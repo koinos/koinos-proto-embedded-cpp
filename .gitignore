@@ -1,0 +1,11 @@
+
+build
+
+# Mac files
+.DS_Store
+
+# Editor cache files
+*~*
+*#*
+
+.vscode/
