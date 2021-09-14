@@ -41,6 +41,7 @@
 #include <RepeatedFieldFixedSize.h>
 #include <FieldStringBytes.h>
 #include <Errors.h>
+#include <limits>
 
 // Include external proto definitions
 #include <koinos/protocol/protocol.h>
@@ -122,17 +123,17 @@ class check_pending_account_resources_request final: public ::EmbeddedProto::Mes
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = payer_.serialize_with_id(static_cast<uint32_t>(id::PAYER), buffer);
+        return_value = payer_.serialize_with_id(static_cast<uint32_t>(id::PAYER), buffer, false);
       }
 
       if((0U != max_payer_resources_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
       {
-        return_value = max_payer_resources_.serialize_with_id(static_cast<uint32_t>(id::MAX_PAYER_RESOURCES), buffer);
+        return_value = max_payer_resources_.serialize_with_id(static_cast<uint32_t>(id::MAX_PAYER_RESOURCES), buffer, false);
       }
 
       if((0U != trx_resource_limit_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
       {
-        return_value = trx_resource_limit_.serialize_with_id(static_cast<uint32_t>(id::TRX_RESOURCE_LIMIT), buffer);
+        return_value = trx_resource_limit_.serialize_with_id(static_cast<uint32_t>(id::TRX_RESOURCE_LIMIT), buffer, false);
       }
 
       return return_value;
@@ -195,6 +196,7 @@ class check_pending_account_resources_request final: public ::EmbeddedProto::Mes
 
     private:
 
+
       ::EmbeddedProto::FieldBytes<payer_LENGTH> payer_;
       EmbeddedProto::uint64 max_payer_resources_ = 0U;
       EmbeddedProto::uint64 trx_resource_limit_ = 0U;
@@ -249,7 +251,7 @@ class check_pending_account_resources_response final: public ::EmbeddedProto::Me
 
       if((false != success_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
       {
-        return_value = success_.serialize_with_id(static_cast<uint32_t>(id::SUCCESS), buffer);
+        return_value = success_.serialize_with_id(static_cast<uint32_t>(id::SUCCESS), buffer, false);
       }
 
       return return_value;
@@ -301,6 +303,7 @@ class check_pending_account_resources_response final: public ::EmbeddedProto::Me
     }
 
     private:
+
 
       EmbeddedProto::boolean success_ = false;
 
@@ -354,7 +357,7 @@ class get_pending_transactions_request final: public ::EmbeddedProto::MessageInt
 
       if((0U != limit_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
       {
-        return_value = limit_.serialize_with_id(static_cast<uint32_t>(id::LIMIT), buffer);
+        return_value = limit_.serialize_with_id(static_cast<uint32_t>(id::LIMIT), buffer, false);
       }
 
       return return_value;
@@ -406,6 +409,7 @@ class get_pending_transactions_request final: public ::EmbeddedProto::MessageInt
     }
 
     private:
+
 
       EmbeddedProto::uint64 limit_ = 0U;
 
@@ -468,7 +472,7 @@ class get_pending_transactions_response final: public ::EmbeddedProto::MessageIn
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = transactions_.serialize_with_id(static_cast<uint32_t>(id::TRANSACTIONS), buffer);
+        return_value = transactions_.serialize_with_id(static_cast<uint32_t>(id::TRANSACTIONS), buffer, false);
       }
 
       return return_value;
@@ -520,6 +524,7 @@ class get_pending_transactions_response final: public ::EmbeddedProto::MessageIn
     }
 
     private:
+
 
       ::EmbeddedProto::RepeatedFieldFixedSize<protocol::transaction<transactions_id_LENGTH, transactions_active_LENGTH, transactions_passive_LENGTH, transactions_signature_data_LENGTH>, transactions_REP_LENGTH> transactions_;
 
@@ -771,21 +776,21 @@ class mempool_request final: public ::EmbeddedProto::MessageInterface
         case id::RESERVED:
           if(::EmbeddedProto::Error::NO_ERRORS == return_value)
           {
-            return_value = request_.reserved_.serialize_with_id(static_cast<uint32_t>(id::RESERVED), buffer);
+            return_value = request_.reserved_.serialize_with_id(static_cast<uint32_t>(id::RESERVED), buffer, false);
           }
           break;
 
         case id::CHECK_PENDING_ACCOUNT_RESOURCES:
           if(::EmbeddedProto::Error::NO_ERRORS == return_value)
           {
-            return_value = request_.check_pending_account_resources_.serialize_with_id(static_cast<uint32_t>(id::CHECK_PENDING_ACCOUNT_RESOURCES), buffer);
+            return_value = request_.check_pending_account_resources_.serialize_with_id(static_cast<uint32_t>(id::CHECK_PENDING_ACCOUNT_RESOURCES), buffer, false);
           }
           break;
 
         case id::GET_PENDING_TRANSACTIONS:
           if(::EmbeddedProto::Error::NO_ERRORS == return_value)
           {
-            return_value = request_.get_pending_transactions_.serialize_with_id(static_cast<uint32_t>(id::GET_PENDING_TRANSACTIONS), buffer);
+            return_value = request_.get_pending_transactions_.serialize_with_id(static_cast<uint32_t>(id::GET_PENDING_TRANSACTIONS), buffer, false);
           }
           break;
 
@@ -853,6 +858,7 @@ class mempool_request final: public ::EmbeddedProto::MessageInterface
     }
 
     private:
+
 
 
       id which_request_ = id::NOT_SET;
@@ -1240,28 +1246,28 @@ class mempool_response final: public ::EmbeddedProto::MessageInterface
         case id::RESERVED:
           if(::EmbeddedProto::Error::NO_ERRORS == return_value)
           {
-            return_value = response_.reserved_.serialize_with_id(static_cast<uint32_t>(id::RESERVED), buffer);
+            return_value = response_.reserved_.serialize_with_id(static_cast<uint32_t>(id::RESERVED), buffer, false);
           }
           break;
 
         case id::ERROR:
           if(::EmbeddedProto::Error::NO_ERRORS == return_value)
           {
-            return_value = response_.error_.serialize_with_id(static_cast<uint32_t>(id::ERROR), buffer);
+            return_value = response_.error_.serialize_with_id(static_cast<uint32_t>(id::ERROR), buffer, false);
           }
           break;
 
         case id::CHECK_PENDING_ACCOUNT_RESOURCES:
           if(::EmbeddedProto::Error::NO_ERRORS == return_value)
           {
-            return_value = response_.check_pending_account_resources_.serialize_with_id(static_cast<uint32_t>(id::CHECK_PENDING_ACCOUNT_RESOURCES), buffer);
+            return_value = response_.check_pending_account_resources_.serialize_with_id(static_cast<uint32_t>(id::CHECK_PENDING_ACCOUNT_RESOURCES), buffer, false);
           }
           break;
 
         case id::GET_PENDING_TRANSACTIONS:
           if(::EmbeddedProto::Error::NO_ERRORS == return_value)
           {
-            return_value = response_.get_pending_transactions_.serialize_with_id(static_cast<uint32_t>(id::GET_PENDING_TRANSACTIONS), buffer);
+            return_value = response_.get_pending_transactions_.serialize_with_id(static_cast<uint32_t>(id::GET_PENDING_TRANSACTIONS), buffer, false);
           }
           break;
 
@@ -1334,6 +1340,7 @@ class mempool_response final: public ::EmbeddedProto::MessageInterface
     }
 
     private:
+
 
 
       id which_response_ = id::NOT_SET;

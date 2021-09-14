@@ -41,6 +41,7 @@
 #include <RepeatedFieldFixedSize.h>
 #include <FieldStringBytes.h>
 #include <Errors.h>
+#include <limits>
 
 // Include external proto definitions
 
@@ -132,22 +133,22 @@ class difficulty_metadata final: public ::EmbeddedProto::MessageInterface
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = target_.serialize_with_id(static_cast<uint32_t>(id::TARGET), buffer);
+        return_value = target_.serialize_with_id(static_cast<uint32_t>(id::TARGET), buffer, false);
       }
 
       if((0U != last_block_time_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
       {
-        return_value = last_block_time_.serialize_with_id(static_cast<uint32_t>(id::LAST_BLOCK_TIME), buffer);
+        return_value = last_block_time_.serialize_with_id(static_cast<uint32_t>(id::LAST_BLOCK_TIME), buffer, false);
       }
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = difficulty_.serialize_with_id(static_cast<uint32_t>(id::DIFFICULTY), buffer);
+        return_value = difficulty_.serialize_with_id(static_cast<uint32_t>(id::DIFFICULTY), buffer, false);
       }
 
       if((0U != target_block_interval_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
       {
-        return_value = target_block_interval_.serialize_with_id(static_cast<uint32_t>(id::TARGET_BLOCK_INTERVAL), buffer);
+        return_value = target_block_interval_.serialize_with_id(static_cast<uint32_t>(id::TARGET_BLOCK_INTERVAL), buffer, false);
       }
 
       return return_value;
@@ -214,6 +215,7 @@ class difficulty_metadata final: public ::EmbeddedProto::MessageInterface
     }
 
     private:
+
 
       ::EmbeddedProto::FieldBytes<target_LENGTH> target_;
       EmbeddedProto::uint64 last_block_time_ = 0U;
@@ -282,12 +284,12 @@ class pow_signature_data final: public ::EmbeddedProto::MessageInterface
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = nonce_.serialize_with_id(static_cast<uint32_t>(id::NONCE), buffer);
+        return_value = nonce_.serialize_with_id(static_cast<uint32_t>(id::NONCE), buffer, false);
       }
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = recoverable_signature_.serialize_with_id(static_cast<uint32_t>(id::RECOVERABLE_SIGNATURE), buffer);
+        return_value = recoverable_signature_.serialize_with_id(static_cast<uint32_t>(id::RECOVERABLE_SIGNATURE), buffer, false);
       }
 
       return return_value;
@@ -344,6 +346,7 @@ class pow_signature_data final: public ::EmbeddedProto::MessageInterface
     }
 
     private:
+
 
       ::EmbeddedProto::FieldBytes<nonce_LENGTH> nonce_;
       ::EmbeddedProto::FieldBytes<recoverable_signature_LENGTH> recoverable_signature_;

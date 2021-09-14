@@ -41,6 +41,7 @@
 #include <RepeatedFieldFixedSize.h>
 #include <FieldStringBytes.h>
 #include <Errors.h>
+#include <limits>
 
 // Include external proto definitions
 
@@ -127,6 +128,7 @@ class reserved_rpc final: public ::EmbeddedProto::MessageInterface
     private:
 
 
+
 };
 
 template<uint32_t message_LENGTH, 
@@ -189,12 +191,12 @@ class error_response final: public ::EmbeddedProto::MessageInterface
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = message_.serialize_with_id(static_cast<uint32_t>(id::MESSAGE), buffer);
+        return_value = message_.serialize_with_id(static_cast<uint32_t>(id::MESSAGE), buffer, false);
       }
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = data_.serialize_with_id(static_cast<uint32_t>(id::DATA), buffer);
+        return_value = data_.serialize_with_id(static_cast<uint32_t>(id::DATA), buffer, false);
       }
 
       return return_value;
@@ -251,6 +253,7 @@ class error_response final: public ::EmbeddedProto::MessageInterface
     }
 
     private:
+
 
       ::EmbeddedProto::FieldString<message_LENGTH> message_;
       ::EmbeddedProto::FieldString<data_LENGTH> data_;

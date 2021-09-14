@@ -41,6 +41,7 @@
 #include <RepeatedFieldFixedSize.h>
 #include <FieldStringBytes.h>
 #include <Errors.h>
+#include <limits>
 
 // Include external proto definitions
 #include <koinos/protocol/protocol.h>
@@ -142,22 +143,22 @@ class block_item final: public ::EmbeddedProto::MessageInterface
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = block_id_.serialize_with_id(static_cast<uint32_t>(id::BLOCK_ID), buffer);
+        return_value = block_id_.serialize_with_id(static_cast<uint32_t>(id::BLOCK_ID), buffer, false);
       }
 
       if((0U != block_height_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
       {
-        return_value = block_height_.serialize_with_id(static_cast<uint32_t>(id::BLOCK_HEIGHT), buffer);
+        return_value = block_height_.serialize_with_id(static_cast<uint32_t>(id::BLOCK_HEIGHT), buffer, false);
       }
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = block_.serialize_with_id(static_cast<uint32_t>(id::BLOCK), buffer);
+        return_value = block_.serialize_with_id(static_cast<uint32_t>(id::BLOCK), buffer, false);
       }
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = receipt_.serialize_with_id(static_cast<uint32_t>(id::RECEIPT), buffer);
+        return_value = receipt_.serialize_with_id(static_cast<uint32_t>(id::RECEIPT), buffer, false);
       }
 
       return return_value;
@@ -224,6 +225,7 @@ class block_item final: public ::EmbeddedProto::MessageInterface
     }
 
     private:
+
 
       ::EmbeddedProto::FieldBytes<block_id_LENGTH> block_id_;
       EmbeddedProto::uint64 block_height_ = 0U;
@@ -344,27 +346,27 @@ class block_record final: public ::EmbeddedProto::MessageInterface
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = block_id_.serialize_with_id(static_cast<uint32_t>(id::BLOCK_ID), buffer);
+        return_value = block_id_.serialize_with_id(static_cast<uint32_t>(id::BLOCK_ID), buffer, false);
       }
 
       if((0U != block_height_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
       {
-        return_value = block_height_.serialize_with_id(static_cast<uint32_t>(id::BLOCK_HEIGHT), buffer);
+        return_value = block_height_.serialize_with_id(static_cast<uint32_t>(id::BLOCK_HEIGHT), buffer, false);
       }
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = block_.serialize_with_id(static_cast<uint32_t>(id::BLOCK), buffer);
+        return_value = block_.serialize_with_id(static_cast<uint32_t>(id::BLOCK), buffer, false);
       }
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = receipt_.serialize_with_id(static_cast<uint32_t>(id::RECEIPT), buffer);
+        return_value = receipt_.serialize_with_id(static_cast<uint32_t>(id::RECEIPT), buffer, false);
       }
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = previous_block_ids_.serialize_with_id(static_cast<uint32_t>(id::PREVIOUS_BLOCK_IDS), buffer);
+        return_value = previous_block_ids_.serialize_with_id(static_cast<uint32_t>(id::PREVIOUS_BLOCK_IDS), buffer, false);
       }
 
       return return_value;
@@ -436,6 +438,7 @@ class block_record final: public ::EmbeddedProto::MessageInterface
     }
 
     private:
+
 
       ::EmbeddedProto::FieldBytes<block_id_LENGTH> block_id_;
       EmbeddedProto::uint64 block_height_ = 0U;

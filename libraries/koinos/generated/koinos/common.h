@@ -41,6 +41,7 @@
 #include <RepeatedFieldFixedSize.h>
 #include <FieldStringBytes.h>
 #include <Errors.h>
+#include <limits>
 
 // Include external proto definitions
 
@@ -118,17 +119,17 @@ class block_topology final: public ::EmbeddedProto::MessageInterface
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = id_.serialize_with_id(static_cast<uint32_t>(id::ID), buffer);
+        return_value = id_.serialize_with_id(static_cast<uint32_t>(id::ID), buffer, false);
       }
 
       if((0U != height_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
       {
-        return_value = height_.serialize_with_id(static_cast<uint32_t>(id::HEIGHT), buffer);
+        return_value = height_.serialize_with_id(static_cast<uint32_t>(id::HEIGHT), buffer, false);
       }
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = previous_.serialize_with_id(static_cast<uint32_t>(id::PREVIOUS), buffer);
+        return_value = previous_.serialize_with_id(static_cast<uint32_t>(id::PREVIOUS), buffer, false);
       }
 
       return return_value;
@@ -190,6 +191,7 @@ class block_topology final: public ::EmbeddedProto::MessageInterface
     }
 
     private:
+
 
       ::EmbeddedProto::FieldBytes<id_LENGTH> id_;
       EmbeddedProto::uint64 height_ = 0U;

@@ -41,6 +41,7 @@
 #include <RepeatedFieldFixedSize.h>
 #include <FieldStringBytes.h>
 #include <Errors.h>
+#include <limits>
 
 // Include external proto definitions
 #include <koinos/rpc/rpc.h>
@@ -104,7 +105,7 @@ class get_transactions_by_id_request final: public ::EmbeddedProto::MessageInter
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = transaction_ids_.serialize_with_id(static_cast<uint32_t>(id::TRANSACTION_IDS), buffer);
+        return_value = transaction_ids_.serialize_with_id(static_cast<uint32_t>(id::TRANSACTION_IDS), buffer, false);
       }
 
       return return_value;
@@ -156,6 +157,7 @@ class get_transactions_by_id_request final: public ::EmbeddedProto::MessageInter
     }
 
     private:
+
 
       ::EmbeddedProto::RepeatedFieldFixedSize<::EmbeddedProto::FieldBytes<transaction_ids_LENGTH>, transaction_ids_REP_LENGTH> transaction_ids_;
 
@@ -220,7 +222,7 @@ class get_transactions_by_id_response final: public ::EmbeddedProto::MessageInte
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = transactions_.serialize_with_id(static_cast<uint32_t>(id::TRANSACTIONS), buffer);
+        return_value = transactions_.serialize_with_id(static_cast<uint32_t>(id::TRANSACTIONS), buffer, false);
       }
 
       return return_value;
@@ -272,6 +274,7 @@ class get_transactions_by_id_response final: public ::EmbeddedProto::MessageInte
     }
 
     private:
+
 
       ::EmbeddedProto::RepeatedFieldFixedSize<transaction_store::transaction_item<transactions_transaction_id_LENGTH, transactions_transaction_active_LENGTH, transactions_transaction_passive_LENGTH, transactions_transaction_signature_data_LENGTH, transactions_containing_blocks_REP_LENGTH, transactions_containing_blocks_LENGTH>, transactions_REP_LENGTH> transactions_;
 
@@ -472,14 +475,14 @@ class transaction_store_request final: public ::EmbeddedProto::MessageInterface
         case id::RESERVED:
           if(::EmbeddedProto::Error::NO_ERRORS == return_value)
           {
-            return_value = request_.reserved_.serialize_with_id(static_cast<uint32_t>(id::RESERVED), buffer);
+            return_value = request_.reserved_.serialize_with_id(static_cast<uint32_t>(id::RESERVED), buffer, false);
           }
           break;
 
         case id::GET_TRANSACTIONS_BY_ID:
           if(::EmbeddedProto::Error::NO_ERRORS == return_value)
           {
-            return_value = request_.get_transactions_by_id_.serialize_with_id(static_cast<uint32_t>(id::GET_TRANSACTIONS_BY_ID), buffer);
+            return_value = request_.get_transactions_by_id_.serialize_with_id(static_cast<uint32_t>(id::GET_TRANSACTIONS_BY_ID), buffer, false);
           }
           break;
 
@@ -542,6 +545,7 @@ class transaction_store_request final: public ::EmbeddedProto::MessageInterface
     }
 
     private:
+
 
 
       id which_request_ = id::NOT_SET;
@@ -870,21 +874,21 @@ class transaction_store_response final: public ::EmbeddedProto::MessageInterface
         case id::RESERVED:
           if(::EmbeddedProto::Error::NO_ERRORS == return_value)
           {
-            return_value = response_.reserved_.serialize_with_id(static_cast<uint32_t>(id::RESERVED), buffer);
+            return_value = response_.reserved_.serialize_with_id(static_cast<uint32_t>(id::RESERVED), buffer, false);
           }
           break;
 
         case id::ERROR:
           if(::EmbeddedProto::Error::NO_ERRORS == return_value)
           {
-            return_value = response_.error_.serialize_with_id(static_cast<uint32_t>(id::ERROR), buffer);
+            return_value = response_.error_.serialize_with_id(static_cast<uint32_t>(id::ERROR), buffer, false);
           }
           break;
 
         case id::GET_TRANSACTIONS_BY_ID:
           if(::EmbeddedProto::Error::NO_ERRORS == return_value)
           {
-            return_value = response_.get_transactions_by_id_.serialize_with_id(static_cast<uint32_t>(id::GET_TRANSACTIONS_BY_ID), buffer);
+            return_value = response_.get_transactions_by_id_.serialize_with_id(static_cast<uint32_t>(id::GET_TRANSACTIONS_BY_ID), buffer, false);
           }
           break;
 
@@ -952,6 +956,7 @@ class transaction_store_response final: public ::EmbeddedProto::MessageInterface
     }
 
     private:
+
 
 
       id which_response_ = id::NOT_SET;

@@ -41,6 +41,7 @@
 #include <RepeatedFieldFixedSize.h>
 #include <FieldStringBytes.h>
 #include <Errors.h>
+#include <limits>
 
 // Include external proto definitions
 
@@ -107,12 +108,12 @@ class contract_call_bundle final: public ::EmbeddedProto::MessageInterface
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = contract_id_.serialize_with_id(static_cast<uint32_t>(id::CONTRACT_ID), buffer);
+        return_value = contract_id_.serialize_with_id(static_cast<uint32_t>(id::CONTRACT_ID), buffer, false);
       }
 
       if((0U != entry_point_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
       {
-        return_value = entry_point_.serialize_with_id(static_cast<uint32_t>(id::ENTRY_POINT), buffer);
+        return_value = entry_point_.serialize_with_id(static_cast<uint32_t>(id::ENTRY_POINT), buffer, false);
       }
 
       return return_value;
@@ -169,6 +170,7 @@ class contract_call_bundle final: public ::EmbeddedProto::MessageInterface
     }
 
     private:
+
 
       ::EmbeddedProto::FieldBytes<contract_id_LENGTH> contract_id_;
       EmbeddedProto::uint32 entry_point_ = 0U;
@@ -377,14 +379,14 @@ class system_call_target final: public ::EmbeddedProto::MessageInterface
         case id::THUNK_ID:
           if((0U != target_.thunk_id_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
           {
-            return_value = target_.thunk_id_.serialize_with_id(static_cast<uint32_t>(id::THUNK_ID), buffer);
+            return_value = target_.thunk_id_.serialize_with_id(static_cast<uint32_t>(id::THUNK_ID), buffer, false);
           }
           break;
 
         case id::SYSTEM_CALL_BUNDLE:
           if(::EmbeddedProto::Error::NO_ERRORS == return_value)
           {
-            return_value = target_.system_call_bundle_.serialize_with_id(static_cast<uint32_t>(id::SYSTEM_CALL_BUNDLE), buffer);
+            return_value = target_.system_call_bundle_.serialize_with_id(static_cast<uint32_t>(id::SYSTEM_CALL_BUNDLE), buffer, false);
           }
           break;
 
@@ -446,6 +448,7 @@ class system_call_target final: public ::EmbeddedProto::MessageInterface
     }
 
     private:
+
 
 
       id which_target_ = id::NOT_SET;
@@ -580,12 +583,12 @@ class upload_contract_operation final: public ::EmbeddedProto::MessageInterface
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = contract_id_.serialize_with_id(static_cast<uint32_t>(id::CONTRACT_ID), buffer);
+        return_value = contract_id_.serialize_with_id(static_cast<uint32_t>(id::CONTRACT_ID), buffer, false);
       }
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = bytecode_.serialize_with_id(static_cast<uint32_t>(id::BYTECODE), buffer);
+        return_value = bytecode_.serialize_with_id(static_cast<uint32_t>(id::BYTECODE), buffer, false);
       }
 
       return return_value;
@@ -642,6 +645,7 @@ class upload_contract_operation final: public ::EmbeddedProto::MessageInterface
     }
 
     private:
+
 
       ::EmbeddedProto::FieldBytes<contract_id_LENGTH> contract_id_;
       ::EmbeddedProto::FieldBytes<bytecode_LENGTH> bytecode_;
@@ -720,17 +724,17 @@ class call_contract_operation final: public ::EmbeddedProto::MessageInterface
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = contract_id_.serialize_with_id(static_cast<uint32_t>(id::CONTRACT_ID), buffer);
+        return_value = contract_id_.serialize_with_id(static_cast<uint32_t>(id::CONTRACT_ID), buffer, false);
       }
 
       if((0U != entry_point_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
       {
-        return_value = entry_point_.serialize_with_id(static_cast<uint32_t>(id::ENTRY_POINT), buffer);
+        return_value = entry_point_.serialize_with_id(static_cast<uint32_t>(id::ENTRY_POINT), buffer, false);
       }
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = args_.serialize_with_id(static_cast<uint32_t>(id::ARGS), buffer);
+        return_value = args_.serialize_with_id(static_cast<uint32_t>(id::ARGS), buffer, false);
       }
 
       return return_value;
@@ -792,6 +796,7 @@ class call_contract_operation final: public ::EmbeddedProto::MessageInterface
     }
 
     private:
+
 
       ::EmbeddedProto::FieldBytes<contract_id_LENGTH> contract_id_;
       EmbeddedProto::uint32 entry_point_ = 0U;
@@ -860,12 +865,12 @@ class set_system_call_operation final: public ::EmbeddedProto::MessageInterface
 
       if((0U != call_id_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
       {
-        return_value = call_id_.serialize_with_id(static_cast<uint32_t>(id::CALL_ID), buffer);
+        return_value = call_id_.serialize_with_id(static_cast<uint32_t>(id::CALL_ID), buffer, false);
       }
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = target_.serialize_with_id(static_cast<uint32_t>(id::TARGET), buffer);
+        return_value = target_.serialize_with_id(static_cast<uint32_t>(id::TARGET), buffer, false);
       }
 
       return return_value;
@@ -922,6 +927,7 @@ class set_system_call_operation final: public ::EmbeddedProto::MessageInterface
     }
 
     private:
+
 
       EmbeddedProto::uint32 call_id_ = 0U;
       system_call_target<target_system_call_bundle_contract_id_LENGTH> target_;
@@ -1178,21 +1184,21 @@ class operation final: public ::EmbeddedProto::MessageInterface
         case id::UPLOAD_CONTRACT:
           if(::EmbeddedProto::Error::NO_ERRORS == return_value)
           {
-            return_value = op_.upload_contract_.serialize_with_id(static_cast<uint32_t>(id::UPLOAD_CONTRACT), buffer);
+            return_value = op_.upload_contract_.serialize_with_id(static_cast<uint32_t>(id::UPLOAD_CONTRACT), buffer, false);
           }
           break;
 
         case id::CALL_CONTRACT:
           if(::EmbeddedProto::Error::NO_ERRORS == return_value)
           {
-            return_value = op_.call_contract_.serialize_with_id(static_cast<uint32_t>(id::CALL_CONTRACT), buffer);
+            return_value = op_.call_contract_.serialize_with_id(static_cast<uint32_t>(id::CALL_CONTRACT), buffer, false);
           }
           break;
 
         case id::SET_SYSTEM_CALL:
           if(::EmbeddedProto::Error::NO_ERRORS == return_value)
           {
-            return_value = op_.set_system_call_.serialize_with_id(static_cast<uint32_t>(id::SET_SYSTEM_CALL), buffer);
+            return_value = op_.set_system_call_.serialize_with_id(static_cast<uint32_t>(id::SET_SYSTEM_CALL), buffer, false);
           }
           break;
 
@@ -1260,6 +1266,7 @@ class operation final: public ::EmbeddedProto::MessageInterface
     }
 
     private:
+
 
 
       id which_op_ = id::NOT_SET;
@@ -1425,17 +1432,17 @@ class active_transaction_data final: public ::EmbeddedProto::MessageInterface
 
       if((0U != resource_limit_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
       {
-        return_value = resource_limit_.serialize_with_id(static_cast<uint32_t>(id::RESOURCE_LIMIT), buffer);
+        return_value = resource_limit_.serialize_with_id(static_cast<uint32_t>(id::RESOURCE_LIMIT), buffer, false);
       }
 
       if((0U != nonce_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
       {
-        return_value = nonce_.serialize_with_id(static_cast<uint32_t>(id::NONCE), buffer);
+        return_value = nonce_.serialize_with_id(static_cast<uint32_t>(id::NONCE), buffer, false);
       }
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = operations_.serialize_with_id(static_cast<uint32_t>(id::OPERATIONS), buffer);
+        return_value = operations_.serialize_with_id(static_cast<uint32_t>(id::OPERATIONS), buffer, false);
       }
 
       return return_value;
@@ -1497,6 +1504,7 @@ class active_transaction_data final: public ::EmbeddedProto::MessageInterface
     }
 
     private:
+
 
       EmbeddedProto::uint64 resource_limit_ = 0U;
       EmbeddedProto::uint64 nonce_ = 0U;
@@ -1582,6 +1590,7 @@ class passive_transaction_data final: public ::EmbeddedProto::MessageInterface
     }
 
     private:
+
 
 
 };
@@ -1670,22 +1679,22 @@ class transaction final: public ::EmbeddedProto::MessageInterface
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = id_.serialize_with_id(static_cast<uint32_t>(id::ID), buffer);
+        return_value = id_.serialize_with_id(static_cast<uint32_t>(id::ID), buffer, false);
       }
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = active_.serialize_with_id(static_cast<uint32_t>(id::ACTIVE), buffer);
+        return_value = active_.serialize_with_id(static_cast<uint32_t>(id::ACTIVE), buffer, false);
       }
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = passive_.serialize_with_id(static_cast<uint32_t>(id::PASSIVE), buffer);
+        return_value = passive_.serialize_with_id(static_cast<uint32_t>(id::PASSIVE), buffer, false);
       }
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = signature_data_.serialize_with_id(static_cast<uint32_t>(id::SIGNATURE_DATA), buffer);
+        return_value = signature_data_.serialize_with_id(static_cast<uint32_t>(id::SIGNATURE_DATA), buffer, false);
       }
 
       return return_value;
@@ -1752,6 +1761,7 @@ class transaction final: public ::EmbeddedProto::MessageInterface
     }
 
     private:
+
 
       ::EmbeddedProto::FieldBytes<id_LENGTH> id_;
       ::EmbeddedProto::FieldBytes<active_LENGTH> active_;
@@ -1832,17 +1842,17 @@ class active_block_data final: public ::EmbeddedProto::MessageInterface
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = transaction_merkle_root_.serialize_with_id(static_cast<uint32_t>(id::TRANSACTION_MERKLE_ROOT), buffer);
+        return_value = transaction_merkle_root_.serialize_with_id(static_cast<uint32_t>(id::TRANSACTION_MERKLE_ROOT), buffer, false);
       }
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = passive_data_merkle_root_.serialize_with_id(static_cast<uint32_t>(id::PASSIVE_DATA_MERKLE_ROOT), buffer);
+        return_value = passive_data_merkle_root_.serialize_with_id(static_cast<uint32_t>(id::PASSIVE_DATA_MERKLE_ROOT), buffer, false);
       }
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = signer_.serialize_with_id(static_cast<uint32_t>(id::SIGNER), buffer);
+        return_value = signer_.serialize_with_id(static_cast<uint32_t>(id::SIGNER), buffer, false);
       }
 
       return return_value;
@@ -1904,6 +1914,7 @@ class active_block_data final: public ::EmbeddedProto::MessageInterface
     }
 
     private:
+
 
       ::EmbeddedProto::FieldBytes<transaction_merkle_root_LENGTH> transaction_merkle_root_;
       ::EmbeddedProto::FieldBytes<passive_data_merkle_root_LENGTH> passive_data_merkle_root_;
@@ -1991,6 +2002,7 @@ class passive_block_data final: public ::EmbeddedProto::MessageInterface
     private:
 
 
+
 };
 
 template<uint32_t previous_LENGTH>
@@ -2065,17 +2077,17 @@ class block_header final: public ::EmbeddedProto::MessageInterface
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = previous_.serialize_with_id(static_cast<uint32_t>(id::PREVIOUS), buffer);
+        return_value = previous_.serialize_with_id(static_cast<uint32_t>(id::PREVIOUS), buffer, false);
       }
 
       if((0U != height_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
       {
-        return_value = height_.serialize_with_id(static_cast<uint32_t>(id::HEIGHT), buffer);
+        return_value = height_.serialize_with_id(static_cast<uint32_t>(id::HEIGHT), buffer, false);
       }
 
       if((0U != timestamp_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
       {
-        return_value = timestamp_.serialize_with_id(static_cast<uint32_t>(id::TIMESTAMP), buffer);
+        return_value = timestamp_.serialize_with_id(static_cast<uint32_t>(id::TIMESTAMP), buffer, false);
       }
 
       return return_value;
@@ -2137,6 +2149,7 @@ class block_header final: public ::EmbeddedProto::MessageInterface
     }
 
     private:
+
 
       ::EmbeddedProto::FieldBytes<previous_LENGTH> previous_;
       EmbeddedProto::uint64 height_ = 0U;
@@ -2262,32 +2275,32 @@ class block final: public ::EmbeddedProto::MessageInterface
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = id_.serialize_with_id(static_cast<uint32_t>(id::ID), buffer);
+        return_value = id_.serialize_with_id(static_cast<uint32_t>(id::ID), buffer, false);
       }
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = header_.serialize_with_id(static_cast<uint32_t>(id::HEADER), buffer);
+        return_value = header_.serialize_with_id(static_cast<uint32_t>(id::HEADER), buffer, false);
       }
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = active_.serialize_with_id(static_cast<uint32_t>(id::ACTIVE), buffer);
+        return_value = active_.serialize_with_id(static_cast<uint32_t>(id::ACTIVE), buffer, false);
       }
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = passive_.serialize_with_id(static_cast<uint32_t>(id::PASSIVE), buffer);
+        return_value = passive_.serialize_with_id(static_cast<uint32_t>(id::PASSIVE), buffer, false);
       }
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = signature_data_.serialize_with_id(static_cast<uint32_t>(id::SIGNATURE_DATA), buffer);
+        return_value = signature_data_.serialize_with_id(static_cast<uint32_t>(id::SIGNATURE_DATA), buffer, false);
       }
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = transactions_.serialize_with_id(static_cast<uint32_t>(id::TRANSACTIONS), buffer);
+        return_value = transactions_.serialize_with_id(static_cast<uint32_t>(id::TRANSACTIONS), buffer, false);
       }
 
       return return_value;
@@ -2364,6 +2377,7 @@ class block final: public ::EmbeddedProto::MessageInterface
     }
 
     private:
+
 
       ::EmbeddedProto::FieldBytes<id_LENGTH> id_;
       block_header<header_previous_LENGTH> header_;
@@ -2452,6 +2466,7 @@ class block_receipt final: public ::EmbeddedProto::MessageInterface
     }
 
     private:
+
 
 
 };

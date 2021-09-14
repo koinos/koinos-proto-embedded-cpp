@@ -41,6 +41,7 @@
 #include <RepeatedFieldFixedSize.h>
 #include <FieldStringBytes.h>
 #include <Errors.h>
+#include <limits>
 
 // Include external proto definitions
 #include <koinos/block_store/block_store.h>
@@ -130,17 +131,17 @@ class get_blocks_by_id_request final: public ::EmbeddedProto::MessageInterface
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = block_id_.serialize_with_id(static_cast<uint32_t>(id::BLOCK_ID), buffer);
+        return_value = block_id_.serialize_with_id(static_cast<uint32_t>(id::BLOCK_ID), buffer, false);
       }
 
       if((false != return_block_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
       {
-        return_value = return_block_.serialize_with_id(static_cast<uint32_t>(id::RETURN_BLOCK), buffer);
+        return_value = return_block_.serialize_with_id(static_cast<uint32_t>(id::RETURN_BLOCK), buffer, false);
       }
 
       if((false != return_receipt_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
       {
-        return_value = return_receipt_.serialize_with_id(static_cast<uint32_t>(id::RETURN_RECEIPT), buffer);
+        return_value = return_receipt_.serialize_with_id(static_cast<uint32_t>(id::RETURN_RECEIPT), buffer, false);
       }
 
       return return_value;
@@ -202,6 +203,7 @@ class get_blocks_by_id_request final: public ::EmbeddedProto::MessageInterface
     }
 
     private:
+
 
       ::EmbeddedProto::RepeatedFieldFixedSize<::EmbeddedProto::FieldBytes<block_id_LENGTH>, block_id_REP_LENGTH> block_id_;
       EmbeddedProto::boolean return_block_ = false;
@@ -273,7 +275,7 @@ class get_blocks_by_id_response final: public ::EmbeddedProto::MessageInterface
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = block_items_.serialize_with_id(static_cast<uint32_t>(id::BLOCK_ITEMS), buffer);
+        return_value = block_items_.serialize_with_id(static_cast<uint32_t>(id::BLOCK_ITEMS), buffer, false);
       }
 
       return return_value;
@@ -325,6 +327,7 @@ class get_blocks_by_id_response final: public ::EmbeddedProto::MessageInterface
     }
 
     private:
+
 
       ::EmbeddedProto::RepeatedFieldFixedSize<block_store::block_item<block_items_block_id_LENGTH, block_items_block_id_LENGTH, block_items_block_header_previous_LENGTH, block_items_block_active_LENGTH, block_items_block_passive_LENGTH, block_items_block_signature_data_LENGTH, block_items_block_transactions_REP_LENGTH, block_items_block_transactions_id_LENGTH, block_items_block_transactions_active_LENGTH, block_items_block_transactions_passive_LENGTH, block_items_block_transactions_signature_data_LENGTH>, block_items_REP_LENGTH> block_items_;
 
@@ -426,27 +429,27 @@ class get_blocks_by_height_request final: public ::EmbeddedProto::MessageInterfa
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = head_block_id_.serialize_with_id(static_cast<uint32_t>(id::HEAD_BLOCK_ID), buffer);
+        return_value = head_block_id_.serialize_with_id(static_cast<uint32_t>(id::HEAD_BLOCK_ID), buffer, false);
       }
 
       if((0U != ancestor_start_height_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
       {
-        return_value = ancestor_start_height_.serialize_with_id(static_cast<uint32_t>(id::ANCESTOR_START_HEIGHT), buffer);
+        return_value = ancestor_start_height_.serialize_with_id(static_cast<uint32_t>(id::ANCESTOR_START_HEIGHT), buffer, false);
       }
 
       if((0U != num_blocks_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
       {
-        return_value = num_blocks_.serialize_with_id(static_cast<uint32_t>(id::NUM_BLOCKS), buffer);
+        return_value = num_blocks_.serialize_with_id(static_cast<uint32_t>(id::NUM_BLOCKS), buffer, false);
       }
 
       if((false != return_block_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
       {
-        return_value = return_block_.serialize_with_id(static_cast<uint32_t>(id::RETURN_BLOCK), buffer);
+        return_value = return_block_.serialize_with_id(static_cast<uint32_t>(id::RETURN_BLOCK), buffer, false);
       }
 
       if((false != return_receipt_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
       {
-        return_value = return_receipt_.serialize_with_id(static_cast<uint32_t>(id::RETURN_RECEIPT), buffer);
+        return_value = return_receipt_.serialize_with_id(static_cast<uint32_t>(id::RETURN_RECEIPT), buffer, false);
       }
 
       return return_value;
@@ -518,6 +521,7 @@ class get_blocks_by_height_request final: public ::EmbeddedProto::MessageInterfa
     }
 
     private:
+
 
       ::EmbeddedProto::FieldBytes<head_block_id_LENGTH> head_block_id_;
       EmbeddedProto::uint64 ancestor_start_height_ = 0U;
@@ -591,7 +595,7 @@ class get_blocks_by_height_response final: public ::EmbeddedProto::MessageInterf
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = block_items_.serialize_with_id(static_cast<uint32_t>(id::BLOCK_ITEMS), buffer);
+        return_value = block_items_.serialize_with_id(static_cast<uint32_t>(id::BLOCK_ITEMS), buffer, false);
       }
 
       return return_value;
@@ -643,6 +647,7 @@ class get_blocks_by_height_response final: public ::EmbeddedProto::MessageInterf
     }
 
     private:
+
 
       ::EmbeddedProto::RepeatedFieldFixedSize<block_store::block_item<block_items_block_id_LENGTH, block_items_block_id_LENGTH, block_items_block_header_previous_LENGTH, block_items_block_active_LENGTH, block_items_block_passive_LENGTH, block_items_block_signature_data_LENGTH, block_items_block_transactions_REP_LENGTH, block_items_block_transactions_id_LENGTH, block_items_block_transactions_active_LENGTH, block_items_block_transactions_passive_LENGTH, block_items_block_transactions_signature_data_LENGTH>, block_items_REP_LENGTH> block_items_;
 
@@ -706,7 +711,7 @@ class add_block_request final: public ::EmbeddedProto::MessageInterface
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = block_to_add_.serialize_with_id(static_cast<uint32_t>(id::BLOCK_TO_ADD), buffer);
+        return_value = block_to_add_.serialize_with_id(static_cast<uint32_t>(id::BLOCK_TO_ADD), buffer, false);
       }
 
       return return_value;
@@ -758,6 +763,7 @@ class add_block_request final: public ::EmbeddedProto::MessageInterface
     }
 
     private:
+
 
       protocol::block<block_to_add_id_LENGTH, block_to_add_header_previous_LENGTH, block_to_add_active_LENGTH, block_to_add_passive_LENGTH, block_to_add_signature_data_LENGTH, block_to_add_transactions_REP_LENGTH, block_to_add_transactions_id_LENGTH, block_to_add_transactions_active_LENGTH, block_to_add_transactions_passive_LENGTH, block_to_add_transactions_signature_data_LENGTH> block_to_add_;
 
@@ -843,6 +849,7 @@ class add_block_response final: public ::EmbeddedProto::MessageInterface
     private:
 
 
+
 };
 
 class get_highest_block_request final: public ::EmbeddedProto::MessageInterface
@@ -925,6 +932,7 @@ class get_highest_block_request final: public ::EmbeddedProto::MessageInterface
     private:
 
 
+
 };
 
 template<uint32_t topology_id_LENGTH, 
@@ -977,7 +985,7 @@ class get_highest_block_response final: public ::EmbeddedProto::MessageInterface
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = topology_.serialize_with_id(static_cast<uint32_t>(id::TOPOLOGY), buffer);
+        return_value = topology_.serialize_with_id(static_cast<uint32_t>(id::TOPOLOGY), buffer, false);
       }
 
       return return_value;
@@ -1029,6 +1037,7 @@ class get_highest_block_response final: public ::EmbeddedProto::MessageInterface
     }
 
     private:
+
 
       block_topology<topology_id_LENGTH, topology_previous_LENGTH> topology_;
 
@@ -1396,35 +1405,35 @@ class block_store_request final: public ::EmbeddedProto::MessageInterface
         case id::RESERVED:
           if(::EmbeddedProto::Error::NO_ERRORS == return_value)
           {
-            return_value = request_.reserved_.serialize_with_id(static_cast<uint32_t>(id::RESERVED), buffer);
+            return_value = request_.reserved_.serialize_with_id(static_cast<uint32_t>(id::RESERVED), buffer, false);
           }
           break;
 
         case id::GET_BLOCKS_BY_ID:
           if(::EmbeddedProto::Error::NO_ERRORS == return_value)
           {
-            return_value = request_.get_blocks_by_id_.serialize_with_id(static_cast<uint32_t>(id::GET_BLOCKS_BY_ID), buffer);
+            return_value = request_.get_blocks_by_id_.serialize_with_id(static_cast<uint32_t>(id::GET_BLOCKS_BY_ID), buffer, false);
           }
           break;
 
         case id::GET_BLOCKS_BY_HEIGHT:
           if(::EmbeddedProto::Error::NO_ERRORS == return_value)
           {
-            return_value = request_.get_blocks_by_height_.serialize_with_id(static_cast<uint32_t>(id::GET_BLOCKS_BY_HEIGHT), buffer);
+            return_value = request_.get_blocks_by_height_.serialize_with_id(static_cast<uint32_t>(id::GET_BLOCKS_BY_HEIGHT), buffer, false);
           }
           break;
 
         case id::ADD_BLOCK:
           if(::EmbeddedProto::Error::NO_ERRORS == return_value)
           {
-            return_value = request_.add_block_.serialize_with_id(static_cast<uint32_t>(id::ADD_BLOCK), buffer);
+            return_value = request_.add_block_.serialize_with_id(static_cast<uint32_t>(id::ADD_BLOCK), buffer, false);
           }
           break;
 
         case id::GET_HIGHEST_BLOCK:
           if(::EmbeddedProto::Error::NO_ERRORS == return_value)
           {
-            return_value = request_.get_highest_block_.serialize_with_id(static_cast<uint32_t>(id::GET_HIGHEST_BLOCK), buffer);
+            return_value = request_.get_highest_block_.serialize_with_id(static_cast<uint32_t>(id::GET_HIGHEST_BLOCK), buffer, false);
           }
           break;
 
@@ -1502,6 +1511,7 @@ class block_store_request final: public ::EmbeddedProto::MessageInterface
     }
 
     private:
+
 
 
       id which_request_ = id::NOT_SET;
@@ -2032,42 +2042,42 @@ class block_store_response final: public ::EmbeddedProto::MessageInterface
         case id::RESERVED:
           if(::EmbeddedProto::Error::NO_ERRORS == return_value)
           {
-            return_value = response_.reserved_.serialize_with_id(static_cast<uint32_t>(id::RESERVED), buffer);
+            return_value = response_.reserved_.serialize_with_id(static_cast<uint32_t>(id::RESERVED), buffer, false);
           }
           break;
 
         case id::ERROR:
           if(::EmbeddedProto::Error::NO_ERRORS == return_value)
           {
-            return_value = response_.error_.serialize_with_id(static_cast<uint32_t>(id::ERROR), buffer);
+            return_value = response_.error_.serialize_with_id(static_cast<uint32_t>(id::ERROR), buffer, false);
           }
           break;
 
         case id::GET_BLOCKS_BY_ID:
           if(::EmbeddedProto::Error::NO_ERRORS == return_value)
           {
-            return_value = response_.get_blocks_by_id_.serialize_with_id(static_cast<uint32_t>(id::GET_BLOCKS_BY_ID), buffer);
+            return_value = response_.get_blocks_by_id_.serialize_with_id(static_cast<uint32_t>(id::GET_BLOCKS_BY_ID), buffer, false);
           }
           break;
 
         case id::GET_BLOCKS_BY_HEIGHT:
           if(::EmbeddedProto::Error::NO_ERRORS == return_value)
           {
-            return_value = response_.get_blocks_by_height_.serialize_with_id(static_cast<uint32_t>(id::GET_BLOCKS_BY_HEIGHT), buffer);
+            return_value = response_.get_blocks_by_height_.serialize_with_id(static_cast<uint32_t>(id::GET_BLOCKS_BY_HEIGHT), buffer, false);
           }
           break;
 
         case id::ADD_BLOCK:
           if(::EmbeddedProto::Error::NO_ERRORS == return_value)
           {
-            return_value = response_.add_block_.serialize_with_id(static_cast<uint32_t>(id::ADD_BLOCK), buffer);
+            return_value = response_.add_block_.serialize_with_id(static_cast<uint32_t>(id::ADD_BLOCK), buffer, false);
           }
           break;
 
         case id::GET_HIGHEST_BLOCK:
           if(::EmbeddedProto::Error::NO_ERRORS == return_value)
           {
-            return_value = response_.get_highest_block_.serialize_with_id(static_cast<uint32_t>(id::GET_HIGHEST_BLOCK), buffer);
+            return_value = response_.get_highest_block_.serialize_with_id(static_cast<uint32_t>(id::GET_HIGHEST_BLOCK), buffer, false);
           }
           break;
 
@@ -2150,6 +2160,7 @@ class block_store_response final: public ::EmbeddedProto::MessageInterface
     }
 
     private:
+
 
 
       id which_response_ = id::NOT_SET;

@@ -41,6 +41,7 @@
 #include <RepeatedFieldFixedSize.h>
 #include <FieldStringBytes.h>
 #include <Errors.h>
+#include <limits>
 
 // Include external proto definitions
 #include <koinos/common.h>
@@ -149,27 +150,27 @@ class transaction_accepted final: public ::EmbeddedProto::MessageInterface
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = transaction_.serialize_with_id(static_cast<uint32_t>(id::TRANSACTION), buffer);
+        return_value = transaction_.serialize_with_id(static_cast<uint32_t>(id::TRANSACTION), buffer, false);
       }
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = payer_.serialize_with_id(static_cast<uint32_t>(id::PAYER), buffer);
+        return_value = payer_.serialize_with_id(static_cast<uint32_t>(id::PAYER), buffer, false);
       }
 
       if((0U != max_payer_resources_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
       {
-        return_value = max_payer_resources_.serialize_with_id(static_cast<uint32_t>(id::MAX_PAYER_RESOURCES), buffer);
+        return_value = max_payer_resources_.serialize_with_id(static_cast<uint32_t>(id::MAX_PAYER_RESOURCES), buffer, false);
       }
 
       if((0U != trx_resource_limit_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
       {
-        return_value = trx_resource_limit_.serialize_with_id(static_cast<uint32_t>(id::TRX_RESOURCE_LIMIT), buffer);
+        return_value = trx_resource_limit_.serialize_with_id(static_cast<uint32_t>(id::TRX_RESOURCE_LIMIT), buffer, false);
       }
 
       if((0U != height_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
       {
-        return_value = height_.serialize_with_id(static_cast<uint32_t>(id::HEIGHT), buffer);
+        return_value = height_.serialize_with_id(static_cast<uint32_t>(id::HEIGHT), buffer, false);
       }
 
       return return_value;
@@ -242,6 +243,7 @@ class transaction_accepted final: public ::EmbeddedProto::MessageInterface
 
     private:
 
+
       protocol::transaction<transaction_id_LENGTH, transaction_active_LENGTH, transaction_passive_LENGTH, transaction_signature_data_LENGTH> transaction_;
       ::EmbeddedProto::FieldBytes<payer_LENGTH> payer_;
       EmbeddedProto::uint64 max_payer_resources_ = 0U;
@@ -308,7 +310,7 @@ class block_accepted final: public ::EmbeddedProto::MessageInterface
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = block_.serialize_with_id(static_cast<uint32_t>(id::BLOCK), buffer);
+        return_value = block_.serialize_with_id(static_cast<uint32_t>(id::BLOCK), buffer, false);
       }
 
       return return_value;
@@ -360,6 +362,7 @@ class block_accepted final: public ::EmbeddedProto::MessageInterface
     }
 
     private:
+
 
       protocol::block<block_id_LENGTH, block_header_previous_LENGTH, block_active_LENGTH, block_passive_LENGTH, block_signature_data_LENGTH, block_transactions_REP_LENGTH, block_transactions_id_LENGTH, block_transactions_active_LENGTH, block_transactions_passive_LENGTH, block_transactions_signature_data_LENGTH> block_;
 
@@ -415,7 +418,7 @@ class block_irreversible final: public ::EmbeddedProto::MessageInterface
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = topology_.serialize_with_id(static_cast<uint32_t>(id::TOPOLOGY), buffer);
+        return_value = topology_.serialize_with_id(static_cast<uint32_t>(id::TOPOLOGY), buffer, false);
       }
 
       return return_value;
@@ -467,6 +470,7 @@ class block_irreversible final: public ::EmbeddedProto::MessageInterface
     }
 
     private:
+
 
       block_topology<topology_id_LENGTH, topology_previous_LENGTH> topology_;
 
@@ -541,12 +545,12 @@ class fork_heads final: public ::EmbeddedProto::MessageInterface
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = last_irreversible_block_.serialize_with_id(static_cast<uint32_t>(id::LAST_IRREVERSIBLE_BLOCK), buffer);
+        return_value = last_irreversible_block_.serialize_with_id(static_cast<uint32_t>(id::LAST_IRREVERSIBLE_BLOCK), buffer, false);
       }
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = heads_.serialize_with_id(static_cast<uint32_t>(id::HEADS), buffer);
+        return_value = heads_.serialize_with_id(static_cast<uint32_t>(id::HEADS), buffer, false);
       }
 
       return return_value;
@@ -603,6 +607,7 @@ class fork_heads final: public ::EmbeddedProto::MessageInterface
     }
 
     private:
+
 
       block_topology<last_irreversible_block_id_LENGTH, last_irreversible_block_previous_LENGTH> last_irreversible_block_;
       ::EmbeddedProto::RepeatedFieldFixedSize<block_topology<heads_id_LENGTH, heads_previous_LENGTH>, heads_REP_LENGTH> heads_;

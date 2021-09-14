@@ -41,6 +41,7 @@
 #include <RepeatedFieldFixedSize.h>
 #include <FieldStringBytes.h>
 #include <Errors.h>
+#include <limits>
 
 // Include external proto definitions
 #include <koinos/protocol/protocol.h>
@@ -118,12 +119,12 @@ class transaction_item final: public ::EmbeddedProto::MessageInterface
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = transaction_.serialize_with_id(static_cast<uint32_t>(id::TRANSACTION), buffer);
+        return_value = transaction_.serialize_with_id(static_cast<uint32_t>(id::TRANSACTION), buffer, false);
       }
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = containing_blocks_.serialize_with_id(static_cast<uint32_t>(id::CONTAINING_BLOCKS), buffer);
+        return_value = containing_blocks_.serialize_with_id(static_cast<uint32_t>(id::CONTAINING_BLOCKS), buffer, false);
       }
 
       return return_value;
@@ -180,6 +181,7 @@ class transaction_item final: public ::EmbeddedProto::MessageInterface
     }
 
     private:
+
 
       protocol::transaction<transaction_id_LENGTH, transaction_active_LENGTH, transaction_passive_LENGTH, transaction_signature_data_LENGTH> transaction_;
       ::EmbeddedProto::RepeatedFieldFixedSize<::EmbeddedProto::FieldBytes<containing_blocks_LENGTH>, containing_blocks_REP_LENGTH> containing_blocks_;
