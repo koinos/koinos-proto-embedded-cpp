@@ -2161,25 +2161,25 @@ class apply_set_system_call_operation_return final: public ::EmbeddedProto::Mess
 template<uint32_t space_LENGTH, 
 uint32_t key_LENGTH, 
 uint32_t obj_LENGTH>
-class db_put_object_args final: public ::EmbeddedProto::MessageInterface
+class put_object_args final: public ::EmbeddedProto::MessageInterface
 {
   public:
-    db_put_object_args() = default;
-    db_put_object_args(const db_put_object_args& rhs )
+    put_object_args() = default;
+    put_object_args(const put_object_args& rhs )
     {
       set_space(rhs.get_space());
       set_key(rhs.get_key());
       set_obj(rhs.get_obj());
     }
 
-    db_put_object_args(const db_put_object_args&& rhs ) noexcept
+    put_object_args(const put_object_args&& rhs ) noexcept
     {
       set_space(rhs.get_space());
       set_key(rhs.get_key());
       set_obj(rhs.get_obj());
     }
 
-    ~db_put_object_args() override = default;
+    ~put_object_args() override = default;
 
     enum class id : uint32_t
     {
@@ -2189,7 +2189,7 @@ class db_put_object_args final: public ::EmbeddedProto::MessageInterface
       OBJ = 3
     };
 
-    db_put_object_args& operator=(const db_put_object_args& rhs)
+    put_object_args& operator=(const put_object_args& rhs)
     {
       set_space(rhs.get_space());
       set_key(rhs.get_key());
@@ -2197,7 +2197,7 @@ class db_put_object_args final: public ::EmbeddedProto::MessageInterface
       return *this;
     }
 
-    db_put_object_args& operator=(const db_put_object_args&& rhs) noexcept
+    put_object_args& operator=(const put_object_args&& rhs) noexcept
     {
       set_space(rhs.get_space());
       set_key(rhs.get_key());
@@ -2310,21 +2310,21 @@ class db_put_object_args final: public ::EmbeddedProto::MessageInterface
 
 };
 
-class db_put_object_return final: public ::EmbeddedProto::MessageInterface
+class put_object_return final: public ::EmbeddedProto::MessageInterface
 {
   public:
-    db_put_object_return() = default;
-    db_put_object_return(const db_put_object_return& rhs )
+    put_object_return() = default;
+    put_object_return(const put_object_return& rhs )
     {
       set_value(rhs.get_value());
     }
 
-    db_put_object_return(const db_put_object_return&& rhs ) noexcept
+    put_object_return(const put_object_return&& rhs ) noexcept
     {
       set_value(rhs.get_value());
     }
 
-    ~db_put_object_return() override = default;
+    ~put_object_return() override = default;
 
     enum class id : uint32_t
     {
@@ -2332,13 +2332,13 @@ class db_put_object_return final: public ::EmbeddedProto::MessageInterface
       VALUE = 1
     };
 
-    db_put_object_return& operator=(const db_put_object_return& rhs)
+    put_object_return& operator=(const put_object_return& rhs)
     {
       set_value(rhs.get_value());
       return *this;
     }
 
-    db_put_object_return& operator=(const db_put_object_return&& rhs) noexcept
+    put_object_return& operator=(const put_object_return&& rhs) noexcept
     {
       set_value(rhs.get_value());
       return *this;
@@ -2418,25 +2418,25 @@ class db_put_object_return final: public ::EmbeddedProto::MessageInterface
 
 template<uint32_t space_LENGTH, 
 uint32_t key_LENGTH>
-class db_get_object_args final: public ::EmbeddedProto::MessageInterface
+class get_object_args final: public ::EmbeddedProto::MessageInterface
 {
   public:
-    db_get_object_args() = default;
-    db_get_object_args(const db_get_object_args& rhs )
+    get_object_args() = default;
+    get_object_args(const get_object_args& rhs )
     {
       set_space(rhs.get_space());
       set_key(rhs.get_key());
       set_object_size_hint(rhs.get_object_size_hint());
     }
 
-    db_get_object_args(const db_get_object_args&& rhs ) noexcept
+    get_object_args(const get_object_args&& rhs ) noexcept
     {
       set_space(rhs.get_space());
       set_key(rhs.get_key());
       set_object_size_hint(rhs.get_object_size_hint());
     }
 
-    ~db_get_object_args() override = default;
+    ~get_object_args() override = default;
 
     enum class id : uint32_t
     {
@@ -2446,7 +2446,7 @@ class db_get_object_args final: public ::EmbeddedProto::MessageInterface
       OBJECT_SIZE_HINT = 3
     };
 
-    db_get_object_args& operator=(const db_get_object_args& rhs)
+    get_object_args& operator=(const get_object_args& rhs)
     {
       set_space(rhs.get_space());
       set_key(rhs.get_key());
@@ -2454,7 +2454,7 @@ class db_get_object_args final: public ::EmbeddedProto::MessageInterface
       return *this;
     }
 
-    db_get_object_args& operator=(const db_get_object_args&& rhs) noexcept
+    get_object_args& operator=(const get_object_args&& rhs) noexcept
     {
       set_space(rhs.get_space());
       set_key(rhs.get_key());
@@ -2569,21 +2569,21 @@ class db_get_object_args final: public ::EmbeddedProto::MessageInterface
 };
 
 template<uint32_t value_LENGTH>
-class db_get_object_return final: public ::EmbeddedProto::MessageInterface
+class get_object_return final: public ::EmbeddedProto::MessageInterface
 {
   public:
-    db_get_object_return() = default;
-    db_get_object_return(const db_get_object_return& rhs )
+    get_object_return() = default;
+    get_object_return(const get_object_return& rhs )
     {
       set_value(rhs.get_value());
     }
 
-    db_get_object_return(const db_get_object_return&& rhs ) noexcept
+    get_object_return(const get_object_return&& rhs ) noexcept
     {
       set_value(rhs.get_value());
     }
 
-    ~db_get_object_return() override = default;
+    ~get_object_return() override = default;
 
     enum class id : uint32_t
     {
@@ -2591,13 +2591,13 @@ class db_get_object_return final: public ::EmbeddedProto::MessageInterface
       VALUE = 3
     };
 
-    db_get_object_return& operator=(const db_get_object_return& rhs)
+    get_object_return& operator=(const get_object_return& rhs)
     {
       set_value(rhs.get_value());
       return *this;
     }
 
-    db_get_object_return& operator=(const db_get_object_return&& rhs) noexcept
+    get_object_return& operator=(const get_object_return&& rhs) noexcept
     {
       set_value(rhs.get_value());
       return *this;
@@ -2676,25 +2676,25 @@ class db_get_object_return final: public ::EmbeddedProto::MessageInterface
 
 template<uint32_t space_LENGTH, 
 uint32_t key_LENGTH>
-class db_get_next_object_args final: public ::EmbeddedProto::MessageInterface
+class get_next_object_args final: public ::EmbeddedProto::MessageInterface
 {
   public:
-    db_get_next_object_args() = default;
-    db_get_next_object_args(const db_get_next_object_args& rhs )
+    get_next_object_args() = default;
+    get_next_object_args(const get_next_object_args& rhs )
     {
       set_space(rhs.get_space());
       set_key(rhs.get_key());
       set_object_size_hint(rhs.get_object_size_hint());
     }
 
-    db_get_next_object_args(const db_get_next_object_args&& rhs ) noexcept
+    get_next_object_args(const get_next_object_args&& rhs ) noexcept
     {
       set_space(rhs.get_space());
       set_key(rhs.get_key());
       set_object_size_hint(rhs.get_object_size_hint());
     }
 
-    ~db_get_next_object_args() override = default;
+    ~get_next_object_args() override = default;
 
     enum class id : uint32_t
     {
@@ -2704,7 +2704,7 @@ class db_get_next_object_args final: public ::EmbeddedProto::MessageInterface
       OBJECT_SIZE_HINT = 3
     };
 
-    db_get_next_object_args& operator=(const db_get_next_object_args& rhs)
+    get_next_object_args& operator=(const get_next_object_args& rhs)
     {
       set_space(rhs.get_space());
       set_key(rhs.get_key());
@@ -2712,7 +2712,7 @@ class db_get_next_object_args final: public ::EmbeddedProto::MessageInterface
       return *this;
     }
 
-    db_get_next_object_args& operator=(const db_get_next_object_args&& rhs) noexcept
+    get_next_object_args& operator=(const get_next_object_args&& rhs) noexcept
     {
       set_space(rhs.get_space());
       set_key(rhs.get_key());
@@ -2827,21 +2827,21 @@ class db_get_next_object_args final: public ::EmbeddedProto::MessageInterface
 };
 
 template<uint32_t value_LENGTH>
-class db_get_next_object_return final: public ::EmbeddedProto::MessageInterface
+class get_next_object_return final: public ::EmbeddedProto::MessageInterface
 {
   public:
-    db_get_next_object_return() = default;
-    db_get_next_object_return(const db_get_next_object_return& rhs )
+    get_next_object_return() = default;
+    get_next_object_return(const get_next_object_return& rhs )
     {
       set_value(rhs.get_value());
     }
 
-    db_get_next_object_return(const db_get_next_object_return&& rhs ) noexcept
+    get_next_object_return(const get_next_object_return&& rhs ) noexcept
     {
       set_value(rhs.get_value());
     }
 
-    ~db_get_next_object_return() override = default;
+    ~get_next_object_return() override = default;
 
     enum class id : uint32_t
     {
@@ -2849,13 +2849,13 @@ class db_get_next_object_return final: public ::EmbeddedProto::MessageInterface
       VALUE = 3
     };
 
-    db_get_next_object_return& operator=(const db_get_next_object_return& rhs)
+    get_next_object_return& operator=(const get_next_object_return& rhs)
     {
       set_value(rhs.get_value());
       return *this;
     }
 
-    db_get_next_object_return& operator=(const db_get_next_object_return&& rhs) noexcept
+    get_next_object_return& operator=(const get_next_object_return&& rhs) noexcept
     {
       set_value(rhs.get_value());
       return *this;
@@ -2934,25 +2934,25 @@ class db_get_next_object_return final: public ::EmbeddedProto::MessageInterface
 
 template<uint32_t space_LENGTH, 
 uint32_t key_LENGTH>
-class db_get_prev_object_args final: public ::EmbeddedProto::MessageInterface
+class get_prev_object_args final: public ::EmbeddedProto::MessageInterface
 {
   public:
-    db_get_prev_object_args() = default;
-    db_get_prev_object_args(const db_get_prev_object_args& rhs )
+    get_prev_object_args() = default;
+    get_prev_object_args(const get_prev_object_args& rhs )
     {
       set_space(rhs.get_space());
       set_key(rhs.get_key());
       set_object_size_hint(rhs.get_object_size_hint());
     }
 
-    db_get_prev_object_args(const db_get_prev_object_args&& rhs ) noexcept
+    get_prev_object_args(const get_prev_object_args&& rhs ) noexcept
     {
       set_space(rhs.get_space());
       set_key(rhs.get_key());
       set_object_size_hint(rhs.get_object_size_hint());
     }
 
-    ~db_get_prev_object_args() override = default;
+    ~get_prev_object_args() override = default;
 
     enum class id : uint32_t
     {
@@ -2962,7 +2962,7 @@ class db_get_prev_object_args final: public ::EmbeddedProto::MessageInterface
       OBJECT_SIZE_HINT = 3
     };
 
-    db_get_prev_object_args& operator=(const db_get_prev_object_args& rhs)
+    get_prev_object_args& operator=(const get_prev_object_args& rhs)
     {
       set_space(rhs.get_space());
       set_key(rhs.get_key());
@@ -2970,7 +2970,7 @@ class db_get_prev_object_args final: public ::EmbeddedProto::MessageInterface
       return *this;
     }
 
-    db_get_prev_object_args& operator=(const db_get_prev_object_args&& rhs) noexcept
+    get_prev_object_args& operator=(const get_prev_object_args&& rhs) noexcept
     {
       set_space(rhs.get_space());
       set_key(rhs.get_key());
@@ -3085,21 +3085,21 @@ class db_get_prev_object_args final: public ::EmbeddedProto::MessageInterface
 };
 
 template<uint32_t value_LENGTH>
-class db_get_prev_object_return final: public ::EmbeddedProto::MessageInterface
+class get_prev_object_return final: public ::EmbeddedProto::MessageInterface
 {
   public:
-    db_get_prev_object_return() = default;
-    db_get_prev_object_return(const db_get_prev_object_return& rhs )
+    get_prev_object_return() = default;
+    get_prev_object_return(const get_prev_object_return& rhs )
     {
       set_value(rhs.get_value());
     }
 
-    db_get_prev_object_return(const db_get_prev_object_return&& rhs ) noexcept
+    get_prev_object_return(const get_prev_object_return&& rhs ) noexcept
     {
       set_value(rhs.get_value());
     }
 
-    ~db_get_prev_object_return() override = default;
+    ~get_prev_object_return() override = default;
 
     enum class id : uint32_t
     {
@@ -3107,13 +3107,13 @@ class db_get_prev_object_return final: public ::EmbeddedProto::MessageInterface
       VALUE = 3
     };
 
-    db_get_prev_object_return& operator=(const db_get_prev_object_return& rhs)
+    get_prev_object_return& operator=(const get_prev_object_return& rhs)
     {
       set_value(rhs.get_value());
       return *this;
     }
 
-    db_get_prev_object_return& operator=(const db_get_prev_object_return&& rhs) noexcept
+    get_prev_object_return& operator=(const get_prev_object_return&& rhs) noexcept
     {
       set_value(rhs.get_value());
       return *this;
