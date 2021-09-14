@@ -1,10 +1,13 @@
 file(GLOB_RECURSE GEN_HEADERS "generated/*.h")
 file(GLOB EAMS_HEADERS "src/*.h")
 file(GLOB EAMS_SOURCE  "src/*.cpp")
+file(GLOB HEADERS "include/koinos/*.hpp")
 add_library(koinos_proto_embedded
+            buffer.cpp
             ${EAMS_SOURCE}
             ${EAMS_HEADERS}
-            ${GEN_SOURCE})
+            ${GEN_SOURCE}
+            ${HEADERS})
 add_library(Koinos::proto_embedded ALIAS koinos_proto_embedded)
 
 target_include_directories(koinos_proto_embedded PUBLIC
