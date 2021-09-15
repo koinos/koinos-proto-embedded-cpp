@@ -79,7 +79,7 @@ class transaction_accepted final: public ::EmbeddedProto::MessageInterface
 
     ~transaction_accepted() override = default;
 
-    enum class id : uint32_t
+    enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
       TRANSACTION = 1,
@@ -150,27 +150,27 @@ class transaction_accepted final: public ::EmbeddedProto::MessageInterface
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = transaction_.serialize_with_id(static_cast<uint32_t>(id::TRANSACTION), buffer, false);
+        return_value = transaction_.serialize_with_id(static_cast<uint32_t>(FieldNumber::TRANSACTION), buffer, false);
       }
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = payer_.serialize_with_id(static_cast<uint32_t>(id::PAYER), buffer, false);
+        return_value = payer_.serialize_with_id(static_cast<uint32_t>(FieldNumber::PAYER), buffer, false);
       }
 
       if((0U != max_payer_resources_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
       {
-        return_value = max_payer_resources_.serialize_with_id(static_cast<uint32_t>(id::MAX_PAYER_RESOURCES), buffer, false);
+        return_value = max_payer_resources_.serialize_with_id(static_cast<uint32_t>(FieldNumber::MAX_PAYER_RESOURCES), buffer, false);
       }
 
       if((0U != trx_resource_limit_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
       {
-        return_value = trx_resource_limit_.serialize_with_id(static_cast<uint32_t>(id::TRX_RESOURCE_LIMIT), buffer, false);
+        return_value = trx_resource_limit_.serialize_with_id(static_cast<uint32_t>(FieldNumber::TRX_RESOURCE_LIMIT), buffer, false);
       }
 
       if((0U != height_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
       {
-        return_value = height_.serialize_with_id(static_cast<uint32_t>(id::HEIGHT), buffer, false);
+        return_value = height_.serialize_with_id(static_cast<uint32_t>(FieldNumber::HEIGHT), buffer, false);
       }
 
       return return_value;
@@ -181,31 +181,31 @@ class transaction_accepted final: public ::EmbeddedProto::MessageInterface
       ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
       ::EmbeddedProto::WireFormatter::WireType wire_type = ::EmbeddedProto::WireFormatter::WireType::VARINT;
       uint32_t id_number = 0;
-      id id_tag = id::NOT_SET;
+      FieldNumber id_tag = FieldNumber::NOT_SET;
 
       ::EmbeddedProto::Error tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
       while((::EmbeddedProto::Error::NO_ERRORS == return_value) && (::EmbeddedProto::Error::NO_ERRORS == tag_value))
       {
-        id_tag = static_cast<id>(id_number);
+        id_tag = static_cast<FieldNumber>(id_number);
         switch(id_tag)
         {
-          case id::TRANSACTION:
+          case FieldNumber::TRANSACTION:
             return_value = transaction_.deserialize_check_type(buffer, wire_type);
             break;
 
-          case id::PAYER:
+          case FieldNumber::PAYER:
             return_value = payer_.deserialize_check_type(buffer, wire_type);
             break;
 
-          case id::MAX_PAYER_RESOURCES:
+          case FieldNumber::MAX_PAYER_RESOURCES:
             return_value = max_payer_resources_.deserialize_check_type(buffer, wire_type);
             break;
 
-          case id::TRX_RESOURCE_LIMIT:
+          case FieldNumber::TRX_RESOURCE_LIMIT:
             return_value = trx_resource_limit_.deserialize_check_type(buffer, wire_type);
             break;
 
-          case id::HEIGHT:
+          case FieldNumber::HEIGHT:
             return_value = height_.deserialize_check_type(buffer, wire_type);
             break;
 
@@ -278,7 +278,7 @@ class block_accepted final: public ::EmbeddedProto::MessageInterface
 
     ~block_accepted() override = default;
 
-    enum class id : uint32_t
+    enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
       BLOCK = 1
@@ -310,7 +310,7 @@ class block_accepted final: public ::EmbeddedProto::MessageInterface
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = block_.serialize_with_id(static_cast<uint32_t>(id::BLOCK), buffer, false);
+        return_value = block_.serialize_with_id(static_cast<uint32_t>(FieldNumber::BLOCK), buffer, false);
       }
 
       return return_value;
@@ -321,15 +321,15 @@ class block_accepted final: public ::EmbeddedProto::MessageInterface
       ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
       ::EmbeddedProto::WireFormatter::WireType wire_type = ::EmbeddedProto::WireFormatter::WireType::VARINT;
       uint32_t id_number = 0;
-      id id_tag = id::NOT_SET;
+      FieldNumber id_tag = FieldNumber::NOT_SET;
 
       ::EmbeddedProto::Error tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
       while((::EmbeddedProto::Error::NO_ERRORS == return_value) && (::EmbeddedProto::Error::NO_ERRORS == tag_value))
       {
-        id_tag = static_cast<id>(id_number);
+        id_tag = static_cast<FieldNumber>(id_number);
         switch(id_tag)
         {
-          case id::BLOCK:
+          case FieldNumber::BLOCK:
             return_value = block_.deserialize_check_type(buffer, wire_type);
             break;
 
@@ -386,7 +386,7 @@ class block_irreversible final: public ::EmbeddedProto::MessageInterface
 
     ~block_irreversible() override = default;
 
-    enum class id : uint32_t
+    enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
       TOPOLOGY = 1
@@ -418,7 +418,7 @@ class block_irreversible final: public ::EmbeddedProto::MessageInterface
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = topology_.serialize_with_id(static_cast<uint32_t>(id::TOPOLOGY), buffer, false);
+        return_value = topology_.serialize_with_id(static_cast<uint32_t>(FieldNumber::TOPOLOGY), buffer, false);
       }
 
       return return_value;
@@ -429,15 +429,15 @@ class block_irreversible final: public ::EmbeddedProto::MessageInterface
       ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
       ::EmbeddedProto::WireFormatter::WireType wire_type = ::EmbeddedProto::WireFormatter::WireType::VARINT;
       uint32_t id_number = 0;
-      id id_tag = id::NOT_SET;
+      FieldNumber id_tag = FieldNumber::NOT_SET;
 
       ::EmbeddedProto::Error tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
       while((::EmbeddedProto::Error::NO_ERRORS == return_value) && (::EmbeddedProto::Error::NO_ERRORS == tag_value))
       {
-        id_tag = static_cast<id>(id_number);
+        id_tag = static_cast<FieldNumber>(id_number);
         switch(id_tag)
         {
-          case id::TOPOLOGY:
+          case FieldNumber::TOPOLOGY:
             return_value = topology_.deserialize_check_type(buffer, wire_type);
             break;
 
@@ -499,7 +499,7 @@ class fork_heads final: public ::EmbeddedProto::MessageInterface
 
     ~fork_heads() override = default;
 
-    enum class id : uint32_t
+    enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
       LAST_IRREVERSIBLE_BLOCK = 1,
@@ -545,12 +545,12 @@ class fork_heads final: public ::EmbeddedProto::MessageInterface
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = last_irreversible_block_.serialize_with_id(static_cast<uint32_t>(id::LAST_IRREVERSIBLE_BLOCK), buffer, false);
+        return_value = last_irreversible_block_.serialize_with_id(static_cast<uint32_t>(FieldNumber::LAST_IRREVERSIBLE_BLOCK), buffer, false);
       }
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = heads_.serialize_with_id(static_cast<uint32_t>(id::HEADS), buffer, false);
+        return_value = heads_.serialize_with_id(static_cast<uint32_t>(FieldNumber::HEADS), buffer, false);
       }
 
       return return_value;
@@ -561,19 +561,19 @@ class fork_heads final: public ::EmbeddedProto::MessageInterface
       ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
       ::EmbeddedProto::WireFormatter::WireType wire_type = ::EmbeddedProto::WireFormatter::WireType::VARINT;
       uint32_t id_number = 0;
-      id id_tag = id::NOT_SET;
+      FieldNumber id_tag = FieldNumber::NOT_SET;
 
       ::EmbeddedProto::Error tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
       while((::EmbeddedProto::Error::NO_ERRORS == return_value) && (::EmbeddedProto::Error::NO_ERRORS == tag_value))
       {
-        id_tag = static_cast<id>(id_number);
+        id_tag = static_cast<FieldNumber>(id_number);
         switch(id_tag)
         {
-          case id::LAST_IRREVERSIBLE_BLOCK:
+          case FieldNumber::LAST_IRREVERSIBLE_BLOCK:
             return_value = last_irreversible_block_.deserialize_check_type(buffer, wire_type);
             break;
 
-          case id::HEADS:
+          case FieldNumber::HEADS:
             return_value = heads_.deserialize_check_type(buffer, wire_type);
             break;
 

@@ -82,7 +82,7 @@ class block_item final: public ::EmbeddedProto::MessageInterface
 
     ~block_item() override = default;
 
-    enum class id : uint32_t
+    enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
       BLOCK_ID = 1,
@@ -143,22 +143,22 @@ class block_item final: public ::EmbeddedProto::MessageInterface
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = block_id_.serialize_with_id(static_cast<uint32_t>(id::BLOCK_ID), buffer, false);
+        return_value = block_id_.serialize_with_id(static_cast<uint32_t>(FieldNumber::BLOCK_ID), buffer, false);
       }
 
       if((0U != block_height_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
       {
-        return_value = block_height_.serialize_with_id(static_cast<uint32_t>(id::BLOCK_HEIGHT), buffer, false);
+        return_value = block_height_.serialize_with_id(static_cast<uint32_t>(FieldNumber::BLOCK_HEIGHT), buffer, false);
       }
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = block_.serialize_with_id(static_cast<uint32_t>(id::BLOCK), buffer, false);
+        return_value = block_.serialize_with_id(static_cast<uint32_t>(FieldNumber::BLOCK), buffer, false);
       }
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = receipt_.serialize_with_id(static_cast<uint32_t>(id::RECEIPT), buffer, false);
+        return_value = receipt_.serialize_with_id(static_cast<uint32_t>(FieldNumber::RECEIPT), buffer, false);
       }
 
       return return_value;
@@ -169,27 +169,27 @@ class block_item final: public ::EmbeddedProto::MessageInterface
       ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
       ::EmbeddedProto::WireFormatter::WireType wire_type = ::EmbeddedProto::WireFormatter::WireType::VARINT;
       uint32_t id_number = 0;
-      id id_tag = id::NOT_SET;
+      FieldNumber id_tag = FieldNumber::NOT_SET;
 
       ::EmbeddedProto::Error tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
       while((::EmbeddedProto::Error::NO_ERRORS == return_value) && (::EmbeddedProto::Error::NO_ERRORS == tag_value))
       {
-        id_tag = static_cast<id>(id_number);
+        id_tag = static_cast<FieldNumber>(id_number);
         switch(id_tag)
         {
-          case id::BLOCK_ID:
+          case FieldNumber::BLOCK_ID:
             return_value = block_id_.deserialize_check_type(buffer, wire_type);
             break;
 
-          case id::BLOCK_HEIGHT:
+          case FieldNumber::BLOCK_HEIGHT:
             return_value = block_height_.deserialize_check_type(buffer, wire_type);
             break;
 
-          case id::BLOCK:
+          case FieldNumber::BLOCK:
             return_value = block_.deserialize_check_type(buffer, wire_type);
             break;
 
-          case id::RECEIPT:
+          case FieldNumber::RECEIPT:
             return_value = receipt_.deserialize_check_type(buffer, wire_type);
             break;
 
@@ -271,7 +271,7 @@ class block_record final: public ::EmbeddedProto::MessageInterface
 
     ~block_record() override = default;
 
-    enum class id : uint32_t
+    enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
       BLOCK_ID = 1,
@@ -346,27 +346,27 @@ class block_record final: public ::EmbeddedProto::MessageInterface
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = block_id_.serialize_with_id(static_cast<uint32_t>(id::BLOCK_ID), buffer, false);
+        return_value = block_id_.serialize_with_id(static_cast<uint32_t>(FieldNumber::BLOCK_ID), buffer, false);
       }
 
       if((0U != block_height_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
       {
-        return_value = block_height_.serialize_with_id(static_cast<uint32_t>(id::BLOCK_HEIGHT), buffer, false);
+        return_value = block_height_.serialize_with_id(static_cast<uint32_t>(FieldNumber::BLOCK_HEIGHT), buffer, false);
       }
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = block_.serialize_with_id(static_cast<uint32_t>(id::BLOCK), buffer, false);
+        return_value = block_.serialize_with_id(static_cast<uint32_t>(FieldNumber::BLOCK), buffer, false);
       }
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = receipt_.serialize_with_id(static_cast<uint32_t>(id::RECEIPT), buffer, false);
+        return_value = receipt_.serialize_with_id(static_cast<uint32_t>(FieldNumber::RECEIPT), buffer, false);
       }
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = previous_block_ids_.serialize_with_id(static_cast<uint32_t>(id::PREVIOUS_BLOCK_IDS), buffer, false);
+        return_value = previous_block_ids_.serialize_with_id(static_cast<uint32_t>(FieldNumber::PREVIOUS_BLOCK_IDS), buffer, false);
       }
 
       return return_value;
@@ -377,31 +377,31 @@ class block_record final: public ::EmbeddedProto::MessageInterface
       ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
       ::EmbeddedProto::WireFormatter::WireType wire_type = ::EmbeddedProto::WireFormatter::WireType::VARINT;
       uint32_t id_number = 0;
-      id id_tag = id::NOT_SET;
+      FieldNumber id_tag = FieldNumber::NOT_SET;
 
       ::EmbeddedProto::Error tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
       while((::EmbeddedProto::Error::NO_ERRORS == return_value) && (::EmbeddedProto::Error::NO_ERRORS == tag_value))
       {
-        id_tag = static_cast<id>(id_number);
+        id_tag = static_cast<FieldNumber>(id_number);
         switch(id_tag)
         {
-          case id::BLOCK_ID:
+          case FieldNumber::BLOCK_ID:
             return_value = block_id_.deserialize_check_type(buffer, wire_type);
             break;
 
-          case id::BLOCK_HEIGHT:
+          case FieldNumber::BLOCK_HEIGHT:
             return_value = block_height_.deserialize_check_type(buffer, wire_type);
             break;
 
-          case id::BLOCK:
+          case FieldNumber::BLOCK:
             return_value = block_.deserialize_check_type(buffer, wire_type);
             break;
 
-          case id::RECEIPT:
+          case FieldNumber::RECEIPT:
             return_value = receipt_.deserialize_check_type(buffer, wire_type);
             break;
 
-          case id::PREVIOUS_BLOCK_IDS:
+          case FieldNumber::PREVIOUS_BLOCK_IDS:
             return_value = previous_block_ids_.deserialize_check_type(buffer, wire_type);
             break;
 

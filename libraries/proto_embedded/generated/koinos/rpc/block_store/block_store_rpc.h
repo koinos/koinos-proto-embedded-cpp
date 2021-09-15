@@ -75,7 +75,7 @@ class get_blocks_by_id_request final: public ::EmbeddedProto::MessageInterface
 
     ~get_blocks_by_id_request() override = default;
 
-    enum class id : uint32_t
+    enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
       BLOCK_ID = 1,
@@ -131,17 +131,17 @@ class get_blocks_by_id_request final: public ::EmbeddedProto::MessageInterface
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = block_id_.serialize_with_id(static_cast<uint32_t>(id::BLOCK_ID), buffer, false);
+        return_value = block_id_.serialize_with_id(static_cast<uint32_t>(FieldNumber::BLOCK_ID), buffer, false);
       }
 
       if((false != return_block_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
       {
-        return_value = return_block_.serialize_with_id(static_cast<uint32_t>(id::RETURN_BLOCK), buffer, false);
+        return_value = return_block_.serialize_with_id(static_cast<uint32_t>(FieldNumber::RETURN_BLOCK), buffer, false);
       }
 
       if((false != return_receipt_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
       {
-        return_value = return_receipt_.serialize_with_id(static_cast<uint32_t>(id::RETURN_RECEIPT), buffer, false);
+        return_value = return_receipt_.serialize_with_id(static_cast<uint32_t>(FieldNumber::RETURN_RECEIPT), buffer, false);
       }
 
       return return_value;
@@ -152,23 +152,23 @@ class get_blocks_by_id_request final: public ::EmbeddedProto::MessageInterface
       ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
       ::EmbeddedProto::WireFormatter::WireType wire_type = ::EmbeddedProto::WireFormatter::WireType::VARINT;
       uint32_t id_number = 0;
-      id id_tag = id::NOT_SET;
+      FieldNumber id_tag = FieldNumber::NOT_SET;
 
       ::EmbeddedProto::Error tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
       while((::EmbeddedProto::Error::NO_ERRORS == return_value) && (::EmbeddedProto::Error::NO_ERRORS == tag_value))
       {
-        id_tag = static_cast<id>(id_number);
+        id_tag = static_cast<FieldNumber>(id_number);
         switch(id_tag)
         {
-          case id::BLOCK_ID:
+          case FieldNumber::BLOCK_ID:
             return_value = block_id_.deserialize_check_type(buffer, wire_type);
             break;
 
-          case id::RETURN_BLOCK:
+          case FieldNumber::RETURN_BLOCK:
             return_value = return_block_.deserialize_check_type(buffer, wire_type);
             break;
 
-          case id::RETURN_RECEIPT:
+          case FieldNumber::RETURN_RECEIPT:
             return_value = return_receipt_.deserialize_check_type(buffer, wire_type);
             break;
 
@@ -239,7 +239,7 @@ class get_blocks_by_id_response final: public ::EmbeddedProto::MessageInterface
 
     ~get_blocks_by_id_response() override = default;
 
-    enum class id : uint32_t
+    enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
       BLOCK_ITEMS = 1
@@ -275,7 +275,7 @@ class get_blocks_by_id_response final: public ::EmbeddedProto::MessageInterface
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = block_items_.serialize_with_id(static_cast<uint32_t>(id::BLOCK_ITEMS), buffer, false);
+        return_value = block_items_.serialize_with_id(static_cast<uint32_t>(FieldNumber::BLOCK_ITEMS), buffer, false);
       }
 
       return return_value;
@@ -286,15 +286,15 @@ class get_blocks_by_id_response final: public ::EmbeddedProto::MessageInterface
       ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
       ::EmbeddedProto::WireFormatter::WireType wire_type = ::EmbeddedProto::WireFormatter::WireType::VARINT;
       uint32_t id_number = 0;
-      id id_tag = id::NOT_SET;
+      FieldNumber id_tag = FieldNumber::NOT_SET;
 
       ::EmbeddedProto::Error tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
       while((::EmbeddedProto::Error::NO_ERRORS == return_value) && (::EmbeddedProto::Error::NO_ERRORS == tag_value))
       {
-        id_tag = static_cast<id>(id_number);
+        id_tag = static_cast<FieldNumber>(id_number);
         switch(id_tag)
         {
-          case id::BLOCK_ITEMS:
+          case FieldNumber::BLOCK_ITEMS:
             return_value = block_items_.deserialize_check_type(buffer, wire_type);
             break;
 
@@ -358,7 +358,7 @@ class get_blocks_by_height_request final: public ::EmbeddedProto::MessageInterfa
 
     ~get_blocks_by_height_request() override = default;
 
-    enum class id : uint32_t
+    enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
       HEAD_BLOCK_ID = 1,
@@ -429,27 +429,27 @@ class get_blocks_by_height_request final: public ::EmbeddedProto::MessageInterfa
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = head_block_id_.serialize_with_id(static_cast<uint32_t>(id::HEAD_BLOCK_ID), buffer, false);
+        return_value = head_block_id_.serialize_with_id(static_cast<uint32_t>(FieldNumber::HEAD_BLOCK_ID), buffer, false);
       }
 
       if((0U != ancestor_start_height_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
       {
-        return_value = ancestor_start_height_.serialize_with_id(static_cast<uint32_t>(id::ANCESTOR_START_HEIGHT), buffer, false);
+        return_value = ancestor_start_height_.serialize_with_id(static_cast<uint32_t>(FieldNumber::ANCESTOR_START_HEIGHT), buffer, false);
       }
 
       if((0U != num_blocks_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
       {
-        return_value = num_blocks_.serialize_with_id(static_cast<uint32_t>(id::NUM_BLOCKS), buffer, false);
+        return_value = num_blocks_.serialize_with_id(static_cast<uint32_t>(FieldNumber::NUM_BLOCKS), buffer, false);
       }
 
       if((false != return_block_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
       {
-        return_value = return_block_.serialize_with_id(static_cast<uint32_t>(id::RETURN_BLOCK), buffer, false);
+        return_value = return_block_.serialize_with_id(static_cast<uint32_t>(FieldNumber::RETURN_BLOCK), buffer, false);
       }
 
       if((false != return_receipt_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
       {
-        return_value = return_receipt_.serialize_with_id(static_cast<uint32_t>(id::RETURN_RECEIPT), buffer, false);
+        return_value = return_receipt_.serialize_with_id(static_cast<uint32_t>(FieldNumber::RETURN_RECEIPT), buffer, false);
       }
 
       return return_value;
@@ -460,31 +460,31 @@ class get_blocks_by_height_request final: public ::EmbeddedProto::MessageInterfa
       ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
       ::EmbeddedProto::WireFormatter::WireType wire_type = ::EmbeddedProto::WireFormatter::WireType::VARINT;
       uint32_t id_number = 0;
-      id id_tag = id::NOT_SET;
+      FieldNumber id_tag = FieldNumber::NOT_SET;
 
       ::EmbeddedProto::Error tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
       while((::EmbeddedProto::Error::NO_ERRORS == return_value) && (::EmbeddedProto::Error::NO_ERRORS == tag_value))
       {
-        id_tag = static_cast<id>(id_number);
+        id_tag = static_cast<FieldNumber>(id_number);
         switch(id_tag)
         {
-          case id::HEAD_BLOCK_ID:
+          case FieldNumber::HEAD_BLOCK_ID:
             return_value = head_block_id_.deserialize_check_type(buffer, wire_type);
             break;
 
-          case id::ANCESTOR_START_HEIGHT:
+          case FieldNumber::ANCESTOR_START_HEIGHT:
             return_value = ancestor_start_height_.deserialize_check_type(buffer, wire_type);
             break;
 
-          case id::NUM_BLOCKS:
+          case FieldNumber::NUM_BLOCKS:
             return_value = num_blocks_.deserialize_check_type(buffer, wire_type);
             break;
 
-          case id::RETURN_BLOCK:
+          case FieldNumber::RETURN_BLOCK:
             return_value = return_block_.deserialize_check_type(buffer, wire_type);
             break;
 
-          case id::RETURN_RECEIPT:
+          case FieldNumber::RETURN_RECEIPT:
             return_value = return_receipt_.deserialize_check_type(buffer, wire_type);
             break;
 
@@ -559,7 +559,7 @@ class get_blocks_by_height_response final: public ::EmbeddedProto::MessageInterf
 
     ~get_blocks_by_height_response() override = default;
 
-    enum class id : uint32_t
+    enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
       BLOCK_ITEMS = 1
@@ -595,7 +595,7 @@ class get_blocks_by_height_response final: public ::EmbeddedProto::MessageInterf
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = block_items_.serialize_with_id(static_cast<uint32_t>(id::BLOCK_ITEMS), buffer, false);
+        return_value = block_items_.serialize_with_id(static_cast<uint32_t>(FieldNumber::BLOCK_ITEMS), buffer, false);
       }
 
       return return_value;
@@ -606,15 +606,15 @@ class get_blocks_by_height_response final: public ::EmbeddedProto::MessageInterf
       ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
       ::EmbeddedProto::WireFormatter::WireType wire_type = ::EmbeddedProto::WireFormatter::WireType::VARINT;
       uint32_t id_number = 0;
-      id id_tag = id::NOT_SET;
+      FieldNumber id_tag = FieldNumber::NOT_SET;
 
       ::EmbeddedProto::Error tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
       while((::EmbeddedProto::Error::NO_ERRORS == return_value) && (::EmbeddedProto::Error::NO_ERRORS == tag_value))
       {
-        id_tag = static_cast<id>(id_number);
+        id_tag = static_cast<FieldNumber>(id_number);
         switch(id_tag)
         {
-          case id::BLOCK_ITEMS:
+          case FieldNumber::BLOCK_ITEMS:
             return_value = block_items_.deserialize_check_type(buffer, wire_type);
             break;
 
@@ -679,7 +679,7 @@ class add_block_request final: public ::EmbeddedProto::MessageInterface
 
     ~add_block_request() override = default;
 
-    enum class id : uint32_t
+    enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
       BLOCK_TO_ADD = 1
@@ -711,7 +711,7 @@ class add_block_request final: public ::EmbeddedProto::MessageInterface
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = block_to_add_.serialize_with_id(static_cast<uint32_t>(id::BLOCK_TO_ADD), buffer, false);
+        return_value = block_to_add_.serialize_with_id(static_cast<uint32_t>(FieldNumber::BLOCK_TO_ADD), buffer, false);
       }
 
       return return_value;
@@ -722,15 +722,15 @@ class add_block_request final: public ::EmbeddedProto::MessageInterface
       ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
       ::EmbeddedProto::WireFormatter::WireType wire_type = ::EmbeddedProto::WireFormatter::WireType::VARINT;
       uint32_t id_number = 0;
-      id id_tag = id::NOT_SET;
+      FieldNumber id_tag = FieldNumber::NOT_SET;
 
       ::EmbeddedProto::Error tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
       while((::EmbeddedProto::Error::NO_ERRORS == return_value) && (::EmbeddedProto::Error::NO_ERRORS == tag_value))
       {
-        id_tag = static_cast<id>(id_number);
+        id_tag = static_cast<FieldNumber>(id_number);
         switch(id_tag)
         {
-          case id::BLOCK_TO_ADD:
+          case FieldNumber::BLOCK_TO_ADD:
             return_value = block_to_add_.deserialize_check_type(buffer, wire_type);
             break;
 
@@ -783,7 +783,7 @@ class add_block_response final: public ::EmbeddedProto::MessageInterface
 
     ~add_block_response() override = default;
 
-    enum class id : uint32_t
+    enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
     };
@@ -811,12 +811,12 @@ class add_block_response final: public ::EmbeddedProto::MessageInterface
       ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
       ::EmbeddedProto::WireFormatter::WireType wire_type = ::EmbeddedProto::WireFormatter::WireType::VARINT;
       uint32_t id_number = 0;
-      id id_tag = id::NOT_SET;
+      FieldNumber id_tag = FieldNumber::NOT_SET;
 
       ::EmbeddedProto::Error tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
       while((::EmbeddedProto::Error::NO_ERRORS == return_value) && (::EmbeddedProto::Error::NO_ERRORS == tag_value))
       {
-        id_tag = static_cast<id>(id_number);
+        id_tag = static_cast<FieldNumber>(id_number);
         switch(id_tag)
         {
           default:
@@ -866,7 +866,7 @@ class get_highest_block_request final: public ::EmbeddedProto::MessageInterface
 
     ~get_highest_block_request() override = default;
 
-    enum class id : uint32_t
+    enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
     };
@@ -894,12 +894,12 @@ class get_highest_block_request final: public ::EmbeddedProto::MessageInterface
       ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
       ::EmbeddedProto::WireFormatter::WireType wire_type = ::EmbeddedProto::WireFormatter::WireType::VARINT;
       uint32_t id_number = 0;
-      id id_tag = id::NOT_SET;
+      FieldNumber id_tag = FieldNumber::NOT_SET;
 
       ::EmbeddedProto::Error tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
       while((::EmbeddedProto::Error::NO_ERRORS == return_value) && (::EmbeddedProto::Error::NO_ERRORS == tag_value))
       {
-        id_tag = static_cast<id>(id_number);
+        id_tag = static_cast<FieldNumber>(id_number);
         switch(id_tag)
         {
           default:
@@ -953,7 +953,7 @@ class get_highest_block_response final: public ::EmbeddedProto::MessageInterface
 
     ~get_highest_block_response() override = default;
 
-    enum class id : uint32_t
+    enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
       TOPOLOGY = 1
@@ -985,7 +985,7 @@ class get_highest_block_response final: public ::EmbeddedProto::MessageInterface
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = topology_.serialize_with_id(static_cast<uint32_t>(id::TOPOLOGY), buffer, false);
+        return_value = topology_.serialize_with_id(static_cast<uint32_t>(FieldNumber::TOPOLOGY), buffer, false);
       }
 
       return return_value;
@@ -996,15 +996,15 @@ class get_highest_block_response final: public ::EmbeddedProto::MessageInterface
       ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
       ::EmbeddedProto::WireFormatter::WireType wire_type = ::EmbeddedProto::WireFormatter::WireType::VARINT;
       uint32_t id_number = 0;
-      id id_tag = id::NOT_SET;
+      FieldNumber id_tag = FieldNumber::NOT_SET;
 
       ::EmbeddedProto::Error tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
       while((::EmbeddedProto::Error::NO_ERRORS == return_value) && (::EmbeddedProto::Error::NO_ERRORS == tag_value))
       {
-        id_tag = static_cast<id>(id_number);
+        id_tag = static_cast<FieldNumber>(id_number);
         switch(id_tag)
         {
-          case id::TOPOLOGY:
+          case FieldNumber::TOPOLOGY:
             return_value = topology_.deserialize_check_type(buffer, wire_type);
             break;
 
@@ -1070,23 +1070,23 @@ class block_store_request final: public ::EmbeddedProto::MessageInterface
 
       switch(rhs.get_which_request())
       {
-        case id::RESERVED:
+        case FieldNumber::RESERVED:
           set_reserved(rhs.get_reserved());
           break;
 
-        case id::GET_BLOCKS_BY_ID:
+        case FieldNumber::GET_BLOCKS_BY_ID:
           set_get_blocks_by_id(rhs.get_get_blocks_by_id());
           break;
 
-        case id::GET_BLOCKS_BY_HEIGHT:
+        case FieldNumber::GET_BLOCKS_BY_HEIGHT:
           set_get_blocks_by_height(rhs.get_get_blocks_by_height());
           break;
 
-        case id::ADD_BLOCK:
+        case FieldNumber::ADD_BLOCK:
           set_add_block(rhs.get_add_block());
           break;
 
-        case id::GET_HIGHEST_BLOCK:
+        case FieldNumber::GET_HIGHEST_BLOCK:
           set_get_highest_block(rhs.get_get_highest_block());
           break;
 
@@ -1106,23 +1106,23 @@ class block_store_request final: public ::EmbeddedProto::MessageInterface
 
       switch(rhs.get_which_request())
       {
-        case id::RESERVED:
+        case FieldNumber::RESERVED:
           set_reserved(rhs.get_reserved());
           break;
 
-        case id::GET_BLOCKS_BY_ID:
+        case FieldNumber::GET_BLOCKS_BY_ID:
           set_get_blocks_by_id(rhs.get_get_blocks_by_id());
           break;
 
-        case id::GET_BLOCKS_BY_HEIGHT:
+        case FieldNumber::GET_BLOCKS_BY_HEIGHT:
           set_get_blocks_by_height(rhs.get_get_blocks_by_height());
           break;
 
-        case id::ADD_BLOCK:
+        case FieldNumber::ADD_BLOCK:
           set_add_block(rhs.get_add_block());
           break;
 
-        case id::GET_HIGHEST_BLOCK:
+        case FieldNumber::GET_HIGHEST_BLOCK:
           set_get_highest_block(rhs.get_get_highest_block());
           break;
 
@@ -1134,7 +1134,7 @@ class block_store_request final: public ::EmbeddedProto::MessageInterface
 
     ~block_store_request() override = default;
 
-    enum class id : uint32_t
+    enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
       RESERVED = 1,
@@ -1154,23 +1154,23 @@ class block_store_request final: public ::EmbeddedProto::MessageInterface
 
       switch(rhs.get_which_request())
       {
-        case id::RESERVED:
+        case FieldNumber::RESERVED:
           set_reserved(rhs.get_reserved());
           break;
 
-        case id::GET_BLOCKS_BY_ID:
+        case FieldNumber::GET_BLOCKS_BY_ID:
           set_get_blocks_by_id(rhs.get_get_blocks_by_id());
           break;
 
-        case id::GET_BLOCKS_BY_HEIGHT:
+        case FieldNumber::GET_BLOCKS_BY_HEIGHT:
           set_get_blocks_by_height(rhs.get_get_blocks_by_height());
           break;
 
-        case id::ADD_BLOCK:
+        case FieldNumber::ADD_BLOCK:
           set_add_block(rhs.get_add_block());
           break;
 
-        case id::GET_HIGHEST_BLOCK:
+        case FieldNumber::GET_HIGHEST_BLOCK:
           set_get_highest_block(rhs.get_get_highest_block());
           break;
 
@@ -1191,23 +1191,23 @@ class block_store_request final: public ::EmbeddedProto::MessageInterface
 
       switch(rhs.get_which_request())
       {
-        case id::RESERVED:
+        case FieldNumber::RESERVED:
           set_reserved(rhs.get_reserved());
           break;
 
-        case id::GET_BLOCKS_BY_ID:
+        case FieldNumber::GET_BLOCKS_BY_ID:
           set_get_blocks_by_id(rhs.get_get_blocks_by_id());
           break;
 
-        case id::GET_BLOCKS_BY_HEIGHT:
+        case FieldNumber::GET_BLOCKS_BY_HEIGHT:
           set_get_blocks_by_height(rhs.get_get_blocks_by_height());
           break;
 
-        case id::ADD_BLOCK:
+        case FieldNumber::ADD_BLOCK:
           set_add_block(rhs.get_add_block());
           break;
 
-        case id::GET_HIGHEST_BLOCK:
+        case FieldNumber::GET_HIGHEST_BLOCK:
           set_get_highest_block(rhs.get_get_highest_block());
           break;
 
@@ -1218,37 +1218,37 @@ class block_store_request final: public ::EmbeddedProto::MessageInterface
       return *this;
     }
 
-    id get_which_request() const { return which_request_; }
+    FieldNumber get_which_request() const { return which_request_; }
 
     inline void clear_reserved()
     {
-      if(id::RESERVED == which_request_)
+      if(FieldNumber::RESERVED == which_request_)
       {
-        which_request_ = id::NOT_SET;
+        which_request_ = FieldNumber::NOT_SET;
         request_.reserved_.~reserved_rpc();
       }
     }
     inline void set_reserved(const reserved_rpc& value)
     {
-      if(id::RESERVED != which_request_)
+      if(FieldNumber::RESERVED != which_request_)
       {
-        init_request(id::RESERVED);
+        init_request(FieldNumber::RESERVED);
       }
       request_.reserved_ = value;
     }
     inline void set_reserved(const reserved_rpc&& value)
     {
-      if(id::RESERVED != which_request_)
+      if(FieldNumber::RESERVED != which_request_)
       {
-        init_request(id::RESERVED);
+        init_request(FieldNumber::RESERVED);
       }
       request_.reserved_ = value;
     }
     inline reserved_rpc& mutable_reserved()
     {
-      if(id::RESERVED != which_request_)
+      if(FieldNumber::RESERVED != which_request_)
       {
-        init_request(id::RESERVED);
+        init_request(FieldNumber::RESERVED);
       }
       return request_.reserved_;
     }
@@ -1257,33 +1257,33 @@ class block_store_request final: public ::EmbeddedProto::MessageInterface
 
     inline void clear_get_blocks_by_id()
     {
-      if(id::GET_BLOCKS_BY_ID == which_request_)
+      if(FieldNumber::GET_BLOCKS_BY_ID == which_request_)
       {
-        which_request_ = id::NOT_SET;
+        which_request_ = FieldNumber::NOT_SET;
         request_.get_blocks_by_id_.~get_blocks_by_id_request<get_blocks_by_id_block_id_REP_LENGTH, get_blocks_by_id_block_id_LENGTH>();
       }
     }
     inline void set_get_blocks_by_id(const get_blocks_by_id_request<get_blocks_by_id_block_id_REP_LENGTH, get_blocks_by_id_block_id_LENGTH>& value)
     {
-      if(id::GET_BLOCKS_BY_ID != which_request_)
+      if(FieldNumber::GET_BLOCKS_BY_ID != which_request_)
       {
-        init_request(id::GET_BLOCKS_BY_ID);
+        init_request(FieldNumber::GET_BLOCKS_BY_ID);
       }
       request_.get_blocks_by_id_ = value;
     }
     inline void set_get_blocks_by_id(const get_blocks_by_id_request<get_blocks_by_id_block_id_REP_LENGTH, get_blocks_by_id_block_id_LENGTH>&& value)
     {
-      if(id::GET_BLOCKS_BY_ID != which_request_)
+      if(FieldNumber::GET_BLOCKS_BY_ID != which_request_)
       {
-        init_request(id::GET_BLOCKS_BY_ID);
+        init_request(FieldNumber::GET_BLOCKS_BY_ID);
       }
       request_.get_blocks_by_id_ = value;
     }
     inline get_blocks_by_id_request<get_blocks_by_id_block_id_REP_LENGTH, get_blocks_by_id_block_id_LENGTH>& mutable_get_blocks_by_id()
     {
-      if(id::GET_BLOCKS_BY_ID != which_request_)
+      if(FieldNumber::GET_BLOCKS_BY_ID != which_request_)
       {
-        init_request(id::GET_BLOCKS_BY_ID);
+        init_request(FieldNumber::GET_BLOCKS_BY_ID);
       }
       return request_.get_blocks_by_id_;
     }
@@ -1292,33 +1292,33 @@ class block_store_request final: public ::EmbeddedProto::MessageInterface
 
     inline void clear_get_blocks_by_height()
     {
-      if(id::GET_BLOCKS_BY_HEIGHT == which_request_)
+      if(FieldNumber::GET_BLOCKS_BY_HEIGHT == which_request_)
       {
-        which_request_ = id::NOT_SET;
+        which_request_ = FieldNumber::NOT_SET;
         request_.get_blocks_by_height_.~get_blocks_by_height_request<get_blocks_by_height_head_block_id_LENGTH>();
       }
     }
     inline void set_get_blocks_by_height(const get_blocks_by_height_request<get_blocks_by_height_head_block_id_LENGTH>& value)
     {
-      if(id::GET_BLOCKS_BY_HEIGHT != which_request_)
+      if(FieldNumber::GET_BLOCKS_BY_HEIGHT != which_request_)
       {
-        init_request(id::GET_BLOCKS_BY_HEIGHT);
+        init_request(FieldNumber::GET_BLOCKS_BY_HEIGHT);
       }
       request_.get_blocks_by_height_ = value;
     }
     inline void set_get_blocks_by_height(const get_blocks_by_height_request<get_blocks_by_height_head_block_id_LENGTH>&& value)
     {
-      if(id::GET_BLOCKS_BY_HEIGHT != which_request_)
+      if(FieldNumber::GET_BLOCKS_BY_HEIGHT != which_request_)
       {
-        init_request(id::GET_BLOCKS_BY_HEIGHT);
+        init_request(FieldNumber::GET_BLOCKS_BY_HEIGHT);
       }
       request_.get_blocks_by_height_ = value;
     }
     inline get_blocks_by_height_request<get_blocks_by_height_head_block_id_LENGTH>& mutable_get_blocks_by_height()
     {
-      if(id::GET_BLOCKS_BY_HEIGHT != which_request_)
+      if(FieldNumber::GET_BLOCKS_BY_HEIGHT != which_request_)
       {
-        init_request(id::GET_BLOCKS_BY_HEIGHT);
+        init_request(FieldNumber::GET_BLOCKS_BY_HEIGHT);
       }
       return request_.get_blocks_by_height_;
     }
@@ -1327,33 +1327,33 @@ class block_store_request final: public ::EmbeddedProto::MessageInterface
 
     inline void clear_add_block()
     {
-      if(id::ADD_BLOCK == which_request_)
+      if(FieldNumber::ADD_BLOCK == which_request_)
       {
-        which_request_ = id::NOT_SET;
+        which_request_ = FieldNumber::NOT_SET;
         request_.add_block_.~add_block_request<add_block_block_to_add_id_LENGTH, add_block_block_to_add_header_previous_LENGTH, add_block_block_to_add_active_LENGTH, add_block_block_to_add_passive_LENGTH, add_block_block_to_add_signature_data_LENGTH, add_block_block_to_add_transactions_REP_LENGTH, add_block_block_to_add_transactions_id_LENGTH, add_block_block_to_add_transactions_active_LENGTH, add_block_block_to_add_transactions_passive_LENGTH, add_block_block_to_add_transactions_signature_data_LENGTH>();
       }
     }
     inline void set_add_block(const add_block_request<add_block_block_to_add_id_LENGTH, add_block_block_to_add_header_previous_LENGTH, add_block_block_to_add_active_LENGTH, add_block_block_to_add_passive_LENGTH, add_block_block_to_add_signature_data_LENGTH, add_block_block_to_add_transactions_REP_LENGTH, add_block_block_to_add_transactions_id_LENGTH, add_block_block_to_add_transactions_active_LENGTH, add_block_block_to_add_transactions_passive_LENGTH, add_block_block_to_add_transactions_signature_data_LENGTH>& value)
     {
-      if(id::ADD_BLOCK != which_request_)
+      if(FieldNumber::ADD_BLOCK != which_request_)
       {
-        init_request(id::ADD_BLOCK);
+        init_request(FieldNumber::ADD_BLOCK);
       }
       request_.add_block_ = value;
     }
     inline void set_add_block(const add_block_request<add_block_block_to_add_id_LENGTH, add_block_block_to_add_header_previous_LENGTH, add_block_block_to_add_active_LENGTH, add_block_block_to_add_passive_LENGTH, add_block_block_to_add_signature_data_LENGTH, add_block_block_to_add_transactions_REP_LENGTH, add_block_block_to_add_transactions_id_LENGTH, add_block_block_to_add_transactions_active_LENGTH, add_block_block_to_add_transactions_passive_LENGTH, add_block_block_to_add_transactions_signature_data_LENGTH>&& value)
     {
-      if(id::ADD_BLOCK != which_request_)
+      if(FieldNumber::ADD_BLOCK != which_request_)
       {
-        init_request(id::ADD_BLOCK);
+        init_request(FieldNumber::ADD_BLOCK);
       }
       request_.add_block_ = value;
     }
     inline add_block_request<add_block_block_to_add_id_LENGTH, add_block_block_to_add_header_previous_LENGTH, add_block_block_to_add_active_LENGTH, add_block_block_to_add_passive_LENGTH, add_block_block_to_add_signature_data_LENGTH, add_block_block_to_add_transactions_REP_LENGTH, add_block_block_to_add_transactions_id_LENGTH, add_block_block_to_add_transactions_active_LENGTH, add_block_block_to_add_transactions_passive_LENGTH, add_block_block_to_add_transactions_signature_data_LENGTH>& mutable_add_block()
     {
-      if(id::ADD_BLOCK != which_request_)
+      if(FieldNumber::ADD_BLOCK != which_request_)
       {
-        init_request(id::ADD_BLOCK);
+        init_request(FieldNumber::ADD_BLOCK);
       }
       return request_.add_block_;
     }
@@ -1362,33 +1362,33 @@ class block_store_request final: public ::EmbeddedProto::MessageInterface
 
     inline void clear_get_highest_block()
     {
-      if(id::GET_HIGHEST_BLOCK == which_request_)
+      if(FieldNumber::GET_HIGHEST_BLOCK == which_request_)
       {
-        which_request_ = id::NOT_SET;
+        which_request_ = FieldNumber::NOT_SET;
         request_.get_highest_block_.~get_highest_block_request();
       }
     }
     inline void set_get_highest_block(const get_highest_block_request& value)
     {
-      if(id::GET_HIGHEST_BLOCK != which_request_)
+      if(FieldNumber::GET_HIGHEST_BLOCK != which_request_)
       {
-        init_request(id::GET_HIGHEST_BLOCK);
+        init_request(FieldNumber::GET_HIGHEST_BLOCK);
       }
       request_.get_highest_block_ = value;
     }
     inline void set_get_highest_block(const get_highest_block_request&& value)
     {
-      if(id::GET_HIGHEST_BLOCK != which_request_)
+      if(FieldNumber::GET_HIGHEST_BLOCK != which_request_)
       {
-        init_request(id::GET_HIGHEST_BLOCK);
+        init_request(FieldNumber::GET_HIGHEST_BLOCK);
       }
       request_.get_highest_block_ = value;
     }
     inline get_highest_block_request& mutable_get_highest_block()
     {
-      if(id::GET_HIGHEST_BLOCK != which_request_)
+      if(FieldNumber::GET_HIGHEST_BLOCK != which_request_)
       {
-        init_request(id::GET_HIGHEST_BLOCK);
+        init_request(FieldNumber::GET_HIGHEST_BLOCK);
       }
       return request_.get_highest_block_;
     }
@@ -1402,38 +1402,38 @@ class block_store_request final: public ::EmbeddedProto::MessageInterface
 
       switch(which_request_)
       {
-        case id::RESERVED:
+        case FieldNumber::RESERVED:
           if(::EmbeddedProto::Error::NO_ERRORS == return_value)
           {
-            return_value = request_.reserved_.serialize_with_id(static_cast<uint32_t>(id::RESERVED), buffer, false);
+            return_value = request_.reserved_.serialize_with_id(static_cast<uint32_t>(FieldNumber::RESERVED), buffer, false);
           }
           break;
 
-        case id::GET_BLOCKS_BY_ID:
+        case FieldNumber::GET_BLOCKS_BY_ID:
           if(::EmbeddedProto::Error::NO_ERRORS == return_value)
           {
-            return_value = request_.get_blocks_by_id_.serialize_with_id(static_cast<uint32_t>(id::GET_BLOCKS_BY_ID), buffer, false);
+            return_value = request_.get_blocks_by_id_.serialize_with_id(static_cast<uint32_t>(FieldNumber::GET_BLOCKS_BY_ID), buffer, false);
           }
           break;
 
-        case id::GET_BLOCKS_BY_HEIGHT:
+        case FieldNumber::GET_BLOCKS_BY_HEIGHT:
           if(::EmbeddedProto::Error::NO_ERRORS == return_value)
           {
-            return_value = request_.get_blocks_by_height_.serialize_with_id(static_cast<uint32_t>(id::GET_BLOCKS_BY_HEIGHT), buffer, false);
+            return_value = request_.get_blocks_by_height_.serialize_with_id(static_cast<uint32_t>(FieldNumber::GET_BLOCKS_BY_HEIGHT), buffer, false);
           }
           break;
 
-        case id::ADD_BLOCK:
+        case FieldNumber::ADD_BLOCK:
           if(::EmbeddedProto::Error::NO_ERRORS == return_value)
           {
-            return_value = request_.add_block_.serialize_with_id(static_cast<uint32_t>(id::ADD_BLOCK), buffer, false);
+            return_value = request_.add_block_.serialize_with_id(static_cast<uint32_t>(FieldNumber::ADD_BLOCK), buffer, false);
           }
           break;
 
-        case id::GET_HIGHEST_BLOCK:
+        case FieldNumber::GET_HIGHEST_BLOCK:
           if(::EmbeddedProto::Error::NO_ERRORS == return_value)
           {
-            return_value = request_.get_highest_block_.serialize_with_id(static_cast<uint32_t>(id::GET_HIGHEST_BLOCK), buffer, false);
+            return_value = request_.get_highest_block_.serialize_with_id(static_cast<uint32_t>(FieldNumber::GET_HIGHEST_BLOCK), buffer, false);
           }
           break;
 
@@ -1449,36 +1449,36 @@ class block_store_request final: public ::EmbeddedProto::MessageInterface
       ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
       ::EmbeddedProto::WireFormatter::WireType wire_type = ::EmbeddedProto::WireFormatter::WireType::VARINT;
       uint32_t id_number = 0;
-      id id_tag = id::NOT_SET;
+      FieldNumber id_tag = FieldNumber::NOT_SET;
 
       ::EmbeddedProto::Error tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
       while((::EmbeddedProto::Error::NO_ERRORS == return_value) && (::EmbeddedProto::Error::NO_ERRORS == tag_value))
       {
-        id_tag = static_cast<id>(id_number);
+        id_tag = static_cast<FieldNumber>(id_number);
         switch(id_tag)
         {
-          case id::RESERVED:
-            return_value = deserialize_request(id::RESERVED, request_.reserved_, buffer, wire_type);
+          case FieldNumber::RESERVED:
+            return_value = deserialize_request(FieldNumber::RESERVED, request_.reserved_, buffer, wire_type);
 
             break;
 
-          case id::GET_BLOCKS_BY_ID:
-            return_value = deserialize_request(id::GET_BLOCKS_BY_ID, request_.get_blocks_by_id_, buffer, wire_type);
+          case FieldNumber::GET_BLOCKS_BY_ID:
+            return_value = deserialize_request(FieldNumber::GET_BLOCKS_BY_ID, request_.get_blocks_by_id_, buffer, wire_type);
 
             break;
 
-          case id::GET_BLOCKS_BY_HEIGHT:
-            return_value = deserialize_request(id::GET_BLOCKS_BY_HEIGHT, request_.get_blocks_by_height_, buffer, wire_type);
+          case FieldNumber::GET_BLOCKS_BY_HEIGHT:
+            return_value = deserialize_request(FieldNumber::GET_BLOCKS_BY_HEIGHT, request_.get_blocks_by_height_, buffer, wire_type);
 
             break;
 
-          case id::ADD_BLOCK:
-            return_value = deserialize_request(id::ADD_BLOCK, request_.add_block_, buffer, wire_type);
+          case FieldNumber::ADD_BLOCK:
+            return_value = deserialize_request(FieldNumber::ADD_BLOCK, request_.add_block_, buffer, wire_type);
 
             break;
 
-          case id::GET_HIGHEST_BLOCK:
-            return_value = deserialize_request(id::GET_HIGHEST_BLOCK, request_.get_highest_block_, buffer, wire_type);
+          case FieldNumber::GET_HIGHEST_BLOCK:
+            return_value = deserialize_request(FieldNumber::GET_HIGHEST_BLOCK, request_.get_highest_block_, buffer, wire_type);
 
             break;
 
@@ -1514,7 +1514,7 @@ class block_store_request final: public ::EmbeddedProto::MessageInterface
 
 
 
-      id which_request_ = id::NOT_SET;
+      FieldNumber which_request_ = FieldNumber::NOT_SET;
       union request
       {
         request() {}
@@ -1527,9 +1527,9 @@ class block_store_request final: public ::EmbeddedProto::MessageInterface
       };
       request request_;
 
-      void init_request(const id field_id)
+      void init_request(const FieldNumber field_id)
       {
-        if(id::NOT_SET != which_request_)
+        if(FieldNumber::NOT_SET != which_request_)
         {
           // First delete the old object in the oneof.
           clear_request();
@@ -1538,29 +1538,29 @@ class block_store_request final: public ::EmbeddedProto::MessageInterface
         // C++11 unions only support nontrivial members when you explicitly call the placement new statement.
         switch(field_id)
         {
-          case id::RESERVED:
+          case FieldNumber::RESERVED:
             new(&request_.reserved_) reserved_rpc;
-            which_request_ = id::RESERVED;
+            which_request_ = FieldNumber::RESERVED;
             break;
 
-          case id::GET_BLOCKS_BY_ID:
+          case FieldNumber::GET_BLOCKS_BY_ID:
             new(&request_.get_blocks_by_id_) get_blocks_by_id_request<get_blocks_by_id_block_id_REP_LENGTH, get_blocks_by_id_block_id_LENGTH>;
-            which_request_ = id::GET_BLOCKS_BY_ID;
+            which_request_ = FieldNumber::GET_BLOCKS_BY_ID;
             break;
 
-          case id::GET_BLOCKS_BY_HEIGHT:
+          case FieldNumber::GET_BLOCKS_BY_HEIGHT:
             new(&request_.get_blocks_by_height_) get_blocks_by_height_request<get_blocks_by_height_head_block_id_LENGTH>;
-            which_request_ = id::GET_BLOCKS_BY_HEIGHT;
+            which_request_ = FieldNumber::GET_BLOCKS_BY_HEIGHT;
             break;
 
-          case id::ADD_BLOCK:
+          case FieldNumber::ADD_BLOCK:
             new(&request_.add_block_) add_block_request<add_block_block_to_add_id_LENGTH, add_block_block_to_add_header_previous_LENGTH, add_block_block_to_add_active_LENGTH, add_block_block_to_add_passive_LENGTH, add_block_block_to_add_signature_data_LENGTH, add_block_block_to_add_transactions_REP_LENGTH, add_block_block_to_add_transactions_id_LENGTH, add_block_block_to_add_transactions_active_LENGTH, add_block_block_to_add_transactions_passive_LENGTH, add_block_block_to_add_transactions_signature_data_LENGTH>;
-            which_request_ = id::ADD_BLOCK;
+            which_request_ = FieldNumber::ADD_BLOCK;
             break;
 
-          case id::GET_HIGHEST_BLOCK:
+          case FieldNumber::GET_HIGHEST_BLOCK:
             new(&request_.get_highest_block_) get_highest_block_request;
-            which_request_ = id::GET_HIGHEST_BLOCK;
+            which_request_ = FieldNumber::GET_HIGHEST_BLOCK;
             break;
 
           default:
@@ -1574,28 +1574,28 @@ class block_store_request final: public ::EmbeddedProto::MessageInterface
       {
         switch(which_request_)
         {
-          case id::RESERVED:
+          case FieldNumber::RESERVED:
             request_.reserved_.~reserved_rpc(); // NOSONAR Unions require this.
             break;
-          case id::GET_BLOCKS_BY_ID:
+          case FieldNumber::GET_BLOCKS_BY_ID:
             request_.get_blocks_by_id_.~get_blocks_by_id_request<get_blocks_by_id_block_id_REP_LENGTH, get_blocks_by_id_block_id_LENGTH>(); // NOSONAR Unions require this.
             break;
-          case id::GET_BLOCKS_BY_HEIGHT:
+          case FieldNumber::GET_BLOCKS_BY_HEIGHT:
             request_.get_blocks_by_height_.~get_blocks_by_height_request<get_blocks_by_height_head_block_id_LENGTH>(); // NOSONAR Unions require this.
             break;
-          case id::ADD_BLOCK:
+          case FieldNumber::ADD_BLOCK:
             request_.add_block_.~add_block_request<add_block_block_to_add_id_LENGTH, add_block_block_to_add_header_previous_LENGTH, add_block_block_to_add_active_LENGTH, add_block_block_to_add_passive_LENGTH, add_block_block_to_add_signature_data_LENGTH, add_block_block_to_add_transactions_REP_LENGTH, add_block_block_to_add_transactions_id_LENGTH, add_block_block_to_add_transactions_active_LENGTH, add_block_block_to_add_transactions_passive_LENGTH, add_block_block_to_add_transactions_signature_data_LENGTH>(); // NOSONAR Unions require this.
             break;
-          case id::GET_HIGHEST_BLOCK:
+          case FieldNumber::GET_HIGHEST_BLOCK:
             request_.get_highest_block_.~get_highest_block_request(); // NOSONAR Unions require this.
             break;
           default:
             break;
         }
-        which_request_ = id::NOT_SET;
+        which_request_ = FieldNumber::NOT_SET;
       }
 
-      ::EmbeddedProto::Error deserialize_request(const id field_id, ::EmbeddedProto::Field& field,
+      ::EmbeddedProto::Error deserialize_request(const FieldNumber field_id, ::EmbeddedProto::Field& field,
                                     ::EmbeddedProto::ReadBufferInterface& buffer,
                                     const ::EmbeddedProto::WireFormatter::WireType wire_type)
       {
@@ -1655,27 +1655,27 @@ class block_store_response final: public ::EmbeddedProto::MessageInterface
 
       switch(rhs.get_which_response())
       {
-        case id::RESERVED:
+        case FieldNumber::RESERVED:
           set_reserved(rhs.get_reserved());
           break;
 
-        case id::ERROR:
+        case FieldNumber::ERROR:
           set_error(rhs.get_error());
           break;
 
-        case id::GET_BLOCKS_BY_ID:
+        case FieldNumber::GET_BLOCKS_BY_ID:
           set_get_blocks_by_id(rhs.get_get_blocks_by_id());
           break;
 
-        case id::GET_BLOCKS_BY_HEIGHT:
+        case FieldNumber::GET_BLOCKS_BY_HEIGHT:
           set_get_blocks_by_height(rhs.get_get_blocks_by_height());
           break;
 
-        case id::ADD_BLOCK:
+        case FieldNumber::ADD_BLOCK:
           set_add_block(rhs.get_add_block());
           break;
 
-        case id::GET_HIGHEST_BLOCK:
+        case FieldNumber::GET_HIGHEST_BLOCK:
           set_get_highest_block(rhs.get_get_highest_block());
           break;
 
@@ -1695,27 +1695,27 @@ class block_store_response final: public ::EmbeddedProto::MessageInterface
 
       switch(rhs.get_which_response())
       {
-        case id::RESERVED:
+        case FieldNumber::RESERVED:
           set_reserved(rhs.get_reserved());
           break;
 
-        case id::ERROR:
+        case FieldNumber::ERROR:
           set_error(rhs.get_error());
           break;
 
-        case id::GET_BLOCKS_BY_ID:
+        case FieldNumber::GET_BLOCKS_BY_ID:
           set_get_blocks_by_id(rhs.get_get_blocks_by_id());
           break;
 
-        case id::GET_BLOCKS_BY_HEIGHT:
+        case FieldNumber::GET_BLOCKS_BY_HEIGHT:
           set_get_blocks_by_height(rhs.get_get_blocks_by_height());
           break;
 
-        case id::ADD_BLOCK:
+        case FieldNumber::ADD_BLOCK:
           set_add_block(rhs.get_add_block());
           break;
 
-        case id::GET_HIGHEST_BLOCK:
+        case FieldNumber::GET_HIGHEST_BLOCK:
           set_get_highest_block(rhs.get_get_highest_block());
           break;
 
@@ -1727,7 +1727,7 @@ class block_store_response final: public ::EmbeddedProto::MessageInterface
 
     ~block_store_response() override = default;
 
-    enum class id : uint32_t
+    enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
       RESERVED = 1,
@@ -1748,27 +1748,27 @@ class block_store_response final: public ::EmbeddedProto::MessageInterface
 
       switch(rhs.get_which_response())
       {
-        case id::RESERVED:
+        case FieldNumber::RESERVED:
           set_reserved(rhs.get_reserved());
           break;
 
-        case id::ERROR:
+        case FieldNumber::ERROR:
           set_error(rhs.get_error());
           break;
 
-        case id::GET_BLOCKS_BY_ID:
+        case FieldNumber::GET_BLOCKS_BY_ID:
           set_get_blocks_by_id(rhs.get_get_blocks_by_id());
           break;
 
-        case id::GET_BLOCKS_BY_HEIGHT:
+        case FieldNumber::GET_BLOCKS_BY_HEIGHT:
           set_get_blocks_by_height(rhs.get_get_blocks_by_height());
           break;
 
-        case id::ADD_BLOCK:
+        case FieldNumber::ADD_BLOCK:
           set_add_block(rhs.get_add_block());
           break;
 
-        case id::GET_HIGHEST_BLOCK:
+        case FieldNumber::GET_HIGHEST_BLOCK:
           set_get_highest_block(rhs.get_get_highest_block());
           break;
 
@@ -1789,27 +1789,27 @@ class block_store_response final: public ::EmbeddedProto::MessageInterface
 
       switch(rhs.get_which_response())
       {
-        case id::RESERVED:
+        case FieldNumber::RESERVED:
           set_reserved(rhs.get_reserved());
           break;
 
-        case id::ERROR:
+        case FieldNumber::ERROR:
           set_error(rhs.get_error());
           break;
 
-        case id::GET_BLOCKS_BY_ID:
+        case FieldNumber::GET_BLOCKS_BY_ID:
           set_get_blocks_by_id(rhs.get_get_blocks_by_id());
           break;
 
-        case id::GET_BLOCKS_BY_HEIGHT:
+        case FieldNumber::GET_BLOCKS_BY_HEIGHT:
           set_get_blocks_by_height(rhs.get_get_blocks_by_height());
           break;
 
-        case id::ADD_BLOCK:
+        case FieldNumber::ADD_BLOCK:
           set_add_block(rhs.get_add_block());
           break;
 
-        case id::GET_HIGHEST_BLOCK:
+        case FieldNumber::GET_HIGHEST_BLOCK:
           set_get_highest_block(rhs.get_get_highest_block());
           break;
 
@@ -1820,37 +1820,37 @@ class block_store_response final: public ::EmbeddedProto::MessageInterface
       return *this;
     }
 
-    id get_which_response() const { return which_response_; }
+    FieldNumber get_which_response() const { return which_response_; }
 
     inline void clear_reserved()
     {
-      if(id::RESERVED == which_response_)
+      if(FieldNumber::RESERVED == which_response_)
       {
-        which_response_ = id::NOT_SET;
+        which_response_ = FieldNumber::NOT_SET;
         response_.reserved_.~reserved_rpc();
       }
     }
     inline void set_reserved(const reserved_rpc& value)
     {
-      if(id::RESERVED != which_response_)
+      if(FieldNumber::RESERVED != which_response_)
       {
-        init_response(id::RESERVED);
+        init_response(FieldNumber::RESERVED);
       }
       response_.reserved_ = value;
     }
     inline void set_reserved(const reserved_rpc&& value)
     {
-      if(id::RESERVED != which_response_)
+      if(FieldNumber::RESERVED != which_response_)
       {
-        init_response(id::RESERVED);
+        init_response(FieldNumber::RESERVED);
       }
       response_.reserved_ = value;
     }
     inline reserved_rpc& mutable_reserved()
     {
-      if(id::RESERVED != which_response_)
+      if(FieldNumber::RESERVED != which_response_)
       {
-        init_response(id::RESERVED);
+        init_response(FieldNumber::RESERVED);
       }
       return response_.reserved_;
     }
@@ -1859,33 +1859,33 @@ class block_store_response final: public ::EmbeddedProto::MessageInterface
 
     inline void clear_error()
     {
-      if(id::ERROR == which_response_)
+      if(FieldNumber::ERROR == which_response_)
       {
-        which_response_ = id::NOT_SET;
+        which_response_ = FieldNumber::NOT_SET;
         response_.error_.~error_response<error_message_LENGTH, error_data_LENGTH>();
       }
     }
     inline void set_error(const error_response<error_message_LENGTH, error_data_LENGTH>& value)
     {
-      if(id::ERROR != which_response_)
+      if(FieldNumber::ERROR != which_response_)
       {
-        init_response(id::ERROR);
+        init_response(FieldNumber::ERROR);
       }
       response_.error_ = value;
     }
     inline void set_error(const error_response<error_message_LENGTH, error_data_LENGTH>&& value)
     {
-      if(id::ERROR != which_response_)
+      if(FieldNumber::ERROR != which_response_)
       {
-        init_response(id::ERROR);
+        init_response(FieldNumber::ERROR);
       }
       response_.error_ = value;
     }
     inline error_response<error_message_LENGTH, error_data_LENGTH>& mutable_error()
     {
-      if(id::ERROR != which_response_)
+      if(FieldNumber::ERROR != which_response_)
       {
-        init_response(id::ERROR);
+        init_response(FieldNumber::ERROR);
       }
       return response_.error_;
     }
@@ -1894,33 +1894,33 @@ class block_store_response final: public ::EmbeddedProto::MessageInterface
 
     inline void clear_get_blocks_by_id()
     {
-      if(id::GET_BLOCKS_BY_ID == which_response_)
+      if(FieldNumber::GET_BLOCKS_BY_ID == which_response_)
       {
-        which_response_ = id::NOT_SET;
+        which_response_ = FieldNumber::NOT_SET;
         response_.get_blocks_by_id_.~get_blocks_by_id_response<get_blocks_by_id_block_items_REP_LENGTH, get_blocks_by_id_block_items_block_id_LENGTH, get_blocks_by_id_block_items_block_id_LENGTH, get_blocks_by_id_block_items_block_header_previous_LENGTH, get_blocks_by_id_block_items_block_active_LENGTH, get_blocks_by_id_block_items_block_passive_LENGTH, get_blocks_by_id_block_items_block_signature_data_LENGTH, get_blocks_by_id_block_items_block_transactions_REP_LENGTH, get_blocks_by_id_block_items_block_transactions_id_LENGTH, get_blocks_by_id_block_items_block_transactions_active_LENGTH, get_blocks_by_id_block_items_block_transactions_passive_LENGTH, get_blocks_by_id_block_items_block_transactions_signature_data_LENGTH>();
       }
     }
     inline void set_get_blocks_by_id(const get_blocks_by_id_response<get_blocks_by_id_block_items_REP_LENGTH, get_blocks_by_id_block_items_block_id_LENGTH, get_blocks_by_id_block_items_block_id_LENGTH, get_blocks_by_id_block_items_block_header_previous_LENGTH, get_blocks_by_id_block_items_block_active_LENGTH, get_blocks_by_id_block_items_block_passive_LENGTH, get_blocks_by_id_block_items_block_signature_data_LENGTH, get_blocks_by_id_block_items_block_transactions_REP_LENGTH, get_blocks_by_id_block_items_block_transactions_id_LENGTH, get_blocks_by_id_block_items_block_transactions_active_LENGTH, get_blocks_by_id_block_items_block_transactions_passive_LENGTH, get_blocks_by_id_block_items_block_transactions_signature_data_LENGTH>& value)
     {
-      if(id::GET_BLOCKS_BY_ID != which_response_)
+      if(FieldNumber::GET_BLOCKS_BY_ID != which_response_)
       {
-        init_response(id::GET_BLOCKS_BY_ID);
+        init_response(FieldNumber::GET_BLOCKS_BY_ID);
       }
       response_.get_blocks_by_id_ = value;
     }
     inline void set_get_blocks_by_id(const get_blocks_by_id_response<get_blocks_by_id_block_items_REP_LENGTH, get_blocks_by_id_block_items_block_id_LENGTH, get_blocks_by_id_block_items_block_id_LENGTH, get_blocks_by_id_block_items_block_header_previous_LENGTH, get_blocks_by_id_block_items_block_active_LENGTH, get_blocks_by_id_block_items_block_passive_LENGTH, get_blocks_by_id_block_items_block_signature_data_LENGTH, get_blocks_by_id_block_items_block_transactions_REP_LENGTH, get_blocks_by_id_block_items_block_transactions_id_LENGTH, get_blocks_by_id_block_items_block_transactions_active_LENGTH, get_blocks_by_id_block_items_block_transactions_passive_LENGTH, get_blocks_by_id_block_items_block_transactions_signature_data_LENGTH>&& value)
     {
-      if(id::GET_BLOCKS_BY_ID != which_response_)
+      if(FieldNumber::GET_BLOCKS_BY_ID != which_response_)
       {
-        init_response(id::GET_BLOCKS_BY_ID);
+        init_response(FieldNumber::GET_BLOCKS_BY_ID);
       }
       response_.get_blocks_by_id_ = value;
     }
     inline get_blocks_by_id_response<get_blocks_by_id_block_items_REP_LENGTH, get_blocks_by_id_block_items_block_id_LENGTH, get_blocks_by_id_block_items_block_id_LENGTH, get_blocks_by_id_block_items_block_header_previous_LENGTH, get_blocks_by_id_block_items_block_active_LENGTH, get_blocks_by_id_block_items_block_passive_LENGTH, get_blocks_by_id_block_items_block_signature_data_LENGTH, get_blocks_by_id_block_items_block_transactions_REP_LENGTH, get_blocks_by_id_block_items_block_transactions_id_LENGTH, get_blocks_by_id_block_items_block_transactions_active_LENGTH, get_blocks_by_id_block_items_block_transactions_passive_LENGTH, get_blocks_by_id_block_items_block_transactions_signature_data_LENGTH>& mutable_get_blocks_by_id()
     {
-      if(id::GET_BLOCKS_BY_ID != which_response_)
+      if(FieldNumber::GET_BLOCKS_BY_ID != which_response_)
       {
-        init_response(id::GET_BLOCKS_BY_ID);
+        init_response(FieldNumber::GET_BLOCKS_BY_ID);
       }
       return response_.get_blocks_by_id_;
     }
@@ -1929,33 +1929,33 @@ class block_store_response final: public ::EmbeddedProto::MessageInterface
 
     inline void clear_get_blocks_by_height()
     {
-      if(id::GET_BLOCKS_BY_HEIGHT == which_response_)
+      if(FieldNumber::GET_BLOCKS_BY_HEIGHT == which_response_)
       {
-        which_response_ = id::NOT_SET;
+        which_response_ = FieldNumber::NOT_SET;
         response_.get_blocks_by_height_.~get_blocks_by_height_response<get_blocks_by_height_block_items_REP_LENGTH, get_blocks_by_height_block_items_block_id_LENGTH, get_blocks_by_height_block_items_block_id_LENGTH, get_blocks_by_height_block_items_block_header_previous_LENGTH, get_blocks_by_height_block_items_block_active_LENGTH, get_blocks_by_height_block_items_block_passive_LENGTH, get_blocks_by_height_block_items_block_signature_data_LENGTH, get_blocks_by_height_block_items_block_transactions_REP_LENGTH, get_blocks_by_height_block_items_block_transactions_id_LENGTH, get_blocks_by_height_block_items_block_transactions_active_LENGTH, get_blocks_by_height_block_items_block_transactions_passive_LENGTH, get_blocks_by_height_block_items_block_transactions_signature_data_LENGTH>();
       }
     }
     inline void set_get_blocks_by_height(const get_blocks_by_height_response<get_blocks_by_height_block_items_REP_LENGTH, get_blocks_by_height_block_items_block_id_LENGTH, get_blocks_by_height_block_items_block_id_LENGTH, get_blocks_by_height_block_items_block_header_previous_LENGTH, get_blocks_by_height_block_items_block_active_LENGTH, get_blocks_by_height_block_items_block_passive_LENGTH, get_blocks_by_height_block_items_block_signature_data_LENGTH, get_blocks_by_height_block_items_block_transactions_REP_LENGTH, get_blocks_by_height_block_items_block_transactions_id_LENGTH, get_blocks_by_height_block_items_block_transactions_active_LENGTH, get_blocks_by_height_block_items_block_transactions_passive_LENGTH, get_blocks_by_height_block_items_block_transactions_signature_data_LENGTH>& value)
     {
-      if(id::GET_BLOCKS_BY_HEIGHT != which_response_)
+      if(FieldNumber::GET_BLOCKS_BY_HEIGHT != which_response_)
       {
-        init_response(id::GET_BLOCKS_BY_HEIGHT);
+        init_response(FieldNumber::GET_BLOCKS_BY_HEIGHT);
       }
       response_.get_blocks_by_height_ = value;
     }
     inline void set_get_blocks_by_height(const get_blocks_by_height_response<get_blocks_by_height_block_items_REP_LENGTH, get_blocks_by_height_block_items_block_id_LENGTH, get_blocks_by_height_block_items_block_id_LENGTH, get_blocks_by_height_block_items_block_header_previous_LENGTH, get_blocks_by_height_block_items_block_active_LENGTH, get_blocks_by_height_block_items_block_passive_LENGTH, get_blocks_by_height_block_items_block_signature_data_LENGTH, get_blocks_by_height_block_items_block_transactions_REP_LENGTH, get_blocks_by_height_block_items_block_transactions_id_LENGTH, get_blocks_by_height_block_items_block_transactions_active_LENGTH, get_blocks_by_height_block_items_block_transactions_passive_LENGTH, get_blocks_by_height_block_items_block_transactions_signature_data_LENGTH>&& value)
     {
-      if(id::GET_BLOCKS_BY_HEIGHT != which_response_)
+      if(FieldNumber::GET_BLOCKS_BY_HEIGHT != which_response_)
       {
-        init_response(id::GET_BLOCKS_BY_HEIGHT);
+        init_response(FieldNumber::GET_BLOCKS_BY_HEIGHT);
       }
       response_.get_blocks_by_height_ = value;
     }
     inline get_blocks_by_height_response<get_blocks_by_height_block_items_REP_LENGTH, get_blocks_by_height_block_items_block_id_LENGTH, get_blocks_by_height_block_items_block_id_LENGTH, get_blocks_by_height_block_items_block_header_previous_LENGTH, get_blocks_by_height_block_items_block_active_LENGTH, get_blocks_by_height_block_items_block_passive_LENGTH, get_blocks_by_height_block_items_block_signature_data_LENGTH, get_blocks_by_height_block_items_block_transactions_REP_LENGTH, get_blocks_by_height_block_items_block_transactions_id_LENGTH, get_blocks_by_height_block_items_block_transactions_active_LENGTH, get_blocks_by_height_block_items_block_transactions_passive_LENGTH, get_blocks_by_height_block_items_block_transactions_signature_data_LENGTH>& mutable_get_blocks_by_height()
     {
-      if(id::GET_BLOCKS_BY_HEIGHT != which_response_)
+      if(FieldNumber::GET_BLOCKS_BY_HEIGHT != which_response_)
       {
-        init_response(id::GET_BLOCKS_BY_HEIGHT);
+        init_response(FieldNumber::GET_BLOCKS_BY_HEIGHT);
       }
       return response_.get_blocks_by_height_;
     }
@@ -1964,33 +1964,33 @@ class block_store_response final: public ::EmbeddedProto::MessageInterface
 
     inline void clear_add_block()
     {
-      if(id::ADD_BLOCK == which_response_)
+      if(FieldNumber::ADD_BLOCK == which_response_)
       {
-        which_response_ = id::NOT_SET;
+        which_response_ = FieldNumber::NOT_SET;
         response_.add_block_.~add_block_response();
       }
     }
     inline void set_add_block(const add_block_response& value)
     {
-      if(id::ADD_BLOCK != which_response_)
+      if(FieldNumber::ADD_BLOCK != which_response_)
       {
-        init_response(id::ADD_BLOCK);
+        init_response(FieldNumber::ADD_BLOCK);
       }
       response_.add_block_ = value;
     }
     inline void set_add_block(const add_block_response&& value)
     {
-      if(id::ADD_BLOCK != which_response_)
+      if(FieldNumber::ADD_BLOCK != which_response_)
       {
-        init_response(id::ADD_BLOCK);
+        init_response(FieldNumber::ADD_BLOCK);
       }
       response_.add_block_ = value;
     }
     inline add_block_response& mutable_add_block()
     {
-      if(id::ADD_BLOCK != which_response_)
+      if(FieldNumber::ADD_BLOCK != which_response_)
       {
-        init_response(id::ADD_BLOCK);
+        init_response(FieldNumber::ADD_BLOCK);
       }
       return response_.add_block_;
     }
@@ -1999,33 +1999,33 @@ class block_store_response final: public ::EmbeddedProto::MessageInterface
 
     inline void clear_get_highest_block()
     {
-      if(id::GET_HIGHEST_BLOCK == which_response_)
+      if(FieldNumber::GET_HIGHEST_BLOCK == which_response_)
       {
-        which_response_ = id::NOT_SET;
+        which_response_ = FieldNumber::NOT_SET;
         response_.get_highest_block_.~get_highest_block_response<get_highest_block_topology_id_LENGTH, get_highest_block_topology_previous_LENGTH>();
       }
     }
     inline void set_get_highest_block(const get_highest_block_response<get_highest_block_topology_id_LENGTH, get_highest_block_topology_previous_LENGTH>& value)
     {
-      if(id::GET_HIGHEST_BLOCK != which_response_)
+      if(FieldNumber::GET_HIGHEST_BLOCK != which_response_)
       {
-        init_response(id::GET_HIGHEST_BLOCK);
+        init_response(FieldNumber::GET_HIGHEST_BLOCK);
       }
       response_.get_highest_block_ = value;
     }
     inline void set_get_highest_block(const get_highest_block_response<get_highest_block_topology_id_LENGTH, get_highest_block_topology_previous_LENGTH>&& value)
     {
-      if(id::GET_HIGHEST_BLOCK != which_response_)
+      if(FieldNumber::GET_HIGHEST_BLOCK != which_response_)
       {
-        init_response(id::GET_HIGHEST_BLOCK);
+        init_response(FieldNumber::GET_HIGHEST_BLOCK);
       }
       response_.get_highest_block_ = value;
     }
     inline get_highest_block_response<get_highest_block_topology_id_LENGTH, get_highest_block_topology_previous_LENGTH>& mutable_get_highest_block()
     {
-      if(id::GET_HIGHEST_BLOCK != which_response_)
+      if(FieldNumber::GET_HIGHEST_BLOCK != which_response_)
       {
-        init_response(id::GET_HIGHEST_BLOCK);
+        init_response(FieldNumber::GET_HIGHEST_BLOCK);
       }
       return response_.get_highest_block_;
     }
@@ -2039,45 +2039,45 @@ class block_store_response final: public ::EmbeddedProto::MessageInterface
 
       switch(which_response_)
       {
-        case id::RESERVED:
+        case FieldNumber::RESERVED:
           if(::EmbeddedProto::Error::NO_ERRORS == return_value)
           {
-            return_value = response_.reserved_.serialize_with_id(static_cast<uint32_t>(id::RESERVED), buffer, false);
+            return_value = response_.reserved_.serialize_with_id(static_cast<uint32_t>(FieldNumber::RESERVED), buffer, false);
           }
           break;
 
-        case id::ERROR:
+        case FieldNumber::ERROR:
           if(::EmbeddedProto::Error::NO_ERRORS == return_value)
           {
-            return_value = response_.error_.serialize_with_id(static_cast<uint32_t>(id::ERROR), buffer, false);
+            return_value = response_.error_.serialize_with_id(static_cast<uint32_t>(FieldNumber::ERROR), buffer, false);
           }
           break;
 
-        case id::GET_BLOCKS_BY_ID:
+        case FieldNumber::GET_BLOCKS_BY_ID:
           if(::EmbeddedProto::Error::NO_ERRORS == return_value)
           {
-            return_value = response_.get_blocks_by_id_.serialize_with_id(static_cast<uint32_t>(id::GET_BLOCKS_BY_ID), buffer, false);
+            return_value = response_.get_blocks_by_id_.serialize_with_id(static_cast<uint32_t>(FieldNumber::GET_BLOCKS_BY_ID), buffer, false);
           }
           break;
 
-        case id::GET_BLOCKS_BY_HEIGHT:
+        case FieldNumber::GET_BLOCKS_BY_HEIGHT:
           if(::EmbeddedProto::Error::NO_ERRORS == return_value)
           {
-            return_value = response_.get_blocks_by_height_.serialize_with_id(static_cast<uint32_t>(id::GET_BLOCKS_BY_HEIGHT), buffer, false);
+            return_value = response_.get_blocks_by_height_.serialize_with_id(static_cast<uint32_t>(FieldNumber::GET_BLOCKS_BY_HEIGHT), buffer, false);
           }
           break;
 
-        case id::ADD_BLOCK:
+        case FieldNumber::ADD_BLOCK:
           if(::EmbeddedProto::Error::NO_ERRORS == return_value)
           {
-            return_value = response_.add_block_.serialize_with_id(static_cast<uint32_t>(id::ADD_BLOCK), buffer, false);
+            return_value = response_.add_block_.serialize_with_id(static_cast<uint32_t>(FieldNumber::ADD_BLOCK), buffer, false);
           }
           break;
 
-        case id::GET_HIGHEST_BLOCK:
+        case FieldNumber::GET_HIGHEST_BLOCK:
           if(::EmbeddedProto::Error::NO_ERRORS == return_value)
           {
-            return_value = response_.get_highest_block_.serialize_with_id(static_cast<uint32_t>(id::GET_HIGHEST_BLOCK), buffer, false);
+            return_value = response_.get_highest_block_.serialize_with_id(static_cast<uint32_t>(FieldNumber::GET_HIGHEST_BLOCK), buffer, false);
           }
           break;
 
@@ -2093,41 +2093,41 @@ class block_store_response final: public ::EmbeddedProto::MessageInterface
       ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
       ::EmbeddedProto::WireFormatter::WireType wire_type = ::EmbeddedProto::WireFormatter::WireType::VARINT;
       uint32_t id_number = 0;
-      id id_tag = id::NOT_SET;
+      FieldNumber id_tag = FieldNumber::NOT_SET;
 
       ::EmbeddedProto::Error tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
       while((::EmbeddedProto::Error::NO_ERRORS == return_value) && (::EmbeddedProto::Error::NO_ERRORS == tag_value))
       {
-        id_tag = static_cast<id>(id_number);
+        id_tag = static_cast<FieldNumber>(id_number);
         switch(id_tag)
         {
-          case id::RESERVED:
-            return_value = deserialize_response(id::RESERVED, response_.reserved_, buffer, wire_type);
+          case FieldNumber::RESERVED:
+            return_value = deserialize_response(FieldNumber::RESERVED, response_.reserved_, buffer, wire_type);
 
             break;
 
-          case id::ERROR:
-            return_value = deserialize_response(id::ERROR, response_.error_, buffer, wire_type);
+          case FieldNumber::ERROR:
+            return_value = deserialize_response(FieldNumber::ERROR, response_.error_, buffer, wire_type);
 
             break;
 
-          case id::GET_BLOCKS_BY_ID:
-            return_value = deserialize_response(id::GET_BLOCKS_BY_ID, response_.get_blocks_by_id_, buffer, wire_type);
+          case FieldNumber::GET_BLOCKS_BY_ID:
+            return_value = deserialize_response(FieldNumber::GET_BLOCKS_BY_ID, response_.get_blocks_by_id_, buffer, wire_type);
 
             break;
 
-          case id::GET_BLOCKS_BY_HEIGHT:
-            return_value = deserialize_response(id::GET_BLOCKS_BY_HEIGHT, response_.get_blocks_by_height_, buffer, wire_type);
+          case FieldNumber::GET_BLOCKS_BY_HEIGHT:
+            return_value = deserialize_response(FieldNumber::GET_BLOCKS_BY_HEIGHT, response_.get_blocks_by_height_, buffer, wire_type);
 
             break;
 
-          case id::ADD_BLOCK:
-            return_value = deserialize_response(id::ADD_BLOCK, response_.add_block_, buffer, wire_type);
+          case FieldNumber::ADD_BLOCK:
+            return_value = deserialize_response(FieldNumber::ADD_BLOCK, response_.add_block_, buffer, wire_type);
 
             break;
 
-          case id::GET_HIGHEST_BLOCK:
-            return_value = deserialize_response(id::GET_HIGHEST_BLOCK, response_.get_highest_block_, buffer, wire_type);
+          case FieldNumber::GET_HIGHEST_BLOCK:
+            return_value = deserialize_response(FieldNumber::GET_HIGHEST_BLOCK, response_.get_highest_block_, buffer, wire_type);
 
             break;
 
@@ -2163,7 +2163,7 @@ class block_store_response final: public ::EmbeddedProto::MessageInterface
 
 
 
-      id which_response_ = id::NOT_SET;
+      FieldNumber which_response_ = FieldNumber::NOT_SET;
       union response
       {
         response() {}
@@ -2177,9 +2177,9 @@ class block_store_response final: public ::EmbeddedProto::MessageInterface
       };
       response response_;
 
-      void init_response(const id field_id)
+      void init_response(const FieldNumber field_id)
       {
-        if(id::NOT_SET != which_response_)
+        if(FieldNumber::NOT_SET != which_response_)
         {
           // First delete the old object in the oneof.
           clear_response();
@@ -2188,34 +2188,34 @@ class block_store_response final: public ::EmbeddedProto::MessageInterface
         // C++11 unions only support nontrivial members when you explicitly call the placement new statement.
         switch(field_id)
         {
-          case id::RESERVED:
+          case FieldNumber::RESERVED:
             new(&response_.reserved_) reserved_rpc;
-            which_response_ = id::RESERVED;
+            which_response_ = FieldNumber::RESERVED;
             break;
 
-          case id::ERROR:
+          case FieldNumber::ERROR:
             new(&response_.error_) error_response<error_message_LENGTH, error_data_LENGTH>;
-            which_response_ = id::ERROR;
+            which_response_ = FieldNumber::ERROR;
             break;
 
-          case id::GET_BLOCKS_BY_ID:
+          case FieldNumber::GET_BLOCKS_BY_ID:
             new(&response_.get_blocks_by_id_) get_blocks_by_id_response<get_blocks_by_id_block_items_REP_LENGTH, get_blocks_by_id_block_items_block_id_LENGTH, get_blocks_by_id_block_items_block_id_LENGTH, get_blocks_by_id_block_items_block_header_previous_LENGTH, get_blocks_by_id_block_items_block_active_LENGTH, get_blocks_by_id_block_items_block_passive_LENGTH, get_blocks_by_id_block_items_block_signature_data_LENGTH, get_blocks_by_id_block_items_block_transactions_REP_LENGTH, get_blocks_by_id_block_items_block_transactions_id_LENGTH, get_blocks_by_id_block_items_block_transactions_active_LENGTH, get_blocks_by_id_block_items_block_transactions_passive_LENGTH, get_blocks_by_id_block_items_block_transactions_signature_data_LENGTH>;
-            which_response_ = id::GET_BLOCKS_BY_ID;
+            which_response_ = FieldNumber::GET_BLOCKS_BY_ID;
             break;
 
-          case id::GET_BLOCKS_BY_HEIGHT:
+          case FieldNumber::GET_BLOCKS_BY_HEIGHT:
             new(&response_.get_blocks_by_height_) get_blocks_by_height_response<get_blocks_by_height_block_items_REP_LENGTH, get_blocks_by_height_block_items_block_id_LENGTH, get_blocks_by_height_block_items_block_id_LENGTH, get_blocks_by_height_block_items_block_header_previous_LENGTH, get_blocks_by_height_block_items_block_active_LENGTH, get_blocks_by_height_block_items_block_passive_LENGTH, get_blocks_by_height_block_items_block_signature_data_LENGTH, get_blocks_by_height_block_items_block_transactions_REP_LENGTH, get_blocks_by_height_block_items_block_transactions_id_LENGTH, get_blocks_by_height_block_items_block_transactions_active_LENGTH, get_blocks_by_height_block_items_block_transactions_passive_LENGTH, get_blocks_by_height_block_items_block_transactions_signature_data_LENGTH>;
-            which_response_ = id::GET_BLOCKS_BY_HEIGHT;
+            which_response_ = FieldNumber::GET_BLOCKS_BY_HEIGHT;
             break;
 
-          case id::ADD_BLOCK:
+          case FieldNumber::ADD_BLOCK:
             new(&response_.add_block_) add_block_response;
-            which_response_ = id::ADD_BLOCK;
+            which_response_ = FieldNumber::ADD_BLOCK;
             break;
 
-          case id::GET_HIGHEST_BLOCK:
+          case FieldNumber::GET_HIGHEST_BLOCK:
             new(&response_.get_highest_block_) get_highest_block_response<get_highest_block_topology_id_LENGTH, get_highest_block_topology_previous_LENGTH>;
-            which_response_ = id::GET_HIGHEST_BLOCK;
+            which_response_ = FieldNumber::GET_HIGHEST_BLOCK;
             break;
 
           default:
@@ -2229,31 +2229,31 @@ class block_store_response final: public ::EmbeddedProto::MessageInterface
       {
         switch(which_response_)
         {
-          case id::RESERVED:
+          case FieldNumber::RESERVED:
             response_.reserved_.~reserved_rpc(); // NOSONAR Unions require this.
             break;
-          case id::ERROR:
+          case FieldNumber::ERROR:
             response_.error_.~error_response<error_message_LENGTH, error_data_LENGTH>(); // NOSONAR Unions require this.
             break;
-          case id::GET_BLOCKS_BY_ID:
+          case FieldNumber::GET_BLOCKS_BY_ID:
             response_.get_blocks_by_id_.~get_blocks_by_id_response<get_blocks_by_id_block_items_REP_LENGTH, get_blocks_by_id_block_items_block_id_LENGTH, get_blocks_by_id_block_items_block_id_LENGTH, get_blocks_by_id_block_items_block_header_previous_LENGTH, get_blocks_by_id_block_items_block_active_LENGTH, get_blocks_by_id_block_items_block_passive_LENGTH, get_blocks_by_id_block_items_block_signature_data_LENGTH, get_blocks_by_id_block_items_block_transactions_REP_LENGTH, get_blocks_by_id_block_items_block_transactions_id_LENGTH, get_blocks_by_id_block_items_block_transactions_active_LENGTH, get_blocks_by_id_block_items_block_transactions_passive_LENGTH, get_blocks_by_id_block_items_block_transactions_signature_data_LENGTH>(); // NOSONAR Unions require this.
             break;
-          case id::GET_BLOCKS_BY_HEIGHT:
+          case FieldNumber::GET_BLOCKS_BY_HEIGHT:
             response_.get_blocks_by_height_.~get_blocks_by_height_response<get_blocks_by_height_block_items_REP_LENGTH, get_blocks_by_height_block_items_block_id_LENGTH, get_blocks_by_height_block_items_block_id_LENGTH, get_blocks_by_height_block_items_block_header_previous_LENGTH, get_blocks_by_height_block_items_block_active_LENGTH, get_blocks_by_height_block_items_block_passive_LENGTH, get_blocks_by_height_block_items_block_signature_data_LENGTH, get_blocks_by_height_block_items_block_transactions_REP_LENGTH, get_blocks_by_height_block_items_block_transactions_id_LENGTH, get_blocks_by_height_block_items_block_transactions_active_LENGTH, get_blocks_by_height_block_items_block_transactions_passive_LENGTH, get_blocks_by_height_block_items_block_transactions_signature_data_LENGTH>(); // NOSONAR Unions require this.
             break;
-          case id::ADD_BLOCK:
+          case FieldNumber::ADD_BLOCK:
             response_.add_block_.~add_block_response(); // NOSONAR Unions require this.
             break;
-          case id::GET_HIGHEST_BLOCK:
+          case FieldNumber::GET_HIGHEST_BLOCK:
             response_.get_highest_block_.~get_highest_block_response<get_highest_block_topology_id_LENGTH, get_highest_block_topology_previous_LENGTH>(); // NOSONAR Unions require this.
             break;
           default:
             break;
         }
-        which_response_ = id::NOT_SET;
+        which_response_ = FieldNumber::NOT_SET;
       }
 
-      ::EmbeddedProto::Error deserialize_response(const id field_id, ::EmbeddedProto::Field& field,
+      ::EmbeddedProto::Error deserialize_response(const FieldNumber field_id, ::EmbeddedProto::Field& field,
                                     ::EmbeddedProto::ReadBufferInterface& buffer,
                                     const ::EmbeddedProto::WireFormatter::WireType wire_type)
       {

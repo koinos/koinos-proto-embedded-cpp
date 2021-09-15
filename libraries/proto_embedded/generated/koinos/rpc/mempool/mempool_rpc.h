@@ -72,7 +72,7 @@ class check_pending_account_resources_request final: public ::EmbeddedProto::Mes
 
     ~check_pending_account_resources_request() override = default;
 
-    enum class id : uint32_t
+    enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
       PAYER = 1,
@@ -123,17 +123,17 @@ class check_pending_account_resources_request final: public ::EmbeddedProto::Mes
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = payer_.serialize_with_id(static_cast<uint32_t>(id::PAYER), buffer, false);
+        return_value = payer_.serialize_with_id(static_cast<uint32_t>(FieldNumber::PAYER), buffer, false);
       }
 
       if((0U != max_payer_resources_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
       {
-        return_value = max_payer_resources_.serialize_with_id(static_cast<uint32_t>(id::MAX_PAYER_RESOURCES), buffer, false);
+        return_value = max_payer_resources_.serialize_with_id(static_cast<uint32_t>(FieldNumber::MAX_PAYER_RESOURCES), buffer, false);
       }
 
       if((0U != trx_resource_limit_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
       {
-        return_value = trx_resource_limit_.serialize_with_id(static_cast<uint32_t>(id::TRX_RESOURCE_LIMIT), buffer, false);
+        return_value = trx_resource_limit_.serialize_with_id(static_cast<uint32_t>(FieldNumber::TRX_RESOURCE_LIMIT), buffer, false);
       }
 
       return return_value;
@@ -144,23 +144,23 @@ class check_pending_account_resources_request final: public ::EmbeddedProto::Mes
       ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
       ::EmbeddedProto::WireFormatter::WireType wire_type = ::EmbeddedProto::WireFormatter::WireType::VARINT;
       uint32_t id_number = 0;
-      id id_tag = id::NOT_SET;
+      FieldNumber id_tag = FieldNumber::NOT_SET;
 
       ::EmbeddedProto::Error tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
       while((::EmbeddedProto::Error::NO_ERRORS == return_value) && (::EmbeddedProto::Error::NO_ERRORS == tag_value))
       {
-        id_tag = static_cast<id>(id_number);
+        id_tag = static_cast<FieldNumber>(id_number);
         switch(id_tag)
         {
-          case id::PAYER:
+          case FieldNumber::PAYER:
             return_value = payer_.deserialize_check_type(buffer, wire_type);
             break;
 
-          case id::MAX_PAYER_RESOURCES:
+          case FieldNumber::MAX_PAYER_RESOURCES:
             return_value = max_payer_resources_.deserialize_check_type(buffer, wire_type);
             break;
 
-          case id::TRX_RESOURCE_LIMIT:
+          case FieldNumber::TRX_RESOURCE_LIMIT:
             return_value = trx_resource_limit_.deserialize_check_type(buffer, wire_type);
             break;
 
@@ -219,7 +219,7 @@ class check_pending_account_resources_response final: public ::EmbeddedProto::Me
 
     ~check_pending_account_resources_response() override = default;
 
-    enum class id : uint32_t
+    enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
       SUCCESS = 1
@@ -251,7 +251,7 @@ class check_pending_account_resources_response final: public ::EmbeddedProto::Me
 
       if((false != success_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
       {
-        return_value = success_.serialize_with_id(static_cast<uint32_t>(id::SUCCESS), buffer, false);
+        return_value = success_.serialize_with_id(static_cast<uint32_t>(FieldNumber::SUCCESS), buffer, false);
       }
 
       return return_value;
@@ -262,15 +262,15 @@ class check_pending_account_resources_response final: public ::EmbeddedProto::Me
       ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
       ::EmbeddedProto::WireFormatter::WireType wire_type = ::EmbeddedProto::WireFormatter::WireType::VARINT;
       uint32_t id_number = 0;
-      id id_tag = id::NOT_SET;
+      FieldNumber id_tag = FieldNumber::NOT_SET;
 
       ::EmbeddedProto::Error tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
       while((::EmbeddedProto::Error::NO_ERRORS == return_value) && (::EmbeddedProto::Error::NO_ERRORS == tag_value))
       {
-        id_tag = static_cast<id>(id_number);
+        id_tag = static_cast<FieldNumber>(id_number);
         switch(id_tag)
         {
-          case id::SUCCESS:
+          case FieldNumber::SUCCESS:
             return_value = success_.deserialize_check_type(buffer, wire_type);
             break;
 
@@ -325,7 +325,7 @@ class get_pending_transactions_request final: public ::EmbeddedProto::MessageInt
 
     ~get_pending_transactions_request() override = default;
 
-    enum class id : uint32_t
+    enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
       LIMIT = 1
@@ -357,7 +357,7 @@ class get_pending_transactions_request final: public ::EmbeddedProto::MessageInt
 
       if((0U != limit_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
       {
-        return_value = limit_.serialize_with_id(static_cast<uint32_t>(id::LIMIT), buffer, false);
+        return_value = limit_.serialize_with_id(static_cast<uint32_t>(FieldNumber::LIMIT), buffer, false);
       }
 
       return return_value;
@@ -368,15 +368,15 @@ class get_pending_transactions_request final: public ::EmbeddedProto::MessageInt
       ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
       ::EmbeddedProto::WireFormatter::WireType wire_type = ::EmbeddedProto::WireFormatter::WireType::VARINT;
       uint32_t id_number = 0;
-      id id_tag = id::NOT_SET;
+      FieldNumber id_tag = FieldNumber::NOT_SET;
 
       ::EmbeddedProto::Error tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
       while((::EmbeddedProto::Error::NO_ERRORS == return_value) && (::EmbeddedProto::Error::NO_ERRORS == tag_value))
       {
-        id_tag = static_cast<id>(id_number);
+        id_tag = static_cast<FieldNumber>(id_number);
         switch(id_tag)
         {
-          case id::LIMIT:
+          case FieldNumber::LIMIT:
             return_value = limit_.deserialize_check_type(buffer, wire_type);
             break;
 
@@ -436,7 +436,7 @@ class get_pending_transactions_response final: public ::EmbeddedProto::MessageIn
 
     ~get_pending_transactions_response() override = default;
 
-    enum class id : uint32_t
+    enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
       TRANSACTIONS = 1
@@ -472,7 +472,7 @@ class get_pending_transactions_response final: public ::EmbeddedProto::MessageIn
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = transactions_.serialize_with_id(static_cast<uint32_t>(id::TRANSACTIONS), buffer, false);
+        return_value = transactions_.serialize_with_id(static_cast<uint32_t>(FieldNumber::TRANSACTIONS), buffer, false);
       }
 
       return return_value;
@@ -483,15 +483,15 @@ class get_pending_transactions_response final: public ::EmbeddedProto::MessageIn
       ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
       ::EmbeddedProto::WireFormatter::WireType wire_type = ::EmbeddedProto::WireFormatter::WireType::VARINT;
       uint32_t id_number = 0;
-      id id_tag = id::NOT_SET;
+      FieldNumber id_tag = FieldNumber::NOT_SET;
 
       ::EmbeddedProto::Error tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
       while((::EmbeddedProto::Error::NO_ERRORS == return_value) && (::EmbeddedProto::Error::NO_ERRORS == tag_value))
       {
-        id_tag = static_cast<id>(id_number);
+        id_tag = static_cast<FieldNumber>(id_number);
         switch(id_tag)
         {
-          case id::TRANSACTIONS:
+          case FieldNumber::TRANSACTIONS:
             return_value = transactions_.deserialize_check_type(buffer, wire_type);
             break;
 
@@ -545,15 +545,15 @@ class mempool_request final: public ::EmbeddedProto::MessageInterface
 
       switch(rhs.get_which_request())
       {
-        case id::RESERVED:
+        case FieldNumber::RESERVED:
           set_reserved(rhs.get_reserved());
           break;
 
-        case id::CHECK_PENDING_ACCOUNT_RESOURCES:
+        case FieldNumber::CHECK_PENDING_ACCOUNT_RESOURCES:
           set_check_pending_account_resources(rhs.get_check_pending_account_resources());
           break;
 
-        case id::GET_PENDING_TRANSACTIONS:
+        case FieldNumber::GET_PENDING_TRANSACTIONS:
           set_get_pending_transactions(rhs.get_get_pending_transactions());
           break;
 
@@ -573,15 +573,15 @@ class mempool_request final: public ::EmbeddedProto::MessageInterface
 
       switch(rhs.get_which_request())
       {
-        case id::RESERVED:
+        case FieldNumber::RESERVED:
           set_reserved(rhs.get_reserved());
           break;
 
-        case id::CHECK_PENDING_ACCOUNT_RESOURCES:
+        case FieldNumber::CHECK_PENDING_ACCOUNT_RESOURCES:
           set_check_pending_account_resources(rhs.get_check_pending_account_resources());
           break;
 
-        case id::GET_PENDING_TRANSACTIONS:
+        case FieldNumber::GET_PENDING_TRANSACTIONS:
           set_get_pending_transactions(rhs.get_get_pending_transactions());
           break;
 
@@ -593,7 +593,7 @@ class mempool_request final: public ::EmbeddedProto::MessageInterface
 
     ~mempool_request() override = default;
 
-    enum class id : uint32_t
+    enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
       RESERVED = 1,
@@ -611,15 +611,15 @@ class mempool_request final: public ::EmbeddedProto::MessageInterface
 
       switch(rhs.get_which_request())
       {
-        case id::RESERVED:
+        case FieldNumber::RESERVED:
           set_reserved(rhs.get_reserved());
           break;
 
-        case id::CHECK_PENDING_ACCOUNT_RESOURCES:
+        case FieldNumber::CHECK_PENDING_ACCOUNT_RESOURCES:
           set_check_pending_account_resources(rhs.get_check_pending_account_resources());
           break;
 
-        case id::GET_PENDING_TRANSACTIONS:
+        case FieldNumber::GET_PENDING_TRANSACTIONS:
           set_get_pending_transactions(rhs.get_get_pending_transactions());
           break;
 
@@ -640,15 +640,15 @@ class mempool_request final: public ::EmbeddedProto::MessageInterface
 
       switch(rhs.get_which_request())
       {
-        case id::RESERVED:
+        case FieldNumber::RESERVED:
           set_reserved(rhs.get_reserved());
           break;
 
-        case id::CHECK_PENDING_ACCOUNT_RESOURCES:
+        case FieldNumber::CHECK_PENDING_ACCOUNT_RESOURCES:
           set_check_pending_account_resources(rhs.get_check_pending_account_resources());
           break;
 
-        case id::GET_PENDING_TRANSACTIONS:
+        case FieldNumber::GET_PENDING_TRANSACTIONS:
           set_get_pending_transactions(rhs.get_get_pending_transactions());
           break;
 
@@ -659,37 +659,37 @@ class mempool_request final: public ::EmbeddedProto::MessageInterface
       return *this;
     }
 
-    id get_which_request() const { return which_request_; }
+    FieldNumber get_which_request() const { return which_request_; }
 
     inline void clear_reserved()
     {
-      if(id::RESERVED == which_request_)
+      if(FieldNumber::RESERVED == which_request_)
       {
-        which_request_ = id::NOT_SET;
+        which_request_ = FieldNumber::NOT_SET;
         request_.reserved_.~reserved_rpc();
       }
     }
     inline void set_reserved(const reserved_rpc& value)
     {
-      if(id::RESERVED != which_request_)
+      if(FieldNumber::RESERVED != which_request_)
       {
-        init_request(id::RESERVED);
+        init_request(FieldNumber::RESERVED);
       }
       request_.reserved_ = value;
     }
     inline void set_reserved(const reserved_rpc&& value)
     {
-      if(id::RESERVED != which_request_)
+      if(FieldNumber::RESERVED != which_request_)
       {
-        init_request(id::RESERVED);
+        init_request(FieldNumber::RESERVED);
       }
       request_.reserved_ = value;
     }
     inline reserved_rpc& mutable_reserved()
     {
-      if(id::RESERVED != which_request_)
+      if(FieldNumber::RESERVED != which_request_)
       {
-        init_request(id::RESERVED);
+        init_request(FieldNumber::RESERVED);
       }
       return request_.reserved_;
     }
@@ -698,33 +698,33 @@ class mempool_request final: public ::EmbeddedProto::MessageInterface
 
     inline void clear_check_pending_account_resources()
     {
-      if(id::CHECK_PENDING_ACCOUNT_RESOURCES == which_request_)
+      if(FieldNumber::CHECK_PENDING_ACCOUNT_RESOURCES == which_request_)
       {
-        which_request_ = id::NOT_SET;
+        which_request_ = FieldNumber::NOT_SET;
         request_.check_pending_account_resources_.~check_pending_account_resources_request<check_pending_account_resources_payer_LENGTH>();
       }
     }
     inline void set_check_pending_account_resources(const check_pending_account_resources_request<check_pending_account_resources_payer_LENGTH>& value)
     {
-      if(id::CHECK_PENDING_ACCOUNT_RESOURCES != which_request_)
+      if(FieldNumber::CHECK_PENDING_ACCOUNT_RESOURCES != which_request_)
       {
-        init_request(id::CHECK_PENDING_ACCOUNT_RESOURCES);
+        init_request(FieldNumber::CHECK_PENDING_ACCOUNT_RESOURCES);
       }
       request_.check_pending_account_resources_ = value;
     }
     inline void set_check_pending_account_resources(const check_pending_account_resources_request<check_pending_account_resources_payer_LENGTH>&& value)
     {
-      if(id::CHECK_PENDING_ACCOUNT_RESOURCES != which_request_)
+      if(FieldNumber::CHECK_PENDING_ACCOUNT_RESOURCES != which_request_)
       {
-        init_request(id::CHECK_PENDING_ACCOUNT_RESOURCES);
+        init_request(FieldNumber::CHECK_PENDING_ACCOUNT_RESOURCES);
       }
       request_.check_pending_account_resources_ = value;
     }
     inline check_pending_account_resources_request<check_pending_account_resources_payer_LENGTH>& mutable_check_pending_account_resources()
     {
-      if(id::CHECK_PENDING_ACCOUNT_RESOURCES != which_request_)
+      if(FieldNumber::CHECK_PENDING_ACCOUNT_RESOURCES != which_request_)
       {
-        init_request(id::CHECK_PENDING_ACCOUNT_RESOURCES);
+        init_request(FieldNumber::CHECK_PENDING_ACCOUNT_RESOURCES);
       }
       return request_.check_pending_account_resources_;
     }
@@ -733,33 +733,33 @@ class mempool_request final: public ::EmbeddedProto::MessageInterface
 
     inline void clear_get_pending_transactions()
     {
-      if(id::GET_PENDING_TRANSACTIONS == which_request_)
+      if(FieldNumber::GET_PENDING_TRANSACTIONS == which_request_)
       {
-        which_request_ = id::NOT_SET;
+        which_request_ = FieldNumber::NOT_SET;
         request_.get_pending_transactions_.~get_pending_transactions_request();
       }
     }
     inline void set_get_pending_transactions(const get_pending_transactions_request& value)
     {
-      if(id::GET_PENDING_TRANSACTIONS != which_request_)
+      if(FieldNumber::GET_PENDING_TRANSACTIONS != which_request_)
       {
-        init_request(id::GET_PENDING_TRANSACTIONS);
+        init_request(FieldNumber::GET_PENDING_TRANSACTIONS);
       }
       request_.get_pending_transactions_ = value;
     }
     inline void set_get_pending_transactions(const get_pending_transactions_request&& value)
     {
-      if(id::GET_PENDING_TRANSACTIONS != which_request_)
+      if(FieldNumber::GET_PENDING_TRANSACTIONS != which_request_)
       {
-        init_request(id::GET_PENDING_TRANSACTIONS);
+        init_request(FieldNumber::GET_PENDING_TRANSACTIONS);
       }
       request_.get_pending_transactions_ = value;
     }
     inline get_pending_transactions_request& mutable_get_pending_transactions()
     {
-      if(id::GET_PENDING_TRANSACTIONS != which_request_)
+      if(FieldNumber::GET_PENDING_TRANSACTIONS != which_request_)
       {
-        init_request(id::GET_PENDING_TRANSACTIONS);
+        init_request(FieldNumber::GET_PENDING_TRANSACTIONS);
       }
       return request_.get_pending_transactions_;
     }
@@ -773,24 +773,24 @@ class mempool_request final: public ::EmbeddedProto::MessageInterface
 
       switch(which_request_)
       {
-        case id::RESERVED:
+        case FieldNumber::RESERVED:
           if(::EmbeddedProto::Error::NO_ERRORS == return_value)
           {
-            return_value = request_.reserved_.serialize_with_id(static_cast<uint32_t>(id::RESERVED), buffer, false);
+            return_value = request_.reserved_.serialize_with_id(static_cast<uint32_t>(FieldNumber::RESERVED), buffer, false);
           }
           break;
 
-        case id::CHECK_PENDING_ACCOUNT_RESOURCES:
+        case FieldNumber::CHECK_PENDING_ACCOUNT_RESOURCES:
           if(::EmbeddedProto::Error::NO_ERRORS == return_value)
           {
-            return_value = request_.check_pending_account_resources_.serialize_with_id(static_cast<uint32_t>(id::CHECK_PENDING_ACCOUNT_RESOURCES), buffer, false);
+            return_value = request_.check_pending_account_resources_.serialize_with_id(static_cast<uint32_t>(FieldNumber::CHECK_PENDING_ACCOUNT_RESOURCES), buffer, false);
           }
           break;
 
-        case id::GET_PENDING_TRANSACTIONS:
+        case FieldNumber::GET_PENDING_TRANSACTIONS:
           if(::EmbeddedProto::Error::NO_ERRORS == return_value)
           {
-            return_value = request_.get_pending_transactions_.serialize_with_id(static_cast<uint32_t>(id::GET_PENDING_TRANSACTIONS), buffer, false);
+            return_value = request_.get_pending_transactions_.serialize_with_id(static_cast<uint32_t>(FieldNumber::GET_PENDING_TRANSACTIONS), buffer, false);
           }
           break;
 
@@ -806,26 +806,26 @@ class mempool_request final: public ::EmbeddedProto::MessageInterface
       ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
       ::EmbeddedProto::WireFormatter::WireType wire_type = ::EmbeddedProto::WireFormatter::WireType::VARINT;
       uint32_t id_number = 0;
-      id id_tag = id::NOT_SET;
+      FieldNumber id_tag = FieldNumber::NOT_SET;
 
       ::EmbeddedProto::Error tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
       while((::EmbeddedProto::Error::NO_ERRORS == return_value) && (::EmbeddedProto::Error::NO_ERRORS == tag_value))
       {
-        id_tag = static_cast<id>(id_number);
+        id_tag = static_cast<FieldNumber>(id_number);
         switch(id_tag)
         {
-          case id::RESERVED:
-            return_value = deserialize_request(id::RESERVED, request_.reserved_, buffer, wire_type);
+          case FieldNumber::RESERVED:
+            return_value = deserialize_request(FieldNumber::RESERVED, request_.reserved_, buffer, wire_type);
 
             break;
 
-          case id::CHECK_PENDING_ACCOUNT_RESOURCES:
-            return_value = deserialize_request(id::CHECK_PENDING_ACCOUNT_RESOURCES, request_.check_pending_account_resources_, buffer, wire_type);
+          case FieldNumber::CHECK_PENDING_ACCOUNT_RESOURCES:
+            return_value = deserialize_request(FieldNumber::CHECK_PENDING_ACCOUNT_RESOURCES, request_.check_pending_account_resources_, buffer, wire_type);
 
             break;
 
-          case id::GET_PENDING_TRANSACTIONS:
-            return_value = deserialize_request(id::GET_PENDING_TRANSACTIONS, request_.get_pending_transactions_, buffer, wire_type);
+          case FieldNumber::GET_PENDING_TRANSACTIONS:
+            return_value = deserialize_request(FieldNumber::GET_PENDING_TRANSACTIONS, request_.get_pending_transactions_, buffer, wire_type);
 
             break;
 
@@ -861,7 +861,7 @@ class mempool_request final: public ::EmbeddedProto::MessageInterface
 
 
 
-      id which_request_ = id::NOT_SET;
+      FieldNumber which_request_ = FieldNumber::NOT_SET;
       union request
       {
         request() {}
@@ -872,9 +872,9 @@ class mempool_request final: public ::EmbeddedProto::MessageInterface
       };
       request request_;
 
-      void init_request(const id field_id)
+      void init_request(const FieldNumber field_id)
       {
-        if(id::NOT_SET != which_request_)
+        if(FieldNumber::NOT_SET != which_request_)
         {
           // First delete the old object in the oneof.
           clear_request();
@@ -883,19 +883,19 @@ class mempool_request final: public ::EmbeddedProto::MessageInterface
         // C++11 unions only support nontrivial members when you explicitly call the placement new statement.
         switch(field_id)
         {
-          case id::RESERVED:
+          case FieldNumber::RESERVED:
             new(&request_.reserved_) reserved_rpc;
-            which_request_ = id::RESERVED;
+            which_request_ = FieldNumber::RESERVED;
             break;
 
-          case id::CHECK_PENDING_ACCOUNT_RESOURCES:
+          case FieldNumber::CHECK_PENDING_ACCOUNT_RESOURCES:
             new(&request_.check_pending_account_resources_) check_pending_account_resources_request<check_pending_account_resources_payer_LENGTH>;
-            which_request_ = id::CHECK_PENDING_ACCOUNT_RESOURCES;
+            which_request_ = FieldNumber::CHECK_PENDING_ACCOUNT_RESOURCES;
             break;
 
-          case id::GET_PENDING_TRANSACTIONS:
+          case FieldNumber::GET_PENDING_TRANSACTIONS:
             new(&request_.get_pending_transactions_) get_pending_transactions_request;
-            which_request_ = id::GET_PENDING_TRANSACTIONS;
+            which_request_ = FieldNumber::GET_PENDING_TRANSACTIONS;
             break;
 
           default:
@@ -909,22 +909,22 @@ class mempool_request final: public ::EmbeddedProto::MessageInterface
       {
         switch(which_request_)
         {
-          case id::RESERVED:
+          case FieldNumber::RESERVED:
             request_.reserved_.~reserved_rpc(); // NOSONAR Unions require this.
             break;
-          case id::CHECK_PENDING_ACCOUNT_RESOURCES:
+          case FieldNumber::CHECK_PENDING_ACCOUNT_RESOURCES:
             request_.check_pending_account_resources_.~check_pending_account_resources_request<check_pending_account_resources_payer_LENGTH>(); // NOSONAR Unions require this.
             break;
-          case id::GET_PENDING_TRANSACTIONS:
+          case FieldNumber::GET_PENDING_TRANSACTIONS:
             request_.get_pending_transactions_.~get_pending_transactions_request(); // NOSONAR Unions require this.
             break;
           default:
             break;
         }
-        which_request_ = id::NOT_SET;
+        which_request_ = FieldNumber::NOT_SET;
       }
 
-      ::EmbeddedProto::Error deserialize_request(const id field_id, ::EmbeddedProto::Field& field,
+      ::EmbeddedProto::Error deserialize_request(const FieldNumber field_id, ::EmbeddedProto::Field& field,
                                     ::EmbeddedProto::ReadBufferInterface& buffer,
                                     const ::EmbeddedProto::WireFormatter::WireType wire_type)
       {
@@ -963,19 +963,19 @@ class mempool_response final: public ::EmbeddedProto::MessageInterface
 
       switch(rhs.get_which_response())
       {
-        case id::RESERVED:
+        case FieldNumber::RESERVED:
           set_reserved(rhs.get_reserved());
           break;
 
-        case id::ERROR:
+        case FieldNumber::ERROR:
           set_error(rhs.get_error());
           break;
 
-        case id::CHECK_PENDING_ACCOUNT_RESOURCES:
+        case FieldNumber::CHECK_PENDING_ACCOUNT_RESOURCES:
           set_check_pending_account_resources(rhs.get_check_pending_account_resources());
           break;
 
-        case id::GET_PENDING_TRANSACTIONS:
+        case FieldNumber::GET_PENDING_TRANSACTIONS:
           set_get_pending_transactions(rhs.get_get_pending_transactions());
           break;
 
@@ -995,19 +995,19 @@ class mempool_response final: public ::EmbeddedProto::MessageInterface
 
       switch(rhs.get_which_response())
       {
-        case id::RESERVED:
+        case FieldNumber::RESERVED:
           set_reserved(rhs.get_reserved());
           break;
 
-        case id::ERROR:
+        case FieldNumber::ERROR:
           set_error(rhs.get_error());
           break;
 
-        case id::CHECK_PENDING_ACCOUNT_RESOURCES:
+        case FieldNumber::CHECK_PENDING_ACCOUNT_RESOURCES:
           set_check_pending_account_resources(rhs.get_check_pending_account_resources());
           break;
 
-        case id::GET_PENDING_TRANSACTIONS:
+        case FieldNumber::GET_PENDING_TRANSACTIONS:
           set_get_pending_transactions(rhs.get_get_pending_transactions());
           break;
 
@@ -1019,7 +1019,7 @@ class mempool_response final: public ::EmbeddedProto::MessageInterface
 
     ~mempool_response() override = default;
 
-    enum class id : uint32_t
+    enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
       RESERVED = 1,
@@ -1038,19 +1038,19 @@ class mempool_response final: public ::EmbeddedProto::MessageInterface
 
       switch(rhs.get_which_response())
       {
-        case id::RESERVED:
+        case FieldNumber::RESERVED:
           set_reserved(rhs.get_reserved());
           break;
 
-        case id::ERROR:
+        case FieldNumber::ERROR:
           set_error(rhs.get_error());
           break;
 
-        case id::CHECK_PENDING_ACCOUNT_RESOURCES:
+        case FieldNumber::CHECK_PENDING_ACCOUNT_RESOURCES:
           set_check_pending_account_resources(rhs.get_check_pending_account_resources());
           break;
 
-        case id::GET_PENDING_TRANSACTIONS:
+        case FieldNumber::GET_PENDING_TRANSACTIONS:
           set_get_pending_transactions(rhs.get_get_pending_transactions());
           break;
 
@@ -1071,19 +1071,19 @@ class mempool_response final: public ::EmbeddedProto::MessageInterface
 
       switch(rhs.get_which_response())
       {
-        case id::RESERVED:
+        case FieldNumber::RESERVED:
           set_reserved(rhs.get_reserved());
           break;
 
-        case id::ERROR:
+        case FieldNumber::ERROR:
           set_error(rhs.get_error());
           break;
 
-        case id::CHECK_PENDING_ACCOUNT_RESOURCES:
+        case FieldNumber::CHECK_PENDING_ACCOUNT_RESOURCES:
           set_check_pending_account_resources(rhs.get_check_pending_account_resources());
           break;
 
-        case id::GET_PENDING_TRANSACTIONS:
+        case FieldNumber::GET_PENDING_TRANSACTIONS:
           set_get_pending_transactions(rhs.get_get_pending_transactions());
           break;
 
@@ -1094,37 +1094,37 @@ class mempool_response final: public ::EmbeddedProto::MessageInterface
       return *this;
     }
 
-    id get_which_response() const { return which_response_; }
+    FieldNumber get_which_response() const { return which_response_; }
 
     inline void clear_reserved()
     {
-      if(id::RESERVED == which_response_)
+      if(FieldNumber::RESERVED == which_response_)
       {
-        which_response_ = id::NOT_SET;
+        which_response_ = FieldNumber::NOT_SET;
         response_.reserved_.~reserved_rpc();
       }
     }
     inline void set_reserved(const reserved_rpc& value)
     {
-      if(id::RESERVED != which_response_)
+      if(FieldNumber::RESERVED != which_response_)
       {
-        init_response(id::RESERVED);
+        init_response(FieldNumber::RESERVED);
       }
       response_.reserved_ = value;
     }
     inline void set_reserved(const reserved_rpc&& value)
     {
-      if(id::RESERVED != which_response_)
+      if(FieldNumber::RESERVED != which_response_)
       {
-        init_response(id::RESERVED);
+        init_response(FieldNumber::RESERVED);
       }
       response_.reserved_ = value;
     }
     inline reserved_rpc& mutable_reserved()
     {
-      if(id::RESERVED != which_response_)
+      if(FieldNumber::RESERVED != which_response_)
       {
-        init_response(id::RESERVED);
+        init_response(FieldNumber::RESERVED);
       }
       return response_.reserved_;
     }
@@ -1133,33 +1133,33 @@ class mempool_response final: public ::EmbeddedProto::MessageInterface
 
     inline void clear_error()
     {
-      if(id::ERROR == which_response_)
+      if(FieldNumber::ERROR == which_response_)
       {
-        which_response_ = id::NOT_SET;
+        which_response_ = FieldNumber::NOT_SET;
         response_.error_.~error_response<error_message_LENGTH, error_data_LENGTH>();
       }
     }
     inline void set_error(const error_response<error_message_LENGTH, error_data_LENGTH>& value)
     {
-      if(id::ERROR != which_response_)
+      if(FieldNumber::ERROR != which_response_)
       {
-        init_response(id::ERROR);
+        init_response(FieldNumber::ERROR);
       }
       response_.error_ = value;
     }
     inline void set_error(const error_response<error_message_LENGTH, error_data_LENGTH>&& value)
     {
-      if(id::ERROR != which_response_)
+      if(FieldNumber::ERROR != which_response_)
       {
-        init_response(id::ERROR);
+        init_response(FieldNumber::ERROR);
       }
       response_.error_ = value;
     }
     inline error_response<error_message_LENGTH, error_data_LENGTH>& mutable_error()
     {
-      if(id::ERROR != which_response_)
+      if(FieldNumber::ERROR != which_response_)
       {
-        init_response(id::ERROR);
+        init_response(FieldNumber::ERROR);
       }
       return response_.error_;
     }
@@ -1168,33 +1168,33 @@ class mempool_response final: public ::EmbeddedProto::MessageInterface
 
     inline void clear_check_pending_account_resources()
     {
-      if(id::CHECK_PENDING_ACCOUNT_RESOURCES == which_response_)
+      if(FieldNumber::CHECK_PENDING_ACCOUNT_RESOURCES == which_response_)
       {
-        which_response_ = id::NOT_SET;
+        which_response_ = FieldNumber::NOT_SET;
         response_.check_pending_account_resources_.~check_pending_account_resources_response();
       }
     }
     inline void set_check_pending_account_resources(const check_pending_account_resources_response& value)
     {
-      if(id::CHECK_PENDING_ACCOUNT_RESOURCES != which_response_)
+      if(FieldNumber::CHECK_PENDING_ACCOUNT_RESOURCES != which_response_)
       {
-        init_response(id::CHECK_PENDING_ACCOUNT_RESOURCES);
+        init_response(FieldNumber::CHECK_PENDING_ACCOUNT_RESOURCES);
       }
       response_.check_pending_account_resources_ = value;
     }
     inline void set_check_pending_account_resources(const check_pending_account_resources_response&& value)
     {
-      if(id::CHECK_PENDING_ACCOUNT_RESOURCES != which_response_)
+      if(FieldNumber::CHECK_PENDING_ACCOUNT_RESOURCES != which_response_)
       {
-        init_response(id::CHECK_PENDING_ACCOUNT_RESOURCES);
+        init_response(FieldNumber::CHECK_PENDING_ACCOUNT_RESOURCES);
       }
       response_.check_pending_account_resources_ = value;
     }
     inline check_pending_account_resources_response& mutable_check_pending_account_resources()
     {
-      if(id::CHECK_PENDING_ACCOUNT_RESOURCES != which_response_)
+      if(FieldNumber::CHECK_PENDING_ACCOUNT_RESOURCES != which_response_)
       {
-        init_response(id::CHECK_PENDING_ACCOUNT_RESOURCES);
+        init_response(FieldNumber::CHECK_PENDING_ACCOUNT_RESOURCES);
       }
       return response_.check_pending_account_resources_;
     }
@@ -1203,33 +1203,33 @@ class mempool_response final: public ::EmbeddedProto::MessageInterface
 
     inline void clear_get_pending_transactions()
     {
-      if(id::GET_PENDING_TRANSACTIONS == which_response_)
+      if(FieldNumber::GET_PENDING_TRANSACTIONS == which_response_)
       {
-        which_response_ = id::NOT_SET;
+        which_response_ = FieldNumber::NOT_SET;
         response_.get_pending_transactions_.~get_pending_transactions_response<get_pending_transactions_transactions_REP_LENGTH, get_pending_transactions_transactions_id_LENGTH, get_pending_transactions_transactions_active_LENGTH, get_pending_transactions_transactions_passive_LENGTH, get_pending_transactions_transactions_signature_data_LENGTH>();
       }
     }
     inline void set_get_pending_transactions(const get_pending_transactions_response<get_pending_transactions_transactions_REP_LENGTH, get_pending_transactions_transactions_id_LENGTH, get_pending_transactions_transactions_active_LENGTH, get_pending_transactions_transactions_passive_LENGTH, get_pending_transactions_transactions_signature_data_LENGTH>& value)
     {
-      if(id::GET_PENDING_TRANSACTIONS != which_response_)
+      if(FieldNumber::GET_PENDING_TRANSACTIONS != which_response_)
       {
-        init_response(id::GET_PENDING_TRANSACTIONS);
+        init_response(FieldNumber::GET_PENDING_TRANSACTIONS);
       }
       response_.get_pending_transactions_ = value;
     }
     inline void set_get_pending_transactions(const get_pending_transactions_response<get_pending_transactions_transactions_REP_LENGTH, get_pending_transactions_transactions_id_LENGTH, get_pending_transactions_transactions_active_LENGTH, get_pending_transactions_transactions_passive_LENGTH, get_pending_transactions_transactions_signature_data_LENGTH>&& value)
     {
-      if(id::GET_PENDING_TRANSACTIONS != which_response_)
+      if(FieldNumber::GET_PENDING_TRANSACTIONS != which_response_)
       {
-        init_response(id::GET_PENDING_TRANSACTIONS);
+        init_response(FieldNumber::GET_PENDING_TRANSACTIONS);
       }
       response_.get_pending_transactions_ = value;
     }
     inline get_pending_transactions_response<get_pending_transactions_transactions_REP_LENGTH, get_pending_transactions_transactions_id_LENGTH, get_pending_transactions_transactions_active_LENGTH, get_pending_transactions_transactions_passive_LENGTH, get_pending_transactions_transactions_signature_data_LENGTH>& mutable_get_pending_transactions()
     {
-      if(id::GET_PENDING_TRANSACTIONS != which_response_)
+      if(FieldNumber::GET_PENDING_TRANSACTIONS != which_response_)
       {
-        init_response(id::GET_PENDING_TRANSACTIONS);
+        init_response(FieldNumber::GET_PENDING_TRANSACTIONS);
       }
       return response_.get_pending_transactions_;
     }
@@ -1243,31 +1243,31 @@ class mempool_response final: public ::EmbeddedProto::MessageInterface
 
       switch(which_response_)
       {
-        case id::RESERVED:
+        case FieldNumber::RESERVED:
           if(::EmbeddedProto::Error::NO_ERRORS == return_value)
           {
-            return_value = response_.reserved_.serialize_with_id(static_cast<uint32_t>(id::RESERVED), buffer, false);
+            return_value = response_.reserved_.serialize_with_id(static_cast<uint32_t>(FieldNumber::RESERVED), buffer, false);
           }
           break;
 
-        case id::ERROR:
+        case FieldNumber::ERROR:
           if(::EmbeddedProto::Error::NO_ERRORS == return_value)
           {
-            return_value = response_.error_.serialize_with_id(static_cast<uint32_t>(id::ERROR), buffer, false);
+            return_value = response_.error_.serialize_with_id(static_cast<uint32_t>(FieldNumber::ERROR), buffer, false);
           }
           break;
 
-        case id::CHECK_PENDING_ACCOUNT_RESOURCES:
+        case FieldNumber::CHECK_PENDING_ACCOUNT_RESOURCES:
           if(::EmbeddedProto::Error::NO_ERRORS == return_value)
           {
-            return_value = response_.check_pending_account_resources_.serialize_with_id(static_cast<uint32_t>(id::CHECK_PENDING_ACCOUNT_RESOURCES), buffer, false);
+            return_value = response_.check_pending_account_resources_.serialize_with_id(static_cast<uint32_t>(FieldNumber::CHECK_PENDING_ACCOUNT_RESOURCES), buffer, false);
           }
           break;
 
-        case id::GET_PENDING_TRANSACTIONS:
+        case FieldNumber::GET_PENDING_TRANSACTIONS:
           if(::EmbeddedProto::Error::NO_ERRORS == return_value)
           {
-            return_value = response_.get_pending_transactions_.serialize_with_id(static_cast<uint32_t>(id::GET_PENDING_TRANSACTIONS), buffer, false);
+            return_value = response_.get_pending_transactions_.serialize_with_id(static_cast<uint32_t>(FieldNumber::GET_PENDING_TRANSACTIONS), buffer, false);
           }
           break;
 
@@ -1283,31 +1283,31 @@ class mempool_response final: public ::EmbeddedProto::MessageInterface
       ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
       ::EmbeddedProto::WireFormatter::WireType wire_type = ::EmbeddedProto::WireFormatter::WireType::VARINT;
       uint32_t id_number = 0;
-      id id_tag = id::NOT_SET;
+      FieldNumber id_tag = FieldNumber::NOT_SET;
 
       ::EmbeddedProto::Error tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
       while((::EmbeddedProto::Error::NO_ERRORS == return_value) && (::EmbeddedProto::Error::NO_ERRORS == tag_value))
       {
-        id_tag = static_cast<id>(id_number);
+        id_tag = static_cast<FieldNumber>(id_number);
         switch(id_tag)
         {
-          case id::RESERVED:
-            return_value = deserialize_response(id::RESERVED, response_.reserved_, buffer, wire_type);
+          case FieldNumber::RESERVED:
+            return_value = deserialize_response(FieldNumber::RESERVED, response_.reserved_, buffer, wire_type);
 
             break;
 
-          case id::ERROR:
-            return_value = deserialize_response(id::ERROR, response_.error_, buffer, wire_type);
+          case FieldNumber::ERROR:
+            return_value = deserialize_response(FieldNumber::ERROR, response_.error_, buffer, wire_type);
 
             break;
 
-          case id::CHECK_PENDING_ACCOUNT_RESOURCES:
-            return_value = deserialize_response(id::CHECK_PENDING_ACCOUNT_RESOURCES, response_.check_pending_account_resources_, buffer, wire_type);
+          case FieldNumber::CHECK_PENDING_ACCOUNT_RESOURCES:
+            return_value = deserialize_response(FieldNumber::CHECK_PENDING_ACCOUNT_RESOURCES, response_.check_pending_account_resources_, buffer, wire_type);
 
             break;
 
-          case id::GET_PENDING_TRANSACTIONS:
-            return_value = deserialize_response(id::GET_PENDING_TRANSACTIONS, response_.get_pending_transactions_, buffer, wire_type);
+          case FieldNumber::GET_PENDING_TRANSACTIONS:
+            return_value = deserialize_response(FieldNumber::GET_PENDING_TRANSACTIONS, response_.get_pending_transactions_, buffer, wire_type);
 
             break;
 
@@ -1343,7 +1343,7 @@ class mempool_response final: public ::EmbeddedProto::MessageInterface
 
 
 
-      id which_response_ = id::NOT_SET;
+      FieldNumber which_response_ = FieldNumber::NOT_SET;
       union response
       {
         response() {}
@@ -1355,9 +1355,9 @@ class mempool_response final: public ::EmbeddedProto::MessageInterface
       };
       response response_;
 
-      void init_response(const id field_id)
+      void init_response(const FieldNumber field_id)
       {
-        if(id::NOT_SET != which_response_)
+        if(FieldNumber::NOT_SET != which_response_)
         {
           // First delete the old object in the oneof.
           clear_response();
@@ -1366,24 +1366,24 @@ class mempool_response final: public ::EmbeddedProto::MessageInterface
         // C++11 unions only support nontrivial members when you explicitly call the placement new statement.
         switch(field_id)
         {
-          case id::RESERVED:
+          case FieldNumber::RESERVED:
             new(&response_.reserved_) reserved_rpc;
-            which_response_ = id::RESERVED;
+            which_response_ = FieldNumber::RESERVED;
             break;
 
-          case id::ERROR:
+          case FieldNumber::ERROR:
             new(&response_.error_) error_response<error_message_LENGTH, error_data_LENGTH>;
-            which_response_ = id::ERROR;
+            which_response_ = FieldNumber::ERROR;
             break;
 
-          case id::CHECK_PENDING_ACCOUNT_RESOURCES:
+          case FieldNumber::CHECK_PENDING_ACCOUNT_RESOURCES:
             new(&response_.check_pending_account_resources_) check_pending_account_resources_response;
-            which_response_ = id::CHECK_PENDING_ACCOUNT_RESOURCES;
+            which_response_ = FieldNumber::CHECK_PENDING_ACCOUNT_RESOURCES;
             break;
 
-          case id::GET_PENDING_TRANSACTIONS:
+          case FieldNumber::GET_PENDING_TRANSACTIONS:
             new(&response_.get_pending_transactions_) get_pending_transactions_response<get_pending_transactions_transactions_REP_LENGTH, get_pending_transactions_transactions_id_LENGTH, get_pending_transactions_transactions_active_LENGTH, get_pending_transactions_transactions_passive_LENGTH, get_pending_transactions_transactions_signature_data_LENGTH>;
-            which_response_ = id::GET_PENDING_TRANSACTIONS;
+            which_response_ = FieldNumber::GET_PENDING_TRANSACTIONS;
             break;
 
           default:
@@ -1397,25 +1397,25 @@ class mempool_response final: public ::EmbeddedProto::MessageInterface
       {
         switch(which_response_)
         {
-          case id::RESERVED:
+          case FieldNumber::RESERVED:
             response_.reserved_.~reserved_rpc(); // NOSONAR Unions require this.
             break;
-          case id::ERROR:
+          case FieldNumber::ERROR:
             response_.error_.~error_response<error_message_LENGTH, error_data_LENGTH>(); // NOSONAR Unions require this.
             break;
-          case id::CHECK_PENDING_ACCOUNT_RESOURCES:
+          case FieldNumber::CHECK_PENDING_ACCOUNT_RESOURCES:
             response_.check_pending_account_resources_.~check_pending_account_resources_response(); // NOSONAR Unions require this.
             break;
-          case id::GET_PENDING_TRANSACTIONS:
+          case FieldNumber::GET_PENDING_TRANSACTIONS:
             response_.get_pending_transactions_.~get_pending_transactions_response<get_pending_transactions_transactions_REP_LENGTH, get_pending_transactions_transactions_id_LENGTH, get_pending_transactions_transactions_active_LENGTH, get_pending_transactions_transactions_passive_LENGTH, get_pending_transactions_transactions_signature_data_LENGTH>(); // NOSONAR Unions require this.
             break;
           default:
             break;
         }
-        which_response_ = id::NOT_SET;
+        which_response_ = FieldNumber::NOT_SET;
       }
 
-      ::EmbeddedProto::Error deserialize_response(const id field_id, ::EmbeddedProto::Field& field,
+      ::EmbeddedProto::Error deserialize_response(const FieldNumber field_id, ::EmbeddedProto::Field& field,
                                     ::EmbeddedProto::ReadBufferInterface& buffer,
                                     const ::EmbeddedProto::WireFormatter::WireType wire_type)
       {

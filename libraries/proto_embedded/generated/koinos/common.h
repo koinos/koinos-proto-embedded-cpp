@@ -69,7 +69,7 @@ class block_topology final: public ::EmbeddedProto::MessageInterface
 
     ~block_topology() override = default;
 
-    enum class id : uint32_t
+    enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
       ID = 1,
@@ -119,17 +119,17 @@ class block_topology final: public ::EmbeddedProto::MessageInterface
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = id_.serialize_with_id(static_cast<uint32_t>(id::ID), buffer, false);
+        return_value = id_.serialize_with_id(static_cast<uint32_t>(FieldNumber::ID), buffer, false);
       }
 
       if((0U != height_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
       {
-        return_value = height_.serialize_with_id(static_cast<uint32_t>(id::HEIGHT), buffer, false);
+        return_value = height_.serialize_with_id(static_cast<uint32_t>(FieldNumber::HEIGHT), buffer, false);
       }
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = previous_.serialize_with_id(static_cast<uint32_t>(id::PREVIOUS), buffer, false);
+        return_value = previous_.serialize_with_id(static_cast<uint32_t>(FieldNumber::PREVIOUS), buffer, false);
       }
 
       return return_value;
@@ -140,23 +140,23 @@ class block_topology final: public ::EmbeddedProto::MessageInterface
       ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
       ::EmbeddedProto::WireFormatter::WireType wire_type = ::EmbeddedProto::WireFormatter::WireType::VARINT;
       uint32_t id_number = 0;
-      id id_tag = id::NOT_SET;
+      FieldNumber id_tag = FieldNumber::NOT_SET;
 
       ::EmbeddedProto::Error tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
       while((::EmbeddedProto::Error::NO_ERRORS == return_value) && (::EmbeddedProto::Error::NO_ERRORS == tag_value))
       {
-        id_tag = static_cast<id>(id_number);
+        id_tag = static_cast<FieldNumber>(id_number);
         switch(id_tag)
         {
-          case id::ID:
+          case FieldNumber::ID:
             return_value = id_.deserialize_check_type(buffer, wire_type);
             break;
 
-          case id::HEIGHT:
+          case FieldNumber::HEIGHT:
             return_value = height_.deserialize_check_type(buffer, wire_type);
             break;
 
-          case id::PREVIOUS:
+          case FieldNumber::PREVIOUS:
             return_value = previous_.deserialize_check_type(buffer, wire_type);
             break;
 
