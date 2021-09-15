@@ -73,7 +73,7 @@ class transaction_item final: public ::EmbeddedProto::MessageInterface
 
     ~transaction_item() override = default;
 
-    enum class id : uint32_t
+    enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
       TRANSACTION = 1,
@@ -119,12 +119,12 @@ class transaction_item final: public ::EmbeddedProto::MessageInterface
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = transaction_.serialize_with_id(static_cast<uint32_t>(id::TRANSACTION), buffer, false);
+        return_value = transaction_.serialize_with_id(static_cast<uint32_t>(FieldNumber::TRANSACTION), buffer, false);
       }
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = containing_blocks_.serialize_with_id(static_cast<uint32_t>(id::CONTAINING_BLOCKS), buffer, false);
+        return_value = containing_blocks_.serialize_with_id(static_cast<uint32_t>(FieldNumber::CONTAINING_BLOCKS), buffer, false);
       }
 
       return return_value;
@@ -135,19 +135,19 @@ class transaction_item final: public ::EmbeddedProto::MessageInterface
       ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
       ::EmbeddedProto::WireFormatter::WireType wire_type = ::EmbeddedProto::WireFormatter::WireType::VARINT;
       uint32_t id_number = 0;
-      id id_tag = id::NOT_SET;
+      FieldNumber id_tag = FieldNumber::NOT_SET;
 
       ::EmbeddedProto::Error tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
       while((::EmbeddedProto::Error::NO_ERRORS == return_value) && (::EmbeddedProto::Error::NO_ERRORS == tag_value))
       {
-        id_tag = static_cast<id>(id_number);
+        id_tag = static_cast<FieldNumber>(id_number);
         switch(id_tag)
         {
-          case id::TRANSACTION:
+          case FieldNumber::TRANSACTION:
             return_value = transaction_.deserialize_check_type(buffer, wire_type);
             break;
 
-          case id::CONTAINING_BLOCKS:
+          case FieldNumber::CONTAINING_BLOCKS:
             return_value = containing_blocks_.deserialize_check_type(buffer, wire_type);
             break;
 

@@ -69,7 +69,7 @@ class get_transactions_by_id_request final: public ::EmbeddedProto::MessageInter
 
     ~get_transactions_by_id_request() override = default;
 
-    enum class id : uint32_t
+    enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
       TRANSACTION_IDS = 1
@@ -105,7 +105,7 @@ class get_transactions_by_id_request final: public ::EmbeddedProto::MessageInter
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = transaction_ids_.serialize_with_id(static_cast<uint32_t>(id::TRANSACTION_IDS), buffer, false);
+        return_value = transaction_ids_.serialize_with_id(static_cast<uint32_t>(FieldNumber::TRANSACTION_IDS), buffer, false);
       }
 
       return return_value;
@@ -116,15 +116,15 @@ class get_transactions_by_id_request final: public ::EmbeddedProto::MessageInter
       ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
       ::EmbeddedProto::WireFormatter::WireType wire_type = ::EmbeddedProto::WireFormatter::WireType::VARINT;
       uint32_t id_number = 0;
-      id id_tag = id::NOT_SET;
+      FieldNumber id_tag = FieldNumber::NOT_SET;
 
       ::EmbeddedProto::Error tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
       while((::EmbeddedProto::Error::NO_ERRORS == return_value) && (::EmbeddedProto::Error::NO_ERRORS == tag_value))
       {
-        id_tag = static_cast<id>(id_number);
+        id_tag = static_cast<FieldNumber>(id_number);
         switch(id_tag)
         {
-          case id::TRANSACTION_IDS:
+          case FieldNumber::TRANSACTION_IDS:
             return_value = transaction_ids_.deserialize_check_type(buffer, wire_type);
             break;
 
@@ -186,7 +186,7 @@ class get_transactions_by_id_response final: public ::EmbeddedProto::MessageInte
 
     ~get_transactions_by_id_response() override = default;
 
-    enum class id : uint32_t
+    enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
       TRANSACTIONS = 1
@@ -222,7 +222,7 @@ class get_transactions_by_id_response final: public ::EmbeddedProto::MessageInte
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = transactions_.serialize_with_id(static_cast<uint32_t>(id::TRANSACTIONS), buffer, false);
+        return_value = transactions_.serialize_with_id(static_cast<uint32_t>(FieldNumber::TRANSACTIONS), buffer, false);
       }
 
       return return_value;
@@ -233,15 +233,15 @@ class get_transactions_by_id_response final: public ::EmbeddedProto::MessageInte
       ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
       ::EmbeddedProto::WireFormatter::WireType wire_type = ::EmbeddedProto::WireFormatter::WireType::VARINT;
       uint32_t id_number = 0;
-      id id_tag = id::NOT_SET;
+      FieldNumber id_tag = FieldNumber::NOT_SET;
 
       ::EmbeddedProto::Error tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
       while((::EmbeddedProto::Error::NO_ERRORS == return_value) && (::EmbeddedProto::Error::NO_ERRORS == tag_value))
       {
-        id_tag = static_cast<id>(id_number);
+        id_tag = static_cast<FieldNumber>(id_number);
         switch(id_tag)
         {
-          case id::TRANSACTIONS:
+          case FieldNumber::TRANSACTIONS:
             return_value = transactions_.deserialize_check_type(buffer, wire_type);
             break;
 
@@ -296,11 +296,11 @@ class transaction_store_request final: public ::EmbeddedProto::MessageInterface
 
       switch(rhs.get_which_request())
       {
-        case id::RESERVED:
+        case FieldNumber::RESERVED:
           set_reserved(rhs.get_reserved());
           break;
 
-        case id::GET_TRANSACTIONS_BY_ID:
+        case FieldNumber::GET_TRANSACTIONS_BY_ID:
           set_get_transactions_by_id(rhs.get_get_transactions_by_id());
           break;
 
@@ -320,11 +320,11 @@ class transaction_store_request final: public ::EmbeddedProto::MessageInterface
 
       switch(rhs.get_which_request())
       {
-        case id::RESERVED:
+        case FieldNumber::RESERVED:
           set_reserved(rhs.get_reserved());
           break;
 
-        case id::GET_TRANSACTIONS_BY_ID:
+        case FieldNumber::GET_TRANSACTIONS_BY_ID:
           set_get_transactions_by_id(rhs.get_get_transactions_by_id());
           break;
 
@@ -336,7 +336,7 @@ class transaction_store_request final: public ::EmbeddedProto::MessageInterface
 
     ~transaction_store_request() override = default;
 
-    enum class id : uint32_t
+    enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
       RESERVED = 1,
@@ -353,11 +353,11 @@ class transaction_store_request final: public ::EmbeddedProto::MessageInterface
 
       switch(rhs.get_which_request())
       {
-        case id::RESERVED:
+        case FieldNumber::RESERVED:
           set_reserved(rhs.get_reserved());
           break;
 
-        case id::GET_TRANSACTIONS_BY_ID:
+        case FieldNumber::GET_TRANSACTIONS_BY_ID:
           set_get_transactions_by_id(rhs.get_get_transactions_by_id());
           break;
 
@@ -378,11 +378,11 @@ class transaction_store_request final: public ::EmbeddedProto::MessageInterface
 
       switch(rhs.get_which_request())
       {
-        case id::RESERVED:
+        case FieldNumber::RESERVED:
           set_reserved(rhs.get_reserved());
           break;
 
-        case id::GET_TRANSACTIONS_BY_ID:
+        case FieldNumber::GET_TRANSACTIONS_BY_ID:
           set_get_transactions_by_id(rhs.get_get_transactions_by_id());
           break;
 
@@ -393,37 +393,37 @@ class transaction_store_request final: public ::EmbeddedProto::MessageInterface
       return *this;
     }
 
-    id get_which_request() const { return which_request_; }
+    FieldNumber get_which_request() const { return which_request_; }
 
     inline void clear_reserved()
     {
-      if(id::RESERVED == which_request_)
+      if(FieldNumber::RESERVED == which_request_)
       {
-        which_request_ = id::NOT_SET;
+        which_request_ = FieldNumber::NOT_SET;
         request_.reserved_.~reserved_rpc();
       }
     }
     inline void set_reserved(const reserved_rpc& value)
     {
-      if(id::RESERVED != which_request_)
+      if(FieldNumber::RESERVED != which_request_)
       {
-        init_request(id::RESERVED);
+        init_request(FieldNumber::RESERVED);
       }
       request_.reserved_ = value;
     }
     inline void set_reserved(const reserved_rpc&& value)
     {
-      if(id::RESERVED != which_request_)
+      if(FieldNumber::RESERVED != which_request_)
       {
-        init_request(id::RESERVED);
+        init_request(FieldNumber::RESERVED);
       }
       request_.reserved_ = value;
     }
     inline reserved_rpc& mutable_reserved()
     {
-      if(id::RESERVED != which_request_)
+      if(FieldNumber::RESERVED != which_request_)
       {
-        init_request(id::RESERVED);
+        init_request(FieldNumber::RESERVED);
       }
       return request_.reserved_;
     }
@@ -432,33 +432,33 @@ class transaction_store_request final: public ::EmbeddedProto::MessageInterface
 
     inline void clear_get_transactions_by_id()
     {
-      if(id::GET_TRANSACTIONS_BY_ID == which_request_)
+      if(FieldNumber::GET_TRANSACTIONS_BY_ID == which_request_)
       {
-        which_request_ = id::NOT_SET;
+        which_request_ = FieldNumber::NOT_SET;
         request_.get_transactions_by_id_.~get_transactions_by_id_request<get_transactions_by_id_transaction_ids_REP_LENGTH, get_transactions_by_id_transaction_ids_LENGTH>();
       }
     }
     inline void set_get_transactions_by_id(const get_transactions_by_id_request<get_transactions_by_id_transaction_ids_REP_LENGTH, get_transactions_by_id_transaction_ids_LENGTH>& value)
     {
-      if(id::GET_TRANSACTIONS_BY_ID != which_request_)
+      if(FieldNumber::GET_TRANSACTIONS_BY_ID != which_request_)
       {
-        init_request(id::GET_TRANSACTIONS_BY_ID);
+        init_request(FieldNumber::GET_TRANSACTIONS_BY_ID);
       }
       request_.get_transactions_by_id_ = value;
     }
     inline void set_get_transactions_by_id(const get_transactions_by_id_request<get_transactions_by_id_transaction_ids_REP_LENGTH, get_transactions_by_id_transaction_ids_LENGTH>&& value)
     {
-      if(id::GET_TRANSACTIONS_BY_ID != which_request_)
+      if(FieldNumber::GET_TRANSACTIONS_BY_ID != which_request_)
       {
-        init_request(id::GET_TRANSACTIONS_BY_ID);
+        init_request(FieldNumber::GET_TRANSACTIONS_BY_ID);
       }
       request_.get_transactions_by_id_ = value;
     }
     inline get_transactions_by_id_request<get_transactions_by_id_transaction_ids_REP_LENGTH, get_transactions_by_id_transaction_ids_LENGTH>& mutable_get_transactions_by_id()
     {
-      if(id::GET_TRANSACTIONS_BY_ID != which_request_)
+      if(FieldNumber::GET_TRANSACTIONS_BY_ID != which_request_)
       {
-        init_request(id::GET_TRANSACTIONS_BY_ID);
+        init_request(FieldNumber::GET_TRANSACTIONS_BY_ID);
       }
       return request_.get_transactions_by_id_;
     }
@@ -472,17 +472,17 @@ class transaction_store_request final: public ::EmbeddedProto::MessageInterface
 
       switch(which_request_)
       {
-        case id::RESERVED:
+        case FieldNumber::RESERVED:
           if(::EmbeddedProto::Error::NO_ERRORS == return_value)
           {
-            return_value = request_.reserved_.serialize_with_id(static_cast<uint32_t>(id::RESERVED), buffer, false);
+            return_value = request_.reserved_.serialize_with_id(static_cast<uint32_t>(FieldNumber::RESERVED), buffer, false);
           }
           break;
 
-        case id::GET_TRANSACTIONS_BY_ID:
+        case FieldNumber::GET_TRANSACTIONS_BY_ID:
           if(::EmbeddedProto::Error::NO_ERRORS == return_value)
           {
-            return_value = request_.get_transactions_by_id_.serialize_with_id(static_cast<uint32_t>(id::GET_TRANSACTIONS_BY_ID), buffer, false);
+            return_value = request_.get_transactions_by_id_.serialize_with_id(static_cast<uint32_t>(FieldNumber::GET_TRANSACTIONS_BY_ID), buffer, false);
           }
           break;
 
@@ -498,21 +498,21 @@ class transaction_store_request final: public ::EmbeddedProto::MessageInterface
       ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
       ::EmbeddedProto::WireFormatter::WireType wire_type = ::EmbeddedProto::WireFormatter::WireType::VARINT;
       uint32_t id_number = 0;
-      id id_tag = id::NOT_SET;
+      FieldNumber id_tag = FieldNumber::NOT_SET;
 
       ::EmbeddedProto::Error tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
       while((::EmbeddedProto::Error::NO_ERRORS == return_value) && (::EmbeddedProto::Error::NO_ERRORS == tag_value))
       {
-        id_tag = static_cast<id>(id_number);
+        id_tag = static_cast<FieldNumber>(id_number);
         switch(id_tag)
         {
-          case id::RESERVED:
-            return_value = deserialize_request(id::RESERVED, request_.reserved_, buffer, wire_type);
+          case FieldNumber::RESERVED:
+            return_value = deserialize_request(FieldNumber::RESERVED, request_.reserved_, buffer, wire_type);
 
             break;
 
-          case id::GET_TRANSACTIONS_BY_ID:
-            return_value = deserialize_request(id::GET_TRANSACTIONS_BY_ID, request_.get_transactions_by_id_, buffer, wire_type);
+          case FieldNumber::GET_TRANSACTIONS_BY_ID:
+            return_value = deserialize_request(FieldNumber::GET_TRANSACTIONS_BY_ID, request_.get_transactions_by_id_, buffer, wire_type);
 
             break;
 
@@ -548,7 +548,7 @@ class transaction_store_request final: public ::EmbeddedProto::MessageInterface
 
 
 
-      id which_request_ = id::NOT_SET;
+      FieldNumber which_request_ = FieldNumber::NOT_SET;
       union request
       {
         request() {}
@@ -558,9 +558,9 @@ class transaction_store_request final: public ::EmbeddedProto::MessageInterface
       };
       request request_;
 
-      void init_request(const id field_id)
+      void init_request(const FieldNumber field_id)
       {
-        if(id::NOT_SET != which_request_)
+        if(FieldNumber::NOT_SET != which_request_)
         {
           // First delete the old object in the oneof.
           clear_request();
@@ -569,14 +569,14 @@ class transaction_store_request final: public ::EmbeddedProto::MessageInterface
         // C++11 unions only support nontrivial members when you explicitly call the placement new statement.
         switch(field_id)
         {
-          case id::RESERVED:
+          case FieldNumber::RESERVED:
             new(&request_.reserved_) reserved_rpc;
-            which_request_ = id::RESERVED;
+            which_request_ = FieldNumber::RESERVED;
             break;
 
-          case id::GET_TRANSACTIONS_BY_ID:
+          case FieldNumber::GET_TRANSACTIONS_BY_ID:
             new(&request_.get_transactions_by_id_) get_transactions_by_id_request<get_transactions_by_id_transaction_ids_REP_LENGTH, get_transactions_by_id_transaction_ids_LENGTH>;
-            which_request_ = id::GET_TRANSACTIONS_BY_ID;
+            which_request_ = FieldNumber::GET_TRANSACTIONS_BY_ID;
             break;
 
           default:
@@ -590,19 +590,19 @@ class transaction_store_request final: public ::EmbeddedProto::MessageInterface
       {
         switch(which_request_)
         {
-          case id::RESERVED:
+          case FieldNumber::RESERVED:
             request_.reserved_.~reserved_rpc(); // NOSONAR Unions require this.
             break;
-          case id::GET_TRANSACTIONS_BY_ID:
+          case FieldNumber::GET_TRANSACTIONS_BY_ID:
             request_.get_transactions_by_id_.~get_transactions_by_id_request<get_transactions_by_id_transaction_ids_REP_LENGTH, get_transactions_by_id_transaction_ids_LENGTH>(); // NOSONAR Unions require this.
             break;
           default:
             break;
         }
-        which_request_ = id::NOT_SET;
+        which_request_ = FieldNumber::NOT_SET;
       }
 
-      ::EmbeddedProto::Error deserialize_request(const id field_id, ::EmbeddedProto::Field& field,
+      ::EmbeddedProto::Error deserialize_request(const FieldNumber field_id, ::EmbeddedProto::Field& field,
                                     ::EmbeddedProto::ReadBufferInterface& buffer,
                                     const ::EmbeddedProto::WireFormatter::WireType wire_type)
       {
@@ -643,15 +643,15 @@ class transaction_store_response final: public ::EmbeddedProto::MessageInterface
 
       switch(rhs.get_which_response())
       {
-        case id::RESERVED:
+        case FieldNumber::RESERVED:
           set_reserved(rhs.get_reserved());
           break;
 
-        case id::ERROR:
+        case FieldNumber::ERROR:
           set_error(rhs.get_error());
           break;
 
-        case id::GET_TRANSACTIONS_BY_ID:
+        case FieldNumber::GET_TRANSACTIONS_BY_ID:
           set_get_transactions_by_id(rhs.get_get_transactions_by_id());
           break;
 
@@ -671,15 +671,15 @@ class transaction_store_response final: public ::EmbeddedProto::MessageInterface
 
       switch(rhs.get_which_response())
       {
-        case id::RESERVED:
+        case FieldNumber::RESERVED:
           set_reserved(rhs.get_reserved());
           break;
 
-        case id::ERROR:
+        case FieldNumber::ERROR:
           set_error(rhs.get_error());
           break;
 
-        case id::GET_TRANSACTIONS_BY_ID:
+        case FieldNumber::GET_TRANSACTIONS_BY_ID:
           set_get_transactions_by_id(rhs.get_get_transactions_by_id());
           break;
 
@@ -691,7 +691,7 @@ class transaction_store_response final: public ::EmbeddedProto::MessageInterface
 
     ~transaction_store_response() override = default;
 
-    enum class id : uint32_t
+    enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
       RESERVED = 1,
@@ -709,15 +709,15 @@ class transaction_store_response final: public ::EmbeddedProto::MessageInterface
 
       switch(rhs.get_which_response())
       {
-        case id::RESERVED:
+        case FieldNumber::RESERVED:
           set_reserved(rhs.get_reserved());
           break;
 
-        case id::ERROR:
+        case FieldNumber::ERROR:
           set_error(rhs.get_error());
           break;
 
-        case id::GET_TRANSACTIONS_BY_ID:
+        case FieldNumber::GET_TRANSACTIONS_BY_ID:
           set_get_transactions_by_id(rhs.get_get_transactions_by_id());
           break;
 
@@ -738,15 +738,15 @@ class transaction_store_response final: public ::EmbeddedProto::MessageInterface
 
       switch(rhs.get_which_response())
       {
-        case id::RESERVED:
+        case FieldNumber::RESERVED:
           set_reserved(rhs.get_reserved());
           break;
 
-        case id::ERROR:
+        case FieldNumber::ERROR:
           set_error(rhs.get_error());
           break;
 
-        case id::GET_TRANSACTIONS_BY_ID:
+        case FieldNumber::GET_TRANSACTIONS_BY_ID:
           set_get_transactions_by_id(rhs.get_get_transactions_by_id());
           break;
 
@@ -757,37 +757,37 @@ class transaction_store_response final: public ::EmbeddedProto::MessageInterface
       return *this;
     }
 
-    id get_which_response() const { return which_response_; }
+    FieldNumber get_which_response() const { return which_response_; }
 
     inline void clear_reserved()
     {
-      if(id::RESERVED == which_response_)
+      if(FieldNumber::RESERVED == which_response_)
       {
-        which_response_ = id::NOT_SET;
+        which_response_ = FieldNumber::NOT_SET;
         response_.reserved_.~reserved_rpc();
       }
     }
     inline void set_reserved(const reserved_rpc& value)
     {
-      if(id::RESERVED != which_response_)
+      if(FieldNumber::RESERVED != which_response_)
       {
-        init_response(id::RESERVED);
+        init_response(FieldNumber::RESERVED);
       }
       response_.reserved_ = value;
     }
     inline void set_reserved(const reserved_rpc&& value)
     {
-      if(id::RESERVED != which_response_)
+      if(FieldNumber::RESERVED != which_response_)
       {
-        init_response(id::RESERVED);
+        init_response(FieldNumber::RESERVED);
       }
       response_.reserved_ = value;
     }
     inline reserved_rpc& mutable_reserved()
     {
-      if(id::RESERVED != which_response_)
+      if(FieldNumber::RESERVED != which_response_)
       {
-        init_response(id::RESERVED);
+        init_response(FieldNumber::RESERVED);
       }
       return response_.reserved_;
     }
@@ -796,33 +796,33 @@ class transaction_store_response final: public ::EmbeddedProto::MessageInterface
 
     inline void clear_error()
     {
-      if(id::ERROR == which_response_)
+      if(FieldNumber::ERROR == which_response_)
       {
-        which_response_ = id::NOT_SET;
+        which_response_ = FieldNumber::NOT_SET;
         response_.error_.~error_response<error_message_LENGTH, error_data_LENGTH>();
       }
     }
     inline void set_error(const error_response<error_message_LENGTH, error_data_LENGTH>& value)
     {
-      if(id::ERROR != which_response_)
+      if(FieldNumber::ERROR != which_response_)
       {
-        init_response(id::ERROR);
+        init_response(FieldNumber::ERROR);
       }
       response_.error_ = value;
     }
     inline void set_error(const error_response<error_message_LENGTH, error_data_LENGTH>&& value)
     {
-      if(id::ERROR != which_response_)
+      if(FieldNumber::ERROR != which_response_)
       {
-        init_response(id::ERROR);
+        init_response(FieldNumber::ERROR);
       }
       response_.error_ = value;
     }
     inline error_response<error_message_LENGTH, error_data_LENGTH>& mutable_error()
     {
-      if(id::ERROR != which_response_)
+      if(FieldNumber::ERROR != which_response_)
       {
-        init_response(id::ERROR);
+        init_response(FieldNumber::ERROR);
       }
       return response_.error_;
     }
@@ -831,33 +831,33 @@ class transaction_store_response final: public ::EmbeddedProto::MessageInterface
 
     inline void clear_get_transactions_by_id()
     {
-      if(id::GET_TRANSACTIONS_BY_ID == which_response_)
+      if(FieldNumber::GET_TRANSACTIONS_BY_ID == which_response_)
       {
-        which_response_ = id::NOT_SET;
+        which_response_ = FieldNumber::NOT_SET;
         response_.get_transactions_by_id_.~get_transactions_by_id_response<get_transactions_by_id_transactions_REP_LENGTH, get_transactions_by_id_transactions_transaction_id_LENGTH, get_transactions_by_id_transactions_transaction_active_LENGTH, get_transactions_by_id_transactions_transaction_passive_LENGTH, get_transactions_by_id_transactions_transaction_signature_data_LENGTH, get_transactions_by_id_transactions_containing_blocks_REP_LENGTH, get_transactions_by_id_transactions_containing_blocks_LENGTH>();
       }
     }
     inline void set_get_transactions_by_id(const get_transactions_by_id_response<get_transactions_by_id_transactions_REP_LENGTH, get_transactions_by_id_transactions_transaction_id_LENGTH, get_transactions_by_id_transactions_transaction_active_LENGTH, get_transactions_by_id_transactions_transaction_passive_LENGTH, get_transactions_by_id_transactions_transaction_signature_data_LENGTH, get_transactions_by_id_transactions_containing_blocks_REP_LENGTH, get_transactions_by_id_transactions_containing_blocks_LENGTH>& value)
     {
-      if(id::GET_TRANSACTIONS_BY_ID != which_response_)
+      if(FieldNumber::GET_TRANSACTIONS_BY_ID != which_response_)
       {
-        init_response(id::GET_TRANSACTIONS_BY_ID);
+        init_response(FieldNumber::GET_TRANSACTIONS_BY_ID);
       }
       response_.get_transactions_by_id_ = value;
     }
     inline void set_get_transactions_by_id(const get_transactions_by_id_response<get_transactions_by_id_transactions_REP_LENGTH, get_transactions_by_id_transactions_transaction_id_LENGTH, get_transactions_by_id_transactions_transaction_active_LENGTH, get_transactions_by_id_transactions_transaction_passive_LENGTH, get_transactions_by_id_transactions_transaction_signature_data_LENGTH, get_transactions_by_id_transactions_containing_blocks_REP_LENGTH, get_transactions_by_id_transactions_containing_blocks_LENGTH>&& value)
     {
-      if(id::GET_TRANSACTIONS_BY_ID != which_response_)
+      if(FieldNumber::GET_TRANSACTIONS_BY_ID != which_response_)
       {
-        init_response(id::GET_TRANSACTIONS_BY_ID);
+        init_response(FieldNumber::GET_TRANSACTIONS_BY_ID);
       }
       response_.get_transactions_by_id_ = value;
     }
     inline get_transactions_by_id_response<get_transactions_by_id_transactions_REP_LENGTH, get_transactions_by_id_transactions_transaction_id_LENGTH, get_transactions_by_id_transactions_transaction_active_LENGTH, get_transactions_by_id_transactions_transaction_passive_LENGTH, get_transactions_by_id_transactions_transaction_signature_data_LENGTH, get_transactions_by_id_transactions_containing_blocks_REP_LENGTH, get_transactions_by_id_transactions_containing_blocks_LENGTH>& mutable_get_transactions_by_id()
     {
-      if(id::GET_TRANSACTIONS_BY_ID != which_response_)
+      if(FieldNumber::GET_TRANSACTIONS_BY_ID != which_response_)
       {
-        init_response(id::GET_TRANSACTIONS_BY_ID);
+        init_response(FieldNumber::GET_TRANSACTIONS_BY_ID);
       }
       return response_.get_transactions_by_id_;
     }
@@ -871,24 +871,24 @@ class transaction_store_response final: public ::EmbeddedProto::MessageInterface
 
       switch(which_response_)
       {
-        case id::RESERVED:
+        case FieldNumber::RESERVED:
           if(::EmbeddedProto::Error::NO_ERRORS == return_value)
           {
-            return_value = response_.reserved_.serialize_with_id(static_cast<uint32_t>(id::RESERVED), buffer, false);
+            return_value = response_.reserved_.serialize_with_id(static_cast<uint32_t>(FieldNumber::RESERVED), buffer, false);
           }
           break;
 
-        case id::ERROR:
+        case FieldNumber::ERROR:
           if(::EmbeddedProto::Error::NO_ERRORS == return_value)
           {
-            return_value = response_.error_.serialize_with_id(static_cast<uint32_t>(id::ERROR), buffer, false);
+            return_value = response_.error_.serialize_with_id(static_cast<uint32_t>(FieldNumber::ERROR), buffer, false);
           }
           break;
 
-        case id::GET_TRANSACTIONS_BY_ID:
+        case FieldNumber::GET_TRANSACTIONS_BY_ID:
           if(::EmbeddedProto::Error::NO_ERRORS == return_value)
           {
-            return_value = response_.get_transactions_by_id_.serialize_with_id(static_cast<uint32_t>(id::GET_TRANSACTIONS_BY_ID), buffer, false);
+            return_value = response_.get_transactions_by_id_.serialize_with_id(static_cast<uint32_t>(FieldNumber::GET_TRANSACTIONS_BY_ID), buffer, false);
           }
           break;
 
@@ -904,26 +904,26 @@ class transaction_store_response final: public ::EmbeddedProto::MessageInterface
       ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
       ::EmbeddedProto::WireFormatter::WireType wire_type = ::EmbeddedProto::WireFormatter::WireType::VARINT;
       uint32_t id_number = 0;
-      id id_tag = id::NOT_SET;
+      FieldNumber id_tag = FieldNumber::NOT_SET;
 
       ::EmbeddedProto::Error tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
       while((::EmbeddedProto::Error::NO_ERRORS == return_value) && (::EmbeddedProto::Error::NO_ERRORS == tag_value))
       {
-        id_tag = static_cast<id>(id_number);
+        id_tag = static_cast<FieldNumber>(id_number);
         switch(id_tag)
         {
-          case id::RESERVED:
-            return_value = deserialize_response(id::RESERVED, response_.reserved_, buffer, wire_type);
+          case FieldNumber::RESERVED:
+            return_value = deserialize_response(FieldNumber::RESERVED, response_.reserved_, buffer, wire_type);
 
             break;
 
-          case id::ERROR:
-            return_value = deserialize_response(id::ERROR, response_.error_, buffer, wire_type);
+          case FieldNumber::ERROR:
+            return_value = deserialize_response(FieldNumber::ERROR, response_.error_, buffer, wire_type);
 
             break;
 
-          case id::GET_TRANSACTIONS_BY_ID:
-            return_value = deserialize_response(id::GET_TRANSACTIONS_BY_ID, response_.get_transactions_by_id_, buffer, wire_type);
+          case FieldNumber::GET_TRANSACTIONS_BY_ID:
+            return_value = deserialize_response(FieldNumber::GET_TRANSACTIONS_BY_ID, response_.get_transactions_by_id_, buffer, wire_type);
 
             break;
 
@@ -959,7 +959,7 @@ class transaction_store_response final: public ::EmbeddedProto::MessageInterface
 
 
 
-      id which_response_ = id::NOT_SET;
+      FieldNumber which_response_ = FieldNumber::NOT_SET;
       union response
       {
         response() {}
@@ -970,9 +970,9 @@ class transaction_store_response final: public ::EmbeddedProto::MessageInterface
       };
       response response_;
 
-      void init_response(const id field_id)
+      void init_response(const FieldNumber field_id)
       {
-        if(id::NOT_SET != which_response_)
+        if(FieldNumber::NOT_SET != which_response_)
         {
           // First delete the old object in the oneof.
           clear_response();
@@ -981,19 +981,19 @@ class transaction_store_response final: public ::EmbeddedProto::MessageInterface
         // C++11 unions only support nontrivial members when you explicitly call the placement new statement.
         switch(field_id)
         {
-          case id::RESERVED:
+          case FieldNumber::RESERVED:
             new(&response_.reserved_) reserved_rpc;
-            which_response_ = id::RESERVED;
+            which_response_ = FieldNumber::RESERVED;
             break;
 
-          case id::ERROR:
+          case FieldNumber::ERROR:
             new(&response_.error_) error_response<error_message_LENGTH, error_data_LENGTH>;
-            which_response_ = id::ERROR;
+            which_response_ = FieldNumber::ERROR;
             break;
 
-          case id::GET_TRANSACTIONS_BY_ID:
+          case FieldNumber::GET_TRANSACTIONS_BY_ID:
             new(&response_.get_transactions_by_id_) get_transactions_by_id_response<get_transactions_by_id_transactions_REP_LENGTH, get_transactions_by_id_transactions_transaction_id_LENGTH, get_transactions_by_id_transactions_transaction_active_LENGTH, get_transactions_by_id_transactions_transaction_passive_LENGTH, get_transactions_by_id_transactions_transaction_signature_data_LENGTH, get_transactions_by_id_transactions_containing_blocks_REP_LENGTH, get_transactions_by_id_transactions_containing_blocks_LENGTH>;
-            which_response_ = id::GET_TRANSACTIONS_BY_ID;
+            which_response_ = FieldNumber::GET_TRANSACTIONS_BY_ID;
             break;
 
           default:
@@ -1007,22 +1007,22 @@ class transaction_store_response final: public ::EmbeddedProto::MessageInterface
       {
         switch(which_response_)
         {
-          case id::RESERVED:
+          case FieldNumber::RESERVED:
             response_.reserved_.~reserved_rpc(); // NOSONAR Unions require this.
             break;
-          case id::ERROR:
+          case FieldNumber::ERROR:
             response_.error_.~error_response<error_message_LENGTH, error_data_LENGTH>(); // NOSONAR Unions require this.
             break;
-          case id::GET_TRANSACTIONS_BY_ID:
+          case FieldNumber::GET_TRANSACTIONS_BY_ID:
             response_.get_transactions_by_id_.~get_transactions_by_id_response<get_transactions_by_id_transactions_REP_LENGTH, get_transactions_by_id_transactions_transaction_id_LENGTH, get_transactions_by_id_transactions_transaction_active_LENGTH, get_transactions_by_id_transactions_transaction_passive_LENGTH, get_transactions_by_id_transactions_transaction_signature_data_LENGTH, get_transactions_by_id_transactions_containing_blocks_REP_LENGTH, get_transactions_by_id_transactions_containing_blocks_LENGTH>(); // NOSONAR Unions require this.
             break;
           default:
             break;
         }
-        which_response_ = id::NOT_SET;
+        which_response_ = FieldNumber::NOT_SET;
       }
 
-      ::EmbeddedProto::Error deserialize_response(const id field_id, ::EmbeddedProto::Field& field,
+      ::EmbeddedProto::Error deserialize_response(const FieldNumber field_id, ::EmbeddedProto::Field& field,
                                     ::EmbeddedProto::ReadBufferInterface& buffer,
                                     const ::EmbeddedProto::WireFormatter::WireType wire_type)
       {

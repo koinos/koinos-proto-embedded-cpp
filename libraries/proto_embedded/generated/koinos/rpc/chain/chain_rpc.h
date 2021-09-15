@@ -84,7 +84,7 @@ class submit_block_request final: public ::EmbeddedProto::MessageInterface
 
     ~submit_block_request() override = default;
 
-    enum class id : uint32_t
+    enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
       BLOCK = 1,
@@ -146,22 +146,22 @@ class submit_block_request final: public ::EmbeddedProto::MessageInterface
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = block_.serialize_with_id(static_cast<uint32_t>(id::BLOCK), buffer, false);
+        return_value = block_.serialize_with_id(static_cast<uint32_t>(FieldNumber::BLOCK), buffer, false);
       }
 
       if((false != verify_passive_data_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
       {
-        return_value = verify_passive_data_.serialize_with_id(static_cast<uint32_t>(id::VERIFY_PASSIVE_DATA), buffer, false);
+        return_value = verify_passive_data_.serialize_with_id(static_cast<uint32_t>(FieldNumber::VERIFY_PASSIVE_DATA), buffer, false);
       }
 
       if((false != verify_block_signature_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
       {
-        return_value = verify_block_signature_.serialize_with_id(static_cast<uint32_t>(id::VERIFY_BLOCK_SIGNATURE), buffer, false);
+        return_value = verify_block_signature_.serialize_with_id(static_cast<uint32_t>(FieldNumber::VERIFY_BLOCK_SIGNATURE), buffer, false);
       }
 
       if((false != verify_transaction_signature_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
       {
-        return_value = verify_transaction_signature_.serialize_with_id(static_cast<uint32_t>(id::VERIFY_TRANSACTION_SIGNATURE), buffer, false);
+        return_value = verify_transaction_signature_.serialize_with_id(static_cast<uint32_t>(FieldNumber::VERIFY_TRANSACTION_SIGNATURE), buffer, false);
       }
 
       return return_value;
@@ -172,27 +172,27 @@ class submit_block_request final: public ::EmbeddedProto::MessageInterface
       ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
       ::EmbeddedProto::WireFormatter::WireType wire_type = ::EmbeddedProto::WireFormatter::WireType::VARINT;
       uint32_t id_number = 0;
-      id id_tag = id::NOT_SET;
+      FieldNumber id_tag = FieldNumber::NOT_SET;
 
       ::EmbeddedProto::Error tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
       while((::EmbeddedProto::Error::NO_ERRORS == return_value) && (::EmbeddedProto::Error::NO_ERRORS == tag_value))
       {
-        id_tag = static_cast<id>(id_number);
+        id_tag = static_cast<FieldNumber>(id_number);
         switch(id_tag)
         {
-          case id::BLOCK:
+          case FieldNumber::BLOCK:
             return_value = block_.deserialize_check_type(buffer, wire_type);
             break;
 
-          case id::VERIFY_PASSIVE_DATA:
+          case FieldNumber::VERIFY_PASSIVE_DATA:
             return_value = verify_passive_data_.deserialize_check_type(buffer, wire_type);
             break;
 
-          case id::VERIFY_BLOCK_SIGNATURE:
+          case FieldNumber::VERIFY_BLOCK_SIGNATURE:
             return_value = verify_block_signature_.deserialize_check_type(buffer, wire_type);
             break;
 
-          case id::VERIFY_TRANSACTION_SIGNATURE:
+          case FieldNumber::VERIFY_TRANSACTION_SIGNATURE:
             return_value = verify_transaction_signature_.deserialize_check_type(buffer, wire_type);
             break;
 
@@ -251,7 +251,7 @@ class submit_block_response final: public ::EmbeddedProto::MessageInterface
 
     ~submit_block_response() override = default;
 
-    enum class id : uint32_t
+    enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
     };
@@ -279,12 +279,12 @@ class submit_block_response final: public ::EmbeddedProto::MessageInterface
       ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
       ::EmbeddedProto::WireFormatter::WireType wire_type = ::EmbeddedProto::WireFormatter::WireType::VARINT;
       uint32_t id_number = 0;
-      id id_tag = id::NOT_SET;
+      FieldNumber id_tag = FieldNumber::NOT_SET;
 
       ::EmbeddedProto::Error tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
       while((::EmbeddedProto::Error::NO_ERRORS == return_value) && (::EmbeddedProto::Error::NO_ERRORS == tag_value))
       {
-        id_tag = static_cast<id>(id_number);
+        id_tag = static_cast<FieldNumber>(id_number);
         switch(id_tag)
         {
           default:
@@ -344,7 +344,7 @@ class submit_transaction_request final: public ::EmbeddedProto::MessageInterface
 
     ~submit_transaction_request() override = default;
 
-    enum class id : uint32_t
+    enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
       TRANSACTION = 1,
@@ -396,17 +396,17 @@ class submit_transaction_request final: public ::EmbeddedProto::MessageInterface
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = transaction_.serialize_with_id(static_cast<uint32_t>(id::TRANSACTION), buffer, false);
+        return_value = transaction_.serialize_with_id(static_cast<uint32_t>(FieldNumber::TRANSACTION), buffer, false);
       }
 
       if((false != verify_passive_data_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
       {
-        return_value = verify_passive_data_.serialize_with_id(static_cast<uint32_t>(id::VERIFY_PASSIVE_DATA), buffer, false);
+        return_value = verify_passive_data_.serialize_with_id(static_cast<uint32_t>(FieldNumber::VERIFY_PASSIVE_DATA), buffer, false);
       }
 
       if((false != verify_transaction_signature_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
       {
-        return_value = verify_transaction_signature_.serialize_with_id(static_cast<uint32_t>(id::VERIFY_TRANSACTION_SIGNATURE), buffer, false);
+        return_value = verify_transaction_signature_.serialize_with_id(static_cast<uint32_t>(FieldNumber::VERIFY_TRANSACTION_SIGNATURE), buffer, false);
       }
 
       return return_value;
@@ -417,23 +417,23 @@ class submit_transaction_request final: public ::EmbeddedProto::MessageInterface
       ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
       ::EmbeddedProto::WireFormatter::WireType wire_type = ::EmbeddedProto::WireFormatter::WireType::VARINT;
       uint32_t id_number = 0;
-      id id_tag = id::NOT_SET;
+      FieldNumber id_tag = FieldNumber::NOT_SET;
 
       ::EmbeddedProto::Error tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
       while((::EmbeddedProto::Error::NO_ERRORS == return_value) && (::EmbeddedProto::Error::NO_ERRORS == tag_value))
       {
-        id_tag = static_cast<id>(id_number);
+        id_tag = static_cast<FieldNumber>(id_number);
         switch(id_tag)
         {
-          case id::TRANSACTION:
+          case FieldNumber::TRANSACTION:
             return_value = transaction_.deserialize_check_type(buffer, wire_type);
             break;
 
-          case id::VERIFY_PASSIVE_DATA:
+          case FieldNumber::VERIFY_PASSIVE_DATA:
             return_value = verify_passive_data_.deserialize_check_type(buffer, wire_type);
             break;
 
-          case id::VERIFY_TRANSACTION_SIGNATURE:
+          case FieldNumber::VERIFY_TRANSACTION_SIGNATURE:
             return_value = verify_transaction_signature_.deserialize_check_type(buffer, wire_type);
             break;
 
@@ -490,7 +490,7 @@ class submit_transaction_response final: public ::EmbeddedProto::MessageInterfac
 
     ~submit_transaction_response() override = default;
 
-    enum class id : uint32_t
+    enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
     };
@@ -518,12 +518,12 @@ class submit_transaction_response final: public ::EmbeddedProto::MessageInterfac
       ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
       ::EmbeddedProto::WireFormatter::WireType wire_type = ::EmbeddedProto::WireFormatter::WireType::VARINT;
       uint32_t id_number = 0;
-      id id_tag = id::NOT_SET;
+      FieldNumber id_tag = FieldNumber::NOT_SET;
 
       ::EmbeddedProto::Error tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
       while((::EmbeddedProto::Error::NO_ERRORS == return_value) && (::EmbeddedProto::Error::NO_ERRORS == tag_value))
       {
-        id_tag = static_cast<id>(id_number);
+        id_tag = static_cast<FieldNumber>(id_number);
         switch(id_tag)
         {
           default:
@@ -573,7 +573,7 @@ class get_head_info_request final: public ::EmbeddedProto::MessageInterface
 
     ~get_head_info_request() override = default;
 
-    enum class id : uint32_t
+    enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
     };
@@ -601,12 +601,12 @@ class get_head_info_request final: public ::EmbeddedProto::MessageInterface
       ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
       ::EmbeddedProto::WireFormatter::WireType wire_type = ::EmbeddedProto::WireFormatter::WireType::VARINT;
       uint32_t id_number = 0;
-      id id_tag = id::NOT_SET;
+      FieldNumber id_tag = FieldNumber::NOT_SET;
 
       ::EmbeddedProto::Error tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
       while((::EmbeddedProto::Error::NO_ERRORS == return_value) && (::EmbeddedProto::Error::NO_ERRORS == tag_value))
       {
-        id_tag = static_cast<id>(id_number);
+        id_tag = static_cast<FieldNumber>(id_number);
         switch(id_tag)
         {
           default:
@@ -662,7 +662,7 @@ class get_head_info_response final: public ::EmbeddedProto::MessageInterface
 
     ~get_head_info_response() override = default;
 
-    enum class id : uint32_t
+    enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
       HEAD_TOPOLOGY = 1,
@@ -704,12 +704,12 @@ class get_head_info_response final: public ::EmbeddedProto::MessageInterface
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = head_topology_.serialize_with_id(static_cast<uint32_t>(id::HEAD_TOPOLOGY), buffer, false);
+        return_value = head_topology_.serialize_with_id(static_cast<uint32_t>(FieldNumber::HEAD_TOPOLOGY), buffer, false);
       }
 
       if((0U != last_irreversible_block_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
       {
-        return_value = last_irreversible_block_.serialize_with_id(static_cast<uint32_t>(id::LAST_IRREVERSIBLE_BLOCK), buffer, false);
+        return_value = last_irreversible_block_.serialize_with_id(static_cast<uint32_t>(FieldNumber::LAST_IRREVERSIBLE_BLOCK), buffer, false);
       }
 
       return return_value;
@@ -720,19 +720,19 @@ class get_head_info_response final: public ::EmbeddedProto::MessageInterface
       ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
       ::EmbeddedProto::WireFormatter::WireType wire_type = ::EmbeddedProto::WireFormatter::WireType::VARINT;
       uint32_t id_number = 0;
-      id id_tag = id::NOT_SET;
+      FieldNumber id_tag = FieldNumber::NOT_SET;
 
       ::EmbeddedProto::Error tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
       while((::EmbeddedProto::Error::NO_ERRORS == return_value) && (::EmbeddedProto::Error::NO_ERRORS == tag_value))
       {
-        id_tag = static_cast<id>(id_number);
+        id_tag = static_cast<FieldNumber>(id_number);
         switch(id_tag)
         {
-          case id::HEAD_TOPOLOGY:
+          case FieldNumber::HEAD_TOPOLOGY:
             return_value = head_topology_.deserialize_check_type(buffer, wire_type);
             break;
 
-          case id::LAST_IRREVERSIBLE_BLOCK:
+          case FieldNumber::LAST_IRREVERSIBLE_BLOCK:
             return_value = last_irreversible_block_.deserialize_check_type(buffer, wire_type);
             break;
 
@@ -787,7 +787,7 @@ class get_chain_id_request final: public ::EmbeddedProto::MessageInterface
 
     ~get_chain_id_request() override = default;
 
-    enum class id : uint32_t
+    enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
     };
@@ -815,12 +815,12 @@ class get_chain_id_request final: public ::EmbeddedProto::MessageInterface
       ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
       ::EmbeddedProto::WireFormatter::WireType wire_type = ::EmbeddedProto::WireFormatter::WireType::VARINT;
       uint32_t id_number = 0;
-      id id_tag = id::NOT_SET;
+      FieldNumber id_tag = FieldNumber::NOT_SET;
 
       ::EmbeddedProto::Error tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
       while((::EmbeddedProto::Error::NO_ERRORS == return_value) && (::EmbeddedProto::Error::NO_ERRORS == tag_value))
       {
-        id_tag = static_cast<id>(id_number);
+        id_tag = static_cast<FieldNumber>(id_number);
         switch(id_tag)
         {
           default:
@@ -873,7 +873,7 @@ class get_chain_id_response final: public ::EmbeddedProto::MessageInterface
 
     ~get_chain_id_response() override = default;
 
-    enum class id : uint32_t
+    enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
       CHAIN_ID = 1
@@ -904,7 +904,7 @@ class get_chain_id_response final: public ::EmbeddedProto::MessageInterface
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = chain_id_.serialize_with_id(static_cast<uint32_t>(id::CHAIN_ID), buffer, false);
+        return_value = chain_id_.serialize_with_id(static_cast<uint32_t>(FieldNumber::CHAIN_ID), buffer, false);
       }
 
       return return_value;
@@ -915,15 +915,15 @@ class get_chain_id_response final: public ::EmbeddedProto::MessageInterface
       ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
       ::EmbeddedProto::WireFormatter::WireType wire_type = ::EmbeddedProto::WireFormatter::WireType::VARINT;
       uint32_t id_number = 0;
-      id id_tag = id::NOT_SET;
+      FieldNumber id_tag = FieldNumber::NOT_SET;
 
       ::EmbeddedProto::Error tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
       while((::EmbeddedProto::Error::NO_ERRORS == return_value) && (::EmbeddedProto::Error::NO_ERRORS == tag_value))
       {
-        id_tag = static_cast<id>(id_number);
+        id_tag = static_cast<FieldNumber>(id_number);
         switch(id_tag)
         {
-          case id::CHAIN_ID:
+          case FieldNumber::CHAIN_ID:
             return_value = chain_id_.deserialize_check_type(buffer, wire_type);
             break;
 
@@ -976,7 +976,7 @@ class get_fork_heads_request final: public ::EmbeddedProto::MessageInterface
 
     ~get_fork_heads_request() override = default;
 
-    enum class id : uint32_t
+    enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
     };
@@ -1004,12 +1004,12 @@ class get_fork_heads_request final: public ::EmbeddedProto::MessageInterface
       ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
       ::EmbeddedProto::WireFormatter::WireType wire_type = ::EmbeddedProto::WireFormatter::WireType::VARINT;
       uint32_t id_number = 0;
-      id id_tag = id::NOT_SET;
+      FieldNumber id_tag = FieldNumber::NOT_SET;
 
       ::EmbeddedProto::Error tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
       while((::EmbeddedProto::Error::NO_ERRORS == return_value) && (::EmbeddedProto::Error::NO_ERRORS == tag_value))
       {
-        id_tag = static_cast<id>(id_number);
+        id_tag = static_cast<FieldNumber>(id_number);
         switch(id_tag)
         {
           default:
@@ -1068,7 +1068,7 @@ class get_fork_heads_response final: public ::EmbeddedProto::MessageInterface
 
     ~get_fork_heads_response() override = default;
 
-    enum class id : uint32_t
+    enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
       LAST_IRREVERSIBLE_BLOCK = 1,
@@ -1114,12 +1114,12 @@ class get_fork_heads_response final: public ::EmbeddedProto::MessageInterface
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = last_irreversible_block_.serialize_with_id(static_cast<uint32_t>(id::LAST_IRREVERSIBLE_BLOCK), buffer, false);
+        return_value = last_irreversible_block_.serialize_with_id(static_cast<uint32_t>(FieldNumber::LAST_IRREVERSIBLE_BLOCK), buffer, false);
       }
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = fork_heads_.serialize_with_id(static_cast<uint32_t>(id::FORK_HEADS), buffer, false);
+        return_value = fork_heads_.serialize_with_id(static_cast<uint32_t>(FieldNumber::FORK_HEADS), buffer, false);
       }
 
       return return_value;
@@ -1130,19 +1130,19 @@ class get_fork_heads_response final: public ::EmbeddedProto::MessageInterface
       ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
       ::EmbeddedProto::WireFormatter::WireType wire_type = ::EmbeddedProto::WireFormatter::WireType::VARINT;
       uint32_t id_number = 0;
-      id id_tag = id::NOT_SET;
+      FieldNumber id_tag = FieldNumber::NOT_SET;
 
       ::EmbeddedProto::Error tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
       while((::EmbeddedProto::Error::NO_ERRORS == return_value) && (::EmbeddedProto::Error::NO_ERRORS == tag_value))
       {
-        id_tag = static_cast<id>(id_number);
+        id_tag = static_cast<FieldNumber>(id_number);
         switch(id_tag)
         {
-          case id::LAST_IRREVERSIBLE_BLOCK:
+          case FieldNumber::LAST_IRREVERSIBLE_BLOCK:
             return_value = last_irreversible_block_.deserialize_check_type(buffer, wire_type);
             break;
 
-          case id::FORK_HEADS:
+          case FieldNumber::FORK_HEADS:
             return_value = fork_heads_.deserialize_check_type(buffer, wire_type);
             break;
 
@@ -1205,7 +1205,7 @@ class read_contract_request final: public ::EmbeddedProto::MessageInterface
 
     ~read_contract_request() override = default;
 
-    enum class id : uint32_t
+    enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
       CONTRACT_ID = 1,
@@ -1255,17 +1255,17 @@ class read_contract_request final: public ::EmbeddedProto::MessageInterface
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = contract_id_.serialize_with_id(static_cast<uint32_t>(id::CONTRACT_ID), buffer, false);
+        return_value = contract_id_.serialize_with_id(static_cast<uint32_t>(FieldNumber::CONTRACT_ID), buffer, false);
       }
 
       if((0U != entry_point_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
       {
-        return_value = entry_point_.serialize_with_id(static_cast<uint32_t>(id::ENTRY_POINT), buffer, false);
+        return_value = entry_point_.serialize_with_id(static_cast<uint32_t>(FieldNumber::ENTRY_POINT), buffer, false);
       }
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = args_.serialize_with_id(static_cast<uint32_t>(id::ARGS), buffer, false);
+        return_value = args_.serialize_with_id(static_cast<uint32_t>(FieldNumber::ARGS), buffer, false);
       }
 
       return return_value;
@@ -1276,23 +1276,23 @@ class read_contract_request final: public ::EmbeddedProto::MessageInterface
       ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
       ::EmbeddedProto::WireFormatter::WireType wire_type = ::EmbeddedProto::WireFormatter::WireType::VARINT;
       uint32_t id_number = 0;
-      id id_tag = id::NOT_SET;
+      FieldNumber id_tag = FieldNumber::NOT_SET;
 
       ::EmbeddedProto::Error tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
       while((::EmbeddedProto::Error::NO_ERRORS == return_value) && (::EmbeddedProto::Error::NO_ERRORS == tag_value))
       {
-        id_tag = static_cast<id>(id_number);
+        id_tag = static_cast<FieldNumber>(id_number);
         switch(id_tag)
         {
-          case id::CONTRACT_ID:
+          case FieldNumber::CONTRACT_ID:
             return_value = contract_id_.deserialize_check_type(buffer, wire_type);
             break;
 
-          case id::ENTRY_POINT:
+          case FieldNumber::ENTRY_POINT:
             return_value = entry_point_.deserialize_check_type(buffer, wire_type);
             break;
 
-          case id::ARGS:
+          case FieldNumber::ARGS:
             return_value = args_.deserialize_check_type(buffer, wire_type);
             break;
 
@@ -1355,7 +1355,7 @@ class read_contract_response final: public ::EmbeddedProto::MessageInterface
 
     ~read_contract_response() override = default;
 
-    enum class id : uint32_t
+    enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
       RESULT = 1,
@@ -1395,12 +1395,12 @@ class read_contract_response final: public ::EmbeddedProto::MessageInterface
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = result_.serialize_with_id(static_cast<uint32_t>(id::RESULT), buffer, false);
+        return_value = result_.serialize_with_id(static_cast<uint32_t>(FieldNumber::RESULT), buffer, false);
       }
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = logs_.serialize_with_id(static_cast<uint32_t>(id::LOGS), buffer, false);
+        return_value = logs_.serialize_with_id(static_cast<uint32_t>(FieldNumber::LOGS), buffer, false);
       }
 
       return return_value;
@@ -1411,19 +1411,19 @@ class read_contract_response final: public ::EmbeddedProto::MessageInterface
       ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
       ::EmbeddedProto::WireFormatter::WireType wire_type = ::EmbeddedProto::WireFormatter::WireType::VARINT;
       uint32_t id_number = 0;
-      id id_tag = id::NOT_SET;
+      FieldNumber id_tag = FieldNumber::NOT_SET;
 
       ::EmbeddedProto::Error tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
       while((::EmbeddedProto::Error::NO_ERRORS == return_value) && (::EmbeddedProto::Error::NO_ERRORS == tag_value))
       {
-        id_tag = static_cast<id>(id_number);
+        id_tag = static_cast<FieldNumber>(id_number);
         switch(id_tag)
         {
-          case id::RESULT:
+          case FieldNumber::RESULT:
             return_value = result_.deserialize_check_type(buffer, wire_type);
             break;
 
-          case id::LOGS:
+          case FieldNumber::LOGS:
             return_value = logs_.deserialize_check_type(buffer, wire_type);
             break;
 
@@ -1481,7 +1481,7 @@ class get_account_nonce_request final: public ::EmbeddedProto::MessageInterface
 
     ~get_account_nonce_request() override = default;
 
-    enum class id : uint32_t
+    enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
       ACCOUNT = 1
@@ -1512,7 +1512,7 @@ class get_account_nonce_request final: public ::EmbeddedProto::MessageInterface
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = account_.serialize_with_id(static_cast<uint32_t>(id::ACCOUNT), buffer, false);
+        return_value = account_.serialize_with_id(static_cast<uint32_t>(FieldNumber::ACCOUNT), buffer, false);
       }
 
       return return_value;
@@ -1523,15 +1523,15 @@ class get_account_nonce_request final: public ::EmbeddedProto::MessageInterface
       ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
       ::EmbeddedProto::WireFormatter::WireType wire_type = ::EmbeddedProto::WireFormatter::WireType::VARINT;
       uint32_t id_number = 0;
-      id id_tag = id::NOT_SET;
+      FieldNumber id_tag = FieldNumber::NOT_SET;
 
       ::EmbeddedProto::Error tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
       while((::EmbeddedProto::Error::NO_ERRORS == return_value) && (::EmbeddedProto::Error::NO_ERRORS == tag_value))
       {
-        id_tag = static_cast<id>(id_number);
+        id_tag = static_cast<FieldNumber>(id_number);
         switch(id_tag)
         {
-          case id::ACCOUNT:
+          case FieldNumber::ACCOUNT:
             return_value = account_.deserialize_check_type(buffer, wire_type);
             break;
 
@@ -1586,7 +1586,7 @@ class get_account_nonce_response final: public ::EmbeddedProto::MessageInterface
 
     ~get_account_nonce_response() override = default;
 
-    enum class id : uint32_t
+    enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
       NONCE = 1
@@ -1618,7 +1618,7 @@ class get_account_nonce_response final: public ::EmbeddedProto::MessageInterface
 
       if((0U != nonce_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
       {
-        return_value = nonce_.serialize_with_id(static_cast<uint32_t>(id::NONCE), buffer, false);
+        return_value = nonce_.serialize_with_id(static_cast<uint32_t>(FieldNumber::NONCE), buffer, false);
       }
 
       return return_value;
@@ -1629,15 +1629,15 @@ class get_account_nonce_response final: public ::EmbeddedProto::MessageInterface
       ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
       ::EmbeddedProto::WireFormatter::WireType wire_type = ::EmbeddedProto::WireFormatter::WireType::VARINT;
       uint32_t id_number = 0;
-      id id_tag = id::NOT_SET;
+      FieldNumber id_tag = FieldNumber::NOT_SET;
 
       ::EmbeddedProto::Error tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
       while((::EmbeddedProto::Error::NO_ERRORS == return_value) && (::EmbeddedProto::Error::NO_ERRORS == tag_value))
       {
-        id_tag = static_cast<id>(id_number);
+        id_tag = static_cast<FieldNumber>(id_number);
         switch(id_tag)
         {
-          case id::NONCE:
+          case FieldNumber::NONCE:
             return_value = nonce_.deserialize_check_type(buffer, wire_type);
             break;
 
@@ -1707,35 +1707,35 @@ class chain_request final: public ::EmbeddedProto::MessageInterface
 
       switch(rhs.get_which_request())
       {
-        case id::RESERVED:
+        case FieldNumber::RESERVED:
           set_reserved(rhs.get_reserved());
           break;
 
-        case id::SUBMIT_BLOCK:
+        case FieldNumber::SUBMIT_BLOCK:
           set_submit_block(rhs.get_submit_block());
           break;
 
-        case id::SUBMIT_TRANSACTION:
+        case FieldNumber::SUBMIT_TRANSACTION:
           set_submit_transaction(rhs.get_submit_transaction());
           break;
 
-        case id::GET_HEAD_INFO:
+        case FieldNumber::GET_HEAD_INFO:
           set_get_head_info(rhs.get_get_head_info());
           break;
 
-        case id::GET_CHAIN_ID:
+        case FieldNumber::GET_CHAIN_ID:
           set_get_chain_id(rhs.get_get_chain_id());
           break;
 
-        case id::GET_FORK_HEADS:
+        case FieldNumber::GET_FORK_HEADS:
           set_get_fork_heads(rhs.get_get_fork_heads());
           break;
 
-        case id::READ_CONTRACT:
+        case FieldNumber::READ_CONTRACT:
           set_read_contract(rhs.get_read_contract());
           break;
 
-        case id::GET_ACCOUNT_NONCE:
+        case FieldNumber::GET_ACCOUNT_NONCE:
           set_get_account_nonce(rhs.get_get_account_nonce());
           break;
 
@@ -1755,35 +1755,35 @@ class chain_request final: public ::EmbeddedProto::MessageInterface
 
       switch(rhs.get_which_request())
       {
-        case id::RESERVED:
+        case FieldNumber::RESERVED:
           set_reserved(rhs.get_reserved());
           break;
 
-        case id::SUBMIT_BLOCK:
+        case FieldNumber::SUBMIT_BLOCK:
           set_submit_block(rhs.get_submit_block());
           break;
 
-        case id::SUBMIT_TRANSACTION:
+        case FieldNumber::SUBMIT_TRANSACTION:
           set_submit_transaction(rhs.get_submit_transaction());
           break;
 
-        case id::GET_HEAD_INFO:
+        case FieldNumber::GET_HEAD_INFO:
           set_get_head_info(rhs.get_get_head_info());
           break;
 
-        case id::GET_CHAIN_ID:
+        case FieldNumber::GET_CHAIN_ID:
           set_get_chain_id(rhs.get_get_chain_id());
           break;
 
-        case id::GET_FORK_HEADS:
+        case FieldNumber::GET_FORK_HEADS:
           set_get_fork_heads(rhs.get_get_fork_heads());
           break;
 
-        case id::READ_CONTRACT:
+        case FieldNumber::READ_CONTRACT:
           set_read_contract(rhs.get_read_contract());
           break;
 
-        case id::GET_ACCOUNT_NONCE:
+        case FieldNumber::GET_ACCOUNT_NONCE:
           set_get_account_nonce(rhs.get_get_account_nonce());
           break;
 
@@ -1795,7 +1795,7 @@ class chain_request final: public ::EmbeddedProto::MessageInterface
 
     ~chain_request() override = default;
 
-    enum class id : uint32_t
+    enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
       RESERVED = 1,
@@ -1818,35 +1818,35 @@ class chain_request final: public ::EmbeddedProto::MessageInterface
 
       switch(rhs.get_which_request())
       {
-        case id::RESERVED:
+        case FieldNumber::RESERVED:
           set_reserved(rhs.get_reserved());
           break;
 
-        case id::SUBMIT_BLOCK:
+        case FieldNumber::SUBMIT_BLOCK:
           set_submit_block(rhs.get_submit_block());
           break;
 
-        case id::SUBMIT_TRANSACTION:
+        case FieldNumber::SUBMIT_TRANSACTION:
           set_submit_transaction(rhs.get_submit_transaction());
           break;
 
-        case id::GET_HEAD_INFO:
+        case FieldNumber::GET_HEAD_INFO:
           set_get_head_info(rhs.get_get_head_info());
           break;
 
-        case id::GET_CHAIN_ID:
+        case FieldNumber::GET_CHAIN_ID:
           set_get_chain_id(rhs.get_get_chain_id());
           break;
 
-        case id::GET_FORK_HEADS:
+        case FieldNumber::GET_FORK_HEADS:
           set_get_fork_heads(rhs.get_get_fork_heads());
           break;
 
-        case id::READ_CONTRACT:
+        case FieldNumber::READ_CONTRACT:
           set_read_contract(rhs.get_read_contract());
           break;
 
-        case id::GET_ACCOUNT_NONCE:
+        case FieldNumber::GET_ACCOUNT_NONCE:
           set_get_account_nonce(rhs.get_get_account_nonce());
           break;
 
@@ -1867,35 +1867,35 @@ class chain_request final: public ::EmbeddedProto::MessageInterface
 
       switch(rhs.get_which_request())
       {
-        case id::RESERVED:
+        case FieldNumber::RESERVED:
           set_reserved(rhs.get_reserved());
           break;
 
-        case id::SUBMIT_BLOCK:
+        case FieldNumber::SUBMIT_BLOCK:
           set_submit_block(rhs.get_submit_block());
           break;
 
-        case id::SUBMIT_TRANSACTION:
+        case FieldNumber::SUBMIT_TRANSACTION:
           set_submit_transaction(rhs.get_submit_transaction());
           break;
 
-        case id::GET_HEAD_INFO:
+        case FieldNumber::GET_HEAD_INFO:
           set_get_head_info(rhs.get_get_head_info());
           break;
 
-        case id::GET_CHAIN_ID:
+        case FieldNumber::GET_CHAIN_ID:
           set_get_chain_id(rhs.get_get_chain_id());
           break;
 
-        case id::GET_FORK_HEADS:
+        case FieldNumber::GET_FORK_HEADS:
           set_get_fork_heads(rhs.get_get_fork_heads());
           break;
 
-        case id::READ_CONTRACT:
+        case FieldNumber::READ_CONTRACT:
           set_read_contract(rhs.get_read_contract());
           break;
 
-        case id::GET_ACCOUNT_NONCE:
+        case FieldNumber::GET_ACCOUNT_NONCE:
           set_get_account_nonce(rhs.get_get_account_nonce());
           break;
 
@@ -1906,37 +1906,37 @@ class chain_request final: public ::EmbeddedProto::MessageInterface
       return *this;
     }
 
-    id get_which_request() const { return which_request_; }
+    FieldNumber get_which_request() const { return which_request_; }
 
     inline void clear_reserved()
     {
-      if(id::RESERVED == which_request_)
+      if(FieldNumber::RESERVED == which_request_)
       {
-        which_request_ = id::NOT_SET;
+        which_request_ = FieldNumber::NOT_SET;
         request_.reserved_.~reserved_rpc();
       }
     }
     inline void set_reserved(const reserved_rpc& value)
     {
-      if(id::RESERVED != which_request_)
+      if(FieldNumber::RESERVED != which_request_)
       {
-        init_request(id::RESERVED);
+        init_request(FieldNumber::RESERVED);
       }
       request_.reserved_ = value;
     }
     inline void set_reserved(const reserved_rpc&& value)
     {
-      if(id::RESERVED != which_request_)
+      if(FieldNumber::RESERVED != which_request_)
       {
-        init_request(id::RESERVED);
+        init_request(FieldNumber::RESERVED);
       }
       request_.reserved_ = value;
     }
     inline reserved_rpc& mutable_reserved()
     {
-      if(id::RESERVED != which_request_)
+      if(FieldNumber::RESERVED != which_request_)
       {
-        init_request(id::RESERVED);
+        init_request(FieldNumber::RESERVED);
       }
       return request_.reserved_;
     }
@@ -1945,33 +1945,33 @@ class chain_request final: public ::EmbeddedProto::MessageInterface
 
     inline void clear_submit_block()
     {
-      if(id::SUBMIT_BLOCK == which_request_)
+      if(FieldNumber::SUBMIT_BLOCK == which_request_)
       {
-        which_request_ = id::NOT_SET;
+        which_request_ = FieldNumber::NOT_SET;
         request_.submit_block_.~submit_block_request<submit_block_block_id_LENGTH, submit_block_block_header_previous_LENGTH, submit_block_block_active_LENGTH, submit_block_block_passive_LENGTH, submit_block_block_signature_data_LENGTH, submit_block_block_transactions_REP_LENGTH, submit_block_block_transactions_id_LENGTH, submit_block_block_transactions_active_LENGTH, submit_block_block_transactions_passive_LENGTH, submit_block_block_transactions_signature_data_LENGTH>();
       }
     }
     inline void set_submit_block(const submit_block_request<submit_block_block_id_LENGTH, submit_block_block_header_previous_LENGTH, submit_block_block_active_LENGTH, submit_block_block_passive_LENGTH, submit_block_block_signature_data_LENGTH, submit_block_block_transactions_REP_LENGTH, submit_block_block_transactions_id_LENGTH, submit_block_block_transactions_active_LENGTH, submit_block_block_transactions_passive_LENGTH, submit_block_block_transactions_signature_data_LENGTH>& value)
     {
-      if(id::SUBMIT_BLOCK != which_request_)
+      if(FieldNumber::SUBMIT_BLOCK != which_request_)
       {
-        init_request(id::SUBMIT_BLOCK);
+        init_request(FieldNumber::SUBMIT_BLOCK);
       }
       request_.submit_block_ = value;
     }
     inline void set_submit_block(const submit_block_request<submit_block_block_id_LENGTH, submit_block_block_header_previous_LENGTH, submit_block_block_active_LENGTH, submit_block_block_passive_LENGTH, submit_block_block_signature_data_LENGTH, submit_block_block_transactions_REP_LENGTH, submit_block_block_transactions_id_LENGTH, submit_block_block_transactions_active_LENGTH, submit_block_block_transactions_passive_LENGTH, submit_block_block_transactions_signature_data_LENGTH>&& value)
     {
-      if(id::SUBMIT_BLOCK != which_request_)
+      if(FieldNumber::SUBMIT_BLOCK != which_request_)
       {
-        init_request(id::SUBMIT_BLOCK);
+        init_request(FieldNumber::SUBMIT_BLOCK);
       }
       request_.submit_block_ = value;
     }
     inline submit_block_request<submit_block_block_id_LENGTH, submit_block_block_header_previous_LENGTH, submit_block_block_active_LENGTH, submit_block_block_passive_LENGTH, submit_block_block_signature_data_LENGTH, submit_block_block_transactions_REP_LENGTH, submit_block_block_transactions_id_LENGTH, submit_block_block_transactions_active_LENGTH, submit_block_block_transactions_passive_LENGTH, submit_block_block_transactions_signature_data_LENGTH>& mutable_submit_block()
     {
-      if(id::SUBMIT_BLOCK != which_request_)
+      if(FieldNumber::SUBMIT_BLOCK != which_request_)
       {
-        init_request(id::SUBMIT_BLOCK);
+        init_request(FieldNumber::SUBMIT_BLOCK);
       }
       return request_.submit_block_;
     }
@@ -1980,33 +1980,33 @@ class chain_request final: public ::EmbeddedProto::MessageInterface
 
     inline void clear_submit_transaction()
     {
-      if(id::SUBMIT_TRANSACTION == which_request_)
+      if(FieldNumber::SUBMIT_TRANSACTION == which_request_)
       {
-        which_request_ = id::NOT_SET;
+        which_request_ = FieldNumber::NOT_SET;
         request_.submit_transaction_.~submit_transaction_request<submit_transaction_transaction_id_LENGTH, submit_transaction_transaction_active_LENGTH, submit_transaction_transaction_passive_LENGTH, submit_transaction_transaction_signature_data_LENGTH>();
       }
     }
     inline void set_submit_transaction(const submit_transaction_request<submit_transaction_transaction_id_LENGTH, submit_transaction_transaction_active_LENGTH, submit_transaction_transaction_passive_LENGTH, submit_transaction_transaction_signature_data_LENGTH>& value)
     {
-      if(id::SUBMIT_TRANSACTION != which_request_)
+      if(FieldNumber::SUBMIT_TRANSACTION != which_request_)
       {
-        init_request(id::SUBMIT_TRANSACTION);
+        init_request(FieldNumber::SUBMIT_TRANSACTION);
       }
       request_.submit_transaction_ = value;
     }
     inline void set_submit_transaction(const submit_transaction_request<submit_transaction_transaction_id_LENGTH, submit_transaction_transaction_active_LENGTH, submit_transaction_transaction_passive_LENGTH, submit_transaction_transaction_signature_data_LENGTH>&& value)
     {
-      if(id::SUBMIT_TRANSACTION != which_request_)
+      if(FieldNumber::SUBMIT_TRANSACTION != which_request_)
       {
-        init_request(id::SUBMIT_TRANSACTION);
+        init_request(FieldNumber::SUBMIT_TRANSACTION);
       }
       request_.submit_transaction_ = value;
     }
     inline submit_transaction_request<submit_transaction_transaction_id_LENGTH, submit_transaction_transaction_active_LENGTH, submit_transaction_transaction_passive_LENGTH, submit_transaction_transaction_signature_data_LENGTH>& mutable_submit_transaction()
     {
-      if(id::SUBMIT_TRANSACTION != which_request_)
+      if(FieldNumber::SUBMIT_TRANSACTION != which_request_)
       {
-        init_request(id::SUBMIT_TRANSACTION);
+        init_request(FieldNumber::SUBMIT_TRANSACTION);
       }
       return request_.submit_transaction_;
     }
@@ -2015,33 +2015,33 @@ class chain_request final: public ::EmbeddedProto::MessageInterface
 
     inline void clear_get_head_info()
     {
-      if(id::GET_HEAD_INFO == which_request_)
+      if(FieldNumber::GET_HEAD_INFO == which_request_)
       {
-        which_request_ = id::NOT_SET;
+        which_request_ = FieldNumber::NOT_SET;
         request_.get_head_info_.~get_head_info_request();
       }
     }
     inline void set_get_head_info(const get_head_info_request& value)
     {
-      if(id::GET_HEAD_INFO != which_request_)
+      if(FieldNumber::GET_HEAD_INFO != which_request_)
       {
-        init_request(id::GET_HEAD_INFO);
+        init_request(FieldNumber::GET_HEAD_INFO);
       }
       request_.get_head_info_ = value;
     }
     inline void set_get_head_info(const get_head_info_request&& value)
     {
-      if(id::GET_HEAD_INFO != which_request_)
+      if(FieldNumber::GET_HEAD_INFO != which_request_)
       {
-        init_request(id::GET_HEAD_INFO);
+        init_request(FieldNumber::GET_HEAD_INFO);
       }
       request_.get_head_info_ = value;
     }
     inline get_head_info_request& mutable_get_head_info()
     {
-      if(id::GET_HEAD_INFO != which_request_)
+      if(FieldNumber::GET_HEAD_INFO != which_request_)
       {
-        init_request(id::GET_HEAD_INFO);
+        init_request(FieldNumber::GET_HEAD_INFO);
       }
       return request_.get_head_info_;
     }
@@ -2050,33 +2050,33 @@ class chain_request final: public ::EmbeddedProto::MessageInterface
 
     inline void clear_get_chain_id()
     {
-      if(id::GET_CHAIN_ID == which_request_)
+      if(FieldNumber::GET_CHAIN_ID == which_request_)
       {
-        which_request_ = id::NOT_SET;
+        which_request_ = FieldNumber::NOT_SET;
         request_.get_chain_id_.~get_chain_id_request();
       }
     }
     inline void set_get_chain_id(const get_chain_id_request& value)
     {
-      if(id::GET_CHAIN_ID != which_request_)
+      if(FieldNumber::GET_CHAIN_ID != which_request_)
       {
-        init_request(id::GET_CHAIN_ID);
+        init_request(FieldNumber::GET_CHAIN_ID);
       }
       request_.get_chain_id_ = value;
     }
     inline void set_get_chain_id(const get_chain_id_request&& value)
     {
-      if(id::GET_CHAIN_ID != which_request_)
+      if(FieldNumber::GET_CHAIN_ID != which_request_)
       {
-        init_request(id::GET_CHAIN_ID);
+        init_request(FieldNumber::GET_CHAIN_ID);
       }
       request_.get_chain_id_ = value;
     }
     inline get_chain_id_request& mutable_get_chain_id()
     {
-      if(id::GET_CHAIN_ID != which_request_)
+      if(FieldNumber::GET_CHAIN_ID != which_request_)
       {
-        init_request(id::GET_CHAIN_ID);
+        init_request(FieldNumber::GET_CHAIN_ID);
       }
       return request_.get_chain_id_;
     }
@@ -2085,33 +2085,33 @@ class chain_request final: public ::EmbeddedProto::MessageInterface
 
     inline void clear_get_fork_heads()
     {
-      if(id::GET_FORK_HEADS == which_request_)
+      if(FieldNumber::GET_FORK_HEADS == which_request_)
       {
-        which_request_ = id::NOT_SET;
+        which_request_ = FieldNumber::NOT_SET;
         request_.get_fork_heads_.~get_fork_heads_request();
       }
     }
     inline void set_get_fork_heads(const get_fork_heads_request& value)
     {
-      if(id::GET_FORK_HEADS != which_request_)
+      if(FieldNumber::GET_FORK_HEADS != which_request_)
       {
-        init_request(id::GET_FORK_HEADS);
+        init_request(FieldNumber::GET_FORK_HEADS);
       }
       request_.get_fork_heads_ = value;
     }
     inline void set_get_fork_heads(const get_fork_heads_request&& value)
     {
-      if(id::GET_FORK_HEADS != which_request_)
+      if(FieldNumber::GET_FORK_HEADS != which_request_)
       {
-        init_request(id::GET_FORK_HEADS);
+        init_request(FieldNumber::GET_FORK_HEADS);
       }
       request_.get_fork_heads_ = value;
     }
     inline get_fork_heads_request& mutable_get_fork_heads()
     {
-      if(id::GET_FORK_HEADS != which_request_)
+      if(FieldNumber::GET_FORK_HEADS != which_request_)
       {
-        init_request(id::GET_FORK_HEADS);
+        init_request(FieldNumber::GET_FORK_HEADS);
       }
       return request_.get_fork_heads_;
     }
@@ -2120,33 +2120,33 @@ class chain_request final: public ::EmbeddedProto::MessageInterface
 
     inline void clear_read_contract()
     {
-      if(id::READ_CONTRACT == which_request_)
+      if(FieldNumber::READ_CONTRACT == which_request_)
       {
-        which_request_ = id::NOT_SET;
+        which_request_ = FieldNumber::NOT_SET;
         request_.read_contract_.~read_contract_request<read_contract_contract_id_LENGTH, read_contract_args_LENGTH>();
       }
     }
     inline void set_read_contract(const read_contract_request<read_contract_contract_id_LENGTH, read_contract_args_LENGTH>& value)
     {
-      if(id::READ_CONTRACT != which_request_)
+      if(FieldNumber::READ_CONTRACT != which_request_)
       {
-        init_request(id::READ_CONTRACT);
+        init_request(FieldNumber::READ_CONTRACT);
       }
       request_.read_contract_ = value;
     }
     inline void set_read_contract(const read_contract_request<read_contract_contract_id_LENGTH, read_contract_args_LENGTH>&& value)
     {
-      if(id::READ_CONTRACT != which_request_)
+      if(FieldNumber::READ_CONTRACT != which_request_)
       {
-        init_request(id::READ_CONTRACT);
+        init_request(FieldNumber::READ_CONTRACT);
       }
       request_.read_contract_ = value;
     }
     inline read_contract_request<read_contract_contract_id_LENGTH, read_contract_args_LENGTH>& mutable_read_contract()
     {
-      if(id::READ_CONTRACT != which_request_)
+      if(FieldNumber::READ_CONTRACT != which_request_)
       {
-        init_request(id::READ_CONTRACT);
+        init_request(FieldNumber::READ_CONTRACT);
       }
       return request_.read_contract_;
     }
@@ -2155,33 +2155,33 @@ class chain_request final: public ::EmbeddedProto::MessageInterface
 
     inline void clear_get_account_nonce()
     {
-      if(id::GET_ACCOUNT_NONCE == which_request_)
+      if(FieldNumber::GET_ACCOUNT_NONCE == which_request_)
       {
-        which_request_ = id::NOT_SET;
+        which_request_ = FieldNumber::NOT_SET;
         request_.get_account_nonce_.~get_account_nonce_request<get_account_nonce_account_LENGTH>();
       }
     }
     inline void set_get_account_nonce(const get_account_nonce_request<get_account_nonce_account_LENGTH>& value)
     {
-      if(id::GET_ACCOUNT_NONCE != which_request_)
+      if(FieldNumber::GET_ACCOUNT_NONCE != which_request_)
       {
-        init_request(id::GET_ACCOUNT_NONCE);
+        init_request(FieldNumber::GET_ACCOUNT_NONCE);
       }
       request_.get_account_nonce_ = value;
     }
     inline void set_get_account_nonce(const get_account_nonce_request<get_account_nonce_account_LENGTH>&& value)
     {
-      if(id::GET_ACCOUNT_NONCE != which_request_)
+      if(FieldNumber::GET_ACCOUNT_NONCE != which_request_)
       {
-        init_request(id::GET_ACCOUNT_NONCE);
+        init_request(FieldNumber::GET_ACCOUNT_NONCE);
       }
       request_.get_account_nonce_ = value;
     }
     inline get_account_nonce_request<get_account_nonce_account_LENGTH>& mutable_get_account_nonce()
     {
-      if(id::GET_ACCOUNT_NONCE != which_request_)
+      if(FieldNumber::GET_ACCOUNT_NONCE != which_request_)
       {
-        init_request(id::GET_ACCOUNT_NONCE);
+        init_request(FieldNumber::GET_ACCOUNT_NONCE);
       }
       return request_.get_account_nonce_;
     }
@@ -2195,59 +2195,59 @@ class chain_request final: public ::EmbeddedProto::MessageInterface
 
       switch(which_request_)
       {
-        case id::RESERVED:
+        case FieldNumber::RESERVED:
           if(::EmbeddedProto::Error::NO_ERRORS == return_value)
           {
-            return_value = request_.reserved_.serialize_with_id(static_cast<uint32_t>(id::RESERVED), buffer, false);
+            return_value = request_.reserved_.serialize_with_id(static_cast<uint32_t>(FieldNumber::RESERVED), buffer, false);
           }
           break;
 
-        case id::SUBMIT_BLOCK:
+        case FieldNumber::SUBMIT_BLOCK:
           if(::EmbeddedProto::Error::NO_ERRORS == return_value)
           {
-            return_value = request_.submit_block_.serialize_with_id(static_cast<uint32_t>(id::SUBMIT_BLOCK), buffer, false);
+            return_value = request_.submit_block_.serialize_with_id(static_cast<uint32_t>(FieldNumber::SUBMIT_BLOCK), buffer, false);
           }
           break;
 
-        case id::SUBMIT_TRANSACTION:
+        case FieldNumber::SUBMIT_TRANSACTION:
           if(::EmbeddedProto::Error::NO_ERRORS == return_value)
           {
-            return_value = request_.submit_transaction_.serialize_with_id(static_cast<uint32_t>(id::SUBMIT_TRANSACTION), buffer, false);
+            return_value = request_.submit_transaction_.serialize_with_id(static_cast<uint32_t>(FieldNumber::SUBMIT_TRANSACTION), buffer, false);
           }
           break;
 
-        case id::GET_HEAD_INFO:
+        case FieldNumber::GET_HEAD_INFO:
           if(::EmbeddedProto::Error::NO_ERRORS == return_value)
           {
-            return_value = request_.get_head_info_.serialize_with_id(static_cast<uint32_t>(id::GET_HEAD_INFO), buffer, false);
+            return_value = request_.get_head_info_.serialize_with_id(static_cast<uint32_t>(FieldNumber::GET_HEAD_INFO), buffer, false);
           }
           break;
 
-        case id::GET_CHAIN_ID:
+        case FieldNumber::GET_CHAIN_ID:
           if(::EmbeddedProto::Error::NO_ERRORS == return_value)
           {
-            return_value = request_.get_chain_id_.serialize_with_id(static_cast<uint32_t>(id::GET_CHAIN_ID), buffer, false);
+            return_value = request_.get_chain_id_.serialize_with_id(static_cast<uint32_t>(FieldNumber::GET_CHAIN_ID), buffer, false);
           }
           break;
 
-        case id::GET_FORK_HEADS:
+        case FieldNumber::GET_FORK_HEADS:
           if(::EmbeddedProto::Error::NO_ERRORS == return_value)
           {
-            return_value = request_.get_fork_heads_.serialize_with_id(static_cast<uint32_t>(id::GET_FORK_HEADS), buffer, false);
+            return_value = request_.get_fork_heads_.serialize_with_id(static_cast<uint32_t>(FieldNumber::GET_FORK_HEADS), buffer, false);
           }
           break;
 
-        case id::READ_CONTRACT:
+        case FieldNumber::READ_CONTRACT:
           if(::EmbeddedProto::Error::NO_ERRORS == return_value)
           {
-            return_value = request_.read_contract_.serialize_with_id(static_cast<uint32_t>(id::READ_CONTRACT), buffer, false);
+            return_value = request_.read_contract_.serialize_with_id(static_cast<uint32_t>(FieldNumber::READ_CONTRACT), buffer, false);
           }
           break;
 
-        case id::GET_ACCOUNT_NONCE:
+        case FieldNumber::GET_ACCOUNT_NONCE:
           if(::EmbeddedProto::Error::NO_ERRORS == return_value)
           {
-            return_value = request_.get_account_nonce_.serialize_with_id(static_cast<uint32_t>(id::GET_ACCOUNT_NONCE), buffer, false);
+            return_value = request_.get_account_nonce_.serialize_with_id(static_cast<uint32_t>(FieldNumber::GET_ACCOUNT_NONCE), buffer, false);
           }
           break;
 
@@ -2263,51 +2263,51 @@ class chain_request final: public ::EmbeddedProto::MessageInterface
       ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
       ::EmbeddedProto::WireFormatter::WireType wire_type = ::EmbeddedProto::WireFormatter::WireType::VARINT;
       uint32_t id_number = 0;
-      id id_tag = id::NOT_SET;
+      FieldNumber id_tag = FieldNumber::NOT_SET;
 
       ::EmbeddedProto::Error tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
       while((::EmbeddedProto::Error::NO_ERRORS == return_value) && (::EmbeddedProto::Error::NO_ERRORS == tag_value))
       {
-        id_tag = static_cast<id>(id_number);
+        id_tag = static_cast<FieldNumber>(id_number);
         switch(id_tag)
         {
-          case id::RESERVED:
-            return_value = deserialize_request(id::RESERVED, request_.reserved_, buffer, wire_type);
+          case FieldNumber::RESERVED:
+            return_value = deserialize_request(FieldNumber::RESERVED, request_.reserved_, buffer, wire_type);
 
             break;
 
-          case id::SUBMIT_BLOCK:
-            return_value = deserialize_request(id::SUBMIT_BLOCK, request_.submit_block_, buffer, wire_type);
+          case FieldNumber::SUBMIT_BLOCK:
+            return_value = deserialize_request(FieldNumber::SUBMIT_BLOCK, request_.submit_block_, buffer, wire_type);
 
             break;
 
-          case id::SUBMIT_TRANSACTION:
-            return_value = deserialize_request(id::SUBMIT_TRANSACTION, request_.submit_transaction_, buffer, wire_type);
+          case FieldNumber::SUBMIT_TRANSACTION:
+            return_value = deserialize_request(FieldNumber::SUBMIT_TRANSACTION, request_.submit_transaction_, buffer, wire_type);
 
             break;
 
-          case id::GET_HEAD_INFO:
-            return_value = deserialize_request(id::GET_HEAD_INFO, request_.get_head_info_, buffer, wire_type);
+          case FieldNumber::GET_HEAD_INFO:
+            return_value = deserialize_request(FieldNumber::GET_HEAD_INFO, request_.get_head_info_, buffer, wire_type);
 
             break;
 
-          case id::GET_CHAIN_ID:
-            return_value = deserialize_request(id::GET_CHAIN_ID, request_.get_chain_id_, buffer, wire_type);
+          case FieldNumber::GET_CHAIN_ID:
+            return_value = deserialize_request(FieldNumber::GET_CHAIN_ID, request_.get_chain_id_, buffer, wire_type);
 
             break;
 
-          case id::GET_FORK_HEADS:
-            return_value = deserialize_request(id::GET_FORK_HEADS, request_.get_fork_heads_, buffer, wire_type);
+          case FieldNumber::GET_FORK_HEADS:
+            return_value = deserialize_request(FieldNumber::GET_FORK_HEADS, request_.get_fork_heads_, buffer, wire_type);
 
             break;
 
-          case id::READ_CONTRACT:
-            return_value = deserialize_request(id::READ_CONTRACT, request_.read_contract_, buffer, wire_type);
+          case FieldNumber::READ_CONTRACT:
+            return_value = deserialize_request(FieldNumber::READ_CONTRACT, request_.read_contract_, buffer, wire_type);
 
             break;
 
-          case id::GET_ACCOUNT_NONCE:
-            return_value = deserialize_request(id::GET_ACCOUNT_NONCE, request_.get_account_nonce_, buffer, wire_type);
+          case FieldNumber::GET_ACCOUNT_NONCE:
+            return_value = deserialize_request(FieldNumber::GET_ACCOUNT_NONCE, request_.get_account_nonce_, buffer, wire_type);
 
             break;
 
@@ -2343,7 +2343,7 @@ class chain_request final: public ::EmbeddedProto::MessageInterface
 
 
 
-      id which_request_ = id::NOT_SET;
+      FieldNumber which_request_ = FieldNumber::NOT_SET;
       union request
       {
         request() {}
@@ -2359,9 +2359,9 @@ class chain_request final: public ::EmbeddedProto::MessageInterface
       };
       request request_;
 
-      void init_request(const id field_id)
+      void init_request(const FieldNumber field_id)
       {
-        if(id::NOT_SET != which_request_)
+        if(FieldNumber::NOT_SET != which_request_)
         {
           // First delete the old object in the oneof.
           clear_request();
@@ -2370,44 +2370,44 @@ class chain_request final: public ::EmbeddedProto::MessageInterface
         // C++11 unions only support nontrivial members when you explicitly call the placement new statement.
         switch(field_id)
         {
-          case id::RESERVED:
+          case FieldNumber::RESERVED:
             new(&request_.reserved_) reserved_rpc;
-            which_request_ = id::RESERVED;
+            which_request_ = FieldNumber::RESERVED;
             break;
 
-          case id::SUBMIT_BLOCK:
+          case FieldNumber::SUBMIT_BLOCK:
             new(&request_.submit_block_) submit_block_request<submit_block_block_id_LENGTH, submit_block_block_header_previous_LENGTH, submit_block_block_active_LENGTH, submit_block_block_passive_LENGTH, submit_block_block_signature_data_LENGTH, submit_block_block_transactions_REP_LENGTH, submit_block_block_transactions_id_LENGTH, submit_block_block_transactions_active_LENGTH, submit_block_block_transactions_passive_LENGTH, submit_block_block_transactions_signature_data_LENGTH>;
-            which_request_ = id::SUBMIT_BLOCK;
+            which_request_ = FieldNumber::SUBMIT_BLOCK;
             break;
 
-          case id::SUBMIT_TRANSACTION:
+          case FieldNumber::SUBMIT_TRANSACTION:
             new(&request_.submit_transaction_) submit_transaction_request<submit_transaction_transaction_id_LENGTH, submit_transaction_transaction_active_LENGTH, submit_transaction_transaction_passive_LENGTH, submit_transaction_transaction_signature_data_LENGTH>;
-            which_request_ = id::SUBMIT_TRANSACTION;
+            which_request_ = FieldNumber::SUBMIT_TRANSACTION;
             break;
 
-          case id::GET_HEAD_INFO:
+          case FieldNumber::GET_HEAD_INFO:
             new(&request_.get_head_info_) get_head_info_request;
-            which_request_ = id::GET_HEAD_INFO;
+            which_request_ = FieldNumber::GET_HEAD_INFO;
             break;
 
-          case id::GET_CHAIN_ID:
+          case FieldNumber::GET_CHAIN_ID:
             new(&request_.get_chain_id_) get_chain_id_request;
-            which_request_ = id::GET_CHAIN_ID;
+            which_request_ = FieldNumber::GET_CHAIN_ID;
             break;
 
-          case id::GET_FORK_HEADS:
+          case FieldNumber::GET_FORK_HEADS:
             new(&request_.get_fork_heads_) get_fork_heads_request;
-            which_request_ = id::GET_FORK_HEADS;
+            which_request_ = FieldNumber::GET_FORK_HEADS;
             break;
 
-          case id::READ_CONTRACT:
+          case FieldNumber::READ_CONTRACT:
             new(&request_.read_contract_) read_contract_request<read_contract_contract_id_LENGTH, read_contract_args_LENGTH>;
-            which_request_ = id::READ_CONTRACT;
+            which_request_ = FieldNumber::READ_CONTRACT;
             break;
 
-          case id::GET_ACCOUNT_NONCE:
+          case FieldNumber::GET_ACCOUNT_NONCE:
             new(&request_.get_account_nonce_) get_account_nonce_request<get_account_nonce_account_LENGTH>;
-            which_request_ = id::GET_ACCOUNT_NONCE;
+            which_request_ = FieldNumber::GET_ACCOUNT_NONCE;
             break;
 
           default:
@@ -2421,37 +2421,37 @@ class chain_request final: public ::EmbeddedProto::MessageInterface
       {
         switch(which_request_)
         {
-          case id::RESERVED:
+          case FieldNumber::RESERVED:
             request_.reserved_.~reserved_rpc(); // NOSONAR Unions require this.
             break;
-          case id::SUBMIT_BLOCK:
+          case FieldNumber::SUBMIT_BLOCK:
             request_.submit_block_.~submit_block_request<submit_block_block_id_LENGTH, submit_block_block_header_previous_LENGTH, submit_block_block_active_LENGTH, submit_block_block_passive_LENGTH, submit_block_block_signature_data_LENGTH, submit_block_block_transactions_REP_LENGTH, submit_block_block_transactions_id_LENGTH, submit_block_block_transactions_active_LENGTH, submit_block_block_transactions_passive_LENGTH, submit_block_block_transactions_signature_data_LENGTH>(); // NOSONAR Unions require this.
             break;
-          case id::SUBMIT_TRANSACTION:
+          case FieldNumber::SUBMIT_TRANSACTION:
             request_.submit_transaction_.~submit_transaction_request<submit_transaction_transaction_id_LENGTH, submit_transaction_transaction_active_LENGTH, submit_transaction_transaction_passive_LENGTH, submit_transaction_transaction_signature_data_LENGTH>(); // NOSONAR Unions require this.
             break;
-          case id::GET_HEAD_INFO:
+          case FieldNumber::GET_HEAD_INFO:
             request_.get_head_info_.~get_head_info_request(); // NOSONAR Unions require this.
             break;
-          case id::GET_CHAIN_ID:
+          case FieldNumber::GET_CHAIN_ID:
             request_.get_chain_id_.~get_chain_id_request(); // NOSONAR Unions require this.
             break;
-          case id::GET_FORK_HEADS:
+          case FieldNumber::GET_FORK_HEADS:
             request_.get_fork_heads_.~get_fork_heads_request(); // NOSONAR Unions require this.
             break;
-          case id::READ_CONTRACT:
+          case FieldNumber::READ_CONTRACT:
             request_.read_contract_.~read_contract_request<read_contract_contract_id_LENGTH, read_contract_args_LENGTH>(); // NOSONAR Unions require this.
             break;
-          case id::GET_ACCOUNT_NONCE:
+          case FieldNumber::GET_ACCOUNT_NONCE:
             request_.get_account_nonce_.~get_account_nonce_request<get_account_nonce_account_LENGTH>(); // NOSONAR Unions require this.
             break;
           default:
             break;
         }
-        which_request_ = id::NOT_SET;
+        which_request_ = FieldNumber::NOT_SET;
       }
 
-      ::EmbeddedProto::Error deserialize_request(const id field_id, ::EmbeddedProto::Field& field,
+      ::EmbeddedProto::Error deserialize_request(const FieldNumber field_id, ::EmbeddedProto::Field& field,
                                     ::EmbeddedProto::ReadBufferInterface& buffer,
                                     const ::EmbeddedProto::WireFormatter::WireType wire_type)
       {
@@ -2495,39 +2495,39 @@ class chain_response final: public ::EmbeddedProto::MessageInterface
 
       switch(rhs.get_which_response())
       {
-        case id::RESERVED:
+        case FieldNumber::RESERVED:
           set_reserved(rhs.get_reserved());
           break;
 
-        case id::ERROR:
+        case FieldNumber::ERROR:
           set_error(rhs.get_error());
           break;
 
-        case id::SUBMIT_BLOCK:
+        case FieldNumber::SUBMIT_BLOCK:
           set_submit_block(rhs.get_submit_block());
           break;
 
-        case id::SUBMIT_TRANSACTION:
+        case FieldNumber::SUBMIT_TRANSACTION:
           set_submit_transaction(rhs.get_submit_transaction());
           break;
 
-        case id::GET_HEAD_INFO:
+        case FieldNumber::GET_HEAD_INFO:
           set_get_head_info(rhs.get_get_head_info());
           break;
 
-        case id::GET_CHAIN_ID:
+        case FieldNumber::GET_CHAIN_ID:
           set_get_chain_id(rhs.get_get_chain_id());
           break;
 
-        case id::GET_FORK_HEADS:
+        case FieldNumber::GET_FORK_HEADS:
           set_get_fork_heads(rhs.get_get_fork_heads());
           break;
 
-        case id::READ_CONTRACT:
+        case FieldNumber::READ_CONTRACT:
           set_read_contract(rhs.get_read_contract());
           break;
 
-        case id::GET_ACCOUNT_NONCE:
+        case FieldNumber::GET_ACCOUNT_NONCE:
           set_get_account_nonce(rhs.get_get_account_nonce());
           break;
 
@@ -2547,39 +2547,39 @@ class chain_response final: public ::EmbeddedProto::MessageInterface
 
       switch(rhs.get_which_response())
       {
-        case id::RESERVED:
+        case FieldNumber::RESERVED:
           set_reserved(rhs.get_reserved());
           break;
 
-        case id::ERROR:
+        case FieldNumber::ERROR:
           set_error(rhs.get_error());
           break;
 
-        case id::SUBMIT_BLOCK:
+        case FieldNumber::SUBMIT_BLOCK:
           set_submit_block(rhs.get_submit_block());
           break;
 
-        case id::SUBMIT_TRANSACTION:
+        case FieldNumber::SUBMIT_TRANSACTION:
           set_submit_transaction(rhs.get_submit_transaction());
           break;
 
-        case id::GET_HEAD_INFO:
+        case FieldNumber::GET_HEAD_INFO:
           set_get_head_info(rhs.get_get_head_info());
           break;
 
-        case id::GET_CHAIN_ID:
+        case FieldNumber::GET_CHAIN_ID:
           set_get_chain_id(rhs.get_get_chain_id());
           break;
 
-        case id::GET_FORK_HEADS:
+        case FieldNumber::GET_FORK_HEADS:
           set_get_fork_heads(rhs.get_get_fork_heads());
           break;
 
-        case id::READ_CONTRACT:
+        case FieldNumber::READ_CONTRACT:
           set_read_contract(rhs.get_read_contract());
           break;
 
-        case id::GET_ACCOUNT_NONCE:
+        case FieldNumber::GET_ACCOUNT_NONCE:
           set_get_account_nonce(rhs.get_get_account_nonce());
           break;
 
@@ -2591,7 +2591,7 @@ class chain_response final: public ::EmbeddedProto::MessageInterface
 
     ~chain_response() override = default;
 
-    enum class id : uint32_t
+    enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
       RESERVED = 1,
@@ -2615,39 +2615,39 @@ class chain_response final: public ::EmbeddedProto::MessageInterface
 
       switch(rhs.get_which_response())
       {
-        case id::RESERVED:
+        case FieldNumber::RESERVED:
           set_reserved(rhs.get_reserved());
           break;
 
-        case id::ERROR:
+        case FieldNumber::ERROR:
           set_error(rhs.get_error());
           break;
 
-        case id::SUBMIT_BLOCK:
+        case FieldNumber::SUBMIT_BLOCK:
           set_submit_block(rhs.get_submit_block());
           break;
 
-        case id::SUBMIT_TRANSACTION:
+        case FieldNumber::SUBMIT_TRANSACTION:
           set_submit_transaction(rhs.get_submit_transaction());
           break;
 
-        case id::GET_HEAD_INFO:
+        case FieldNumber::GET_HEAD_INFO:
           set_get_head_info(rhs.get_get_head_info());
           break;
 
-        case id::GET_CHAIN_ID:
+        case FieldNumber::GET_CHAIN_ID:
           set_get_chain_id(rhs.get_get_chain_id());
           break;
 
-        case id::GET_FORK_HEADS:
+        case FieldNumber::GET_FORK_HEADS:
           set_get_fork_heads(rhs.get_get_fork_heads());
           break;
 
-        case id::READ_CONTRACT:
+        case FieldNumber::READ_CONTRACT:
           set_read_contract(rhs.get_read_contract());
           break;
 
-        case id::GET_ACCOUNT_NONCE:
+        case FieldNumber::GET_ACCOUNT_NONCE:
           set_get_account_nonce(rhs.get_get_account_nonce());
           break;
 
@@ -2668,39 +2668,39 @@ class chain_response final: public ::EmbeddedProto::MessageInterface
 
       switch(rhs.get_which_response())
       {
-        case id::RESERVED:
+        case FieldNumber::RESERVED:
           set_reserved(rhs.get_reserved());
           break;
 
-        case id::ERROR:
+        case FieldNumber::ERROR:
           set_error(rhs.get_error());
           break;
 
-        case id::SUBMIT_BLOCK:
+        case FieldNumber::SUBMIT_BLOCK:
           set_submit_block(rhs.get_submit_block());
           break;
 
-        case id::SUBMIT_TRANSACTION:
+        case FieldNumber::SUBMIT_TRANSACTION:
           set_submit_transaction(rhs.get_submit_transaction());
           break;
 
-        case id::GET_HEAD_INFO:
+        case FieldNumber::GET_HEAD_INFO:
           set_get_head_info(rhs.get_get_head_info());
           break;
 
-        case id::GET_CHAIN_ID:
+        case FieldNumber::GET_CHAIN_ID:
           set_get_chain_id(rhs.get_get_chain_id());
           break;
 
-        case id::GET_FORK_HEADS:
+        case FieldNumber::GET_FORK_HEADS:
           set_get_fork_heads(rhs.get_get_fork_heads());
           break;
 
-        case id::READ_CONTRACT:
+        case FieldNumber::READ_CONTRACT:
           set_read_contract(rhs.get_read_contract());
           break;
 
-        case id::GET_ACCOUNT_NONCE:
+        case FieldNumber::GET_ACCOUNT_NONCE:
           set_get_account_nonce(rhs.get_get_account_nonce());
           break;
 
@@ -2711,37 +2711,37 @@ class chain_response final: public ::EmbeddedProto::MessageInterface
       return *this;
     }
 
-    id get_which_response() const { return which_response_; }
+    FieldNumber get_which_response() const { return which_response_; }
 
     inline void clear_reserved()
     {
-      if(id::RESERVED == which_response_)
+      if(FieldNumber::RESERVED == which_response_)
       {
-        which_response_ = id::NOT_SET;
+        which_response_ = FieldNumber::NOT_SET;
         response_.reserved_.~reserved_rpc();
       }
     }
     inline void set_reserved(const reserved_rpc& value)
     {
-      if(id::RESERVED != which_response_)
+      if(FieldNumber::RESERVED != which_response_)
       {
-        init_response(id::RESERVED);
+        init_response(FieldNumber::RESERVED);
       }
       response_.reserved_ = value;
     }
     inline void set_reserved(const reserved_rpc&& value)
     {
-      if(id::RESERVED != which_response_)
+      if(FieldNumber::RESERVED != which_response_)
       {
-        init_response(id::RESERVED);
+        init_response(FieldNumber::RESERVED);
       }
       response_.reserved_ = value;
     }
     inline reserved_rpc& mutable_reserved()
     {
-      if(id::RESERVED != which_response_)
+      if(FieldNumber::RESERVED != which_response_)
       {
-        init_response(id::RESERVED);
+        init_response(FieldNumber::RESERVED);
       }
       return response_.reserved_;
     }
@@ -2750,33 +2750,33 @@ class chain_response final: public ::EmbeddedProto::MessageInterface
 
     inline void clear_error()
     {
-      if(id::ERROR == which_response_)
+      if(FieldNumber::ERROR == which_response_)
       {
-        which_response_ = id::NOT_SET;
+        which_response_ = FieldNumber::NOT_SET;
         response_.error_.~error_response<error_message_LENGTH, error_data_LENGTH>();
       }
     }
     inline void set_error(const error_response<error_message_LENGTH, error_data_LENGTH>& value)
     {
-      if(id::ERROR != which_response_)
+      if(FieldNumber::ERROR != which_response_)
       {
-        init_response(id::ERROR);
+        init_response(FieldNumber::ERROR);
       }
       response_.error_ = value;
     }
     inline void set_error(const error_response<error_message_LENGTH, error_data_LENGTH>&& value)
     {
-      if(id::ERROR != which_response_)
+      if(FieldNumber::ERROR != which_response_)
       {
-        init_response(id::ERROR);
+        init_response(FieldNumber::ERROR);
       }
       response_.error_ = value;
     }
     inline error_response<error_message_LENGTH, error_data_LENGTH>& mutable_error()
     {
-      if(id::ERROR != which_response_)
+      if(FieldNumber::ERROR != which_response_)
       {
-        init_response(id::ERROR);
+        init_response(FieldNumber::ERROR);
       }
       return response_.error_;
     }
@@ -2785,33 +2785,33 @@ class chain_response final: public ::EmbeddedProto::MessageInterface
 
     inline void clear_submit_block()
     {
-      if(id::SUBMIT_BLOCK == which_response_)
+      if(FieldNumber::SUBMIT_BLOCK == which_response_)
       {
-        which_response_ = id::NOT_SET;
+        which_response_ = FieldNumber::NOT_SET;
         response_.submit_block_.~submit_block_response();
       }
     }
     inline void set_submit_block(const submit_block_response& value)
     {
-      if(id::SUBMIT_BLOCK != which_response_)
+      if(FieldNumber::SUBMIT_BLOCK != which_response_)
       {
-        init_response(id::SUBMIT_BLOCK);
+        init_response(FieldNumber::SUBMIT_BLOCK);
       }
       response_.submit_block_ = value;
     }
     inline void set_submit_block(const submit_block_response&& value)
     {
-      if(id::SUBMIT_BLOCK != which_response_)
+      if(FieldNumber::SUBMIT_BLOCK != which_response_)
       {
-        init_response(id::SUBMIT_BLOCK);
+        init_response(FieldNumber::SUBMIT_BLOCK);
       }
       response_.submit_block_ = value;
     }
     inline submit_block_response& mutable_submit_block()
     {
-      if(id::SUBMIT_BLOCK != which_response_)
+      if(FieldNumber::SUBMIT_BLOCK != which_response_)
       {
-        init_response(id::SUBMIT_BLOCK);
+        init_response(FieldNumber::SUBMIT_BLOCK);
       }
       return response_.submit_block_;
     }
@@ -2820,33 +2820,33 @@ class chain_response final: public ::EmbeddedProto::MessageInterface
 
     inline void clear_submit_transaction()
     {
-      if(id::SUBMIT_TRANSACTION == which_response_)
+      if(FieldNumber::SUBMIT_TRANSACTION == which_response_)
       {
-        which_response_ = id::NOT_SET;
+        which_response_ = FieldNumber::NOT_SET;
         response_.submit_transaction_.~submit_transaction_response();
       }
     }
     inline void set_submit_transaction(const submit_transaction_response& value)
     {
-      if(id::SUBMIT_TRANSACTION != which_response_)
+      if(FieldNumber::SUBMIT_TRANSACTION != which_response_)
       {
-        init_response(id::SUBMIT_TRANSACTION);
+        init_response(FieldNumber::SUBMIT_TRANSACTION);
       }
       response_.submit_transaction_ = value;
     }
     inline void set_submit_transaction(const submit_transaction_response&& value)
     {
-      if(id::SUBMIT_TRANSACTION != which_response_)
+      if(FieldNumber::SUBMIT_TRANSACTION != which_response_)
       {
-        init_response(id::SUBMIT_TRANSACTION);
+        init_response(FieldNumber::SUBMIT_TRANSACTION);
       }
       response_.submit_transaction_ = value;
     }
     inline submit_transaction_response& mutable_submit_transaction()
     {
-      if(id::SUBMIT_TRANSACTION != which_response_)
+      if(FieldNumber::SUBMIT_TRANSACTION != which_response_)
       {
-        init_response(id::SUBMIT_TRANSACTION);
+        init_response(FieldNumber::SUBMIT_TRANSACTION);
       }
       return response_.submit_transaction_;
     }
@@ -2855,33 +2855,33 @@ class chain_response final: public ::EmbeddedProto::MessageInterface
 
     inline void clear_get_head_info()
     {
-      if(id::GET_HEAD_INFO == which_response_)
+      if(FieldNumber::GET_HEAD_INFO == which_response_)
       {
-        which_response_ = id::NOT_SET;
+        which_response_ = FieldNumber::NOT_SET;
         response_.get_head_info_.~get_head_info_response<get_head_info_head_topology_id_LENGTH, get_head_info_head_topology_previous_LENGTH>();
       }
     }
     inline void set_get_head_info(const get_head_info_response<get_head_info_head_topology_id_LENGTH, get_head_info_head_topology_previous_LENGTH>& value)
     {
-      if(id::GET_HEAD_INFO != which_response_)
+      if(FieldNumber::GET_HEAD_INFO != which_response_)
       {
-        init_response(id::GET_HEAD_INFO);
+        init_response(FieldNumber::GET_HEAD_INFO);
       }
       response_.get_head_info_ = value;
     }
     inline void set_get_head_info(const get_head_info_response<get_head_info_head_topology_id_LENGTH, get_head_info_head_topology_previous_LENGTH>&& value)
     {
-      if(id::GET_HEAD_INFO != which_response_)
+      if(FieldNumber::GET_HEAD_INFO != which_response_)
       {
-        init_response(id::GET_HEAD_INFO);
+        init_response(FieldNumber::GET_HEAD_INFO);
       }
       response_.get_head_info_ = value;
     }
     inline get_head_info_response<get_head_info_head_topology_id_LENGTH, get_head_info_head_topology_previous_LENGTH>& mutable_get_head_info()
     {
-      if(id::GET_HEAD_INFO != which_response_)
+      if(FieldNumber::GET_HEAD_INFO != which_response_)
       {
-        init_response(id::GET_HEAD_INFO);
+        init_response(FieldNumber::GET_HEAD_INFO);
       }
       return response_.get_head_info_;
     }
@@ -2890,33 +2890,33 @@ class chain_response final: public ::EmbeddedProto::MessageInterface
 
     inline void clear_get_chain_id()
     {
-      if(id::GET_CHAIN_ID == which_response_)
+      if(FieldNumber::GET_CHAIN_ID == which_response_)
       {
-        which_response_ = id::NOT_SET;
+        which_response_ = FieldNumber::NOT_SET;
         response_.get_chain_id_.~get_chain_id_response<get_chain_id_chain_id_LENGTH>();
       }
     }
     inline void set_get_chain_id(const get_chain_id_response<get_chain_id_chain_id_LENGTH>& value)
     {
-      if(id::GET_CHAIN_ID != which_response_)
+      if(FieldNumber::GET_CHAIN_ID != which_response_)
       {
-        init_response(id::GET_CHAIN_ID);
+        init_response(FieldNumber::GET_CHAIN_ID);
       }
       response_.get_chain_id_ = value;
     }
     inline void set_get_chain_id(const get_chain_id_response<get_chain_id_chain_id_LENGTH>&& value)
     {
-      if(id::GET_CHAIN_ID != which_response_)
+      if(FieldNumber::GET_CHAIN_ID != which_response_)
       {
-        init_response(id::GET_CHAIN_ID);
+        init_response(FieldNumber::GET_CHAIN_ID);
       }
       response_.get_chain_id_ = value;
     }
     inline get_chain_id_response<get_chain_id_chain_id_LENGTH>& mutable_get_chain_id()
     {
-      if(id::GET_CHAIN_ID != which_response_)
+      if(FieldNumber::GET_CHAIN_ID != which_response_)
       {
-        init_response(id::GET_CHAIN_ID);
+        init_response(FieldNumber::GET_CHAIN_ID);
       }
       return response_.get_chain_id_;
     }
@@ -2925,33 +2925,33 @@ class chain_response final: public ::EmbeddedProto::MessageInterface
 
     inline void clear_get_fork_heads()
     {
-      if(id::GET_FORK_HEADS == which_response_)
+      if(FieldNumber::GET_FORK_HEADS == which_response_)
       {
-        which_response_ = id::NOT_SET;
+        which_response_ = FieldNumber::NOT_SET;
         response_.get_fork_heads_.~get_fork_heads_response<get_fork_heads_last_irreversible_block_id_LENGTH, get_fork_heads_last_irreversible_block_previous_LENGTH, get_fork_heads_fork_heads_REP_LENGTH, get_fork_heads_fork_heads_id_LENGTH, get_fork_heads_fork_heads_previous_LENGTH>();
       }
     }
     inline void set_get_fork_heads(const get_fork_heads_response<get_fork_heads_last_irreversible_block_id_LENGTH, get_fork_heads_last_irreversible_block_previous_LENGTH, get_fork_heads_fork_heads_REP_LENGTH, get_fork_heads_fork_heads_id_LENGTH, get_fork_heads_fork_heads_previous_LENGTH>& value)
     {
-      if(id::GET_FORK_HEADS != which_response_)
+      if(FieldNumber::GET_FORK_HEADS != which_response_)
       {
-        init_response(id::GET_FORK_HEADS);
+        init_response(FieldNumber::GET_FORK_HEADS);
       }
       response_.get_fork_heads_ = value;
     }
     inline void set_get_fork_heads(const get_fork_heads_response<get_fork_heads_last_irreversible_block_id_LENGTH, get_fork_heads_last_irreversible_block_previous_LENGTH, get_fork_heads_fork_heads_REP_LENGTH, get_fork_heads_fork_heads_id_LENGTH, get_fork_heads_fork_heads_previous_LENGTH>&& value)
     {
-      if(id::GET_FORK_HEADS != which_response_)
+      if(FieldNumber::GET_FORK_HEADS != which_response_)
       {
-        init_response(id::GET_FORK_HEADS);
+        init_response(FieldNumber::GET_FORK_HEADS);
       }
       response_.get_fork_heads_ = value;
     }
     inline get_fork_heads_response<get_fork_heads_last_irreversible_block_id_LENGTH, get_fork_heads_last_irreversible_block_previous_LENGTH, get_fork_heads_fork_heads_REP_LENGTH, get_fork_heads_fork_heads_id_LENGTH, get_fork_heads_fork_heads_previous_LENGTH>& mutable_get_fork_heads()
     {
-      if(id::GET_FORK_HEADS != which_response_)
+      if(FieldNumber::GET_FORK_HEADS != which_response_)
       {
-        init_response(id::GET_FORK_HEADS);
+        init_response(FieldNumber::GET_FORK_HEADS);
       }
       return response_.get_fork_heads_;
     }
@@ -2960,33 +2960,33 @@ class chain_response final: public ::EmbeddedProto::MessageInterface
 
     inline void clear_read_contract()
     {
-      if(id::READ_CONTRACT == which_response_)
+      if(FieldNumber::READ_CONTRACT == which_response_)
       {
-        which_response_ = id::NOT_SET;
+        which_response_ = FieldNumber::NOT_SET;
         response_.read_contract_.~read_contract_response<read_contract_result_LENGTH, read_contract_logs_LENGTH>();
       }
     }
     inline void set_read_contract(const read_contract_response<read_contract_result_LENGTH, read_contract_logs_LENGTH>& value)
     {
-      if(id::READ_CONTRACT != which_response_)
+      if(FieldNumber::READ_CONTRACT != which_response_)
       {
-        init_response(id::READ_CONTRACT);
+        init_response(FieldNumber::READ_CONTRACT);
       }
       response_.read_contract_ = value;
     }
     inline void set_read_contract(const read_contract_response<read_contract_result_LENGTH, read_contract_logs_LENGTH>&& value)
     {
-      if(id::READ_CONTRACT != which_response_)
+      if(FieldNumber::READ_CONTRACT != which_response_)
       {
-        init_response(id::READ_CONTRACT);
+        init_response(FieldNumber::READ_CONTRACT);
       }
       response_.read_contract_ = value;
     }
     inline read_contract_response<read_contract_result_LENGTH, read_contract_logs_LENGTH>& mutable_read_contract()
     {
-      if(id::READ_CONTRACT != which_response_)
+      if(FieldNumber::READ_CONTRACT != which_response_)
       {
-        init_response(id::READ_CONTRACT);
+        init_response(FieldNumber::READ_CONTRACT);
       }
       return response_.read_contract_;
     }
@@ -2995,33 +2995,33 @@ class chain_response final: public ::EmbeddedProto::MessageInterface
 
     inline void clear_get_account_nonce()
     {
-      if(id::GET_ACCOUNT_NONCE == which_response_)
+      if(FieldNumber::GET_ACCOUNT_NONCE == which_response_)
       {
-        which_response_ = id::NOT_SET;
+        which_response_ = FieldNumber::NOT_SET;
         response_.get_account_nonce_.~get_account_nonce_response();
       }
     }
     inline void set_get_account_nonce(const get_account_nonce_response& value)
     {
-      if(id::GET_ACCOUNT_NONCE != which_response_)
+      if(FieldNumber::GET_ACCOUNT_NONCE != which_response_)
       {
-        init_response(id::GET_ACCOUNT_NONCE);
+        init_response(FieldNumber::GET_ACCOUNT_NONCE);
       }
       response_.get_account_nonce_ = value;
     }
     inline void set_get_account_nonce(const get_account_nonce_response&& value)
     {
-      if(id::GET_ACCOUNT_NONCE != which_response_)
+      if(FieldNumber::GET_ACCOUNT_NONCE != which_response_)
       {
-        init_response(id::GET_ACCOUNT_NONCE);
+        init_response(FieldNumber::GET_ACCOUNT_NONCE);
       }
       response_.get_account_nonce_ = value;
     }
     inline get_account_nonce_response& mutable_get_account_nonce()
     {
-      if(id::GET_ACCOUNT_NONCE != which_response_)
+      if(FieldNumber::GET_ACCOUNT_NONCE != which_response_)
       {
-        init_response(id::GET_ACCOUNT_NONCE);
+        init_response(FieldNumber::GET_ACCOUNT_NONCE);
       }
       return response_.get_account_nonce_;
     }
@@ -3035,66 +3035,66 @@ class chain_response final: public ::EmbeddedProto::MessageInterface
 
       switch(which_response_)
       {
-        case id::RESERVED:
+        case FieldNumber::RESERVED:
           if(::EmbeddedProto::Error::NO_ERRORS == return_value)
           {
-            return_value = response_.reserved_.serialize_with_id(static_cast<uint32_t>(id::RESERVED), buffer, false);
+            return_value = response_.reserved_.serialize_with_id(static_cast<uint32_t>(FieldNumber::RESERVED), buffer, false);
           }
           break;
 
-        case id::ERROR:
+        case FieldNumber::ERROR:
           if(::EmbeddedProto::Error::NO_ERRORS == return_value)
           {
-            return_value = response_.error_.serialize_with_id(static_cast<uint32_t>(id::ERROR), buffer, false);
+            return_value = response_.error_.serialize_with_id(static_cast<uint32_t>(FieldNumber::ERROR), buffer, false);
           }
           break;
 
-        case id::SUBMIT_BLOCK:
+        case FieldNumber::SUBMIT_BLOCK:
           if(::EmbeddedProto::Error::NO_ERRORS == return_value)
           {
-            return_value = response_.submit_block_.serialize_with_id(static_cast<uint32_t>(id::SUBMIT_BLOCK), buffer, false);
+            return_value = response_.submit_block_.serialize_with_id(static_cast<uint32_t>(FieldNumber::SUBMIT_BLOCK), buffer, false);
           }
           break;
 
-        case id::SUBMIT_TRANSACTION:
+        case FieldNumber::SUBMIT_TRANSACTION:
           if(::EmbeddedProto::Error::NO_ERRORS == return_value)
           {
-            return_value = response_.submit_transaction_.serialize_with_id(static_cast<uint32_t>(id::SUBMIT_TRANSACTION), buffer, false);
+            return_value = response_.submit_transaction_.serialize_with_id(static_cast<uint32_t>(FieldNumber::SUBMIT_TRANSACTION), buffer, false);
           }
           break;
 
-        case id::GET_HEAD_INFO:
+        case FieldNumber::GET_HEAD_INFO:
           if(::EmbeddedProto::Error::NO_ERRORS == return_value)
           {
-            return_value = response_.get_head_info_.serialize_with_id(static_cast<uint32_t>(id::GET_HEAD_INFO), buffer, false);
+            return_value = response_.get_head_info_.serialize_with_id(static_cast<uint32_t>(FieldNumber::GET_HEAD_INFO), buffer, false);
           }
           break;
 
-        case id::GET_CHAIN_ID:
+        case FieldNumber::GET_CHAIN_ID:
           if(::EmbeddedProto::Error::NO_ERRORS == return_value)
           {
-            return_value = response_.get_chain_id_.serialize_with_id(static_cast<uint32_t>(id::GET_CHAIN_ID), buffer, false);
+            return_value = response_.get_chain_id_.serialize_with_id(static_cast<uint32_t>(FieldNumber::GET_CHAIN_ID), buffer, false);
           }
           break;
 
-        case id::GET_FORK_HEADS:
+        case FieldNumber::GET_FORK_HEADS:
           if(::EmbeddedProto::Error::NO_ERRORS == return_value)
           {
-            return_value = response_.get_fork_heads_.serialize_with_id(static_cast<uint32_t>(id::GET_FORK_HEADS), buffer, false);
+            return_value = response_.get_fork_heads_.serialize_with_id(static_cast<uint32_t>(FieldNumber::GET_FORK_HEADS), buffer, false);
           }
           break;
 
-        case id::READ_CONTRACT:
+        case FieldNumber::READ_CONTRACT:
           if(::EmbeddedProto::Error::NO_ERRORS == return_value)
           {
-            return_value = response_.read_contract_.serialize_with_id(static_cast<uint32_t>(id::READ_CONTRACT), buffer, false);
+            return_value = response_.read_contract_.serialize_with_id(static_cast<uint32_t>(FieldNumber::READ_CONTRACT), buffer, false);
           }
           break;
 
-        case id::GET_ACCOUNT_NONCE:
+        case FieldNumber::GET_ACCOUNT_NONCE:
           if(::EmbeddedProto::Error::NO_ERRORS == return_value)
           {
-            return_value = response_.get_account_nonce_.serialize_with_id(static_cast<uint32_t>(id::GET_ACCOUNT_NONCE), buffer, false);
+            return_value = response_.get_account_nonce_.serialize_with_id(static_cast<uint32_t>(FieldNumber::GET_ACCOUNT_NONCE), buffer, false);
           }
           break;
 
@@ -3110,56 +3110,56 @@ class chain_response final: public ::EmbeddedProto::MessageInterface
       ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
       ::EmbeddedProto::WireFormatter::WireType wire_type = ::EmbeddedProto::WireFormatter::WireType::VARINT;
       uint32_t id_number = 0;
-      id id_tag = id::NOT_SET;
+      FieldNumber id_tag = FieldNumber::NOT_SET;
 
       ::EmbeddedProto::Error tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
       while((::EmbeddedProto::Error::NO_ERRORS == return_value) && (::EmbeddedProto::Error::NO_ERRORS == tag_value))
       {
-        id_tag = static_cast<id>(id_number);
+        id_tag = static_cast<FieldNumber>(id_number);
         switch(id_tag)
         {
-          case id::RESERVED:
-            return_value = deserialize_response(id::RESERVED, response_.reserved_, buffer, wire_type);
+          case FieldNumber::RESERVED:
+            return_value = deserialize_response(FieldNumber::RESERVED, response_.reserved_, buffer, wire_type);
 
             break;
 
-          case id::ERROR:
-            return_value = deserialize_response(id::ERROR, response_.error_, buffer, wire_type);
+          case FieldNumber::ERROR:
+            return_value = deserialize_response(FieldNumber::ERROR, response_.error_, buffer, wire_type);
 
             break;
 
-          case id::SUBMIT_BLOCK:
-            return_value = deserialize_response(id::SUBMIT_BLOCK, response_.submit_block_, buffer, wire_type);
+          case FieldNumber::SUBMIT_BLOCK:
+            return_value = deserialize_response(FieldNumber::SUBMIT_BLOCK, response_.submit_block_, buffer, wire_type);
 
             break;
 
-          case id::SUBMIT_TRANSACTION:
-            return_value = deserialize_response(id::SUBMIT_TRANSACTION, response_.submit_transaction_, buffer, wire_type);
+          case FieldNumber::SUBMIT_TRANSACTION:
+            return_value = deserialize_response(FieldNumber::SUBMIT_TRANSACTION, response_.submit_transaction_, buffer, wire_type);
 
             break;
 
-          case id::GET_HEAD_INFO:
-            return_value = deserialize_response(id::GET_HEAD_INFO, response_.get_head_info_, buffer, wire_type);
+          case FieldNumber::GET_HEAD_INFO:
+            return_value = deserialize_response(FieldNumber::GET_HEAD_INFO, response_.get_head_info_, buffer, wire_type);
 
             break;
 
-          case id::GET_CHAIN_ID:
-            return_value = deserialize_response(id::GET_CHAIN_ID, response_.get_chain_id_, buffer, wire_type);
+          case FieldNumber::GET_CHAIN_ID:
+            return_value = deserialize_response(FieldNumber::GET_CHAIN_ID, response_.get_chain_id_, buffer, wire_type);
 
             break;
 
-          case id::GET_FORK_HEADS:
-            return_value = deserialize_response(id::GET_FORK_HEADS, response_.get_fork_heads_, buffer, wire_type);
+          case FieldNumber::GET_FORK_HEADS:
+            return_value = deserialize_response(FieldNumber::GET_FORK_HEADS, response_.get_fork_heads_, buffer, wire_type);
 
             break;
 
-          case id::READ_CONTRACT:
-            return_value = deserialize_response(id::READ_CONTRACT, response_.read_contract_, buffer, wire_type);
+          case FieldNumber::READ_CONTRACT:
+            return_value = deserialize_response(FieldNumber::READ_CONTRACT, response_.read_contract_, buffer, wire_type);
 
             break;
 
-          case id::GET_ACCOUNT_NONCE:
-            return_value = deserialize_response(id::GET_ACCOUNT_NONCE, response_.get_account_nonce_, buffer, wire_type);
+          case FieldNumber::GET_ACCOUNT_NONCE:
+            return_value = deserialize_response(FieldNumber::GET_ACCOUNT_NONCE, response_.get_account_nonce_, buffer, wire_type);
 
             break;
 
@@ -3195,7 +3195,7 @@ class chain_response final: public ::EmbeddedProto::MessageInterface
 
 
 
-      id which_response_ = id::NOT_SET;
+      FieldNumber which_response_ = FieldNumber::NOT_SET;
       union response
       {
         response() {}
@@ -3212,9 +3212,9 @@ class chain_response final: public ::EmbeddedProto::MessageInterface
       };
       response response_;
 
-      void init_response(const id field_id)
+      void init_response(const FieldNumber field_id)
       {
-        if(id::NOT_SET != which_response_)
+        if(FieldNumber::NOT_SET != which_response_)
         {
           // First delete the old object in the oneof.
           clear_response();
@@ -3223,49 +3223,49 @@ class chain_response final: public ::EmbeddedProto::MessageInterface
         // C++11 unions only support nontrivial members when you explicitly call the placement new statement.
         switch(field_id)
         {
-          case id::RESERVED:
+          case FieldNumber::RESERVED:
             new(&response_.reserved_) reserved_rpc;
-            which_response_ = id::RESERVED;
+            which_response_ = FieldNumber::RESERVED;
             break;
 
-          case id::ERROR:
+          case FieldNumber::ERROR:
             new(&response_.error_) error_response<error_message_LENGTH, error_data_LENGTH>;
-            which_response_ = id::ERROR;
+            which_response_ = FieldNumber::ERROR;
             break;
 
-          case id::SUBMIT_BLOCK:
+          case FieldNumber::SUBMIT_BLOCK:
             new(&response_.submit_block_) submit_block_response;
-            which_response_ = id::SUBMIT_BLOCK;
+            which_response_ = FieldNumber::SUBMIT_BLOCK;
             break;
 
-          case id::SUBMIT_TRANSACTION:
+          case FieldNumber::SUBMIT_TRANSACTION:
             new(&response_.submit_transaction_) submit_transaction_response;
-            which_response_ = id::SUBMIT_TRANSACTION;
+            which_response_ = FieldNumber::SUBMIT_TRANSACTION;
             break;
 
-          case id::GET_HEAD_INFO:
+          case FieldNumber::GET_HEAD_INFO:
             new(&response_.get_head_info_) get_head_info_response<get_head_info_head_topology_id_LENGTH, get_head_info_head_topology_previous_LENGTH>;
-            which_response_ = id::GET_HEAD_INFO;
+            which_response_ = FieldNumber::GET_HEAD_INFO;
             break;
 
-          case id::GET_CHAIN_ID:
+          case FieldNumber::GET_CHAIN_ID:
             new(&response_.get_chain_id_) get_chain_id_response<get_chain_id_chain_id_LENGTH>;
-            which_response_ = id::GET_CHAIN_ID;
+            which_response_ = FieldNumber::GET_CHAIN_ID;
             break;
 
-          case id::GET_FORK_HEADS:
+          case FieldNumber::GET_FORK_HEADS:
             new(&response_.get_fork_heads_) get_fork_heads_response<get_fork_heads_last_irreversible_block_id_LENGTH, get_fork_heads_last_irreversible_block_previous_LENGTH, get_fork_heads_fork_heads_REP_LENGTH, get_fork_heads_fork_heads_id_LENGTH, get_fork_heads_fork_heads_previous_LENGTH>;
-            which_response_ = id::GET_FORK_HEADS;
+            which_response_ = FieldNumber::GET_FORK_HEADS;
             break;
 
-          case id::READ_CONTRACT:
+          case FieldNumber::READ_CONTRACT:
             new(&response_.read_contract_) read_contract_response<read_contract_result_LENGTH, read_contract_logs_LENGTH>;
-            which_response_ = id::READ_CONTRACT;
+            which_response_ = FieldNumber::READ_CONTRACT;
             break;
 
-          case id::GET_ACCOUNT_NONCE:
+          case FieldNumber::GET_ACCOUNT_NONCE:
             new(&response_.get_account_nonce_) get_account_nonce_response;
-            which_response_ = id::GET_ACCOUNT_NONCE;
+            which_response_ = FieldNumber::GET_ACCOUNT_NONCE;
             break;
 
           default:
@@ -3279,40 +3279,40 @@ class chain_response final: public ::EmbeddedProto::MessageInterface
       {
         switch(which_response_)
         {
-          case id::RESERVED:
+          case FieldNumber::RESERVED:
             response_.reserved_.~reserved_rpc(); // NOSONAR Unions require this.
             break;
-          case id::ERROR:
+          case FieldNumber::ERROR:
             response_.error_.~error_response<error_message_LENGTH, error_data_LENGTH>(); // NOSONAR Unions require this.
             break;
-          case id::SUBMIT_BLOCK:
+          case FieldNumber::SUBMIT_BLOCK:
             response_.submit_block_.~submit_block_response(); // NOSONAR Unions require this.
             break;
-          case id::SUBMIT_TRANSACTION:
+          case FieldNumber::SUBMIT_TRANSACTION:
             response_.submit_transaction_.~submit_transaction_response(); // NOSONAR Unions require this.
             break;
-          case id::GET_HEAD_INFO:
+          case FieldNumber::GET_HEAD_INFO:
             response_.get_head_info_.~get_head_info_response<get_head_info_head_topology_id_LENGTH, get_head_info_head_topology_previous_LENGTH>(); // NOSONAR Unions require this.
             break;
-          case id::GET_CHAIN_ID:
+          case FieldNumber::GET_CHAIN_ID:
             response_.get_chain_id_.~get_chain_id_response<get_chain_id_chain_id_LENGTH>(); // NOSONAR Unions require this.
             break;
-          case id::GET_FORK_HEADS:
+          case FieldNumber::GET_FORK_HEADS:
             response_.get_fork_heads_.~get_fork_heads_response<get_fork_heads_last_irreversible_block_id_LENGTH, get_fork_heads_last_irreversible_block_previous_LENGTH, get_fork_heads_fork_heads_REP_LENGTH, get_fork_heads_fork_heads_id_LENGTH, get_fork_heads_fork_heads_previous_LENGTH>(); // NOSONAR Unions require this.
             break;
-          case id::READ_CONTRACT:
+          case FieldNumber::READ_CONTRACT:
             response_.read_contract_.~read_contract_response<read_contract_result_LENGTH, read_contract_logs_LENGTH>(); // NOSONAR Unions require this.
             break;
-          case id::GET_ACCOUNT_NONCE:
+          case FieldNumber::GET_ACCOUNT_NONCE:
             response_.get_account_nonce_.~get_account_nonce_response(); // NOSONAR Unions require this.
             break;
           default:
             break;
         }
-        which_response_ = id::NOT_SET;
+        which_response_ = FieldNumber::NOT_SET;
       }
 
-      ::EmbeddedProto::Error deserialize_response(const id field_id, ::EmbeddedProto::Field& field,
+      ::EmbeddedProto::Error deserialize_response(const FieldNumber field_id, ::EmbeddedProto::Field& field,
                                     ::EmbeddedProto::ReadBufferInterface& buffer,
                                     const ::EmbeddedProto::WireFormatter::WireType wire_type)
       {

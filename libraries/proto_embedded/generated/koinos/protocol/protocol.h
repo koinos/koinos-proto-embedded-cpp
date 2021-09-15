@@ -67,7 +67,7 @@ class contract_call_bundle final: public ::EmbeddedProto::MessageInterface
 
     ~contract_call_bundle() override = default;
 
-    enum class id : uint32_t
+    enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
       CONTRACT_ID = 1,
@@ -108,12 +108,12 @@ class contract_call_bundle final: public ::EmbeddedProto::MessageInterface
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = contract_id_.serialize_with_id(static_cast<uint32_t>(id::CONTRACT_ID), buffer, false);
+        return_value = contract_id_.serialize_with_id(static_cast<uint32_t>(FieldNumber::CONTRACT_ID), buffer, false);
       }
 
       if((0U != entry_point_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
       {
-        return_value = entry_point_.serialize_with_id(static_cast<uint32_t>(id::ENTRY_POINT), buffer, false);
+        return_value = entry_point_.serialize_with_id(static_cast<uint32_t>(FieldNumber::ENTRY_POINT), buffer, false);
       }
 
       return return_value;
@@ -124,19 +124,19 @@ class contract_call_bundle final: public ::EmbeddedProto::MessageInterface
       ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
       ::EmbeddedProto::WireFormatter::WireType wire_type = ::EmbeddedProto::WireFormatter::WireType::VARINT;
       uint32_t id_number = 0;
-      id id_tag = id::NOT_SET;
+      FieldNumber id_tag = FieldNumber::NOT_SET;
 
       ::EmbeddedProto::Error tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
       while((::EmbeddedProto::Error::NO_ERRORS == return_value) && (::EmbeddedProto::Error::NO_ERRORS == tag_value))
       {
-        id_tag = static_cast<id>(id_number);
+        id_tag = static_cast<FieldNumber>(id_number);
         switch(id_tag)
         {
-          case id::CONTRACT_ID:
+          case FieldNumber::CONTRACT_ID:
             return_value = contract_id_.deserialize_check_type(buffer, wire_type);
             break;
 
-          case id::ENTRY_POINT:
+          case FieldNumber::ENTRY_POINT:
             return_value = entry_point_.deserialize_check_type(buffer, wire_type);
             break;
 
@@ -192,11 +192,11 @@ class system_call_target final: public ::EmbeddedProto::MessageInterface
 
       switch(rhs.get_which_target())
       {
-        case id::THUNK_ID:
+        case FieldNumber::THUNK_ID:
           set_thunk_id(rhs.get_thunk_id());
           break;
 
-        case id::SYSTEM_CALL_BUNDLE:
+        case FieldNumber::SYSTEM_CALL_BUNDLE:
           set_system_call_bundle(rhs.get_system_call_bundle());
           break;
 
@@ -216,11 +216,11 @@ class system_call_target final: public ::EmbeddedProto::MessageInterface
 
       switch(rhs.get_which_target())
       {
-        case id::THUNK_ID:
+        case FieldNumber::THUNK_ID:
           set_thunk_id(rhs.get_thunk_id());
           break;
 
-        case id::SYSTEM_CALL_BUNDLE:
+        case FieldNumber::SYSTEM_CALL_BUNDLE:
           set_system_call_bundle(rhs.get_system_call_bundle());
           break;
 
@@ -232,7 +232,7 @@ class system_call_target final: public ::EmbeddedProto::MessageInterface
 
     ~system_call_target() override = default;
 
-    enum class id : uint32_t
+    enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
       THUNK_ID = 1,
@@ -249,11 +249,11 @@ class system_call_target final: public ::EmbeddedProto::MessageInterface
 
       switch(rhs.get_which_target())
       {
-        case id::THUNK_ID:
+        case FieldNumber::THUNK_ID:
           set_thunk_id(rhs.get_thunk_id());
           break;
 
-        case id::SYSTEM_CALL_BUNDLE:
+        case FieldNumber::SYSTEM_CALL_BUNDLE:
           set_system_call_bundle(rhs.get_system_call_bundle());
           break;
 
@@ -274,11 +274,11 @@ class system_call_target final: public ::EmbeddedProto::MessageInterface
 
       switch(rhs.get_which_target())
       {
-        case id::THUNK_ID:
+        case FieldNumber::THUNK_ID:
           set_thunk_id(rhs.get_thunk_id());
           break;
 
-        case id::SYSTEM_CALL_BUNDLE:
+        case FieldNumber::SYSTEM_CALL_BUNDLE:
           set_system_call_bundle(rhs.get_system_call_bundle());
           break;
 
@@ -289,45 +289,45 @@ class system_call_target final: public ::EmbeddedProto::MessageInterface
       return *this;
     }
 
-    id get_which_target() const { return which_target_; }
+    FieldNumber get_which_target() const { return which_target_; }
 
     inline void clear_thunk_id()
     {
-      if(id::THUNK_ID == which_target_)
+      if(FieldNumber::THUNK_ID == which_target_)
       {
-        which_target_ = id::NOT_SET;
+        which_target_ = FieldNumber::NOT_SET;
         target_.thunk_id_.~uint32(); // NOSONAR Unions require this.
       }
     }
     inline void set_thunk_id(const EmbeddedProto::uint32::FIELD_TYPE& value)
     {
-      if(id::THUNK_ID != which_target_)
+      if(FieldNumber::THUNK_ID != which_target_)
       {
-        init_target(id::THUNK_ID);
+        init_target(FieldNumber::THUNK_ID);
       }
       target_.thunk_id_.set(value);
     }
     inline void set_thunk_id(const EmbeddedProto::uint32::FIELD_TYPE&& value)
     {
-      if(id::THUNK_ID != which_target_)
+      if(FieldNumber::THUNK_ID != which_target_)
       {
-        init_target(id::THUNK_ID);
+        init_target(FieldNumber::THUNK_ID);
       }
       target_.thunk_id_.set(value);
     }
     inline void set_thunk_id(const EmbeddedProto::uint32& value)
     {
-      if(id::THUNK_ID != which_target_)
+      if(FieldNumber::THUNK_ID != which_target_)
       {
-        init_target(id::THUNK_ID);
+        init_target(FieldNumber::THUNK_ID);
       }
       target_.thunk_id_ = value;
     }
     inline void set_thunk_id(const EmbeddedProto::uint32&& value)
     {
-      if(id::THUNK_ID != which_target_)
+      if(FieldNumber::THUNK_ID != which_target_)
       {
-        init_target(id::THUNK_ID);
+        init_target(FieldNumber::THUNK_ID);
       }
       target_.thunk_id_ = value;
     }
@@ -336,33 +336,33 @@ class system_call_target final: public ::EmbeddedProto::MessageInterface
 
     inline void clear_system_call_bundle()
     {
-      if(id::SYSTEM_CALL_BUNDLE == which_target_)
+      if(FieldNumber::SYSTEM_CALL_BUNDLE == which_target_)
       {
-        which_target_ = id::NOT_SET;
+        which_target_ = FieldNumber::NOT_SET;
         target_.system_call_bundle_.~contract_call_bundle<system_call_bundle_contract_id_LENGTH>();
       }
     }
     inline void set_system_call_bundle(const contract_call_bundle<system_call_bundle_contract_id_LENGTH>& value)
     {
-      if(id::SYSTEM_CALL_BUNDLE != which_target_)
+      if(FieldNumber::SYSTEM_CALL_BUNDLE != which_target_)
       {
-        init_target(id::SYSTEM_CALL_BUNDLE);
+        init_target(FieldNumber::SYSTEM_CALL_BUNDLE);
       }
       target_.system_call_bundle_ = value;
     }
     inline void set_system_call_bundle(const contract_call_bundle<system_call_bundle_contract_id_LENGTH>&& value)
     {
-      if(id::SYSTEM_CALL_BUNDLE != which_target_)
+      if(FieldNumber::SYSTEM_CALL_BUNDLE != which_target_)
       {
-        init_target(id::SYSTEM_CALL_BUNDLE);
+        init_target(FieldNumber::SYSTEM_CALL_BUNDLE);
       }
       target_.system_call_bundle_ = value;
     }
     inline contract_call_bundle<system_call_bundle_contract_id_LENGTH>& mutable_system_call_bundle()
     {
-      if(id::SYSTEM_CALL_BUNDLE != which_target_)
+      if(FieldNumber::SYSTEM_CALL_BUNDLE != which_target_)
       {
-        init_target(id::SYSTEM_CALL_BUNDLE);
+        init_target(FieldNumber::SYSTEM_CALL_BUNDLE);
       }
       return target_.system_call_bundle_;
     }
@@ -376,17 +376,17 @@ class system_call_target final: public ::EmbeddedProto::MessageInterface
 
       switch(which_target_)
       {
-        case id::THUNK_ID:
+        case FieldNumber::THUNK_ID:
           if((0U != target_.thunk_id_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
           {
-            return_value = target_.thunk_id_.serialize_with_id(static_cast<uint32_t>(id::THUNK_ID), buffer, false);
+            return_value = target_.thunk_id_.serialize_with_id(static_cast<uint32_t>(FieldNumber::THUNK_ID), buffer, false);
           }
           break;
 
-        case id::SYSTEM_CALL_BUNDLE:
+        case FieldNumber::SYSTEM_CALL_BUNDLE:
           if(::EmbeddedProto::Error::NO_ERRORS == return_value)
           {
-            return_value = target_.system_call_bundle_.serialize_with_id(static_cast<uint32_t>(id::SYSTEM_CALL_BUNDLE), buffer, false);
+            return_value = target_.system_call_bundle_.serialize_with_id(static_cast<uint32_t>(FieldNumber::SYSTEM_CALL_BUNDLE), buffer, false);
           }
           break;
 
@@ -402,20 +402,20 @@ class system_call_target final: public ::EmbeddedProto::MessageInterface
       ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
       ::EmbeddedProto::WireFormatter::WireType wire_type = ::EmbeddedProto::WireFormatter::WireType::VARINT;
       uint32_t id_number = 0;
-      id id_tag = id::NOT_SET;
+      FieldNumber id_tag = FieldNumber::NOT_SET;
 
       ::EmbeddedProto::Error tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
       while((::EmbeddedProto::Error::NO_ERRORS == return_value) && (::EmbeddedProto::Error::NO_ERRORS == tag_value))
       {
-        id_tag = static_cast<id>(id_number);
+        id_tag = static_cast<FieldNumber>(id_number);
         switch(id_tag)
         {
-          case id::THUNK_ID:
-            return_value = deserialize_target(id::THUNK_ID, target_.thunk_id_, buffer, wire_type);
+          case FieldNumber::THUNK_ID:
+            return_value = deserialize_target(FieldNumber::THUNK_ID, target_.thunk_id_, buffer, wire_type);
             break;
 
-          case id::SYSTEM_CALL_BUNDLE:
-            return_value = deserialize_target(id::SYSTEM_CALL_BUNDLE, target_.system_call_bundle_, buffer, wire_type);
+          case FieldNumber::SYSTEM_CALL_BUNDLE:
+            return_value = deserialize_target(FieldNumber::SYSTEM_CALL_BUNDLE, target_.system_call_bundle_, buffer, wire_type);
 
             break;
 
@@ -451,7 +451,7 @@ class system_call_target final: public ::EmbeddedProto::MessageInterface
 
 
 
-      id which_target_ = id::NOT_SET;
+      FieldNumber which_target_ = FieldNumber::NOT_SET;
       union target
       {
         target() {}
@@ -461,9 +461,9 @@ class system_call_target final: public ::EmbeddedProto::MessageInterface
       };
       target target_;
 
-      void init_target(const id field_id)
+      void init_target(const FieldNumber field_id)
       {
-        if(id::NOT_SET != which_target_)
+        if(FieldNumber::NOT_SET != which_target_)
         {
           // First delete the old object in the oneof.
           clear_target();
@@ -472,14 +472,14 @@ class system_call_target final: public ::EmbeddedProto::MessageInterface
         // C++11 unions only support nontrivial members when you explicitly call the placement new statement.
         switch(field_id)
         {
-          case id::THUNK_ID:
+          case FieldNumber::THUNK_ID:
             new(&target_.thunk_id_) EmbeddedProto::uint32;
-            which_target_ = id::THUNK_ID;
+            which_target_ = FieldNumber::THUNK_ID;
             break;
 
-          case id::SYSTEM_CALL_BUNDLE:
+          case FieldNumber::SYSTEM_CALL_BUNDLE:
             new(&target_.system_call_bundle_) contract_call_bundle<system_call_bundle_contract_id_LENGTH>;
-            which_target_ = id::SYSTEM_CALL_BUNDLE;
+            which_target_ = FieldNumber::SYSTEM_CALL_BUNDLE;
             break;
 
           default:
@@ -493,19 +493,19 @@ class system_call_target final: public ::EmbeddedProto::MessageInterface
       {
         switch(which_target_)
         {
-          case id::THUNK_ID:
+          case FieldNumber::THUNK_ID:
             target_.thunk_id_.~uint32(); // NOSONAR Unions require this.
             break;
-          case id::SYSTEM_CALL_BUNDLE:
+          case FieldNumber::SYSTEM_CALL_BUNDLE:
             target_.system_call_bundle_.~contract_call_bundle<system_call_bundle_contract_id_LENGTH>(); // NOSONAR Unions require this.
             break;
           default:
             break;
         }
-        which_target_ = id::NOT_SET;
+        which_target_ = FieldNumber::NOT_SET;
       }
 
-      ::EmbeddedProto::Error deserialize_target(const id field_id, ::EmbeddedProto::Field& field,
+      ::EmbeddedProto::Error deserialize_target(const FieldNumber field_id, ::EmbeddedProto::Field& field,
                                     ::EmbeddedProto::ReadBufferInterface& buffer,
                                     const ::EmbeddedProto::WireFormatter::WireType wire_type)
       {
@@ -543,7 +543,7 @@ class upload_contract_operation final: public ::EmbeddedProto::MessageInterface
 
     ~upload_contract_operation() override = default;
 
-    enum class id : uint32_t
+    enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
       CONTRACT_ID = 1,
@@ -583,12 +583,12 @@ class upload_contract_operation final: public ::EmbeddedProto::MessageInterface
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = contract_id_.serialize_with_id(static_cast<uint32_t>(id::CONTRACT_ID), buffer, false);
+        return_value = contract_id_.serialize_with_id(static_cast<uint32_t>(FieldNumber::CONTRACT_ID), buffer, false);
       }
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = bytecode_.serialize_with_id(static_cast<uint32_t>(id::BYTECODE), buffer, false);
+        return_value = bytecode_.serialize_with_id(static_cast<uint32_t>(FieldNumber::BYTECODE), buffer, false);
       }
 
       return return_value;
@@ -599,19 +599,19 @@ class upload_contract_operation final: public ::EmbeddedProto::MessageInterface
       ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
       ::EmbeddedProto::WireFormatter::WireType wire_type = ::EmbeddedProto::WireFormatter::WireType::VARINT;
       uint32_t id_number = 0;
-      id id_tag = id::NOT_SET;
+      FieldNumber id_tag = FieldNumber::NOT_SET;
 
       ::EmbeddedProto::Error tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
       while((::EmbeddedProto::Error::NO_ERRORS == return_value) && (::EmbeddedProto::Error::NO_ERRORS == tag_value))
       {
-        id_tag = static_cast<id>(id_number);
+        id_tag = static_cast<FieldNumber>(id_number);
         switch(id_tag)
         {
-          case id::CONTRACT_ID:
+          case FieldNumber::CONTRACT_ID:
             return_value = contract_id_.deserialize_check_type(buffer, wire_type);
             break;
 
-          case id::BYTECODE:
+          case FieldNumber::BYTECODE:
             return_value = bytecode_.deserialize_check_type(buffer, wire_type);
             break;
 
@@ -674,7 +674,7 @@ class call_contract_operation final: public ::EmbeddedProto::MessageInterface
 
     ~call_contract_operation() override = default;
 
-    enum class id : uint32_t
+    enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
       CONTRACT_ID = 1,
@@ -724,17 +724,17 @@ class call_contract_operation final: public ::EmbeddedProto::MessageInterface
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = contract_id_.serialize_with_id(static_cast<uint32_t>(id::CONTRACT_ID), buffer, false);
+        return_value = contract_id_.serialize_with_id(static_cast<uint32_t>(FieldNumber::CONTRACT_ID), buffer, false);
       }
 
       if((0U != entry_point_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
       {
-        return_value = entry_point_.serialize_with_id(static_cast<uint32_t>(id::ENTRY_POINT), buffer, false);
+        return_value = entry_point_.serialize_with_id(static_cast<uint32_t>(FieldNumber::ENTRY_POINT), buffer, false);
       }
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = args_.serialize_with_id(static_cast<uint32_t>(id::ARGS), buffer, false);
+        return_value = args_.serialize_with_id(static_cast<uint32_t>(FieldNumber::ARGS), buffer, false);
       }
 
       return return_value;
@@ -745,23 +745,23 @@ class call_contract_operation final: public ::EmbeddedProto::MessageInterface
       ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
       ::EmbeddedProto::WireFormatter::WireType wire_type = ::EmbeddedProto::WireFormatter::WireType::VARINT;
       uint32_t id_number = 0;
-      id id_tag = id::NOT_SET;
+      FieldNumber id_tag = FieldNumber::NOT_SET;
 
       ::EmbeddedProto::Error tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
       while((::EmbeddedProto::Error::NO_ERRORS == return_value) && (::EmbeddedProto::Error::NO_ERRORS == tag_value))
       {
-        id_tag = static_cast<id>(id_number);
+        id_tag = static_cast<FieldNumber>(id_number);
         switch(id_tag)
         {
-          case id::CONTRACT_ID:
+          case FieldNumber::CONTRACT_ID:
             return_value = contract_id_.deserialize_check_type(buffer, wire_type);
             break;
 
-          case id::ENTRY_POINT:
+          case FieldNumber::ENTRY_POINT:
             return_value = entry_point_.deserialize_check_type(buffer, wire_type);
             break;
 
-          case id::ARGS:
+          case FieldNumber::ARGS:
             return_value = args_.deserialize_check_type(buffer, wire_type);
             break;
 
@@ -823,7 +823,7 @@ class set_system_call_operation final: public ::EmbeddedProto::MessageInterface
 
     ~set_system_call_operation() override = default;
 
-    enum class id : uint32_t
+    enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
       CALL_ID = 1,
@@ -865,12 +865,12 @@ class set_system_call_operation final: public ::EmbeddedProto::MessageInterface
 
       if((0U != call_id_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
       {
-        return_value = call_id_.serialize_with_id(static_cast<uint32_t>(id::CALL_ID), buffer, false);
+        return_value = call_id_.serialize_with_id(static_cast<uint32_t>(FieldNumber::CALL_ID), buffer, false);
       }
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = target_.serialize_with_id(static_cast<uint32_t>(id::TARGET), buffer, false);
+        return_value = target_.serialize_with_id(static_cast<uint32_t>(FieldNumber::TARGET), buffer, false);
       }
 
       return return_value;
@@ -881,19 +881,19 @@ class set_system_call_operation final: public ::EmbeddedProto::MessageInterface
       ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
       ::EmbeddedProto::WireFormatter::WireType wire_type = ::EmbeddedProto::WireFormatter::WireType::VARINT;
       uint32_t id_number = 0;
-      id id_tag = id::NOT_SET;
+      FieldNumber id_tag = FieldNumber::NOT_SET;
 
       ::EmbeddedProto::Error tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
       while((::EmbeddedProto::Error::NO_ERRORS == return_value) && (::EmbeddedProto::Error::NO_ERRORS == tag_value))
       {
-        id_tag = static_cast<id>(id_number);
+        id_tag = static_cast<FieldNumber>(id_number);
         switch(id_tag)
         {
-          case id::CALL_ID:
+          case FieldNumber::CALL_ID:
             return_value = call_id_.deserialize_check_type(buffer, wire_type);
             break;
 
-          case id::TARGET:
+          case FieldNumber::TARGET:
             return_value = target_.deserialize_check_type(buffer, wire_type);
             break;
 
@@ -953,15 +953,15 @@ class operation final: public ::EmbeddedProto::MessageInterface
 
       switch(rhs.get_which_op())
       {
-        case id::UPLOAD_CONTRACT:
+        case FieldNumber::UPLOAD_CONTRACT:
           set_upload_contract(rhs.get_upload_contract());
           break;
 
-        case id::CALL_CONTRACT:
+        case FieldNumber::CALL_CONTRACT:
           set_call_contract(rhs.get_call_contract());
           break;
 
-        case id::SET_SYSTEM_CALL:
+        case FieldNumber::SET_SYSTEM_CALL:
           set_set_system_call(rhs.get_set_system_call());
           break;
 
@@ -981,15 +981,15 @@ class operation final: public ::EmbeddedProto::MessageInterface
 
       switch(rhs.get_which_op())
       {
-        case id::UPLOAD_CONTRACT:
+        case FieldNumber::UPLOAD_CONTRACT:
           set_upload_contract(rhs.get_upload_contract());
           break;
 
-        case id::CALL_CONTRACT:
+        case FieldNumber::CALL_CONTRACT:
           set_call_contract(rhs.get_call_contract());
           break;
 
-        case id::SET_SYSTEM_CALL:
+        case FieldNumber::SET_SYSTEM_CALL:
           set_set_system_call(rhs.get_set_system_call());
           break;
 
@@ -1001,7 +1001,7 @@ class operation final: public ::EmbeddedProto::MessageInterface
 
     ~operation() override = default;
 
-    enum class id : uint32_t
+    enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
       UPLOAD_CONTRACT = 1,
@@ -1019,15 +1019,15 @@ class operation final: public ::EmbeddedProto::MessageInterface
 
       switch(rhs.get_which_op())
       {
-        case id::UPLOAD_CONTRACT:
+        case FieldNumber::UPLOAD_CONTRACT:
           set_upload_contract(rhs.get_upload_contract());
           break;
 
-        case id::CALL_CONTRACT:
+        case FieldNumber::CALL_CONTRACT:
           set_call_contract(rhs.get_call_contract());
           break;
 
-        case id::SET_SYSTEM_CALL:
+        case FieldNumber::SET_SYSTEM_CALL:
           set_set_system_call(rhs.get_set_system_call());
           break;
 
@@ -1048,15 +1048,15 @@ class operation final: public ::EmbeddedProto::MessageInterface
 
       switch(rhs.get_which_op())
       {
-        case id::UPLOAD_CONTRACT:
+        case FieldNumber::UPLOAD_CONTRACT:
           set_upload_contract(rhs.get_upload_contract());
           break;
 
-        case id::CALL_CONTRACT:
+        case FieldNumber::CALL_CONTRACT:
           set_call_contract(rhs.get_call_contract());
           break;
 
-        case id::SET_SYSTEM_CALL:
+        case FieldNumber::SET_SYSTEM_CALL:
           set_set_system_call(rhs.get_set_system_call());
           break;
 
@@ -1067,37 +1067,37 @@ class operation final: public ::EmbeddedProto::MessageInterface
       return *this;
     }
 
-    id get_which_op() const { return which_op_; }
+    FieldNumber get_which_op() const { return which_op_; }
 
     inline void clear_upload_contract()
     {
-      if(id::UPLOAD_CONTRACT == which_op_)
+      if(FieldNumber::UPLOAD_CONTRACT == which_op_)
       {
-        which_op_ = id::NOT_SET;
+        which_op_ = FieldNumber::NOT_SET;
         op_.upload_contract_.~upload_contract_operation<upload_contract_contract_id_LENGTH, upload_contract_bytecode_LENGTH>();
       }
     }
     inline void set_upload_contract(const upload_contract_operation<upload_contract_contract_id_LENGTH, upload_contract_bytecode_LENGTH>& value)
     {
-      if(id::UPLOAD_CONTRACT != which_op_)
+      if(FieldNumber::UPLOAD_CONTRACT != which_op_)
       {
-        init_op(id::UPLOAD_CONTRACT);
+        init_op(FieldNumber::UPLOAD_CONTRACT);
       }
       op_.upload_contract_ = value;
     }
     inline void set_upload_contract(const upload_contract_operation<upload_contract_contract_id_LENGTH, upload_contract_bytecode_LENGTH>&& value)
     {
-      if(id::UPLOAD_CONTRACT != which_op_)
+      if(FieldNumber::UPLOAD_CONTRACT != which_op_)
       {
-        init_op(id::UPLOAD_CONTRACT);
+        init_op(FieldNumber::UPLOAD_CONTRACT);
       }
       op_.upload_contract_ = value;
     }
     inline upload_contract_operation<upload_contract_contract_id_LENGTH, upload_contract_bytecode_LENGTH>& mutable_upload_contract()
     {
-      if(id::UPLOAD_CONTRACT != which_op_)
+      if(FieldNumber::UPLOAD_CONTRACT != which_op_)
       {
-        init_op(id::UPLOAD_CONTRACT);
+        init_op(FieldNumber::UPLOAD_CONTRACT);
       }
       return op_.upload_contract_;
     }
@@ -1106,33 +1106,33 @@ class operation final: public ::EmbeddedProto::MessageInterface
 
     inline void clear_call_contract()
     {
-      if(id::CALL_CONTRACT == which_op_)
+      if(FieldNumber::CALL_CONTRACT == which_op_)
       {
-        which_op_ = id::NOT_SET;
+        which_op_ = FieldNumber::NOT_SET;
         op_.call_contract_.~call_contract_operation<call_contract_contract_id_LENGTH, call_contract_args_LENGTH>();
       }
     }
     inline void set_call_contract(const call_contract_operation<call_contract_contract_id_LENGTH, call_contract_args_LENGTH>& value)
     {
-      if(id::CALL_CONTRACT != which_op_)
+      if(FieldNumber::CALL_CONTRACT != which_op_)
       {
-        init_op(id::CALL_CONTRACT);
+        init_op(FieldNumber::CALL_CONTRACT);
       }
       op_.call_contract_ = value;
     }
     inline void set_call_contract(const call_contract_operation<call_contract_contract_id_LENGTH, call_contract_args_LENGTH>&& value)
     {
-      if(id::CALL_CONTRACT != which_op_)
+      if(FieldNumber::CALL_CONTRACT != which_op_)
       {
-        init_op(id::CALL_CONTRACT);
+        init_op(FieldNumber::CALL_CONTRACT);
       }
       op_.call_contract_ = value;
     }
     inline call_contract_operation<call_contract_contract_id_LENGTH, call_contract_args_LENGTH>& mutable_call_contract()
     {
-      if(id::CALL_CONTRACT != which_op_)
+      if(FieldNumber::CALL_CONTRACT != which_op_)
       {
-        init_op(id::CALL_CONTRACT);
+        init_op(FieldNumber::CALL_CONTRACT);
       }
       return op_.call_contract_;
     }
@@ -1141,33 +1141,33 @@ class operation final: public ::EmbeddedProto::MessageInterface
 
     inline void clear_set_system_call()
     {
-      if(id::SET_SYSTEM_CALL == which_op_)
+      if(FieldNumber::SET_SYSTEM_CALL == which_op_)
       {
-        which_op_ = id::NOT_SET;
+        which_op_ = FieldNumber::NOT_SET;
         op_.set_system_call_.~set_system_call_operation<set_system_call_target_system_call_bundle_contract_id_LENGTH>();
       }
     }
     inline void set_set_system_call(const set_system_call_operation<set_system_call_target_system_call_bundle_contract_id_LENGTH>& value)
     {
-      if(id::SET_SYSTEM_CALL != which_op_)
+      if(FieldNumber::SET_SYSTEM_CALL != which_op_)
       {
-        init_op(id::SET_SYSTEM_CALL);
+        init_op(FieldNumber::SET_SYSTEM_CALL);
       }
       op_.set_system_call_ = value;
     }
     inline void set_set_system_call(const set_system_call_operation<set_system_call_target_system_call_bundle_contract_id_LENGTH>&& value)
     {
-      if(id::SET_SYSTEM_CALL != which_op_)
+      if(FieldNumber::SET_SYSTEM_CALL != which_op_)
       {
-        init_op(id::SET_SYSTEM_CALL);
+        init_op(FieldNumber::SET_SYSTEM_CALL);
       }
       op_.set_system_call_ = value;
     }
     inline set_system_call_operation<set_system_call_target_system_call_bundle_contract_id_LENGTH>& mutable_set_system_call()
     {
-      if(id::SET_SYSTEM_CALL != which_op_)
+      if(FieldNumber::SET_SYSTEM_CALL != which_op_)
       {
-        init_op(id::SET_SYSTEM_CALL);
+        init_op(FieldNumber::SET_SYSTEM_CALL);
       }
       return op_.set_system_call_;
     }
@@ -1181,24 +1181,24 @@ class operation final: public ::EmbeddedProto::MessageInterface
 
       switch(which_op_)
       {
-        case id::UPLOAD_CONTRACT:
+        case FieldNumber::UPLOAD_CONTRACT:
           if(::EmbeddedProto::Error::NO_ERRORS == return_value)
           {
-            return_value = op_.upload_contract_.serialize_with_id(static_cast<uint32_t>(id::UPLOAD_CONTRACT), buffer, false);
+            return_value = op_.upload_contract_.serialize_with_id(static_cast<uint32_t>(FieldNumber::UPLOAD_CONTRACT), buffer, false);
           }
           break;
 
-        case id::CALL_CONTRACT:
+        case FieldNumber::CALL_CONTRACT:
           if(::EmbeddedProto::Error::NO_ERRORS == return_value)
           {
-            return_value = op_.call_contract_.serialize_with_id(static_cast<uint32_t>(id::CALL_CONTRACT), buffer, false);
+            return_value = op_.call_contract_.serialize_with_id(static_cast<uint32_t>(FieldNumber::CALL_CONTRACT), buffer, false);
           }
           break;
 
-        case id::SET_SYSTEM_CALL:
+        case FieldNumber::SET_SYSTEM_CALL:
           if(::EmbeddedProto::Error::NO_ERRORS == return_value)
           {
-            return_value = op_.set_system_call_.serialize_with_id(static_cast<uint32_t>(id::SET_SYSTEM_CALL), buffer, false);
+            return_value = op_.set_system_call_.serialize_with_id(static_cast<uint32_t>(FieldNumber::SET_SYSTEM_CALL), buffer, false);
           }
           break;
 
@@ -1214,26 +1214,26 @@ class operation final: public ::EmbeddedProto::MessageInterface
       ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
       ::EmbeddedProto::WireFormatter::WireType wire_type = ::EmbeddedProto::WireFormatter::WireType::VARINT;
       uint32_t id_number = 0;
-      id id_tag = id::NOT_SET;
+      FieldNumber id_tag = FieldNumber::NOT_SET;
 
       ::EmbeddedProto::Error tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
       while((::EmbeddedProto::Error::NO_ERRORS == return_value) && (::EmbeddedProto::Error::NO_ERRORS == tag_value))
       {
-        id_tag = static_cast<id>(id_number);
+        id_tag = static_cast<FieldNumber>(id_number);
         switch(id_tag)
         {
-          case id::UPLOAD_CONTRACT:
-            return_value = deserialize_op(id::UPLOAD_CONTRACT, op_.upload_contract_, buffer, wire_type);
+          case FieldNumber::UPLOAD_CONTRACT:
+            return_value = deserialize_op(FieldNumber::UPLOAD_CONTRACT, op_.upload_contract_, buffer, wire_type);
 
             break;
 
-          case id::CALL_CONTRACT:
-            return_value = deserialize_op(id::CALL_CONTRACT, op_.call_contract_, buffer, wire_type);
+          case FieldNumber::CALL_CONTRACT:
+            return_value = deserialize_op(FieldNumber::CALL_CONTRACT, op_.call_contract_, buffer, wire_type);
 
             break;
 
-          case id::SET_SYSTEM_CALL:
-            return_value = deserialize_op(id::SET_SYSTEM_CALL, op_.set_system_call_, buffer, wire_type);
+          case FieldNumber::SET_SYSTEM_CALL:
+            return_value = deserialize_op(FieldNumber::SET_SYSTEM_CALL, op_.set_system_call_, buffer, wire_type);
 
             break;
 
@@ -1269,7 +1269,7 @@ class operation final: public ::EmbeddedProto::MessageInterface
 
 
 
-      id which_op_ = id::NOT_SET;
+      FieldNumber which_op_ = FieldNumber::NOT_SET;
       union op
       {
         op() {}
@@ -1280,9 +1280,9 @@ class operation final: public ::EmbeddedProto::MessageInterface
       };
       op op_;
 
-      void init_op(const id field_id)
+      void init_op(const FieldNumber field_id)
       {
-        if(id::NOT_SET != which_op_)
+        if(FieldNumber::NOT_SET != which_op_)
         {
           // First delete the old object in the oneof.
           clear_op();
@@ -1291,19 +1291,19 @@ class operation final: public ::EmbeddedProto::MessageInterface
         // C++11 unions only support nontrivial members when you explicitly call the placement new statement.
         switch(field_id)
         {
-          case id::UPLOAD_CONTRACT:
+          case FieldNumber::UPLOAD_CONTRACT:
             new(&op_.upload_contract_) upload_contract_operation<upload_contract_contract_id_LENGTH, upload_contract_bytecode_LENGTH>;
-            which_op_ = id::UPLOAD_CONTRACT;
+            which_op_ = FieldNumber::UPLOAD_CONTRACT;
             break;
 
-          case id::CALL_CONTRACT:
+          case FieldNumber::CALL_CONTRACT:
             new(&op_.call_contract_) call_contract_operation<call_contract_contract_id_LENGTH, call_contract_args_LENGTH>;
-            which_op_ = id::CALL_CONTRACT;
+            which_op_ = FieldNumber::CALL_CONTRACT;
             break;
 
-          case id::SET_SYSTEM_CALL:
+          case FieldNumber::SET_SYSTEM_CALL:
             new(&op_.set_system_call_) set_system_call_operation<set_system_call_target_system_call_bundle_contract_id_LENGTH>;
-            which_op_ = id::SET_SYSTEM_CALL;
+            which_op_ = FieldNumber::SET_SYSTEM_CALL;
             break;
 
           default:
@@ -1317,22 +1317,22 @@ class operation final: public ::EmbeddedProto::MessageInterface
       {
         switch(which_op_)
         {
-          case id::UPLOAD_CONTRACT:
+          case FieldNumber::UPLOAD_CONTRACT:
             op_.upload_contract_.~upload_contract_operation<upload_contract_contract_id_LENGTH, upload_contract_bytecode_LENGTH>(); // NOSONAR Unions require this.
             break;
-          case id::CALL_CONTRACT:
+          case FieldNumber::CALL_CONTRACT:
             op_.call_contract_.~call_contract_operation<call_contract_contract_id_LENGTH, call_contract_args_LENGTH>(); // NOSONAR Unions require this.
             break;
-          case id::SET_SYSTEM_CALL:
+          case FieldNumber::SET_SYSTEM_CALL:
             op_.set_system_call_.~set_system_call_operation<set_system_call_target_system_call_bundle_contract_id_LENGTH>(); // NOSONAR Unions require this.
             break;
           default:
             break;
         }
-        which_op_ = id::NOT_SET;
+        which_op_ = FieldNumber::NOT_SET;
       }
 
-      ::EmbeddedProto::Error deserialize_op(const id field_id, ::EmbeddedProto::Field& field,
+      ::EmbeddedProto::Error deserialize_op(const FieldNumber field_id, ::EmbeddedProto::Field& field,
                                     ::EmbeddedProto::ReadBufferInterface& buffer,
                                     const ::EmbeddedProto::WireFormatter::WireType wire_type)
       {
@@ -1376,7 +1376,7 @@ class active_transaction_data final: public ::EmbeddedProto::MessageInterface
 
     ~active_transaction_data() override = default;
 
-    enum class id : uint32_t
+    enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
       RESOURCE_LIMIT = 1,
@@ -1432,17 +1432,17 @@ class active_transaction_data final: public ::EmbeddedProto::MessageInterface
 
       if((0U != resource_limit_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
       {
-        return_value = resource_limit_.serialize_with_id(static_cast<uint32_t>(id::RESOURCE_LIMIT), buffer, false);
+        return_value = resource_limit_.serialize_with_id(static_cast<uint32_t>(FieldNumber::RESOURCE_LIMIT), buffer, false);
       }
 
       if((0U != nonce_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
       {
-        return_value = nonce_.serialize_with_id(static_cast<uint32_t>(id::NONCE), buffer, false);
+        return_value = nonce_.serialize_with_id(static_cast<uint32_t>(FieldNumber::NONCE), buffer, false);
       }
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = operations_.serialize_with_id(static_cast<uint32_t>(id::OPERATIONS), buffer, false);
+        return_value = operations_.serialize_with_id(static_cast<uint32_t>(FieldNumber::OPERATIONS), buffer, false);
       }
 
       return return_value;
@@ -1453,23 +1453,23 @@ class active_transaction_data final: public ::EmbeddedProto::MessageInterface
       ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
       ::EmbeddedProto::WireFormatter::WireType wire_type = ::EmbeddedProto::WireFormatter::WireType::VARINT;
       uint32_t id_number = 0;
-      id id_tag = id::NOT_SET;
+      FieldNumber id_tag = FieldNumber::NOT_SET;
 
       ::EmbeddedProto::Error tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
       while((::EmbeddedProto::Error::NO_ERRORS == return_value) && (::EmbeddedProto::Error::NO_ERRORS == tag_value))
       {
-        id_tag = static_cast<id>(id_number);
+        id_tag = static_cast<FieldNumber>(id_number);
         switch(id_tag)
         {
-          case id::RESOURCE_LIMIT:
+          case FieldNumber::RESOURCE_LIMIT:
             return_value = resource_limit_.deserialize_check_type(buffer, wire_type);
             break;
 
-          case id::NONCE:
+          case FieldNumber::NONCE:
             return_value = nonce_.deserialize_check_type(buffer, wire_type);
             break;
 
-          case id::OPERATIONS:
+          case FieldNumber::OPERATIONS:
             return_value = operations_.deserialize_check_type(buffer, wire_type);
             break;
 
@@ -1526,7 +1526,7 @@ class passive_transaction_data final: public ::EmbeddedProto::MessageInterface
 
     ~passive_transaction_data() override = default;
 
-    enum class id : uint32_t
+    enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
     };
@@ -1554,12 +1554,12 @@ class passive_transaction_data final: public ::EmbeddedProto::MessageInterface
       ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
       ::EmbeddedProto::WireFormatter::WireType wire_type = ::EmbeddedProto::WireFormatter::WireType::VARINT;
       uint32_t id_number = 0;
-      id id_tag = id::NOT_SET;
+      FieldNumber id_tag = FieldNumber::NOT_SET;
 
       ::EmbeddedProto::Error tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
       while((::EmbeddedProto::Error::NO_ERRORS == return_value) && (::EmbeddedProto::Error::NO_ERRORS == tag_value))
       {
-        id_tag = static_cast<id>(id_number);
+        id_tag = static_cast<FieldNumber>(id_number);
         switch(id_tag)
         {
           default:
@@ -1621,7 +1621,7 @@ class transaction final: public ::EmbeddedProto::MessageInterface
 
     ~transaction() override = default;
 
-    enum class id : uint32_t
+    enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
       ID = 1,
@@ -1679,22 +1679,22 @@ class transaction final: public ::EmbeddedProto::MessageInterface
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = id_.serialize_with_id(static_cast<uint32_t>(id::ID), buffer, false);
+        return_value = id_.serialize_with_id(static_cast<uint32_t>(FieldNumber::ID), buffer, false);
       }
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = active_.serialize_with_id(static_cast<uint32_t>(id::ACTIVE), buffer, false);
+        return_value = active_.serialize_with_id(static_cast<uint32_t>(FieldNumber::ACTIVE), buffer, false);
       }
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = passive_.serialize_with_id(static_cast<uint32_t>(id::PASSIVE), buffer, false);
+        return_value = passive_.serialize_with_id(static_cast<uint32_t>(FieldNumber::PASSIVE), buffer, false);
       }
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = signature_data_.serialize_with_id(static_cast<uint32_t>(id::SIGNATURE_DATA), buffer, false);
+        return_value = signature_data_.serialize_with_id(static_cast<uint32_t>(FieldNumber::SIGNATURE_DATA), buffer, false);
       }
 
       return return_value;
@@ -1705,27 +1705,27 @@ class transaction final: public ::EmbeddedProto::MessageInterface
       ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
       ::EmbeddedProto::WireFormatter::WireType wire_type = ::EmbeddedProto::WireFormatter::WireType::VARINT;
       uint32_t id_number = 0;
-      id id_tag = id::NOT_SET;
+      FieldNumber id_tag = FieldNumber::NOT_SET;
 
       ::EmbeddedProto::Error tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
       while((::EmbeddedProto::Error::NO_ERRORS == return_value) && (::EmbeddedProto::Error::NO_ERRORS == tag_value))
       {
-        id_tag = static_cast<id>(id_number);
+        id_tag = static_cast<FieldNumber>(id_number);
         switch(id_tag)
         {
-          case id::ID:
+          case FieldNumber::ID:
             return_value = id_.deserialize_check_type(buffer, wire_type);
             break;
 
-          case id::ACTIVE:
+          case FieldNumber::ACTIVE:
             return_value = active_.deserialize_check_type(buffer, wire_type);
             break;
 
-          case id::PASSIVE:
+          case FieldNumber::PASSIVE:
             return_value = passive_.deserialize_check_type(buffer, wire_type);
             break;
 
-          case id::SIGNATURE_DATA:
+          case FieldNumber::SIGNATURE_DATA:
             return_value = signature_data_.deserialize_check_type(buffer, wire_type);
             break;
 
@@ -1793,7 +1793,7 @@ class active_block_data final: public ::EmbeddedProto::MessageInterface
 
     ~active_block_data() override = default;
 
-    enum class id : uint32_t
+    enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
       TRANSACTION_MERKLE_ROOT = 1,
@@ -1842,17 +1842,17 @@ class active_block_data final: public ::EmbeddedProto::MessageInterface
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = transaction_merkle_root_.serialize_with_id(static_cast<uint32_t>(id::TRANSACTION_MERKLE_ROOT), buffer, false);
+        return_value = transaction_merkle_root_.serialize_with_id(static_cast<uint32_t>(FieldNumber::TRANSACTION_MERKLE_ROOT), buffer, false);
       }
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = passive_data_merkle_root_.serialize_with_id(static_cast<uint32_t>(id::PASSIVE_DATA_MERKLE_ROOT), buffer, false);
+        return_value = passive_data_merkle_root_.serialize_with_id(static_cast<uint32_t>(FieldNumber::PASSIVE_DATA_MERKLE_ROOT), buffer, false);
       }
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = signer_.serialize_with_id(static_cast<uint32_t>(id::SIGNER), buffer, false);
+        return_value = signer_.serialize_with_id(static_cast<uint32_t>(FieldNumber::SIGNER), buffer, false);
       }
 
       return return_value;
@@ -1863,23 +1863,23 @@ class active_block_data final: public ::EmbeddedProto::MessageInterface
       ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
       ::EmbeddedProto::WireFormatter::WireType wire_type = ::EmbeddedProto::WireFormatter::WireType::VARINT;
       uint32_t id_number = 0;
-      id id_tag = id::NOT_SET;
+      FieldNumber id_tag = FieldNumber::NOT_SET;
 
       ::EmbeddedProto::Error tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
       while((::EmbeddedProto::Error::NO_ERRORS == return_value) && (::EmbeddedProto::Error::NO_ERRORS == tag_value))
       {
-        id_tag = static_cast<id>(id_number);
+        id_tag = static_cast<FieldNumber>(id_number);
         switch(id_tag)
         {
-          case id::TRANSACTION_MERKLE_ROOT:
+          case FieldNumber::TRANSACTION_MERKLE_ROOT:
             return_value = transaction_merkle_root_.deserialize_check_type(buffer, wire_type);
             break;
 
-          case id::PASSIVE_DATA_MERKLE_ROOT:
+          case FieldNumber::PASSIVE_DATA_MERKLE_ROOT:
             return_value = passive_data_merkle_root_.deserialize_check_type(buffer, wire_type);
             break;
 
-          case id::SIGNER:
+          case FieldNumber::SIGNER:
             return_value = signer_.deserialize_check_type(buffer, wire_type);
             break;
 
@@ -1936,7 +1936,7 @@ class passive_block_data final: public ::EmbeddedProto::MessageInterface
 
     ~passive_block_data() override = default;
 
-    enum class id : uint32_t
+    enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
     };
@@ -1964,12 +1964,12 @@ class passive_block_data final: public ::EmbeddedProto::MessageInterface
       ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
       ::EmbeddedProto::WireFormatter::WireType wire_type = ::EmbeddedProto::WireFormatter::WireType::VARINT;
       uint32_t id_number = 0;
-      id id_tag = id::NOT_SET;
+      FieldNumber id_tag = FieldNumber::NOT_SET;
 
       ::EmbeddedProto::Error tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
       while((::EmbeddedProto::Error::NO_ERRORS == return_value) && (::EmbeddedProto::Error::NO_ERRORS == tag_value))
       {
-        id_tag = static_cast<id>(id_number);
+        id_tag = static_cast<FieldNumber>(id_number);
         switch(id_tag)
         {
           default:
@@ -2026,7 +2026,7 @@ class block_header final: public ::EmbeddedProto::MessageInterface
 
     ~block_header() override = default;
 
-    enum class id : uint32_t
+    enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
       PREVIOUS = 1,
@@ -2077,17 +2077,17 @@ class block_header final: public ::EmbeddedProto::MessageInterface
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = previous_.serialize_with_id(static_cast<uint32_t>(id::PREVIOUS), buffer, false);
+        return_value = previous_.serialize_with_id(static_cast<uint32_t>(FieldNumber::PREVIOUS), buffer, false);
       }
 
       if((0U != height_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
       {
-        return_value = height_.serialize_with_id(static_cast<uint32_t>(id::HEIGHT), buffer, false);
+        return_value = height_.serialize_with_id(static_cast<uint32_t>(FieldNumber::HEIGHT), buffer, false);
       }
 
       if((0U != timestamp_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
       {
-        return_value = timestamp_.serialize_with_id(static_cast<uint32_t>(id::TIMESTAMP), buffer, false);
+        return_value = timestamp_.serialize_with_id(static_cast<uint32_t>(FieldNumber::TIMESTAMP), buffer, false);
       }
 
       return return_value;
@@ -2098,23 +2098,23 @@ class block_header final: public ::EmbeddedProto::MessageInterface
       ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
       ::EmbeddedProto::WireFormatter::WireType wire_type = ::EmbeddedProto::WireFormatter::WireType::VARINT;
       uint32_t id_number = 0;
-      id id_tag = id::NOT_SET;
+      FieldNumber id_tag = FieldNumber::NOT_SET;
 
       ::EmbeddedProto::Error tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
       while((::EmbeddedProto::Error::NO_ERRORS == return_value) && (::EmbeddedProto::Error::NO_ERRORS == tag_value))
       {
-        id_tag = static_cast<id>(id_number);
+        id_tag = static_cast<FieldNumber>(id_number);
         switch(id_tag)
         {
-          case id::PREVIOUS:
+          case FieldNumber::PREVIOUS:
             return_value = previous_.deserialize_check_type(buffer, wire_type);
             break;
 
-          case id::HEIGHT:
+          case FieldNumber::HEIGHT:
             return_value = height_.deserialize_check_type(buffer, wire_type);
             break;
 
-          case id::TIMESTAMP:
+          case FieldNumber::TIMESTAMP:
             return_value = timestamp_.deserialize_check_type(buffer, wire_type);
             break;
 
@@ -2193,7 +2193,7 @@ class block final: public ::EmbeddedProto::MessageInterface
 
     ~block() override = default;
 
-    enum class id : uint32_t
+    enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
       ID = 1,
@@ -2275,32 +2275,32 @@ class block final: public ::EmbeddedProto::MessageInterface
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = id_.serialize_with_id(static_cast<uint32_t>(id::ID), buffer, false);
+        return_value = id_.serialize_with_id(static_cast<uint32_t>(FieldNumber::ID), buffer, false);
       }
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = header_.serialize_with_id(static_cast<uint32_t>(id::HEADER), buffer, false);
+        return_value = header_.serialize_with_id(static_cast<uint32_t>(FieldNumber::HEADER), buffer, false);
       }
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = active_.serialize_with_id(static_cast<uint32_t>(id::ACTIVE), buffer, false);
+        return_value = active_.serialize_with_id(static_cast<uint32_t>(FieldNumber::ACTIVE), buffer, false);
       }
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = passive_.serialize_with_id(static_cast<uint32_t>(id::PASSIVE), buffer, false);
+        return_value = passive_.serialize_with_id(static_cast<uint32_t>(FieldNumber::PASSIVE), buffer, false);
       }
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = signature_data_.serialize_with_id(static_cast<uint32_t>(id::SIGNATURE_DATA), buffer, false);
+        return_value = signature_data_.serialize_with_id(static_cast<uint32_t>(FieldNumber::SIGNATURE_DATA), buffer, false);
       }
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = transactions_.serialize_with_id(static_cast<uint32_t>(id::TRANSACTIONS), buffer, false);
+        return_value = transactions_.serialize_with_id(static_cast<uint32_t>(FieldNumber::TRANSACTIONS), buffer, false);
       }
 
       return return_value;
@@ -2311,35 +2311,35 @@ class block final: public ::EmbeddedProto::MessageInterface
       ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
       ::EmbeddedProto::WireFormatter::WireType wire_type = ::EmbeddedProto::WireFormatter::WireType::VARINT;
       uint32_t id_number = 0;
-      id id_tag = id::NOT_SET;
+      FieldNumber id_tag = FieldNumber::NOT_SET;
 
       ::EmbeddedProto::Error tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
       while((::EmbeddedProto::Error::NO_ERRORS == return_value) && (::EmbeddedProto::Error::NO_ERRORS == tag_value))
       {
-        id_tag = static_cast<id>(id_number);
+        id_tag = static_cast<FieldNumber>(id_number);
         switch(id_tag)
         {
-          case id::ID:
+          case FieldNumber::ID:
             return_value = id_.deserialize_check_type(buffer, wire_type);
             break;
 
-          case id::HEADER:
+          case FieldNumber::HEADER:
             return_value = header_.deserialize_check_type(buffer, wire_type);
             break;
 
-          case id::ACTIVE:
+          case FieldNumber::ACTIVE:
             return_value = active_.deserialize_check_type(buffer, wire_type);
             break;
 
-          case id::PASSIVE:
+          case FieldNumber::PASSIVE:
             return_value = passive_.deserialize_check_type(buffer, wire_type);
             break;
 
-          case id::SIGNATURE_DATA:
+          case FieldNumber::SIGNATURE_DATA:
             return_value = signature_data_.deserialize_check_type(buffer, wire_type);
             break;
 
-          case id::TRANSACTIONS:
+          case FieldNumber::TRANSACTIONS:
             return_value = transactions_.deserialize_check_type(buffer, wire_type);
             break;
 
@@ -2402,7 +2402,7 @@ class block_receipt final: public ::EmbeddedProto::MessageInterface
 
     ~block_receipt() override = default;
 
-    enum class id : uint32_t
+    enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
     };
@@ -2430,12 +2430,12 @@ class block_receipt final: public ::EmbeddedProto::MessageInterface
       ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
       ::EmbeddedProto::WireFormatter::WireType wire_type = ::EmbeddedProto::WireFormatter::WireType::VARINT;
       uint32_t id_number = 0;
-      id id_tag = id::NOT_SET;
+      FieldNumber id_tag = FieldNumber::NOT_SET;
 
       ::EmbeddedProto::Error tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
       while((::EmbeddedProto::Error::NO_ERRORS == return_value) && (::EmbeddedProto::Error::NO_ERRORS == tag_value))
       {
-        id_tag = static_cast<id>(id_number);
+        id_tag = static_cast<FieldNumber>(id_number);
         switch(id_tag)
         {
           default:

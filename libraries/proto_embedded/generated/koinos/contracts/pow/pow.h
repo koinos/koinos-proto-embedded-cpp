@@ -73,7 +73,7 @@ class difficulty_metadata final: public ::EmbeddedProto::MessageInterface
 
     ~difficulty_metadata() override = default;
 
-    enum class id : uint32_t
+    enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
       TARGET = 1,
@@ -133,22 +133,22 @@ class difficulty_metadata final: public ::EmbeddedProto::MessageInterface
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = target_.serialize_with_id(static_cast<uint32_t>(id::TARGET), buffer, false);
+        return_value = target_.serialize_with_id(static_cast<uint32_t>(FieldNumber::TARGET), buffer, false);
       }
 
       if((0U != last_block_time_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
       {
-        return_value = last_block_time_.serialize_with_id(static_cast<uint32_t>(id::LAST_BLOCK_TIME), buffer, false);
+        return_value = last_block_time_.serialize_with_id(static_cast<uint32_t>(FieldNumber::LAST_BLOCK_TIME), buffer, false);
       }
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = difficulty_.serialize_with_id(static_cast<uint32_t>(id::DIFFICULTY), buffer, false);
+        return_value = difficulty_.serialize_with_id(static_cast<uint32_t>(FieldNumber::DIFFICULTY), buffer, false);
       }
 
       if((0U != target_block_interval_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
       {
-        return_value = target_block_interval_.serialize_with_id(static_cast<uint32_t>(id::TARGET_BLOCK_INTERVAL), buffer, false);
+        return_value = target_block_interval_.serialize_with_id(static_cast<uint32_t>(FieldNumber::TARGET_BLOCK_INTERVAL), buffer, false);
       }
 
       return return_value;
@@ -159,27 +159,27 @@ class difficulty_metadata final: public ::EmbeddedProto::MessageInterface
       ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
       ::EmbeddedProto::WireFormatter::WireType wire_type = ::EmbeddedProto::WireFormatter::WireType::VARINT;
       uint32_t id_number = 0;
-      id id_tag = id::NOT_SET;
+      FieldNumber id_tag = FieldNumber::NOT_SET;
 
       ::EmbeddedProto::Error tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
       while((::EmbeddedProto::Error::NO_ERRORS == return_value) && (::EmbeddedProto::Error::NO_ERRORS == tag_value))
       {
-        id_tag = static_cast<id>(id_number);
+        id_tag = static_cast<FieldNumber>(id_number);
         switch(id_tag)
         {
-          case id::TARGET:
+          case FieldNumber::TARGET:
             return_value = target_.deserialize_check_type(buffer, wire_type);
             break;
 
-          case id::LAST_BLOCK_TIME:
+          case FieldNumber::LAST_BLOCK_TIME:
             return_value = last_block_time_.deserialize_check_type(buffer, wire_type);
             break;
 
-          case id::DIFFICULTY:
+          case FieldNumber::DIFFICULTY:
             return_value = difficulty_.deserialize_check_type(buffer, wire_type);
             break;
 
-          case id::TARGET_BLOCK_INTERVAL:
+          case FieldNumber::TARGET_BLOCK_INTERVAL:
             return_value = target_block_interval_.deserialize_check_type(buffer, wire_type);
             break;
 
@@ -244,7 +244,7 @@ class pow_signature_data final: public ::EmbeddedProto::MessageInterface
 
     ~pow_signature_data() override = default;
 
-    enum class id : uint32_t
+    enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
       NONCE = 1,
@@ -284,12 +284,12 @@ class pow_signature_data final: public ::EmbeddedProto::MessageInterface
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = nonce_.serialize_with_id(static_cast<uint32_t>(id::NONCE), buffer, false);
+        return_value = nonce_.serialize_with_id(static_cast<uint32_t>(FieldNumber::NONCE), buffer, false);
       }
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = recoverable_signature_.serialize_with_id(static_cast<uint32_t>(id::RECOVERABLE_SIGNATURE), buffer, false);
+        return_value = recoverable_signature_.serialize_with_id(static_cast<uint32_t>(FieldNumber::RECOVERABLE_SIGNATURE), buffer, false);
       }
 
       return return_value;
@@ -300,19 +300,19 @@ class pow_signature_data final: public ::EmbeddedProto::MessageInterface
       ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
       ::EmbeddedProto::WireFormatter::WireType wire_type = ::EmbeddedProto::WireFormatter::WireType::VARINT;
       uint32_t id_number = 0;
-      id id_tag = id::NOT_SET;
+      FieldNumber id_tag = FieldNumber::NOT_SET;
 
       ::EmbeddedProto::Error tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
       while((::EmbeddedProto::Error::NO_ERRORS == return_value) && (::EmbeddedProto::Error::NO_ERRORS == tag_value))
       {
-        id_tag = static_cast<id>(id_number);
+        id_tag = static_cast<FieldNumber>(id_number);
         switch(id_tag)
         {
-          case id::NONCE:
+          case FieldNumber::NONCE:
             return_value = nonce_.deserialize_check_type(buffer, wire_type);
             break;
 
-          case id::RECOVERABLE_SIGNATURE:
+          case FieldNumber::RECOVERABLE_SIGNATURE:
             return_value = recoverable_signature_.deserialize_check_type(buffer, wire_type);
             break;
 
