@@ -1,5 +1,7 @@
 #include <koinos/buffer.hpp>
 
+#include <cstring>
+
 namespace koinos {
 
 read_buffer::read_buffer( uint8_t* buffer, uint32_t len ) :
