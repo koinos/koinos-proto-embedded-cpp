@@ -1,3 +1,5 @@
+language: c++
+
 cache:
   ccache: true
   pip: true
