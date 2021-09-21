@@ -90,11 +90,10 @@ if(${CMAKE_GENERATOR} MATCHES "Xcode")
   set(CMAKE_XCODE_GENERATE_SCHEME YES)
 endif()
 
-hunter_add_package(Boost COMPONENTS test)
-find_package(Boost CONFIG REQUIRED)
-
 add_subdirectory(libraries)
 if (BUILD_TESTS)
+   hunter_add_package(Boost COMPONENTS test)
+   find_package(Boost CONFIG REQUIRED)
    add_subdirectory(tests)
 endif()
 
