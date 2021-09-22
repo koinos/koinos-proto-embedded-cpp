@@ -5505,22 +5505,22 @@ class get_max_account_resources_return final: public ::EmbeddedProto::MessageInt
 
 };
 
-template<uint32_t transction_id_LENGTH, 
-uint32_t transction_active_LENGTH, 
-uint32_t transction_passive_LENGTH, 
-uint32_t transction_signature_data_LENGTH>
+template<uint32_t transaction_id_LENGTH, 
+uint32_t transaction_active_LENGTH, 
+uint32_t transaction_passive_LENGTH, 
+uint32_t transaction_signature_data_LENGTH>
 class get_transaction_resource_limit_args final: public ::EmbeddedProto::MessageInterface
 {
   public:
     get_transaction_resource_limit_args() = default;
     get_transaction_resource_limit_args(const get_transaction_resource_limit_args& rhs )
     {
-      set_transction(rhs.get_transction());
+      set_transaction(rhs.get_transaction());
     }
 
     get_transaction_resource_limit_args(const get_transaction_resource_limit_args&& rhs ) noexcept
     {
-      set_transction(rhs.get_transction());
+      set_transaction(rhs.get_transaction());
     }
 
     ~get_transaction_resource_limit_args() override = default;
@@ -5528,27 +5528,27 @@ class get_transaction_resource_limit_args final: public ::EmbeddedProto::Message
     enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
-      TRANSCTION = 1
+      TRANSACTION = 1
     };
 
     get_transaction_resource_limit_args& operator=(const get_transaction_resource_limit_args& rhs)
     {
-      set_transction(rhs.get_transction());
+      set_transaction(rhs.get_transaction());
       return *this;
     }
 
     get_transaction_resource_limit_args& operator=(const get_transaction_resource_limit_args&& rhs) noexcept
     {
-      set_transction(rhs.get_transction());
+      set_transaction(rhs.get_transaction());
       return *this;
     }
 
-    inline void clear_transction() { transction_.clear(); }
-    inline void set_transction(const protocol::transaction<transction_id_LENGTH, transction_active_LENGTH, transction_passive_LENGTH, transction_signature_data_LENGTH>& value) { transction_ = value; }
-    inline void set_transction(const protocol::transaction<transction_id_LENGTH, transction_active_LENGTH, transction_passive_LENGTH, transction_signature_data_LENGTH>&& value) { transction_ = value; }
-    inline protocol::transaction<transction_id_LENGTH, transction_active_LENGTH, transction_passive_LENGTH, transction_signature_data_LENGTH>& mutable_transction() { return transction_; }
-    inline const protocol::transaction<transction_id_LENGTH, transction_active_LENGTH, transction_passive_LENGTH, transction_signature_data_LENGTH>& get_transction() const { return transction_; }
-    inline const protocol::transaction<transction_id_LENGTH, transction_active_LENGTH, transction_passive_LENGTH, transction_signature_data_LENGTH>& transction() const { return transction_; }
+    inline void clear_transaction() { transaction_.clear(); }
+    inline void set_transaction(const protocol::transaction<transaction_id_LENGTH, transaction_active_LENGTH, transaction_passive_LENGTH, transaction_signature_data_LENGTH>& value) { transaction_ = value; }
+    inline void set_transaction(const protocol::transaction<transaction_id_LENGTH, transaction_active_LENGTH, transaction_passive_LENGTH, transaction_signature_data_LENGTH>&& value) { transaction_ = value; }
+    inline protocol::transaction<transaction_id_LENGTH, transaction_active_LENGTH, transaction_passive_LENGTH, transaction_signature_data_LENGTH>& mutable_transaction() { return transaction_; }
+    inline const protocol::transaction<transaction_id_LENGTH, transaction_active_LENGTH, transaction_passive_LENGTH, transaction_signature_data_LENGTH>& get_transaction() const { return transaction_; }
+    inline const protocol::transaction<transaction_id_LENGTH, transaction_active_LENGTH, transaction_passive_LENGTH, transaction_signature_data_LENGTH>& transaction() const { return transaction_; }
 
 
     ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
@@ -5557,7 +5557,7 @@ class get_transaction_resource_limit_args final: public ::EmbeddedProto::Message
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = transction_.serialize_with_id(static_cast<uint32_t>(FieldNumber::TRANSCTION), buffer, false);
+        return_value = transaction_.serialize_with_id(static_cast<uint32_t>(FieldNumber::TRANSACTION), buffer, false);
       }
 
       return return_value;
@@ -5576,8 +5576,8 @@ class get_transaction_resource_limit_args final: public ::EmbeddedProto::Message
         id_tag = static_cast<FieldNumber>(id_number);
         switch(id_tag)
         {
-          case FieldNumber::TRANSCTION:
-            return_value = transction_.deserialize_check_type(buffer, wire_type);
+          case FieldNumber::TRANSACTION:
+            return_value = transaction_.deserialize_check_type(buffer, wire_type);
             break;
 
           default:
@@ -5604,14 +5604,14 @@ class get_transaction_resource_limit_args final: public ::EmbeddedProto::Message
 
     void clear() override
     {
-      clear_transction();
+      clear_transaction();
 
     }
 
     private:
 
 
-      protocol::transaction<transction_id_LENGTH, transction_active_LENGTH, transction_passive_LENGTH, transction_signature_data_LENGTH> transction_;
+      protocol::transaction<transaction_id_LENGTH, transaction_active_LENGTH, transaction_passive_LENGTH, transaction_signature_data_LENGTH> transaction_;
 
 };
 
