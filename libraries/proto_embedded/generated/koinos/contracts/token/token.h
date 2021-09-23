@@ -1169,21 +1169,21 @@ class transfer_args final: public ::EmbeddedProto::MessageInterface
 
 };
 
-class transafer_return final: public ::EmbeddedProto::MessageInterface
+class transfer_return final: public ::EmbeddedProto::MessageInterface
 {
   public:
-    transafer_return() = default;
-    transafer_return(const transafer_return& rhs )
+    transfer_return() = default;
+    transfer_return(const transfer_return& rhs )
     {
       set_value(rhs.get_value());
     }
 
-    transafer_return(const transafer_return&& rhs ) noexcept
+    transfer_return(const transfer_return&& rhs ) noexcept
     {
       set_value(rhs.get_value());
     }
 
-    ~transafer_return() override = default;
+    ~transfer_return() override = default;
 
     enum class FieldNumber : uint32_t
     {
@@ -1191,13 +1191,13 @@ class transafer_return final: public ::EmbeddedProto::MessageInterface
       VALUE = 1
     };
 
-    transafer_return& operator=(const transafer_return& rhs)
+    transfer_return& operator=(const transfer_return& rhs)
     {
       set_value(rhs.get_value());
       return *this;
     }
 
-    transafer_return& operator=(const transafer_return&& rhs) noexcept
+    transfer_return& operator=(const transfer_return&& rhs) noexcept
     {
       set_value(rhs.get_value());
       return *this;
@@ -1507,6 +1507,112 @@ class mint_return final: public ::EmbeddedProto::MessageInterface
 
 
       EmbeddedProto::boolean value_ = false;
+
+};
+
+class balance_object final: public ::EmbeddedProto::MessageInterface
+{
+  public:
+    balance_object() = default;
+    balance_object(const balance_object& rhs )
+    {
+      set_value(rhs.get_value());
+    }
+
+    balance_object(const balance_object&& rhs ) noexcept
+    {
+      set_value(rhs.get_value());
+    }
+
+    ~balance_object() override = default;
+
+    enum class FieldNumber : uint32_t
+    {
+      NOT_SET = 0,
+      VALUE = 1
+    };
+
+    balance_object& operator=(const balance_object& rhs)
+    {
+      set_value(rhs.get_value());
+      return *this;
+    }
+
+    balance_object& operator=(const balance_object&& rhs) noexcept
+    {
+      set_value(rhs.get_value());
+      return *this;
+    }
+
+    inline void clear_value() { value_.clear(); }
+    inline void set_value(const EmbeddedProto::uint64& value) { value_ = value; }
+    inline void set_value(const EmbeddedProto::uint64&& value) { value_ = value; }
+    inline EmbeddedProto::uint64& mutable_value() { return value_; }
+    inline const EmbeddedProto::uint64& get_value() const { return value_; }
+    inline EmbeddedProto::uint64::FIELD_TYPE value() const { return value_.get(); }
+
+
+    ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
+    {
+      ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
+
+      if((0U != value_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
+      {
+        return_value = value_.serialize_with_id(static_cast<uint32_t>(FieldNumber::VALUE), buffer, false);
+      }
+
+      return return_value;
+    };
+
+    ::EmbeddedProto::Error deserialize(::EmbeddedProto::ReadBufferInterface& buffer) override
+    {
+      ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
+      ::EmbeddedProto::WireFormatter::WireType wire_type = ::EmbeddedProto::WireFormatter::WireType::VARINT;
+      uint32_t id_number = 0;
+      FieldNumber id_tag = FieldNumber::NOT_SET;
+
+      ::EmbeddedProto::Error tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
+      while((::EmbeddedProto::Error::NO_ERRORS == return_value) && (::EmbeddedProto::Error::NO_ERRORS == tag_value))
+      {
+        id_tag = static_cast<FieldNumber>(id_number);
+        switch(id_tag)
+        {
+          case FieldNumber::VALUE:
+            return_value = value_.deserialize_check_type(buffer, wire_type);
+            break;
+
+          default:
+            break;
+        }
+
+        if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+        {
+          // Read the next tag.
+          tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
+        }
+      }
+
+      // When an error was detect while reading the tag but no other errors where found, set it in the return value.
+      if((::EmbeddedProto::Error::NO_ERRORS == return_value)
+         && (::EmbeddedProto::Error::NO_ERRORS != tag_value)
+         && (::EmbeddedProto::Error::END_OF_BUFFER != tag_value)) // The end of the buffer is not an array in this case.
+      {
+        return_value = tag_value;
+      }
+
+      return return_value;
+    };
+
+    void clear() override
+    {
+      clear_value();
+
+    }
+
+    private:
+
+
+      EmbeddedProto::uint64 value_ = 0U;
 
 };
 
