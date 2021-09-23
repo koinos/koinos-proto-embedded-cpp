@@ -1,3 +1,5 @@
+#pragma once
+
 #include <ReadBufferInterface.h>
 #include <WriteBufferInterface.h>
 
@@ -46,6 +48,9 @@ namespace koinos {
          This will not do anything if size zero is reached.
          */
          virtual bool pop(uint8_t& byte) override final;
+
+         //! Get a pointer to the beginning of the buffer.
+         uint8_t* data();
    };
 
    class write_buffer : public EmbeddedProto::WriteBufferInterface
@@ -84,6 +89,9 @@ namespace koinos {
             \return True when there was space to add the bytes.
          */
          virtual bool push(const uint8_t* bytes, const uint32_t length) override final;
+
+         //! Get a pointer to the beginning of the buffer.
+         uint8_t* data();
    };
 
    class rw_buffer final : public write_buffer, public read_buffer
@@ -93,3 +101,4 @@ namespace koinos {
    };
 
 } // koinos
+

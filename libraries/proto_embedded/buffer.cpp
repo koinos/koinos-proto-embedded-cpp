@@ -49,6 +49,11 @@ bool read_buffer::pop(uint8_t& byte)
    return false;
 }
 
+uint8_t* read_buffer::data()
+{
+   return _buffer;
+}
+
 write_buffer::write_buffer( uint8_t* buffer, uint32_t len ) :
    _buffer( buffer ),
    _len( len )
@@ -95,6 +100,11 @@ bool write_buffer::push(const uint8_t* bytes, const uint32_t length)
    }
 
    return false;
+}
+
+uint8_t* write_buffer::data()
+{
+   return _buffer;
 }
 
 rw_buffer::rw_buffer( uint8_t* buffer, uint32_t len ) : write_buffer( buffer, len ), read_buffer( buffer, len ) {}
