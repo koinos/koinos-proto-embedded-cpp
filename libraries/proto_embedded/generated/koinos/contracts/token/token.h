@@ -1169,21 +1169,21 @@ class transfer_args final: public ::EmbeddedProto::MessageInterface
 
 };
 
-class transafer_return final: public ::EmbeddedProto::MessageInterface
+class transfer_return final: public ::EmbeddedProto::MessageInterface
 {
   public:
-    transafer_return() = default;
-    transafer_return(const transafer_return& rhs )
+    transfer_return() = default;
+    transfer_return(const transfer_return& rhs )
     {
       set_value(rhs.get_value());
     }
 
-    transafer_return(const transafer_return&& rhs ) noexcept
+    transfer_return(const transfer_return&& rhs ) noexcept
     {
       set_value(rhs.get_value());
     }
 
-    ~transafer_return() override = default;
+    ~transfer_return() override = default;
 
     enum class FieldNumber : uint32_t
     {
@@ -1191,13 +1191,13 @@ class transafer_return final: public ::EmbeddedProto::MessageInterface
       VALUE = 1
     };
 
-    transafer_return& operator=(const transafer_return& rhs)
+    transfer_return& operator=(const transfer_return& rhs)
     {
       set_value(rhs.get_value());
       return *this;
     }
 
-    transafer_return& operator=(const transafer_return&& rhs) noexcept
+    transfer_return& operator=(const transfer_return&& rhs) noexcept
     {
       set_value(rhs.get_value());
       return *this;
