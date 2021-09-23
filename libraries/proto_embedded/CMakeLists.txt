@@ -18,6 +18,11 @@ target_include_directories(koinos_proto_embedded PUBLIC
 )
 
 install(
+   DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/include/"
+   DESTINATION "include/"
+   FILES_MATCHING PATTERN "*.hpp" )
+
+install(
    DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/src/"
    DESTINATION "include/"
    FILES_MATCHING PATTERN "*.h" )
