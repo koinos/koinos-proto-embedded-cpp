@@ -400,11 +400,8 @@ class prints_return final: public ::EmbeddedProto::MessageInterface
 };
 
 template<uint32_t digest_LENGTH, 
-uint32_t signature_data_LENGTH, 
-uint32_t active_native_transaction_merkle_root_LENGTH, 
-uint32_t active_native_passive_data_merkle_root_LENGTH, 
-uint32_t active_native_signer_LENGTH, 
-uint32_t active_blob_LENGTH>
+uint32_t active_LENGTH, 
+uint32_t signature_data_LENGTH>
 class verify_block_signature_args final: public ::EmbeddedProto::MessageInterface
 {
   public:
@@ -412,53 +409,15 @@ class verify_block_signature_args final: public ::EmbeddedProto::MessageInterfac
     verify_block_signature_args(const verify_block_signature_args& rhs )
     {
       set_digest(rhs.get_digest());
+      set_active(rhs.get_active());
       set_signature_data(rhs.get_signature_data());
-      if(rhs.get_which_active_data() != which_active_data_)
-      {
-        // First delete the old object in the oneof.
-        clear_active_data();
-      }
-
-      switch(rhs.get_which_active_data())
-      {
-        case FieldNumber::ACTIVE_NATIVE:
-          set_active_native(rhs.get_active_native());
-          break;
-
-        case FieldNumber::ACTIVE_BLOB:
-          set_active_blob(rhs.get_active_blob());
-          break;
-
-        default:
-          break;
-      }
-
     }
 
     verify_block_signature_args(const verify_block_signature_args&& rhs ) noexcept
     {
       set_digest(rhs.get_digest());
+      set_active(rhs.get_active());
       set_signature_data(rhs.get_signature_data());
-      if(rhs.get_which_active_data() != which_active_data_)
-      {
-        // First delete the old object in the oneof.
-        clear_active_data();
-      }
-
-      switch(rhs.get_which_active_data())
-      {
-        case FieldNumber::ACTIVE_NATIVE:
-          set_active_native(rhs.get_active_native());
-          break;
-
-        case FieldNumber::ACTIVE_BLOB:
-          set_active_blob(rhs.get_active_blob());
-          break;
-
-        default:
-          break;
-      }
-
     }
 
     ~verify_block_signature_args() override = default;
@@ -467,62 +426,23 @@ class verify_block_signature_args final: public ::EmbeddedProto::MessageInterfac
     {
       NOT_SET = 0,
       DIGEST = 1,
-      ACTIVE_NATIVE = 2,
-      ACTIVE_BLOB = 3,
-      SIGNATURE_DATA = 4
+      ACTIVE = 2,
+      SIGNATURE_DATA = 3
     };
 
     verify_block_signature_args& operator=(const verify_block_signature_args& rhs)
     {
       set_digest(rhs.get_digest());
+      set_active(rhs.get_active());
       set_signature_data(rhs.get_signature_data());
-      if(rhs.get_which_active_data() != which_active_data_)
-      {
-        // First delete the old object in the oneof.
-        clear_active_data();
-      }
-
-      switch(rhs.get_which_active_data())
-      {
-        case FieldNumber::ACTIVE_NATIVE:
-          set_active_native(rhs.get_active_native());
-          break;
-
-        case FieldNumber::ACTIVE_BLOB:
-          set_active_blob(rhs.get_active_blob());
-          break;
-
-        default:
-          break;
-      }
-
       return *this;
     }
 
     verify_block_signature_args& operator=(const verify_block_signature_args&& rhs) noexcept
     {
       set_digest(rhs.get_digest());
+      set_active(rhs.get_active());
       set_signature_data(rhs.get_signature_data());
-      if(rhs.get_which_active_data() != which_active_data_)
-      {
-        // First delete the old object in the oneof.
-        clear_active_data();
-      }
-
-      switch(rhs.get_which_active_data())
-      {
-        case FieldNumber::ACTIVE_NATIVE:
-          set_active_native(rhs.get_active_native());
-          break;
-
-        case FieldNumber::ACTIVE_BLOB:
-          set_active_blob(rhs.get_active_blob());
-          break;
-
-        default:
-          break;
-      }
-
       return *this;
     }
 
@@ -532,75 +452,17 @@ class verify_block_signature_args final: public ::EmbeddedProto::MessageInterfac
     inline const ::EmbeddedProto::FieldBytes<digest_LENGTH>& get_digest() const { return digest_; }
     inline const uint8_t* digest() const { return digest_.get_const(); }
 
+    inline void clear_active() { active_.clear(); }
+    inline ::EmbeddedProto::FieldBytes<active_LENGTH>& mutable_active() { return active_; }
+    inline void set_active(const ::EmbeddedProto::FieldBytes<active_LENGTH>& rhs) { active_.set(rhs); }
+    inline const ::EmbeddedProto::FieldBytes<active_LENGTH>& get_active() const { return active_; }
+    inline const uint8_t* active() const { return active_.get_const(); }
+
     inline void clear_signature_data() { signature_data_.clear(); }
     inline ::EmbeddedProto::FieldBytes<signature_data_LENGTH>& mutable_signature_data() { return signature_data_; }
     inline void set_signature_data(const ::EmbeddedProto::FieldBytes<signature_data_LENGTH>& rhs) { signature_data_.set(rhs); }
     inline const ::EmbeddedProto::FieldBytes<signature_data_LENGTH>& get_signature_data() const { return signature_data_; }
     inline const uint8_t* signature_data() const { return signature_data_.get_const(); }
-
-    FieldNumber get_which_active_data() const { return which_active_data_; }
-
-    inline void clear_active_native()
-    {
-      if(FieldNumber::ACTIVE_NATIVE == which_active_data_)
-      {
-        which_active_data_ = FieldNumber::NOT_SET;
-        active_data_.active_native_.~active_block_data<active_native_transaction_merkle_root_LENGTH, active_native_passive_data_merkle_root_LENGTH, active_native_signer_LENGTH>();
-      }
-    }
-    inline void set_active_native(const protocol::active_block_data<active_native_transaction_merkle_root_LENGTH, active_native_passive_data_merkle_root_LENGTH, active_native_signer_LENGTH>& value)
-    {
-      if(FieldNumber::ACTIVE_NATIVE != which_active_data_)
-      {
-        init_active_data(FieldNumber::ACTIVE_NATIVE);
-      }
-      active_data_.active_native_ = value;
-    }
-    inline void set_active_native(const protocol::active_block_data<active_native_transaction_merkle_root_LENGTH, active_native_passive_data_merkle_root_LENGTH, active_native_signer_LENGTH>&& value)
-    {
-      if(FieldNumber::ACTIVE_NATIVE != which_active_data_)
-      {
-        init_active_data(FieldNumber::ACTIVE_NATIVE);
-      }
-      active_data_.active_native_ = value;
-    }
-    inline protocol::active_block_data<active_native_transaction_merkle_root_LENGTH, active_native_passive_data_merkle_root_LENGTH, active_native_signer_LENGTH>& mutable_active_native()
-    {
-      if(FieldNumber::ACTIVE_NATIVE != which_active_data_)
-      {
-        init_active_data(FieldNumber::ACTIVE_NATIVE);
-      }
-      return active_data_.active_native_;
-    }
-    inline const protocol::active_block_data<active_native_transaction_merkle_root_LENGTH, active_native_passive_data_merkle_root_LENGTH, active_native_signer_LENGTH>& get_active_native() const { return active_data_.active_native_; }
-    inline const protocol::active_block_data<active_native_transaction_merkle_root_LENGTH, active_native_passive_data_merkle_root_LENGTH, active_native_signer_LENGTH>& active_native() const { return active_data_.active_native_; }
-
-    inline void clear_active_blob()
-    {
-      if(FieldNumber::ACTIVE_BLOB == which_active_data_)
-      {
-        which_active_data_ = FieldNumber::NOT_SET;
-        active_data_.active_blob_.~FieldBytes();
-      }
-    }
-    inline ::EmbeddedProto::FieldBytes<active_blob_LENGTH>& mutable_active_blob()
-    {
-      if(FieldNumber::ACTIVE_BLOB != which_active_data_)
-      {
-        init_active_data(FieldNumber::ACTIVE_BLOB);
-      }
-      return active_data_.active_blob_;
-    }
-    inline void set_active_blob(const ::EmbeddedProto::FieldBytes<active_blob_LENGTH>& rhs)
-    {
-      if(FieldNumber::ACTIVE_BLOB != which_active_data_)
-      {
-        init_active_data(FieldNumber::ACTIVE_BLOB);
-      }
-      active_data_.active_blob_.set(rhs);
-    }
-    inline const ::EmbeddedProto::FieldBytes<active_blob_LENGTH>& get_active_blob() const { return active_data_.active_blob_; }
-    inline const uint8_t* active_blob() const { return active_data_.active_blob_.get_const(); }
 
 
     ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
@@ -614,27 +476,12 @@ class verify_block_signature_args final: public ::EmbeddedProto::MessageInterfac
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = signature_data_.serialize_with_id(static_cast<uint32_t>(FieldNumber::SIGNATURE_DATA), buffer, false);
+        return_value = active_.serialize_with_id(static_cast<uint32_t>(FieldNumber::ACTIVE), buffer, false);
       }
 
-      switch(which_active_data_)
+      if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        case FieldNumber::ACTIVE_NATIVE:
-          if(::EmbeddedProto::Error::NO_ERRORS == return_value)
-          {
-            return_value = active_data_.active_native_.serialize_with_id(static_cast<uint32_t>(FieldNumber::ACTIVE_NATIVE), buffer, false);
-          }
-          break;
-
-        case FieldNumber::ACTIVE_BLOB:
-          if(::EmbeddedProto::Error::NO_ERRORS == return_value)
-          {
-            return_value = active_data_.active_blob_.serialize_with_id(static_cast<uint32_t>(FieldNumber::ACTIVE_BLOB), buffer, false);
-          }
-          break;
-
-        default:
-          break;
+        return_value = signature_data_.serialize_with_id(static_cast<uint32_t>(FieldNumber::SIGNATURE_DATA), buffer, false);
       }
 
       return return_value;
@@ -657,17 +504,12 @@ class verify_block_signature_args final: public ::EmbeddedProto::MessageInterfac
             return_value = digest_.deserialize_check_type(buffer, wire_type);
             break;
 
+          case FieldNumber::ACTIVE:
+            return_value = active_.deserialize_check_type(buffer, wire_type);
+            break;
+
           case FieldNumber::SIGNATURE_DATA:
             return_value = signature_data_.deserialize_check_type(buffer, wire_type);
-            break;
-
-          case FieldNumber::ACTIVE_NATIVE:
-            return_value = deserialize_active_data(FieldNumber::ACTIVE_NATIVE, active_data_.active_native_, buffer, wire_type);
-
-            break;
-
-          case FieldNumber::ACTIVE_BLOB:
-            return_value = deserialize_active_data(FieldNumber::ACTIVE_BLOB, active_data_.active_blob_, buffer, wire_type);
             break;
 
           default:
@@ -695,8 +537,8 @@ class verify_block_signature_args final: public ::EmbeddedProto::MessageInterfac
     void clear() override
     {
       clear_digest();
+      clear_active();
       clear_signature_data();
-      clear_active_data();
 
     }
 
@@ -704,77 +546,8 @@ class verify_block_signature_args final: public ::EmbeddedProto::MessageInterfac
 
 
       ::EmbeddedProto::FieldBytes<digest_LENGTH> digest_;
+      ::EmbeddedProto::FieldBytes<active_LENGTH> active_;
       ::EmbeddedProto::FieldBytes<signature_data_LENGTH> signature_data_;
-
-      FieldNumber which_active_data_ = FieldNumber::NOT_SET;
-      union active_data
-      {
-        active_data() {}
-        ~active_data() {}
-        protocol::active_block_data<active_native_transaction_merkle_root_LENGTH, active_native_passive_data_merkle_root_LENGTH, active_native_signer_LENGTH> active_native_;
-        ::EmbeddedProto::FieldBytes<active_blob_LENGTH> active_blob_;
-      };
-      active_data active_data_;
-
-      void init_active_data(const FieldNumber field_id)
-      {
-        if(FieldNumber::NOT_SET != which_active_data_)
-        {
-          // First delete the old object in the oneof.
-          clear_active_data();
-        }
-
-        // C++11 unions only support nontrivial members when you explicitly call the placement new statement.
-        switch(field_id)
-        {
-          case FieldNumber::ACTIVE_NATIVE:
-            new(&active_data_.active_native_) protocol::active_block_data<active_native_transaction_merkle_root_LENGTH, active_native_passive_data_merkle_root_LENGTH, active_native_signer_LENGTH>;
-            which_active_data_ = FieldNumber::ACTIVE_NATIVE;
-            break;
-
-          case FieldNumber::ACTIVE_BLOB:
-            new(&active_data_.active_blob_) ::EmbeddedProto::FieldBytes<active_blob_LENGTH>;
-            which_active_data_ = FieldNumber::ACTIVE_BLOB;
-            break;
-
-          default:
-            break;
-         }
-
-         which_active_data_ = field_id;
-      }
-
-      void clear_active_data()
-      {
-        switch(which_active_data_)
-        {
-          case FieldNumber::ACTIVE_NATIVE:
-            active_data_.active_native_.~active_block_data<active_native_transaction_merkle_root_LENGTH, active_native_passive_data_merkle_root_LENGTH, active_native_signer_LENGTH>(); // NOSONAR Unions require this.
-            break;
-          case FieldNumber::ACTIVE_BLOB:
-            active_data_.active_blob_.~FieldBytes(); // NOSONAR Unions require this.
-            break;
-          default:
-            break;
-        }
-        which_active_data_ = FieldNumber::NOT_SET;
-      }
-
-      ::EmbeddedProto::Error deserialize_active_data(const FieldNumber field_id, ::EmbeddedProto::Field& field,
-                                    ::EmbeddedProto::ReadBufferInterface& buffer,
-                                    const ::EmbeddedProto::WireFormatter::WireType wire_type)
-      {
-        if(field_id != which_active_data_)
-        {
-          init_active_data(field_id);
-        }
-        ::EmbeddedProto::Error return_value = field.deserialize_check_type(buffer, wire_type);
-        if(::EmbeddedProto::Error::NO_ERRORS != return_value)
-        {
-          clear_active_data();
-        }
-        return return_value;
-      }
 
 };
 
