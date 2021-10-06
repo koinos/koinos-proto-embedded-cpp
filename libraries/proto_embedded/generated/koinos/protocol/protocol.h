@@ -1362,14 +1362,14 @@ class active_transaction_data final: public ::EmbeddedProto::MessageInterface
     active_transaction_data() = default;
     active_transaction_data(const active_transaction_data& rhs )
     {
-      set_resource_limit(rhs.get_resource_limit());
+      set_rc_limit(rhs.get_rc_limit());
       set_nonce(rhs.get_nonce());
       set_operations(rhs.get_operations());
     }
 
     active_transaction_data(const active_transaction_data&& rhs ) noexcept
     {
-      set_resource_limit(rhs.get_resource_limit());
+      set_rc_limit(rhs.get_rc_limit());
       set_nonce(rhs.get_nonce());
       set_operations(rhs.get_operations());
     }
@@ -1379,14 +1379,14 @@ class active_transaction_data final: public ::EmbeddedProto::MessageInterface
     enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
-      RESOURCE_LIMIT = 1,
+      RC_LIMIT = 1,
       NONCE = 2,
       OPERATIONS = 3
     };
 
     active_transaction_data& operator=(const active_transaction_data& rhs)
     {
-      set_resource_limit(rhs.get_resource_limit());
+      set_rc_limit(rhs.get_rc_limit());
       set_nonce(rhs.get_nonce());
       set_operations(rhs.get_operations());
       return *this;
@@ -1394,18 +1394,18 @@ class active_transaction_data final: public ::EmbeddedProto::MessageInterface
 
     active_transaction_data& operator=(const active_transaction_data&& rhs) noexcept
     {
-      set_resource_limit(rhs.get_resource_limit());
+      set_rc_limit(rhs.get_rc_limit());
       set_nonce(rhs.get_nonce());
       set_operations(rhs.get_operations());
       return *this;
     }
 
-    inline void clear_resource_limit() { resource_limit_.clear(); }
-    inline void set_resource_limit(const EmbeddedProto::uint64& value) { resource_limit_ = value; }
-    inline void set_resource_limit(const EmbeddedProto::uint64&& value) { resource_limit_ = value; }
-    inline EmbeddedProto::uint64& mutable_resource_limit() { return resource_limit_; }
-    inline const EmbeddedProto::uint64& get_resource_limit() const { return resource_limit_; }
-    inline EmbeddedProto::uint64::FIELD_TYPE resource_limit() const { return resource_limit_.get(); }
+    inline void clear_rc_limit() { rc_limit_.clear(); }
+    inline void set_rc_limit(const EmbeddedProto::uint64& value) { rc_limit_ = value; }
+    inline void set_rc_limit(const EmbeddedProto::uint64&& value) { rc_limit_ = value; }
+    inline EmbeddedProto::uint64& mutable_rc_limit() { return rc_limit_; }
+    inline const EmbeddedProto::uint64& get_rc_limit() const { return rc_limit_; }
+    inline EmbeddedProto::uint64::FIELD_TYPE rc_limit() const { return rc_limit_.get(); }
 
     inline void clear_nonce() { nonce_.clear(); }
     inline void set_nonce(const EmbeddedProto::uint64& value) { nonce_ = value; }
@@ -1430,9 +1430,9 @@ class active_transaction_data final: public ::EmbeddedProto::MessageInterface
     {
       ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
 
-      if((0U != resource_limit_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
+      if((0U != rc_limit_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
       {
-        return_value = resource_limit_.serialize_with_id(static_cast<uint32_t>(FieldNumber::RESOURCE_LIMIT), buffer, false);
+        return_value = rc_limit_.serialize_with_id(static_cast<uint32_t>(FieldNumber::RC_LIMIT), buffer, false);
       }
 
       if((0U != nonce_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
@@ -1461,8 +1461,8 @@ class active_transaction_data final: public ::EmbeddedProto::MessageInterface
         id_tag = static_cast<FieldNumber>(id_number);
         switch(id_tag)
         {
-          case FieldNumber::RESOURCE_LIMIT:
-            return_value = resource_limit_.deserialize_check_type(buffer, wire_type);
+          case FieldNumber::RC_LIMIT:
+            return_value = rc_limit_.deserialize_check_type(buffer, wire_type);
             break;
 
           case FieldNumber::NONCE:
@@ -1497,7 +1497,7 @@ class active_transaction_data final: public ::EmbeddedProto::MessageInterface
 
     void clear() override
     {
-      clear_resource_limit();
+      clear_rc_limit();
       clear_nonce();
       clear_operations();
 
@@ -1506,7 +1506,7 @@ class active_transaction_data final: public ::EmbeddedProto::MessageInterface
     private:
 
 
-      EmbeddedProto::uint64 resource_limit_ = 0U;
+      EmbeddedProto::uint64 rc_limit_ = 0U;
       EmbeddedProto::uint64 nonce_ = 0U;
       ::EmbeddedProto::RepeatedFieldFixedSize<operation<operations_upload_contract_contract_id_LENGTH, operations_upload_contract_bytecode_LENGTH, operations_call_contract_contract_id_LENGTH, operations_call_contract_args_LENGTH, operations_set_system_call_target_system_call_bundle_contract_id_LENGTH>, operations_REP_LENGTH> operations_;
 

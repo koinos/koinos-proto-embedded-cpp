@@ -224,6 +224,114 @@ class difficulty_metadata final: public ::EmbeddedProto::MessageInterface
 
 };
 
+template<uint32_t value_target_LENGTH, 
+uint32_t value_difficulty_LENGTH>
+class difficulty_metadata_result final: public ::EmbeddedProto::MessageInterface
+{
+  public:
+    difficulty_metadata_result() = default;
+    difficulty_metadata_result(const difficulty_metadata_result& rhs )
+    {
+      set_value(rhs.get_value());
+    }
+
+    difficulty_metadata_result(const difficulty_metadata_result&& rhs ) noexcept
+    {
+      set_value(rhs.get_value());
+    }
+
+    ~difficulty_metadata_result() override = default;
+
+    enum class FieldNumber : uint32_t
+    {
+      NOT_SET = 0,
+      VALUE = 1
+    };
+
+    difficulty_metadata_result& operator=(const difficulty_metadata_result& rhs)
+    {
+      set_value(rhs.get_value());
+      return *this;
+    }
+
+    difficulty_metadata_result& operator=(const difficulty_metadata_result&& rhs) noexcept
+    {
+      set_value(rhs.get_value());
+      return *this;
+    }
+
+    inline void clear_value() { value_.clear(); }
+    inline void set_value(const difficulty_metadata<value_target_LENGTH, value_difficulty_LENGTH>& value) { value_ = value; }
+    inline void set_value(const difficulty_metadata<value_target_LENGTH, value_difficulty_LENGTH>&& value) { value_ = value; }
+    inline difficulty_metadata<value_target_LENGTH, value_difficulty_LENGTH>& mutable_value() { return value_; }
+    inline const difficulty_metadata<value_target_LENGTH, value_difficulty_LENGTH>& get_value() const { return value_; }
+    inline const difficulty_metadata<value_target_LENGTH, value_difficulty_LENGTH>& value() const { return value_; }
+
+
+    ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
+    {
+      ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
+
+      if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+      {
+        return_value = value_.serialize_with_id(static_cast<uint32_t>(FieldNumber::VALUE), buffer, false);
+      }
+
+      return return_value;
+    };
+
+    ::EmbeddedProto::Error deserialize(::EmbeddedProto::ReadBufferInterface& buffer) override
+    {
+      ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
+      ::EmbeddedProto::WireFormatter::WireType wire_type = ::EmbeddedProto::WireFormatter::WireType::VARINT;
+      uint32_t id_number = 0;
+      FieldNumber id_tag = FieldNumber::NOT_SET;
+
+      ::EmbeddedProto::Error tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
+      while((::EmbeddedProto::Error::NO_ERRORS == return_value) && (::EmbeddedProto::Error::NO_ERRORS == tag_value))
+      {
+        id_tag = static_cast<FieldNumber>(id_number);
+        switch(id_tag)
+        {
+          case FieldNumber::VALUE:
+            return_value = value_.deserialize_check_type(buffer, wire_type);
+            break;
+
+          default:
+            break;
+        }
+
+        if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+        {
+          // Read the next tag.
+          tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
+        }
+      }
+
+      // When an error was detect while reading the tag but no other errors where found, set it in the return value.
+      if((::EmbeddedProto::Error::NO_ERRORS == return_value)
+         && (::EmbeddedProto::Error::NO_ERRORS != tag_value)
+         && (::EmbeddedProto::Error::END_OF_BUFFER != tag_value)) // The end of the buffer is not an array in this case.
+      {
+        return_value = tag_value;
+      }
+
+      return return_value;
+    };
+
+    void clear() override
+    {
+      clear_value();
+
+    }
+
+    private:
+
+
+      difficulty_metadata<value_target_LENGTH, value_difficulty_LENGTH> value_;
+
+};
+
 template<uint32_t nonce_LENGTH, 
 uint32_t recoverable_signature_LENGTH>
 class pow_signature_data final: public ::EmbeddedProto::MessageInterface

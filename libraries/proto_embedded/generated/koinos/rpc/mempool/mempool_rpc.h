@@ -59,15 +59,15 @@ class check_pending_account_resources_request final: public ::EmbeddedProto::Mes
     check_pending_account_resources_request(const check_pending_account_resources_request& rhs )
     {
       set_payer(rhs.get_payer());
-      set_max_payer_resources(rhs.get_max_payer_resources());
-      set_trx_resource_limit(rhs.get_trx_resource_limit());
+      set_max_payer_rc(rhs.get_max_payer_rc());
+      set_rc_limit(rhs.get_rc_limit());
     }
 
     check_pending_account_resources_request(const check_pending_account_resources_request&& rhs ) noexcept
     {
       set_payer(rhs.get_payer());
-      set_max_payer_resources(rhs.get_max_payer_resources());
-      set_trx_resource_limit(rhs.get_trx_resource_limit());
+      set_max_payer_rc(rhs.get_max_payer_rc());
+      set_rc_limit(rhs.get_rc_limit());
     }
 
     ~check_pending_account_resources_request() override = default;
@@ -76,23 +76,23 @@ class check_pending_account_resources_request final: public ::EmbeddedProto::Mes
     {
       NOT_SET = 0,
       PAYER = 1,
-      MAX_PAYER_RESOURCES = 2,
-      TRX_RESOURCE_LIMIT = 3
+      MAX_PAYER_RC = 2,
+      RC_LIMIT = 3
     };
 
     check_pending_account_resources_request& operator=(const check_pending_account_resources_request& rhs)
     {
       set_payer(rhs.get_payer());
-      set_max_payer_resources(rhs.get_max_payer_resources());
-      set_trx_resource_limit(rhs.get_trx_resource_limit());
+      set_max_payer_rc(rhs.get_max_payer_rc());
+      set_rc_limit(rhs.get_rc_limit());
       return *this;
     }
 
     check_pending_account_resources_request& operator=(const check_pending_account_resources_request&& rhs) noexcept
     {
       set_payer(rhs.get_payer());
-      set_max_payer_resources(rhs.get_max_payer_resources());
-      set_trx_resource_limit(rhs.get_trx_resource_limit());
+      set_max_payer_rc(rhs.get_max_payer_rc());
+      set_rc_limit(rhs.get_rc_limit());
       return *this;
     }
 
@@ -102,19 +102,19 @@ class check_pending_account_resources_request final: public ::EmbeddedProto::Mes
     inline const ::EmbeddedProto::FieldBytes<payer_LENGTH>& get_payer() const { return payer_; }
     inline const uint8_t* payer() const { return payer_.get_const(); }
 
-    inline void clear_max_payer_resources() { max_payer_resources_.clear(); }
-    inline void set_max_payer_resources(const EmbeddedProto::uint64& value) { max_payer_resources_ = value; }
-    inline void set_max_payer_resources(const EmbeddedProto::uint64&& value) { max_payer_resources_ = value; }
-    inline EmbeddedProto::uint64& mutable_max_payer_resources() { return max_payer_resources_; }
-    inline const EmbeddedProto::uint64& get_max_payer_resources() const { return max_payer_resources_; }
-    inline EmbeddedProto::uint64::FIELD_TYPE max_payer_resources() const { return max_payer_resources_.get(); }
+    inline void clear_max_payer_rc() { max_payer_rc_.clear(); }
+    inline void set_max_payer_rc(const EmbeddedProto::uint64& value) { max_payer_rc_ = value; }
+    inline void set_max_payer_rc(const EmbeddedProto::uint64&& value) { max_payer_rc_ = value; }
+    inline EmbeddedProto::uint64& mutable_max_payer_rc() { return max_payer_rc_; }
+    inline const EmbeddedProto::uint64& get_max_payer_rc() const { return max_payer_rc_; }
+    inline EmbeddedProto::uint64::FIELD_TYPE max_payer_rc() const { return max_payer_rc_.get(); }
 
-    inline void clear_trx_resource_limit() { trx_resource_limit_.clear(); }
-    inline void set_trx_resource_limit(const EmbeddedProto::uint64& value) { trx_resource_limit_ = value; }
-    inline void set_trx_resource_limit(const EmbeddedProto::uint64&& value) { trx_resource_limit_ = value; }
-    inline EmbeddedProto::uint64& mutable_trx_resource_limit() { return trx_resource_limit_; }
-    inline const EmbeddedProto::uint64& get_trx_resource_limit() const { return trx_resource_limit_; }
-    inline EmbeddedProto::uint64::FIELD_TYPE trx_resource_limit() const { return trx_resource_limit_.get(); }
+    inline void clear_rc_limit() { rc_limit_.clear(); }
+    inline void set_rc_limit(const EmbeddedProto::uint64& value) { rc_limit_ = value; }
+    inline void set_rc_limit(const EmbeddedProto::uint64&& value) { rc_limit_ = value; }
+    inline EmbeddedProto::uint64& mutable_rc_limit() { return rc_limit_; }
+    inline const EmbeddedProto::uint64& get_rc_limit() const { return rc_limit_; }
+    inline EmbeddedProto::uint64::FIELD_TYPE rc_limit() const { return rc_limit_.get(); }
 
 
     ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
@@ -126,14 +126,14 @@ class check_pending_account_resources_request final: public ::EmbeddedProto::Mes
         return_value = payer_.serialize_with_id(static_cast<uint32_t>(FieldNumber::PAYER), buffer, false);
       }
 
-      if((0U != max_payer_resources_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
+      if((0U != max_payer_rc_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
       {
-        return_value = max_payer_resources_.serialize_with_id(static_cast<uint32_t>(FieldNumber::MAX_PAYER_RESOURCES), buffer, false);
+        return_value = max_payer_rc_.serialize_with_id(static_cast<uint32_t>(FieldNumber::MAX_PAYER_RC), buffer, false);
       }
 
-      if((0U != trx_resource_limit_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
+      if((0U != rc_limit_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
       {
-        return_value = trx_resource_limit_.serialize_with_id(static_cast<uint32_t>(FieldNumber::TRX_RESOURCE_LIMIT), buffer, false);
+        return_value = rc_limit_.serialize_with_id(static_cast<uint32_t>(FieldNumber::RC_LIMIT), buffer, false);
       }
 
       return return_value;
@@ -156,12 +156,12 @@ class check_pending_account_resources_request final: public ::EmbeddedProto::Mes
             return_value = payer_.deserialize_check_type(buffer, wire_type);
             break;
 
-          case FieldNumber::MAX_PAYER_RESOURCES:
-            return_value = max_payer_resources_.deserialize_check_type(buffer, wire_type);
+          case FieldNumber::MAX_PAYER_RC:
+            return_value = max_payer_rc_.deserialize_check_type(buffer, wire_type);
             break;
 
-          case FieldNumber::TRX_RESOURCE_LIMIT:
-            return_value = trx_resource_limit_.deserialize_check_type(buffer, wire_type);
+          case FieldNumber::RC_LIMIT:
+            return_value = rc_limit_.deserialize_check_type(buffer, wire_type);
             break;
 
           default:
@@ -189,8 +189,8 @@ class check_pending_account_resources_request final: public ::EmbeddedProto::Mes
     void clear() override
     {
       clear_payer();
-      clear_max_payer_resources();
-      clear_trx_resource_limit();
+      clear_max_payer_rc();
+      clear_rc_limit();
 
     }
 
@@ -198,8 +198,8 @@ class check_pending_account_resources_request final: public ::EmbeddedProto::Mes
 
 
       ::EmbeddedProto::FieldBytes<payer_LENGTH> payer_;
-      EmbeddedProto::uint64 max_payer_resources_ = 0U;
-      EmbeddedProto::uint64 trx_resource_limit_ = 0U;
+      EmbeddedProto::uint64 max_payer_rc_ = 0U;
+      EmbeddedProto::uint64 rc_limit_ = 0U;
 
 };
 

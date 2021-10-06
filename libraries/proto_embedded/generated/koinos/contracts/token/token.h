@@ -49,31 +49,31 @@ namespace koinos {
 namespace contracts {
 namespace token {
 
-class name_args final: public ::EmbeddedProto::MessageInterface
+class name_arguments final: public ::EmbeddedProto::MessageInterface
 {
   public:
-    name_args() = default;
-    name_args(const name_args& rhs )
+    name_arguments() = default;
+    name_arguments(const name_arguments& rhs )
     {
     }
 
-    name_args(const name_args&& rhs ) noexcept
+    name_arguments(const name_arguments&& rhs ) noexcept
     {
     }
 
-    ~name_args() override = default;
+    ~name_arguments() override = default;
 
     enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
     };
 
-    name_args& operator=(const name_args& rhs)
+    name_arguments& operator=(const name_arguments& rhs)
     {
       return *this;
     }
 
-    name_args& operator=(const name_args&& rhs) noexcept
+    name_arguments& operator=(const name_arguments&& rhs) noexcept
     {
       return *this;
     }
@@ -133,21 +133,21 @@ class name_args final: public ::EmbeddedProto::MessageInterface
 };
 
 template<uint32_t value_LENGTH>
-class name_return final: public ::EmbeddedProto::MessageInterface
+class name_result final: public ::EmbeddedProto::MessageInterface
 {
   public:
-    name_return() = default;
-    name_return(const name_return& rhs )
+    name_result() = default;
+    name_result(const name_result& rhs )
     {
       set_value(rhs.get_value());
     }
 
-    name_return(const name_return&& rhs ) noexcept
+    name_result(const name_result&& rhs ) noexcept
     {
       set_value(rhs.get_value());
     }
 
-    ~name_return() override = default;
+    ~name_result() override = default;
 
     enum class FieldNumber : uint32_t
     {
@@ -155,13 +155,13 @@ class name_return final: public ::EmbeddedProto::MessageInterface
       VALUE = 1
     };
 
-    name_return& operator=(const name_return& rhs)
+    name_result& operator=(const name_result& rhs)
     {
       set_value(rhs.get_value());
       return *this;
     }
 
-    name_return& operator=(const name_return&& rhs) noexcept
+    name_result& operator=(const name_result&& rhs) noexcept
     {
       set_value(rhs.get_value());
       return *this;
@@ -238,31 +238,31 @@ class name_return final: public ::EmbeddedProto::MessageInterface
 
 };
 
-class symbol_args final: public ::EmbeddedProto::MessageInterface
+class symbol_arguments final: public ::EmbeddedProto::MessageInterface
 {
   public:
-    symbol_args() = default;
-    symbol_args(const symbol_args& rhs )
+    symbol_arguments() = default;
+    symbol_arguments(const symbol_arguments& rhs )
     {
     }
 
-    symbol_args(const symbol_args&& rhs ) noexcept
+    symbol_arguments(const symbol_arguments&& rhs ) noexcept
     {
     }
 
-    ~symbol_args() override = default;
+    ~symbol_arguments() override = default;
 
     enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
     };
 
-    symbol_args& operator=(const symbol_args& rhs)
+    symbol_arguments& operator=(const symbol_arguments& rhs)
     {
       return *this;
     }
 
-    symbol_args& operator=(const symbol_args&& rhs) noexcept
+    symbol_arguments& operator=(const symbol_arguments&& rhs) noexcept
     {
       return *this;
     }
@@ -322,21 +322,21 @@ class symbol_args final: public ::EmbeddedProto::MessageInterface
 };
 
 template<uint32_t value_LENGTH>
-class symbol_return final: public ::EmbeddedProto::MessageInterface
+class symbol_result final: public ::EmbeddedProto::MessageInterface
 {
   public:
-    symbol_return() = default;
-    symbol_return(const symbol_return& rhs )
+    symbol_result() = default;
+    symbol_result(const symbol_result& rhs )
     {
       set_value(rhs.get_value());
     }
 
-    symbol_return(const symbol_return&& rhs ) noexcept
+    symbol_result(const symbol_result&& rhs ) noexcept
     {
       set_value(rhs.get_value());
     }
 
-    ~symbol_return() override = default;
+    ~symbol_result() override = default;
 
     enum class FieldNumber : uint32_t
     {
@@ -344,13 +344,13 @@ class symbol_return final: public ::EmbeddedProto::MessageInterface
       VALUE = 1
     };
 
-    symbol_return& operator=(const symbol_return& rhs)
+    symbol_result& operator=(const symbol_result& rhs)
     {
       set_value(rhs.get_value());
       return *this;
     }
 
-    symbol_return& operator=(const symbol_return&& rhs) noexcept
+    symbol_result& operator=(const symbol_result&& rhs) noexcept
     {
       set_value(rhs.get_value());
       return *this;
@@ -427,31 +427,31 @@ class symbol_return final: public ::EmbeddedProto::MessageInterface
 
 };
 
-class decimals_args final: public ::EmbeddedProto::MessageInterface
+class decimals_arguments final: public ::EmbeddedProto::MessageInterface
 {
   public:
-    decimals_args() = default;
-    decimals_args(const decimals_args& rhs )
+    decimals_arguments() = default;
+    decimals_arguments(const decimals_arguments& rhs )
     {
     }
 
-    decimals_args(const decimals_args&& rhs ) noexcept
+    decimals_arguments(const decimals_arguments&& rhs ) noexcept
     {
     }
 
-    ~decimals_args() override = default;
+    ~decimals_arguments() override = default;
 
     enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
     };
 
-    decimals_args& operator=(const decimals_args& rhs)
+    decimals_arguments& operator=(const decimals_arguments& rhs)
     {
       return *this;
     }
 
-    decimals_args& operator=(const decimals_args&& rhs) noexcept
+    decimals_arguments& operator=(const decimals_arguments&& rhs) noexcept
     {
       return *this;
     }
@@ -510,21 +510,21 @@ class decimals_args final: public ::EmbeddedProto::MessageInterface
 
 };
 
-class decimals_return final: public ::EmbeddedProto::MessageInterface
+class decimals_result final: public ::EmbeddedProto::MessageInterface
 {
   public:
-    decimals_return() = default;
-    decimals_return(const decimals_return& rhs )
+    decimals_result() = default;
+    decimals_result(const decimals_result& rhs )
     {
       set_value(rhs.get_value());
     }
 
-    decimals_return(const decimals_return&& rhs ) noexcept
+    decimals_result(const decimals_result&& rhs ) noexcept
     {
       set_value(rhs.get_value());
     }
 
-    ~decimals_return() override = default;
+    ~decimals_result() override = default;
 
     enum class FieldNumber : uint32_t
     {
@@ -532,13 +532,13 @@ class decimals_return final: public ::EmbeddedProto::MessageInterface
       VALUE = 1
     };
 
-    decimals_return& operator=(const decimals_return& rhs)
+    decimals_result& operator=(const decimals_result& rhs)
     {
       set_value(rhs.get_value());
       return *this;
     }
 
-    decimals_return& operator=(const decimals_return&& rhs) noexcept
+    decimals_result& operator=(const decimals_result&& rhs) noexcept
     {
       set_value(rhs.get_value());
       return *this;
@@ -616,31 +616,31 @@ class decimals_return final: public ::EmbeddedProto::MessageInterface
 
 };
 
-class total_supply_args final: public ::EmbeddedProto::MessageInterface
+class total_supply_arguments final: public ::EmbeddedProto::MessageInterface
 {
   public:
-    total_supply_args() = default;
-    total_supply_args(const total_supply_args& rhs )
+    total_supply_arguments() = default;
+    total_supply_arguments(const total_supply_arguments& rhs )
     {
     }
 
-    total_supply_args(const total_supply_args&& rhs ) noexcept
+    total_supply_arguments(const total_supply_arguments&& rhs ) noexcept
     {
     }
 
-    ~total_supply_args() override = default;
+    ~total_supply_arguments() override = default;
 
     enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
     };
 
-    total_supply_args& operator=(const total_supply_args& rhs)
+    total_supply_arguments& operator=(const total_supply_arguments& rhs)
     {
       return *this;
     }
 
-    total_supply_args& operator=(const total_supply_args&& rhs) noexcept
+    total_supply_arguments& operator=(const total_supply_arguments&& rhs) noexcept
     {
       return *this;
     }
@@ -699,21 +699,21 @@ class total_supply_args final: public ::EmbeddedProto::MessageInterface
 
 };
 
-class total_supply_return final: public ::EmbeddedProto::MessageInterface
+class total_supply_result final: public ::EmbeddedProto::MessageInterface
 {
   public:
-    total_supply_return() = default;
-    total_supply_return(const total_supply_return& rhs )
+    total_supply_result() = default;
+    total_supply_result(const total_supply_result& rhs )
     {
       set_value(rhs.get_value());
     }
 
-    total_supply_return(const total_supply_return&& rhs ) noexcept
+    total_supply_result(const total_supply_result&& rhs ) noexcept
     {
       set_value(rhs.get_value());
     }
 
-    ~total_supply_return() override = default;
+    ~total_supply_result() override = default;
 
     enum class FieldNumber : uint32_t
     {
@@ -721,13 +721,13 @@ class total_supply_return final: public ::EmbeddedProto::MessageInterface
       VALUE = 1
     };
 
-    total_supply_return& operator=(const total_supply_return& rhs)
+    total_supply_result& operator=(const total_supply_result& rhs)
     {
       set_value(rhs.get_value());
       return *this;
     }
 
-    total_supply_return& operator=(const total_supply_return&& rhs) noexcept
+    total_supply_result& operator=(const total_supply_result&& rhs) noexcept
     {
       set_value(rhs.get_value());
       return *this;
@@ -806,21 +806,21 @@ class total_supply_return final: public ::EmbeddedProto::MessageInterface
 };
 
 template<uint32_t owner_LENGTH>
-class balance_of_args final: public ::EmbeddedProto::MessageInterface
+class balance_of_arguments final: public ::EmbeddedProto::MessageInterface
 {
   public:
-    balance_of_args() = default;
-    balance_of_args(const balance_of_args& rhs )
+    balance_of_arguments() = default;
+    balance_of_arguments(const balance_of_arguments& rhs )
     {
       set_owner(rhs.get_owner());
     }
 
-    balance_of_args(const balance_of_args&& rhs ) noexcept
+    balance_of_arguments(const balance_of_arguments&& rhs ) noexcept
     {
       set_owner(rhs.get_owner());
     }
 
-    ~balance_of_args() override = default;
+    ~balance_of_arguments() override = default;
 
     enum class FieldNumber : uint32_t
     {
@@ -828,13 +828,13 @@ class balance_of_args final: public ::EmbeddedProto::MessageInterface
       OWNER = 1
     };
 
-    balance_of_args& operator=(const balance_of_args& rhs)
+    balance_of_arguments& operator=(const balance_of_arguments& rhs)
     {
       set_owner(rhs.get_owner());
       return *this;
     }
 
-    balance_of_args& operator=(const balance_of_args&& rhs) noexcept
+    balance_of_arguments& operator=(const balance_of_arguments&& rhs) noexcept
     {
       set_owner(rhs.get_owner());
       return *this;
@@ -911,21 +911,21 @@ class balance_of_args final: public ::EmbeddedProto::MessageInterface
 
 };
 
-class balance_of_return final: public ::EmbeddedProto::MessageInterface
+class balance_of_result final: public ::EmbeddedProto::MessageInterface
 {
   public:
-    balance_of_return() = default;
-    balance_of_return(const balance_of_return& rhs )
+    balance_of_result() = default;
+    balance_of_result(const balance_of_result& rhs )
     {
       set_value(rhs.get_value());
     }
 
-    balance_of_return(const balance_of_return&& rhs ) noexcept
+    balance_of_result(const balance_of_result&& rhs ) noexcept
     {
       set_value(rhs.get_value());
     }
 
-    ~balance_of_return() override = default;
+    ~balance_of_result() override = default;
 
     enum class FieldNumber : uint32_t
     {
@@ -933,13 +933,13 @@ class balance_of_return final: public ::EmbeddedProto::MessageInterface
       VALUE = 1
     };
 
-    balance_of_return& operator=(const balance_of_return& rhs)
+    balance_of_result& operator=(const balance_of_result& rhs)
     {
       set_value(rhs.get_value());
       return *this;
     }
 
-    balance_of_return& operator=(const balance_of_return&& rhs) noexcept
+    balance_of_result& operator=(const balance_of_result&& rhs) noexcept
     {
       set_value(rhs.get_value());
       return *this;
@@ -1019,25 +1019,25 @@ class balance_of_return final: public ::EmbeddedProto::MessageInterface
 
 template<uint32_t from_LENGTH, 
 uint32_t to_LENGTH>
-class transfer_args final: public ::EmbeddedProto::MessageInterface
+class transfer_arguments final: public ::EmbeddedProto::MessageInterface
 {
   public:
-    transfer_args() = default;
-    transfer_args(const transfer_args& rhs )
+    transfer_arguments() = default;
+    transfer_arguments(const transfer_arguments& rhs )
     {
       set_from(rhs.get_from());
       set_to(rhs.get_to());
       set_value(rhs.get_value());
     }
 
-    transfer_args(const transfer_args&& rhs ) noexcept
+    transfer_arguments(const transfer_arguments&& rhs ) noexcept
     {
       set_from(rhs.get_from());
       set_to(rhs.get_to());
       set_value(rhs.get_value());
     }
 
-    ~transfer_args() override = default;
+    ~transfer_arguments() override = default;
 
     enum class FieldNumber : uint32_t
     {
@@ -1047,7 +1047,7 @@ class transfer_args final: public ::EmbeddedProto::MessageInterface
       VALUE = 3
     };
 
-    transfer_args& operator=(const transfer_args& rhs)
+    transfer_arguments& operator=(const transfer_arguments& rhs)
     {
       set_from(rhs.get_from());
       set_to(rhs.get_to());
@@ -1055,7 +1055,7 @@ class transfer_args final: public ::EmbeddedProto::MessageInterface
       return *this;
     }
 
-    transfer_args& operator=(const transfer_args&& rhs) noexcept
+    transfer_arguments& operator=(const transfer_arguments&& rhs) noexcept
     {
       set_from(rhs.get_from());
       set_to(rhs.get_to());
@@ -1169,21 +1169,21 @@ class transfer_args final: public ::EmbeddedProto::MessageInterface
 
 };
 
-class transfer_return final: public ::EmbeddedProto::MessageInterface
+class transfer_result final: public ::EmbeddedProto::MessageInterface
 {
   public:
-    transfer_return() = default;
-    transfer_return(const transfer_return& rhs )
+    transfer_result() = default;
+    transfer_result(const transfer_result& rhs )
     {
       set_value(rhs.get_value());
     }
 
-    transfer_return(const transfer_return&& rhs ) noexcept
+    transfer_result(const transfer_result&& rhs ) noexcept
     {
       set_value(rhs.get_value());
     }
 
-    ~transfer_return() override = default;
+    ~transfer_result() override = default;
 
     enum class FieldNumber : uint32_t
     {
@@ -1191,13 +1191,13 @@ class transfer_return final: public ::EmbeddedProto::MessageInterface
       VALUE = 1
     };
 
-    transfer_return& operator=(const transfer_return& rhs)
+    transfer_result& operator=(const transfer_result& rhs)
     {
       set_value(rhs.get_value());
       return *this;
     }
 
-    transfer_return& operator=(const transfer_return&& rhs) noexcept
+    transfer_result& operator=(const transfer_result&& rhs) noexcept
     {
       set_value(rhs.get_value());
       return *this;
@@ -1276,23 +1276,23 @@ class transfer_return final: public ::EmbeddedProto::MessageInterface
 };
 
 template<uint32_t to_LENGTH>
-class mint_args final: public ::EmbeddedProto::MessageInterface
+class mint_arguments final: public ::EmbeddedProto::MessageInterface
 {
   public:
-    mint_args() = default;
-    mint_args(const mint_args& rhs )
+    mint_arguments() = default;
+    mint_arguments(const mint_arguments& rhs )
     {
       set_to(rhs.get_to());
       set_value(rhs.get_value());
     }
 
-    mint_args(const mint_args&& rhs ) noexcept
+    mint_arguments(const mint_arguments&& rhs ) noexcept
     {
       set_to(rhs.get_to());
       set_value(rhs.get_value());
     }
 
-    ~mint_args() override = default;
+    ~mint_arguments() override = default;
 
     enum class FieldNumber : uint32_t
     {
@@ -1301,14 +1301,14 @@ class mint_args final: public ::EmbeddedProto::MessageInterface
       VALUE = 2
     };
 
-    mint_args& operator=(const mint_args& rhs)
+    mint_arguments& operator=(const mint_arguments& rhs)
     {
       set_to(rhs.get_to());
       set_value(rhs.get_value());
       return *this;
     }
 
-    mint_args& operator=(const mint_args&& rhs) noexcept
+    mint_arguments& operator=(const mint_arguments&& rhs) noexcept
     {
       set_to(rhs.get_to());
       set_value(rhs.get_value());
@@ -1404,21 +1404,21 @@ class mint_args final: public ::EmbeddedProto::MessageInterface
 
 };
 
-class mint_return final: public ::EmbeddedProto::MessageInterface
+class mint_result final: public ::EmbeddedProto::MessageInterface
 {
   public:
-    mint_return() = default;
-    mint_return(const mint_return& rhs )
+    mint_result() = default;
+    mint_result(const mint_result& rhs )
     {
       set_value(rhs.get_value());
     }
 
-    mint_return(const mint_return&& rhs ) noexcept
+    mint_result(const mint_result&& rhs ) noexcept
     {
       set_value(rhs.get_value());
     }
 
-    ~mint_return() override = default;
+    ~mint_result() override = default;
 
     enum class FieldNumber : uint32_t
     {
@@ -1426,13 +1426,13 @@ class mint_return final: public ::EmbeddedProto::MessageInterface
       VALUE = 1
     };
 
-    mint_return& operator=(const mint_return& rhs)
+    mint_result& operator=(const mint_result& rhs)
     {
       set_value(rhs.get_value());
       return *this;
     }
 
-    mint_return& operator=(const mint_return&& rhs) noexcept
+    mint_result& operator=(const mint_result&& rhs) noexcept
     {
       set_value(rhs.get_value());
       return *this;
@@ -1613,6 +1613,158 @@ class balance_object final: public ::EmbeddedProto::MessageInterface
 
 
       EmbeddedProto::uint64 value_ = 0U;
+
+};
+
+class mana_balance_object final: public ::EmbeddedProto::MessageInterface
+{
+  public:
+    mana_balance_object() = default;
+    mana_balance_object(const mana_balance_object& rhs )
+    {
+      set_balance(rhs.get_balance());
+      set_mana(rhs.get_mana());
+      set_last_mana_update(rhs.get_last_mana_update());
+    }
+
+    mana_balance_object(const mana_balance_object&& rhs ) noexcept
+    {
+      set_balance(rhs.get_balance());
+      set_mana(rhs.get_mana());
+      set_last_mana_update(rhs.get_last_mana_update());
+    }
+
+    ~mana_balance_object() override = default;
+
+    enum class FieldNumber : uint32_t
+    {
+      NOT_SET = 0,
+      BALANCE = 1,
+      MANA = 2,
+      LAST_MANA_UPDATE = 3
+    };
+
+    mana_balance_object& operator=(const mana_balance_object& rhs)
+    {
+      set_balance(rhs.get_balance());
+      set_mana(rhs.get_mana());
+      set_last_mana_update(rhs.get_last_mana_update());
+      return *this;
+    }
+
+    mana_balance_object& operator=(const mana_balance_object&& rhs) noexcept
+    {
+      set_balance(rhs.get_balance());
+      set_mana(rhs.get_mana());
+      set_last_mana_update(rhs.get_last_mana_update());
+      return *this;
+    }
+
+    inline void clear_balance() { balance_.clear(); }
+    inline void set_balance(const EmbeddedProto::uint64& value) { balance_ = value; }
+    inline void set_balance(const EmbeddedProto::uint64&& value) { balance_ = value; }
+    inline EmbeddedProto::uint64& mutable_balance() { return balance_; }
+    inline const EmbeddedProto::uint64& get_balance() const { return balance_; }
+    inline EmbeddedProto::uint64::FIELD_TYPE balance() const { return balance_.get(); }
+
+    inline void clear_mana() { mana_.clear(); }
+    inline void set_mana(const EmbeddedProto::uint64& value) { mana_ = value; }
+    inline void set_mana(const EmbeddedProto::uint64&& value) { mana_ = value; }
+    inline EmbeddedProto::uint64& mutable_mana() { return mana_; }
+    inline const EmbeddedProto::uint64& get_mana() const { return mana_; }
+    inline EmbeddedProto::uint64::FIELD_TYPE mana() const { return mana_.get(); }
+
+    inline void clear_last_mana_update() { last_mana_update_.clear(); }
+    inline void set_last_mana_update(const EmbeddedProto::uint64& value) { last_mana_update_ = value; }
+    inline void set_last_mana_update(const EmbeddedProto::uint64&& value) { last_mana_update_ = value; }
+    inline EmbeddedProto::uint64& mutable_last_mana_update() { return last_mana_update_; }
+    inline const EmbeddedProto::uint64& get_last_mana_update() const { return last_mana_update_; }
+    inline EmbeddedProto::uint64::FIELD_TYPE last_mana_update() const { return last_mana_update_.get(); }
+
+
+    ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
+    {
+      ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
+
+      if((0U != balance_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
+      {
+        return_value = balance_.serialize_with_id(static_cast<uint32_t>(FieldNumber::BALANCE), buffer, false);
+      }
+
+      if((0U != mana_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
+      {
+        return_value = mana_.serialize_with_id(static_cast<uint32_t>(FieldNumber::MANA), buffer, false);
+      }
+
+      if((0U != last_mana_update_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
+      {
+        return_value = last_mana_update_.serialize_with_id(static_cast<uint32_t>(FieldNumber::LAST_MANA_UPDATE), buffer, false);
+      }
+
+      return return_value;
+    };
+
+    ::EmbeddedProto::Error deserialize(::EmbeddedProto::ReadBufferInterface& buffer) override
+    {
+      ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
+      ::EmbeddedProto::WireFormatter::WireType wire_type = ::EmbeddedProto::WireFormatter::WireType::VARINT;
+      uint32_t id_number = 0;
+      FieldNumber id_tag = FieldNumber::NOT_SET;
+
+      ::EmbeddedProto::Error tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
+      while((::EmbeddedProto::Error::NO_ERRORS == return_value) && (::EmbeddedProto::Error::NO_ERRORS == tag_value))
+      {
+        id_tag = static_cast<FieldNumber>(id_number);
+        switch(id_tag)
+        {
+          case FieldNumber::BALANCE:
+            return_value = balance_.deserialize_check_type(buffer, wire_type);
+            break;
+
+          case FieldNumber::MANA:
+            return_value = mana_.deserialize_check_type(buffer, wire_type);
+            break;
+
+          case FieldNumber::LAST_MANA_UPDATE:
+            return_value = last_mana_update_.deserialize_check_type(buffer, wire_type);
+            break;
+
+          default:
+            break;
+        }
+
+        if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+        {
+          // Read the next tag.
+          tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
+        }
+      }
+
+      // When an error was detect while reading the tag but no other errors where found, set it in the return value.
+      if((::EmbeddedProto::Error::NO_ERRORS == return_value)
+         && (::EmbeddedProto::Error::NO_ERRORS != tag_value)
+         && (::EmbeddedProto::Error::END_OF_BUFFER != tag_value)) // The end of the buffer is not an array in this case.
+      {
+        return_value = tag_value;
+      }
+
+      return return_value;
+    };
+
+    void clear() override
+    {
+      clear_balance();
+      clear_mana();
+      clear_last_mana_update();
+
+    }
+
+    private:
+
+
+      EmbeddedProto::uint64 balance_ = 0U;
+      EmbeddedProto::uint64 mana_ = 0U;
+      EmbeddedProto::uint64 last_mana_update_ = 0U;
 
 };
 
