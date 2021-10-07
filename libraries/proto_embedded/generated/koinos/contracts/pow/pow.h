@@ -224,23 +224,106 @@ class difficulty_metadata final: public ::EmbeddedProto::MessageInterface
 
 };
 
-template<uint32_t value_target_LENGTH, 
-uint32_t value_difficulty_LENGTH>
-class difficulty_metadata_result final: public ::EmbeddedProto::MessageInterface
+class get_difficulty_metadata_arguments final: public ::EmbeddedProto::MessageInterface
 {
   public:
-    difficulty_metadata_result() = default;
-    difficulty_metadata_result(const difficulty_metadata_result& rhs )
+    get_difficulty_metadata_arguments() = default;
+    get_difficulty_metadata_arguments(const get_difficulty_metadata_arguments& rhs )
+    {
+    }
+
+    get_difficulty_metadata_arguments(const get_difficulty_metadata_arguments&& rhs ) noexcept
+    {
+    }
+
+    ~get_difficulty_metadata_arguments() override = default;
+
+    enum class FieldNumber : uint32_t
+    {
+      NOT_SET = 0,
+    };
+
+    get_difficulty_metadata_arguments& operator=(const get_difficulty_metadata_arguments& rhs)
+    {
+      return *this;
+    }
+
+    get_difficulty_metadata_arguments& operator=(const get_difficulty_metadata_arguments&& rhs) noexcept
+    {
+      return *this;
+    }
+
+
+    ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
+    {
+      ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
+
+      return return_value;
+    };
+
+    ::EmbeddedProto::Error deserialize(::EmbeddedProto::ReadBufferInterface& buffer) override
+    {
+      ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
+      ::EmbeddedProto::WireFormatter::WireType wire_type = ::EmbeddedProto::WireFormatter::WireType::VARINT;
+      uint32_t id_number = 0;
+      FieldNumber id_tag = FieldNumber::NOT_SET;
+
+      ::EmbeddedProto::Error tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
+      while((::EmbeddedProto::Error::NO_ERRORS == return_value) && (::EmbeddedProto::Error::NO_ERRORS == tag_value))
+      {
+        id_tag = static_cast<FieldNumber>(id_number);
+        switch(id_tag)
+        {
+          default:
+            break;
+        }
+
+        if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+        {
+          // Read the next tag.
+          tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
+        }
+      }
+
+      // When an error was detect while reading the tag but no other errors where found, set it in the return value.
+      if((::EmbeddedProto::Error::NO_ERRORS == return_value)
+         && (::EmbeddedProto::Error::NO_ERRORS != tag_value)
+         && (::EmbeddedProto::Error::END_OF_BUFFER != tag_value)) // The end of the buffer is not an array in this case.
+      {
+        return_value = tag_value;
+      }
+
+      return return_value;
+    };
+
+    void clear() override
+    {
+
+    }
+
+    private:
+
+
+
+};
+
+template<uint32_t value_target_LENGTH, 
+uint32_t value_difficulty_LENGTH>
+class get_difficulty_metadata_result final: public ::EmbeddedProto::MessageInterface
+{
+  public:
+    get_difficulty_metadata_result() = default;
+    get_difficulty_metadata_result(const get_difficulty_metadata_result& rhs )
     {
       set_value(rhs.get_value());
     }
 
-    difficulty_metadata_result(const difficulty_metadata_result&& rhs ) noexcept
+    get_difficulty_metadata_result(const get_difficulty_metadata_result&& rhs ) noexcept
     {
       set_value(rhs.get_value());
     }
 
-    ~difficulty_metadata_result() override = default;
+    ~get_difficulty_metadata_result() override = default;
 
     enum class FieldNumber : uint32_t
     {
@@ -248,13 +331,13 @@ class difficulty_metadata_result final: public ::EmbeddedProto::MessageInterface
       VALUE = 1
     };
 
-    difficulty_metadata_result& operator=(const difficulty_metadata_result& rhs)
+    get_difficulty_metadata_result& operator=(const get_difficulty_metadata_result& rhs)
     {
       set_value(rhs.get_value());
       return *this;
     }
 
-    difficulty_metadata_result& operator=(const difficulty_metadata_result&& rhs) noexcept
+    get_difficulty_metadata_result& operator=(const get_difficulty_metadata_result&& rhs) noexcept
     {
       set_value(rhs.get_value());
       return *this;
