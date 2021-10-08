@@ -45,6 +45,7 @@
 
 // Include external proto definitions
 #include <koinos/common.h>
+#include <koinos/chain/chain.h>
 #include <koinos/protocol/protocol.h>
 #include <koinos/rpc/rpc.h>
 
@@ -1676,6 +1677,407 @@ class get_account_nonce_response final: public ::EmbeddedProto::MessageInterface
 
 };
 
+template<uint32_t account_LENGTH>
+class get_account_rc_request final: public ::EmbeddedProto::MessageInterface
+{
+  public:
+    get_account_rc_request() = default;
+    get_account_rc_request(const get_account_rc_request& rhs )
+    {
+      set_account(rhs.get_account());
+    }
+
+    get_account_rc_request(const get_account_rc_request&& rhs ) noexcept
+    {
+      set_account(rhs.get_account());
+    }
+
+    ~get_account_rc_request() override = default;
+
+    enum class FieldNumber : uint32_t
+    {
+      NOT_SET = 0,
+      ACCOUNT = 1
+    };
+
+    get_account_rc_request& operator=(const get_account_rc_request& rhs)
+    {
+      set_account(rhs.get_account());
+      return *this;
+    }
+
+    get_account_rc_request& operator=(const get_account_rc_request&& rhs) noexcept
+    {
+      set_account(rhs.get_account());
+      return *this;
+    }
+
+    inline void clear_account() { account_.clear(); }
+    inline ::EmbeddedProto::FieldBytes<account_LENGTH>& mutable_account() { return account_; }
+    inline void set_account(const ::EmbeddedProto::FieldBytes<account_LENGTH>& rhs) { account_.set(rhs); }
+    inline const ::EmbeddedProto::FieldBytes<account_LENGTH>& get_account() const { return account_; }
+    inline const uint8_t* account() const { return account_.get_const(); }
+
+
+    ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
+    {
+      ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
+
+      if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+      {
+        return_value = account_.serialize_with_id(static_cast<uint32_t>(FieldNumber::ACCOUNT), buffer, false);
+      }
+
+      return return_value;
+    };
+
+    ::EmbeddedProto::Error deserialize(::EmbeddedProto::ReadBufferInterface& buffer) override
+    {
+      ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
+      ::EmbeddedProto::WireFormatter::WireType wire_type = ::EmbeddedProto::WireFormatter::WireType::VARINT;
+      uint32_t id_number = 0;
+      FieldNumber id_tag = FieldNumber::NOT_SET;
+
+      ::EmbeddedProto::Error tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
+      while((::EmbeddedProto::Error::NO_ERRORS == return_value) && (::EmbeddedProto::Error::NO_ERRORS == tag_value))
+      {
+        id_tag = static_cast<FieldNumber>(id_number);
+        switch(id_tag)
+        {
+          case FieldNumber::ACCOUNT:
+            return_value = account_.deserialize_check_type(buffer, wire_type);
+            break;
+
+          default:
+            break;
+        }
+
+        if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+        {
+          // Read the next tag.
+          tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
+        }
+      }
+
+      // When an error was detect while reading the tag but no other errors where found, set it in the return value.
+      if((::EmbeddedProto::Error::NO_ERRORS == return_value)
+         && (::EmbeddedProto::Error::NO_ERRORS != tag_value)
+         && (::EmbeddedProto::Error::END_OF_BUFFER != tag_value)) // The end of the buffer is not an array in this case.
+      {
+        return_value = tag_value;
+      }
+
+      return return_value;
+    };
+
+    void clear() override
+    {
+      clear_account();
+
+    }
+
+    private:
+
+
+      ::EmbeddedProto::FieldBytes<account_LENGTH> account_;
+
+};
+
+class get_account_rc_response final: public ::EmbeddedProto::MessageInterface
+{
+  public:
+    get_account_rc_response() = default;
+    get_account_rc_response(const get_account_rc_response& rhs )
+    {
+      set_rc(rhs.get_rc());
+    }
+
+    get_account_rc_response(const get_account_rc_response&& rhs ) noexcept
+    {
+      set_rc(rhs.get_rc());
+    }
+
+    ~get_account_rc_response() override = default;
+
+    enum class FieldNumber : uint32_t
+    {
+      NOT_SET = 0,
+      RC = 1
+    };
+
+    get_account_rc_response& operator=(const get_account_rc_response& rhs)
+    {
+      set_rc(rhs.get_rc());
+      return *this;
+    }
+
+    get_account_rc_response& operator=(const get_account_rc_response&& rhs) noexcept
+    {
+      set_rc(rhs.get_rc());
+      return *this;
+    }
+
+    inline void clear_rc() { rc_.clear(); }
+    inline void set_rc(const EmbeddedProto::uint64& value) { rc_ = value; }
+    inline void set_rc(const EmbeddedProto::uint64&& value) { rc_ = value; }
+    inline EmbeddedProto::uint64& mutable_rc() { return rc_; }
+    inline const EmbeddedProto::uint64& get_rc() const { return rc_; }
+    inline EmbeddedProto::uint64::FIELD_TYPE rc() const { return rc_.get(); }
+
+
+    ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
+    {
+      ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
+
+      if((0U != rc_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
+      {
+        return_value = rc_.serialize_with_id(static_cast<uint32_t>(FieldNumber::RC), buffer, false);
+      }
+
+      return return_value;
+    };
+
+    ::EmbeddedProto::Error deserialize(::EmbeddedProto::ReadBufferInterface& buffer) override
+    {
+      ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
+      ::EmbeddedProto::WireFormatter::WireType wire_type = ::EmbeddedProto::WireFormatter::WireType::VARINT;
+      uint32_t id_number = 0;
+      FieldNumber id_tag = FieldNumber::NOT_SET;
+
+      ::EmbeddedProto::Error tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
+      while((::EmbeddedProto::Error::NO_ERRORS == return_value) && (::EmbeddedProto::Error::NO_ERRORS == tag_value))
+      {
+        id_tag = static_cast<FieldNumber>(id_number);
+        switch(id_tag)
+        {
+          case FieldNumber::RC:
+            return_value = rc_.deserialize_check_type(buffer, wire_type);
+            break;
+
+          default:
+            break;
+        }
+
+        if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+        {
+          // Read the next tag.
+          tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
+        }
+      }
+
+      // When an error was detect while reading the tag but no other errors where found, set it in the return value.
+      if((::EmbeddedProto::Error::NO_ERRORS == return_value)
+         && (::EmbeddedProto::Error::NO_ERRORS != tag_value)
+         && (::EmbeddedProto::Error::END_OF_BUFFER != tag_value)) // The end of the buffer is not an array in this case.
+      {
+        return_value = tag_value;
+      }
+
+      return return_value;
+    };
+
+    void clear() override
+    {
+      clear_rc();
+
+    }
+
+    private:
+
+
+      EmbeddedProto::uint64 rc_ = 0U;
+
+};
+
+class get_resource_limits_request final: public ::EmbeddedProto::MessageInterface
+{
+  public:
+    get_resource_limits_request() = default;
+    get_resource_limits_request(const get_resource_limits_request& rhs )
+    {
+    }
+
+    get_resource_limits_request(const get_resource_limits_request&& rhs ) noexcept
+    {
+    }
+
+    ~get_resource_limits_request() override = default;
+
+    enum class FieldNumber : uint32_t
+    {
+      NOT_SET = 0,
+    };
+
+    get_resource_limits_request& operator=(const get_resource_limits_request& rhs)
+    {
+      return *this;
+    }
+
+    get_resource_limits_request& operator=(const get_resource_limits_request&& rhs) noexcept
+    {
+      return *this;
+    }
+
+
+    ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
+    {
+      ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
+
+      return return_value;
+    };
+
+    ::EmbeddedProto::Error deserialize(::EmbeddedProto::ReadBufferInterface& buffer) override
+    {
+      ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
+      ::EmbeddedProto::WireFormatter::WireType wire_type = ::EmbeddedProto::WireFormatter::WireType::VARINT;
+      uint32_t id_number = 0;
+      FieldNumber id_tag = FieldNumber::NOT_SET;
+
+      ::EmbeddedProto::Error tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
+      while((::EmbeddedProto::Error::NO_ERRORS == return_value) && (::EmbeddedProto::Error::NO_ERRORS == tag_value))
+      {
+        id_tag = static_cast<FieldNumber>(id_number);
+        switch(id_tag)
+        {
+          default:
+            break;
+        }
+
+        if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+        {
+          // Read the next tag.
+          tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
+        }
+      }
+
+      // When an error was detect while reading the tag but no other errors where found, set it in the return value.
+      if((::EmbeddedProto::Error::NO_ERRORS == return_value)
+         && (::EmbeddedProto::Error::NO_ERRORS != tag_value)
+         && (::EmbeddedProto::Error::END_OF_BUFFER != tag_value)) // The end of the buffer is not an array in this case.
+      {
+        return_value = tag_value;
+      }
+
+      return return_value;
+    };
+
+    void clear() override
+    {
+
+    }
+
+    private:
+
+
+
+};
+
+class get_resource_limits_response final: public ::EmbeddedProto::MessageInterface
+{
+  public:
+    get_resource_limits_response() = default;
+    get_resource_limits_response(const get_resource_limits_response& rhs )
+    {
+      set_resource_limit_data(rhs.get_resource_limit_data());
+    }
+
+    get_resource_limits_response(const get_resource_limits_response&& rhs ) noexcept
+    {
+      set_resource_limit_data(rhs.get_resource_limit_data());
+    }
+
+    ~get_resource_limits_response() override = default;
+
+    enum class FieldNumber : uint32_t
+    {
+      NOT_SET = 0,
+      RESOURCE_LIMIT_DATA = 1
+    };
+
+    get_resource_limits_response& operator=(const get_resource_limits_response& rhs)
+    {
+      set_resource_limit_data(rhs.get_resource_limit_data());
+      return *this;
+    }
+
+    get_resource_limits_response& operator=(const get_resource_limits_response&& rhs) noexcept
+    {
+      set_resource_limit_data(rhs.get_resource_limit_data());
+      return *this;
+    }
+
+    inline void clear_resource_limit_data() { resource_limit_data_.clear(); }
+    inline void set_resource_limit_data(const chain::resource_limit_data& value) { resource_limit_data_ = value; }
+    inline void set_resource_limit_data(const chain::resource_limit_data&& value) { resource_limit_data_ = value; }
+    inline chain::resource_limit_data& mutable_resource_limit_data() { return resource_limit_data_; }
+    inline const chain::resource_limit_data& get_resource_limit_data() const { return resource_limit_data_; }
+    inline const chain::resource_limit_data& resource_limit_data() const { return resource_limit_data_; }
+
+
+    ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
+    {
+      ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
+
+      if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+      {
+        return_value = resource_limit_data_.serialize_with_id(static_cast<uint32_t>(FieldNumber::RESOURCE_LIMIT_DATA), buffer, false);
+      }
+
+      return return_value;
+    };
+
+    ::EmbeddedProto::Error deserialize(::EmbeddedProto::ReadBufferInterface& buffer) override
+    {
+      ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
+      ::EmbeddedProto::WireFormatter::WireType wire_type = ::EmbeddedProto::WireFormatter::WireType::VARINT;
+      uint32_t id_number = 0;
+      FieldNumber id_tag = FieldNumber::NOT_SET;
+
+      ::EmbeddedProto::Error tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
+      while((::EmbeddedProto::Error::NO_ERRORS == return_value) && (::EmbeddedProto::Error::NO_ERRORS == tag_value))
+      {
+        id_tag = static_cast<FieldNumber>(id_number);
+        switch(id_tag)
+        {
+          case FieldNumber::RESOURCE_LIMIT_DATA:
+            return_value = resource_limit_data_.deserialize_check_type(buffer, wire_type);
+            break;
+
+          default:
+            break;
+        }
+
+        if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+        {
+          // Read the next tag.
+          tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
+        }
+      }
+
+      // When an error was detect while reading the tag but no other errors where found, set it in the return value.
+      if((::EmbeddedProto::Error::NO_ERRORS == return_value)
+         && (::EmbeddedProto::Error::NO_ERRORS != tag_value)
+         && (::EmbeddedProto::Error::END_OF_BUFFER != tag_value)) // The end of the buffer is not an array in this case.
+      {
+        return_value = tag_value;
+      }
+
+      return return_value;
+    };
+
+    void clear() override
+    {
+      clear_resource_limit_data();
+
+    }
+
+    private:
+
+
+      chain::resource_limit_data resource_limit_data_;
+
+};
+
 template<uint32_t submit_block_block_id_LENGTH, 
 uint32_t submit_block_block_header_previous_LENGTH, 
 uint32_t submit_block_block_active_LENGTH, 
@@ -1692,7 +2094,8 @@ uint32_t submit_transaction_transaction_passive_LENGTH,
 uint32_t submit_transaction_transaction_signature_data_LENGTH, 
 uint32_t read_contract_contract_id_LENGTH, 
 uint32_t read_contract_args_LENGTH, 
-uint32_t get_account_nonce_account_LENGTH>
+uint32_t get_account_nonce_account_LENGTH, 
+uint32_t get_account_rc_account_LENGTH>
 class chain_request final: public ::EmbeddedProto::MessageInterface
 {
   public:
@@ -1737,6 +2140,14 @@ class chain_request final: public ::EmbeddedProto::MessageInterface
 
         case FieldNumber::GET_ACCOUNT_NONCE:
           set_get_account_nonce(rhs.get_get_account_nonce());
+          break;
+
+        case FieldNumber::GET_ACCOUNT_RC:
+          set_get_account_rc(rhs.get_get_account_rc());
+          break;
+
+        case FieldNumber::GET_RESOURCE_LIMITS:
+          set_get_resource_limits(rhs.get_get_resource_limits());
           break;
 
         default:
@@ -1787,6 +2198,14 @@ class chain_request final: public ::EmbeddedProto::MessageInterface
           set_get_account_nonce(rhs.get_get_account_nonce());
           break;
 
+        case FieldNumber::GET_ACCOUNT_RC:
+          set_get_account_rc(rhs.get_get_account_rc());
+          break;
+
+        case FieldNumber::GET_RESOURCE_LIMITS:
+          set_get_resource_limits(rhs.get_get_resource_limits());
+          break;
+
         default:
           break;
       }
@@ -1805,7 +2224,9 @@ class chain_request final: public ::EmbeddedProto::MessageInterface
       GET_CHAIN_ID = 5,
       GET_FORK_HEADS = 6,
       READ_CONTRACT = 7,
-      GET_ACCOUNT_NONCE = 8
+      GET_ACCOUNT_NONCE = 8,
+      GET_ACCOUNT_RC = 9,
+      GET_RESOURCE_LIMITS = 10
     };
 
     chain_request& operator=(const chain_request& rhs)
@@ -1848,6 +2269,14 @@ class chain_request final: public ::EmbeddedProto::MessageInterface
 
         case FieldNumber::GET_ACCOUNT_NONCE:
           set_get_account_nonce(rhs.get_get_account_nonce());
+          break;
+
+        case FieldNumber::GET_ACCOUNT_RC:
+          set_get_account_rc(rhs.get_get_account_rc());
+          break;
+
+        case FieldNumber::GET_RESOURCE_LIMITS:
+          set_get_resource_limits(rhs.get_get_resource_limits());
           break;
 
         default:
@@ -1897,6 +2326,14 @@ class chain_request final: public ::EmbeddedProto::MessageInterface
 
         case FieldNumber::GET_ACCOUNT_NONCE:
           set_get_account_nonce(rhs.get_get_account_nonce());
+          break;
+
+        case FieldNumber::GET_ACCOUNT_RC:
+          set_get_account_rc(rhs.get_get_account_rc());
+          break;
+
+        case FieldNumber::GET_RESOURCE_LIMITS:
+          set_get_resource_limits(rhs.get_get_resource_limits());
           break;
 
         default:
@@ -2188,6 +2625,76 @@ class chain_request final: public ::EmbeddedProto::MessageInterface
     inline const get_account_nonce_request<get_account_nonce_account_LENGTH>& get_get_account_nonce() const { return request_.get_account_nonce_; }
     inline const get_account_nonce_request<get_account_nonce_account_LENGTH>& get_account_nonce() const { return request_.get_account_nonce_; }
 
+    inline void clear_get_account_rc()
+    {
+      if(FieldNumber::GET_ACCOUNT_RC == which_request_)
+      {
+        which_request_ = FieldNumber::NOT_SET;
+        request_.get_account_rc_.~get_account_rc_request<get_account_rc_account_LENGTH>();
+      }
+    }
+    inline void set_get_account_rc(const get_account_rc_request<get_account_rc_account_LENGTH>& value)
+    {
+      if(FieldNumber::GET_ACCOUNT_RC != which_request_)
+      {
+        init_request(FieldNumber::GET_ACCOUNT_RC);
+      }
+      request_.get_account_rc_ = value;
+    }
+    inline void set_get_account_rc(const get_account_rc_request<get_account_rc_account_LENGTH>&& value)
+    {
+      if(FieldNumber::GET_ACCOUNT_RC != which_request_)
+      {
+        init_request(FieldNumber::GET_ACCOUNT_RC);
+      }
+      request_.get_account_rc_ = value;
+    }
+    inline get_account_rc_request<get_account_rc_account_LENGTH>& mutable_get_account_rc()
+    {
+      if(FieldNumber::GET_ACCOUNT_RC != which_request_)
+      {
+        init_request(FieldNumber::GET_ACCOUNT_RC);
+      }
+      return request_.get_account_rc_;
+    }
+    inline const get_account_rc_request<get_account_rc_account_LENGTH>& get_get_account_rc() const { return request_.get_account_rc_; }
+    inline const get_account_rc_request<get_account_rc_account_LENGTH>& get_account_rc() const { return request_.get_account_rc_; }
+
+    inline void clear_get_resource_limits()
+    {
+      if(FieldNumber::GET_RESOURCE_LIMITS == which_request_)
+      {
+        which_request_ = FieldNumber::NOT_SET;
+        request_.get_resource_limits_.~get_resource_limits_request();
+      }
+    }
+    inline void set_get_resource_limits(const get_resource_limits_request& value)
+    {
+      if(FieldNumber::GET_RESOURCE_LIMITS != which_request_)
+      {
+        init_request(FieldNumber::GET_RESOURCE_LIMITS);
+      }
+      request_.get_resource_limits_ = value;
+    }
+    inline void set_get_resource_limits(const get_resource_limits_request&& value)
+    {
+      if(FieldNumber::GET_RESOURCE_LIMITS != which_request_)
+      {
+        init_request(FieldNumber::GET_RESOURCE_LIMITS);
+      }
+      request_.get_resource_limits_ = value;
+    }
+    inline get_resource_limits_request& mutable_get_resource_limits()
+    {
+      if(FieldNumber::GET_RESOURCE_LIMITS != which_request_)
+      {
+        init_request(FieldNumber::GET_RESOURCE_LIMITS);
+      }
+      return request_.get_resource_limits_;
+    }
+    inline const get_resource_limits_request& get_get_resource_limits() const { return request_.get_resource_limits_; }
+    inline const get_resource_limits_request& get_resource_limits() const { return request_.get_resource_limits_; }
+
 
     ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
     {
@@ -2251,6 +2758,20 @@ class chain_request final: public ::EmbeddedProto::MessageInterface
           }
           break;
 
+        case FieldNumber::GET_ACCOUNT_RC:
+          if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+          {
+            return_value = request_.get_account_rc_.serialize_with_id(static_cast<uint32_t>(FieldNumber::GET_ACCOUNT_RC), buffer, false);
+          }
+          break;
+
+        case FieldNumber::GET_RESOURCE_LIMITS:
+          if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+          {
+            return_value = request_.get_resource_limits_.serialize_with_id(static_cast<uint32_t>(FieldNumber::GET_RESOURCE_LIMITS), buffer, false);
+          }
+          break;
+
         default:
           break;
       }
@@ -2311,6 +2832,16 @@ class chain_request final: public ::EmbeddedProto::MessageInterface
 
             break;
 
+          case FieldNumber::GET_ACCOUNT_RC:
+            return_value = deserialize_request(FieldNumber::GET_ACCOUNT_RC, request_.get_account_rc_, buffer, wire_type);
+
+            break;
+
+          case FieldNumber::GET_RESOURCE_LIMITS:
+            return_value = deserialize_request(FieldNumber::GET_RESOURCE_LIMITS, request_.get_resource_limits_, buffer, wire_type);
+
+            break;
+
           default:
             break;
         }
@@ -2356,6 +2887,8 @@ class chain_request final: public ::EmbeddedProto::MessageInterface
         get_fork_heads_request get_fork_heads_;
         read_contract_request<read_contract_contract_id_LENGTH, read_contract_args_LENGTH> read_contract_;
         get_account_nonce_request<get_account_nonce_account_LENGTH> get_account_nonce_;
+        get_account_rc_request<get_account_rc_account_LENGTH> get_account_rc_;
+        get_resource_limits_request get_resource_limits_;
       };
       request request_;
 
@@ -2410,6 +2943,16 @@ class chain_request final: public ::EmbeddedProto::MessageInterface
             which_request_ = FieldNumber::GET_ACCOUNT_NONCE;
             break;
 
+          case FieldNumber::GET_ACCOUNT_RC:
+            new(&request_.get_account_rc_) get_account_rc_request<get_account_rc_account_LENGTH>;
+            which_request_ = FieldNumber::GET_ACCOUNT_RC;
+            break;
+
+          case FieldNumber::GET_RESOURCE_LIMITS:
+            new(&request_.get_resource_limits_) get_resource_limits_request;
+            which_request_ = FieldNumber::GET_RESOURCE_LIMITS;
+            break;
+
           default:
             break;
          }
@@ -2444,6 +2987,12 @@ class chain_request final: public ::EmbeddedProto::MessageInterface
             break;
           case FieldNumber::GET_ACCOUNT_NONCE:
             request_.get_account_nonce_.~get_account_nonce_request<get_account_nonce_account_LENGTH>(); // NOSONAR Unions require this.
+            break;
+          case FieldNumber::GET_ACCOUNT_RC:
+            request_.get_account_rc_.~get_account_rc_request<get_account_rc_account_LENGTH>(); // NOSONAR Unions require this.
+            break;
+          case FieldNumber::GET_RESOURCE_LIMITS:
+            request_.get_resource_limits_.~get_resource_limits_request(); // NOSONAR Unions require this.
             break;
           default:
             break;
@@ -2531,6 +3080,14 @@ class chain_response final: public ::EmbeddedProto::MessageInterface
           set_get_account_nonce(rhs.get_get_account_nonce());
           break;
 
+        case FieldNumber::GET_ACCOUNT_RC:
+          set_get_account_rc(rhs.get_get_account_rc());
+          break;
+
+        case FieldNumber::GET_RESOURCE_LIMITS:
+          set_get_resource_limits(rhs.get_get_resource_limits());
+          break;
+
         default:
           break;
       }
@@ -2583,6 +3140,14 @@ class chain_response final: public ::EmbeddedProto::MessageInterface
           set_get_account_nonce(rhs.get_get_account_nonce());
           break;
 
+        case FieldNumber::GET_ACCOUNT_RC:
+          set_get_account_rc(rhs.get_get_account_rc());
+          break;
+
+        case FieldNumber::GET_RESOURCE_LIMITS:
+          set_get_resource_limits(rhs.get_get_resource_limits());
+          break;
+
         default:
           break;
       }
@@ -2602,7 +3167,9 @@ class chain_response final: public ::EmbeddedProto::MessageInterface
       GET_CHAIN_ID = 6,
       GET_FORK_HEADS = 7,
       READ_CONTRACT = 8,
-      GET_ACCOUNT_NONCE = 9
+      GET_ACCOUNT_NONCE = 9,
+      GET_ACCOUNT_RC = 10,
+      GET_RESOURCE_LIMITS = 11
     };
 
     chain_response& operator=(const chain_response& rhs)
@@ -2649,6 +3216,14 @@ class chain_response final: public ::EmbeddedProto::MessageInterface
 
         case FieldNumber::GET_ACCOUNT_NONCE:
           set_get_account_nonce(rhs.get_get_account_nonce());
+          break;
+
+        case FieldNumber::GET_ACCOUNT_RC:
+          set_get_account_rc(rhs.get_get_account_rc());
+          break;
+
+        case FieldNumber::GET_RESOURCE_LIMITS:
+          set_get_resource_limits(rhs.get_get_resource_limits());
           break;
 
         default:
@@ -2702,6 +3277,14 @@ class chain_response final: public ::EmbeddedProto::MessageInterface
 
         case FieldNumber::GET_ACCOUNT_NONCE:
           set_get_account_nonce(rhs.get_get_account_nonce());
+          break;
+
+        case FieldNumber::GET_ACCOUNT_RC:
+          set_get_account_rc(rhs.get_get_account_rc());
+          break;
+
+        case FieldNumber::GET_RESOURCE_LIMITS:
+          set_get_resource_limits(rhs.get_get_resource_limits());
           break;
 
         default:
@@ -3028,6 +3611,76 @@ class chain_response final: public ::EmbeddedProto::MessageInterface
     inline const get_account_nonce_response& get_get_account_nonce() const { return response_.get_account_nonce_; }
     inline const get_account_nonce_response& get_account_nonce() const { return response_.get_account_nonce_; }
 
+    inline void clear_get_account_rc()
+    {
+      if(FieldNumber::GET_ACCOUNT_RC == which_response_)
+      {
+        which_response_ = FieldNumber::NOT_SET;
+        response_.get_account_rc_.~get_account_rc_response();
+      }
+    }
+    inline void set_get_account_rc(const get_account_rc_response& value)
+    {
+      if(FieldNumber::GET_ACCOUNT_RC != which_response_)
+      {
+        init_response(FieldNumber::GET_ACCOUNT_RC);
+      }
+      response_.get_account_rc_ = value;
+    }
+    inline void set_get_account_rc(const get_account_rc_response&& value)
+    {
+      if(FieldNumber::GET_ACCOUNT_RC != which_response_)
+      {
+        init_response(FieldNumber::GET_ACCOUNT_RC);
+      }
+      response_.get_account_rc_ = value;
+    }
+    inline get_account_rc_response& mutable_get_account_rc()
+    {
+      if(FieldNumber::GET_ACCOUNT_RC != which_response_)
+      {
+        init_response(FieldNumber::GET_ACCOUNT_RC);
+      }
+      return response_.get_account_rc_;
+    }
+    inline const get_account_rc_response& get_get_account_rc() const { return response_.get_account_rc_; }
+    inline const get_account_rc_response& get_account_rc() const { return response_.get_account_rc_; }
+
+    inline void clear_get_resource_limits()
+    {
+      if(FieldNumber::GET_RESOURCE_LIMITS == which_response_)
+      {
+        which_response_ = FieldNumber::NOT_SET;
+        response_.get_resource_limits_.~get_resource_limits_response();
+      }
+    }
+    inline void set_get_resource_limits(const get_resource_limits_response& value)
+    {
+      if(FieldNumber::GET_RESOURCE_LIMITS != which_response_)
+      {
+        init_response(FieldNumber::GET_RESOURCE_LIMITS);
+      }
+      response_.get_resource_limits_ = value;
+    }
+    inline void set_get_resource_limits(const get_resource_limits_response&& value)
+    {
+      if(FieldNumber::GET_RESOURCE_LIMITS != which_response_)
+      {
+        init_response(FieldNumber::GET_RESOURCE_LIMITS);
+      }
+      response_.get_resource_limits_ = value;
+    }
+    inline get_resource_limits_response& mutable_get_resource_limits()
+    {
+      if(FieldNumber::GET_RESOURCE_LIMITS != which_response_)
+      {
+        init_response(FieldNumber::GET_RESOURCE_LIMITS);
+      }
+      return response_.get_resource_limits_;
+    }
+    inline const get_resource_limits_response& get_get_resource_limits() const { return response_.get_resource_limits_; }
+    inline const get_resource_limits_response& get_resource_limits() const { return response_.get_resource_limits_; }
+
 
     ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
     {
@@ -3098,6 +3751,20 @@ class chain_response final: public ::EmbeddedProto::MessageInterface
           }
           break;
 
+        case FieldNumber::GET_ACCOUNT_RC:
+          if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+          {
+            return_value = response_.get_account_rc_.serialize_with_id(static_cast<uint32_t>(FieldNumber::GET_ACCOUNT_RC), buffer, false);
+          }
+          break;
+
+        case FieldNumber::GET_RESOURCE_LIMITS:
+          if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+          {
+            return_value = response_.get_resource_limits_.serialize_with_id(static_cast<uint32_t>(FieldNumber::GET_RESOURCE_LIMITS), buffer, false);
+          }
+          break;
+
         default:
           break;
       }
@@ -3163,6 +3830,16 @@ class chain_response final: public ::EmbeddedProto::MessageInterface
 
             break;
 
+          case FieldNumber::GET_ACCOUNT_RC:
+            return_value = deserialize_response(FieldNumber::GET_ACCOUNT_RC, response_.get_account_rc_, buffer, wire_type);
+
+            break;
+
+          case FieldNumber::GET_RESOURCE_LIMITS:
+            return_value = deserialize_response(FieldNumber::GET_RESOURCE_LIMITS, response_.get_resource_limits_, buffer, wire_type);
+
+            break;
+
           default:
             break;
         }
@@ -3209,6 +3886,8 @@ class chain_response final: public ::EmbeddedProto::MessageInterface
         get_fork_heads_response<get_fork_heads_last_irreversible_block_id_LENGTH, get_fork_heads_last_irreversible_block_previous_LENGTH, get_fork_heads_fork_heads_REP_LENGTH, get_fork_heads_fork_heads_id_LENGTH, get_fork_heads_fork_heads_previous_LENGTH> get_fork_heads_;
         read_contract_response<read_contract_result_LENGTH, read_contract_logs_LENGTH> read_contract_;
         get_account_nonce_response get_account_nonce_;
+        get_account_rc_response get_account_rc_;
+        get_resource_limits_response get_resource_limits_;
       };
       response response_;
 
@@ -3268,6 +3947,16 @@ class chain_response final: public ::EmbeddedProto::MessageInterface
             which_response_ = FieldNumber::GET_ACCOUNT_NONCE;
             break;
 
+          case FieldNumber::GET_ACCOUNT_RC:
+            new(&response_.get_account_rc_) get_account_rc_response;
+            which_response_ = FieldNumber::GET_ACCOUNT_RC;
+            break;
+
+          case FieldNumber::GET_RESOURCE_LIMITS:
+            new(&response_.get_resource_limits_) get_resource_limits_response;
+            which_response_ = FieldNumber::GET_RESOURCE_LIMITS;
+            break;
+
           default:
             break;
          }
@@ -3305,6 +3994,12 @@ class chain_response final: public ::EmbeddedProto::MessageInterface
             break;
           case FieldNumber::GET_ACCOUNT_NONCE:
             response_.get_account_nonce_.~get_account_nonce_response(); // NOSONAR Unions require this.
+            break;
+          case FieldNumber::GET_ACCOUNT_RC:
+            response_.get_account_rc_.~get_account_rc_response(); // NOSONAR Unions require this.
+            break;
+          case FieldNumber::GET_RESOURCE_LIMITS:
+            response_.get_resource_limits_.~get_resource_limits_response(); // NOSONAR Unions require this.
             break;
           default:
             break;
