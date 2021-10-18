@@ -56,6 +56,158 @@ enum class privilege : uint32_t
   user_mode = 1
 };
 
+template<uint32_t zone_LENGTH>
+class object_space final: public ::EmbeddedProto::MessageInterface
+{
+  public:
+    object_space() = default;
+    object_space(const object_space& rhs )
+    {
+      set_system(rhs.get_system());
+      set_zone(rhs.get_zone());
+      set_id(rhs.get_id());
+    }
+
+    object_space(const object_space&& rhs ) noexcept
+    {
+      set_system(rhs.get_system());
+      set_zone(rhs.get_zone());
+      set_id(rhs.get_id());
+    }
+
+    ~object_space() override = default;
+
+    enum class FieldNumber : uint32_t
+    {
+      NOT_SET = 0,
+      SYSTEM = 1,
+      ZONE = 2,
+      ID = 3
+    };
+
+    object_space& operator=(const object_space& rhs)
+    {
+      set_system(rhs.get_system());
+      set_zone(rhs.get_zone());
+      set_id(rhs.get_id());
+      return *this;
+    }
+
+    object_space& operator=(const object_space&& rhs) noexcept
+    {
+      set_system(rhs.get_system());
+      set_zone(rhs.get_zone());
+      set_id(rhs.get_id());
+      return *this;
+    }
+
+    inline void clear_system() { system_.clear(); }
+    inline void set_system(const EmbeddedProto::boolean& value) { system_ = value; }
+    inline void set_system(const EmbeddedProto::boolean&& value) { system_ = value; }
+    inline EmbeddedProto::boolean& mutable_system() { return system_; }
+    inline const EmbeddedProto::boolean& get_system() const { return system_; }
+    inline EmbeddedProto::boolean::FIELD_TYPE system() const { return system_.get(); }
+
+    inline void clear_zone() { zone_.clear(); }
+    inline ::EmbeddedProto::FieldBytes<zone_LENGTH>& mutable_zone() { return zone_; }
+    inline void set_zone(const ::EmbeddedProto::FieldBytes<zone_LENGTH>& rhs) { zone_.set(rhs); }
+    inline const ::EmbeddedProto::FieldBytes<zone_LENGTH>& get_zone() const { return zone_; }
+    inline const uint8_t* zone() const { return zone_.get_const(); }
+
+    inline void clear_id() { id_.clear(); }
+    inline void set_id(const EmbeddedProto::uint32& value) { id_ = value; }
+    inline void set_id(const EmbeddedProto::uint32&& value) { id_ = value; }
+    inline EmbeddedProto::uint32& mutable_id() { return id_; }
+    inline const EmbeddedProto::uint32& get_id() const { return id_; }
+    inline EmbeddedProto::uint32::FIELD_TYPE id() const { return id_.get(); }
+
+
+    ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
+    {
+      ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
+
+      if((false != system_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
+      {
+        return_value = system_.serialize_with_id(static_cast<uint32_t>(FieldNumber::SYSTEM), buffer, false);
+      }
+
+      if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+      {
+        return_value = zone_.serialize_with_id(static_cast<uint32_t>(FieldNumber::ZONE), buffer, false);
+      }
+
+      if((0U != id_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
+      {
+        return_value = id_.serialize_with_id(static_cast<uint32_t>(FieldNumber::ID), buffer, false);
+      }
+
+      return return_value;
+    };
+
+    ::EmbeddedProto::Error deserialize(::EmbeddedProto::ReadBufferInterface& buffer) override
+    {
+      ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
+      ::EmbeddedProto::WireFormatter::WireType wire_type = ::EmbeddedProto::WireFormatter::WireType::VARINT;
+      uint32_t id_number = 0;
+      FieldNumber id_tag = FieldNumber::NOT_SET;
+
+      ::EmbeddedProto::Error tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
+      while((::EmbeddedProto::Error::NO_ERRORS == return_value) && (::EmbeddedProto::Error::NO_ERRORS == tag_value))
+      {
+        id_tag = static_cast<FieldNumber>(id_number);
+        switch(id_tag)
+        {
+          case FieldNumber::SYSTEM:
+            return_value = system_.deserialize_check_type(buffer, wire_type);
+            break;
+
+          case FieldNumber::ZONE:
+            return_value = zone_.deserialize_check_type(buffer, wire_type);
+            break;
+
+          case FieldNumber::ID:
+            return_value = id_.deserialize_check_type(buffer, wire_type);
+            break;
+
+          default:
+            break;
+        }
+
+        if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+        {
+          // Read the next tag.
+          tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
+        }
+      }
+
+      // When an error was detect while reading the tag but no other errors where found, set it in the return value.
+      if((::EmbeddedProto::Error::NO_ERRORS == return_value)
+         && (::EmbeddedProto::Error::NO_ERRORS != tag_value)
+         && (::EmbeddedProto::Error::END_OF_BUFFER != tag_value)) // The end of the buffer is not an array in this case.
+      {
+        return_value = tag_value;
+      }
+
+      return return_value;
+    };
+
+    void clear() override
+    {
+      clear_system();
+      clear_zone();
+      clear_id();
+
+    }
+
+    private:
+
+
+      EmbeddedProto::boolean system_ = false;
+      ::EmbeddedProto::FieldBytes<zone_LENGTH> zone_;
+      EmbeddedProto::uint32 id_ = 0U;
+
+};
+
 template<uint32_t head_topology_id_LENGTH, 
 uint32_t head_topology_previous_LENGTH>
 class head_info final: public ::EmbeddedProto::MessageInterface
@@ -207,6 +359,149 @@ class head_info final: public ::EmbeddedProto::MessageInterface
       block_topology<head_topology_id_LENGTH, head_topology_previous_LENGTH> head_topology_;
       EmbeddedProto::uint64 head_block_time_ = 0U;
       EmbeddedProto::uint64 last_irreversible_block_ = 0U;
+
+};
+
+template<uint32_t caller_LENGTH>
+class caller_data final: public ::EmbeddedProto::MessageInterface
+{
+  public:
+    caller_data() = default;
+    caller_data(const caller_data& rhs )
+    {
+      set_caller(rhs.get_caller());
+      set_caller_privilege(rhs.get_caller_privilege());
+    }
+
+    caller_data(const caller_data&& rhs ) noexcept
+    {
+      set_caller(rhs.get_caller());
+      set_caller_privilege(rhs.get_caller_privilege());
+    }
+
+    ~caller_data() override = default;
+
+    enum class FieldNumber : uint32_t
+    {
+      NOT_SET = 0,
+      CALLER = 1,
+      CALLER_PRIVILEGE = 2
+    };
+
+    caller_data& operator=(const caller_data& rhs)
+    {
+      set_caller(rhs.get_caller());
+      set_caller_privilege(rhs.get_caller_privilege());
+      return *this;
+    }
+
+    caller_data& operator=(const caller_data&& rhs) noexcept
+    {
+      set_caller(rhs.get_caller());
+      set_caller_privilege(rhs.get_caller_privilege());
+      return *this;
+    }
+
+    inline void clear_caller() { caller_.clear(); }
+    inline ::EmbeddedProto::FieldBytes<caller_LENGTH>& mutable_caller() { return caller_; }
+    inline void set_caller(const ::EmbeddedProto::FieldBytes<caller_LENGTH>& rhs) { caller_.set(rhs); }
+    inline const ::EmbeddedProto::FieldBytes<caller_LENGTH>& get_caller() const { return caller_; }
+    inline const uint8_t* caller() const { return caller_.get_const(); }
+
+    inline void clear_caller_privilege() { caller_privilege_ = static_cast<privilege>(0); }
+    inline void set_caller_privilege(const privilege& value) { caller_privilege_ = value; }
+    inline void set_caller_privilege(const privilege&& value) { caller_privilege_ = value; }
+    inline const privilege& get_caller_privilege() const { return caller_privilege_; }
+    inline privilege caller_privilege() const { return caller_privilege_; }
+
+
+    ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
+    {
+      ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
+
+      if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+      {
+        return_value = caller_.serialize_with_id(static_cast<uint32_t>(FieldNumber::CALLER), buffer, false);
+      }
+
+      if((static_cast<privilege>(0) != caller_privilege_) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
+      {
+        EmbeddedProto::uint32 value = 0;
+        value.set(static_cast<uint32_t>(caller_privilege_));
+        return_value = value.serialize_with_id(static_cast<uint32_t>(FieldNumber::CALLER_PRIVILEGE), buffer, false);
+      }
+
+      return return_value;
+    };
+
+    ::EmbeddedProto::Error deserialize(::EmbeddedProto::ReadBufferInterface& buffer) override
+    {
+      ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
+      ::EmbeddedProto::WireFormatter::WireType wire_type = ::EmbeddedProto::WireFormatter::WireType::VARINT;
+      uint32_t id_number = 0;
+      FieldNumber id_tag = FieldNumber::NOT_SET;
+
+      ::EmbeddedProto::Error tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
+      while((::EmbeddedProto::Error::NO_ERRORS == return_value) && (::EmbeddedProto::Error::NO_ERRORS == tag_value))
+      {
+        id_tag = static_cast<FieldNumber>(id_number);
+        switch(id_tag)
+        {
+          case FieldNumber::CALLER:
+            return_value = caller_.deserialize_check_type(buffer, wire_type);
+            break;
+
+          case FieldNumber::CALLER_PRIVILEGE:
+            if(::EmbeddedProto::WireFormatter::WireType::VARINT == wire_type)
+            {
+              uint32_t value = 0;
+              return_value = ::EmbeddedProto::WireFormatter::DeserializeVarint(buffer, value);
+              if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+              {
+                set_caller_privilege(static_cast<privilege>(value));
+              }
+            }
+            else
+            {
+              // Wire type does not match field.
+              return_value = ::EmbeddedProto::Error::INVALID_WIRETYPE;
+            }
+            break;
+
+          default:
+            break;
+        }
+
+        if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+        {
+          // Read the next tag.
+          tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
+        }
+      }
+
+      // When an error was detect while reading the tag but no other errors where found, set it in the return value.
+      if((::EmbeddedProto::Error::NO_ERRORS == return_value)
+         && (::EmbeddedProto::Error::NO_ERRORS != tag_value)
+         && (::EmbeddedProto::Error::END_OF_BUFFER != tag_value)) // The end of the buffer is not an array in this case.
+      {
+        return_value = tag_value;
+      }
+
+      return return_value;
+    };
+
+    void clear() override
+    {
+      clear_caller();
+      clear_caller_privilege();
+
+    }
+
+    private:
+
+
+      ::EmbeddedProto::FieldBytes<caller_LENGTH> caller_;
+      privilege caller_privilege_ = static_cast<privilege>(0);
 
 };
 
@@ -2152,7 +2447,7 @@ class apply_set_system_call_operation_result final: public ::EmbeddedProto::Mess
 
 };
 
-template<uint32_t space_LENGTH, 
+template<uint32_t space_zone_LENGTH, 
 uint32_t key_LENGTH, 
 uint32_t obj_LENGTH>
 class put_object_arguments final: public ::EmbeddedProto::MessageInterface
@@ -2200,10 +2495,11 @@ class put_object_arguments final: public ::EmbeddedProto::MessageInterface
     }
 
     inline void clear_space() { space_.clear(); }
-    inline ::EmbeddedProto::FieldBytes<space_LENGTH>& mutable_space() { return space_; }
-    inline void set_space(const ::EmbeddedProto::FieldBytes<space_LENGTH>& rhs) { space_.set(rhs); }
-    inline const ::EmbeddedProto::FieldBytes<space_LENGTH>& get_space() const { return space_; }
-    inline const uint8_t* space() const { return space_.get_const(); }
+    inline void set_space(const object_space<space_zone_LENGTH>& value) { space_ = value; }
+    inline void set_space(const object_space<space_zone_LENGTH>&& value) { space_ = value; }
+    inline object_space<space_zone_LENGTH>& mutable_space() { return space_; }
+    inline const object_space<space_zone_LENGTH>& get_space() const { return space_; }
+    inline const object_space<space_zone_LENGTH>& space() const { return space_; }
 
     inline void clear_key() { key_.clear(); }
     inline ::EmbeddedProto::FieldBytes<key_LENGTH>& mutable_key() { return key_; }
@@ -2298,7 +2594,7 @@ class put_object_arguments final: public ::EmbeddedProto::MessageInterface
     private:
 
 
-      ::EmbeddedProto::FieldBytes<space_LENGTH> space_;
+      object_space<space_zone_LENGTH> space_;
       ::EmbeddedProto::FieldBytes<key_LENGTH> key_;
       ::EmbeddedProto::FieldBytes<obj_LENGTH> obj_;
 
@@ -2410,7 +2706,7 @@ class put_object_result final: public ::EmbeddedProto::MessageInterface
 
 };
 
-template<uint32_t space_LENGTH, 
+template<uint32_t space_zone_LENGTH, 
 uint32_t key_LENGTH>
 class get_object_arguments final: public ::EmbeddedProto::MessageInterface
 {
@@ -2457,10 +2753,11 @@ class get_object_arguments final: public ::EmbeddedProto::MessageInterface
     }
 
     inline void clear_space() { space_.clear(); }
-    inline ::EmbeddedProto::FieldBytes<space_LENGTH>& mutable_space() { return space_; }
-    inline void set_space(const ::EmbeddedProto::FieldBytes<space_LENGTH>& rhs) { space_.set(rhs); }
-    inline const ::EmbeddedProto::FieldBytes<space_LENGTH>& get_space() const { return space_; }
-    inline const uint8_t* space() const { return space_.get_const(); }
+    inline void set_space(const object_space<space_zone_LENGTH>& value) { space_ = value; }
+    inline void set_space(const object_space<space_zone_LENGTH>&& value) { space_ = value; }
+    inline object_space<space_zone_LENGTH>& mutable_space() { return space_; }
+    inline const object_space<space_zone_LENGTH>& get_space() const { return space_; }
+    inline const object_space<space_zone_LENGTH>& space() const { return space_; }
 
     inline void clear_key() { key_.clear(); }
     inline ::EmbeddedProto::FieldBytes<key_LENGTH>& mutable_key() { return key_; }
@@ -2556,7 +2853,7 @@ class get_object_arguments final: public ::EmbeddedProto::MessageInterface
     private:
 
 
-      ::EmbeddedProto::FieldBytes<space_LENGTH> space_;
+      object_space<space_zone_LENGTH> space_;
       ::EmbeddedProto::FieldBytes<key_LENGTH> key_;
       EmbeddedProto::uint32 object_size_hint_ = 0U;
 
@@ -2668,7 +2965,7 @@ class get_object_result final: public ::EmbeddedProto::MessageInterface
 
 };
 
-template<uint32_t space_LENGTH, 
+template<uint32_t space_zone_LENGTH, 
 uint32_t key_LENGTH>
 class get_next_object_arguments final: public ::EmbeddedProto::MessageInterface
 {
@@ -2715,10 +3012,11 @@ class get_next_object_arguments final: public ::EmbeddedProto::MessageInterface
     }
 
     inline void clear_space() { space_.clear(); }
-    inline ::EmbeddedProto::FieldBytes<space_LENGTH>& mutable_space() { return space_; }
-    inline void set_space(const ::EmbeddedProto::FieldBytes<space_LENGTH>& rhs) { space_.set(rhs); }
-    inline const ::EmbeddedProto::FieldBytes<space_LENGTH>& get_space() const { return space_; }
-    inline const uint8_t* space() const { return space_.get_const(); }
+    inline void set_space(const object_space<space_zone_LENGTH>& value) { space_ = value; }
+    inline void set_space(const object_space<space_zone_LENGTH>&& value) { space_ = value; }
+    inline object_space<space_zone_LENGTH>& mutable_space() { return space_; }
+    inline const object_space<space_zone_LENGTH>& get_space() const { return space_; }
+    inline const object_space<space_zone_LENGTH>& space() const { return space_; }
 
     inline void clear_key() { key_.clear(); }
     inline ::EmbeddedProto::FieldBytes<key_LENGTH>& mutable_key() { return key_; }
@@ -2814,7 +3112,7 @@ class get_next_object_arguments final: public ::EmbeddedProto::MessageInterface
     private:
 
 
-      ::EmbeddedProto::FieldBytes<space_LENGTH> space_;
+      object_space<space_zone_LENGTH> space_;
       ::EmbeddedProto::FieldBytes<key_LENGTH> key_;
       EmbeddedProto::uint32 object_size_hint_ = 0U;
 
@@ -2926,7 +3224,7 @@ class get_next_object_result final: public ::EmbeddedProto::MessageInterface
 
 };
 
-template<uint32_t space_LENGTH, 
+template<uint32_t space_zone_LENGTH, 
 uint32_t key_LENGTH>
 class get_prev_object_arguments final: public ::EmbeddedProto::MessageInterface
 {
@@ -2973,10 +3271,11 @@ class get_prev_object_arguments final: public ::EmbeddedProto::MessageInterface
     }
 
     inline void clear_space() { space_.clear(); }
-    inline ::EmbeddedProto::FieldBytes<space_LENGTH>& mutable_space() { return space_; }
-    inline void set_space(const ::EmbeddedProto::FieldBytes<space_LENGTH>& rhs) { space_.set(rhs); }
-    inline const ::EmbeddedProto::FieldBytes<space_LENGTH>& get_space() const { return space_; }
-    inline const uint8_t* space() const { return space_.get_const(); }
+    inline void set_space(const object_space<space_zone_LENGTH>& value) { space_ = value; }
+    inline void set_space(const object_space<space_zone_LENGTH>&& value) { space_ = value; }
+    inline object_space<space_zone_LENGTH>& mutable_space() { return space_; }
+    inline const object_space<space_zone_LENGTH>& get_space() const { return space_; }
+    inline const object_space<space_zone_LENGTH>& space() const { return space_; }
 
     inline void clear_key() { key_.clear(); }
     inline ::EmbeddedProto::FieldBytes<key_LENGTH>& mutable_key() { return key_; }
@@ -3072,7 +3371,7 @@ class get_prev_object_arguments final: public ::EmbeddedProto::MessageInterface
     private:
 
 
-      ::EmbeddedProto::FieldBytes<space_LENGTH> space_;
+      object_space<space_zone_LENGTH> space_;
       ::EmbeddedProto::FieldBytes<key_LENGTH> key_;
       EmbeddedProto::uint32 object_size_hint_ = 0U;
 
@@ -6669,21 +6968,19 @@ class get_caller_arguments final: public ::EmbeddedProto::MessageInterface
 
 };
 
-template<uint32_t caller_LENGTH>
+template<uint32_t value_caller_LENGTH>
 class get_caller_result final: public ::EmbeddedProto::MessageInterface
 {
   public:
     get_caller_result() = default;
     get_caller_result(const get_caller_result& rhs )
     {
-      set_caller(rhs.get_caller());
-      set_caller_privilege(rhs.get_caller_privilege());
+      set_value(rhs.get_value());
     }
 
     get_caller_result(const get_caller_result&& rhs ) noexcept
     {
-      set_caller(rhs.get_caller());
-      set_caller_privilege(rhs.get_caller_privilege());
+      set_value(rhs.get_value());
     }
 
     ~get_caller_result() override = default;
@@ -6691,35 +6988,27 @@ class get_caller_result final: public ::EmbeddedProto::MessageInterface
     enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
-      CALLER = 1,
-      CALLER_PRIVILEGE = 2
+      VALUE = 1
     };
 
     get_caller_result& operator=(const get_caller_result& rhs)
     {
-      set_caller(rhs.get_caller());
-      set_caller_privilege(rhs.get_caller_privilege());
+      set_value(rhs.get_value());
       return *this;
     }
 
     get_caller_result& operator=(const get_caller_result&& rhs) noexcept
     {
-      set_caller(rhs.get_caller());
-      set_caller_privilege(rhs.get_caller_privilege());
+      set_value(rhs.get_value());
       return *this;
     }
 
-    inline void clear_caller() { caller_.clear(); }
-    inline ::EmbeddedProto::FieldBytes<caller_LENGTH>& mutable_caller() { return caller_; }
-    inline void set_caller(const ::EmbeddedProto::FieldBytes<caller_LENGTH>& rhs) { caller_.set(rhs); }
-    inline const ::EmbeddedProto::FieldBytes<caller_LENGTH>& get_caller() const { return caller_; }
-    inline const uint8_t* caller() const { return caller_.get_const(); }
-
-    inline void clear_caller_privilege() { caller_privilege_ = static_cast<privilege>(0); }
-    inline void set_caller_privilege(const privilege& value) { caller_privilege_ = value; }
-    inline void set_caller_privilege(const privilege&& value) { caller_privilege_ = value; }
-    inline const privilege& get_caller_privilege() const { return caller_privilege_; }
-    inline privilege caller_privilege() const { return caller_privilege_; }
+    inline void clear_value() { value_.clear(); }
+    inline void set_value(const caller_data<value_caller_LENGTH>& value) { value_ = value; }
+    inline void set_value(const caller_data<value_caller_LENGTH>&& value) { value_ = value; }
+    inline caller_data<value_caller_LENGTH>& mutable_value() { return value_; }
+    inline const caller_data<value_caller_LENGTH>& get_value() const { return value_; }
+    inline const caller_data<value_caller_LENGTH>& value() const { return value_; }
 
 
     ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
@@ -6728,14 +7017,7 @@ class get_caller_result final: public ::EmbeddedProto::MessageInterface
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = caller_.serialize_with_id(static_cast<uint32_t>(FieldNumber::CALLER), buffer, false);
-      }
-
-      if((static_cast<privilege>(0) != caller_privilege_) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
-      {
-        EmbeddedProto::uint32 value = 0;
-        value.set(static_cast<uint32_t>(caller_privilege_));
-        return_value = value.serialize_with_id(static_cast<uint32_t>(FieldNumber::CALLER_PRIVILEGE), buffer, false);
+        return_value = value_.serialize_with_id(static_cast<uint32_t>(FieldNumber::VALUE), buffer, false);
       }
 
       return return_value;
@@ -6754,25 +7036,8 @@ class get_caller_result final: public ::EmbeddedProto::MessageInterface
         id_tag = static_cast<FieldNumber>(id_number);
         switch(id_tag)
         {
-          case FieldNumber::CALLER:
-            return_value = caller_.deserialize_check_type(buffer, wire_type);
-            break;
-
-          case FieldNumber::CALLER_PRIVILEGE:
-            if(::EmbeddedProto::WireFormatter::WireType::VARINT == wire_type)
-            {
-              uint32_t value = 0;
-              return_value = ::EmbeddedProto::WireFormatter::DeserializeVarint(buffer, value);
-              if(::EmbeddedProto::Error::NO_ERRORS == return_value)
-              {
-                set_caller_privilege(static_cast<privilege>(value));
-              }
-            }
-            else
-            {
-              // Wire type does not match field.
-              return_value = ::EmbeddedProto::Error::INVALID_WIRETYPE;
-            }
+          case FieldNumber::VALUE:
+            return_value = value_.deserialize_check_type(buffer, wire_type);
             break;
 
           default:
@@ -6799,16 +7064,14 @@ class get_caller_result final: public ::EmbeddedProto::MessageInterface
 
     void clear() override
     {
-      clear_caller();
-      clear_caller_privilege();
+      clear_value();
 
     }
 
     private:
 
 
-      ::EmbeddedProto::FieldBytes<caller_LENGTH> caller_;
-      privilege caller_privilege_ = static_cast<privilege>(0);
+      caller_data<value_caller_LENGTH> value_;
 
 };
 
