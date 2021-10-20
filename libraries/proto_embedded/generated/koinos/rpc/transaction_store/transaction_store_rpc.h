@@ -44,6 +44,7 @@
 #include <limits>
 
 // Include external proto definitions
+#include <koinos/options.h>
 #include <koinos/rpc/rpc.h>
 #include <koinos/transaction_store/transaction_store.h>
 

@@ -45,6 +45,7 @@
 
 // Include external proto definitions
 #include <koinos/block_store/block_store.h>
+#include <koinos/options.h>
 #include <koinos/common.h>
 #include <koinos/protocol/protocol.h>
 #include <koinos/rpc/rpc.h>

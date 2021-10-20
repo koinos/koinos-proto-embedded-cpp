@@ -44,6 +44,7 @@
 #include <limits>
 
 // Include external proto definitions
+#include <koinos/options.h>
 #include <koinos/protocol/protocol.h>
 #include <koinos/rpc/rpc.h>
 

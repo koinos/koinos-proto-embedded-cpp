@@ -45,6 +45,7 @@
 
 // Include external proto definitions
 #include <koinos/common.h>
+#include <koinos/options.h>
 #include <koinos/chain/chain.h>
 #include <koinos/protocol/protocol.h>
 #include <koinos/rpc/rpc.h>
