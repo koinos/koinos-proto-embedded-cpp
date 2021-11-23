@@ -57,12 +57,10 @@ namespace chain {
 template<uint32_t block_id_LENGTH, 
 uint32_t block_header_previous_LENGTH, 
 uint32_t block_active_LENGTH, 
-uint32_t block_passive_LENGTH, 
 uint32_t block_signature_data_LENGTH, 
 uint32_t block_transactions_REP_LENGTH, 
 uint32_t block_transactions_id_LENGTH, 
 uint32_t block_transactions_active_LENGTH, 
-uint32_t block_transactions_passive_LENGTH, 
 uint32_t block_transactions_signature_data_LENGTH>
 class submit_block_request final: public ::EmbeddedProto::MessageInterface
 {
@@ -114,11 +112,11 @@ class submit_block_request final: public ::EmbeddedProto::MessageInterface
     }
 
     inline void clear_block() { block_.clear(); }
-    inline void set_block(const protocol::block<block_id_LENGTH, block_header_previous_LENGTH, block_active_LENGTH, block_passive_LENGTH, block_signature_data_LENGTH, block_transactions_REP_LENGTH, block_transactions_id_LENGTH, block_transactions_active_LENGTH, block_transactions_passive_LENGTH, block_transactions_signature_data_LENGTH>& value) { block_ = value; }
-    inline void set_block(const protocol::block<block_id_LENGTH, block_header_previous_LENGTH, block_active_LENGTH, block_passive_LENGTH, block_signature_data_LENGTH, block_transactions_REP_LENGTH, block_transactions_id_LENGTH, block_transactions_active_LENGTH, block_transactions_passive_LENGTH, block_transactions_signature_data_LENGTH>&& value) { block_ = value; }
-    inline protocol::block<block_id_LENGTH, block_header_previous_LENGTH, block_active_LENGTH, block_passive_LENGTH, block_signature_data_LENGTH, block_transactions_REP_LENGTH, block_transactions_id_LENGTH, block_transactions_active_LENGTH, block_transactions_passive_LENGTH, block_transactions_signature_data_LENGTH>& mutable_block() { return block_; }
-    inline const protocol::block<block_id_LENGTH, block_header_previous_LENGTH, block_active_LENGTH, block_passive_LENGTH, block_signature_data_LENGTH, block_transactions_REP_LENGTH, block_transactions_id_LENGTH, block_transactions_active_LENGTH, block_transactions_passive_LENGTH, block_transactions_signature_data_LENGTH>& get_block() const { return block_; }
-    inline const protocol::block<block_id_LENGTH, block_header_previous_LENGTH, block_active_LENGTH, block_passive_LENGTH, block_signature_data_LENGTH, block_transactions_REP_LENGTH, block_transactions_id_LENGTH, block_transactions_active_LENGTH, block_transactions_passive_LENGTH, block_transactions_signature_data_LENGTH>& block() const { return block_; }
+    inline void set_block(const protocol::block<block_id_LENGTH, block_header_previous_LENGTH, block_active_LENGTH, block_signature_data_LENGTH, block_transactions_REP_LENGTH, block_transactions_id_LENGTH, block_transactions_active_LENGTH, block_transactions_signature_data_LENGTH>& value) { block_ = value; }
+    inline void set_block(const protocol::block<block_id_LENGTH, block_header_previous_LENGTH, block_active_LENGTH, block_signature_data_LENGTH, block_transactions_REP_LENGTH, block_transactions_id_LENGTH, block_transactions_active_LENGTH, block_transactions_signature_data_LENGTH>&& value) { block_ = value; }
+    inline protocol::block<block_id_LENGTH, block_header_previous_LENGTH, block_active_LENGTH, block_signature_data_LENGTH, block_transactions_REP_LENGTH, block_transactions_id_LENGTH, block_transactions_active_LENGTH, block_transactions_signature_data_LENGTH>& mutable_block() { return block_; }
+    inline const protocol::block<block_id_LENGTH, block_header_previous_LENGTH, block_active_LENGTH, block_signature_data_LENGTH, block_transactions_REP_LENGTH, block_transactions_id_LENGTH, block_transactions_active_LENGTH, block_transactions_signature_data_LENGTH>& get_block() const { return block_; }
+    inline const protocol::block<block_id_LENGTH, block_header_previous_LENGTH, block_active_LENGTH, block_signature_data_LENGTH, block_transactions_REP_LENGTH, block_transactions_id_LENGTH, block_transactions_active_LENGTH, block_transactions_signature_data_LENGTH>& block() const { return block_; }
 
     inline void clear_verify_passive_data() { verify_passive_data_.clear(); }
     inline void set_verify_passive_data(const EmbeddedProto::boolean& value) { verify_passive_data_ = value; }
@@ -232,7 +230,7 @@ class submit_block_request final: public ::EmbeddedProto::MessageInterface
     private:
 
 
-      protocol::block<block_id_LENGTH, block_header_previous_LENGTH, block_active_LENGTH, block_passive_LENGTH, block_signature_data_LENGTH, block_transactions_REP_LENGTH, block_transactions_id_LENGTH, block_transactions_active_LENGTH, block_transactions_passive_LENGTH, block_transactions_signature_data_LENGTH> block_;
+      protocol::block<block_id_LENGTH, block_header_previous_LENGTH, block_active_LENGTH, block_signature_data_LENGTH, block_transactions_REP_LENGTH, block_transactions_id_LENGTH, block_transactions_active_LENGTH, block_transactions_signature_data_LENGTH> block_;
       EmbeddedProto::boolean verify_passive_data_ = false;
       EmbeddedProto::boolean verify_block_signature_ = false;
       EmbeddedProto::boolean verify_transaction_signature_ = false;
@@ -324,7 +322,6 @@ class submit_block_response final: public ::EmbeddedProto::MessageInterface
 
 template<uint32_t transaction_id_LENGTH, 
 uint32_t transaction_active_LENGTH, 
-uint32_t transaction_passive_LENGTH, 
 uint32_t transaction_signature_data_LENGTH>
 class submit_transaction_request final: public ::EmbeddedProto::MessageInterface
 {
@@ -371,11 +368,11 @@ class submit_transaction_request final: public ::EmbeddedProto::MessageInterface
     }
 
     inline void clear_transaction() { transaction_.clear(); }
-    inline void set_transaction(const protocol::transaction<transaction_id_LENGTH, transaction_active_LENGTH, transaction_passive_LENGTH, transaction_signature_data_LENGTH>& value) { transaction_ = value; }
-    inline void set_transaction(const protocol::transaction<transaction_id_LENGTH, transaction_active_LENGTH, transaction_passive_LENGTH, transaction_signature_data_LENGTH>&& value) { transaction_ = value; }
-    inline protocol::transaction<transaction_id_LENGTH, transaction_active_LENGTH, transaction_passive_LENGTH, transaction_signature_data_LENGTH>& mutable_transaction() { return transaction_; }
-    inline const protocol::transaction<transaction_id_LENGTH, transaction_active_LENGTH, transaction_passive_LENGTH, transaction_signature_data_LENGTH>& get_transaction() const { return transaction_; }
-    inline const protocol::transaction<transaction_id_LENGTH, transaction_active_LENGTH, transaction_passive_LENGTH, transaction_signature_data_LENGTH>& transaction() const { return transaction_; }
+    inline void set_transaction(const protocol::transaction<transaction_id_LENGTH, transaction_active_LENGTH, transaction_signature_data_LENGTH>& value) { transaction_ = value; }
+    inline void set_transaction(const protocol::transaction<transaction_id_LENGTH, transaction_active_LENGTH, transaction_signature_data_LENGTH>&& value) { transaction_ = value; }
+    inline protocol::transaction<transaction_id_LENGTH, transaction_active_LENGTH, transaction_signature_data_LENGTH>& mutable_transaction() { return transaction_; }
+    inline const protocol::transaction<transaction_id_LENGTH, transaction_active_LENGTH, transaction_signature_data_LENGTH>& get_transaction() const { return transaction_; }
+    inline const protocol::transaction<transaction_id_LENGTH, transaction_active_LENGTH, transaction_signature_data_LENGTH>& transaction() const { return transaction_; }
 
     inline void clear_verify_passive_data() { verify_passive_data_.clear(); }
     inline void set_verify_passive_data(const EmbeddedProto::boolean& value) { verify_passive_data_ = value; }
@@ -472,7 +469,7 @@ class submit_transaction_request final: public ::EmbeddedProto::MessageInterface
     private:
 
 
-      protocol::transaction<transaction_id_LENGTH, transaction_active_LENGTH, transaction_passive_LENGTH, transaction_signature_data_LENGTH> transaction_;
+      protocol::transaction<transaction_id_LENGTH, transaction_active_LENGTH, transaction_signature_data_LENGTH> transaction_;
       EmbeddedProto::boolean verify_passive_data_ = false;
       EmbeddedProto::boolean verify_transaction_signature_ = false;
 
@@ -2082,16 +2079,13 @@ class get_resource_limits_response final: public ::EmbeddedProto::MessageInterfa
 template<uint32_t submit_block_block_id_LENGTH, 
 uint32_t submit_block_block_header_previous_LENGTH, 
 uint32_t submit_block_block_active_LENGTH, 
-uint32_t submit_block_block_passive_LENGTH, 
 uint32_t submit_block_block_signature_data_LENGTH, 
 uint32_t submit_block_block_transactions_REP_LENGTH, 
 uint32_t submit_block_block_transactions_id_LENGTH, 
 uint32_t submit_block_block_transactions_active_LENGTH, 
-uint32_t submit_block_block_transactions_passive_LENGTH, 
 uint32_t submit_block_block_transactions_signature_data_LENGTH, 
 uint32_t submit_transaction_transaction_id_LENGTH, 
 uint32_t submit_transaction_transaction_active_LENGTH, 
-uint32_t submit_transaction_transaction_passive_LENGTH, 
 uint32_t submit_transaction_transaction_signature_data_LENGTH, 
 uint32_t read_contract_contract_id_LENGTH, 
 uint32_t read_contract_args_LENGTH, 
@@ -2386,10 +2380,10 @@ class chain_request final: public ::EmbeddedProto::MessageInterface
       if(FieldNumber::SUBMIT_BLOCK == which_request_)
       {
         which_request_ = FieldNumber::NOT_SET;
-        request_.submit_block_.~submit_block_request<submit_block_block_id_LENGTH, submit_block_block_header_previous_LENGTH, submit_block_block_active_LENGTH, submit_block_block_passive_LENGTH, submit_block_block_signature_data_LENGTH, submit_block_block_transactions_REP_LENGTH, submit_block_block_transactions_id_LENGTH, submit_block_block_transactions_active_LENGTH, submit_block_block_transactions_passive_LENGTH, submit_block_block_transactions_signature_data_LENGTH>();
+        request_.submit_block_.~submit_block_request<submit_block_block_id_LENGTH, submit_block_block_header_previous_LENGTH, submit_block_block_active_LENGTH, submit_block_block_signature_data_LENGTH, submit_block_block_transactions_REP_LENGTH, submit_block_block_transactions_id_LENGTH, submit_block_block_transactions_active_LENGTH, submit_block_block_transactions_signature_data_LENGTH>();
       }
     }
-    inline void set_submit_block(const submit_block_request<submit_block_block_id_LENGTH, submit_block_block_header_previous_LENGTH, submit_block_block_active_LENGTH, submit_block_block_passive_LENGTH, submit_block_block_signature_data_LENGTH, submit_block_block_transactions_REP_LENGTH, submit_block_block_transactions_id_LENGTH, submit_block_block_transactions_active_LENGTH, submit_block_block_transactions_passive_LENGTH, submit_block_block_transactions_signature_data_LENGTH>& value)
+    inline void set_submit_block(const submit_block_request<submit_block_block_id_LENGTH, submit_block_block_header_previous_LENGTH, submit_block_block_active_LENGTH, submit_block_block_signature_data_LENGTH, submit_block_block_transactions_REP_LENGTH, submit_block_block_transactions_id_LENGTH, submit_block_block_transactions_active_LENGTH, submit_block_block_transactions_signature_data_LENGTH>& value)
     {
       if(FieldNumber::SUBMIT_BLOCK != which_request_)
       {
@@ -2397,7 +2391,7 @@ class chain_request final: public ::EmbeddedProto::MessageInterface
       }
       request_.submit_block_ = value;
     }
-    inline void set_submit_block(const submit_block_request<submit_block_block_id_LENGTH, submit_block_block_header_previous_LENGTH, submit_block_block_active_LENGTH, submit_block_block_passive_LENGTH, submit_block_block_signature_data_LENGTH, submit_block_block_transactions_REP_LENGTH, submit_block_block_transactions_id_LENGTH, submit_block_block_transactions_active_LENGTH, submit_block_block_transactions_passive_LENGTH, submit_block_block_transactions_signature_data_LENGTH>&& value)
+    inline void set_submit_block(const submit_block_request<submit_block_block_id_LENGTH, submit_block_block_header_previous_LENGTH, submit_block_block_active_LENGTH, submit_block_block_signature_data_LENGTH, submit_block_block_transactions_REP_LENGTH, submit_block_block_transactions_id_LENGTH, submit_block_block_transactions_active_LENGTH, submit_block_block_transactions_signature_data_LENGTH>&& value)
     {
       if(FieldNumber::SUBMIT_BLOCK != which_request_)
       {
@@ -2405,7 +2399,7 @@ class chain_request final: public ::EmbeddedProto::MessageInterface
       }
       request_.submit_block_ = value;
     }
-    inline submit_block_request<submit_block_block_id_LENGTH, submit_block_block_header_previous_LENGTH, submit_block_block_active_LENGTH, submit_block_block_passive_LENGTH, submit_block_block_signature_data_LENGTH, submit_block_block_transactions_REP_LENGTH, submit_block_block_transactions_id_LENGTH, submit_block_block_transactions_active_LENGTH, submit_block_block_transactions_passive_LENGTH, submit_block_block_transactions_signature_data_LENGTH>& mutable_submit_block()
+    inline submit_block_request<submit_block_block_id_LENGTH, submit_block_block_header_previous_LENGTH, submit_block_block_active_LENGTH, submit_block_block_signature_data_LENGTH, submit_block_block_transactions_REP_LENGTH, submit_block_block_transactions_id_LENGTH, submit_block_block_transactions_active_LENGTH, submit_block_block_transactions_signature_data_LENGTH>& mutable_submit_block()
     {
       if(FieldNumber::SUBMIT_BLOCK != which_request_)
       {
@@ -2413,18 +2407,18 @@ class chain_request final: public ::EmbeddedProto::MessageInterface
       }
       return request_.submit_block_;
     }
-    inline const submit_block_request<submit_block_block_id_LENGTH, submit_block_block_header_previous_LENGTH, submit_block_block_active_LENGTH, submit_block_block_passive_LENGTH, submit_block_block_signature_data_LENGTH, submit_block_block_transactions_REP_LENGTH, submit_block_block_transactions_id_LENGTH, submit_block_block_transactions_active_LENGTH, submit_block_block_transactions_passive_LENGTH, submit_block_block_transactions_signature_data_LENGTH>& get_submit_block() const { return request_.submit_block_; }
-    inline const submit_block_request<submit_block_block_id_LENGTH, submit_block_block_header_previous_LENGTH, submit_block_block_active_LENGTH, submit_block_block_passive_LENGTH, submit_block_block_signature_data_LENGTH, submit_block_block_transactions_REP_LENGTH, submit_block_block_transactions_id_LENGTH, submit_block_block_transactions_active_LENGTH, submit_block_block_transactions_passive_LENGTH, submit_block_block_transactions_signature_data_LENGTH>& submit_block() const { return request_.submit_block_; }
+    inline const submit_block_request<submit_block_block_id_LENGTH, submit_block_block_header_previous_LENGTH, submit_block_block_active_LENGTH, submit_block_block_signature_data_LENGTH, submit_block_block_transactions_REP_LENGTH, submit_block_block_transactions_id_LENGTH, submit_block_block_transactions_active_LENGTH, submit_block_block_transactions_signature_data_LENGTH>& get_submit_block() const { return request_.submit_block_; }
+    inline const submit_block_request<submit_block_block_id_LENGTH, submit_block_block_header_previous_LENGTH, submit_block_block_active_LENGTH, submit_block_block_signature_data_LENGTH, submit_block_block_transactions_REP_LENGTH, submit_block_block_transactions_id_LENGTH, submit_block_block_transactions_active_LENGTH, submit_block_block_transactions_signature_data_LENGTH>& submit_block() const { return request_.submit_block_; }
 
     inline void clear_submit_transaction()
     {
       if(FieldNumber::SUBMIT_TRANSACTION == which_request_)
       {
         which_request_ = FieldNumber::NOT_SET;
-        request_.submit_transaction_.~submit_transaction_request<submit_transaction_transaction_id_LENGTH, submit_transaction_transaction_active_LENGTH, submit_transaction_transaction_passive_LENGTH, submit_transaction_transaction_signature_data_LENGTH>();
+        request_.submit_transaction_.~submit_transaction_request<submit_transaction_transaction_id_LENGTH, submit_transaction_transaction_active_LENGTH, submit_transaction_transaction_signature_data_LENGTH>();
       }
     }
-    inline void set_submit_transaction(const submit_transaction_request<submit_transaction_transaction_id_LENGTH, submit_transaction_transaction_active_LENGTH, submit_transaction_transaction_passive_LENGTH, submit_transaction_transaction_signature_data_LENGTH>& value)
+    inline void set_submit_transaction(const submit_transaction_request<submit_transaction_transaction_id_LENGTH, submit_transaction_transaction_active_LENGTH, submit_transaction_transaction_signature_data_LENGTH>& value)
     {
       if(FieldNumber::SUBMIT_TRANSACTION != which_request_)
       {
@@ -2432,7 +2426,7 @@ class chain_request final: public ::EmbeddedProto::MessageInterface
       }
       request_.submit_transaction_ = value;
     }
-    inline void set_submit_transaction(const submit_transaction_request<submit_transaction_transaction_id_LENGTH, submit_transaction_transaction_active_LENGTH, submit_transaction_transaction_passive_LENGTH, submit_transaction_transaction_signature_data_LENGTH>&& value)
+    inline void set_submit_transaction(const submit_transaction_request<submit_transaction_transaction_id_LENGTH, submit_transaction_transaction_active_LENGTH, submit_transaction_transaction_signature_data_LENGTH>&& value)
     {
       if(FieldNumber::SUBMIT_TRANSACTION != which_request_)
       {
@@ -2440,7 +2434,7 @@ class chain_request final: public ::EmbeddedProto::MessageInterface
       }
       request_.submit_transaction_ = value;
     }
-    inline submit_transaction_request<submit_transaction_transaction_id_LENGTH, submit_transaction_transaction_active_LENGTH, submit_transaction_transaction_passive_LENGTH, submit_transaction_transaction_signature_data_LENGTH>& mutable_submit_transaction()
+    inline submit_transaction_request<submit_transaction_transaction_id_LENGTH, submit_transaction_transaction_active_LENGTH, submit_transaction_transaction_signature_data_LENGTH>& mutable_submit_transaction()
     {
       if(FieldNumber::SUBMIT_TRANSACTION != which_request_)
       {
@@ -2448,8 +2442,8 @@ class chain_request final: public ::EmbeddedProto::MessageInterface
       }
       return request_.submit_transaction_;
     }
-    inline const submit_transaction_request<submit_transaction_transaction_id_LENGTH, submit_transaction_transaction_active_LENGTH, submit_transaction_transaction_passive_LENGTH, submit_transaction_transaction_signature_data_LENGTH>& get_submit_transaction() const { return request_.submit_transaction_; }
-    inline const submit_transaction_request<submit_transaction_transaction_id_LENGTH, submit_transaction_transaction_active_LENGTH, submit_transaction_transaction_passive_LENGTH, submit_transaction_transaction_signature_data_LENGTH>& submit_transaction() const { return request_.submit_transaction_; }
+    inline const submit_transaction_request<submit_transaction_transaction_id_LENGTH, submit_transaction_transaction_active_LENGTH, submit_transaction_transaction_signature_data_LENGTH>& get_submit_transaction() const { return request_.submit_transaction_; }
+    inline const submit_transaction_request<submit_transaction_transaction_id_LENGTH, submit_transaction_transaction_active_LENGTH, submit_transaction_transaction_signature_data_LENGTH>& submit_transaction() const { return request_.submit_transaction_; }
 
     inline void clear_get_head_info()
     {
@@ -2881,8 +2875,8 @@ class chain_request final: public ::EmbeddedProto::MessageInterface
         request() {}
         ~request() {}
         reserved_rpc reserved_;
-        submit_block_request<submit_block_block_id_LENGTH, submit_block_block_header_previous_LENGTH, submit_block_block_active_LENGTH, submit_block_block_passive_LENGTH, submit_block_block_signature_data_LENGTH, submit_block_block_transactions_REP_LENGTH, submit_block_block_transactions_id_LENGTH, submit_block_block_transactions_active_LENGTH, submit_block_block_transactions_passive_LENGTH, submit_block_block_transactions_signature_data_LENGTH> submit_block_;
-        submit_transaction_request<submit_transaction_transaction_id_LENGTH, submit_transaction_transaction_active_LENGTH, submit_transaction_transaction_passive_LENGTH, submit_transaction_transaction_signature_data_LENGTH> submit_transaction_;
+        submit_block_request<submit_block_block_id_LENGTH, submit_block_block_header_previous_LENGTH, submit_block_block_active_LENGTH, submit_block_block_signature_data_LENGTH, submit_block_block_transactions_REP_LENGTH, submit_block_block_transactions_id_LENGTH, submit_block_block_transactions_active_LENGTH, submit_block_block_transactions_signature_data_LENGTH> submit_block_;
+        submit_transaction_request<submit_transaction_transaction_id_LENGTH, submit_transaction_transaction_active_LENGTH, submit_transaction_transaction_signature_data_LENGTH> submit_transaction_;
         get_head_info_request get_head_info_;
         get_chain_id_request get_chain_id_;
         get_fork_heads_request get_fork_heads_;
@@ -2910,12 +2904,12 @@ class chain_request final: public ::EmbeddedProto::MessageInterface
             break;
 
           case FieldNumber::SUBMIT_BLOCK:
-            new(&request_.submit_block_) submit_block_request<submit_block_block_id_LENGTH, submit_block_block_header_previous_LENGTH, submit_block_block_active_LENGTH, submit_block_block_passive_LENGTH, submit_block_block_signature_data_LENGTH, submit_block_block_transactions_REP_LENGTH, submit_block_block_transactions_id_LENGTH, submit_block_block_transactions_active_LENGTH, submit_block_block_transactions_passive_LENGTH, submit_block_block_transactions_signature_data_LENGTH>;
+            new(&request_.submit_block_) submit_block_request<submit_block_block_id_LENGTH, submit_block_block_header_previous_LENGTH, submit_block_block_active_LENGTH, submit_block_block_signature_data_LENGTH, submit_block_block_transactions_REP_LENGTH, submit_block_block_transactions_id_LENGTH, submit_block_block_transactions_active_LENGTH, submit_block_block_transactions_signature_data_LENGTH>;
             which_request_ = FieldNumber::SUBMIT_BLOCK;
             break;
 
           case FieldNumber::SUBMIT_TRANSACTION:
-            new(&request_.submit_transaction_) submit_transaction_request<submit_transaction_transaction_id_LENGTH, submit_transaction_transaction_active_LENGTH, submit_transaction_transaction_passive_LENGTH, submit_transaction_transaction_signature_data_LENGTH>;
+            new(&request_.submit_transaction_) submit_transaction_request<submit_transaction_transaction_id_LENGTH, submit_transaction_transaction_active_LENGTH, submit_transaction_transaction_signature_data_LENGTH>;
             which_request_ = FieldNumber::SUBMIT_TRANSACTION;
             break;
 
@@ -2969,10 +2963,10 @@ class chain_request final: public ::EmbeddedProto::MessageInterface
             request_.reserved_.~reserved_rpc(); // NOSONAR Unions require this.
             break;
           case FieldNumber::SUBMIT_BLOCK:
-            request_.submit_block_.~submit_block_request<submit_block_block_id_LENGTH, submit_block_block_header_previous_LENGTH, submit_block_block_active_LENGTH, submit_block_block_passive_LENGTH, submit_block_block_signature_data_LENGTH, submit_block_block_transactions_REP_LENGTH, submit_block_block_transactions_id_LENGTH, submit_block_block_transactions_active_LENGTH, submit_block_block_transactions_passive_LENGTH, submit_block_block_transactions_signature_data_LENGTH>(); // NOSONAR Unions require this.
+            request_.submit_block_.~submit_block_request<submit_block_block_id_LENGTH, submit_block_block_header_previous_LENGTH, submit_block_block_active_LENGTH, submit_block_block_signature_data_LENGTH, submit_block_block_transactions_REP_LENGTH, submit_block_block_transactions_id_LENGTH, submit_block_block_transactions_active_LENGTH, submit_block_block_transactions_signature_data_LENGTH>(); // NOSONAR Unions require this.
             break;
           case FieldNumber::SUBMIT_TRANSACTION:
-            request_.submit_transaction_.~submit_transaction_request<submit_transaction_transaction_id_LENGTH, submit_transaction_transaction_active_LENGTH, submit_transaction_transaction_passive_LENGTH, submit_transaction_transaction_signature_data_LENGTH>(); // NOSONAR Unions require this.
+            request_.submit_transaction_.~submit_transaction_request<submit_transaction_transaction_id_LENGTH, submit_transaction_transaction_active_LENGTH, submit_transaction_transaction_signature_data_LENGTH>(); // NOSONAR Unions require this.
             break;
           case FieldNumber::GET_HEAD_INFO:
             request_.get_head_info_.~get_head_info_request(); // NOSONAR Unions require this.

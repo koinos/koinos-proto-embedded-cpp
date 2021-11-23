@@ -29,8 +29,8 @@
  */
 
 // This file is generated. Please do not edit!
-#ifndef KOINOS_RPC_TRANSACTION_STORE_TRANSACTION_STORE_RPC_H
-#define KOINOS_RPC_TRANSACTION_STORE_TRANSACTION_STORE_RPC_H
+#ifndef KOINOS_RPC_CONTRACT_META_STORE_CONTRACT_META_STORE_RPC_H
+#define KOINOS_RPC_CONTRACT_META_STORE_CONTRACT_META_STORE_RPC_H
 
 #include <cstdint>
 #include <MessageInterface.h>
@@ -46,58 +46,52 @@
 // Include external proto definitions
 #include <koinos/options.h>
 #include <koinos/rpc/rpc.h>
-#include <koinos/transaction_store/transaction_store.h>
+#include <koinos/contract_meta_store/contract_meta_store.h>
 
 namespace koinos {
 namespace rpc {
-namespace transaction_store {
+namespace contract_meta_store {
 
-template<uint32_t transaction_ids_REP_LENGTH, 
-uint32_t transaction_ids_LENGTH>
-class get_transactions_by_id_request final: public ::EmbeddedProto::MessageInterface
+template<uint32_t contract_id_LENGTH>
+class get_contract_meta_request final: public ::EmbeddedProto::MessageInterface
 {
   public:
-    get_transactions_by_id_request() = default;
-    get_transactions_by_id_request(const get_transactions_by_id_request& rhs )
+    get_contract_meta_request() = default;
+    get_contract_meta_request(const get_contract_meta_request& rhs )
     {
-      set_transaction_ids(rhs.get_transaction_ids());
+      set_contract_id(rhs.get_contract_id());
     }
 
-    get_transactions_by_id_request(const get_transactions_by_id_request&& rhs ) noexcept
+    get_contract_meta_request(const get_contract_meta_request&& rhs ) noexcept
     {
-      set_transaction_ids(rhs.get_transaction_ids());
+      set_contract_id(rhs.get_contract_id());
     }
 
-    ~get_transactions_by_id_request() override = default;
+    ~get_contract_meta_request() override = default;
 
     enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
-      TRANSACTION_IDS = 1
+      CONTRACT_ID = 1
     };
 
-    get_transactions_by_id_request& operator=(const get_transactions_by_id_request& rhs)
+    get_contract_meta_request& operator=(const get_contract_meta_request& rhs)
     {
-      set_transaction_ids(rhs.get_transaction_ids());
+      set_contract_id(rhs.get_contract_id());
       return *this;
     }
 
-    get_transactions_by_id_request& operator=(const get_transactions_by_id_request&& rhs) noexcept
+    get_contract_meta_request& operator=(const get_contract_meta_request&& rhs) noexcept
     {
-      set_transaction_ids(rhs.get_transaction_ids());
+      set_contract_id(rhs.get_contract_id());
       return *this;
     }
 
-    inline const ::EmbeddedProto::FieldBytes<transaction_ids_LENGTH>& transaction_ids(uint32_t index) const { return transaction_ids_[index]; }
-    inline void clear_transaction_ids() { transaction_ids_.clear(); }
-    inline void set_transaction_ids(uint32_t index, const ::EmbeddedProto::FieldBytes<transaction_ids_LENGTH>& value) { transaction_ids_.set(index, value); }
-    inline void set_transaction_ids(uint32_t index, const ::EmbeddedProto::FieldBytes<transaction_ids_LENGTH>&& value) { transaction_ids_.set(index, value); }
-    inline void set_transaction_ids(const ::EmbeddedProto::RepeatedFieldFixedSize<::EmbeddedProto::FieldBytes<transaction_ids_LENGTH>, transaction_ids_REP_LENGTH>& values) { transaction_ids_ = values; }
-    inline void add_transaction_ids(const ::EmbeddedProto::FieldBytes<transaction_ids_LENGTH>& value) { transaction_ids_.add(value); }
-    inline ::EmbeddedProto::RepeatedFieldFixedSize<::EmbeddedProto::FieldBytes<transaction_ids_LENGTH>, transaction_ids_REP_LENGTH>& mutable_transaction_ids() { return transaction_ids_; }
-    inline ::EmbeddedProto::FieldBytes<transaction_ids_LENGTH>& mutable_transaction_ids(uint32_t index) { return transaction_ids_[index]; }
-    inline const ::EmbeddedProto::RepeatedFieldFixedSize<::EmbeddedProto::FieldBytes<transaction_ids_LENGTH>, transaction_ids_REP_LENGTH>& get_transaction_ids() const { return transaction_ids_; }
-    inline const ::EmbeddedProto::RepeatedFieldFixedSize<::EmbeddedProto::FieldBytes<transaction_ids_LENGTH>, transaction_ids_REP_LENGTH>& transaction_ids() const { return transaction_ids_; }
+    inline void clear_contract_id() { contract_id_.clear(); }
+    inline ::EmbeddedProto::FieldBytes<contract_id_LENGTH>& mutable_contract_id() { return contract_id_; }
+    inline void set_contract_id(const ::EmbeddedProto::FieldBytes<contract_id_LENGTH>& rhs) { contract_id_.set(rhs); }
+    inline const ::EmbeddedProto::FieldBytes<contract_id_LENGTH>& get_contract_id() const { return contract_id_; }
+    inline const uint8_t* contract_id() const { return contract_id_.get_const(); }
 
 
     ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
@@ -106,7 +100,7 @@ class get_transactions_by_id_request final: public ::EmbeddedProto::MessageInter
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = transaction_ids_.serialize_with_id(static_cast<uint32_t>(FieldNumber::TRANSACTION_IDS), buffer, false);
+        return_value = contract_id_.serialize_with_id(static_cast<uint32_t>(FieldNumber::CONTRACT_ID), buffer, false);
       }
 
       return return_value;
@@ -125,8 +119,8 @@ class get_transactions_by_id_request final: public ::EmbeddedProto::MessageInter
         id_tag = static_cast<FieldNumber>(id_number);
         switch(id_tag)
         {
-          case FieldNumber::TRANSACTION_IDS:
-            return_value = transaction_ids_.deserialize_check_type(buffer, wire_type);
+          case FieldNumber::CONTRACT_ID:
+            return_value = contract_id_.deserialize_check_type(buffer, wire_type);
             break;
 
           default:
@@ -153,67 +147,58 @@ class get_transactions_by_id_request final: public ::EmbeddedProto::MessageInter
 
     void clear() override
     {
-      clear_transaction_ids();
+      clear_contract_id();
 
     }
 
     private:
 
 
-      ::EmbeddedProto::RepeatedFieldFixedSize<::EmbeddedProto::FieldBytes<transaction_ids_LENGTH>, transaction_ids_REP_LENGTH> transaction_ids_;
+      ::EmbeddedProto::FieldBytes<contract_id_LENGTH> contract_id_;
 
 };
 
-template<uint32_t transactions_REP_LENGTH, 
-uint32_t transactions_transaction_id_LENGTH, 
-uint32_t transactions_transaction_active_LENGTH, 
-uint32_t transactions_transaction_signature_data_LENGTH, 
-uint32_t transactions_containing_blocks_REP_LENGTH, 
-uint32_t transactions_containing_blocks_LENGTH>
-class get_transactions_by_id_response final: public ::EmbeddedProto::MessageInterface
+template<uint32_t meta_abi_LENGTH>
+class get_contract_meta_response final: public ::EmbeddedProto::MessageInterface
 {
   public:
-    get_transactions_by_id_response() = default;
-    get_transactions_by_id_response(const get_transactions_by_id_response& rhs )
+    get_contract_meta_response() = default;
+    get_contract_meta_response(const get_contract_meta_response& rhs )
     {
-      set_transactions(rhs.get_transactions());
+      set_meta(rhs.get_meta());
     }
 
-    get_transactions_by_id_response(const get_transactions_by_id_response&& rhs ) noexcept
+    get_contract_meta_response(const get_contract_meta_response&& rhs ) noexcept
     {
-      set_transactions(rhs.get_transactions());
+      set_meta(rhs.get_meta());
     }
 
-    ~get_transactions_by_id_response() override = default;
+    ~get_contract_meta_response() override = default;
 
     enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
-      TRANSACTIONS = 1
+      META = 1
     };
 
-    get_transactions_by_id_response& operator=(const get_transactions_by_id_response& rhs)
+    get_contract_meta_response& operator=(const get_contract_meta_response& rhs)
     {
-      set_transactions(rhs.get_transactions());
+      set_meta(rhs.get_meta());
       return *this;
     }
 
-    get_transactions_by_id_response& operator=(const get_transactions_by_id_response&& rhs) noexcept
+    get_contract_meta_response& operator=(const get_contract_meta_response&& rhs) noexcept
     {
-      set_transactions(rhs.get_transactions());
+      set_meta(rhs.get_meta());
       return *this;
     }
 
-    inline const transaction_store::transaction_item<transactions_transaction_id_LENGTH, transactions_transaction_active_LENGTH, transactions_transaction_signature_data_LENGTH, transactions_containing_blocks_REP_LENGTH, transactions_containing_blocks_LENGTH>& transactions(uint32_t index) const { return transactions_[index]; }
-    inline void clear_transactions() { transactions_.clear(); }
-    inline void set_transactions(uint32_t index, const transaction_store::transaction_item<transactions_transaction_id_LENGTH, transactions_transaction_active_LENGTH, transactions_transaction_signature_data_LENGTH, transactions_containing_blocks_REP_LENGTH, transactions_containing_blocks_LENGTH>& value) { transactions_.set(index, value); }
-    inline void set_transactions(uint32_t index, const transaction_store::transaction_item<transactions_transaction_id_LENGTH, transactions_transaction_active_LENGTH, transactions_transaction_signature_data_LENGTH, transactions_containing_blocks_REP_LENGTH, transactions_containing_blocks_LENGTH>&& value) { transactions_.set(index, value); }
-    inline void set_transactions(const ::EmbeddedProto::RepeatedFieldFixedSize<transaction_store::transaction_item<transactions_transaction_id_LENGTH, transactions_transaction_active_LENGTH, transactions_transaction_signature_data_LENGTH, transactions_containing_blocks_REP_LENGTH, transactions_containing_blocks_LENGTH>, transactions_REP_LENGTH>& values) { transactions_ = values; }
-    inline void add_transactions(const transaction_store::transaction_item<transactions_transaction_id_LENGTH, transactions_transaction_active_LENGTH, transactions_transaction_signature_data_LENGTH, transactions_containing_blocks_REP_LENGTH, transactions_containing_blocks_LENGTH>& value) { transactions_.add(value); }
-    inline ::EmbeddedProto::RepeatedFieldFixedSize<transaction_store::transaction_item<transactions_transaction_id_LENGTH, transactions_transaction_active_LENGTH, transactions_transaction_signature_data_LENGTH, transactions_containing_blocks_REP_LENGTH, transactions_containing_blocks_LENGTH>, transactions_REP_LENGTH>& mutable_transactions() { return transactions_; }
-    inline transaction_store::transaction_item<transactions_transaction_id_LENGTH, transactions_transaction_active_LENGTH, transactions_transaction_signature_data_LENGTH, transactions_containing_blocks_REP_LENGTH, transactions_containing_blocks_LENGTH>& mutable_transactions(uint32_t index) { return transactions_[index]; }
-    inline const ::EmbeddedProto::RepeatedFieldFixedSize<transaction_store::transaction_item<transactions_transaction_id_LENGTH, transactions_transaction_active_LENGTH, transactions_transaction_signature_data_LENGTH, transactions_containing_blocks_REP_LENGTH, transactions_containing_blocks_LENGTH>, transactions_REP_LENGTH>& get_transactions() const { return transactions_; }
-    inline const ::EmbeddedProto::RepeatedFieldFixedSize<transaction_store::transaction_item<transactions_transaction_id_LENGTH, transactions_transaction_active_LENGTH, transactions_transaction_signature_data_LENGTH, transactions_containing_blocks_REP_LENGTH, transactions_containing_blocks_LENGTH>, transactions_REP_LENGTH>& transactions() const { return transactions_; }
+    inline void clear_meta() { meta_.clear(); }
+    inline void set_meta(const contract_meta_store::contract_meta_item<meta_abi_LENGTH>& value) { meta_ = value; }
+    inline void set_meta(const contract_meta_store::contract_meta_item<meta_abi_LENGTH>&& value) { meta_ = value; }
+    inline contract_meta_store::contract_meta_item<meta_abi_LENGTH>& mutable_meta() { return meta_; }
+    inline const contract_meta_store::contract_meta_item<meta_abi_LENGTH>& get_meta() const { return meta_; }
+    inline const contract_meta_store::contract_meta_item<meta_abi_LENGTH>& meta() const { return meta_; }
 
 
     ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
@@ -222,7 +207,7 @@ class get_transactions_by_id_response final: public ::EmbeddedProto::MessageInte
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = transactions_.serialize_with_id(static_cast<uint32_t>(FieldNumber::TRANSACTIONS), buffer, false);
+        return_value = meta_.serialize_with_id(static_cast<uint32_t>(FieldNumber::META), buffer, false);
       }
 
       return return_value;
@@ -241,8 +226,8 @@ class get_transactions_by_id_response final: public ::EmbeddedProto::MessageInte
         id_tag = static_cast<FieldNumber>(id_number);
         switch(id_tag)
         {
-          case FieldNumber::TRANSACTIONS:
-            return_value = transactions_.deserialize_check_type(buffer, wire_type);
+          case FieldNumber::META:
+            return_value = meta_.deserialize_check_type(buffer, wire_type);
             break;
 
           default:
@@ -269,24 +254,23 @@ class get_transactions_by_id_response final: public ::EmbeddedProto::MessageInte
 
     void clear() override
     {
-      clear_transactions();
+      clear_meta();
 
     }
 
     private:
 
 
-      ::EmbeddedProto::RepeatedFieldFixedSize<transaction_store::transaction_item<transactions_transaction_id_LENGTH, transactions_transaction_active_LENGTH, transactions_transaction_signature_data_LENGTH, transactions_containing_blocks_REP_LENGTH, transactions_containing_blocks_LENGTH>, transactions_REP_LENGTH> transactions_;
+      contract_meta_store::contract_meta_item<meta_abi_LENGTH> meta_;
 
 };
 
-template<uint32_t get_transactions_by_id_transaction_ids_REP_LENGTH, 
-uint32_t get_transactions_by_id_transaction_ids_LENGTH>
-class transaction_store_request final: public ::EmbeddedProto::MessageInterface
+template<uint32_t get_contract_meta_contract_id_LENGTH>
+class contract_meta_store_request final: public ::EmbeddedProto::MessageInterface
 {
   public:
-    transaction_store_request() = default;
-    transaction_store_request(const transaction_store_request& rhs )
+    contract_meta_store_request() = default;
+    contract_meta_store_request(const contract_meta_store_request& rhs )
     {
       if(rhs.get_which_request() != which_request_)
       {
@@ -300,8 +284,8 @@ class transaction_store_request final: public ::EmbeddedProto::MessageInterface
           set_reserved(rhs.get_reserved());
           break;
 
-        case FieldNumber::GET_TRANSACTIONS_BY_ID:
-          set_get_transactions_by_id(rhs.get_get_transactions_by_id());
+        case FieldNumber::GET_CONTRACT_META:
+          set_get_contract_meta(rhs.get_get_contract_meta());
           break;
 
         default:
@@ -310,7 +294,7 @@ class transaction_store_request final: public ::EmbeddedProto::MessageInterface
 
     }
 
-    transaction_store_request(const transaction_store_request&& rhs ) noexcept
+    contract_meta_store_request(const contract_meta_store_request&& rhs ) noexcept
     {
       if(rhs.get_which_request() != which_request_)
       {
@@ -324,8 +308,8 @@ class transaction_store_request final: public ::EmbeddedProto::MessageInterface
           set_reserved(rhs.get_reserved());
           break;
 
-        case FieldNumber::GET_TRANSACTIONS_BY_ID:
-          set_get_transactions_by_id(rhs.get_get_transactions_by_id());
+        case FieldNumber::GET_CONTRACT_META:
+          set_get_contract_meta(rhs.get_get_contract_meta());
           break;
 
         default:
@@ -334,16 +318,16 @@ class transaction_store_request final: public ::EmbeddedProto::MessageInterface
 
     }
 
-    ~transaction_store_request() override = default;
+    ~contract_meta_store_request() override = default;
 
     enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
       RESERVED = 1,
-      GET_TRANSACTIONS_BY_ID = 2
+      GET_CONTRACT_META = 2
     };
 
-    transaction_store_request& operator=(const transaction_store_request& rhs)
+    contract_meta_store_request& operator=(const contract_meta_store_request& rhs)
     {
       if(rhs.get_which_request() != which_request_)
       {
@@ -357,8 +341,8 @@ class transaction_store_request final: public ::EmbeddedProto::MessageInterface
           set_reserved(rhs.get_reserved());
           break;
 
-        case FieldNumber::GET_TRANSACTIONS_BY_ID:
-          set_get_transactions_by_id(rhs.get_get_transactions_by_id());
+        case FieldNumber::GET_CONTRACT_META:
+          set_get_contract_meta(rhs.get_get_contract_meta());
           break;
 
         default:
@@ -368,7 +352,7 @@ class transaction_store_request final: public ::EmbeddedProto::MessageInterface
       return *this;
     }
 
-    transaction_store_request& operator=(const transaction_store_request&& rhs) noexcept
+    contract_meta_store_request& operator=(const contract_meta_store_request&& rhs) noexcept
     {
       if(rhs.get_which_request() != which_request_)
       {
@@ -382,8 +366,8 @@ class transaction_store_request final: public ::EmbeddedProto::MessageInterface
           set_reserved(rhs.get_reserved());
           break;
 
-        case FieldNumber::GET_TRANSACTIONS_BY_ID:
-          set_get_transactions_by_id(rhs.get_get_transactions_by_id());
+        case FieldNumber::GET_CONTRACT_META:
+          set_get_contract_meta(rhs.get_get_contract_meta());
           break;
 
         default:
@@ -430,40 +414,40 @@ class transaction_store_request final: public ::EmbeddedProto::MessageInterface
     inline const reserved_rpc& get_reserved() const { return request_.reserved_; }
     inline const reserved_rpc& reserved() const { return request_.reserved_; }
 
-    inline void clear_get_transactions_by_id()
+    inline void clear_get_contract_meta()
     {
-      if(FieldNumber::GET_TRANSACTIONS_BY_ID == which_request_)
+      if(FieldNumber::GET_CONTRACT_META == which_request_)
       {
         which_request_ = FieldNumber::NOT_SET;
-        request_.get_transactions_by_id_.~get_transactions_by_id_request<get_transactions_by_id_transaction_ids_REP_LENGTH, get_transactions_by_id_transaction_ids_LENGTH>();
+        request_.get_contract_meta_.~get_contract_meta_request<get_contract_meta_contract_id_LENGTH>();
       }
     }
-    inline void set_get_transactions_by_id(const get_transactions_by_id_request<get_transactions_by_id_transaction_ids_REP_LENGTH, get_transactions_by_id_transaction_ids_LENGTH>& value)
+    inline void set_get_contract_meta(const get_contract_meta_request<get_contract_meta_contract_id_LENGTH>& value)
     {
-      if(FieldNumber::GET_TRANSACTIONS_BY_ID != which_request_)
+      if(FieldNumber::GET_CONTRACT_META != which_request_)
       {
-        init_request(FieldNumber::GET_TRANSACTIONS_BY_ID);
+        init_request(FieldNumber::GET_CONTRACT_META);
       }
-      request_.get_transactions_by_id_ = value;
+      request_.get_contract_meta_ = value;
     }
-    inline void set_get_transactions_by_id(const get_transactions_by_id_request<get_transactions_by_id_transaction_ids_REP_LENGTH, get_transactions_by_id_transaction_ids_LENGTH>&& value)
+    inline void set_get_contract_meta(const get_contract_meta_request<get_contract_meta_contract_id_LENGTH>&& value)
     {
-      if(FieldNumber::GET_TRANSACTIONS_BY_ID != which_request_)
+      if(FieldNumber::GET_CONTRACT_META != which_request_)
       {
-        init_request(FieldNumber::GET_TRANSACTIONS_BY_ID);
+        init_request(FieldNumber::GET_CONTRACT_META);
       }
-      request_.get_transactions_by_id_ = value;
+      request_.get_contract_meta_ = value;
     }
-    inline get_transactions_by_id_request<get_transactions_by_id_transaction_ids_REP_LENGTH, get_transactions_by_id_transaction_ids_LENGTH>& mutable_get_transactions_by_id()
+    inline get_contract_meta_request<get_contract_meta_contract_id_LENGTH>& mutable_get_contract_meta()
     {
-      if(FieldNumber::GET_TRANSACTIONS_BY_ID != which_request_)
+      if(FieldNumber::GET_CONTRACT_META != which_request_)
       {
-        init_request(FieldNumber::GET_TRANSACTIONS_BY_ID);
+        init_request(FieldNumber::GET_CONTRACT_META);
       }
-      return request_.get_transactions_by_id_;
+      return request_.get_contract_meta_;
     }
-    inline const get_transactions_by_id_request<get_transactions_by_id_transaction_ids_REP_LENGTH, get_transactions_by_id_transaction_ids_LENGTH>& get_get_transactions_by_id() const { return request_.get_transactions_by_id_; }
-    inline const get_transactions_by_id_request<get_transactions_by_id_transaction_ids_REP_LENGTH, get_transactions_by_id_transaction_ids_LENGTH>& get_transactions_by_id() const { return request_.get_transactions_by_id_; }
+    inline const get_contract_meta_request<get_contract_meta_contract_id_LENGTH>& get_get_contract_meta() const { return request_.get_contract_meta_; }
+    inline const get_contract_meta_request<get_contract_meta_contract_id_LENGTH>& get_contract_meta() const { return request_.get_contract_meta_; }
 
 
     ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
@@ -479,10 +463,10 @@ class transaction_store_request final: public ::EmbeddedProto::MessageInterface
           }
           break;
 
-        case FieldNumber::GET_TRANSACTIONS_BY_ID:
+        case FieldNumber::GET_CONTRACT_META:
           if(::EmbeddedProto::Error::NO_ERRORS == return_value)
           {
-            return_value = request_.get_transactions_by_id_.serialize_with_id(static_cast<uint32_t>(FieldNumber::GET_TRANSACTIONS_BY_ID), buffer, false);
+            return_value = request_.get_contract_meta_.serialize_with_id(static_cast<uint32_t>(FieldNumber::GET_CONTRACT_META), buffer, false);
           }
           break;
 
@@ -511,8 +495,8 @@ class transaction_store_request final: public ::EmbeddedProto::MessageInterface
 
             break;
 
-          case FieldNumber::GET_TRANSACTIONS_BY_ID:
-            return_value = deserialize_request(FieldNumber::GET_TRANSACTIONS_BY_ID, request_.get_transactions_by_id_, buffer, wire_type);
+          case FieldNumber::GET_CONTRACT_META:
+            return_value = deserialize_request(FieldNumber::GET_CONTRACT_META, request_.get_contract_meta_, buffer, wire_type);
 
             break;
 
@@ -554,7 +538,7 @@ class transaction_store_request final: public ::EmbeddedProto::MessageInterface
         request() {}
         ~request() {}
         reserved_rpc reserved_;
-        get_transactions_by_id_request<get_transactions_by_id_transaction_ids_REP_LENGTH, get_transactions_by_id_transaction_ids_LENGTH> get_transactions_by_id_;
+        get_contract_meta_request<get_contract_meta_contract_id_LENGTH> get_contract_meta_;
       };
       request request_;
 
@@ -574,9 +558,9 @@ class transaction_store_request final: public ::EmbeddedProto::MessageInterface
             which_request_ = FieldNumber::RESERVED;
             break;
 
-          case FieldNumber::GET_TRANSACTIONS_BY_ID:
-            new(&request_.get_transactions_by_id_) get_transactions_by_id_request<get_transactions_by_id_transaction_ids_REP_LENGTH, get_transactions_by_id_transaction_ids_LENGTH>;
-            which_request_ = FieldNumber::GET_TRANSACTIONS_BY_ID;
+          case FieldNumber::GET_CONTRACT_META:
+            new(&request_.get_contract_meta_) get_contract_meta_request<get_contract_meta_contract_id_LENGTH>;
+            which_request_ = FieldNumber::GET_CONTRACT_META;
             break;
 
           default:
@@ -593,8 +577,8 @@ class transaction_store_request final: public ::EmbeddedProto::MessageInterface
           case FieldNumber::RESERVED:
             request_.reserved_.~reserved_rpc(); // NOSONAR Unions require this.
             break;
-          case FieldNumber::GET_TRANSACTIONS_BY_ID:
-            request_.get_transactions_by_id_.~get_transactions_by_id_request<get_transactions_by_id_transaction_ids_REP_LENGTH, get_transactions_by_id_transaction_ids_LENGTH>(); // NOSONAR Unions require this.
+          case FieldNumber::GET_CONTRACT_META:
+            request_.get_contract_meta_.~get_contract_meta_request<get_contract_meta_contract_id_LENGTH>(); // NOSONAR Unions require this.
             break;
           default:
             break;
@@ -622,17 +606,12 @@ class transaction_store_request final: public ::EmbeddedProto::MessageInterface
 
 template<uint32_t error_message_LENGTH, 
 uint32_t error_data_LENGTH, 
-uint32_t get_transactions_by_id_transactions_REP_LENGTH, 
-uint32_t get_transactions_by_id_transactions_transaction_id_LENGTH, 
-uint32_t get_transactions_by_id_transactions_transaction_active_LENGTH, 
-uint32_t get_transactions_by_id_transactions_transaction_signature_data_LENGTH, 
-uint32_t get_transactions_by_id_transactions_containing_blocks_REP_LENGTH, 
-uint32_t get_transactions_by_id_transactions_containing_blocks_LENGTH>
-class transaction_store_response final: public ::EmbeddedProto::MessageInterface
+uint32_t get_contract_meta_meta_abi_LENGTH>
+class contract_meta_store_response final: public ::EmbeddedProto::MessageInterface
 {
   public:
-    transaction_store_response() = default;
-    transaction_store_response(const transaction_store_response& rhs )
+    contract_meta_store_response() = default;
+    contract_meta_store_response(const contract_meta_store_response& rhs )
     {
       if(rhs.get_which_response() != which_response_)
       {
@@ -650,8 +629,8 @@ class transaction_store_response final: public ::EmbeddedProto::MessageInterface
           set_error(rhs.get_error());
           break;
 
-        case FieldNumber::GET_TRANSACTIONS_BY_ID:
-          set_get_transactions_by_id(rhs.get_get_transactions_by_id());
+        case FieldNumber::GET_CONTRACT_META:
+          set_get_contract_meta(rhs.get_get_contract_meta());
           break;
 
         default:
@@ -660,7 +639,7 @@ class transaction_store_response final: public ::EmbeddedProto::MessageInterface
 
     }
 
-    transaction_store_response(const transaction_store_response&& rhs ) noexcept
+    contract_meta_store_response(const contract_meta_store_response&& rhs ) noexcept
     {
       if(rhs.get_which_response() != which_response_)
       {
@@ -678,8 +657,8 @@ class transaction_store_response final: public ::EmbeddedProto::MessageInterface
           set_error(rhs.get_error());
           break;
 
-        case FieldNumber::GET_TRANSACTIONS_BY_ID:
-          set_get_transactions_by_id(rhs.get_get_transactions_by_id());
+        case FieldNumber::GET_CONTRACT_META:
+          set_get_contract_meta(rhs.get_get_contract_meta());
           break;
 
         default:
@@ -688,17 +667,17 @@ class transaction_store_response final: public ::EmbeddedProto::MessageInterface
 
     }
 
-    ~transaction_store_response() override = default;
+    ~contract_meta_store_response() override = default;
 
     enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
       RESERVED = 1,
       ERROR = 2,
-      GET_TRANSACTIONS_BY_ID = 3
+      GET_CONTRACT_META = 3
     };
 
-    transaction_store_response& operator=(const transaction_store_response& rhs)
+    contract_meta_store_response& operator=(const contract_meta_store_response& rhs)
     {
       if(rhs.get_which_response() != which_response_)
       {
@@ -716,8 +695,8 @@ class transaction_store_response final: public ::EmbeddedProto::MessageInterface
           set_error(rhs.get_error());
           break;
 
-        case FieldNumber::GET_TRANSACTIONS_BY_ID:
-          set_get_transactions_by_id(rhs.get_get_transactions_by_id());
+        case FieldNumber::GET_CONTRACT_META:
+          set_get_contract_meta(rhs.get_get_contract_meta());
           break;
 
         default:
@@ -727,7 +706,7 @@ class transaction_store_response final: public ::EmbeddedProto::MessageInterface
       return *this;
     }
 
-    transaction_store_response& operator=(const transaction_store_response&& rhs) noexcept
+    contract_meta_store_response& operator=(const contract_meta_store_response&& rhs) noexcept
     {
       if(rhs.get_which_response() != which_response_)
       {
@@ -745,8 +724,8 @@ class transaction_store_response final: public ::EmbeddedProto::MessageInterface
           set_error(rhs.get_error());
           break;
 
-        case FieldNumber::GET_TRANSACTIONS_BY_ID:
-          set_get_transactions_by_id(rhs.get_get_transactions_by_id());
+        case FieldNumber::GET_CONTRACT_META:
+          set_get_contract_meta(rhs.get_get_contract_meta());
           break;
 
         default:
@@ -828,40 +807,40 @@ class transaction_store_response final: public ::EmbeddedProto::MessageInterface
     inline const error_response<error_message_LENGTH, error_data_LENGTH>& get_error() const { return response_.error_; }
     inline const error_response<error_message_LENGTH, error_data_LENGTH>& error() const { return response_.error_; }
 
-    inline void clear_get_transactions_by_id()
+    inline void clear_get_contract_meta()
     {
-      if(FieldNumber::GET_TRANSACTIONS_BY_ID == which_response_)
+      if(FieldNumber::GET_CONTRACT_META == which_response_)
       {
         which_response_ = FieldNumber::NOT_SET;
-        response_.get_transactions_by_id_.~get_transactions_by_id_response<get_transactions_by_id_transactions_REP_LENGTH, get_transactions_by_id_transactions_transaction_id_LENGTH, get_transactions_by_id_transactions_transaction_active_LENGTH, get_transactions_by_id_transactions_transaction_signature_data_LENGTH, get_transactions_by_id_transactions_containing_blocks_REP_LENGTH, get_transactions_by_id_transactions_containing_blocks_LENGTH>();
+        response_.get_contract_meta_.~get_contract_meta_response<get_contract_meta_meta_abi_LENGTH>();
       }
     }
-    inline void set_get_transactions_by_id(const get_transactions_by_id_response<get_transactions_by_id_transactions_REP_LENGTH, get_transactions_by_id_transactions_transaction_id_LENGTH, get_transactions_by_id_transactions_transaction_active_LENGTH, get_transactions_by_id_transactions_transaction_signature_data_LENGTH, get_transactions_by_id_transactions_containing_blocks_REP_LENGTH, get_transactions_by_id_transactions_containing_blocks_LENGTH>& value)
+    inline void set_get_contract_meta(const get_contract_meta_response<get_contract_meta_meta_abi_LENGTH>& value)
     {
-      if(FieldNumber::GET_TRANSACTIONS_BY_ID != which_response_)
+      if(FieldNumber::GET_CONTRACT_META != which_response_)
       {
-        init_response(FieldNumber::GET_TRANSACTIONS_BY_ID);
+        init_response(FieldNumber::GET_CONTRACT_META);
       }
-      response_.get_transactions_by_id_ = value;
+      response_.get_contract_meta_ = value;
     }
-    inline void set_get_transactions_by_id(const get_transactions_by_id_response<get_transactions_by_id_transactions_REP_LENGTH, get_transactions_by_id_transactions_transaction_id_LENGTH, get_transactions_by_id_transactions_transaction_active_LENGTH, get_transactions_by_id_transactions_transaction_signature_data_LENGTH, get_transactions_by_id_transactions_containing_blocks_REP_LENGTH, get_transactions_by_id_transactions_containing_blocks_LENGTH>&& value)
+    inline void set_get_contract_meta(const get_contract_meta_response<get_contract_meta_meta_abi_LENGTH>&& value)
     {
-      if(FieldNumber::GET_TRANSACTIONS_BY_ID != which_response_)
+      if(FieldNumber::GET_CONTRACT_META != which_response_)
       {
-        init_response(FieldNumber::GET_TRANSACTIONS_BY_ID);
+        init_response(FieldNumber::GET_CONTRACT_META);
       }
-      response_.get_transactions_by_id_ = value;
+      response_.get_contract_meta_ = value;
     }
-    inline get_transactions_by_id_response<get_transactions_by_id_transactions_REP_LENGTH, get_transactions_by_id_transactions_transaction_id_LENGTH, get_transactions_by_id_transactions_transaction_active_LENGTH, get_transactions_by_id_transactions_transaction_signature_data_LENGTH, get_transactions_by_id_transactions_containing_blocks_REP_LENGTH, get_transactions_by_id_transactions_containing_blocks_LENGTH>& mutable_get_transactions_by_id()
+    inline get_contract_meta_response<get_contract_meta_meta_abi_LENGTH>& mutable_get_contract_meta()
     {
-      if(FieldNumber::GET_TRANSACTIONS_BY_ID != which_response_)
+      if(FieldNumber::GET_CONTRACT_META != which_response_)
       {
-        init_response(FieldNumber::GET_TRANSACTIONS_BY_ID);
+        init_response(FieldNumber::GET_CONTRACT_META);
       }
-      return response_.get_transactions_by_id_;
+      return response_.get_contract_meta_;
     }
-    inline const get_transactions_by_id_response<get_transactions_by_id_transactions_REP_LENGTH, get_transactions_by_id_transactions_transaction_id_LENGTH, get_transactions_by_id_transactions_transaction_active_LENGTH, get_transactions_by_id_transactions_transaction_signature_data_LENGTH, get_transactions_by_id_transactions_containing_blocks_REP_LENGTH, get_transactions_by_id_transactions_containing_blocks_LENGTH>& get_get_transactions_by_id() const { return response_.get_transactions_by_id_; }
-    inline const get_transactions_by_id_response<get_transactions_by_id_transactions_REP_LENGTH, get_transactions_by_id_transactions_transaction_id_LENGTH, get_transactions_by_id_transactions_transaction_active_LENGTH, get_transactions_by_id_transactions_transaction_signature_data_LENGTH, get_transactions_by_id_transactions_containing_blocks_REP_LENGTH, get_transactions_by_id_transactions_containing_blocks_LENGTH>& get_transactions_by_id() const { return response_.get_transactions_by_id_; }
+    inline const get_contract_meta_response<get_contract_meta_meta_abi_LENGTH>& get_get_contract_meta() const { return response_.get_contract_meta_; }
+    inline const get_contract_meta_response<get_contract_meta_meta_abi_LENGTH>& get_contract_meta() const { return response_.get_contract_meta_; }
 
 
     ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
@@ -884,10 +863,10 @@ class transaction_store_response final: public ::EmbeddedProto::MessageInterface
           }
           break;
 
-        case FieldNumber::GET_TRANSACTIONS_BY_ID:
+        case FieldNumber::GET_CONTRACT_META:
           if(::EmbeddedProto::Error::NO_ERRORS == return_value)
           {
-            return_value = response_.get_transactions_by_id_.serialize_with_id(static_cast<uint32_t>(FieldNumber::GET_TRANSACTIONS_BY_ID), buffer, false);
+            return_value = response_.get_contract_meta_.serialize_with_id(static_cast<uint32_t>(FieldNumber::GET_CONTRACT_META), buffer, false);
           }
           break;
 
@@ -921,8 +900,8 @@ class transaction_store_response final: public ::EmbeddedProto::MessageInterface
 
             break;
 
-          case FieldNumber::GET_TRANSACTIONS_BY_ID:
-            return_value = deserialize_response(FieldNumber::GET_TRANSACTIONS_BY_ID, response_.get_transactions_by_id_, buffer, wire_type);
+          case FieldNumber::GET_CONTRACT_META:
+            return_value = deserialize_response(FieldNumber::GET_CONTRACT_META, response_.get_contract_meta_, buffer, wire_type);
 
             break;
 
@@ -965,7 +944,7 @@ class transaction_store_response final: public ::EmbeddedProto::MessageInterface
         ~response() {}
         reserved_rpc reserved_;
         error_response<error_message_LENGTH, error_data_LENGTH> error_;
-        get_transactions_by_id_response<get_transactions_by_id_transactions_REP_LENGTH, get_transactions_by_id_transactions_transaction_id_LENGTH, get_transactions_by_id_transactions_transaction_active_LENGTH, get_transactions_by_id_transactions_transaction_signature_data_LENGTH, get_transactions_by_id_transactions_containing_blocks_REP_LENGTH, get_transactions_by_id_transactions_containing_blocks_LENGTH> get_transactions_by_id_;
+        get_contract_meta_response<get_contract_meta_meta_abi_LENGTH> get_contract_meta_;
       };
       response response_;
 
@@ -990,9 +969,9 @@ class transaction_store_response final: public ::EmbeddedProto::MessageInterface
             which_response_ = FieldNumber::ERROR;
             break;
 
-          case FieldNumber::GET_TRANSACTIONS_BY_ID:
-            new(&response_.get_transactions_by_id_) get_transactions_by_id_response<get_transactions_by_id_transactions_REP_LENGTH, get_transactions_by_id_transactions_transaction_id_LENGTH, get_transactions_by_id_transactions_transaction_active_LENGTH, get_transactions_by_id_transactions_transaction_signature_data_LENGTH, get_transactions_by_id_transactions_containing_blocks_REP_LENGTH, get_transactions_by_id_transactions_containing_blocks_LENGTH>;
-            which_response_ = FieldNumber::GET_TRANSACTIONS_BY_ID;
+          case FieldNumber::GET_CONTRACT_META:
+            new(&response_.get_contract_meta_) get_contract_meta_response<get_contract_meta_meta_abi_LENGTH>;
+            which_response_ = FieldNumber::GET_CONTRACT_META;
             break;
 
           default:
@@ -1012,8 +991,8 @@ class transaction_store_response final: public ::EmbeddedProto::MessageInterface
           case FieldNumber::ERROR:
             response_.error_.~error_response<error_message_LENGTH, error_data_LENGTH>(); // NOSONAR Unions require this.
             break;
-          case FieldNumber::GET_TRANSACTIONS_BY_ID:
-            response_.get_transactions_by_id_.~get_transactions_by_id_response<get_transactions_by_id_transactions_REP_LENGTH, get_transactions_by_id_transactions_transaction_id_LENGTH, get_transactions_by_id_transactions_transaction_active_LENGTH, get_transactions_by_id_transactions_transaction_signature_data_LENGTH, get_transactions_by_id_transactions_containing_blocks_REP_LENGTH, get_transactions_by_id_transactions_containing_blocks_LENGTH>(); // NOSONAR Unions require this.
+          case FieldNumber::GET_CONTRACT_META:
+            response_.get_contract_meta_.~get_contract_meta_response<get_contract_meta_meta_abi_LENGTH>(); // NOSONAR Unions require this.
             break;
           default:
             break;
@@ -1039,7 +1018,7 @@ class transaction_store_response final: public ::EmbeddedProto::MessageInterface
 
 };
 
-} // End of namespace transaction_store
+} // End of namespace contract_meta_store
 } // End of namespace rpc
 } // End of namespace koinos
-#endif // KOINOS_RPC_TRANSACTION_STORE_TRANSACTION_STORE_RPC_H
+#endif // KOINOS_RPC_CONTRACT_META_STORE_CONTRACT_META_STORE_RPC_H

@@ -52,7 +52,6 @@ namespace transaction_store {
 
 template<uint32_t transaction_id_LENGTH, 
 uint32_t transaction_active_LENGTH, 
-uint32_t transaction_passive_LENGTH, 
 uint32_t transaction_signature_data_LENGTH, 
 uint32_t containing_blocks_REP_LENGTH, 
 uint32_t containing_blocks_LENGTH>
@@ -96,11 +95,11 @@ class transaction_item final: public ::EmbeddedProto::MessageInterface
     }
 
     inline void clear_transaction() { transaction_.clear(); }
-    inline void set_transaction(const protocol::transaction<transaction_id_LENGTH, transaction_active_LENGTH, transaction_passive_LENGTH, transaction_signature_data_LENGTH>& value) { transaction_ = value; }
-    inline void set_transaction(const protocol::transaction<transaction_id_LENGTH, transaction_active_LENGTH, transaction_passive_LENGTH, transaction_signature_data_LENGTH>&& value) { transaction_ = value; }
-    inline protocol::transaction<transaction_id_LENGTH, transaction_active_LENGTH, transaction_passive_LENGTH, transaction_signature_data_LENGTH>& mutable_transaction() { return transaction_; }
-    inline const protocol::transaction<transaction_id_LENGTH, transaction_active_LENGTH, transaction_passive_LENGTH, transaction_signature_data_LENGTH>& get_transaction() const { return transaction_; }
-    inline const protocol::transaction<transaction_id_LENGTH, transaction_active_LENGTH, transaction_passive_LENGTH, transaction_signature_data_LENGTH>& transaction() const { return transaction_; }
+    inline void set_transaction(const protocol::transaction<transaction_id_LENGTH, transaction_active_LENGTH, transaction_signature_data_LENGTH>& value) { transaction_ = value; }
+    inline void set_transaction(const protocol::transaction<transaction_id_LENGTH, transaction_active_LENGTH, transaction_signature_data_LENGTH>&& value) { transaction_ = value; }
+    inline protocol::transaction<transaction_id_LENGTH, transaction_active_LENGTH, transaction_signature_data_LENGTH>& mutable_transaction() { return transaction_; }
+    inline const protocol::transaction<transaction_id_LENGTH, transaction_active_LENGTH, transaction_signature_data_LENGTH>& get_transaction() const { return transaction_; }
+    inline const protocol::transaction<transaction_id_LENGTH, transaction_active_LENGTH, transaction_signature_data_LENGTH>& transaction() const { return transaction_; }
 
     inline const ::EmbeddedProto::FieldBytes<containing_blocks_LENGTH>& containing_blocks(uint32_t index) const { return containing_blocks_[index]; }
     inline void clear_containing_blocks() { containing_blocks_.clear(); }
@@ -184,7 +183,7 @@ class transaction_item final: public ::EmbeddedProto::MessageInterface
     private:
 
 
-      protocol::transaction<transaction_id_LENGTH, transaction_active_LENGTH, transaction_passive_LENGTH, transaction_signature_data_LENGTH> transaction_;
+      protocol::transaction<transaction_id_LENGTH, transaction_active_LENGTH, transaction_signature_data_LENGTH> transaction_;
       ::EmbeddedProto::RepeatedFieldFixedSize<::EmbeddedProto::FieldBytes<containing_blocks_LENGTH>, containing_blocks_REP_LENGTH> containing_blocks_;
 
 };

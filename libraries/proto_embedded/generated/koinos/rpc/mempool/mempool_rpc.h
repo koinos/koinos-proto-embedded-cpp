@@ -54,7 +54,6 @@ namespace mempool {
 
 template<uint32_t transaction_id_LENGTH, 
 uint32_t transaction_active_LENGTH, 
-uint32_t transaction_passive_LENGTH, 
 uint32_t transaction_signature_data_LENGTH>
 class pending_transaction final: public ::EmbeddedProto::MessageInterface
 {
@@ -106,11 +105,11 @@ class pending_transaction final: public ::EmbeddedProto::MessageInterface
     }
 
     inline void clear_transaction() { transaction_.clear(); }
-    inline void set_transaction(const protocol::transaction<transaction_id_LENGTH, transaction_active_LENGTH, transaction_passive_LENGTH, transaction_signature_data_LENGTH>& value) { transaction_ = value; }
-    inline void set_transaction(const protocol::transaction<transaction_id_LENGTH, transaction_active_LENGTH, transaction_passive_LENGTH, transaction_signature_data_LENGTH>&& value) { transaction_ = value; }
-    inline protocol::transaction<transaction_id_LENGTH, transaction_active_LENGTH, transaction_passive_LENGTH, transaction_signature_data_LENGTH>& mutable_transaction() { return transaction_; }
-    inline const protocol::transaction<transaction_id_LENGTH, transaction_active_LENGTH, transaction_passive_LENGTH, transaction_signature_data_LENGTH>& get_transaction() const { return transaction_; }
-    inline const protocol::transaction<transaction_id_LENGTH, transaction_active_LENGTH, transaction_passive_LENGTH, transaction_signature_data_LENGTH>& transaction() const { return transaction_; }
+    inline void set_transaction(const protocol::transaction<transaction_id_LENGTH, transaction_active_LENGTH, transaction_signature_data_LENGTH>& value) { transaction_ = value; }
+    inline void set_transaction(const protocol::transaction<transaction_id_LENGTH, transaction_active_LENGTH, transaction_signature_data_LENGTH>&& value) { transaction_ = value; }
+    inline protocol::transaction<transaction_id_LENGTH, transaction_active_LENGTH, transaction_signature_data_LENGTH>& mutable_transaction() { return transaction_; }
+    inline const protocol::transaction<transaction_id_LENGTH, transaction_active_LENGTH, transaction_signature_data_LENGTH>& get_transaction() const { return transaction_; }
+    inline const protocol::transaction<transaction_id_LENGTH, transaction_active_LENGTH, transaction_signature_data_LENGTH>& transaction() const { return transaction_; }
 
     inline void clear_disk_storage_used() { disk_storage_used_.clear(); }
     inline void set_disk_storage_used(const EmbeddedProto::uint64& value) { disk_storage_used_ = value; }
@@ -224,7 +223,7 @@ class pending_transaction final: public ::EmbeddedProto::MessageInterface
     private:
 
 
-      protocol::transaction<transaction_id_LENGTH, transaction_active_LENGTH, transaction_passive_LENGTH, transaction_signature_data_LENGTH> transaction_;
+      protocol::transaction<transaction_id_LENGTH, transaction_active_LENGTH, transaction_signature_data_LENGTH> transaction_;
       EmbeddedProto::uint64 disk_storage_used_ = 0U;
       EmbeddedProto::uint64 network_bandwidth_used_ = 0U;
       EmbeddedProto::uint64 compute_bandwidth_used_ = 0U;
@@ -598,7 +597,6 @@ class get_pending_transactions_request final: public ::EmbeddedProto::MessageInt
 template<uint32_t pending_transactions_REP_LENGTH, 
 uint32_t pending_transactions_transaction_id_LENGTH, 
 uint32_t pending_transactions_transaction_active_LENGTH, 
-uint32_t pending_transactions_transaction_passive_LENGTH, 
 uint32_t pending_transactions_transaction_signature_data_LENGTH>
 class get_pending_transactions_response final: public ::EmbeddedProto::MessageInterface
 {
@@ -634,16 +632,16 @@ class get_pending_transactions_response final: public ::EmbeddedProto::MessageIn
       return *this;
     }
 
-    inline const pending_transaction<pending_transactions_transaction_id_LENGTH, pending_transactions_transaction_active_LENGTH, pending_transactions_transaction_passive_LENGTH, pending_transactions_transaction_signature_data_LENGTH>& pending_transactions(uint32_t index) const { return pending_transactions_[index]; }
+    inline const pending_transaction<pending_transactions_transaction_id_LENGTH, pending_transactions_transaction_active_LENGTH, pending_transactions_transaction_signature_data_LENGTH>& pending_transactions(uint32_t index) const { return pending_transactions_[index]; }
     inline void clear_pending_transactions() { pending_transactions_.clear(); }
-    inline void set_pending_transactions(uint32_t index, const pending_transaction<pending_transactions_transaction_id_LENGTH, pending_transactions_transaction_active_LENGTH, pending_transactions_transaction_passive_LENGTH, pending_transactions_transaction_signature_data_LENGTH>& value) { pending_transactions_.set(index, value); }
-    inline void set_pending_transactions(uint32_t index, const pending_transaction<pending_transactions_transaction_id_LENGTH, pending_transactions_transaction_active_LENGTH, pending_transactions_transaction_passive_LENGTH, pending_transactions_transaction_signature_data_LENGTH>&& value) { pending_transactions_.set(index, value); }
-    inline void set_pending_transactions(const ::EmbeddedProto::RepeatedFieldFixedSize<pending_transaction<pending_transactions_transaction_id_LENGTH, pending_transactions_transaction_active_LENGTH, pending_transactions_transaction_passive_LENGTH, pending_transactions_transaction_signature_data_LENGTH>, pending_transactions_REP_LENGTH>& values) { pending_transactions_ = values; }
-    inline void add_pending_transactions(const pending_transaction<pending_transactions_transaction_id_LENGTH, pending_transactions_transaction_active_LENGTH, pending_transactions_transaction_passive_LENGTH, pending_transactions_transaction_signature_data_LENGTH>& value) { pending_transactions_.add(value); }
-    inline ::EmbeddedProto::RepeatedFieldFixedSize<pending_transaction<pending_transactions_transaction_id_LENGTH, pending_transactions_transaction_active_LENGTH, pending_transactions_transaction_passive_LENGTH, pending_transactions_transaction_signature_data_LENGTH>, pending_transactions_REP_LENGTH>& mutable_pending_transactions() { return pending_transactions_; }
-    inline pending_transaction<pending_transactions_transaction_id_LENGTH, pending_transactions_transaction_active_LENGTH, pending_transactions_transaction_passive_LENGTH, pending_transactions_transaction_signature_data_LENGTH>& mutable_pending_transactions(uint32_t index) { return pending_transactions_[index]; }
-    inline const ::EmbeddedProto::RepeatedFieldFixedSize<pending_transaction<pending_transactions_transaction_id_LENGTH, pending_transactions_transaction_active_LENGTH, pending_transactions_transaction_passive_LENGTH, pending_transactions_transaction_signature_data_LENGTH>, pending_transactions_REP_LENGTH>& get_pending_transactions() const { return pending_transactions_; }
-    inline const ::EmbeddedProto::RepeatedFieldFixedSize<pending_transaction<pending_transactions_transaction_id_LENGTH, pending_transactions_transaction_active_LENGTH, pending_transactions_transaction_passive_LENGTH, pending_transactions_transaction_signature_data_LENGTH>, pending_transactions_REP_LENGTH>& pending_transactions() const { return pending_transactions_; }
+    inline void set_pending_transactions(uint32_t index, const pending_transaction<pending_transactions_transaction_id_LENGTH, pending_transactions_transaction_active_LENGTH, pending_transactions_transaction_signature_data_LENGTH>& value) { pending_transactions_.set(index, value); }
+    inline void set_pending_transactions(uint32_t index, const pending_transaction<pending_transactions_transaction_id_LENGTH, pending_transactions_transaction_active_LENGTH, pending_transactions_transaction_signature_data_LENGTH>&& value) { pending_transactions_.set(index, value); }
+    inline void set_pending_transactions(const ::EmbeddedProto::RepeatedFieldFixedSize<pending_transaction<pending_transactions_transaction_id_LENGTH, pending_transactions_transaction_active_LENGTH, pending_transactions_transaction_signature_data_LENGTH>, pending_transactions_REP_LENGTH>& values) { pending_transactions_ = values; }
+    inline void add_pending_transactions(const pending_transaction<pending_transactions_transaction_id_LENGTH, pending_transactions_transaction_active_LENGTH, pending_transactions_transaction_signature_data_LENGTH>& value) { pending_transactions_.add(value); }
+    inline ::EmbeddedProto::RepeatedFieldFixedSize<pending_transaction<pending_transactions_transaction_id_LENGTH, pending_transactions_transaction_active_LENGTH, pending_transactions_transaction_signature_data_LENGTH>, pending_transactions_REP_LENGTH>& mutable_pending_transactions() { return pending_transactions_; }
+    inline pending_transaction<pending_transactions_transaction_id_LENGTH, pending_transactions_transaction_active_LENGTH, pending_transactions_transaction_signature_data_LENGTH>& mutable_pending_transactions(uint32_t index) { return pending_transactions_[index]; }
+    inline const ::EmbeddedProto::RepeatedFieldFixedSize<pending_transaction<pending_transactions_transaction_id_LENGTH, pending_transactions_transaction_active_LENGTH, pending_transactions_transaction_signature_data_LENGTH>, pending_transactions_REP_LENGTH>& get_pending_transactions() const { return pending_transactions_; }
+    inline const ::EmbeddedProto::RepeatedFieldFixedSize<pending_transaction<pending_transactions_transaction_id_LENGTH, pending_transactions_transaction_active_LENGTH, pending_transactions_transaction_signature_data_LENGTH>, pending_transactions_REP_LENGTH>& pending_transactions() const { return pending_transactions_; }
 
 
     ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
@@ -706,7 +704,7 @@ class get_pending_transactions_response final: public ::EmbeddedProto::MessageIn
     private:
 
 
-      ::EmbeddedProto::RepeatedFieldFixedSize<pending_transaction<pending_transactions_transaction_id_LENGTH, pending_transactions_transaction_active_LENGTH, pending_transactions_transaction_passive_LENGTH, pending_transactions_transaction_signature_data_LENGTH>, pending_transactions_REP_LENGTH> pending_transactions_;
+      ::EmbeddedProto::RepeatedFieldFixedSize<pending_transaction<pending_transactions_transaction_id_LENGTH, pending_transactions_transaction_active_LENGTH, pending_transactions_transaction_signature_data_LENGTH>, pending_transactions_REP_LENGTH> pending_transactions_;
 
 };
 
@@ -1127,7 +1125,6 @@ uint32_t error_data_LENGTH,
 uint32_t get_pending_transactions_pending_transactions_REP_LENGTH, 
 uint32_t get_pending_transactions_pending_transactions_transaction_id_LENGTH, 
 uint32_t get_pending_transactions_pending_transactions_transaction_active_LENGTH, 
-uint32_t get_pending_transactions_pending_transactions_transaction_passive_LENGTH, 
 uint32_t get_pending_transactions_pending_transactions_transaction_signature_data_LENGTH>
 class mempool_response final: public ::EmbeddedProto::MessageInterface
 {
@@ -1386,10 +1383,10 @@ class mempool_response final: public ::EmbeddedProto::MessageInterface
       if(FieldNumber::GET_PENDING_TRANSACTIONS == which_response_)
       {
         which_response_ = FieldNumber::NOT_SET;
-        response_.get_pending_transactions_.~get_pending_transactions_response<get_pending_transactions_pending_transactions_REP_LENGTH, get_pending_transactions_pending_transactions_transaction_id_LENGTH, get_pending_transactions_pending_transactions_transaction_active_LENGTH, get_pending_transactions_pending_transactions_transaction_passive_LENGTH, get_pending_transactions_pending_transactions_transaction_signature_data_LENGTH>();
+        response_.get_pending_transactions_.~get_pending_transactions_response<get_pending_transactions_pending_transactions_REP_LENGTH, get_pending_transactions_pending_transactions_transaction_id_LENGTH, get_pending_transactions_pending_transactions_transaction_active_LENGTH, get_pending_transactions_pending_transactions_transaction_signature_data_LENGTH>();
       }
     }
-    inline void set_get_pending_transactions(const get_pending_transactions_response<get_pending_transactions_pending_transactions_REP_LENGTH, get_pending_transactions_pending_transactions_transaction_id_LENGTH, get_pending_transactions_pending_transactions_transaction_active_LENGTH, get_pending_transactions_pending_transactions_transaction_passive_LENGTH, get_pending_transactions_pending_transactions_transaction_signature_data_LENGTH>& value)
+    inline void set_get_pending_transactions(const get_pending_transactions_response<get_pending_transactions_pending_transactions_REP_LENGTH, get_pending_transactions_pending_transactions_transaction_id_LENGTH, get_pending_transactions_pending_transactions_transaction_active_LENGTH, get_pending_transactions_pending_transactions_transaction_signature_data_LENGTH>& value)
     {
       if(FieldNumber::GET_PENDING_TRANSACTIONS != which_response_)
       {
@@ -1397,7 +1394,7 @@ class mempool_response final: public ::EmbeddedProto::MessageInterface
       }
       response_.get_pending_transactions_ = value;
     }
-    inline void set_get_pending_transactions(const get_pending_transactions_response<get_pending_transactions_pending_transactions_REP_LENGTH, get_pending_transactions_pending_transactions_transaction_id_LENGTH, get_pending_transactions_pending_transactions_transaction_active_LENGTH, get_pending_transactions_pending_transactions_transaction_passive_LENGTH, get_pending_transactions_pending_transactions_transaction_signature_data_LENGTH>&& value)
+    inline void set_get_pending_transactions(const get_pending_transactions_response<get_pending_transactions_pending_transactions_REP_LENGTH, get_pending_transactions_pending_transactions_transaction_id_LENGTH, get_pending_transactions_pending_transactions_transaction_active_LENGTH, get_pending_transactions_pending_transactions_transaction_signature_data_LENGTH>&& value)
     {
       if(FieldNumber::GET_PENDING_TRANSACTIONS != which_response_)
       {
@@ -1405,7 +1402,7 @@ class mempool_response final: public ::EmbeddedProto::MessageInterface
       }
       response_.get_pending_transactions_ = value;
     }
-    inline get_pending_transactions_response<get_pending_transactions_pending_transactions_REP_LENGTH, get_pending_transactions_pending_transactions_transaction_id_LENGTH, get_pending_transactions_pending_transactions_transaction_active_LENGTH, get_pending_transactions_pending_transactions_transaction_passive_LENGTH, get_pending_transactions_pending_transactions_transaction_signature_data_LENGTH>& mutable_get_pending_transactions()
+    inline get_pending_transactions_response<get_pending_transactions_pending_transactions_REP_LENGTH, get_pending_transactions_pending_transactions_transaction_id_LENGTH, get_pending_transactions_pending_transactions_transaction_active_LENGTH, get_pending_transactions_pending_transactions_transaction_signature_data_LENGTH>& mutable_get_pending_transactions()
     {
       if(FieldNumber::GET_PENDING_TRANSACTIONS != which_response_)
       {
@@ -1413,8 +1410,8 @@ class mempool_response final: public ::EmbeddedProto::MessageInterface
       }
       return response_.get_pending_transactions_;
     }
-    inline const get_pending_transactions_response<get_pending_transactions_pending_transactions_REP_LENGTH, get_pending_transactions_pending_transactions_transaction_id_LENGTH, get_pending_transactions_pending_transactions_transaction_active_LENGTH, get_pending_transactions_pending_transactions_transaction_passive_LENGTH, get_pending_transactions_pending_transactions_transaction_signature_data_LENGTH>& get_get_pending_transactions() const { return response_.get_pending_transactions_; }
-    inline const get_pending_transactions_response<get_pending_transactions_pending_transactions_REP_LENGTH, get_pending_transactions_pending_transactions_transaction_id_LENGTH, get_pending_transactions_pending_transactions_transaction_active_LENGTH, get_pending_transactions_pending_transactions_transaction_passive_LENGTH, get_pending_transactions_pending_transactions_transaction_signature_data_LENGTH>& get_pending_transactions() const { return response_.get_pending_transactions_; }
+    inline const get_pending_transactions_response<get_pending_transactions_pending_transactions_REP_LENGTH, get_pending_transactions_pending_transactions_transaction_id_LENGTH, get_pending_transactions_pending_transactions_transaction_active_LENGTH, get_pending_transactions_pending_transactions_transaction_signature_data_LENGTH>& get_get_pending_transactions() const { return response_.get_pending_transactions_; }
+    inline const get_pending_transactions_response<get_pending_transactions_pending_transactions_REP_LENGTH, get_pending_transactions_pending_transactions_transaction_id_LENGTH, get_pending_transactions_pending_transactions_transaction_active_LENGTH, get_pending_transactions_pending_transactions_transaction_signature_data_LENGTH>& get_pending_transactions() const { return response_.get_pending_transactions_; }
 
 
     ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
@@ -1531,7 +1528,7 @@ class mempool_response final: public ::EmbeddedProto::MessageInterface
         reserved_rpc reserved_;
         error_response<error_message_LENGTH, error_data_LENGTH> error_;
         check_pending_account_resources_response check_pending_account_resources_;
-        get_pending_transactions_response<get_pending_transactions_pending_transactions_REP_LENGTH, get_pending_transactions_pending_transactions_transaction_id_LENGTH, get_pending_transactions_pending_transactions_transaction_active_LENGTH, get_pending_transactions_pending_transactions_transaction_passive_LENGTH, get_pending_transactions_pending_transactions_transaction_signature_data_LENGTH> get_pending_transactions_;
+        get_pending_transactions_response<get_pending_transactions_pending_transactions_REP_LENGTH, get_pending_transactions_pending_transactions_transaction_id_LENGTH, get_pending_transactions_pending_transactions_transaction_active_LENGTH, get_pending_transactions_pending_transactions_transaction_signature_data_LENGTH> get_pending_transactions_;
       };
       response response_;
 
@@ -1562,7 +1559,7 @@ class mempool_response final: public ::EmbeddedProto::MessageInterface
             break;
 
           case FieldNumber::GET_PENDING_TRANSACTIONS:
-            new(&response_.get_pending_transactions_) get_pending_transactions_response<get_pending_transactions_pending_transactions_REP_LENGTH, get_pending_transactions_pending_transactions_transaction_id_LENGTH, get_pending_transactions_pending_transactions_transaction_active_LENGTH, get_pending_transactions_pending_transactions_transaction_passive_LENGTH, get_pending_transactions_pending_transactions_transaction_signature_data_LENGTH>;
+            new(&response_.get_pending_transactions_) get_pending_transactions_response<get_pending_transactions_pending_transactions_REP_LENGTH, get_pending_transactions_pending_transactions_transaction_id_LENGTH, get_pending_transactions_pending_transactions_transaction_active_LENGTH, get_pending_transactions_pending_transactions_transaction_signature_data_LENGTH>;
             which_response_ = FieldNumber::GET_PENDING_TRANSACTIONS;
             break;
 
@@ -1587,7 +1584,7 @@ class mempool_response final: public ::EmbeddedProto::MessageInterface
             response_.check_pending_account_resources_.~check_pending_account_resources_response(); // NOSONAR Unions require this.
             break;
           case FieldNumber::GET_PENDING_TRANSACTIONS:
-            response_.get_pending_transactions_.~get_pending_transactions_response<get_pending_transactions_pending_transactions_REP_LENGTH, get_pending_transactions_pending_transactions_transaction_id_LENGTH, get_pending_transactions_pending_transactions_transaction_active_LENGTH, get_pending_transactions_pending_transactions_transaction_passive_LENGTH, get_pending_transactions_pending_transactions_transaction_signature_data_LENGTH>(); // NOSONAR Unions require this.
+            response_.get_pending_transactions_.~get_pending_transactions_response<get_pending_transactions_pending_transactions_REP_LENGTH, get_pending_transactions_pending_transactions_transaction_id_LENGTH, get_pending_transactions_pending_transactions_transaction_active_LENGTH, get_pending_transactions_pending_transactions_transaction_signature_data_LENGTH>(); // NOSONAR Unions require this.
             break;
           default:
             break;

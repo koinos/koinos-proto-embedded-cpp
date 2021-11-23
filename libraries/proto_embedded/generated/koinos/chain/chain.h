@@ -1548,12 +1548,10 @@ class verify_merkle_root_result final: public ::EmbeddedProto::MessageInterface
 template<uint32_t block_id_LENGTH, 
 uint32_t block_header_previous_LENGTH, 
 uint32_t block_active_LENGTH, 
-uint32_t block_passive_LENGTH, 
 uint32_t block_signature_data_LENGTH, 
 uint32_t block_transactions_REP_LENGTH, 
 uint32_t block_transactions_id_LENGTH, 
 uint32_t block_transactions_active_LENGTH, 
-uint32_t block_transactions_passive_LENGTH, 
 uint32_t block_transactions_signature_data_LENGTH>
 class apply_block_arguments final: public ::EmbeddedProto::MessageInterface
 {
@@ -1605,11 +1603,11 @@ class apply_block_arguments final: public ::EmbeddedProto::MessageInterface
     }
 
     inline void clear_block() { block_.clear(); }
-    inline void set_block(const protocol::block<block_id_LENGTH, block_header_previous_LENGTH, block_active_LENGTH, block_passive_LENGTH, block_signature_data_LENGTH, block_transactions_REP_LENGTH, block_transactions_id_LENGTH, block_transactions_active_LENGTH, block_transactions_passive_LENGTH, block_transactions_signature_data_LENGTH>& value) { block_ = value; }
-    inline void set_block(const protocol::block<block_id_LENGTH, block_header_previous_LENGTH, block_active_LENGTH, block_passive_LENGTH, block_signature_data_LENGTH, block_transactions_REP_LENGTH, block_transactions_id_LENGTH, block_transactions_active_LENGTH, block_transactions_passive_LENGTH, block_transactions_signature_data_LENGTH>&& value) { block_ = value; }
-    inline protocol::block<block_id_LENGTH, block_header_previous_LENGTH, block_active_LENGTH, block_passive_LENGTH, block_signature_data_LENGTH, block_transactions_REP_LENGTH, block_transactions_id_LENGTH, block_transactions_active_LENGTH, block_transactions_passive_LENGTH, block_transactions_signature_data_LENGTH>& mutable_block() { return block_; }
-    inline const protocol::block<block_id_LENGTH, block_header_previous_LENGTH, block_active_LENGTH, block_passive_LENGTH, block_signature_data_LENGTH, block_transactions_REP_LENGTH, block_transactions_id_LENGTH, block_transactions_active_LENGTH, block_transactions_passive_LENGTH, block_transactions_signature_data_LENGTH>& get_block() const { return block_; }
-    inline const protocol::block<block_id_LENGTH, block_header_previous_LENGTH, block_active_LENGTH, block_passive_LENGTH, block_signature_data_LENGTH, block_transactions_REP_LENGTH, block_transactions_id_LENGTH, block_transactions_active_LENGTH, block_transactions_passive_LENGTH, block_transactions_signature_data_LENGTH>& block() const { return block_; }
+    inline void set_block(const protocol::block<block_id_LENGTH, block_header_previous_LENGTH, block_active_LENGTH, block_signature_data_LENGTH, block_transactions_REP_LENGTH, block_transactions_id_LENGTH, block_transactions_active_LENGTH, block_transactions_signature_data_LENGTH>& value) { block_ = value; }
+    inline void set_block(const protocol::block<block_id_LENGTH, block_header_previous_LENGTH, block_active_LENGTH, block_signature_data_LENGTH, block_transactions_REP_LENGTH, block_transactions_id_LENGTH, block_transactions_active_LENGTH, block_transactions_signature_data_LENGTH>&& value) { block_ = value; }
+    inline protocol::block<block_id_LENGTH, block_header_previous_LENGTH, block_active_LENGTH, block_signature_data_LENGTH, block_transactions_REP_LENGTH, block_transactions_id_LENGTH, block_transactions_active_LENGTH, block_transactions_signature_data_LENGTH>& mutable_block() { return block_; }
+    inline const protocol::block<block_id_LENGTH, block_header_previous_LENGTH, block_active_LENGTH, block_signature_data_LENGTH, block_transactions_REP_LENGTH, block_transactions_id_LENGTH, block_transactions_active_LENGTH, block_transactions_signature_data_LENGTH>& get_block() const { return block_; }
+    inline const protocol::block<block_id_LENGTH, block_header_previous_LENGTH, block_active_LENGTH, block_signature_data_LENGTH, block_transactions_REP_LENGTH, block_transactions_id_LENGTH, block_transactions_active_LENGTH, block_transactions_signature_data_LENGTH>& block() const { return block_; }
 
     inline void clear_check_passive_data() { check_passive_data_.clear(); }
     inline void set_check_passive_data(const EmbeddedProto::boolean& value) { check_passive_data_ = value; }
@@ -1723,7 +1721,7 @@ class apply_block_arguments final: public ::EmbeddedProto::MessageInterface
     private:
 
 
-      protocol::block<block_id_LENGTH, block_header_previous_LENGTH, block_active_LENGTH, block_passive_LENGTH, block_signature_data_LENGTH, block_transactions_REP_LENGTH, block_transactions_id_LENGTH, block_transactions_active_LENGTH, block_transactions_passive_LENGTH, block_transactions_signature_data_LENGTH> block_;
+      protocol::block<block_id_LENGTH, block_header_previous_LENGTH, block_active_LENGTH, block_signature_data_LENGTH, block_transactions_REP_LENGTH, block_transactions_id_LENGTH, block_transactions_active_LENGTH, block_transactions_signature_data_LENGTH> block_;
       EmbeddedProto::boolean check_passive_data_ = false;
       EmbeddedProto::boolean check_block_signature_ = false;
       EmbeddedProto::boolean check_transaction_signature_ = false;
@@ -1815,7 +1813,6 @@ class apply_block_result final: public ::EmbeddedProto::MessageInterface
 
 template<uint32_t transaction_id_LENGTH, 
 uint32_t transaction_active_LENGTH, 
-uint32_t transaction_passive_LENGTH, 
 uint32_t transaction_signature_data_LENGTH>
 class apply_transaction_arguments final: public ::EmbeddedProto::MessageInterface
 {
@@ -1852,11 +1849,11 @@ class apply_transaction_arguments final: public ::EmbeddedProto::MessageInterfac
     }
 
     inline void clear_transaction() { transaction_.clear(); }
-    inline void set_transaction(const protocol::transaction<transaction_id_LENGTH, transaction_active_LENGTH, transaction_passive_LENGTH, transaction_signature_data_LENGTH>& value) { transaction_ = value; }
-    inline void set_transaction(const protocol::transaction<transaction_id_LENGTH, transaction_active_LENGTH, transaction_passive_LENGTH, transaction_signature_data_LENGTH>&& value) { transaction_ = value; }
-    inline protocol::transaction<transaction_id_LENGTH, transaction_active_LENGTH, transaction_passive_LENGTH, transaction_signature_data_LENGTH>& mutable_transaction() { return transaction_; }
-    inline const protocol::transaction<transaction_id_LENGTH, transaction_active_LENGTH, transaction_passive_LENGTH, transaction_signature_data_LENGTH>& get_transaction() const { return transaction_; }
-    inline const protocol::transaction<transaction_id_LENGTH, transaction_active_LENGTH, transaction_passive_LENGTH, transaction_signature_data_LENGTH>& transaction() const { return transaction_; }
+    inline void set_transaction(const protocol::transaction<transaction_id_LENGTH, transaction_active_LENGTH, transaction_signature_data_LENGTH>& value) { transaction_ = value; }
+    inline void set_transaction(const protocol::transaction<transaction_id_LENGTH, transaction_active_LENGTH, transaction_signature_data_LENGTH>&& value) { transaction_ = value; }
+    inline protocol::transaction<transaction_id_LENGTH, transaction_active_LENGTH, transaction_signature_data_LENGTH>& mutable_transaction() { return transaction_; }
+    inline const protocol::transaction<transaction_id_LENGTH, transaction_active_LENGTH, transaction_signature_data_LENGTH>& get_transaction() const { return transaction_; }
+    inline const protocol::transaction<transaction_id_LENGTH, transaction_active_LENGTH, transaction_signature_data_LENGTH>& transaction() const { return transaction_; }
 
 
     ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
@@ -1919,7 +1916,7 @@ class apply_transaction_arguments final: public ::EmbeddedProto::MessageInterfac
     private:
 
 
-      protocol::transaction<transaction_id_LENGTH, transaction_active_LENGTH, transaction_passive_LENGTH, transaction_signature_data_LENGTH> transaction_;
+      protocol::transaction<transaction_id_LENGTH, transaction_active_LENGTH, transaction_signature_data_LENGTH> transaction_;
 
 };
 
@@ -2007,7 +2004,8 @@ class apply_transaction_result final: public ::EmbeddedProto::MessageInterface
 };
 
 template<uint32_t op_contract_id_LENGTH, 
-uint32_t op_bytecode_LENGTH>
+uint32_t op_bytecode_LENGTH, 
+uint32_t op_abi_LENGTH>
 class apply_upload_contract_operation_arguments final: public ::EmbeddedProto::MessageInterface
 {
   public:
@@ -2043,11 +2041,11 @@ class apply_upload_contract_operation_arguments final: public ::EmbeddedProto::M
     }
 
     inline void clear_op() { op_.clear(); }
-    inline void set_op(const protocol::upload_contract_operation<op_contract_id_LENGTH, op_bytecode_LENGTH>& value) { op_ = value; }
-    inline void set_op(const protocol::upload_contract_operation<op_contract_id_LENGTH, op_bytecode_LENGTH>&& value) { op_ = value; }
-    inline protocol::upload_contract_operation<op_contract_id_LENGTH, op_bytecode_LENGTH>& mutable_op() { return op_; }
-    inline const protocol::upload_contract_operation<op_contract_id_LENGTH, op_bytecode_LENGTH>& get_op() const { return op_; }
-    inline const protocol::upload_contract_operation<op_contract_id_LENGTH, op_bytecode_LENGTH>& op() const { return op_; }
+    inline void set_op(const protocol::upload_contract_operation<op_contract_id_LENGTH, op_bytecode_LENGTH, op_abi_LENGTH>& value) { op_ = value; }
+    inline void set_op(const protocol::upload_contract_operation<op_contract_id_LENGTH, op_bytecode_LENGTH, op_abi_LENGTH>&& value) { op_ = value; }
+    inline protocol::upload_contract_operation<op_contract_id_LENGTH, op_bytecode_LENGTH, op_abi_LENGTH>& mutable_op() { return op_; }
+    inline const protocol::upload_contract_operation<op_contract_id_LENGTH, op_bytecode_LENGTH, op_abi_LENGTH>& get_op() const { return op_; }
+    inline const protocol::upload_contract_operation<op_contract_id_LENGTH, op_bytecode_LENGTH, op_abi_LENGTH>& op() const { return op_; }
 
 
     ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
@@ -2110,7 +2108,7 @@ class apply_upload_contract_operation_arguments final: public ::EmbeddedProto::M
     private:
 
 
-      protocol::upload_contract_operation<op_contract_id_LENGTH, op_bytecode_LENGTH> op_;
+      protocol::upload_contract_operation<op_contract_id_LENGTH, op_bytecode_LENGTH, op_abi_LENGTH> op_;
 
 };
 
@@ -5503,7 +5501,6 @@ class recover_public_key_result final: public ::EmbeddedProto::MessageInterface
 
 template<uint32_t transaction_id_LENGTH, 
 uint32_t transaction_active_LENGTH, 
-uint32_t transaction_passive_LENGTH, 
 uint32_t transaction_signature_data_LENGTH>
 class get_transaction_payer_arguments final: public ::EmbeddedProto::MessageInterface
 {
@@ -5540,11 +5537,11 @@ class get_transaction_payer_arguments final: public ::EmbeddedProto::MessageInte
     }
 
     inline void clear_transaction() { transaction_.clear(); }
-    inline void set_transaction(const protocol::transaction<transaction_id_LENGTH, transaction_active_LENGTH, transaction_passive_LENGTH, transaction_signature_data_LENGTH>& value) { transaction_ = value; }
-    inline void set_transaction(const protocol::transaction<transaction_id_LENGTH, transaction_active_LENGTH, transaction_passive_LENGTH, transaction_signature_data_LENGTH>&& value) { transaction_ = value; }
-    inline protocol::transaction<transaction_id_LENGTH, transaction_active_LENGTH, transaction_passive_LENGTH, transaction_signature_data_LENGTH>& mutable_transaction() { return transaction_; }
-    inline const protocol::transaction<transaction_id_LENGTH, transaction_active_LENGTH, transaction_passive_LENGTH, transaction_signature_data_LENGTH>& get_transaction() const { return transaction_; }
-    inline const protocol::transaction<transaction_id_LENGTH, transaction_active_LENGTH, transaction_passive_LENGTH, transaction_signature_data_LENGTH>& transaction() const { return transaction_; }
+    inline void set_transaction(const protocol::transaction<transaction_id_LENGTH, transaction_active_LENGTH, transaction_signature_data_LENGTH>& value) { transaction_ = value; }
+    inline void set_transaction(const protocol::transaction<transaction_id_LENGTH, transaction_active_LENGTH, transaction_signature_data_LENGTH>&& value) { transaction_ = value; }
+    inline protocol::transaction<transaction_id_LENGTH, transaction_active_LENGTH, transaction_signature_data_LENGTH>& mutable_transaction() { return transaction_; }
+    inline const protocol::transaction<transaction_id_LENGTH, transaction_active_LENGTH, transaction_signature_data_LENGTH>& get_transaction() const { return transaction_; }
+    inline const protocol::transaction<transaction_id_LENGTH, transaction_active_LENGTH, transaction_signature_data_LENGTH>& transaction() const { return transaction_; }
 
 
     ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
@@ -5607,7 +5604,7 @@ class get_transaction_payer_arguments final: public ::EmbeddedProto::MessageInte
     private:
 
 
-      protocol::transaction<transaction_id_LENGTH, transaction_active_LENGTH, transaction_passive_LENGTH, transaction_signature_data_LENGTH> transaction_;
+      protocol::transaction<transaction_id_LENGTH, transaction_active_LENGTH, transaction_signature_data_LENGTH> transaction_;
 
 };
 
@@ -6613,7 +6610,6 @@ class consume_block_resources_result final: public ::EmbeddedProto::MessageInter
 
 template<uint32_t transaction_id_LENGTH, 
 uint32_t transaction_active_LENGTH, 
-uint32_t transaction_passive_LENGTH, 
 uint32_t transaction_signature_data_LENGTH>
 class get_transaction_rc_limit_arguments final: public ::EmbeddedProto::MessageInterface
 {
@@ -6650,11 +6646,11 @@ class get_transaction_rc_limit_arguments final: public ::EmbeddedProto::MessageI
     }
 
     inline void clear_transaction() { transaction_.clear(); }
-    inline void set_transaction(const protocol::transaction<transaction_id_LENGTH, transaction_active_LENGTH, transaction_passive_LENGTH, transaction_signature_data_LENGTH>& value) { transaction_ = value; }
-    inline void set_transaction(const protocol::transaction<transaction_id_LENGTH, transaction_active_LENGTH, transaction_passive_LENGTH, transaction_signature_data_LENGTH>&& value) { transaction_ = value; }
-    inline protocol::transaction<transaction_id_LENGTH, transaction_active_LENGTH, transaction_passive_LENGTH, transaction_signature_data_LENGTH>& mutable_transaction() { return transaction_; }
-    inline const protocol::transaction<transaction_id_LENGTH, transaction_active_LENGTH, transaction_passive_LENGTH, transaction_signature_data_LENGTH>& get_transaction() const { return transaction_; }
-    inline const protocol::transaction<transaction_id_LENGTH, transaction_active_LENGTH, transaction_passive_LENGTH, transaction_signature_data_LENGTH>& transaction() const { return transaction_; }
+    inline void set_transaction(const protocol::transaction<transaction_id_LENGTH, transaction_active_LENGTH, transaction_signature_data_LENGTH>& value) { transaction_ = value; }
+    inline void set_transaction(const protocol::transaction<transaction_id_LENGTH, transaction_active_LENGTH, transaction_signature_data_LENGTH>&& value) { transaction_ = value; }
+    inline protocol::transaction<transaction_id_LENGTH, transaction_active_LENGTH, transaction_signature_data_LENGTH>& mutable_transaction() { return transaction_; }
+    inline const protocol::transaction<transaction_id_LENGTH, transaction_active_LENGTH, transaction_signature_data_LENGTH>& get_transaction() const { return transaction_; }
+    inline const protocol::transaction<transaction_id_LENGTH, transaction_active_LENGTH, transaction_signature_data_LENGTH>& transaction() const { return transaction_; }
 
 
     ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
@@ -6717,7 +6713,7 @@ class get_transaction_rc_limit_arguments final: public ::EmbeddedProto::MessageI
     private:
 
 
-      protocol::transaction<transaction_id_LENGTH, transaction_active_LENGTH, transaction_passive_LENGTH, transaction_signature_data_LENGTH> transaction_;
+      protocol::transaction<transaction_id_LENGTH, transaction_active_LENGTH, transaction_signature_data_LENGTH> transaction_;
 
 };
 

@@ -217,12 +217,10 @@ uint32_t block_items_block_id_LENGTH,
 uint32_t block_items_block_id_LENGTH, 
 uint32_t block_items_block_header_previous_LENGTH, 
 uint32_t block_items_block_active_LENGTH, 
-uint32_t block_items_block_passive_LENGTH, 
 uint32_t block_items_block_signature_data_LENGTH, 
 uint32_t block_items_block_transactions_REP_LENGTH, 
 uint32_t block_items_block_transactions_id_LENGTH, 
 uint32_t block_items_block_transactions_active_LENGTH, 
-uint32_t block_items_block_transactions_passive_LENGTH, 
 uint32_t block_items_block_transactions_signature_data_LENGTH>
 class get_blocks_by_id_response final: public ::EmbeddedProto::MessageInterface
 {
@@ -258,16 +256,16 @@ class get_blocks_by_id_response final: public ::EmbeddedProto::MessageInterface
       return *this;
     }
 
-    inline const block_store::block_item<block_items_block_id_LENGTH, block_items_block_id_LENGTH, block_items_block_header_previous_LENGTH, block_items_block_active_LENGTH, block_items_block_passive_LENGTH, block_items_block_signature_data_LENGTH, block_items_block_transactions_REP_LENGTH, block_items_block_transactions_id_LENGTH, block_items_block_transactions_active_LENGTH, block_items_block_transactions_passive_LENGTH, block_items_block_transactions_signature_data_LENGTH>& block_items(uint32_t index) const { return block_items_[index]; }
+    inline const block_store::block_item<block_items_block_id_LENGTH, block_items_block_id_LENGTH, block_items_block_header_previous_LENGTH, block_items_block_active_LENGTH, block_items_block_signature_data_LENGTH, block_items_block_transactions_REP_LENGTH, block_items_block_transactions_id_LENGTH, block_items_block_transactions_active_LENGTH, block_items_block_transactions_signature_data_LENGTH>& block_items(uint32_t index) const { return block_items_[index]; }
     inline void clear_block_items() { block_items_.clear(); }
-    inline void set_block_items(uint32_t index, const block_store::block_item<block_items_block_id_LENGTH, block_items_block_id_LENGTH, block_items_block_header_previous_LENGTH, block_items_block_active_LENGTH, block_items_block_passive_LENGTH, block_items_block_signature_data_LENGTH, block_items_block_transactions_REP_LENGTH, block_items_block_transactions_id_LENGTH, block_items_block_transactions_active_LENGTH, block_items_block_transactions_passive_LENGTH, block_items_block_transactions_signature_data_LENGTH>& value) { block_items_.set(index, value); }
-    inline void set_block_items(uint32_t index, const block_store::block_item<block_items_block_id_LENGTH, block_items_block_id_LENGTH, block_items_block_header_previous_LENGTH, block_items_block_active_LENGTH, block_items_block_passive_LENGTH, block_items_block_signature_data_LENGTH, block_items_block_transactions_REP_LENGTH, block_items_block_transactions_id_LENGTH, block_items_block_transactions_active_LENGTH, block_items_block_transactions_passive_LENGTH, block_items_block_transactions_signature_data_LENGTH>&& value) { block_items_.set(index, value); }
-    inline void set_block_items(const ::EmbeddedProto::RepeatedFieldFixedSize<block_store::block_item<block_items_block_id_LENGTH, block_items_block_id_LENGTH, block_items_block_header_previous_LENGTH, block_items_block_active_LENGTH, block_items_block_passive_LENGTH, block_items_block_signature_data_LENGTH, block_items_block_transactions_REP_LENGTH, block_items_block_transactions_id_LENGTH, block_items_block_transactions_active_LENGTH, block_items_block_transactions_passive_LENGTH, block_items_block_transactions_signature_data_LENGTH>, block_items_REP_LENGTH>& values) { block_items_ = values; }
-    inline void add_block_items(const block_store::block_item<block_items_block_id_LENGTH, block_items_block_id_LENGTH, block_items_block_header_previous_LENGTH, block_items_block_active_LENGTH, block_items_block_passive_LENGTH, block_items_block_signature_data_LENGTH, block_items_block_transactions_REP_LENGTH, block_items_block_transactions_id_LENGTH, block_items_block_transactions_active_LENGTH, block_items_block_transactions_passive_LENGTH, block_items_block_transactions_signature_data_LENGTH>& value) { block_items_.add(value); }
-    inline ::EmbeddedProto::RepeatedFieldFixedSize<block_store::block_item<block_items_block_id_LENGTH, block_items_block_id_LENGTH, block_items_block_header_previous_LENGTH, block_items_block_active_LENGTH, block_items_block_passive_LENGTH, block_items_block_signature_data_LENGTH, block_items_block_transactions_REP_LENGTH, block_items_block_transactions_id_LENGTH, block_items_block_transactions_active_LENGTH, block_items_block_transactions_passive_LENGTH, block_items_block_transactions_signature_data_LENGTH>, block_items_REP_LENGTH>& mutable_block_items() { return block_items_; }
-    inline block_store::block_item<block_items_block_id_LENGTH, block_items_block_id_LENGTH, block_items_block_header_previous_LENGTH, block_items_block_active_LENGTH, block_items_block_passive_LENGTH, block_items_block_signature_data_LENGTH, block_items_block_transactions_REP_LENGTH, block_items_block_transactions_id_LENGTH, block_items_block_transactions_active_LENGTH, block_items_block_transactions_passive_LENGTH, block_items_block_transactions_signature_data_LENGTH>& mutable_block_items(uint32_t index) { return block_items_[index]; }
-    inline const ::EmbeddedProto::RepeatedFieldFixedSize<block_store::block_item<block_items_block_id_LENGTH, block_items_block_id_LENGTH, block_items_block_header_previous_LENGTH, block_items_block_active_LENGTH, block_items_block_passive_LENGTH, block_items_block_signature_data_LENGTH, block_items_block_transactions_REP_LENGTH, block_items_block_transactions_id_LENGTH, block_items_block_transactions_active_LENGTH, block_items_block_transactions_passive_LENGTH, block_items_block_transactions_signature_data_LENGTH>, block_items_REP_LENGTH>& get_block_items() const { return block_items_; }
-    inline const ::EmbeddedProto::RepeatedFieldFixedSize<block_store::block_item<block_items_block_id_LENGTH, block_items_block_id_LENGTH, block_items_block_header_previous_LENGTH, block_items_block_active_LENGTH, block_items_block_passive_LENGTH, block_items_block_signature_data_LENGTH, block_items_block_transactions_REP_LENGTH, block_items_block_transactions_id_LENGTH, block_items_block_transactions_active_LENGTH, block_items_block_transactions_passive_LENGTH, block_items_block_transactions_signature_data_LENGTH>, block_items_REP_LENGTH>& block_items() const { return block_items_; }
+    inline void set_block_items(uint32_t index, const block_store::block_item<block_items_block_id_LENGTH, block_items_block_id_LENGTH, block_items_block_header_previous_LENGTH, block_items_block_active_LENGTH, block_items_block_signature_data_LENGTH, block_items_block_transactions_REP_LENGTH, block_items_block_transactions_id_LENGTH, block_items_block_transactions_active_LENGTH, block_items_block_transactions_signature_data_LENGTH>& value) { block_items_.set(index, value); }
+    inline void set_block_items(uint32_t index, const block_store::block_item<block_items_block_id_LENGTH, block_items_block_id_LENGTH, block_items_block_header_previous_LENGTH, block_items_block_active_LENGTH, block_items_block_signature_data_LENGTH, block_items_block_transactions_REP_LENGTH, block_items_block_transactions_id_LENGTH, block_items_block_transactions_active_LENGTH, block_items_block_transactions_signature_data_LENGTH>&& value) { block_items_.set(index, value); }
+    inline void set_block_items(const ::EmbeddedProto::RepeatedFieldFixedSize<block_store::block_item<block_items_block_id_LENGTH, block_items_block_id_LENGTH, block_items_block_header_previous_LENGTH, block_items_block_active_LENGTH, block_items_block_signature_data_LENGTH, block_items_block_transactions_REP_LENGTH, block_items_block_transactions_id_LENGTH, block_items_block_transactions_active_LENGTH, block_items_block_transactions_signature_data_LENGTH>, block_items_REP_LENGTH>& values) { block_items_ = values; }
+    inline void add_block_items(const block_store::block_item<block_items_block_id_LENGTH, block_items_block_id_LENGTH, block_items_block_header_previous_LENGTH, block_items_block_active_LENGTH, block_items_block_signature_data_LENGTH, block_items_block_transactions_REP_LENGTH, block_items_block_transactions_id_LENGTH, block_items_block_transactions_active_LENGTH, block_items_block_transactions_signature_data_LENGTH>& value) { block_items_.add(value); }
+    inline ::EmbeddedProto::RepeatedFieldFixedSize<block_store::block_item<block_items_block_id_LENGTH, block_items_block_id_LENGTH, block_items_block_header_previous_LENGTH, block_items_block_active_LENGTH, block_items_block_signature_data_LENGTH, block_items_block_transactions_REP_LENGTH, block_items_block_transactions_id_LENGTH, block_items_block_transactions_active_LENGTH, block_items_block_transactions_signature_data_LENGTH>, block_items_REP_LENGTH>& mutable_block_items() { return block_items_; }
+    inline block_store::block_item<block_items_block_id_LENGTH, block_items_block_id_LENGTH, block_items_block_header_previous_LENGTH, block_items_block_active_LENGTH, block_items_block_signature_data_LENGTH, block_items_block_transactions_REP_LENGTH, block_items_block_transactions_id_LENGTH, block_items_block_transactions_active_LENGTH, block_items_block_transactions_signature_data_LENGTH>& mutable_block_items(uint32_t index) { return block_items_[index]; }
+    inline const ::EmbeddedProto::RepeatedFieldFixedSize<block_store::block_item<block_items_block_id_LENGTH, block_items_block_id_LENGTH, block_items_block_header_previous_LENGTH, block_items_block_active_LENGTH, block_items_block_signature_data_LENGTH, block_items_block_transactions_REP_LENGTH, block_items_block_transactions_id_LENGTH, block_items_block_transactions_active_LENGTH, block_items_block_transactions_signature_data_LENGTH>, block_items_REP_LENGTH>& get_block_items() const { return block_items_; }
+    inline const ::EmbeddedProto::RepeatedFieldFixedSize<block_store::block_item<block_items_block_id_LENGTH, block_items_block_id_LENGTH, block_items_block_header_previous_LENGTH, block_items_block_active_LENGTH, block_items_block_signature_data_LENGTH, block_items_block_transactions_REP_LENGTH, block_items_block_transactions_id_LENGTH, block_items_block_transactions_active_LENGTH, block_items_block_transactions_signature_data_LENGTH>, block_items_REP_LENGTH>& block_items() const { return block_items_; }
 
 
     ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
@@ -330,7 +328,7 @@ class get_blocks_by_id_response final: public ::EmbeddedProto::MessageInterface
     private:
 
 
-      ::EmbeddedProto::RepeatedFieldFixedSize<block_store::block_item<block_items_block_id_LENGTH, block_items_block_id_LENGTH, block_items_block_header_previous_LENGTH, block_items_block_active_LENGTH, block_items_block_passive_LENGTH, block_items_block_signature_data_LENGTH, block_items_block_transactions_REP_LENGTH, block_items_block_transactions_id_LENGTH, block_items_block_transactions_active_LENGTH, block_items_block_transactions_passive_LENGTH, block_items_block_transactions_signature_data_LENGTH>, block_items_REP_LENGTH> block_items_;
+      ::EmbeddedProto::RepeatedFieldFixedSize<block_store::block_item<block_items_block_id_LENGTH, block_items_block_id_LENGTH, block_items_block_header_previous_LENGTH, block_items_block_active_LENGTH, block_items_block_signature_data_LENGTH, block_items_block_transactions_REP_LENGTH, block_items_block_transactions_id_LENGTH, block_items_block_transactions_active_LENGTH, block_items_block_transactions_signature_data_LENGTH>, block_items_REP_LENGTH> block_items_;
 
 };
 
@@ -537,12 +535,10 @@ uint32_t block_items_block_id_LENGTH,
 uint32_t block_items_block_id_LENGTH, 
 uint32_t block_items_block_header_previous_LENGTH, 
 uint32_t block_items_block_active_LENGTH, 
-uint32_t block_items_block_passive_LENGTH, 
 uint32_t block_items_block_signature_data_LENGTH, 
 uint32_t block_items_block_transactions_REP_LENGTH, 
 uint32_t block_items_block_transactions_id_LENGTH, 
 uint32_t block_items_block_transactions_active_LENGTH, 
-uint32_t block_items_block_transactions_passive_LENGTH, 
 uint32_t block_items_block_transactions_signature_data_LENGTH>
 class get_blocks_by_height_response final: public ::EmbeddedProto::MessageInterface
 {
@@ -578,16 +574,16 @@ class get_blocks_by_height_response final: public ::EmbeddedProto::MessageInterf
       return *this;
     }
 
-    inline const block_store::block_item<block_items_block_id_LENGTH, block_items_block_id_LENGTH, block_items_block_header_previous_LENGTH, block_items_block_active_LENGTH, block_items_block_passive_LENGTH, block_items_block_signature_data_LENGTH, block_items_block_transactions_REP_LENGTH, block_items_block_transactions_id_LENGTH, block_items_block_transactions_active_LENGTH, block_items_block_transactions_passive_LENGTH, block_items_block_transactions_signature_data_LENGTH>& block_items(uint32_t index) const { return block_items_[index]; }
+    inline const block_store::block_item<block_items_block_id_LENGTH, block_items_block_id_LENGTH, block_items_block_header_previous_LENGTH, block_items_block_active_LENGTH, block_items_block_signature_data_LENGTH, block_items_block_transactions_REP_LENGTH, block_items_block_transactions_id_LENGTH, block_items_block_transactions_active_LENGTH, block_items_block_transactions_signature_data_LENGTH>& block_items(uint32_t index) const { return block_items_[index]; }
     inline void clear_block_items() { block_items_.clear(); }
-    inline void set_block_items(uint32_t index, const block_store::block_item<block_items_block_id_LENGTH, block_items_block_id_LENGTH, block_items_block_header_previous_LENGTH, block_items_block_active_LENGTH, block_items_block_passive_LENGTH, block_items_block_signature_data_LENGTH, block_items_block_transactions_REP_LENGTH, block_items_block_transactions_id_LENGTH, block_items_block_transactions_active_LENGTH, block_items_block_transactions_passive_LENGTH, block_items_block_transactions_signature_data_LENGTH>& value) { block_items_.set(index, value); }
-    inline void set_block_items(uint32_t index, const block_store::block_item<block_items_block_id_LENGTH, block_items_block_id_LENGTH, block_items_block_header_previous_LENGTH, block_items_block_active_LENGTH, block_items_block_passive_LENGTH, block_items_block_signature_data_LENGTH, block_items_block_transactions_REP_LENGTH, block_items_block_transactions_id_LENGTH, block_items_block_transactions_active_LENGTH, block_items_block_transactions_passive_LENGTH, block_items_block_transactions_signature_data_LENGTH>&& value) { block_items_.set(index, value); }
-    inline void set_block_items(const ::EmbeddedProto::RepeatedFieldFixedSize<block_store::block_item<block_items_block_id_LENGTH, block_items_block_id_LENGTH, block_items_block_header_previous_LENGTH, block_items_block_active_LENGTH, block_items_block_passive_LENGTH, block_items_block_signature_data_LENGTH, block_items_block_transactions_REP_LENGTH, block_items_block_transactions_id_LENGTH, block_items_block_transactions_active_LENGTH, block_items_block_transactions_passive_LENGTH, block_items_block_transactions_signature_data_LENGTH>, block_items_REP_LENGTH>& values) { block_items_ = values; }
-    inline void add_block_items(const block_store::block_item<block_items_block_id_LENGTH, block_items_block_id_LENGTH, block_items_block_header_previous_LENGTH, block_items_block_active_LENGTH, block_items_block_passive_LENGTH, block_items_block_signature_data_LENGTH, block_items_block_transactions_REP_LENGTH, block_items_block_transactions_id_LENGTH, block_items_block_transactions_active_LENGTH, block_items_block_transactions_passive_LENGTH, block_items_block_transactions_signature_data_LENGTH>& value) { block_items_.add(value); }
-    inline ::EmbeddedProto::RepeatedFieldFixedSize<block_store::block_item<block_items_block_id_LENGTH, block_items_block_id_LENGTH, block_items_block_header_previous_LENGTH, block_items_block_active_LENGTH, block_items_block_passive_LENGTH, block_items_block_signature_data_LENGTH, block_items_block_transactions_REP_LENGTH, block_items_block_transactions_id_LENGTH, block_items_block_transactions_active_LENGTH, block_items_block_transactions_passive_LENGTH, block_items_block_transactions_signature_data_LENGTH>, block_items_REP_LENGTH>& mutable_block_items() { return block_items_; }
-    inline block_store::block_item<block_items_block_id_LENGTH, block_items_block_id_LENGTH, block_items_block_header_previous_LENGTH, block_items_block_active_LENGTH, block_items_block_passive_LENGTH, block_items_block_signature_data_LENGTH, block_items_block_transactions_REP_LENGTH, block_items_block_transactions_id_LENGTH, block_items_block_transactions_active_LENGTH, block_items_block_transactions_passive_LENGTH, block_items_block_transactions_signature_data_LENGTH>& mutable_block_items(uint32_t index) { return block_items_[index]; }
-    inline const ::EmbeddedProto::RepeatedFieldFixedSize<block_store::block_item<block_items_block_id_LENGTH, block_items_block_id_LENGTH, block_items_block_header_previous_LENGTH, block_items_block_active_LENGTH, block_items_block_passive_LENGTH, block_items_block_signature_data_LENGTH, block_items_block_transactions_REP_LENGTH, block_items_block_transactions_id_LENGTH, block_items_block_transactions_active_LENGTH, block_items_block_transactions_passive_LENGTH, block_items_block_transactions_signature_data_LENGTH>, block_items_REP_LENGTH>& get_block_items() const { return block_items_; }
-    inline const ::EmbeddedProto::RepeatedFieldFixedSize<block_store::block_item<block_items_block_id_LENGTH, block_items_block_id_LENGTH, block_items_block_header_previous_LENGTH, block_items_block_active_LENGTH, block_items_block_passive_LENGTH, block_items_block_signature_data_LENGTH, block_items_block_transactions_REP_LENGTH, block_items_block_transactions_id_LENGTH, block_items_block_transactions_active_LENGTH, block_items_block_transactions_passive_LENGTH, block_items_block_transactions_signature_data_LENGTH>, block_items_REP_LENGTH>& block_items() const { return block_items_; }
+    inline void set_block_items(uint32_t index, const block_store::block_item<block_items_block_id_LENGTH, block_items_block_id_LENGTH, block_items_block_header_previous_LENGTH, block_items_block_active_LENGTH, block_items_block_signature_data_LENGTH, block_items_block_transactions_REP_LENGTH, block_items_block_transactions_id_LENGTH, block_items_block_transactions_active_LENGTH, block_items_block_transactions_signature_data_LENGTH>& value) { block_items_.set(index, value); }
+    inline void set_block_items(uint32_t index, const block_store::block_item<block_items_block_id_LENGTH, block_items_block_id_LENGTH, block_items_block_header_previous_LENGTH, block_items_block_active_LENGTH, block_items_block_signature_data_LENGTH, block_items_block_transactions_REP_LENGTH, block_items_block_transactions_id_LENGTH, block_items_block_transactions_active_LENGTH, block_items_block_transactions_signature_data_LENGTH>&& value) { block_items_.set(index, value); }
+    inline void set_block_items(const ::EmbeddedProto::RepeatedFieldFixedSize<block_store::block_item<block_items_block_id_LENGTH, block_items_block_id_LENGTH, block_items_block_header_previous_LENGTH, block_items_block_active_LENGTH, block_items_block_signature_data_LENGTH, block_items_block_transactions_REP_LENGTH, block_items_block_transactions_id_LENGTH, block_items_block_transactions_active_LENGTH, block_items_block_transactions_signature_data_LENGTH>, block_items_REP_LENGTH>& values) { block_items_ = values; }
+    inline void add_block_items(const block_store::block_item<block_items_block_id_LENGTH, block_items_block_id_LENGTH, block_items_block_header_previous_LENGTH, block_items_block_active_LENGTH, block_items_block_signature_data_LENGTH, block_items_block_transactions_REP_LENGTH, block_items_block_transactions_id_LENGTH, block_items_block_transactions_active_LENGTH, block_items_block_transactions_signature_data_LENGTH>& value) { block_items_.add(value); }
+    inline ::EmbeddedProto::RepeatedFieldFixedSize<block_store::block_item<block_items_block_id_LENGTH, block_items_block_id_LENGTH, block_items_block_header_previous_LENGTH, block_items_block_active_LENGTH, block_items_block_signature_data_LENGTH, block_items_block_transactions_REP_LENGTH, block_items_block_transactions_id_LENGTH, block_items_block_transactions_active_LENGTH, block_items_block_transactions_signature_data_LENGTH>, block_items_REP_LENGTH>& mutable_block_items() { return block_items_; }
+    inline block_store::block_item<block_items_block_id_LENGTH, block_items_block_id_LENGTH, block_items_block_header_previous_LENGTH, block_items_block_active_LENGTH, block_items_block_signature_data_LENGTH, block_items_block_transactions_REP_LENGTH, block_items_block_transactions_id_LENGTH, block_items_block_transactions_active_LENGTH, block_items_block_transactions_signature_data_LENGTH>& mutable_block_items(uint32_t index) { return block_items_[index]; }
+    inline const ::EmbeddedProto::RepeatedFieldFixedSize<block_store::block_item<block_items_block_id_LENGTH, block_items_block_id_LENGTH, block_items_block_header_previous_LENGTH, block_items_block_active_LENGTH, block_items_block_signature_data_LENGTH, block_items_block_transactions_REP_LENGTH, block_items_block_transactions_id_LENGTH, block_items_block_transactions_active_LENGTH, block_items_block_transactions_signature_data_LENGTH>, block_items_REP_LENGTH>& get_block_items() const { return block_items_; }
+    inline const ::EmbeddedProto::RepeatedFieldFixedSize<block_store::block_item<block_items_block_id_LENGTH, block_items_block_id_LENGTH, block_items_block_header_previous_LENGTH, block_items_block_active_LENGTH, block_items_block_signature_data_LENGTH, block_items_block_transactions_REP_LENGTH, block_items_block_transactions_id_LENGTH, block_items_block_transactions_active_LENGTH, block_items_block_transactions_signature_data_LENGTH>, block_items_REP_LENGTH>& block_items() const { return block_items_; }
 
 
     ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
@@ -650,19 +646,17 @@ class get_blocks_by_height_response final: public ::EmbeddedProto::MessageInterf
     private:
 
 
-      ::EmbeddedProto::RepeatedFieldFixedSize<block_store::block_item<block_items_block_id_LENGTH, block_items_block_id_LENGTH, block_items_block_header_previous_LENGTH, block_items_block_active_LENGTH, block_items_block_passive_LENGTH, block_items_block_signature_data_LENGTH, block_items_block_transactions_REP_LENGTH, block_items_block_transactions_id_LENGTH, block_items_block_transactions_active_LENGTH, block_items_block_transactions_passive_LENGTH, block_items_block_transactions_signature_data_LENGTH>, block_items_REP_LENGTH> block_items_;
+      ::EmbeddedProto::RepeatedFieldFixedSize<block_store::block_item<block_items_block_id_LENGTH, block_items_block_id_LENGTH, block_items_block_header_previous_LENGTH, block_items_block_active_LENGTH, block_items_block_signature_data_LENGTH, block_items_block_transactions_REP_LENGTH, block_items_block_transactions_id_LENGTH, block_items_block_transactions_active_LENGTH, block_items_block_transactions_signature_data_LENGTH>, block_items_REP_LENGTH> block_items_;
 
 };
 
 template<uint32_t block_to_add_id_LENGTH, 
 uint32_t block_to_add_header_previous_LENGTH, 
 uint32_t block_to_add_active_LENGTH, 
-uint32_t block_to_add_passive_LENGTH, 
 uint32_t block_to_add_signature_data_LENGTH, 
 uint32_t block_to_add_transactions_REP_LENGTH, 
 uint32_t block_to_add_transactions_id_LENGTH, 
 uint32_t block_to_add_transactions_active_LENGTH, 
-uint32_t block_to_add_transactions_passive_LENGTH, 
 uint32_t block_to_add_transactions_signature_data_LENGTH>
 class add_block_request final: public ::EmbeddedProto::MessageInterface
 {
@@ -699,11 +693,11 @@ class add_block_request final: public ::EmbeddedProto::MessageInterface
     }
 
     inline void clear_block_to_add() { block_to_add_.clear(); }
-    inline void set_block_to_add(const protocol::block<block_to_add_id_LENGTH, block_to_add_header_previous_LENGTH, block_to_add_active_LENGTH, block_to_add_passive_LENGTH, block_to_add_signature_data_LENGTH, block_to_add_transactions_REP_LENGTH, block_to_add_transactions_id_LENGTH, block_to_add_transactions_active_LENGTH, block_to_add_transactions_passive_LENGTH, block_to_add_transactions_signature_data_LENGTH>& value) { block_to_add_ = value; }
-    inline void set_block_to_add(const protocol::block<block_to_add_id_LENGTH, block_to_add_header_previous_LENGTH, block_to_add_active_LENGTH, block_to_add_passive_LENGTH, block_to_add_signature_data_LENGTH, block_to_add_transactions_REP_LENGTH, block_to_add_transactions_id_LENGTH, block_to_add_transactions_active_LENGTH, block_to_add_transactions_passive_LENGTH, block_to_add_transactions_signature_data_LENGTH>&& value) { block_to_add_ = value; }
-    inline protocol::block<block_to_add_id_LENGTH, block_to_add_header_previous_LENGTH, block_to_add_active_LENGTH, block_to_add_passive_LENGTH, block_to_add_signature_data_LENGTH, block_to_add_transactions_REP_LENGTH, block_to_add_transactions_id_LENGTH, block_to_add_transactions_active_LENGTH, block_to_add_transactions_passive_LENGTH, block_to_add_transactions_signature_data_LENGTH>& mutable_block_to_add() { return block_to_add_; }
-    inline const protocol::block<block_to_add_id_LENGTH, block_to_add_header_previous_LENGTH, block_to_add_active_LENGTH, block_to_add_passive_LENGTH, block_to_add_signature_data_LENGTH, block_to_add_transactions_REP_LENGTH, block_to_add_transactions_id_LENGTH, block_to_add_transactions_active_LENGTH, block_to_add_transactions_passive_LENGTH, block_to_add_transactions_signature_data_LENGTH>& get_block_to_add() const { return block_to_add_; }
-    inline const protocol::block<block_to_add_id_LENGTH, block_to_add_header_previous_LENGTH, block_to_add_active_LENGTH, block_to_add_passive_LENGTH, block_to_add_signature_data_LENGTH, block_to_add_transactions_REP_LENGTH, block_to_add_transactions_id_LENGTH, block_to_add_transactions_active_LENGTH, block_to_add_transactions_passive_LENGTH, block_to_add_transactions_signature_data_LENGTH>& block_to_add() const { return block_to_add_; }
+    inline void set_block_to_add(const protocol::block<block_to_add_id_LENGTH, block_to_add_header_previous_LENGTH, block_to_add_active_LENGTH, block_to_add_signature_data_LENGTH, block_to_add_transactions_REP_LENGTH, block_to_add_transactions_id_LENGTH, block_to_add_transactions_active_LENGTH, block_to_add_transactions_signature_data_LENGTH>& value) { block_to_add_ = value; }
+    inline void set_block_to_add(const protocol::block<block_to_add_id_LENGTH, block_to_add_header_previous_LENGTH, block_to_add_active_LENGTH, block_to_add_signature_data_LENGTH, block_to_add_transactions_REP_LENGTH, block_to_add_transactions_id_LENGTH, block_to_add_transactions_active_LENGTH, block_to_add_transactions_signature_data_LENGTH>&& value) { block_to_add_ = value; }
+    inline protocol::block<block_to_add_id_LENGTH, block_to_add_header_previous_LENGTH, block_to_add_active_LENGTH, block_to_add_signature_data_LENGTH, block_to_add_transactions_REP_LENGTH, block_to_add_transactions_id_LENGTH, block_to_add_transactions_active_LENGTH, block_to_add_transactions_signature_data_LENGTH>& mutable_block_to_add() { return block_to_add_; }
+    inline const protocol::block<block_to_add_id_LENGTH, block_to_add_header_previous_LENGTH, block_to_add_active_LENGTH, block_to_add_signature_data_LENGTH, block_to_add_transactions_REP_LENGTH, block_to_add_transactions_id_LENGTH, block_to_add_transactions_active_LENGTH, block_to_add_transactions_signature_data_LENGTH>& get_block_to_add() const { return block_to_add_; }
+    inline const protocol::block<block_to_add_id_LENGTH, block_to_add_header_previous_LENGTH, block_to_add_active_LENGTH, block_to_add_signature_data_LENGTH, block_to_add_transactions_REP_LENGTH, block_to_add_transactions_id_LENGTH, block_to_add_transactions_active_LENGTH, block_to_add_transactions_signature_data_LENGTH>& block_to_add() const { return block_to_add_; }
 
 
     ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
@@ -766,7 +760,7 @@ class add_block_request final: public ::EmbeddedProto::MessageInterface
     private:
 
 
-      protocol::block<block_to_add_id_LENGTH, block_to_add_header_previous_LENGTH, block_to_add_active_LENGTH, block_to_add_passive_LENGTH, block_to_add_signature_data_LENGTH, block_to_add_transactions_REP_LENGTH, block_to_add_transactions_id_LENGTH, block_to_add_transactions_active_LENGTH, block_to_add_transactions_passive_LENGTH, block_to_add_transactions_signature_data_LENGTH> block_to_add_;
+      protocol::block<block_to_add_id_LENGTH, block_to_add_header_previous_LENGTH, block_to_add_active_LENGTH, block_to_add_signature_data_LENGTH, block_to_add_transactions_REP_LENGTH, block_to_add_transactions_id_LENGTH, block_to_add_transactions_active_LENGTH, block_to_add_transactions_signature_data_LENGTH> block_to_add_;
 
 };
 
@@ -1050,12 +1044,10 @@ uint32_t get_blocks_by_height_head_block_id_LENGTH,
 uint32_t add_block_block_to_add_id_LENGTH, 
 uint32_t add_block_block_to_add_header_previous_LENGTH, 
 uint32_t add_block_block_to_add_active_LENGTH, 
-uint32_t add_block_block_to_add_passive_LENGTH, 
 uint32_t add_block_block_to_add_signature_data_LENGTH, 
 uint32_t add_block_block_to_add_transactions_REP_LENGTH, 
 uint32_t add_block_block_to_add_transactions_id_LENGTH, 
 uint32_t add_block_block_to_add_transactions_active_LENGTH, 
-uint32_t add_block_block_to_add_transactions_passive_LENGTH, 
 uint32_t add_block_block_to_add_transactions_signature_data_LENGTH>
 class block_store_request final: public ::EmbeddedProto::MessageInterface
 {
@@ -1331,10 +1323,10 @@ class block_store_request final: public ::EmbeddedProto::MessageInterface
       if(FieldNumber::ADD_BLOCK == which_request_)
       {
         which_request_ = FieldNumber::NOT_SET;
-        request_.add_block_.~add_block_request<add_block_block_to_add_id_LENGTH, add_block_block_to_add_header_previous_LENGTH, add_block_block_to_add_active_LENGTH, add_block_block_to_add_passive_LENGTH, add_block_block_to_add_signature_data_LENGTH, add_block_block_to_add_transactions_REP_LENGTH, add_block_block_to_add_transactions_id_LENGTH, add_block_block_to_add_transactions_active_LENGTH, add_block_block_to_add_transactions_passive_LENGTH, add_block_block_to_add_transactions_signature_data_LENGTH>();
+        request_.add_block_.~add_block_request<add_block_block_to_add_id_LENGTH, add_block_block_to_add_header_previous_LENGTH, add_block_block_to_add_active_LENGTH, add_block_block_to_add_signature_data_LENGTH, add_block_block_to_add_transactions_REP_LENGTH, add_block_block_to_add_transactions_id_LENGTH, add_block_block_to_add_transactions_active_LENGTH, add_block_block_to_add_transactions_signature_data_LENGTH>();
       }
     }
-    inline void set_add_block(const add_block_request<add_block_block_to_add_id_LENGTH, add_block_block_to_add_header_previous_LENGTH, add_block_block_to_add_active_LENGTH, add_block_block_to_add_passive_LENGTH, add_block_block_to_add_signature_data_LENGTH, add_block_block_to_add_transactions_REP_LENGTH, add_block_block_to_add_transactions_id_LENGTH, add_block_block_to_add_transactions_active_LENGTH, add_block_block_to_add_transactions_passive_LENGTH, add_block_block_to_add_transactions_signature_data_LENGTH>& value)
+    inline void set_add_block(const add_block_request<add_block_block_to_add_id_LENGTH, add_block_block_to_add_header_previous_LENGTH, add_block_block_to_add_active_LENGTH, add_block_block_to_add_signature_data_LENGTH, add_block_block_to_add_transactions_REP_LENGTH, add_block_block_to_add_transactions_id_LENGTH, add_block_block_to_add_transactions_active_LENGTH, add_block_block_to_add_transactions_signature_data_LENGTH>& value)
     {
       if(FieldNumber::ADD_BLOCK != which_request_)
       {
@@ -1342,7 +1334,7 @@ class block_store_request final: public ::EmbeddedProto::MessageInterface
       }
       request_.add_block_ = value;
     }
-    inline void set_add_block(const add_block_request<add_block_block_to_add_id_LENGTH, add_block_block_to_add_header_previous_LENGTH, add_block_block_to_add_active_LENGTH, add_block_block_to_add_passive_LENGTH, add_block_block_to_add_signature_data_LENGTH, add_block_block_to_add_transactions_REP_LENGTH, add_block_block_to_add_transactions_id_LENGTH, add_block_block_to_add_transactions_active_LENGTH, add_block_block_to_add_transactions_passive_LENGTH, add_block_block_to_add_transactions_signature_data_LENGTH>&& value)
+    inline void set_add_block(const add_block_request<add_block_block_to_add_id_LENGTH, add_block_block_to_add_header_previous_LENGTH, add_block_block_to_add_active_LENGTH, add_block_block_to_add_signature_data_LENGTH, add_block_block_to_add_transactions_REP_LENGTH, add_block_block_to_add_transactions_id_LENGTH, add_block_block_to_add_transactions_active_LENGTH, add_block_block_to_add_transactions_signature_data_LENGTH>&& value)
     {
       if(FieldNumber::ADD_BLOCK != which_request_)
       {
@@ -1350,7 +1342,7 @@ class block_store_request final: public ::EmbeddedProto::MessageInterface
       }
       request_.add_block_ = value;
     }
-    inline add_block_request<add_block_block_to_add_id_LENGTH, add_block_block_to_add_header_previous_LENGTH, add_block_block_to_add_active_LENGTH, add_block_block_to_add_passive_LENGTH, add_block_block_to_add_signature_data_LENGTH, add_block_block_to_add_transactions_REP_LENGTH, add_block_block_to_add_transactions_id_LENGTH, add_block_block_to_add_transactions_active_LENGTH, add_block_block_to_add_transactions_passive_LENGTH, add_block_block_to_add_transactions_signature_data_LENGTH>& mutable_add_block()
+    inline add_block_request<add_block_block_to_add_id_LENGTH, add_block_block_to_add_header_previous_LENGTH, add_block_block_to_add_active_LENGTH, add_block_block_to_add_signature_data_LENGTH, add_block_block_to_add_transactions_REP_LENGTH, add_block_block_to_add_transactions_id_LENGTH, add_block_block_to_add_transactions_active_LENGTH, add_block_block_to_add_transactions_signature_data_LENGTH>& mutable_add_block()
     {
       if(FieldNumber::ADD_BLOCK != which_request_)
       {
@@ -1358,8 +1350,8 @@ class block_store_request final: public ::EmbeddedProto::MessageInterface
       }
       return request_.add_block_;
     }
-    inline const add_block_request<add_block_block_to_add_id_LENGTH, add_block_block_to_add_header_previous_LENGTH, add_block_block_to_add_active_LENGTH, add_block_block_to_add_passive_LENGTH, add_block_block_to_add_signature_data_LENGTH, add_block_block_to_add_transactions_REP_LENGTH, add_block_block_to_add_transactions_id_LENGTH, add_block_block_to_add_transactions_active_LENGTH, add_block_block_to_add_transactions_passive_LENGTH, add_block_block_to_add_transactions_signature_data_LENGTH>& get_add_block() const { return request_.add_block_; }
-    inline const add_block_request<add_block_block_to_add_id_LENGTH, add_block_block_to_add_header_previous_LENGTH, add_block_block_to_add_active_LENGTH, add_block_block_to_add_passive_LENGTH, add_block_block_to_add_signature_data_LENGTH, add_block_block_to_add_transactions_REP_LENGTH, add_block_block_to_add_transactions_id_LENGTH, add_block_block_to_add_transactions_active_LENGTH, add_block_block_to_add_transactions_passive_LENGTH, add_block_block_to_add_transactions_signature_data_LENGTH>& add_block() const { return request_.add_block_; }
+    inline const add_block_request<add_block_block_to_add_id_LENGTH, add_block_block_to_add_header_previous_LENGTH, add_block_block_to_add_active_LENGTH, add_block_block_to_add_signature_data_LENGTH, add_block_block_to_add_transactions_REP_LENGTH, add_block_block_to_add_transactions_id_LENGTH, add_block_block_to_add_transactions_active_LENGTH, add_block_block_to_add_transactions_signature_data_LENGTH>& get_add_block() const { return request_.add_block_; }
+    inline const add_block_request<add_block_block_to_add_id_LENGTH, add_block_block_to_add_header_previous_LENGTH, add_block_block_to_add_active_LENGTH, add_block_block_to_add_signature_data_LENGTH, add_block_block_to_add_transactions_REP_LENGTH, add_block_block_to_add_transactions_id_LENGTH, add_block_block_to_add_transactions_active_LENGTH, add_block_block_to_add_transactions_signature_data_LENGTH>& add_block() const { return request_.add_block_; }
 
     inline void clear_get_highest_block()
     {
@@ -1523,7 +1515,7 @@ class block_store_request final: public ::EmbeddedProto::MessageInterface
         reserved_rpc reserved_;
         get_blocks_by_id_request<get_blocks_by_id_block_id_REP_LENGTH, get_blocks_by_id_block_id_LENGTH> get_blocks_by_id_;
         get_blocks_by_height_request<get_blocks_by_height_head_block_id_LENGTH> get_blocks_by_height_;
-        add_block_request<add_block_block_to_add_id_LENGTH, add_block_block_to_add_header_previous_LENGTH, add_block_block_to_add_active_LENGTH, add_block_block_to_add_passive_LENGTH, add_block_block_to_add_signature_data_LENGTH, add_block_block_to_add_transactions_REP_LENGTH, add_block_block_to_add_transactions_id_LENGTH, add_block_block_to_add_transactions_active_LENGTH, add_block_block_to_add_transactions_passive_LENGTH, add_block_block_to_add_transactions_signature_data_LENGTH> add_block_;
+        add_block_request<add_block_block_to_add_id_LENGTH, add_block_block_to_add_header_previous_LENGTH, add_block_block_to_add_active_LENGTH, add_block_block_to_add_signature_data_LENGTH, add_block_block_to_add_transactions_REP_LENGTH, add_block_block_to_add_transactions_id_LENGTH, add_block_block_to_add_transactions_active_LENGTH, add_block_block_to_add_transactions_signature_data_LENGTH> add_block_;
         get_highest_block_request get_highest_block_;
       };
       request request_;
@@ -1555,7 +1547,7 @@ class block_store_request final: public ::EmbeddedProto::MessageInterface
             break;
 
           case FieldNumber::ADD_BLOCK:
-            new(&request_.add_block_) add_block_request<add_block_block_to_add_id_LENGTH, add_block_block_to_add_header_previous_LENGTH, add_block_block_to_add_active_LENGTH, add_block_block_to_add_passive_LENGTH, add_block_block_to_add_signature_data_LENGTH, add_block_block_to_add_transactions_REP_LENGTH, add_block_block_to_add_transactions_id_LENGTH, add_block_block_to_add_transactions_active_LENGTH, add_block_block_to_add_transactions_passive_LENGTH, add_block_block_to_add_transactions_signature_data_LENGTH>;
+            new(&request_.add_block_) add_block_request<add_block_block_to_add_id_LENGTH, add_block_block_to_add_header_previous_LENGTH, add_block_block_to_add_active_LENGTH, add_block_block_to_add_signature_data_LENGTH, add_block_block_to_add_transactions_REP_LENGTH, add_block_block_to_add_transactions_id_LENGTH, add_block_block_to_add_transactions_active_LENGTH, add_block_block_to_add_transactions_signature_data_LENGTH>;
             which_request_ = FieldNumber::ADD_BLOCK;
             break;
 
@@ -1585,7 +1577,7 @@ class block_store_request final: public ::EmbeddedProto::MessageInterface
             request_.get_blocks_by_height_.~get_blocks_by_height_request<get_blocks_by_height_head_block_id_LENGTH>(); // NOSONAR Unions require this.
             break;
           case FieldNumber::ADD_BLOCK:
-            request_.add_block_.~add_block_request<add_block_block_to_add_id_LENGTH, add_block_block_to_add_header_previous_LENGTH, add_block_block_to_add_active_LENGTH, add_block_block_to_add_passive_LENGTH, add_block_block_to_add_signature_data_LENGTH, add_block_block_to_add_transactions_REP_LENGTH, add_block_block_to_add_transactions_id_LENGTH, add_block_block_to_add_transactions_active_LENGTH, add_block_block_to_add_transactions_passive_LENGTH, add_block_block_to_add_transactions_signature_data_LENGTH>(); // NOSONAR Unions require this.
+            request_.add_block_.~add_block_request<add_block_block_to_add_id_LENGTH, add_block_block_to_add_header_previous_LENGTH, add_block_block_to_add_active_LENGTH, add_block_block_to_add_signature_data_LENGTH, add_block_block_to_add_transactions_REP_LENGTH, add_block_block_to_add_transactions_id_LENGTH, add_block_block_to_add_transactions_active_LENGTH, add_block_block_to_add_transactions_signature_data_LENGTH>(); // NOSONAR Unions require this.
             break;
           case FieldNumber::GET_HIGHEST_BLOCK:
             request_.get_highest_block_.~get_highest_block_request(); // NOSONAR Unions require this.
@@ -1621,24 +1613,20 @@ uint32_t get_blocks_by_id_block_items_block_id_LENGTH,
 uint32_t get_blocks_by_id_block_items_block_id_LENGTH, 
 uint32_t get_blocks_by_id_block_items_block_header_previous_LENGTH, 
 uint32_t get_blocks_by_id_block_items_block_active_LENGTH, 
-uint32_t get_blocks_by_id_block_items_block_passive_LENGTH, 
 uint32_t get_blocks_by_id_block_items_block_signature_data_LENGTH, 
 uint32_t get_blocks_by_id_block_items_block_transactions_REP_LENGTH, 
 uint32_t get_blocks_by_id_block_items_block_transactions_id_LENGTH, 
 uint32_t get_blocks_by_id_block_items_block_transactions_active_LENGTH, 
-uint32_t get_blocks_by_id_block_items_block_transactions_passive_LENGTH, 
 uint32_t get_blocks_by_id_block_items_block_transactions_signature_data_LENGTH, 
 uint32_t get_blocks_by_height_block_items_REP_LENGTH, 
 uint32_t get_blocks_by_height_block_items_block_id_LENGTH, 
 uint32_t get_blocks_by_height_block_items_block_id_LENGTH, 
 uint32_t get_blocks_by_height_block_items_block_header_previous_LENGTH, 
 uint32_t get_blocks_by_height_block_items_block_active_LENGTH, 
-uint32_t get_blocks_by_height_block_items_block_passive_LENGTH, 
 uint32_t get_blocks_by_height_block_items_block_signature_data_LENGTH, 
 uint32_t get_blocks_by_height_block_items_block_transactions_REP_LENGTH, 
 uint32_t get_blocks_by_height_block_items_block_transactions_id_LENGTH, 
 uint32_t get_blocks_by_height_block_items_block_transactions_active_LENGTH, 
-uint32_t get_blocks_by_height_block_items_block_transactions_passive_LENGTH, 
 uint32_t get_blocks_by_height_block_items_block_transactions_signature_data_LENGTH, 
 uint32_t get_highest_block_topology_id_LENGTH, 
 uint32_t get_highest_block_topology_previous_LENGTH>
@@ -1898,10 +1886,10 @@ class block_store_response final: public ::EmbeddedProto::MessageInterface
       if(FieldNumber::GET_BLOCKS_BY_ID == which_response_)
       {
         which_response_ = FieldNumber::NOT_SET;
-        response_.get_blocks_by_id_.~get_blocks_by_id_response<get_blocks_by_id_block_items_REP_LENGTH, get_blocks_by_id_block_items_block_id_LENGTH, get_blocks_by_id_block_items_block_id_LENGTH, get_blocks_by_id_block_items_block_header_previous_LENGTH, get_blocks_by_id_block_items_block_active_LENGTH, get_blocks_by_id_block_items_block_passive_LENGTH, get_blocks_by_id_block_items_block_signature_data_LENGTH, get_blocks_by_id_block_items_block_transactions_REP_LENGTH, get_blocks_by_id_block_items_block_transactions_id_LENGTH, get_blocks_by_id_block_items_block_transactions_active_LENGTH, get_blocks_by_id_block_items_block_transactions_passive_LENGTH, get_blocks_by_id_block_items_block_transactions_signature_data_LENGTH>();
+        response_.get_blocks_by_id_.~get_blocks_by_id_response<get_blocks_by_id_block_items_REP_LENGTH, get_blocks_by_id_block_items_block_id_LENGTH, get_blocks_by_id_block_items_block_id_LENGTH, get_blocks_by_id_block_items_block_header_previous_LENGTH, get_blocks_by_id_block_items_block_active_LENGTH, get_blocks_by_id_block_items_block_signature_data_LENGTH, get_blocks_by_id_block_items_block_transactions_REP_LENGTH, get_blocks_by_id_block_items_block_transactions_id_LENGTH, get_blocks_by_id_block_items_block_transactions_active_LENGTH, get_blocks_by_id_block_items_block_transactions_signature_data_LENGTH>();
       }
     }
-    inline void set_get_blocks_by_id(const get_blocks_by_id_response<get_blocks_by_id_block_items_REP_LENGTH, get_blocks_by_id_block_items_block_id_LENGTH, get_blocks_by_id_block_items_block_id_LENGTH, get_blocks_by_id_block_items_block_header_previous_LENGTH, get_blocks_by_id_block_items_block_active_LENGTH, get_blocks_by_id_block_items_block_passive_LENGTH, get_blocks_by_id_block_items_block_signature_data_LENGTH, get_blocks_by_id_block_items_block_transactions_REP_LENGTH, get_blocks_by_id_block_items_block_transactions_id_LENGTH, get_blocks_by_id_block_items_block_transactions_active_LENGTH, get_blocks_by_id_block_items_block_transactions_passive_LENGTH, get_blocks_by_id_block_items_block_transactions_signature_data_LENGTH>& value)
+    inline void set_get_blocks_by_id(const get_blocks_by_id_response<get_blocks_by_id_block_items_REP_LENGTH, get_blocks_by_id_block_items_block_id_LENGTH, get_blocks_by_id_block_items_block_id_LENGTH, get_blocks_by_id_block_items_block_header_previous_LENGTH, get_blocks_by_id_block_items_block_active_LENGTH, get_blocks_by_id_block_items_block_signature_data_LENGTH, get_blocks_by_id_block_items_block_transactions_REP_LENGTH, get_blocks_by_id_block_items_block_transactions_id_LENGTH, get_blocks_by_id_block_items_block_transactions_active_LENGTH, get_blocks_by_id_block_items_block_transactions_signature_data_LENGTH>& value)
     {
       if(FieldNumber::GET_BLOCKS_BY_ID != which_response_)
       {
@@ -1909,7 +1897,7 @@ class block_store_response final: public ::EmbeddedProto::MessageInterface
       }
       response_.get_blocks_by_id_ = value;
     }
-    inline void set_get_blocks_by_id(const get_blocks_by_id_response<get_blocks_by_id_block_items_REP_LENGTH, get_blocks_by_id_block_items_block_id_LENGTH, get_blocks_by_id_block_items_block_id_LENGTH, get_blocks_by_id_block_items_block_header_previous_LENGTH, get_blocks_by_id_block_items_block_active_LENGTH, get_blocks_by_id_block_items_block_passive_LENGTH, get_blocks_by_id_block_items_block_signature_data_LENGTH, get_blocks_by_id_block_items_block_transactions_REP_LENGTH, get_blocks_by_id_block_items_block_transactions_id_LENGTH, get_blocks_by_id_block_items_block_transactions_active_LENGTH, get_blocks_by_id_block_items_block_transactions_passive_LENGTH, get_blocks_by_id_block_items_block_transactions_signature_data_LENGTH>&& value)
+    inline void set_get_blocks_by_id(const get_blocks_by_id_response<get_blocks_by_id_block_items_REP_LENGTH, get_blocks_by_id_block_items_block_id_LENGTH, get_blocks_by_id_block_items_block_id_LENGTH, get_blocks_by_id_block_items_block_header_previous_LENGTH, get_blocks_by_id_block_items_block_active_LENGTH, get_blocks_by_id_block_items_block_signature_data_LENGTH, get_blocks_by_id_block_items_block_transactions_REP_LENGTH, get_blocks_by_id_block_items_block_transactions_id_LENGTH, get_blocks_by_id_block_items_block_transactions_active_LENGTH, get_blocks_by_id_block_items_block_transactions_signature_data_LENGTH>&& value)
     {
       if(FieldNumber::GET_BLOCKS_BY_ID != which_response_)
       {
@@ -1917,7 +1905,7 @@ class block_store_response final: public ::EmbeddedProto::MessageInterface
       }
       response_.get_blocks_by_id_ = value;
     }
-    inline get_blocks_by_id_response<get_blocks_by_id_block_items_REP_LENGTH, get_blocks_by_id_block_items_block_id_LENGTH, get_blocks_by_id_block_items_block_id_LENGTH, get_blocks_by_id_block_items_block_header_previous_LENGTH, get_blocks_by_id_block_items_block_active_LENGTH, get_blocks_by_id_block_items_block_passive_LENGTH, get_blocks_by_id_block_items_block_signature_data_LENGTH, get_blocks_by_id_block_items_block_transactions_REP_LENGTH, get_blocks_by_id_block_items_block_transactions_id_LENGTH, get_blocks_by_id_block_items_block_transactions_active_LENGTH, get_blocks_by_id_block_items_block_transactions_passive_LENGTH, get_blocks_by_id_block_items_block_transactions_signature_data_LENGTH>& mutable_get_blocks_by_id()
+    inline get_blocks_by_id_response<get_blocks_by_id_block_items_REP_LENGTH, get_blocks_by_id_block_items_block_id_LENGTH, get_blocks_by_id_block_items_block_id_LENGTH, get_blocks_by_id_block_items_block_header_previous_LENGTH, get_blocks_by_id_block_items_block_active_LENGTH, get_blocks_by_id_block_items_block_signature_data_LENGTH, get_blocks_by_id_block_items_block_transactions_REP_LENGTH, get_blocks_by_id_block_items_block_transactions_id_LENGTH, get_blocks_by_id_block_items_block_transactions_active_LENGTH, get_blocks_by_id_block_items_block_transactions_signature_data_LENGTH>& mutable_get_blocks_by_id()
     {
       if(FieldNumber::GET_BLOCKS_BY_ID != which_response_)
       {
@@ -1925,18 +1913,18 @@ class block_store_response final: public ::EmbeddedProto::MessageInterface
       }
       return response_.get_blocks_by_id_;
     }
-    inline const get_blocks_by_id_response<get_blocks_by_id_block_items_REP_LENGTH, get_blocks_by_id_block_items_block_id_LENGTH, get_blocks_by_id_block_items_block_id_LENGTH, get_blocks_by_id_block_items_block_header_previous_LENGTH, get_blocks_by_id_block_items_block_active_LENGTH, get_blocks_by_id_block_items_block_passive_LENGTH, get_blocks_by_id_block_items_block_signature_data_LENGTH, get_blocks_by_id_block_items_block_transactions_REP_LENGTH, get_blocks_by_id_block_items_block_transactions_id_LENGTH, get_blocks_by_id_block_items_block_transactions_active_LENGTH, get_blocks_by_id_block_items_block_transactions_passive_LENGTH, get_blocks_by_id_block_items_block_transactions_signature_data_LENGTH>& get_get_blocks_by_id() const { return response_.get_blocks_by_id_; }
-    inline const get_blocks_by_id_response<get_blocks_by_id_block_items_REP_LENGTH, get_blocks_by_id_block_items_block_id_LENGTH, get_blocks_by_id_block_items_block_id_LENGTH, get_blocks_by_id_block_items_block_header_previous_LENGTH, get_blocks_by_id_block_items_block_active_LENGTH, get_blocks_by_id_block_items_block_passive_LENGTH, get_blocks_by_id_block_items_block_signature_data_LENGTH, get_blocks_by_id_block_items_block_transactions_REP_LENGTH, get_blocks_by_id_block_items_block_transactions_id_LENGTH, get_blocks_by_id_block_items_block_transactions_active_LENGTH, get_blocks_by_id_block_items_block_transactions_passive_LENGTH, get_blocks_by_id_block_items_block_transactions_signature_data_LENGTH>& get_blocks_by_id() const { return response_.get_blocks_by_id_; }
+    inline const get_blocks_by_id_response<get_blocks_by_id_block_items_REP_LENGTH, get_blocks_by_id_block_items_block_id_LENGTH, get_blocks_by_id_block_items_block_id_LENGTH, get_blocks_by_id_block_items_block_header_previous_LENGTH, get_blocks_by_id_block_items_block_active_LENGTH, get_blocks_by_id_block_items_block_signature_data_LENGTH, get_blocks_by_id_block_items_block_transactions_REP_LENGTH, get_blocks_by_id_block_items_block_transactions_id_LENGTH, get_blocks_by_id_block_items_block_transactions_active_LENGTH, get_blocks_by_id_block_items_block_transactions_signature_data_LENGTH>& get_get_blocks_by_id() const { return response_.get_blocks_by_id_; }
+    inline const get_blocks_by_id_response<get_blocks_by_id_block_items_REP_LENGTH, get_blocks_by_id_block_items_block_id_LENGTH, get_blocks_by_id_block_items_block_id_LENGTH, get_blocks_by_id_block_items_block_header_previous_LENGTH, get_blocks_by_id_block_items_block_active_LENGTH, get_blocks_by_id_block_items_block_signature_data_LENGTH, get_blocks_by_id_block_items_block_transactions_REP_LENGTH, get_blocks_by_id_block_items_block_transactions_id_LENGTH, get_blocks_by_id_block_items_block_transactions_active_LENGTH, get_blocks_by_id_block_items_block_transactions_signature_data_LENGTH>& get_blocks_by_id() const { return response_.get_blocks_by_id_; }
 
     inline void clear_get_blocks_by_height()
     {
       if(FieldNumber::GET_BLOCKS_BY_HEIGHT == which_response_)
       {
         which_response_ = FieldNumber::NOT_SET;
-        response_.get_blocks_by_height_.~get_blocks_by_height_response<get_blocks_by_height_block_items_REP_LENGTH, get_blocks_by_height_block_items_block_id_LENGTH, get_blocks_by_height_block_items_block_id_LENGTH, get_blocks_by_height_block_items_block_header_previous_LENGTH, get_blocks_by_height_block_items_block_active_LENGTH, get_blocks_by_height_block_items_block_passive_LENGTH, get_blocks_by_height_block_items_block_signature_data_LENGTH, get_blocks_by_height_block_items_block_transactions_REP_LENGTH, get_blocks_by_height_block_items_block_transactions_id_LENGTH, get_blocks_by_height_block_items_block_transactions_active_LENGTH, get_blocks_by_height_block_items_block_transactions_passive_LENGTH, get_blocks_by_height_block_items_block_transactions_signature_data_LENGTH>();
+        response_.get_blocks_by_height_.~get_blocks_by_height_response<get_blocks_by_height_block_items_REP_LENGTH, get_blocks_by_height_block_items_block_id_LENGTH, get_blocks_by_height_block_items_block_id_LENGTH, get_blocks_by_height_block_items_block_header_previous_LENGTH, get_blocks_by_height_block_items_block_active_LENGTH, get_blocks_by_height_block_items_block_signature_data_LENGTH, get_blocks_by_height_block_items_block_transactions_REP_LENGTH, get_blocks_by_height_block_items_block_transactions_id_LENGTH, get_blocks_by_height_block_items_block_transactions_active_LENGTH, get_blocks_by_height_block_items_block_transactions_signature_data_LENGTH>();
       }
     }
-    inline void set_get_blocks_by_height(const get_blocks_by_height_response<get_blocks_by_height_block_items_REP_LENGTH, get_blocks_by_height_block_items_block_id_LENGTH, get_blocks_by_height_block_items_block_id_LENGTH, get_blocks_by_height_block_items_block_header_previous_LENGTH, get_blocks_by_height_block_items_block_active_LENGTH, get_blocks_by_height_block_items_block_passive_LENGTH, get_blocks_by_height_block_items_block_signature_data_LENGTH, get_blocks_by_height_block_items_block_transactions_REP_LENGTH, get_blocks_by_height_block_items_block_transactions_id_LENGTH, get_blocks_by_height_block_items_block_transactions_active_LENGTH, get_blocks_by_height_block_items_block_transactions_passive_LENGTH, get_blocks_by_height_block_items_block_transactions_signature_data_LENGTH>& value)
+    inline void set_get_blocks_by_height(const get_blocks_by_height_response<get_blocks_by_height_block_items_REP_LENGTH, get_blocks_by_height_block_items_block_id_LENGTH, get_blocks_by_height_block_items_block_id_LENGTH, get_blocks_by_height_block_items_block_header_previous_LENGTH, get_blocks_by_height_block_items_block_active_LENGTH, get_blocks_by_height_block_items_block_signature_data_LENGTH, get_blocks_by_height_block_items_block_transactions_REP_LENGTH, get_blocks_by_height_block_items_block_transactions_id_LENGTH, get_blocks_by_height_block_items_block_transactions_active_LENGTH, get_blocks_by_height_block_items_block_transactions_signature_data_LENGTH>& value)
     {
       if(FieldNumber::GET_BLOCKS_BY_HEIGHT != which_response_)
       {
@@ -1944,7 +1932,7 @@ class block_store_response final: public ::EmbeddedProto::MessageInterface
       }
       response_.get_blocks_by_height_ = value;
     }
-    inline void set_get_blocks_by_height(const get_blocks_by_height_response<get_blocks_by_height_block_items_REP_LENGTH, get_blocks_by_height_block_items_block_id_LENGTH, get_blocks_by_height_block_items_block_id_LENGTH, get_blocks_by_height_block_items_block_header_previous_LENGTH, get_blocks_by_height_block_items_block_active_LENGTH, get_blocks_by_height_block_items_block_passive_LENGTH, get_blocks_by_height_block_items_block_signature_data_LENGTH, get_blocks_by_height_block_items_block_transactions_REP_LENGTH, get_blocks_by_height_block_items_block_transactions_id_LENGTH, get_blocks_by_height_block_items_block_transactions_active_LENGTH, get_blocks_by_height_block_items_block_transactions_passive_LENGTH, get_blocks_by_height_block_items_block_transactions_signature_data_LENGTH>&& value)
+    inline void set_get_blocks_by_height(const get_blocks_by_height_response<get_blocks_by_height_block_items_REP_LENGTH, get_blocks_by_height_block_items_block_id_LENGTH, get_blocks_by_height_block_items_block_id_LENGTH, get_blocks_by_height_block_items_block_header_previous_LENGTH, get_blocks_by_height_block_items_block_active_LENGTH, get_blocks_by_height_block_items_block_signature_data_LENGTH, get_blocks_by_height_block_items_block_transactions_REP_LENGTH, get_blocks_by_height_block_items_block_transactions_id_LENGTH, get_blocks_by_height_block_items_block_transactions_active_LENGTH, get_blocks_by_height_block_items_block_transactions_signature_data_LENGTH>&& value)
     {
       if(FieldNumber::GET_BLOCKS_BY_HEIGHT != which_response_)
       {
@@ -1952,7 +1940,7 @@ class block_store_response final: public ::EmbeddedProto::MessageInterface
       }
       response_.get_blocks_by_height_ = value;
     }
-    inline get_blocks_by_height_response<get_blocks_by_height_block_items_REP_LENGTH, get_blocks_by_height_block_items_block_id_LENGTH, get_blocks_by_height_block_items_block_id_LENGTH, get_blocks_by_height_block_items_block_header_previous_LENGTH, get_blocks_by_height_block_items_block_active_LENGTH, get_blocks_by_height_block_items_block_passive_LENGTH, get_blocks_by_height_block_items_block_signature_data_LENGTH, get_blocks_by_height_block_items_block_transactions_REP_LENGTH, get_blocks_by_height_block_items_block_transactions_id_LENGTH, get_blocks_by_height_block_items_block_transactions_active_LENGTH, get_blocks_by_height_block_items_block_transactions_passive_LENGTH, get_blocks_by_height_block_items_block_transactions_signature_data_LENGTH>& mutable_get_blocks_by_height()
+    inline get_blocks_by_height_response<get_blocks_by_height_block_items_REP_LENGTH, get_blocks_by_height_block_items_block_id_LENGTH, get_blocks_by_height_block_items_block_id_LENGTH, get_blocks_by_height_block_items_block_header_previous_LENGTH, get_blocks_by_height_block_items_block_active_LENGTH, get_blocks_by_height_block_items_block_signature_data_LENGTH, get_blocks_by_height_block_items_block_transactions_REP_LENGTH, get_blocks_by_height_block_items_block_transactions_id_LENGTH, get_blocks_by_height_block_items_block_transactions_active_LENGTH, get_blocks_by_height_block_items_block_transactions_signature_data_LENGTH>& mutable_get_blocks_by_height()
     {
       if(FieldNumber::GET_BLOCKS_BY_HEIGHT != which_response_)
       {
@@ -1960,8 +1948,8 @@ class block_store_response final: public ::EmbeddedProto::MessageInterface
       }
       return response_.get_blocks_by_height_;
     }
-    inline const get_blocks_by_height_response<get_blocks_by_height_block_items_REP_LENGTH, get_blocks_by_height_block_items_block_id_LENGTH, get_blocks_by_height_block_items_block_id_LENGTH, get_blocks_by_height_block_items_block_header_previous_LENGTH, get_blocks_by_height_block_items_block_active_LENGTH, get_blocks_by_height_block_items_block_passive_LENGTH, get_blocks_by_height_block_items_block_signature_data_LENGTH, get_blocks_by_height_block_items_block_transactions_REP_LENGTH, get_blocks_by_height_block_items_block_transactions_id_LENGTH, get_blocks_by_height_block_items_block_transactions_active_LENGTH, get_blocks_by_height_block_items_block_transactions_passive_LENGTH, get_blocks_by_height_block_items_block_transactions_signature_data_LENGTH>& get_get_blocks_by_height() const { return response_.get_blocks_by_height_; }
-    inline const get_blocks_by_height_response<get_blocks_by_height_block_items_REP_LENGTH, get_blocks_by_height_block_items_block_id_LENGTH, get_blocks_by_height_block_items_block_id_LENGTH, get_blocks_by_height_block_items_block_header_previous_LENGTH, get_blocks_by_height_block_items_block_active_LENGTH, get_blocks_by_height_block_items_block_passive_LENGTH, get_blocks_by_height_block_items_block_signature_data_LENGTH, get_blocks_by_height_block_items_block_transactions_REP_LENGTH, get_blocks_by_height_block_items_block_transactions_id_LENGTH, get_blocks_by_height_block_items_block_transactions_active_LENGTH, get_blocks_by_height_block_items_block_transactions_passive_LENGTH, get_blocks_by_height_block_items_block_transactions_signature_data_LENGTH>& get_blocks_by_height() const { return response_.get_blocks_by_height_; }
+    inline const get_blocks_by_height_response<get_blocks_by_height_block_items_REP_LENGTH, get_blocks_by_height_block_items_block_id_LENGTH, get_blocks_by_height_block_items_block_id_LENGTH, get_blocks_by_height_block_items_block_header_previous_LENGTH, get_blocks_by_height_block_items_block_active_LENGTH, get_blocks_by_height_block_items_block_signature_data_LENGTH, get_blocks_by_height_block_items_block_transactions_REP_LENGTH, get_blocks_by_height_block_items_block_transactions_id_LENGTH, get_blocks_by_height_block_items_block_transactions_active_LENGTH, get_blocks_by_height_block_items_block_transactions_signature_data_LENGTH>& get_get_blocks_by_height() const { return response_.get_blocks_by_height_; }
+    inline const get_blocks_by_height_response<get_blocks_by_height_block_items_REP_LENGTH, get_blocks_by_height_block_items_block_id_LENGTH, get_blocks_by_height_block_items_block_id_LENGTH, get_blocks_by_height_block_items_block_header_previous_LENGTH, get_blocks_by_height_block_items_block_active_LENGTH, get_blocks_by_height_block_items_block_signature_data_LENGTH, get_blocks_by_height_block_items_block_transactions_REP_LENGTH, get_blocks_by_height_block_items_block_transactions_id_LENGTH, get_blocks_by_height_block_items_block_transactions_active_LENGTH, get_blocks_by_height_block_items_block_transactions_signature_data_LENGTH>& get_blocks_by_height() const { return response_.get_blocks_by_height_; }
 
     inline void clear_add_block()
     {
@@ -2171,8 +2159,8 @@ class block_store_response final: public ::EmbeddedProto::MessageInterface
         ~response() {}
         reserved_rpc reserved_;
         error_response<error_message_LENGTH, error_data_LENGTH> error_;
-        get_blocks_by_id_response<get_blocks_by_id_block_items_REP_LENGTH, get_blocks_by_id_block_items_block_id_LENGTH, get_blocks_by_id_block_items_block_id_LENGTH, get_blocks_by_id_block_items_block_header_previous_LENGTH, get_blocks_by_id_block_items_block_active_LENGTH, get_blocks_by_id_block_items_block_passive_LENGTH, get_blocks_by_id_block_items_block_signature_data_LENGTH, get_blocks_by_id_block_items_block_transactions_REP_LENGTH, get_blocks_by_id_block_items_block_transactions_id_LENGTH, get_blocks_by_id_block_items_block_transactions_active_LENGTH, get_blocks_by_id_block_items_block_transactions_passive_LENGTH, get_blocks_by_id_block_items_block_transactions_signature_data_LENGTH> get_blocks_by_id_;
-        get_blocks_by_height_response<get_blocks_by_height_block_items_REP_LENGTH, get_blocks_by_height_block_items_block_id_LENGTH, get_blocks_by_height_block_items_block_id_LENGTH, get_blocks_by_height_block_items_block_header_previous_LENGTH, get_blocks_by_height_block_items_block_active_LENGTH, get_blocks_by_height_block_items_block_passive_LENGTH, get_blocks_by_height_block_items_block_signature_data_LENGTH, get_blocks_by_height_block_items_block_transactions_REP_LENGTH, get_blocks_by_height_block_items_block_transactions_id_LENGTH, get_blocks_by_height_block_items_block_transactions_active_LENGTH, get_blocks_by_height_block_items_block_transactions_passive_LENGTH, get_blocks_by_height_block_items_block_transactions_signature_data_LENGTH> get_blocks_by_height_;
+        get_blocks_by_id_response<get_blocks_by_id_block_items_REP_LENGTH, get_blocks_by_id_block_items_block_id_LENGTH, get_blocks_by_id_block_items_block_id_LENGTH, get_blocks_by_id_block_items_block_header_previous_LENGTH, get_blocks_by_id_block_items_block_active_LENGTH, get_blocks_by_id_block_items_block_signature_data_LENGTH, get_blocks_by_id_block_items_block_transactions_REP_LENGTH, get_blocks_by_id_block_items_block_transactions_id_LENGTH, get_blocks_by_id_block_items_block_transactions_active_LENGTH, get_blocks_by_id_block_items_block_transactions_signature_data_LENGTH> get_blocks_by_id_;
+        get_blocks_by_height_response<get_blocks_by_height_block_items_REP_LENGTH, get_blocks_by_height_block_items_block_id_LENGTH, get_blocks_by_height_block_items_block_id_LENGTH, get_blocks_by_height_block_items_block_header_previous_LENGTH, get_blocks_by_height_block_items_block_active_LENGTH, get_blocks_by_height_block_items_block_signature_data_LENGTH, get_blocks_by_height_block_items_block_transactions_REP_LENGTH, get_blocks_by_height_block_items_block_transactions_id_LENGTH, get_blocks_by_height_block_items_block_transactions_active_LENGTH, get_blocks_by_height_block_items_block_transactions_signature_data_LENGTH> get_blocks_by_height_;
         add_block_response add_block_;
         get_highest_block_response<get_highest_block_topology_id_LENGTH, get_highest_block_topology_previous_LENGTH> get_highest_block_;
       };
@@ -2200,12 +2188,12 @@ class block_store_response final: public ::EmbeddedProto::MessageInterface
             break;
 
           case FieldNumber::GET_BLOCKS_BY_ID:
-            new(&response_.get_blocks_by_id_) get_blocks_by_id_response<get_blocks_by_id_block_items_REP_LENGTH, get_blocks_by_id_block_items_block_id_LENGTH, get_blocks_by_id_block_items_block_id_LENGTH, get_blocks_by_id_block_items_block_header_previous_LENGTH, get_blocks_by_id_block_items_block_active_LENGTH, get_blocks_by_id_block_items_block_passive_LENGTH, get_blocks_by_id_block_items_block_signature_data_LENGTH, get_blocks_by_id_block_items_block_transactions_REP_LENGTH, get_blocks_by_id_block_items_block_transactions_id_LENGTH, get_blocks_by_id_block_items_block_transactions_active_LENGTH, get_blocks_by_id_block_items_block_transactions_passive_LENGTH, get_blocks_by_id_block_items_block_transactions_signature_data_LENGTH>;
+            new(&response_.get_blocks_by_id_) get_blocks_by_id_response<get_blocks_by_id_block_items_REP_LENGTH, get_blocks_by_id_block_items_block_id_LENGTH, get_blocks_by_id_block_items_block_id_LENGTH, get_blocks_by_id_block_items_block_header_previous_LENGTH, get_blocks_by_id_block_items_block_active_LENGTH, get_blocks_by_id_block_items_block_signature_data_LENGTH, get_blocks_by_id_block_items_block_transactions_REP_LENGTH, get_blocks_by_id_block_items_block_transactions_id_LENGTH, get_blocks_by_id_block_items_block_transactions_active_LENGTH, get_blocks_by_id_block_items_block_transactions_signature_data_LENGTH>;
             which_response_ = FieldNumber::GET_BLOCKS_BY_ID;
             break;
 
           case FieldNumber::GET_BLOCKS_BY_HEIGHT:
-            new(&response_.get_blocks_by_height_) get_blocks_by_height_response<get_blocks_by_height_block_items_REP_LENGTH, get_blocks_by_height_block_items_block_id_LENGTH, get_blocks_by_height_block_items_block_id_LENGTH, get_blocks_by_height_block_items_block_header_previous_LENGTH, get_blocks_by_height_block_items_block_active_LENGTH, get_blocks_by_height_block_items_block_passive_LENGTH, get_blocks_by_height_block_items_block_signature_data_LENGTH, get_blocks_by_height_block_items_block_transactions_REP_LENGTH, get_blocks_by_height_block_items_block_transactions_id_LENGTH, get_blocks_by_height_block_items_block_transactions_active_LENGTH, get_blocks_by_height_block_items_block_transactions_passive_LENGTH, get_blocks_by_height_block_items_block_transactions_signature_data_LENGTH>;
+            new(&response_.get_blocks_by_height_) get_blocks_by_height_response<get_blocks_by_height_block_items_REP_LENGTH, get_blocks_by_height_block_items_block_id_LENGTH, get_blocks_by_height_block_items_block_id_LENGTH, get_blocks_by_height_block_items_block_header_previous_LENGTH, get_blocks_by_height_block_items_block_active_LENGTH, get_blocks_by_height_block_items_block_signature_data_LENGTH, get_blocks_by_height_block_items_block_transactions_REP_LENGTH, get_blocks_by_height_block_items_block_transactions_id_LENGTH, get_blocks_by_height_block_items_block_transactions_active_LENGTH, get_blocks_by_height_block_items_block_transactions_signature_data_LENGTH>;
             which_response_ = FieldNumber::GET_BLOCKS_BY_HEIGHT;
             break;
 
@@ -2237,10 +2225,10 @@ class block_store_response final: public ::EmbeddedProto::MessageInterface
             response_.error_.~error_response<error_message_LENGTH, error_data_LENGTH>(); // NOSONAR Unions require this.
             break;
           case FieldNumber::GET_BLOCKS_BY_ID:
-            response_.get_blocks_by_id_.~get_blocks_by_id_response<get_blocks_by_id_block_items_REP_LENGTH, get_blocks_by_id_block_items_block_id_LENGTH, get_blocks_by_id_block_items_block_id_LENGTH, get_blocks_by_id_block_items_block_header_previous_LENGTH, get_blocks_by_id_block_items_block_active_LENGTH, get_blocks_by_id_block_items_block_passive_LENGTH, get_blocks_by_id_block_items_block_signature_data_LENGTH, get_blocks_by_id_block_items_block_transactions_REP_LENGTH, get_blocks_by_id_block_items_block_transactions_id_LENGTH, get_blocks_by_id_block_items_block_transactions_active_LENGTH, get_blocks_by_id_block_items_block_transactions_passive_LENGTH, get_blocks_by_id_block_items_block_transactions_signature_data_LENGTH>(); // NOSONAR Unions require this.
+            response_.get_blocks_by_id_.~get_blocks_by_id_response<get_blocks_by_id_block_items_REP_LENGTH, get_blocks_by_id_block_items_block_id_LENGTH, get_blocks_by_id_block_items_block_id_LENGTH, get_blocks_by_id_block_items_block_header_previous_LENGTH, get_blocks_by_id_block_items_block_active_LENGTH, get_blocks_by_id_block_items_block_signature_data_LENGTH, get_blocks_by_id_block_items_block_transactions_REP_LENGTH, get_blocks_by_id_block_items_block_transactions_id_LENGTH, get_blocks_by_id_block_items_block_transactions_active_LENGTH, get_blocks_by_id_block_items_block_transactions_signature_data_LENGTH>(); // NOSONAR Unions require this.
             break;
           case FieldNumber::GET_BLOCKS_BY_HEIGHT:
-            response_.get_blocks_by_height_.~get_blocks_by_height_response<get_blocks_by_height_block_items_REP_LENGTH, get_blocks_by_height_block_items_block_id_LENGTH, get_blocks_by_height_block_items_block_id_LENGTH, get_blocks_by_height_block_items_block_header_previous_LENGTH, get_blocks_by_height_block_items_block_active_LENGTH, get_blocks_by_height_block_items_block_passive_LENGTH, get_blocks_by_height_block_items_block_signature_data_LENGTH, get_blocks_by_height_block_items_block_transactions_REP_LENGTH, get_blocks_by_height_block_items_block_transactions_id_LENGTH, get_blocks_by_height_block_items_block_transactions_active_LENGTH, get_blocks_by_height_block_items_block_transactions_passive_LENGTH, get_blocks_by_height_block_items_block_transactions_signature_data_LENGTH>(); // NOSONAR Unions require this.
+            response_.get_blocks_by_height_.~get_blocks_by_height_response<get_blocks_by_height_block_items_REP_LENGTH, get_blocks_by_height_block_items_block_id_LENGTH, get_blocks_by_height_block_items_block_id_LENGTH, get_blocks_by_height_block_items_block_header_previous_LENGTH, get_blocks_by_height_block_items_block_active_LENGTH, get_blocks_by_height_block_items_block_signature_data_LENGTH, get_blocks_by_height_block_items_block_transactions_REP_LENGTH, get_blocks_by_height_block_items_block_transactions_id_LENGTH, get_blocks_by_height_block_items_block_transactions_active_LENGTH, get_blocks_by_height_block_items_block_transactions_signature_data_LENGTH>(); // NOSONAR Unions require this.
             break;
           case FieldNumber::ADD_BLOCK:
             response_.add_block_.~add_block_response(); // NOSONAR Unions require this.
