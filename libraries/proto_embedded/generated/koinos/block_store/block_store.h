@@ -58,7 +58,23 @@ uint32_t block_signature_data_LENGTH,
 uint32_t block_transactions_REP_LENGTH, 
 uint32_t block_transactions_id_LENGTH, 
 uint32_t block_transactions_active_LENGTH, 
-uint32_t block_transactions_signature_data_LENGTH>
+uint32_t block_transactions_signature_data_LENGTH, 
+uint32_t receipt_id_LENGTH, 
+uint32_t receipt_events_REP_LENGTH, 
+uint32_t receipt_events_source_LENGTH, 
+uint32_t receipt_events_name_LENGTH, 
+uint32_t receipt_events_data_LENGTH, 
+uint32_t receipt_events_impacted_REP_LENGTH, 
+uint32_t receipt_events_impacted_LENGTH, 
+uint32_t receipt_transaction_receipts_REP_LENGTH, 
+uint32_t receipt_transaction_receipts_id_LENGTH, 
+uint32_t receipt_transaction_receipts_payer_LENGTH, 
+uint32_t receipt_transaction_receipts_events_REP_LENGTH, 
+uint32_t receipt_transaction_receipts_events_source_LENGTH, 
+uint32_t receipt_transaction_receipts_events_name_LENGTH, 
+uint32_t receipt_transaction_receipts_events_data_LENGTH, 
+uint32_t receipt_transaction_receipts_events_impacted_REP_LENGTH, 
+uint32_t receipt_transaction_receipts_events_impacted_LENGTH>
 class block_item final: public ::EmbeddedProto::MessageInterface
 {
   public:
@@ -129,11 +145,11 @@ class block_item final: public ::EmbeddedProto::MessageInterface
     inline const protocol::block<block_id_LENGTH, block_header_previous_LENGTH, block_active_LENGTH, block_signature_data_LENGTH, block_transactions_REP_LENGTH, block_transactions_id_LENGTH, block_transactions_active_LENGTH, block_transactions_signature_data_LENGTH>& block() const { return block_; }
 
     inline void clear_receipt() { receipt_.clear(); }
-    inline void set_receipt(const protocol::block_receipt& value) { receipt_ = value; }
-    inline void set_receipt(const protocol::block_receipt&& value) { receipt_ = value; }
-    inline protocol::block_receipt& mutable_receipt() { return receipt_; }
-    inline const protocol::block_receipt& get_receipt() const { return receipt_; }
-    inline const protocol::block_receipt& receipt() const { return receipt_; }
+    inline void set_receipt(const protocol::block_receipt<receipt_id_LENGTH, receipt_events_REP_LENGTH, receipt_events_source_LENGTH, receipt_events_name_LENGTH, receipt_events_data_LENGTH, receipt_events_impacted_REP_LENGTH, receipt_events_impacted_LENGTH, receipt_transaction_receipts_REP_LENGTH, receipt_transaction_receipts_id_LENGTH, receipt_transaction_receipts_payer_LENGTH, receipt_transaction_receipts_events_REP_LENGTH, receipt_transaction_receipts_events_source_LENGTH, receipt_transaction_receipts_events_name_LENGTH, receipt_transaction_receipts_events_data_LENGTH, receipt_transaction_receipts_events_impacted_REP_LENGTH, receipt_transaction_receipts_events_impacted_LENGTH>& value) { receipt_ = value; }
+    inline void set_receipt(const protocol::block_receipt<receipt_id_LENGTH, receipt_events_REP_LENGTH, receipt_events_source_LENGTH, receipt_events_name_LENGTH, receipt_events_data_LENGTH, receipt_events_impacted_REP_LENGTH, receipt_events_impacted_LENGTH, receipt_transaction_receipts_REP_LENGTH, receipt_transaction_receipts_id_LENGTH, receipt_transaction_receipts_payer_LENGTH, receipt_transaction_receipts_events_REP_LENGTH, receipt_transaction_receipts_events_source_LENGTH, receipt_transaction_receipts_events_name_LENGTH, receipt_transaction_receipts_events_data_LENGTH, receipt_transaction_receipts_events_impacted_REP_LENGTH, receipt_transaction_receipts_events_impacted_LENGTH>&& value) { receipt_ = value; }
+    inline protocol::block_receipt<receipt_id_LENGTH, receipt_events_REP_LENGTH, receipt_events_source_LENGTH, receipt_events_name_LENGTH, receipt_events_data_LENGTH, receipt_events_impacted_REP_LENGTH, receipt_events_impacted_LENGTH, receipt_transaction_receipts_REP_LENGTH, receipt_transaction_receipts_id_LENGTH, receipt_transaction_receipts_payer_LENGTH, receipt_transaction_receipts_events_REP_LENGTH, receipt_transaction_receipts_events_source_LENGTH, receipt_transaction_receipts_events_name_LENGTH, receipt_transaction_receipts_events_data_LENGTH, receipt_transaction_receipts_events_impacted_REP_LENGTH, receipt_transaction_receipts_events_impacted_LENGTH>& mutable_receipt() { return receipt_; }
+    inline const protocol::block_receipt<receipt_id_LENGTH, receipt_events_REP_LENGTH, receipt_events_source_LENGTH, receipt_events_name_LENGTH, receipt_events_data_LENGTH, receipt_events_impacted_REP_LENGTH, receipt_events_impacted_LENGTH, receipt_transaction_receipts_REP_LENGTH, receipt_transaction_receipts_id_LENGTH, receipt_transaction_receipts_payer_LENGTH, receipt_transaction_receipts_events_REP_LENGTH, receipt_transaction_receipts_events_source_LENGTH, receipt_transaction_receipts_events_name_LENGTH, receipt_transaction_receipts_events_data_LENGTH, receipt_transaction_receipts_events_impacted_REP_LENGTH, receipt_transaction_receipts_events_impacted_LENGTH>& get_receipt() const { return receipt_; }
+    inline const protocol::block_receipt<receipt_id_LENGTH, receipt_events_REP_LENGTH, receipt_events_source_LENGTH, receipt_events_name_LENGTH, receipt_events_data_LENGTH, receipt_events_impacted_REP_LENGTH, receipt_events_impacted_LENGTH, receipt_transaction_receipts_REP_LENGTH, receipt_transaction_receipts_id_LENGTH, receipt_transaction_receipts_payer_LENGTH, receipt_transaction_receipts_events_REP_LENGTH, receipt_transaction_receipts_events_source_LENGTH, receipt_transaction_receipts_events_name_LENGTH, receipt_transaction_receipts_events_data_LENGTH, receipt_transaction_receipts_events_impacted_REP_LENGTH, receipt_transaction_receipts_events_impacted_LENGTH>& receipt() const { return receipt_; }
 
 
     ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
@@ -229,7 +245,7 @@ class block_item final: public ::EmbeddedProto::MessageInterface
       ::EmbeddedProto::FieldBytes<block_id_LENGTH> block_id_;
       EmbeddedProto::uint64 block_height_ = 0U;
       protocol::block<block_id_LENGTH, block_header_previous_LENGTH, block_active_LENGTH, block_signature_data_LENGTH, block_transactions_REP_LENGTH, block_transactions_id_LENGTH, block_transactions_active_LENGTH, block_transactions_signature_data_LENGTH> block_;
-      protocol::block_receipt receipt_;
+      protocol::block_receipt<receipt_id_LENGTH, receipt_events_REP_LENGTH, receipt_events_source_LENGTH, receipt_events_name_LENGTH, receipt_events_data_LENGTH, receipt_events_impacted_REP_LENGTH, receipt_events_impacted_LENGTH, receipt_transaction_receipts_REP_LENGTH, receipt_transaction_receipts_id_LENGTH, receipt_transaction_receipts_payer_LENGTH, receipt_transaction_receipts_events_REP_LENGTH, receipt_transaction_receipts_events_source_LENGTH, receipt_transaction_receipts_events_name_LENGTH, receipt_transaction_receipts_events_data_LENGTH, receipt_transaction_receipts_events_impacted_REP_LENGTH, receipt_transaction_receipts_events_impacted_LENGTH> receipt_;
 
 };
 
@@ -242,6 +258,22 @@ uint32_t block_transactions_REP_LENGTH,
 uint32_t block_transactions_id_LENGTH, 
 uint32_t block_transactions_active_LENGTH, 
 uint32_t block_transactions_signature_data_LENGTH, 
+uint32_t receipt_id_LENGTH, 
+uint32_t receipt_events_REP_LENGTH, 
+uint32_t receipt_events_source_LENGTH, 
+uint32_t receipt_events_name_LENGTH, 
+uint32_t receipt_events_data_LENGTH, 
+uint32_t receipt_events_impacted_REP_LENGTH, 
+uint32_t receipt_events_impacted_LENGTH, 
+uint32_t receipt_transaction_receipts_REP_LENGTH, 
+uint32_t receipt_transaction_receipts_id_LENGTH, 
+uint32_t receipt_transaction_receipts_payer_LENGTH, 
+uint32_t receipt_transaction_receipts_events_REP_LENGTH, 
+uint32_t receipt_transaction_receipts_events_source_LENGTH, 
+uint32_t receipt_transaction_receipts_events_name_LENGTH, 
+uint32_t receipt_transaction_receipts_events_data_LENGTH, 
+uint32_t receipt_transaction_receipts_events_impacted_REP_LENGTH, 
+uint32_t receipt_transaction_receipts_events_impacted_LENGTH, 
 uint32_t previous_block_ids_REP_LENGTH, 
 uint32_t previous_block_ids_LENGTH>
 class block_record final: public ::EmbeddedProto::MessageInterface
@@ -319,11 +351,11 @@ class block_record final: public ::EmbeddedProto::MessageInterface
     inline const protocol::block<block_id_LENGTH, block_header_previous_LENGTH, block_active_LENGTH, block_signature_data_LENGTH, block_transactions_REP_LENGTH, block_transactions_id_LENGTH, block_transactions_active_LENGTH, block_transactions_signature_data_LENGTH>& block() const { return block_; }
 
     inline void clear_receipt() { receipt_.clear(); }
-    inline void set_receipt(const protocol::block_receipt& value) { receipt_ = value; }
-    inline void set_receipt(const protocol::block_receipt&& value) { receipt_ = value; }
-    inline protocol::block_receipt& mutable_receipt() { return receipt_; }
-    inline const protocol::block_receipt& get_receipt() const { return receipt_; }
-    inline const protocol::block_receipt& receipt() const { return receipt_; }
+    inline void set_receipt(const protocol::block_receipt<receipt_id_LENGTH, receipt_events_REP_LENGTH, receipt_events_source_LENGTH, receipt_events_name_LENGTH, receipt_events_data_LENGTH, receipt_events_impacted_REP_LENGTH, receipt_events_impacted_LENGTH, receipt_transaction_receipts_REP_LENGTH, receipt_transaction_receipts_id_LENGTH, receipt_transaction_receipts_payer_LENGTH, receipt_transaction_receipts_events_REP_LENGTH, receipt_transaction_receipts_events_source_LENGTH, receipt_transaction_receipts_events_name_LENGTH, receipt_transaction_receipts_events_data_LENGTH, receipt_transaction_receipts_events_impacted_REP_LENGTH, receipt_transaction_receipts_events_impacted_LENGTH>& value) { receipt_ = value; }
+    inline void set_receipt(const protocol::block_receipt<receipt_id_LENGTH, receipt_events_REP_LENGTH, receipt_events_source_LENGTH, receipt_events_name_LENGTH, receipt_events_data_LENGTH, receipt_events_impacted_REP_LENGTH, receipt_events_impacted_LENGTH, receipt_transaction_receipts_REP_LENGTH, receipt_transaction_receipts_id_LENGTH, receipt_transaction_receipts_payer_LENGTH, receipt_transaction_receipts_events_REP_LENGTH, receipt_transaction_receipts_events_source_LENGTH, receipt_transaction_receipts_events_name_LENGTH, receipt_transaction_receipts_events_data_LENGTH, receipt_transaction_receipts_events_impacted_REP_LENGTH, receipt_transaction_receipts_events_impacted_LENGTH>&& value) { receipt_ = value; }
+    inline protocol::block_receipt<receipt_id_LENGTH, receipt_events_REP_LENGTH, receipt_events_source_LENGTH, receipt_events_name_LENGTH, receipt_events_data_LENGTH, receipt_events_impacted_REP_LENGTH, receipt_events_impacted_LENGTH, receipt_transaction_receipts_REP_LENGTH, receipt_transaction_receipts_id_LENGTH, receipt_transaction_receipts_payer_LENGTH, receipt_transaction_receipts_events_REP_LENGTH, receipt_transaction_receipts_events_source_LENGTH, receipt_transaction_receipts_events_name_LENGTH, receipt_transaction_receipts_events_data_LENGTH, receipt_transaction_receipts_events_impacted_REP_LENGTH, receipt_transaction_receipts_events_impacted_LENGTH>& mutable_receipt() { return receipt_; }
+    inline const protocol::block_receipt<receipt_id_LENGTH, receipt_events_REP_LENGTH, receipt_events_source_LENGTH, receipt_events_name_LENGTH, receipt_events_data_LENGTH, receipt_events_impacted_REP_LENGTH, receipt_events_impacted_LENGTH, receipt_transaction_receipts_REP_LENGTH, receipt_transaction_receipts_id_LENGTH, receipt_transaction_receipts_payer_LENGTH, receipt_transaction_receipts_events_REP_LENGTH, receipt_transaction_receipts_events_source_LENGTH, receipt_transaction_receipts_events_name_LENGTH, receipt_transaction_receipts_events_data_LENGTH, receipt_transaction_receipts_events_impacted_REP_LENGTH, receipt_transaction_receipts_events_impacted_LENGTH>& get_receipt() const { return receipt_; }
+    inline const protocol::block_receipt<receipt_id_LENGTH, receipt_events_REP_LENGTH, receipt_events_source_LENGTH, receipt_events_name_LENGTH, receipt_events_data_LENGTH, receipt_events_impacted_REP_LENGTH, receipt_events_impacted_LENGTH, receipt_transaction_receipts_REP_LENGTH, receipt_transaction_receipts_id_LENGTH, receipt_transaction_receipts_payer_LENGTH, receipt_transaction_receipts_events_REP_LENGTH, receipt_transaction_receipts_events_source_LENGTH, receipt_transaction_receipts_events_name_LENGTH, receipt_transaction_receipts_events_data_LENGTH, receipt_transaction_receipts_events_impacted_REP_LENGTH, receipt_transaction_receipts_events_impacted_LENGTH>& receipt() const { return receipt_; }
 
     inline const ::EmbeddedProto::FieldBytes<previous_block_ids_LENGTH>& previous_block_ids(uint32_t index) const { return previous_block_ids_[index]; }
     inline void clear_previous_block_ids() { previous_block_ids_.clear(); }
@@ -440,7 +472,7 @@ class block_record final: public ::EmbeddedProto::MessageInterface
       ::EmbeddedProto::FieldBytes<block_id_LENGTH> block_id_;
       EmbeddedProto::uint64 block_height_ = 0U;
       protocol::block<block_id_LENGTH, block_header_previous_LENGTH, block_active_LENGTH, block_signature_data_LENGTH, block_transactions_REP_LENGTH, block_transactions_id_LENGTH, block_transactions_active_LENGTH, block_transactions_signature_data_LENGTH> block_;
-      protocol::block_receipt receipt_;
+      protocol::block_receipt<receipt_id_LENGTH, receipt_events_REP_LENGTH, receipt_events_source_LENGTH, receipt_events_name_LENGTH, receipt_events_data_LENGTH, receipt_events_impacted_REP_LENGTH, receipt_events_impacted_LENGTH, receipt_transaction_receipts_REP_LENGTH, receipt_transaction_receipts_id_LENGTH, receipt_transaction_receipts_payer_LENGTH, receipt_transaction_receipts_events_REP_LENGTH, receipt_transaction_receipts_events_source_LENGTH, receipt_transaction_receipts_events_name_LENGTH, receipt_transaction_receipts_events_data_LENGTH, receipt_transaction_receipts_events_impacted_REP_LENGTH, receipt_transaction_receipts_events_impacted_LENGTH> receipt_;
       ::EmbeddedProto::RepeatedFieldFixedSize<::EmbeddedProto::FieldBytes<previous_block_ids_LENGTH>, previous_block_ids_REP_LENGTH> previous_block_ids_;
 
 };

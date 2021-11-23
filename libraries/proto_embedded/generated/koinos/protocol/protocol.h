@@ -49,6 +49,210 @@
 namespace koinos {
 namespace protocol {
 
+template<uint32_t source_LENGTH, 
+uint32_t name_LENGTH, 
+uint32_t data_LENGTH, 
+uint32_t impacted_REP_LENGTH, 
+uint32_t impacted_LENGTH>
+class event_data final: public ::EmbeddedProto::MessageInterface
+{
+  public:
+    event_data() = default;
+    event_data(const event_data& rhs )
+    {
+      set_sequence(rhs.get_sequence());
+      set_source(rhs.get_source());
+      set_name(rhs.get_name());
+      set_data(rhs.get_data());
+      set_impacted(rhs.get_impacted());
+    }
+
+    event_data(const event_data&& rhs ) noexcept
+    {
+      set_sequence(rhs.get_sequence());
+      set_source(rhs.get_source());
+      set_name(rhs.get_name());
+      set_data(rhs.get_data());
+      set_impacted(rhs.get_impacted());
+    }
+
+    ~event_data() override = default;
+
+    enum class FieldNumber : uint32_t
+    {
+      NOT_SET = 0,
+      SEQUENCE = 1,
+      SOURCE = 2,
+      NAME = 3,
+      DATA = 4,
+      IMPACTED = 5
+    };
+
+    event_data& operator=(const event_data& rhs)
+    {
+      set_sequence(rhs.get_sequence());
+      set_source(rhs.get_source());
+      set_name(rhs.get_name());
+      set_data(rhs.get_data());
+      set_impacted(rhs.get_impacted());
+      return *this;
+    }
+
+    event_data& operator=(const event_data&& rhs) noexcept
+    {
+      set_sequence(rhs.get_sequence());
+      set_source(rhs.get_source());
+      set_name(rhs.get_name());
+      set_data(rhs.get_data());
+      set_impacted(rhs.get_impacted());
+      return *this;
+    }
+
+    inline void clear_sequence() { sequence_.clear(); }
+    inline void set_sequence(const EmbeddedProto::uint32& value) { sequence_ = value; }
+    inline void set_sequence(const EmbeddedProto::uint32&& value) { sequence_ = value; }
+    inline EmbeddedProto::uint32& mutable_sequence() { return sequence_; }
+    inline const EmbeddedProto::uint32& get_sequence() const { return sequence_; }
+    inline EmbeddedProto::uint32::FIELD_TYPE sequence() const { return sequence_.get(); }
+
+    inline void clear_source() { source_.clear(); }
+    inline ::EmbeddedProto::FieldBytes<source_LENGTH>& mutable_source() { return source_; }
+    inline void set_source(const ::EmbeddedProto::FieldBytes<source_LENGTH>& rhs) { source_.set(rhs); }
+    inline const ::EmbeddedProto::FieldBytes<source_LENGTH>& get_source() const { return source_; }
+    inline const uint8_t* source() const { return source_.get_const(); }
+
+    inline void clear_name() { name_.clear(); }
+    inline ::EmbeddedProto::FieldString<name_LENGTH>& mutable_name() { return name_; }
+    inline void set_name(const ::EmbeddedProto::FieldString<name_LENGTH>& rhs) { name_.set(rhs); }
+    inline const ::EmbeddedProto::FieldString<name_LENGTH>& get_name() const { return name_; }
+    inline const char* name() const { return name_.get_const(); }
+
+    inline void clear_data() { data_.clear(); }
+    inline ::EmbeddedProto::FieldBytes<data_LENGTH>& mutable_data() { return data_; }
+    inline void set_data(const ::EmbeddedProto::FieldBytes<data_LENGTH>& rhs) { data_.set(rhs); }
+    inline const ::EmbeddedProto::FieldBytes<data_LENGTH>& get_data() const { return data_; }
+    inline const uint8_t* data() const { return data_.get_const(); }
+
+    inline const ::EmbeddedProto::FieldBytes<impacted_LENGTH>& impacted(uint32_t index) const { return impacted_[index]; }
+    inline void clear_impacted() { impacted_.clear(); }
+    inline void set_impacted(uint32_t index, const ::EmbeddedProto::FieldBytes<impacted_LENGTH>& value) { impacted_.set(index, value); }
+    inline void set_impacted(uint32_t index, const ::EmbeddedProto::FieldBytes<impacted_LENGTH>&& value) { impacted_.set(index, value); }
+    inline void set_impacted(const ::EmbeddedProto::RepeatedFieldFixedSize<::EmbeddedProto::FieldBytes<impacted_LENGTH>, impacted_REP_LENGTH>& values) { impacted_ = values; }
+    inline void add_impacted(const ::EmbeddedProto::FieldBytes<impacted_LENGTH>& value) { impacted_.add(value); }
+    inline ::EmbeddedProto::RepeatedFieldFixedSize<::EmbeddedProto::FieldBytes<impacted_LENGTH>, impacted_REP_LENGTH>& mutable_impacted() { return impacted_; }
+    inline ::EmbeddedProto::FieldBytes<impacted_LENGTH>& mutable_impacted(uint32_t index) { return impacted_[index]; }
+    inline const ::EmbeddedProto::RepeatedFieldFixedSize<::EmbeddedProto::FieldBytes<impacted_LENGTH>, impacted_REP_LENGTH>& get_impacted() const { return impacted_; }
+    inline const ::EmbeddedProto::RepeatedFieldFixedSize<::EmbeddedProto::FieldBytes<impacted_LENGTH>, impacted_REP_LENGTH>& impacted() const { return impacted_; }
+
+
+    ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
+    {
+      ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
+
+      if((0U != sequence_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
+      {
+        return_value = sequence_.serialize_with_id(static_cast<uint32_t>(FieldNumber::SEQUENCE), buffer, false);
+      }
+
+      if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+      {
+        return_value = source_.serialize_with_id(static_cast<uint32_t>(FieldNumber::SOURCE), buffer, false);
+      }
+
+      if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+      {
+        return_value = name_.serialize_with_id(static_cast<uint32_t>(FieldNumber::NAME), buffer, false);
+      }
+
+      if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+      {
+        return_value = data_.serialize_with_id(static_cast<uint32_t>(FieldNumber::DATA), buffer, false);
+      }
+
+      if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+      {
+        return_value = impacted_.serialize_with_id(static_cast<uint32_t>(FieldNumber::IMPACTED), buffer, false);
+      }
+
+      return return_value;
+    };
+
+    ::EmbeddedProto::Error deserialize(::EmbeddedProto::ReadBufferInterface& buffer) override
+    {
+      ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
+      ::EmbeddedProto::WireFormatter::WireType wire_type = ::EmbeddedProto::WireFormatter::WireType::VARINT;
+      uint32_t id_number = 0;
+      FieldNumber id_tag = FieldNumber::NOT_SET;
+
+      ::EmbeddedProto::Error tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
+      while((::EmbeddedProto::Error::NO_ERRORS == return_value) && (::EmbeddedProto::Error::NO_ERRORS == tag_value))
+      {
+        id_tag = static_cast<FieldNumber>(id_number);
+        switch(id_tag)
+        {
+          case FieldNumber::SEQUENCE:
+            return_value = sequence_.deserialize_check_type(buffer, wire_type);
+            break;
+
+          case FieldNumber::SOURCE:
+            return_value = source_.deserialize_check_type(buffer, wire_type);
+            break;
+
+          case FieldNumber::NAME:
+            return_value = name_.deserialize_check_type(buffer, wire_type);
+            break;
+
+          case FieldNumber::DATA:
+            return_value = data_.deserialize_check_type(buffer, wire_type);
+            break;
+
+          case FieldNumber::IMPACTED:
+            return_value = impacted_.deserialize_check_type(buffer, wire_type);
+            break;
+
+          default:
+            break;
+        }
+
+        if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+        {
+          // Read the next tag.
+          tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
+        }
+      }
+
+      // When an error was detect while reading the tag but no other errors where found, set it in the return value.
+      if((::EmbeddedProto::Error::NO_ERRORS == return_value)
+         && (::EmbeddedProto::Error::NO_ERRORS != tag_value)
+         && (::EmbeddedProto::Error::END_OF_BUFFER != tag_value)) // The end of the buffer is not an array in this case.
+      {
+        return_value = tag_value;
+      }
+
+      return return_value;
+    };
+
+    void clear() override
+    {
+      clear_sequence();
+      clear_source();
+      clear_name();
+      clear_data();
+      clear_impacted();
+
+    }
+
+    private:
+
+
+      EmbeddedProto::uint32 sequence_ = 0U;
+      ::EmbeddedProto::FieldBytes<source_LENGTH> source_;
+      ::EmbeddedProto::FieldString<name_LENGTH> name_;
+      ::EmbeddedProto::FieldBytes<data_LENGTH> data_;
+      ::EmbeddedProto::RepeatedFieldFixedSize<::EmbeddedProto::FieldBytes<impacted_LENGTH>, impacted_REP_LENGTH> impacted_;
+
+};
+
 template<uint32_t contract_id_LENGTH>
 class contract_call_bundle final: public ::EmbeddedProto::MessageInterface
 {
@@ -1690,6 +1894,329 @@ class transaction final: public ::EmbeddedProto::MessageInterface
 
 };
 
+template<uint32_t id_LENGTH, 
+uint32_t payer_LENGTH, 
+uint32_t events_REP_LENGTH, 
+uint32_t events_source_LENGTH, 
+uint32_t events_name_LENGTH, 
+uint32_t events_data_LENGTH, 
+uint32_t events_impacted_REP_LENGTH, 
+uint32_t events_impacted_LENGTH>
+class transaction_receipt final: public ::EmbeddedProto::MessageInterface
+{
+  public:
+    transaction_receipt() = default;
+    transaction_receipt(const transaction_receipt& rhs )
+    {
+      set_id(rhs.get_id());
+      set_payer(rhs.get_payer());
+      set_max_payer_rc(rhs.get_max_payer_rc());
+      set_rc_limit(rhs.get_rc_limit());
+      set_rc_used(rhs.get_rc_used());
+      set_disk_storage_used(rhs.get_disk_storage_used());
+      set_network_bandwidth_used(rhs.get_network_bandwidth_used());
+      set_compute_bandwidth_used(rhs.get_compute_bandwidth_used());
+      set_reverted(rhs.get_reverted());
+      set_events(rhs.get_events());
+    }
+
+    transaction_receipt(const transaction_receipt&& rhs ) noexcept
+    {
+      set_id(rhs.get_id());
+      set_payer(rhs.get_payer());
+      set_max_payer_rc(rhs.get_max_payer_rc());
+      set_rc_limit(rhs.get_rc_limit());
+      set_rc_used(rhs.get_rc_used());
+      set_disk_storage_used(rhs.get_disk_storage_used());
+      set_network_bandwidth_used(rhs.get_network_bandwidth_used());
+      set_compute_bandwidth_used(rhs.get_compute_bandwidth_used());
+      set_reverted(rhs.get_reverted());
+      set_events(rhs.get_events());
+    }
+
+    ~transaction_receipt() override = default;
+
+    enum class FieldNumber : uint32_t
+    {
+      NOT_SET = 0,
+      ID = 1,
+      PAYER = 2,
+      MAX_PAYER_RC = 3,
+      RC_LIMIT = 4,
+      RC_USED = 5,
+      DISK_STORAGE_USED = 6,
+      NETWORK_BANDWIDTH_USED = 7,
+      COMPUTE_BANDWIDTH_USED = 8,
+      REVERTED = 9,
+      EVENTS = 10
+    };
+
+    transaction_receipt& operator=(const transaction_receipt& rhs)
+    {
+      set_id(rhs.get_id());
+      set_payer(rhs.get_payer());
+      set_max_payer_rc(rhs.get_max_payer_rc());
+      set_rc_limit(rhs.get_rc_limit());
+      set_rc_used(rhs.get_rc_used());
+      set_disk_storage_used(rhs.get_disk_storage_used());
+      set_network_bandwidth_used(rhs.get_network_bandwidth_used());
+      set_compute_bandwidth_used(rhs.get_compute_bandwidth_used());
+      set_reverted(rhs.get_reverted());
+      set_events(rhs.get_events());
+      return *this;
+    }
+
+    transaction_receipt& operator=(const transaction_receipt&& rhs) noexcept
+    {
+      set_id(rhs.get_id());
+      set_payer(rhs.get_payer());
+      set_max_payer_rc(rhs.get_max_payer_rc());
+      set_rc_limit(rhs.get_rc_limit());
+      set_rc_used(rhs.get_rc_used());
+      set_disk_storage_used(rhs.get_disk_storage_used());
+      set_network_bandwidth_used(rhs.get_network_bandwidth_used());
+      set_compute_bandwidth_used(rhs.get_compute_bandwidth_used());
+      set_reverted(rhs.get_reverted());
+      set_events(rhs.get_events());
+      return *this;
+    }
+
+    inline void clear_id() { id_.clear(); }
+    inline ::EmbeddedProto::FieldBytes<id_LENGTH>& mutable_id() { return id_; }
+    inline void set_id(const ::EmbeddedProto::FieldBytes<id_LENGTH>& rhs) { id_.set(rhs); }
+    inline const ::EmbeddedProto::FieldBytes<id_LENGTH>& get_id() const { return id_; }
+    inline const uint8_t* id() const { return id_.get_const(); }
+
+    inline void clear_payer() { payer_.clear(); }
+    inline ::EmbeddedProto::FieldBytes<payer_LENGTH>& mutable_payer() { return payer_; }
+    inline void set_payer(const ::EmbeddedProto::FieldBytes<payer_LENGTH>& rhs) { payer_.set(rhs); }
+    inline const ::EmbeddedProto::FieldBytes<payer_LENGTH>& get_payer() const { return payer_; }
+    inline const uint8_t* payer() const { return payer_.get_const(); }
+
+    inline void clear_max_payer_rc() { max_payer_rc_.clear(); }
+    inline void set_max_payer_rc(const EmbeddedProto::uint64& value) { max_payer_rc_ = value; }
+    inline void set_max_payer_rc(const EmbeddedProto::uint64&& value) { max_payer_rc_ = value; }
+    inline EmbeddedProto::uint64& mutable_max_payer_rc() { return max_payer_rc_; }
+    inline const EmbeddedProto::uint64& get_max_payer_rc() const { return max_payer_rc_; }
+    inline EmbeddedProto::uint64::FIELD_TYPE max_payer_rc() const { return max_payer_rc_.get(); }
+
+    inline void clear_rc_limit() { rc_limit_.clear(); }
+    inline void set_rc_limit(const EmbeddedProto::uint64& value) { rc_limit_ = value; }
+    inline void set_rc_limit(const EmbeddedProto::uint64&& value) { rc_limit_ = value; }
+    inline EmbeddedProto::uint64& mutable_rc_limit() { return rc_limit_; }
+    inline const EmbeddedProto::uint64& get_rc_limit() const { return rc_limit_; }
+    inline EmbeddedProto::uint64::FIELD_TYPE rc_limit() const { return rc_limit_.get(); }
+
+    inline void clear_rc_used() { rc_used_.clear(); }
+    inline void set_rc_used(const EmbeddedProto::uint64& value) { rc_used_ = value; }
+    inline void set_rc_used(const EmbeddedProto::uint64&& value) { rc_used_ = value; }
+    inline EmbeddedProto::uint64& mutable_rc_used() { return rc_used_; }
+    inline const EmbeddedProto::uint64& get_rc_used() const { return rc_used_; }
+    inline EmbeddedProto::uint64::FIELD_TYPE rc_used() const { return rc_used_.get(); }
+
+    inline void clear_disk_storage_used() { disk_storage_used_.clear(); }
+    inline void set_disk_storage_used(const EmbeddedProto::uint64& value) { disk_storage_used_ = value; }
+    inline void set_disk_storage_used(const EmbeddedProto::uint64&& value) { disk_storage_used_ = value; }
+    inline EmbeddedProto::uint64& mutable_disk_storage_used() { return disk_storage_used_; }
+    inline const EmbeddedProto::uint64& get_disk_storage_used() const { return disk_storage_used_; }
+    inline EmbeddedProto::uint64::FIELD_TYPE disk_storage_used() const { return disk_storage_used_.get(); }
+
+    inline void clear_network_bandwidth_used() { network_bandwidth_used_.clear(); }
+    inline void set_network_bandwidth_used(const EmbeddedProto::uint64& value) { network_bandwidth_used_ = value; }
+    inline void set_network_bandwidth_used(const EmbeddedProto::uint64&& value) { network_bandwidth_used_ = value; }
+    inline EmbeddedProto::uint64& mutable_network_bandwidth_used() { return network_bandwidth_used_; }
+    inline const EmbeddedProto::uint64& get_network_bandwidth_used() const { return network_bandwidth_used_; }
+    inline EmbeddedProto::uint64::FIELD_TYPE network_bandwidth_used() const { return network_bandwidth_used_.get(); }
+
+    inline void clear_compute_bandwidth_used() { compute_bandwidth_used_.clear(); }
+    inline void set_compute_bandwidth_used(const EmbeddedProto::uint64& value) { compute_bandwidth_used_ = value; }
+    inline void set_compute_bandwidth_used(const EmbeddedProto::uint64&& value) { compute_bandwidth_used_ = value; }
+    inline EmbeddedProto::uint64& mutable_compute_bandwidth_used() { return compute_bandwidth_used_; }
+    inline const EmbeddedProto::uint64& get_compute_bandwidth_used() const { return compute_bandwidth_used_; }
+    inline EmbeddedProto::uint64::FIELD_TYPE compute_bandwidth_used() const { return compute_bandwidth_used_.get(); }
+
+    inline void clear_reverted() { reverted_.clear(); }
+    inline void set_reverted(const EmbeddedProto::boolean& value) { reverted_ = value; }
+    inline void set_reverted(const EmbeddedProto::boolean&& value) { reverted_ = value; }
+    inline EmbeddedProto::boolean& mutable_reverted() { return reverted_; }
+    inline const EmbeddedProto::boolean& get_reverted() const { return reverted_; }
+    inline EmbeddedProto::boolean::FIELD_TYPE reverted() const { return reverted_.get(); }
+
+    inline const event_data<events_source_LENGTH, events_name_LENGTH, events_data_LENGTH, events_impacted_REP_LENGTH, events_impacted_LENGTH>& events(uint32_t index) const { return events_[index]; }
+    inline void clear_events() { events_.clear(); }
+    inline void set_events(uint32_t index, const event_data<events_source_LENGTH, events_name_LENGTH, events_data_LENGTH, events_impacted_REP_LENGTH, events_impacted_LENGTH>& value) { events_.set(index, value); }
+    inline void set_events(uint32_t index, const event_data<events_source_LENGTH, events_name_LENGTH, events_data_LENGTH, events_impacted_REP_LENGTH, events_impacted_LENGTH>&& value) { events_.set(index, value); }
+    inline void set_events(const ::EmbeddedProto::RepeatedFieldFixedSize<event_data<events_source_LENGTH, events_name_LENGTH, events_data_LENGTH, events_impacted_REP_LENGTH, events_impacted_LENGTH>, events_REP_LENGTH>& values) { events_ = values; }
+    inline void add_events(const event_data<events_source_LENGTH, events_name_LENGTH, events_data_LENGTH, events_impacted_REP_LENGTH, events_impacted_LENGTH>& value) { events_.add(value); }
+    inline ::EmbeddedProto::RepeatedFieldFixedSize<event_data<events_source_LENGTH, events_name_LENGTH, events_data_LENGTH, events_impacted_REP_LENGTH, events_impacted_LENGTH>, events_REP_LENGTH>& mutable_events() { return events_; }
+    inline event_data<events_source_LENGTH, events_name_LENGTH, events_data_LENGTH, events_impacted_REP_LENGTH, events_impacted_LENGTH>& mutable_events(uint32_t index) { return events_[index]; }
+    inline const ::EmbeddedProto::RepeatedFieldFixedSize<event_data<events_source_LENGTH, events_name_LENGTH, events_data_LENGTH, events_impacted_REP_LENGTH, events_impacted_LENGTH>, events_REP_LENGTH>& get_events() const { return events_; }
+    inline const ::EmbeddedProto::RepeatedFieldFixedSize<event_data<events_source_LENGTH, events_name_LENGTH, events_data_LENGTH, events_impacted_REP_LENGTH, events_impacted_LENGTH>, events_REP_LENGTH>& events() const { return events_; }
+
+
+    ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
+    {
+      ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
+
+      if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+      {
+        return_value = id_.serialize_with_id(static_cast<uint32_t>(FieldNumber::ID), buffer, false);
+      }
+
+      if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+      {
+        return_value = payer_.serialize_with_id(static_cast<uint32_t>(FieldNumber::PAYER), buffer, false);
+      }
+
+      if((0U != max_payer_rc_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
+      {
+        return_value = max_payer_rc_.serialize_with_id(static_cast<uint32_t>(FieldNumber::MAX_PAYER_RC), buffer, false);
+      }
+
+      if((0U != rc_limit_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
+      {
+        return_value = rc_limit_.serialize_with_id(static_cast<uint32_t>(FieldNumber::RC_LIMIT), buffer, false);
+      }
+
+      if((0U != rc_used_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
+      {
+        return_value = rc_used_.serialize_with_id(static_cast<uint32_t>(FieldNumber::RC_USED), buffer, false);
+      }
+
+      if((0U != disk_storage_used_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
+      {
+        return_value = disk_storage_used_.serialize_with_id(static_cast<uint32_t>(FieldNumber::DISK_STORAGE_USED), buffer, false);
+      }
+
+      if((0U != network_bandwidth_used_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
+      {
+        return_value = network_bandwidth_used_.serialize_with_id(static_cast<uint32_t>(FieldNumber::NETWORK_BANDWIDTH_USED), buffer, false);
+      }
+
+      if((0U != compute_bandwidth_used_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
+      {
+        return_value = compute_bandwidth_used_.serialize_with_id(static_cast<uint32_t>(FieldNumber::COMPUTE_BANDWIDTH_USED), buffer, false);
+      }
+
+      if((false != reverted_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
+      {
+        return_value = reverted_.serialize_with_id(static_cast<uint32_t>(FieldNumber::REVERTED), buffer, false);
+      }
+
+      if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+      {
+        return_value = events_.serialize_with_id(static_cast<uint32_t>(FieldNumber::EVENTS), buffer, false);
+      }
+
+      return return_value;
+    };
+
+    ::EmbeddedProto::Error deserialize(::EmbeddedProto::ReadBufferInterface& buffer) override
+    {
+      ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
+      ::EmbeddedProto::WireFormatter::WireType wire_type = ::EmbeddedProto::WireFormatter::WireType::VARINT;
+      uint32_t id_number = 0;
+      FieldNumber id_tag = FieldNumber::NOT_SET;
+
+      ::EmbeddedProto::Error tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
+      while((::EmbeddedProto::Error::NO_ERRORS == return_value) && (::EmbeddedProto::Error::NO_ERRORS == tag_value))
+      {
+        id_tag = static_cast<FieldNumber>(id_number);
+        switch(id_tag)
+        {
+          case FieldNumber::ID:
+            return_value = id_.deserialize_check_type(buffer, wire_type);
+            break;
+
+          case FieldNumber::PAYER:
+            return_value = payer_.deserialize_check_type(buffer, wire_type);
+            break;
+
+          case FieldNumber::MAX_PAYER_RC:
+            return_value = max_payer_rc_.deserialize_check_type(buffer, wire_type);
+            break;
+
+          case FieldNumber::RC_LIMIT:
+            return_value = rc_limit_.deserialize_check_type(buffer, wire_type);
+            break;
+
+          case FieldNumber::RC_USED:
+            return_value = rc_used_.deserialize_check_type(buffer, wire_type);
+            break;
+
+          case FieldNumber::DISK_STORAGE_USED:
+            return_value = disk_storage_used_.deserialize_check_type(buffer, wire_type);
+            break;
+
+          case FieldNumber::NETWORK_BANDWIDTH_USED:
+            return_value = network_bandwidth_used_.deserialize_check_type(buffer, wire_type);
+            break;
+
+          case FieldNumber::COMPUTE_BANDWIDTH_USED:
+            return_value = compute_bandwidth_used_.deserialize_check_type(buffer, wire_type);
+            break;
+
+          case FieldNumber::REVERTED:
+            return_value = reverted_.deserialize_check_type(buffer, wire_type);
+            break;
+
+          case FieldNumber::EVENTS:
+            return_value = events_.deserialize_check_type(buffer, wire_type);
+            break;
+
+          default:
+            break;
+        }
+
+        if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+        {
+          // Read the next tag.
+          tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
+        }
+      }
+
+      // When an error was detect while reading the tag but no other errors where found, set it in the return value.
+      if((::EmbeddedProto::Error::NO_ERRORS == return_value)
+         && (::EmbeddedProto::Error::NO_ERRORS != tag_value)
+         && (::EmbeddedProto::Error::END_OF_BUFFER != tag_value)) // The end of the buffer is not an array in this case.
+      {
+        return_value = tag_value;
+      }
+
+      return return_value;
+    };
+
+    void clear() override
+    {
+      clear_id();
+      clear_payer();
+      clear_max_payer_rc();
+      clear_rc_limit();
+      clear_rc_used();
+      clear_disk_storage_used();
+      clear_network_bandwidth_used();
+      clear_compute_bandwidth_used();
+      clear_reverted();
+      clear_events();
+
+    }
+
+    private:
+
+
+      ::EmbeddedProto::FieldBytes<id_LENGTH> id_;
+      ::EmbeddedProto::FieldBytes<payer_LENGTH> payer_;
+      EmbeddedProto::uint64 max_payer_rc_ = 0U;
+      EmbeddedProto::uint64 rc_limit_ = 0U;
+      EmbeddedProto::uint64 rc_used_ = 0U;
+      EmbeddedProto::uint64 disk_storage_used_ = 0U;
+      EmbeddedProto::uint64 network_bandwidth_used_ = 0U;
+      EmbeddedProto::uint64 compute_bandwidth_used_ = 0U;
+      EmbeddedProto::boolean reverted_ = false;
+      ::EmbeddedProto::RepeatedFieldFixedSize<event_data<events_source_LENGTH, events_name_LENGTH, events_data_LENGTH, events_impacted_REP_LENGTH, events_impacted_LENGTH>, events_REP_LENGTH> events_;
+
+};
+
 template<uint32_t transaction_merkle_root_LENGTH, 
 uint32_t signer_LENGTH>
 class active_block_data final: public ::EmbeddedProto::MessageInterface
@@ -2178,16 +2705,46 @@ class block final: public ::EmbeddedProto::MessageInterface
 
 };
 
+template<uint32_t id_LENGTH, 
+uint32_t events_REP_LENGTH, 
+uint32_t events_source_LENGTH, 
+uint32_t events_name_LENGTH, 
+uint32_t events_data_LENGTH, 
+uint32_t events_impacted_REP_LENGTH, 
+uint32_t events_impacted_LENGTH, 
+uint32_t transaction_receipts_REP_LENGTH, 
+uint32_t transaction_receipts_id_LENGTH, 
+uint32_t transaction_receipts_payer_LENGTH, 
+uint32_t transaction_receipts_events_REP_LENGTH, 
+uint32_t transaction_receipts_events_source_LENGTH, 
+uint32_t transaction_receipts_events_name_LENGTH, 
+uint32_t transaction_receipts_events_data_LENGTH, 
+uint32_t transaction_receipts_events_impacted_REP_LENGTH, 
+uint32_t transaction_receipts_events_impacted_LENGTH>
 class block_receipt final: public ::EmbeddedProto::MessageInterface
 {
   public:
     block_receipt() = default;
     block_receipt(const block_receipt& rhs )
     {
+      set_id(rhs.get_id());
+      set_height(rhs.get_height());
+      set_disk_storage_used(rhs.get_disk_storage_used());
+      set_network_bandwidth_used(rhs.get_network_bandwidth_used());
+      set_compute_bandwidth_used(rhs.get_compute_bandwidth_used());
+      set_events(rhs.get_events());
+      set_transaction_receipts(rhs.get_transaction_receipts());
     }
 
     block_receipt(const block_receipt&& rhs ) noexcept
     {
+      set_id(rhs.get_id());
+      set_height(rhs.get_height());
+      set_disk_storage_used(rhs.get_disk_storage_used());
+      set_network_bandwidth_used(rhs.get_network_bandwidth_used());
+      set_compute_bandwidth_used(rhs.get_compute_bandwidth_used());
+      set_events(rhs.get_events());
+      set_transaction_receipts(rhs.get_transaction_receipts());
     }
 
     ~block_receipt() override = default;
@@ -2195,22 +2752,134 @@ class block_receipt final: public ::EmbeddedProto::MessageInterface
     enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
+      ID = 1,
+      HEIGHT = 2,
+      DISK_STORAGE_USED = 3,
+      NETWORK_BANDWIDTH_USED = 4,
+      COMPUTE_BANDWIDTH_USED = 5,
+      EVENTS = 6,
+      TRANSACTION_RECEIPTS = 7
     };
 
     block_receipt& operator=(const block_receipt& rhs)
     {
+      set_id(rhs.get_id());
+      set_height(rhs.get_height());
+      set_disk_storage_used(rhs.get_disk_storage_used());
+      set_network_bandwidth_used(rhs.get_network_bandwidth_used());
+      set_compute_bandwidth_used(rhs.get_compute_bandwidth_used());
+      set_events(rhs.get_events());
+      set_transaction_receipts(rhs.get_transaction_receipts());
       return *this;
     }
 
     block_receipt& operator=(const block_receipt&& rhs) noexcept
     {
+      set_id(rhs.get_id());
+      set_height(rhs.get_height());
+      set_disk_storage_used(rhs.get_disk_storage_used());
+      set_network_bandwidth_used(rhs.get_network_bandwidth_used());
+      set_compute_bandwidth_used(rhs.get_compute_bandwidth_used());
+      set_events(rhs.get_events());
+      set_transaction_receipts(rhs.get_transaction_receipts());
       return *this;
     }
+
+    inline void clear_id() { id_.clear(); }
+    inline ::EmbeddedProto::FieldBytes<id_LENGTH>& mutable_id() { return id_; }
+    inline void set_id(const ::EmbeddedProto::FieldBytes<id_LENGTH>& rhs) { id_.set(rhs); }
+    inline const ::EmbeddedProto::FieldBytes<id_LENGTH>& get_id() const { return id_; }
+    inline const uint8_t* id() const { return id_.get_const(); }
+
+    inline void clear_height() { height_.clear(); }
+    inline void set_height(const EmbeddedProto::uint64& value) { height_ = value; }
+    inline void set_height(const EmbeddedProto::uint64&& value) { height_ = value; }
+    inline EmbeddedProto::uint64& mutable_height() { return height_; }
+    inline const EmbeddedProto::uint64& get_height() const { return height_; }
+    inline EmbeddedProto::uint64::FIELD_TYPE height() const { return height_.get(); }
+
+    inline void clear_disk_storage_used() { disk_storage_used_.clear(); }
+    inline void set_disk_storage_used(const EmbeddedProto::uint64& value) { disk_storage_used_ = value; }
+    inline void set_disk_storage_used(const EmbeddedProto::uint64&& value) { disk_storage_used_ = value; }
+    inline EmbeddedProto::uint64& mutable_disk_storage_used() { return disk_storage_used_; }
+    inline const EmbeddedProto::uint64& get_disk_storage_used() const { return disk_storage_used_; }
+    inline EmbeddedProto::uint64::FIELD_TYPE disk_storage_used() const { return disk_storage_used_.get(); }
+
+    inline void clear_network_bandwidth_used() { network_bandwidth_used_.clear(); }
+    inline void set_network_bandwidth_used(const EmbeddedProto::uint64& value) { network_bandwidth_used_ = value; }
+    inline void set_network_bandwidth_used(const EmbeddedProto::uint64&& value) { network_bandwidth_used_ = value; }
+    inline EmbeddedProto::uint64& mutable_network_bandwidth_used() { return network_bandwidth_used_; }
+    inline const EmbeddedProto::uint64& get_network_bandwidth_used() const { return network_bandwidth_used_; }
+    inline EmbeddedProto::uint64::FIELD_TYPE network_bandwidth_used() const { return network_bandwidth_used_.get(); }
+
+    inline void clear_compute_bandwidth_used() { compute_bandwidth_used_.clear(); }
+    inline void set_compute_bandwidth_used(const EmbeddedProto::uint64& value) { compute_bandwidth_used_ = value; }
+    inline void set_compute_bandwidth_used(const EmbeddedProto::uint64&& value) { compute_bandwidth_used_ = value; }
+    inline EmbeddedProto::uint64& mutable_compute_bandwidth_used() { return compute_bandwidth_used_; }
+    inline const EmbeddedProto::uint64& get_compute_bandwidth_used() const { return compute_bandwidth_used_; }
+    inline EmbeddedProto::uint64::FIELD_TYPE compute_bandwidth_used() const { return compute_bandwidth_used_.get(); }
+
+    inline const event_data<events_source_LENGTH, events_name_LENGTH, events_data_LENGTH, events_impacted_REP_LENGTH, events_impacted_LENGTH>& events(uint32_t index) const { return events_[index]; }
+    inline void clear_events() { events_.clear(); }
+    inline void set_events(uint32_t index, const event_data<events_source_LENGTH, events_name_LENGTH, events_data_LENGTH, events_impacted_REP_LENGTH, events_impacted_LENGTH>& value) { events_.set(index, value); }
+    inline void set_events(uint32_t index, const event_data<events_source_LENGTH, events_name_LENGTH, events_data_LENGTH, events_impacted_REP_LENGTH, events_impacted_LENGTH>&& value) { events_.set(index, value); }
+    inline void set_events(const ::EmbeddedProto::RepeatedFieldFixedSize<event_data<events_source_LENGTH, events_name_LENGTH, events_data_LENGTH, events_impacted_REP_LENGTH, events_impacted_LENGTH>, events_REP_LENGTH>& values) { events_ = values; }
+    inline void add_events(const event_data<events_source_LENGTH, events_name_LENGTH, events_data_LENGTH, events_impacted_REP_LENGTH, events_impacted_LENGTH>& value) { events_.add(value); }
+    inline ::EmbeddedProto::RepeatedFieldFixedSize<event_data<events_source_LENGTH, events_name_LENGTH, events_data_LENGTH, events_impacted_REP_LENGTH, events_impacted_LENGTH>, events_REP_LENGTH>& mutable_events() { return events_; }
+    inline event_data<events_source_LENGTH, events_name_LENGTH, events_data_LENGTH, events_impacted_REP_LENGTH, events_impacted_LENGTH>& mutable_events(uint32_t index) { return events_[index]; }
+    inline const ::EmbeddedProto::RepeatedFieldFixedSize<event_data<events_source_LENGTH, events_name_LENGTH, events_data_LENGTH, events_impacted_REP_LENGTH, events_impacted_LENGTH>, events_REP_LENGTH>& get_events() const { return events_; }
+    inline const ::EmbeddedProto::RepeatedFieldFixedSize<event_data<events_source_LENGTH, events_name_LENGTH, events_data_LENGTH, events_impacted_REP_LENGTH, events_impacted_LENGTH>, events_REP_LENGTH>& events() const { return events_; }
+
+    inline const transaction_receipt<transaction_receipts_id_LENGTH, transaction_receipts_payer_LENGTH, transaction_receipts_events_REP_LENGTH, transaction_receipts_events_source_LENGTH, transaction_receipts_events_name_LENGTH, transaction_receipts_events_data_LENGTH, transaction_receipts_events_impacted_REP_LENGTH, transaction_receipts_events_impacted_LENGTH>& transaction_receipts(uint32_t index) const { return transaction_receipts_[index]; }
+    inline void clear_transaction_receipts() { transaction_receipts_.clear(); }
+    inline void set_transaction_receipts(uint32_t index, const transaction_receipt<transaction_receipts_id_LENGTH, transaction_receipts_payer_LENGTH, transaction_receipts_events_REP_LENGTH, transaction_receipts_events_source_LENGTH, transaction_receipts_events_name_LENGTH, transaction_receipts_events_data_LENGTH, transaction_receipts_events_impacted_REP_LENGTH, transaction_receipts_events_impacted_LENGTH>& value) { transaction_receipts_.set(index, value); }
+    inline void set_transaction_receipts(uint32_t index, const transaction_receipt<transaction_receipts_id_LENGTH, transaction_receipts_payer_LENGTH, transaction_receipts_events_REP_LENGTH, transaction_receipts_events_source_LENGTH, transaction_receipts_events_name_LENGTH, transaction_receipts_events_data_LENGTH, transaction_receipts_events_impacted_REP_LENGTH, transaction_receipts_events_impacted_LENGTH>&& value) { transaction_receipts_.set(index, value); }
+    inline void set_transaction_receipts(const ::EmbeddedProto::RepeatedFieldFixedSize<transaction_receipt<transaction_receipts_id_LENGTH, transaction_receipts_payer_LENGTH, transaction_receipts_events_REP_LENGTH, transaction_receipts_events_source_LENGTH, transaction_receipts_events_name_LENGTH, transaction_receipts_events_data_LENGTH, transaction_receipts_events_impacted_REP_LENGTH, transaction_receipts_events_impacted_LENGTH>, transaction_receipts_REP_LENGTH>& values) { transaction_receipts_ = values; }
+    inline void add_transaction_receipts(const transaction_receipt<transaction_receipts_id_LENGTH, transaction_receipts_payer_LENGTH, transaction_receipts_events_REP_LENGTH, transaction_receipts_events_source_LENGTH, transaction_receipts_events_name_LENGTH, transaction_receipts_events_data_LENGTH, transaction_receipts_events_impacted_REP_LENGTH, transaction_receipts_events_impacted_LENGTH>& value) { transaction_receipts_.add(value); }
+    inline ::EmbeddedProto::RepeatedFieldFixedSize<transaction_receipt<transaction_receipts_id_LENGTH, transaction_receipts_payer_LENGTH, transaction_receipts_events_REP_LENGTH, transaction_receipts_events_source_LENGTH, transaction_receipts_events_name_LENGTH, transaction_receipts_events_data_LENGTH, transaction_receipts_events_impacted_REP_LENGTH, transaction_receipts_events_impacted_LENGTH>, transaction_receipts_REP_LENGTH>& mutable_transaction_receipts() { return transaction_receipts_; }
+    inline transaction_receipt<transaction_receipts_id_LENGTH, transaction_receipts_payer_LENGTH, transaction_receipts_events_REP_LENGTH, transaction_receipts_events_source_LENGTH, transaction_receipts_events_name_LENGTH, transaction_receipts_events_data_LENGTH, transaction_receipts_events_impacted_REP_LENGTH, transaction_receipts_events_impacted_LENGTH>& mutable_transaction_receipts(uint32_t index) { return transaction_receipts_[index]; }
+    inline const ::EmbeddedProto::RepeatedFieldFixedSize<transaction_receipt<transaction_receipts_id_LENGTH, transaction_receipts_payer_LENGTH, transaction_receipts_events_REP_LENGTH, transaction_receipts_events_source_LENGTH, transaction_receipts_events_name_LENGTH, transaction_receipts_events_data_LENGTH, transaction_receipts_events_impacted_REP_LENGTH, transaction_receipts_events_impacted_LENGTH>, transaction_receipts_REP_LENGTH>& get_transaction_receipts() const { return transaction_receipts_; }
+    inline const ::EmbeddedProto::RepeatedFieldFixedSize<transaction_receipt<transaction_receipts_id_LENGTH, transaction_receipts_payer_LENGTH, transaction_receipts_events_REP_LENGTH, transaction_receipts_events_source_LENGTH, transaction_receipts_events_name_LENGTH, transaction_receipts_events_data_LENGTH, transaction_receipts_events_impacted_REP_LENGTH, transaction_receipts_events_impacted_LENGTH>, transaction_receipts_REP_LENGTH>& transaction_receipts() const { return transaction_receipts_; }
 
 
     ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
     {
       ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
+
+      if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+      {
+        return_value = id_.serialize_with_id(static_cast<uint32_t>(FieldNumber::ID), buffer, false);
+      }
+
+      if((0U != height_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
+      {
+        return_value = height_.serialize_with_id(static_cast<uint32_t>(FieldNumber::HEIGHT), buffer, false);
+      }
+
+      if((0U != disk_storage_used_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
+      {
+        return_value = disk_storage_used_.serialize_with_id(static_cast<uint32_t>(FieldNumber::DISK_STORAGE_USED), buffer, false);
+      }
+
+      if((0U != network_bandwidth_used_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
+      {
+        return_value = network_bandwidth_used_.serialize_with_id(static_cast<uint32_t>(FieldNumber::NETWORK_BANDWIDTH_USED), buffer, false);
+      }
+
+      if((0U != compute_bandwidth_used_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
+      {
+        return_value = compute_bandwidth_used_.serialize_with_id(static_cast<uint32_t>(FieldNumber::COMPUTE_BANDWIDTH_USED), buffer, false);
+      }
+
+      if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+      {
+        return_value = events_.serialize_with_id(static_cast<uint32_t>(FieldNumber::EVENTS), buffer, false);
+      }
+
+      if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+      {
+        return_value = transaction_receipts_.serialize_with_id(static_cast<uint32_t>(FieldNumber::TRANSACTION_RECEIPTS), buffer, false);
+      }
 
       return return_value;
     };
@@ -2228,6 +2897,34 @@ class block_receipt final: public ::EmbeddedProto::MessageInterface
         id_tag = static_cast<FieldNumber>(id_number);
         switch(id_tag)
         {
+          case FieldNumber::ID:
+            return_value = id_.deserialize_check_type(buffer, wire_type);
+            break;
+
+          case FieldNumber::HEIGHT:
+            return_value = height_.deserialize_check_type(buffer, wire_type);
+            break;
+
+          case FieldNumber::DISK_STORAGE_USED:
+            return_value = disk_storage_used_.deserialize_check_type(buffer, wire_type);
+            break;
+
+          case FieldNumber::NETWORK_BANDWIDTH_USED:
+            return_value = network_bandwidth_used_.deserialize_check_type(buffer, wire_type);
+            break;
+
+          case FieldNumber::COMPUTE_BANDWIDTH_USED:
+            return_value = compute_bandwidth_used_.deserialize_check_type(buffer, wire_type);
+            break;
+
+          case FieldNumber::EVENTS:
+            return_value = events_.deserialize_check_type(buffer, wire_type);
+            break;
+
+          case FieldNumber::TRANSACTION_RECEIPTS:
+            return_value = transaction_receipts_.deserialize_check_type(buffer, wire_type);
+            break;
+
           default:
             break;
         }
@@ -2252,12 +2949,26 @@ class block_receipt final: public ::EmbeddedProto::MessageInterface
 
     void clear() override
     {
+      clear_id();
+      clear_height();
+      clear_disk_storage_used();
+      clear_network_bandwidth_used();
+      clear_compute_bandwidth_used();
+      clear_events();
+      clear_transaction_receipts();
 
     }
 
     private:
 
 
+      ::EmbeddedProto::FieldBytes<id_LENGTH> id_;
+      EmbeddedProto::uint64 height_ = 0U;
+      EmbeddedProto::uint64 disk_storage_used_ = 0U;
+      EmbeddedProto::uint64 network_bandwidth_used_ = 0U;
+      EmbeddedProto::uint64 compute_bandwidth_used_ = 0U;
+      ::EmbeddedProto::RepeatedFieldFixedSize<event_data<events_source_LENGTH, events_name_LENGTH, events_data_LENGTH, events_impacted_REP_LENGTH, events_impacted_LENGTH>, events_REP_LENGTH> events_;
+      ::EmbeddedProto::RepeatedFieldFixedSize<transaction_receipt<transaction_receipts_id_LENGTH, transaction_receipts_payer_LENGTH, transaction_receipts_events_REP_LENGTH, transaction_receipts_events_source_LENGTH, transaction_receipts_events_name_LENGTH, transaction_receipts_events_data_LENGTH, transaction_receipts_events_impacted_REP_LENGTH, transaction_receipts_events_impacted_LENGTH>, transaction_receipts_REP_LENGTH> transaction_receipts_;
 
 };
 

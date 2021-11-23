@@ -237,16 +237,34 @@ class submit_block_request final: public ::EmbeddedProto::MessageInterface
 
 };
 
+template<uint32_t receipt_id_LENGTH, 
+uint32_t receipt_events_REP_LENGTH, 
+uint32_t receipt_events_source_LENGTH, 
+uint32_t receipt_events_name_LENGTH, 
+uint32_t receipt_events_data_LENGTH, 
+uint32_t receipt_events_impacted_REP_LENGTH, 
+uint32_t receipt_events_impacted_LENGTH, 
+uint32_t receipt_transaction_receipts_REP_LENGTH, 
+uint32_t receipt_transaction_receipts_id_LENGTH, 
+uint32_t receipt_transaction_receipts_payer_LENGTH, 
+uint32_t receipt_transaction_receipts_events_REP_LENGTH, 
+uint32_t receipt_transaction_receipts_events_source_LENGTH, 
+uint32_t receipt_transaction_receipts_events_name_LENGTH, 
+uint32_t receipt_transaction_receipts_events_data_LENGTH, 
+uint32_t receipt_transaction_receipts_events_impacted_REP_LENGTH, 
+uint32_t receipt_transaction_receipts_events_impacted_LENGTH>
 class submit_block_response final: public ::EmbeddedProto::MessageInterface
 {
   public:
     submit_block_response() = default;
     submit_block_response(const submit_block_response& rhs )
     {
+      set_receipt(rhs.get_receipt());
     }
 
     submit_block_response(const submit_block_response&& rhs ) noexcept
     {
+      set_receipt(rhs.get_receipt());
     }
 
     ~submit_block_response() override = default;
@@ -254,22 +272,37 @@ class submit_block_response final: public ::EmbeddedProto::MessageInterface
     enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
+      RECEIPT = 1
     };
 
     submit_block_response& operator=(const submit_block_response& rhs)
     {
+      set_receipt(rhs.get_receipt());
       return *this;
     }
 
     submit_block_response& operator=(const submit_block_response&& rhs) noexcept
     {
+      set_receipt(rhs.get_receipt());
       return *this;
     }
+
+    inline void clear_receipt() { receipt_.clear(); }
+    inline void set_receipt(const protocol::block_receipt<receipt_id_LENGTH, receipt_events_REP_LENGTH, receipt_events_source_LENGTH, receipt_events_name_LENGTH, receipt_events_data_LENGTH, receipt_events_impacted_REP_LENGTH, receipt_events_impacted_LENGTH, receipt_transaction_receipts_REP_LENGTH, receipt_transaction_receipts_id_LENGTH, receipt_transaction_receipts_payer_LENGTH, receipt_transaction_receipts_events_REP_LENGTH, receipt_transaction_receipts_events_source_LENGTH, receipt_transaction_receipts_events_name_LENGTH, receipt_transaction_receipts_events_data_LENGTH, receipt_transaction_receipts_events_impacted_REP_LENGTH, receipt_transaction_receipts_events_impacted_LENGTH>& value) { receipt_ = value; }
+    inline void set_receipt(const protocol::block_receipt<receipt_id_LENGTH, receipt_events_REP_LENGTH, receipt_events_source_LENGTH, receipt_events_name_LENGTH, receipt_events_data_LENGTH, receipt_events_impacted_REP_LENGTH, receipt_events_impacted_LENGTH, receipt_transaction_receipts_REP_LENGTH, receipt_transaction_receipts_id_LENGTH, receipt_transaction_receipts_payer_LENGTH, receipt_transaction_receipts_events_REP_LENGTH, receipt_transaction_receipts_events_source_LENGTH, receipt_transaction_receipts_events_name_LENGTH, receipt_transaction_receipts_events_data_LENGTH, receipt_transaction_receipts_events_impacted_REP_LENGTH, receipt_transaction_receipts_events_impacted_LENGTH>&& value) { receipt_ = value; }
+    inline protocol::block_receipt<receipt_id_LENGTH, receipt_events_REP_LENGTH, receipt_events_source_LENGTH, receipt_events_name_LENGTH, receipt_events_data_LENGTH, receipt_events_impacted_REP_LENGTH, receipt_events_impacted_LENGTH, receipt_transaction_receipts_REP_LENGTH, receipt_transaction_receipts_id_LENGTH, receipt_transaction_receipts_payer_LENGTH, receipt_transaction_receipts_events_REP_LENGTH, receipt_transaction_receipts_events_source_LENGTH, receipt_transaction_receipts_events_name_LENGTH, receipt_transaction_receipts_events_data_LENGTH, receipt_transaction_receipts_events_impacted_REP_LENGTH, receipt_transaction_receipts_events_impacted_LENGTH>& mutable_receipt() { return receipt_; }
+    inline const protocol::block_receipt<receipt_id_LENGTH, receipt_events_REP_LENGTH, receipt_events_source_LENGTH, receipt_events_name_LENGTH, receipt_events_data_LENGTH, receipt_events_impacted_REP_LENGTH, receipt_events_impacted_LENGTH, receipt_transaction_receipts_REP_LENGTH, receipt_transaction_receipts_id_LENGTH, receipt_transaction_receipts_payer_LENGTH, receipt_transaction_receipts_events_REP_LENGTH, receipt_transaction_receipts_events_source_LENGTH, receipt_transaction_receipts_events_name_LENGTH, receipt_transaction_receipts_events_data_LENGTH, receipt_transaction_receipts_events_impacted_REP_LENGTH, receipt_transaction_receipts_events_impacted_LENGTH>& get_receipt() const { return receipt_; }
+    inline const protocol::block_receipt<receipt_id_LENGTH, receipt_events_REP_LENGTH, receipt_events_source_LENGTH, receipt_events_name_LENGTH, receipt_events_data_LENGTH, receipt_events_impacted_REP_LENGTH, receipt_events_impacted_LENGTH, receipt_transaction_receipts_REP_LENGTH, receipt_transaction_receipts_id_LENGTH, receipt_transaction_receipts_payer_LENGTH, receipt_transaction_receipts_events_REP_LENGTH, receipt_transaction_receipts_events_source_LENGTH, receipt_transaction_receipts_events_name_LENGTH, receipt_transaction_receipts_events_data_LENGTH, receipt_transaction_receipts_events_impacted_REP_LENGTH, receipt_transaction_receipts_events_impacted_LENGTH>& receipt() const { return receipt_; }
 
 
     ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
     {
       ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
+
+      if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+      {
+        return_value = receipt_.serialize_with_id(static_cast<uint32_t>(FieldNumber::RECEIPT), buffer, false);
+      }
 
       return return_value;
     };
@@ -287,6 +320,10 @@ class submit_block_response final: public ::EmbeddedProto::MessageInterface
         id_tag = static_cast<FieldNumber>(id_number);
         switch(id_tag)
         {
+          case FieldNumber::RECEIPT:
+            return_value = receipt_.deserialize_check_type(buffer, wire_type);
+            break;
+
           default:
             break;
         }
@@ -311,12 +348,14 @@ class submit_block_response final: public ::EmbeddedProto::MessageInterface
 
     void clear() override
     {
+      clear_receipt();
 
     }
 
     private:
 
 
+      protocol::block_receipt<receipt_id_LENGTH, receipt_events_REP_LENGTH, receipt_events_source_LENGTH, receipt_events_name_LENGTH, receipt_events_data_LENGTH, receipt_events_impacted_REP_LENGTH, receipt_events_impacted_LENGTH, receipt_transaction_receipts_REP_LENGTH, receipt_transaction_receipts_id_LENGTH, receipt_transaction_receipts_payer_LENGTH, receipt_transaction_receipts_events_REP_LENGTH, receipt_transaction_receipts_events_source_LENGTH, receipt_transaction_receipts_events_name_LENGTH, receipt_transaction_receipts_events_data_LENGTH, receipt_transaction_receipts_events_impacted_REP_LENGTH, receipt_transaction_receipts_events_impacted_LENGTH> receipt_;
 
 };
 
@@ -475,16 +514,26 @@ class submit_transaction_request final: public ::EmbeddedProto::MessageInterface
 
 };
 
+template<uint32_t receipt_id_LENGTH, 
+uint32_t receipt_payer_LENGTH, 
+uint32_t receipt_events_REP_LENGTH, 
+uint32_t receipt_events_source_LENGTH, 
+uint32_t receipt_events_name_LENGTH, 
+uint32_t receipt_events_data_LENGTH, 
+uint32_t receipt_events_impacted_REP_LENGTH, 
+uint32_t receipt_events_impacted_LENGTH>
 class submit_transaction_response final: public ::EmbeddedProto::MessageInterface
 {
   public:
     submit_transaction_response() = default;
     submit_transaction_response(const submit_transaction_response& rhs )
     {
+      set_receipt(rhs.get_receipt());
     }
 
     submit_transaction_response(const submit_transaction_response&& rhs ) noexcept
     {
+      set_receipt(rhs.get_receipt());
     }
 
     ~submit_transaction_response() override = default;
@@ -492,22 +541,37 @@ class submit_transaction_response final: public ::EmbeddedProto::MessageInterfac
     enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
+      RECEIPT = 1
     };
 
     submit_transaction_response& operator=(const submit_transaction_response& rhs)
     {
+      set_receipt(rhs.get_receipt());
       return *this;
     }
 
     submit_transaction_response& operator=(const submit_transaction_response&& rhs) noexcept
     {
+      set_receipt(rhs.get_receipt());
       return *this;
     }
+
+    inline void clear_receipt() { receipt_.clear(); }
+    inline void set_receipt(const protocol::transaction_receipt<receipt_id_LENGTH, receipt_payer_LENGTH, receipt_events_REP_LENGTH, receipt_events_source_LENGTH, receipt_events_name_LENGTH, receipt_events_data_LENGTH, receipt_events_impacted_REP_LENGTH, receipt_events_impacted_LENGTH>& value) { receipt_ = value; }
+    inline void set_receipt(const protocol::transaction_receipt<receipt_id_LENGTH, receipt_payer_LENGTH, receipt_events_REP_LENGTH, receipt_events_source_LENGTH, receipt_events_name_LENGTH, receipt_events_data_LENGTH, receipt_events_impacted_REP_LENGTH, receipt_events_impacted_LENGTH>&& value) { receipt_ = value; }
+    inline protocol::transaction_receipt<receipt_id_LENGTH, receipt_payer_LENGTH, receipt_events_REP_LENGTH, receipt_events_source_LENGTH, receipt_events_name_LENGTH, receipt_events_data_LENGTH, receipt_events_impacted_REP_LENGTH, receipt_events_impacted_LENGTH>& mutable_receipt() { return receipt_; }
+    inline const protocol::transaction_receipt<receipt_id_LENGTH, receipt_payer_LENGTH, receipt_events_REP_LENGTH, receipt_events_source_LENGTH, receipt_events_name_LENGTH, receipt_events_data_LENGTH, receipt_events_impacted_REP_LENGTH, receipt_events_impacted_LENGTH>& get_receipt() const { return receipt_; }
+    inline const protocol::transaction_receipt<receipt_id_LENGTH, receipt_payer_LENGTH, receipt_events_REP_LENGTH, receipt_events_source_LENGTH, receipt_events_name_LENGTH, receipt_events_data_LENGTH, receipt_events_impacted_REP_LENGTH, receipt_events_impacted_LENGTH>& receipt() const { return receipt_; }
 
 
     ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
     {
       ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
+
+      if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+      {
+        return_value = receipt_.serialize_with_id(static_cast<uint32_t>(FieldNumber::RECEIPT), buffer, false);
+      }
 
       return return_value;
     };
@@ -525,6 +589,10 @@ class submit_transaction_response final: public ::EmbeddedProto::MessageInterfac
         id_tag = static_cast<FieldNumber>(id_number);
         switch(id_tag)
         {
+          case FieldNumber::RECEIPT:
+            return_value = receipt_.deserialize_check_type(buffer, wire_type);
+            break;
+
           default:
             break;
         }
@@ -549,12 +617,14 @@ class submit_transaction_response final: public ::EmbeddedProto::MessageInterfac
 
     void clear() override
     {
+      clear_receipt();
 
     }
 
     private:
 
 
+      protocol::transaction_receipt<receipt_id_LENGTH, receipt_payer_LENGTH, receipt_events_REP_LENGTH, receipt_events_source_LENGTH, receipt_events_name_LENGTH, receipt_events_data_LENGTH, receipt_events_impacted_REP_LENGTH, receipt_events_impacted_LENGTH> receipt_;
 
 };
 
@@ -3015,6 +3085,30 @@ class chain_request final: public ::EmbeddedProto::MessageInterface
 
 template<uint32_t error_message_LENGTH, 
 uint32_t error_data_LENGTH, 
+uint32_t submit_block_receipt_id_LENGTH, 
+uint32_t submit_block_receipt_events_REP_LENGTH, 
+uint32_t submit_block_receipt_events_source_LENGTH, 
+uint32_t submit_block_receipt_events_name_LENGTH, 
+uint32_t submit_block_receipt_events_data_LENGTH, 
+uint32_t submit_block_receipt_events_impacted_REP_LENGTH, 
+uint32_t submit_block_receipt_events_impacted_LENGTH, 
+uint32_t submit_block_receipt_transaction_receipts_REP_LENGTH, 
+uint32_t submit_block_receipt_transaction_receipts_id_LENGTH, 
+uint32_t submit_block_receipt_transaction_receipts_payer_LENGTH, 
+uint32_t submit_block_receipt_transaction_receipts_events_REP_LENGTH, 
+uint32_t submit_block_receipt_transaction_receipts_events_source_LENGTH, 
+uint32_t submit_block_receipt_transaction_receipts_events_name_LENGTH, 
+uint32_t submit_block_receipt_transaction_receipts_events_data_LENGTH, 
+uint32_t submit_block_receipt_transaction_receipts_events_impacted_REP_LENGTH, 
+uint32_t submit_block_receipt_transaction_receipts_events_impacted_LENGTH, 
+uint32_t submit_transaction_receipt_id_LENGTH, 
+uint32_t submit_transaction_receipt_payer_LENGTH, 
+uint32_t submit_transaction_receipt_events_REP_LENGTH, 
+uint32_t submit_transaction_receipt_events_source_LENGTH, 
+uint32_t submit_transaction_receipt_events_name_LENGTH, 
+uint32_t submit_transaction_receipt_events_data_LENGTH, 
+uint32_t submit_transaction_receipt_events_impacted_REP_LENGTH, 
+uint32_t submit_transaction_receipt_events_impacted_LENGTH, 
 uint32_t get_head_info_head_topology_id_LENGTH, 
 uint32_t get_head_info_head_topology_previous_LENGTH, 
 uint32_t get_chain_id_chain_id_LENGTH, 
@@ -3366,10 +3460,10 @@ class chain_response final: public ::EmbeddedProto::MessageInterface
       if(FieldNumber::SUBMIT_BLOCK == which_response_)
       {
         which_response_ = FieldNumber::NOT_SET;
-        response_.submit_block_.~submit_block_response();
+        response_.submit_block_.~submit_block_response<submit_block_receipt_id_LENGTH, submit_block_receipt_events_REP_LENGTH, submit_block_receipt_events_source_LENGTH, submit_block_receipt_events_name_LENGTH, submit_block_receipt_events_data_LENGTH, submit_block_receipt_events_impacted_REP_LENGTH, submit_block_receipt_events_impacted_LENGTH, submit_block_receipt_transaction_receipts_REP_LENGTH, submit_block_receipt_transaction_receipts_id_LENGTH, submit_block_receipt_transaction_receipts_payer_LENGTH, submit_block_receipt_transaction_receipts_events_REP_LENGTH, submit_block_receipt_transaction_receipts_events_source_LENGTH, submit_block_receipt_transaction_receipts_events_name_LENGTH, submit_block_receipt_transaction_receipts_events_data_LENGTH, submit_block_receipt_transaction_receipts_events_impacted_REP_LENGTH, submit_block_receipt_transaction_receipts_events_impacted_LENGTH>();
       }
     }
-    inline void set_submit_block(const submit_block_response& value)
+    inline void set_submit_block(const submit_block_response<submit_block_receipt_id_LENGTH, submit_block_receipt_events_REP_LENGTH, submit_block_receipt_events_source_LENGTH, submit_block_receipt_events_name_LENGTH, submit_block_receipt_events_data_LENGTH, submit_block_receipt_events_impacted_REP_LENGTH, submit_block_receipt_events_impacted_LENGTH, submit_block_receipt_transaction_receipts_REP_LENGTH, submit_block_receipt_transaction_receipts_id_LENGTH, submit_block_receipt_transaction_receipts_payer_LENGTH, submit_block_receipt_transaction_receipts_events_REP_LENGTH, submit_block_receipt_transaction_receipts_events_source_LENGTH, submit_block_receipt_transaction_receipts_events_name_LENGTH, submit_block_receipt_transaction_receipts_events_data_LENGTH, submit_block_receipt_transaction_receipts_events_impacted_REP_LENGTH, submit_block_receipt_transaction_receipts_events_impacted_LENGTH>& value)
     {
       if(FieldNumber::SUBMIT_BLOCK != which_response_)
       {
@@ -3377,7 +3471,7 @@ class chain_response final: public ::EmbeddedProto::MessageInterface
       }
       response_.submit_block_ = value;
     }
-    inline void set_submit_block(const submit_block_response&& value)
+    inline void set_submit_block(const submit_block_response<submit_block_receipt_id_LENGTH, submit_block_receipt_events_REP_LENGTH, submit_block_receipt_events_source_LENGTH, submit_block_receipt_events_name_LENGTH, submit_block_receipt_events_data_LENGTH, submit_block_receipt_events_impacted_REP_LENGTH, submit_block_receipt_events_impacted_LENGTH, submit_block_receipt_transaction_receipts_REP_LENGTH, submit_block_receipt_transaction_receipts_id_LENGTH, submit_block_receipt_transaction_receipts_payer_LENGTH, submit_block_receipt_transaction_receipts_events_REP_LENGTH, submit_block_receipt_transaction_receipts_events_source_LENGTH, submit_block_receipt_transaction_receipts_events_name_LENGTH, submit_block_receipt_transaction_receipts_events_data_LENGTH, submit_block_receipt_transaction_receipts_events_impacted_REP_LENGTH, submit_block_receipt_transaction_receipts_events_impacted_LENGTH>&& value)
     {
       if(FieldNumber::SUBMIT_BLOCK != which_response_)
       {
@@ -3385,7 +3479,7 @@ class chain_response final: public ::EmbeddedProto::MessageInterface
       }
       response_.submit_block_ = value;
     }
-    inline submit_block_response& mutable_submit_block()
+    inline submit_block_response<submit_block_receipt_id_LENGTH, submit_block_receipt_events_REP_LENGTH, submit_block_receipt_events_source_LENGTH, submit_block_receipt_events_name_LENGTH, submit_block_receipt_events_data_LENGTH, submit_block_receipt_events_impacted_REP_LENGTH, submit_block_receipt_events_impacted_LENGTH, submit_block_receipt_transaction_receipts_REP_LENGTH, submit_block_receipt_transaction_receipts_id_LENGTH, submit_block_receipt_transaction_receipts_payer_LENGTH, submit_block_receipt_transaction_receipts_events_REP_LENGTH, submit_block_receipt_transaction_receipts_events_source_LENGTH, submit_block_receipt_transaction_receipts_events_name_LENGTH, submit_block_receipt_transaction_receipts_events_data_LENGTH, submit_block_receipt_transaction_receipts_events_impacted_REP_LENGTH, submit_block_receipt_transaction_receipts_events_impacted_LENGTH>& mutable_submit_block()
     {
       if(FieldNumber::SUBMIT_BLOCK != which_response_)
       {
@@ -3393,18 +3487,18 @@ class chain_response final: public ::EmbeddedProto::MessageInterface
       }
       return response_.submit_block_;
     }
-    inline const submit_block_response& get_submit_block() const { return response_.submit_block_; }
-    inline const submit_block_response& submit_block() const { return response_.submit_block_; }
+    inline const submit_block_response<submit_block_receipt_id_LENGTH, submit_block_receipt_events_REP_LENGTH, submit_block_receipt_events_source_LENGTH, submit_block_receipt_events_name_LENGTH, submit_block_receipt_events_data_LENGTH, submit_block_receipt_events_impacted_REP_LENGTH, submit_block_receipt_events_impacted_LENGTH, submit_block_receipt_transaction_receipts_REP_LENGTH, submit_block_receipt_transaction_receipts_id_LENGTH, submit_block_receipt_transaction_receipts_payer_LENGTH, submit_block_receipt_transaction_receipts_events_REP_LENGTH, submit_block_receipt_transaction_receipts_events_source_LENGTH, submit_block_receipt_transaction_receipts_events_name_LENGTH, submit_block_receipt_transaction_receipts_events_data_LENGTH, submit_block_receipt_transaction_receipts_events_impacted_REP_LENGTH, submit_block_receipt_transaction_receipts_events_impacted_LENGTH>& get_submit_block() const { return response_.submit_block_; }
+    inline const submit_block_response<submit_block_receipt_id_LENGTH, submit_block_receipt_events_REP_LENGTH, submit_block_receipt_events_source_LENGTH, submit_block_receipt_events_name_LENGTH, submit_block_receipt_events_data_LENGTH, submit_block_receipt_events_impacted_REP_LENGTH, submit_block_receipt_events_impacted_LENGTH, submit_block_receipt_transaction_receipts_REP_LENGTH, submit_block_receipt_transaction_receipts_id_LENGTH, submit_block_receipt_transaction_receipts_payer_LENGTH, submit_block_receipt_transaction_receipts_events_REP_LENGTH, submit_block_receipt_transaction_receipts_events_source_LENGTH, submit_block_receipt_transaction_receipts_events_name_LENGTH, submit_block_receipt_transaction_receipts_events_data_LENGTH, submit_block_receipt_transaction_receipts_events_impacted_REP_LENGTH, submit_block_receipt_transaction_receipts_events_impacted_LENGTH>& submit_block() const { return response_.submit_block_; }
 
     inline void clear_submit_transaction()
     {
       if(FieldNumber::SUBMIT_TRANSACTION == which_response_)
       {
         which_response_ = FieldNumber::NOT_SET;
-        response_.submit_transaction_.~submit_transaction_response();
+        response_.submit_transaction_.~submit_transaction_response<submit_transaction_receipt_id_LENGTH, submit_transaction_receipt_payer_LENGTH, submit_transaction_receipt_events_REP_LENGTH, submit_transaction_receipt_events_source_LENGTH, submit_transaction_receipt_events_name_LENGTH, submit_transaction_receipt_events_data_LENGTH, submit_transaction_receipt_events_impacted_REP_LENGTH, submit_transaction_receipt_events_impacted_LENGTH>();
       }
     }
-    inline void set_submit_transaction(const submit_transaction_response& value)
+    inline void set_submit_transaction(const submit_transaction_response<submit_transaction_receipt_id_LENGTH, submit_transaction_receipt_payer_LENGTH, submit_transaction_receipt_events_REP_LENGTH, submit_transaction_receipt_events_source_LENGTH, submit_transaction_receipt_events_name_LENGTH, submit_transaction_receipt_events_data_LENGTH, submit_transaction_receipt_events_impacted_REP_LENGTH, submit_transaction_receipt_events_impacted_LENGTH>& value)
     {
       if(FieldNumber::SUBMIT_TRANSACTION != which_response_)
       {
@@ -3412,7 +3506,7 @@ class chain_response final: public ::EmbeddedProto::MessageInterface
       }
       response_.submit_transaction_ = value;
     }
-    inline void set_submit_transaction(const submit_transaction_response&& value)
+    inline void set_submit_transaction(const submit_transaction_response<submit_transaction_receipt_id_LENGTH, submit_transaction_receipt_payer_LENGTH, submit_transaction_receipt_events_REP_LENGTH, submit_transaction_receipt_events_source_LENGTH, submit_transaction_receipt_events_name_LENGTH, submit_transaction_receipt_events_data_LENGTH, submit_transaction_receipt_events_impacted_REP_LENGTH, submit_transaction_receipt_events_impacted_LENGTH>&& value)
     {
       if(FieldNumber::SUBMIT_TRANSACTION != which_response_)
       {
@@ -3420,7 +3514,7 @@ class chain_response final: public ::EmbeddedProto::MessageInterface
       }
       response_.submit_transaction_ = value;
     }
-    inline submit_transaction_response& mutable_submit_transaction()
+    inline submit_transaction_response<submit_transaction_receipt_id_LENGTH, submit_transaction_receipt_payer_LENGTH, submit_transaction_receipt_events_REP_LENGTH, submit_transaction_receipt_events_source_LENGTH, submit_transaction_receipt_events_name_LENGTH, submit_transaction_receipt_events_data_LENGTH, submit_transaction_receipt_events_impacted_REP_LENGTH, submit_transaction_receipt_events_impacted_LENGTH>& mutable_submit_transaction()
     {
       if(FieldNumber::SUBMIT_TRANSACTION != which_response_)
       {
@@ -3428,8 +3522,8 @@ class chain_response final: public ::EmbeddedProto::MessageInterface
       }
       return response_.submit_transaction_;
     }
-    inline const submit_transaction_response& get_submit_transaction() const { return response_.submit_transaction_; }
-    inline const submit_transaction_response& submit_transaction() const { return response_.submit_transaction_; }
+    inline const submit_transaction_response<submit_transaction_receipt_id_LENGTH, submit_transaction_receipt_payer_LENGTH, submit_transaction_receipt_events_REP_LENGTH, submit_transaction_receipt_events_source_LENGTH, submit_transaction_receipt_events_name_LENGTH, submit_transaction_receipt_events_data_LENGTH, submit_transaction_receipt_events_impacted_REP_LENGTH, submit_transaction_receipt_events_impacted_LENGTH>& get_submit_transaction() const { return response_.submit_transaction_; }
+    inline const submit_transaction_response<submit_transaction_receipt_id_LENGTH, submit_transaction_receipt_payer_LENGTH, submit_transaction_receipt_events_REP_LENGTH, submit_transaction_receipt_events_source_LENGTH, submit_transaction_receipt_events_name_LENGTH, submit_transaction_receipt_events_data_LENGTH, submit_transaction_receipt_events_impacted_REP_LENGTH, submit_transaction_receipt_events_impacted_LENGTH>& submit_transaction() const { return response_.submit_transaction_; }
 
     inline void clear_get_head_info()
     {
@@ -3874,8 +3968,8 @@ class chain_response final: public ::EmbeddedProto::MessageInterface
         ~response() {}
         reserved_rpc reserved_;
         error_response<error_message_LENGTH, error_data_LENGTH> error_;
-        submit_block_response submit_block_;
-        submit_transaction_response submit_transaction_;
+        submit_block_response<submit_block_receipt_id_LENGTH, submit_block_receipt_events_REP_LENGTH, submit_block_receipt_events_source_LENGTH, submit_block_receipt_events_name_LENGTH, submit_block_receipt_events_data_LENGTH, submit_block_receipt_events_impacted_REP_LENGTH, submit_block_receipt_events_impacted_LENGTH, submit_block_receipt_transaction_receipts_REP_LENGTH, submit_block_receipt_transaction_receipts_id_LENGTH, submit_block_receipt_transaction_receipts_payer_LENGTH, submit_block_receipt_transaction_receipts_events_REP_LENGTH, submit_block_receipt_transaction_receipts_events_source_LENGTH, submit_block_receipt_transaction_receipts_events_name_LENGTH, submit_block_receipt_transaction_receipts_events_data_LENGTH, submit_block_receipt_transaction_receipts_events_impacted_REP_LENGTH, submit_block_receipt_transaction_receipts_events_impacted_LENGTH> submit_block_;
+        submit_transaction_response<submit_transaction_receipt_id_LENGTH, submit_transaction_receipt_payer_LENGTH, submit_transaction_receipt_events_REP_LENGTH, submit_transaction_receipt_events_source_LENGTH, submit_transaction_receipt_events_name_LENGTH, submit_transaction_receipt_events_data_LENGTH, submit_transaction_receipt_events_impacted_REP_LENGTH, submit_transaction_receipt_events_impacted_LENGTH> submit_transaction_;
         get_head_info_response<get_head_info_head_topology_id_LENGTH, get_head_info_head_topology_previous_LENGTH> get_head_info_;
         get_chain_id_response<get_chain_id_chain_id_LENGTH> get_chain_id_;
         get_fork_heads_response<get_fork_heads_last_irreversible_block_id_LENGTH, get_fork_heads_last_irreversible_block_previous_LENGTH, get_fork_heads_fork_heads_REP_LENGTH, get_fork_heads_fork_heads_id_LENGTH, get_fork_heads_fork_heads_previous_LENGTH> get_fork_heads_;
@@ -3908,12 +4002,12 @@ class chain_response final: public ::EmbeddedProto::MessageInterface
             break;
 
           case FieldNumber::SUBMIT_BLOCK:
-            new(&response_.submit_block_) submit_block_response;
+            new(&response_.submit_block_) submit_block_response<submit_block_receipt_id_LENGTH, submit_block_receipt_events_REP_LENGTH, submit_block_receipt_events_source_LENGTH, submit_block_receipt_events_name_LENGTH, submit_block_receipt_events_data_LENGTH, submit_block_receipt_events_impacted_REP_LENGTH, submit_block_receipt_events_impacted_LENGTH, submit_block_receipt_transaction_receipts_REP_LENGTH, submit_block_receipt_transaction_receipts_id_LENGTH, submit_block_receipt_transaction_receipts_payer_LENGTH, submit_block_receipt_transaction_receipts_events_REP_LENGTH, submit_block_receipt_transaction_receipts_events_source_LENGTH, submit_block_receipt_transaction_receipts_events_name_LENGTH, submit_block_receipt_transaction_receipts_events_data_LENGTH, submit_block_receipt_transaction_receipts_events_impacted_REP_LENGTH, submit_block_receipt_transaction_receipts_events_impacted_LENGTH>;
             which_response_ = FieldNumber::SUBMIT_BLOCK;
             break;
 
           case FieldNumber::SUBMIT_TRANSACTION:
-            new(&response_.submit_transaction_) submit_transaction_response;
+            new(&response_.submit_transaction_) submit_transaction_response<submit_transaction_receipt_id_LENGTH, submit_transaction_receipt_payer_LENGTH, submit_transaction_receipt_events_REP_LENGTH, submit_transaction_receipt_events_source_LENGTH, submit_transaction_receipt_events_name_LENGTH, submit_transaction_receipt_events_data_LENGTH, submit_transaction_receipt_events_impacted_REP_LENGTH, submit_transaction_receipt_events_impacted_LENGTH>;
             which_response_ = FieldNumber::SUBMIT_TRANSACTION;
             break;
 
@@ -3970,10 +4064,10 @@ class chain_response final: public ::EmbeddedProto::MessageInterface
             response_.error_.~error_response<error_message_LENGTH, error_data_LENGTH>(); // NOSONAR Unions require this.
             break;
           case FieldNumber::SUBMIT_BLOCK:
-            response_.submit_block_.~submit_block_response(); // NOSONAR Unions require this.
+            response_.submit_block_.~submit_block_response<submit_block_receipt_id_LENGTH, submit_block_receipt_events_REP_LENGTH, submit_block_receipt_events_source_LENGTH, submit_block_receipt_events_name_LENGTH, submit_block_receipt_events_data_LENGTH, submit_block_receipt_events_impacted_REP_LENGTH, submit_block_receipt_events_impacted_LENGTH, submit_block_receipt_transaction_receipts_REP_LENGTH, submit_block_receipt_transaction_receipts_id_LENGTH, submit_block_receipt_transaction_receipts_payer_LENGTH, submit_block_receipt_transaction_receipts_events_REP_LENGTH, submit_block_receipt_transaction_receipts_events_source_LENGTH, submit_block_receipt_transaction_receipts_events_name_LENGTH, submit_block_receipt_transaction_receipts_events_data_LENGTH, submit_block_receipt_transaction_receipts_events_impacted_REP_LENGTH, submit_block_receipt_transaction_receipts_events_impacted_LENGTH>(); // NOSONAR Unions require this.
             break;
           case FieldNumber::SUBMIT_TRANSACTION:
-            response_.submit_transaction_.~submit_transaction_response(); // NOSONAR Unions require this.
+            response_.submit_transaction_.~submit_transaction_response<submit_transaction_receipt_id_LENGTH, submit_transaction_receipt_payer_LENGTH, submit_transaction_receipt_events_REP_LENGTH, submit_transaction_receipt_events_source_LENGTH, submit_transaction_receipt_events_name_LENGTH, submit_transaction_receipt_events_data_LENGTH, submit_transaction_receipt_events_impacted_REP_LENGTH, submit_transaction_receipt_events_impacted_LENGTH>(); // NOSONAR Unions require this.
             break;
           case FieldNumber::GET_HEAD_INFO:
             response_.get_head_info_.~get_head_info_response<get_head_info_head_topology_id_LENGTH, get_head_info_head_topology_previous_LENGTH>(); // NOSONAR Unions require this.

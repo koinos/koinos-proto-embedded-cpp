@@ -54,7 +54,14 @@ namespace broadcast {
 template<uint32_t transaction_id_LENGTH, 
 uint32_t transaction_active_LENGTH, 
 uint32_t transaction_signature_data_LENGTH, 
-uint32_t payer_LENGTH>
+uint32_t receipt_id_LENGTH, 
+uint32_t receipt_payer_LENGTH, 
+uint32_t receipt_events_REP_LENGTH, 
+uint32_t receipt_events_source_LENGTH, 
+uint32_t receipt_events_name_LENGTH, 
+uint32_t receipt_events_data_LENGTH, 
+uint32_t receipt_events_impacted_REP_LENGTH, 
+uint32_t receipt_events_impacted_LENGTH>
 class transaction_accepted final: public ::EmbeddedProto::MessageInterface
 {
   public:
@@ -62,25 +69,15 @@ class transaction_accepted final: public ::EmbeddedProto::MessageInterface
     transaction_accepted(const transaction_accepted& rhs )
     {
       set_transaction(rhs.get_transaction());
-      set_payer(rhs.get_payer());
-      set_max_payer_rc(rhs.get_max_payer_rc());
-      set_rc_limit(rhs.get_rc_limit());
+      set_receipt(rhs.get_receipt());
       set_height(rhs.get_height());
-      set_disk_storage_used(rhs.get_disk_storage_used());
-      set_network_bandwidth_used(rhs.get_network_bandwidth_used());
-      set_compute_bandwidth_used(rhs.get_compute_bandwidth_used());
     }
 
     transaction_accepted(const transaction_accepted&& rhs ) noexcept
     {
       set_transaction(rhs.get_transaction());
-      set_payer(rhs.get_payer());
-      set_max_payer_rc(rhs.get_max_payer_rc());
-      set_rc_limit(rhs.get_rc_limit());
+      set_receipt(rhs.get_receipt());
       set_height(rhs.get_height());
-      set_disk_storage_used(rhs.get_disk_storage_used());
-      set_network_bandwidth_used(rhs.get_network_bandwidth_used());
-      set_compute_bandwidth_used(rhs.get_compute_bandwidth_used());
     }
 
     ~transaction_accepted() override = default;
@@ -89,38 +86,23 @@ class transaction_accepted final: public ::EmbeddedProto::MessageInterface
     {
       NOT_SET = 0,
       TRANSACTION = 1,
-      PAYER = 2,
-      MAX_PAYER_RC = 3,
-      RC_LIMIT = 4,
-      HEIGHT = 5,
-      DISK_STORAGE_USED = 6,
-      NETWORK_BANDWIDTH_USED = 7,
-      COMPUTE_BANDWIDTH_USED = 8
+      RECEIPT = 2,
+      HEIGHT = 3
     };
 
     transaction_accepted& operator=(const transaction_accepted& rhs)
     {
       set_transaction(rhs.get_transaction());
-      set_payer(rhs.get_payer());
-      set_max_payer_rc(rhs.get_max_payer_rc());
-      set_rc_limit(rhs.get_rc_limit());
+      set_receipt(rhs.get_receipt());
       set_height(rhs.get_height());
-      set_disk_storage_used(rhs.get_disk_storage_used());
-      set_network_bandwidth_used(rhs.get_network_bandwidth_used());
-      set_compute_bandwidth_used(rhs.get_compute_bandwidth_used());
       return *this;
     }
 
     transaction_accepted& operator=(const transaction_accepted&& rhs) noexcept
     {
       set_transaction(rhs.get_transaction());
-      set_payer(rhs.get_payer());
-      set_max_payer_rc(rhs.get_max_payer_rc());
-      set_rc_limit(rhs.get_rc_limit());
+      set_receipt(rhs.get_receipt());
       set_height(rhs.get_height());
-      set_disk_storage_used(rhs.get_disk_storage_used());
-      set_network_bandwidth_used(rhs.get_network_bandwidth_used());
-      set_compute_bandwidth_used(rhs.get_compute_bandwidth_used());
       return *this;
     }
 
@@ -131,25 +113,12 @@ class transaction_accepted final: public ::EmbeddedProto::MessageInterface
     inline const protocol::transaction<transaction_id_LENGTH, transaction_active_LENGTH, transaction_signature_data_LENGTH>& get_transaction() const { return transaction_; }
     inline const protocol::transaction<transaction_id_LENGTH, transaction_active_LENGTH, transaction_signature_data_LENGTH>& transaction() const { return transaction_; }
 
-    inline void clear_payer() { payer_.clear(); }
-    inline ::EmbeddedProto::FieldBytes<payer_LENGTH>& mutable_payer() { return payer_; }
-    inline void set_payer(const ::EmbeddedProto::FieldBytes<payer_LENGTH>& rhs) { payer_.set(rhs); }
-    inline const ::EmbeddedProto::FieldBytes<payer_LENGTH>& get_payer() const { return payer_; }
-    inline const uint8_t* payer() const { return payer_.get_const(); }
-
-    inline void clear_max_payer_rc() { max_payer_rc_.clear(); }
-    inline void set_max_payer_rc(const EmbeddedProto::uint64& value) { max_payer_rc_ = value; }
-    inline void set_max_payer_rc(const EmbeddedProto::uint64&& value) { max_payer_rc_ = value; }
-    inline EmbeddedProto::uint64& mutable_max_payer_rc() { return max_payer_rc_; }
-    inline const EmbeddedProto::uint64& get_max_payer_rc() const { return max_payer_rc_; }
-    inline EmbeddedProto::uint64::FIELD_TYPE max_payer_rc() const { return max_payer_rc_.get(); }
-
-    inline void clear_rc_limit() { rc_limit_.clear(); }
-    inline void set_rc_limit(const EmbeddedProto::uint64& value) { rc_limit_ = value; }
-    inline void set_rc_limit(const EmbeddedProto::uint64&& value) { rc_limit_ = value; }
-    inline EmbeddedProto::uint64& mutable_rc_limit() { return rc_limit_; }
-    inline const EmbeddedProto::uint64& get_rc_limit() const { return rc_limit_; }
-    inline EmbeddedProto::uint64::FIELD_TYPE rc_limit() const { return rc_limit_.get(); }
+    inline void clear_receipt() { receipt_.clear(); }
+    inline void set_receipt(const protocol::transaction_receipt<receipt_id_LENGTH, receipt_payer_LENGTH, receipt_events_REP_LENGTH, receipt_events_source_LENGTH, receipt_events_name_LENGTH, receipt_events_data_LENGTH, receipt_events_impacted_REP_LENGTH, receipt_events_impacted_LENGTH>& value) { receipt_ = value; }
+    inline void set_receipt(const protocol::transaction_receipt<receipt_id_LENGTH, receipt_payer_LENGTH, receipt_events_REP_LENGTH, receipt_events_source_LENGTH, receipt_events_name_LENGTH, receipt_events_data_LENGTH, receipt_events_impacted_REP_LENGTH, receipt_events_impacted_LENGTH>&& value) { receipt_ = value; }
+    inline protocol::transaction_receipt<receipt_id_LENGTH, receipt_payer_LENGTH, receipt_events_REP_LENGTH, receipt_events_source_LENGTH, receipt_events_name_LENGTH, receipt_events_data_LENGTH, receipt_events_impacted_REP_LENGTH, receipt_events_impacted_LENGTH>& mutable_receipt() { return receipt_; }
+    inline const protocol::transaction_receipt<receipt_id_LENGTH, receipt_payer_LENGTH, receipt_events_REP_LENGTH, receipt_events_source_LENGTH, receipt_events_name_LENGTH, receipt_events_data_LENGTH, receipt_events_impacted_REP_LENGTH, receipt_events_impacted_LENGTH>& get_receipt() const { return receipt_; }
+    inline const protocol::transaction_receipt<receipt_id_LENGTH, receipt_payer_LENGTH, receipt_events_REP_LENGTH, receipt_events_source_LENGTH, receipt_events_name_LENGTH, receipt_events_data_LENGTH, receipt_events_impacted_REP_LENGTH, receipt_events_impacted_LENGTH>& receipt() const { return receipt_; }
 
     inline void clear_height() { height_.clear(); }
     inline void set_height(const EmbeddedProto::uint64& value) { height_ = value; }
@@ -157,27 +126,6 @@ class transaction_accepted final: public ::EmbeddedProto::MessageInterface
     inline EmbeddedProto::uint64& mutable_height() { return height_; }
     inline const EmbeddedProto::uint64& get_height() const { return height_; }
     inline EmbeddedProto::uint64::FIELD_TYPE height() const { return height_.get(); }
-
-    inline void clear_disk_storage_used() { disk_storage_used_.clear(); }
-    inline void set_disk_storage_used(const EmbeddedProto::uint64& value) { disk_storage_used_ = value; }
-    inline void set_disk_storage_used(const EmbeddedProto::uint64&& value) { disk_storage_used_ = value; }
-    inline EmbeddedProto::uint64& mutable_disk_storage_used() { return disk_storage_used_; }
-    inline const EmbeddedProto::uint64& get_disk_storage_used() const { return disk_storage_used_; }
-    inline EmbeddedProto::uint64::FIELD_TYPE disk_storage_used() const { return disk_storage_used_.get(); }
-
-    inline void clear_network_bandwidth_used() { network_bandwidth_used_.clear(); }
-    inline void set_network_bandwidth_used(const EmbeddedProto::uint64& value) { network_bandwidth_used_ = value; }
-    inline void set_network_bandwidth_used(const EmbeddedProto::uint64&& value) { network_bandwidth_used_ = value; }
-    inline EmbeddedProto::uint64& mutable_network_bandwidth_used() { return network_bandwidth_used_; }
-    inline const EmbeddedProto::uint64& get_network_bandwidth_used() const { return network_bandwidth_used_; }
-    inline EmbeddedProto::uint64::FIELD_TYPE network_bandwidth_used() const { return network_bandwidth_used_.get(); }
-
-    inline void clear_compute_bandwidth_used() { compute_bandwidth_used_.clear(); }
-    inline void set_compute_bandwidth_used(const EmbeddedProto::uint64& value) { compute_bandwidth_used_ = value; }
-    inline void set_compute_bandwidth_used(const EmbeddedProto::uint64&& value) { compute_bandwidth_used_ = value; }
-    inline EmbeddedProto::uint64& mutable_compute_bandwidth_used() { return compute_bandwidth_used_; }
-    inline const EmbeddedProto::uint64& get_compute_bandwidth_used() const { return compute_bandwidth_used_; }
-    inline EmbeddedProto::uint64::FIELD_TYPE compute_bandwidth_used() const { return compute_bandwidth_used_.get(); }
 
 
     ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
@@ -191,37 +139,12 @@ class transaction_accepted final: public ::EmbeddedProto::MessageInterface
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = payer_.serialize_with_id(static_cast<uint32_t>(FieldNumber::PAYER), buffer, false);
-      }
-
-      if((0U != max_payer_rc_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
-      {
-        return_value = max_payer_rc_.serialize_with_id(static_cast<uint32_t>(FieldNumber::MAX_PAYER_RC), buffer, false);
-      }
-
-      if((0U != rc_limit_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
-      {
-        return_value = rc_limit_.serialize_with_id(static_cast<uint32_t>(FieldNumber::RC_LIMIT), buffer, false);
+        return_value = receipt_.serialize_with_id(static_cast<uint32_t>(FieldNumber::RECEIPT), buffer, false);
       }
 
       if((0U != height_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
       {
         return_value = height_.serialize_with_id(static_cast<uint32_t>(FieldNumber::HEIGHT), buffer, false);
-      }
-
-      if((0U != disk_storage_used_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
-      {
-        return_value = disk_storage_used_.serialize_with_id(static_cast<uint32_t>(FieldNumber::DISK_STORAGE_USED), buffer, false);
-      }
-
-      if((0U != network_bandwidth_used_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
-      {
-        return_value = network_bandwidth_used_.serialize_with_id(static_cast<uint32_t>(FieldNumber::NETWORK_BANDWIDTH_USED), buffer, false);
-      }
-
-      if((0U != compute_bandwidth_used_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
-      {
-        return_value = compute_bandwidth_used_.serialize_with_id(static_cast<uint32_t>(FieldNumber::COMPUTE_BANDWIDTH_USED), buffer, false);
       }
 
       return return_value;
@@ -244,32 +167,12 @@ class transaction_accepted final: public ::EmbeddedProto::MessageInterface
             return_value = transaction_.deserialize_check_type(buffer, wire_type);
             break;
 
-          case FieldNumber::PAYER:
-            return_value = payer_.deserialize_check_type(buffer, wire_type);
-            break;
-
-          case FieldNumber::MAX_PAYER_RC:
-            return_value = max_payer_rc_.deserialize_check_type(buffer, wire_type);
-            break;
-
-          case FieldNumber::RC_LIMIT:
-            return_value = rc_limit_.deserialize_check_type(buffer, wire_type);
+          case FieldNumber::RECEIPT:
+            return_value = receipt_.deserialize_check_type(buffer, wire_type);
             break;
 
           case FieldNumber::HEIGHT:
             return_value = height_.deserialize_check_type(buffer, wire_type);
-            break;
-
-          case FieldNumber::DISK_STORAGE_USED:
-            return_value = disk_storage_used_.deserialize_check_type(buffer, wire_type);
-            break;
-
-          case FieldNumber::NETWORK_BANDWIDTH_USED:
-            return_value = network_bandwidth_used_.deserialize_check_type(buffer, wire_type);
-            break;
-
-          case FieldNumber::COMPUTE_BANDWIDTH_USED:
-            return_value = compute_bandwidth_used_.deserialize_check_type(buffer, wire_type);
             break;
 
           default:
@@ -297,13 +200,8 @@ class transaction_accepted final: public ::EmbeddedProto::MessageInterface
     void clear() override
     {
       clear_transaction();
-      clear_payer();
-      clear_max_payer_rc();
-      clear_rc_limit();
+      clear_receipt();
       clear_height();
-      clear_disk_storage_used();
-      clear_network_bandwidth_used();
-      clear_compute_bandwidth_used();
 
     }
 
@@ -311,13 +209,8 @@ class transaction_accepted final: public ::EmbeddedProto::MessageInterface
 
 
       protocol::transaction<transaction_id_LENGTH, transaction_active_LENGTH, transaction_signature_data_LENGTH> transaction_;
-      ::EmbeddedProto::FieldBytes<payer_LENGTH> payer_;
-      EmbeddedProto::uint64 max_payer_rc_ = 0U;
-      EmbeddedProto::uint64 rc_limit_ = 0U;
+      protocol::transaction_receipt<receipt_id_LENGTH, receipt_payer_LENGTH, receipt_events_REP_LENGTH, receipt_events_source_LENGTH, receipt_events_name_LENGTH, receipt_events_data_LENGTH, receipt_events_impacted_REP_LENGTH, receipt_events_impacted_LENGTH> receipt_;
       EmbeddedProto::uint64 height_ = 0U;
-      EmbeddedProto::uint64 disk_storage_used_ = 0U;
-      EmbeddedProto::uint64 network_bandwidth_used_ = 0U;
-      EmbeddedProto::uint64 compute_bandwidth_used_ = 0U;
 
 };
 
@@ -328,7 +221,23 @@ uint32_t block_signature_data_LENGTH,
 uint32_t block_transactions_REP_LENGTH, 
 uint32_t block_transactions_id_LENGTH, 
 uint32_t block_transactions_active_LENGTH, 
-uint32_t block_transactions_signature_data_LENGTH>
+uint32_t block_transactions_signature_data_LENGTH, 
+uint32_t receipt_id_LENGTH, 
+uint32_t receipt_events_REP_LENGTH, 
+uint32_t receipt_events_source_LENGTH, 
+uint32_t receipt_events_name_LENGTH, 
+uint32_t receipt_events_data_LENGTH, 
+uint32_t receipt_events_impacted_REP_LENGTH, 
+uint32_t receipt_events_impacted_LENGTH, 
+uint32_t receipt_transaction_receipts_REP_LENGTH, 
+uint32_t receipt_transaction_receipts_id_LENGTH, 
+uint32_t receipt_transaction_receipts_payer_LENGTH, 
+uint32_t receipt_transaction_receipts_events_REP_LENGTH, 
+uint32_t receipt_transaction_receipts_events_source_LENGTH, 
+uint32_t receipt_transaction_receipts_events_name_LENGTH, 
+uint32_t receipt_transaction_receipts_events_data_LENGTH, 
+uint32_t receipt_transaction_receipts_events_impacted_REP_LENGTH, 
+uint32_t receipt_transaction_receipts_events_impacted_LENGTH>
 class block_accepted final: public ::EmbeddedProto::MessageInterface
 {
   public:
@@ -336,11 +245,13 @@ class block_accepted final: public ::EmbeddedProto::MessageInterface
     block_accepted(const block_accepted& rhs )
     {
       set_block(rhs.get_block());
+      set_receipt(rhs.get_receipt());
     }
 
     block_accepted(const block_accepted&& rhs ) noexcept
     {
       set_block(rhs.get_block());
+      set_receipt(rhs.get_receipt());
     }
 
     ~block_accepted() override = default;
@@ -348,18 +259,21 @@ class block_accepted final: public ::EmbeddedProto::MessageInterface
     enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
-      BLOCK = 1
+      BLOCK = 1,
+      RECEIPT = 2
     };
 
     block_accepted& operator=(const block_accepted& rhs)
     {
       set_block(rhs.get_block());
+      set_receipt(rhs.get_receipt());
       return *this;
     }
 
     block_accepted& operator=(const block_accepted&& rhs) noexcept
     {
       set_block(rhs.get_block());
+      set_receipt(rhs.get_receipt());
       return *this;
     }
 
@@ -370,6 +284,13 @@ class block_accepted final: public ::EmbeddedProto::MessageInterface
     inline const protocol::block<block_id_LENGTH, block_header_previous_LENGTH, block_active_LENGTH, block_signature_data_LENGTH, block_transactions_REP_LENGTH, block_transactions_id_LENGTH, block_transactions_active_LENGTH, block_transactions_signature_data_LENGTH>& get_block() const { return block_; }
     inline const protocol::block<block_id_LENGTH, block_header_previous_LENGTH, block_active_LENGTH, block_signature_data_LENGTH, block_transactions_REP_LENGTH, block_transactions_id_LENGTH, block_transactions_active_LENGTH, block_transactions_signature_data_LENGTH>& block() const { return block_; }
 
+    inline void clear_receipt() { receipt_.clear(); }
+    inline void set_receipt(const protocol::block_receipt<receipt_id_LENGTH, receipt_events_REP_LENGTH, receipt_events_source_LENGTH, receipt_events_name_LENGTH, receipt_events_data_LENGTH, receipt_events_impacted_REP_LENGTH, receipt_events_impacted_LENGTH, receipt_transaction_receipts_REP_LENGTH, receipt_transaction_receipts_id_LENGTH, receipt_transaction_receipts_payer_LENGTH, receipt_transaction_receipts_events_REP_LENGTH, receipt_transaction_receipts_events_source_LENGTH, receipt_transaction_receipts_events_name_LENGTH, receipt_transaction_receipts_events_data_LENGTH, receipt_transaction_receipts_events_impacted_REP_LENGTH, receipt_transaction_receipts_events_impacted_LENGTH>& value) { receipt_ = value; }
+    inline void set_receipt(const protocol::block_receipt<receipt_id_LENGTH, receipt_events_REP_LENGTH, receipt_events_source_LENGTH, receipt_events_name_LENGTH, receipt_events_data_LENGTH, receipt_events_impacted_REP_LENGTH, receipt_events_impacted_LENGTH, receipt_transaction_receipts_REP_LENGTH, receipt_transaction_receipts_id_LENGTH, receipt_transaction_receipts_payer_LENGTH, receipt_transaction_receipts_events_REP_LENGTH, receipt_transaction_receipts_events_source_LENGTH, receipt_transaction_receipts_events_name_LENGTH, receipt_transaction_receipts_events_data_LENGTH, receipt_transaction_receipts_events_impacted_REP_LENGTH, receipt_transaction_receipts_events_impacted_LENGTH>&& value) { receipt_ = value; }
+    inline protocol::block_receipt<receipt_id_LENGTH, receipt_events_REP_LENGTH, receipt_events_source_LENGTH, receipt_events_name_LENGTH, receipt_events_data_LENGTH, receipt_events_impacted_REP_LENGTH, receipt_events_impacted_LENGTH, receipt_transaction_receipts_REP_LENGTH, receipt_transaction_receipts_id_LENGTH, receipt_transaction_receipts_payer_LENGTH, receipt_transaction_receipts_events_REP_LENGTH, receipt_transaction_receipts_events_source_LENGTH, receipt_transaction_receipts_events_name_LENGTH, receipt_transaction_receipts_events_data_LENGTH, receipt_transaction_receipts_events_impacted_REP_LENGTH, receipt_transaction_receipts_events_impacted_LENGTH>& mutable_receipt() { return receipt_; }
+    inline const protocol::block_receipt<receipt_id_LENGTH, receipt_events_REP_LENGTH, receipt_events_source_LENGTH, receipt_events_name_LENGTH, receipt_events_data_LENGTH, receipt_events_impacted_REP_LENGTH, receipt_events_impacted_LENGTH, receipt_transaction_receipts_REP_LENGTH, receipt_transaction_receipts_id_LENGTH, receipt_transaction_receipts_payer_LENGTH, receipt_transaction_receipts_events_REP_LENGTH, receipt_transaction_receipts_events_source_LENGTH, receipt_transaction_receipts_events_name_LENGTH, receipt_transaction_receipts_events_data_LENGTH, receipt_transaction_receipts_events_impacted_REP_LENGTH, receipt_transaction_receipts_events_impacted_LENGTH>& get_receipt() const { return receipt_; }
+    inline const protocol::block_receipt<receipt_id_LENGTH, receipt_events_REP_LENGTH, receipt_events_source_LENGTH, receipt_events_name_LENGTH, receipt_events_data_LENGTH, receipt_events_impacted_REP_LENGTH, receipt_events_impacted_LENGTH, receipt_transaction_receipts_REP_LENGTH, receipt_transaction_receipts_id_LENGTH, receipt_transaction_receipts_payer_LENGTH, receipt_transaction_receipts_events_REP_LENGTH, receipt_transaction_receipts_events_source_LENGTH, receipt_transaction_receipts_events_name_LENGTH, receipt_transaction_receipts_events_data_LENGTH, receipt_transaction_receipts_events_impacted_REP_LENGTH, receipt_transaction_receipts_events_impacted_LENGTH>& receipt() const { return receipt_; }
+
 
     ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
     {
@@ -378,6 +299,11 @@ class block_accepted final: public ::EmbeddedProto::MessageInterface
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
         return_value = block_.serialize_with_id(static_cast<uint32_t>(FieldNumber::BLOCK), buffer, false);
+      }
+
+      if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+      {
+        return_value = receipt_.serialize_with_id(static_cast<uint32_t>(FieldNumber::RECEIPT), buffer, false);
       }
 
       return return_value;
@@ -398,6 +324,10 @@ class block_accepted final: public ::EmbeddedProto::MessageInterface
         {
           case FieldNumber::BLOCK:
             return_value = block_.deserialize_check_type(buffer, wire_type);
+            break;
+
+          case FieldNumber::RECEIPT:
+            return_value = receipt_.deserialize_check_type(buffer, wire_type);
             break;
 
           default:
@@ -425,6 +355,7 @@ class block_accepted final: public ::EmbeddedProto::MessageInterface
     void clear() override
     {
       clear_block();
+      clear_receipt();
 
     }
 
@@ -432,6 +363,7 @@ class block_accepted final: public ::EmbeddedProto::MessageInterface
 
 
       protocol::block<block_id_LENGTH, block_header_previous_LENGTH, block_active_LENGTH, block_signature_data_LENGTH, block_transactions_REP_LENGTH, block_transactions_id_LENGTH, block_transactions_active_LENGTH, block_transactions_signature_data_LENGTH> block_;
+      protocol::block_receipt<receipt_id_LENGTH, receipt_events_REP_LENGTH, receipt_events_source_LENGTH, receipt_events_name_LENGTH, receipt_events_data_LENGTH, receipt_events_impacted_REP_LENGTH, receipt_events_impacted_LENGTH, receipt_transaction_receipts_REP_LENGTH, receipt_transaction_receipts_id_LENGTH, receipt_transaction_receipts_payer_LENGTH, receipt_transaction_receipts_events_REP_LENGTH, receipt_transaction_receipts_events_source_LENGTH, receipt_transaction_receipts_events_name_LENGTH, receipt_transaction_receipts_events_data_LENGTH, receipt_transaction_receipts_events_impacted_REP_LENGTH, receipt_transaction_receipts_events_impacted_LENGTH> receipt_;
 
 };
 

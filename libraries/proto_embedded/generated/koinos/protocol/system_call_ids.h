@@ -74,7 +74,8 @@ enum class system_call_id : uint32_t
   get_account_rc = 32,
   consume_account_rc = 33,
   get_resource_limits = 34,
-  consume_block_resources = 35
+  consume_block_resources = 35,
+  event = 36
 };
 
 } // End of namespace protocol
