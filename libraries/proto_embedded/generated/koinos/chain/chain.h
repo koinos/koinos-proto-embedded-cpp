@@ -1290,25 +1290,25 @@ class prints_result final: public ::EmbeddedProto::MessageInterface
 template<uint32_t digest_LENGTH, 
 uint32_t active_LENGTH, 
 uint32_t signature_data_LENGTH>
-class verify_block_signature_arguments final: public ::EmbeddedProto::MessageInterface
+class process_block_signature_arguments final: public ::EmbeddedProto::MessageInterface
 {
   public:
-    verify_block_signature_arguments() = default;
-    verify_block_signature_arguments(const verify_block_signature_arguments& rhs )
+    process_block_signature_arguments() = default;
+    process_block_signature_arguments(const process_block_signature_arguments& rhs )
     {
       set_digest(rhs.get_digest());
       set_active(rhs.get_active());
       set_signature_data(rhs.get_signature_data());
     }
 
-    verify_block_signature_arguments(const verify_block_signature_arguments&& rhs ) noexcept
+    process_block_signature_arguments(const process_block_signature_arguments&& rhs ) noexcept
     {
       set_digest(rhs.get_digest());
       set_active(rhs.get_active());
       set_signature_data(rhs.get_signature_data());
     }
 
-    ~verify_block_signature_arguments() override = default;
+    ~process_block_signature_arguments() override = default;
 
     enum class FieldNumber : uint32_t
     {
@@ -1318,7 +1318,7 @@ class verify_block_signature_arguments final: public ::EmbeddedProto::MessageInt
       SIGNATURE_DATA = 3
     };
 
-    verify_block_signature_arguments& operator=(const verify_block_signature_arguments& rhs)
+    process_block_signature_arguments& operator=(const process_block_signature_arguments& rhs)
     {
       set_digest(rhs.get_digest());
       set_active(rhs.get_active());
@@ -1326,7 +1326,7 @@ class verify_block_signature_arguments final: public ::EmbeddedProto::MessageInt
       return *this;
     }
 
-    verify_block_signature_arguments& operator=(const verify_block_signature_arguments&& rhs) noexcept
+    process_block_signature_arguments& operator=(const process_block_signature_arguments&& rhs) noexcept
     {
       set_digest(rhs.get_digest());
       set_active(rhs.get_active());
@@ -1439,21 +1439,21 @@ class verify_block_signature_arguments final: public ::EmbeddedProto::MessageInt
 
 };
 
-class verify_block_signature_result final: public ::EmbeddedProto::MessageInterface
+class process_block_signature_result final: public ::EmbeddedProto::MessageInterface
 {
   public:
-    verify_block_signature_result() = default;
-    verify_block_signature_result(const verify_block_signature_result& rhs )
+    process_block_signature_result() = default;
+    process_block_signature_result(const process_block_signature_result& rhs )
     {
       set_value(rhs.get_value());
     }
 
-    verify_block_signature_result(const verify_block_signature_result&& rhs ) noexcept
+    process_block_signature_result(const process_block_signature_result&& rhs ) noexcept
     {
       set_value(rhs.get_value());
     }
 
-    ~verify_block_signature_result() override = default;
+    ~process_block_signature_result() override = default;
 
     enum class FieldNumber : uint32_t
     {
@@ -1461,13 +1461,13 @@ class verify_block_signature_result final: public ::EmbeddedProto::MessageInterf
       VALUE = 1
     };
 
-    verify_block_signature_result& operator=(const verify_block_signature_result& rhs)
+    process_block_signature_result& operator=(const process_block_signature_result& rhs)
     {
       set_value(rhs.get_value());
       return *this;
     }
 
-    verify_block_signature_result& operator=(const verify_block_signature_result&& rhs) noexcept
+    process_block_signature_result& operator=(const process_block_signature_result&& rhs) noexcept
     {
       set_value(rhs.get_value());
       return *this;
@@ -1801,17 +1801,11 @@ class apply_block_arguments final: public ::EmbeddedProto::MessageInterface
     apply_block_arguments(const apply_block_arguments& rhs )
     {
       set_block(rhs.get_block());
-      set_check_passive_data(rhs.get_check_passive_data());
-      set_check_block_signature(rhs.get_check_block_signature());
-      set_check_transaction_signature(rhs.get_check_transaction_signature());
     }
 
     apply_block_arguments(const apply_block_arguments&& rhs ) noexcept
     {
       set_block(rhs.get_block());
-      set_check_passive_data(rhs.get_check_passive_data());
-      set_check_block_signature(rhs.get_check_block_signature());
-      set_check_transaction_signature(rhs.get_check_transaction_signature());
     }
 
     ~apply_block_arguments() override = default;
@@ -1819,27 +1813,18 @@ class apply_block_arguments final: public ::EmbeddedProto::MessageInterface
     enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
-      BLOCK = 1,
-      CHECK_PASSIVE_DATA = 2,
-      CHECK_BLOCK_SIGNATURE = 3,
-      CHECK_TRANSACTION_SIGNATURE = 4
+      BLOCK = 1
     };
 
     apply_block_arguments& operator=(const apply_block_arguments& rhs)
     {
       set_block(rhs.get_block());
-      set_check_passive_data(rhs.get_check_passive_data());
-      set_check_block_signature(rhs.get_check_block_signature());
-      set_check_transaction_signature(rhs.get_check_transaction_signature());
       return *this;
     }
 
     apply_block_arguments& operator=(const apply_block_arguments&& rhs) noexcept
     {
       set_block(rhs.get_block());
-      set_check_passive_data(rhs.get_check_passive_data());
-      set_check_block_signature(rhs.get_check_block_signature());
-      set_check_transaction_signature(rhs.get_check_transaction_signature());
       return *this;
     }
 
@@ -1850,27 +1835,6 @@ class apply_block_arguments final: public ::EmbeddedProto::MessageInterface
     inline const protocol::block<block_id_LENGTH, block_header_previous_LENGTH, block_active_LENGTH, block_signature_data_LENGTH, block_transactions_REP_LENGTH, block_transactions_id_LENGTH, block_transactions_active_LENGTH, block_transactions_signature_data_LENGTH>& get_block() const { return block_; }
     inline const protocol::block<block_id_LENGTH, block_header_previous_LENGTH, block_active_LENGTH, block_signature_data_LENGTH, block_transactions_REP_LENGTH, block_transactions_id_LENGTH, block_transactions_active_LENGTH, block_transactions_signature_data_LENGTH>& block() const { return block_; }
 
-    inline void clear_check_passive_data() { check_passive_data_.clear(); }
-    inline void set_check_passive_data(const EmbeddedProto::boolean& value) { check_passive_data_ = value; }
-    inline void set_check_passive_data(const EmbeddedProto::boolean&& value) { check_passive_data_ = value; }
-    inline EmbeddedProto::boolean& mutable_check_passive_data() { return check_passive_data_; }
-    inline const EmbeddedProto::boolean& get_check_passive_data() const { return check_passive_data_; }
-    inline EmbeddedProto::boolean::FIELD_TYPE check_passive_data() const { return check_passive_data_.get(); }
-
-    inline void clear_check_block_signature() { check_block_signature_.clear(); }
-    inline void set_check_block_signature(const EmbeddedProto::boolean& value) { check_block_signature_ = value; }
-    inline void set_check_block_signature(const EmbeddedProto::boolean&& value) { check_block_signature_ = value; }
-    inline EmbeddedProto::boolean& mutable_check_block_signature() { return check_block_signature_; }
-    inline const EmbeddedProto::boolean& get_check_block_signature() const { return check_block_signature_; }
-    inline EmbeddedProto::boolean::FIELD_TYPE check_block_signature() const { return check_block_signature_.get(); }
-
-    inline void clear_check_transaction_signature() { check_transaction_signature_.clear(); }
-    inline void set_check_transaction_signature(const EmbeddedProto::boolean& value) { check_transaction_signature_ = value; }
-    inline void set_check_transaction_signature(const EmbeddedProto::boolean&& value) { check_transaction_signature_ = value; }
-    inline EmbeddedProto::boolean& mutable_check_transaction_signature() { return check_transaction_signature_; }
-    inline const EmbeddedProto::boolean& get_check_transaction_signature() const { return check_transaction_signature_; }
-    inline EmbeddedProto::boolean::FIELD_TYPE check_transaction_signature() const { return check_transaction_signature_.get(); }
-
 
     ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
     {
@@ -1879,21 +1843,6 @@ class apply_block_arguments final: public ::EmbeddedProto::MessageInterface
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
         return_value = block_.serialize_with_id(static_cast<uint32_t>(FieldNumber::BLOCK), buffer, false);
-      }
-
-      if((false != check_passive_data_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
-      {
-        return_value = check_passive_data_.serialize_with_id(static_cast<uint32_t>(FieldNumber::CHECK_PASSIVE_DATA), buffer, false);
-      }
-
-      if((false != check_block_signature_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
-      {
-        return_value = check_block_signature_.serialize_with_id(static_cast<uint32_t>(FieldNumber::CHECK_BLOCK_SIGNATURE), buffer, false);
-      }
-
-      if((false != check_transaction_signature_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
-      {
-        return_value = check_transaction_signature_.serialize_with_id(static_cast<uint32_t>(FieldNumber::CHECK_TRANSACTION_SIGNATURE), buffer, false);
       }
 
       return return_value;
@@ -1914,18 +1863,6 @@ class apply_block_arguments final: public ::EmbeddedProto::MessageInterface
         {
           case FieldNumber::BLOCK:
             return_value = block_.deserialize_check_type(buffer, wire_type);
-            break;
-
-          case FieldNumber::CHECK_PASSIVE_DATA:
-            return_value = check_passive_data_.deserialize_check_type(buffer, wire_type);
-            break;
-
-          case FieldNumber::CHECK_BLOCK_SIGNATURE:
-            return_value = check_block_signature_.deserialize_check_type(buffer, wire_type);
-            break;
-
-          case FieldNumber::CHECK_TRANSACTION_SIGNATURE:
-            return_value = check_transaction_signature_.deserialize_check_type(buffer, wire_type);
             break;
 
           default:
@@ -1953,9 +1890,6 @@ class apply_block_arguments final: public ::EmbeddedProto::MessageInterface
     void clear() override
     {
       clear_block();
-      clear_check_passive_data();
-      clear_check_block_signature();
-      clear_check_transaction_signature();
 
     }
 
@@ -1963,9 +1897,6 @@ class apply_block_arguments final: public ::EmbeddedProto::MessageInterface
 
 
       protocol::block<block_id_LENGTH, block_header_previous_LENGTH, block_active_LENGTH, block_signature_data_LENGTH, block_transactions_REP_LENGTH, block_transactions_id_LENGTH, block_transactions_active_LENGTH, block_transactions_signature_data_LENGTH> block_;
-      EmbeddedProto::boolean check_passive_data_ = false;
-      EmbeddedProto::boolean check_block_signature_ = false;
-      EmbeddedProto::boolean check_transaction_signature_ = false;
 
 };
 

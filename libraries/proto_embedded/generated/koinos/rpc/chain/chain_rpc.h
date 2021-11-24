@@ -69,17 +69,11 @@ class submit_block_request final: public ::EmbeddedProto::MessageInterface
     submit_block_request(const submit_block_request& rhs )
     {
       set_block(rhs.get_block());
-      set_verify_passive_data(rhs.get_verify_passive_data());
-      set_verify_block_signature(rhs.get_verify_block_signature());
-      set_verify_transaction_signature(rhs.get_verify_transaction_signature());
     }
 
     submit_block_request(const submit_block_request&& rhs ) noexcept
     {
       set_block(rhs.get_block());
-      set_verify_passive_data(rhs.get_verify_passive_data());
-      set_verify_block_signature(rhs.get_verify_block_signature());
-      set_verify_transaction_signature(rhs.get_verify_transaction_signature());
     }
 
     ~submit_block_request() override = default;
@@ -87,27 +81,18 @@ class submit_block_request final: public ::EmbeddedProto::MessageInterface
     enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
-      BLOCK = 1,
-      VERIFY_PASSIVE_DATA = 2,
-      VERIFY_BLOCK_SIGNATURE = 3,
-      VERIFY_TRANSACTION_SIGNATURE = 4
+      BLOCK = 1
     };
 
     submit_block_request& operator=(const submit_block_request& rhs)
     {
       set_block(rhs.get_block());
-      set_verify_passive_data(rhs.get_verify_passive_data());
-      set_verify_block_signature(rhs.get_verify_block_signature());
-      set_verify_transaction_signature(rhs.get_verify_transaction_signature());
       return *this;
     }
 
     submit_block_request& operator=(const submit_block_request&& rhs) noexcept
     {
       set_block(rhs.get_block());
-      set_verify_passive_data(rhs.get_verify_passive_data());
-      set_verify_block_signature(rhs.get_verify_block_signature());
-      set_verify_transaction_signature(rhs.get_verify_transaction_signature());
       return *this;
     }
 
@@ -118,27 +103,6 @@ class submit_block_request final: public ::EmbeddedProto::MessageInterface
     inline const protocol::block<block_id_LENGTH, block_header_previous_LENGTH, block_active_LENGTH, block_signature_data_LENGTH, block_transactions_REP_LENGTH, block_transactions_id_LENGTH, block_transactions_active_LENGTH, block_transactions_signature_data_LENGTH>& get_block() const { return block_; }
     inline const protocol::block<block_id_LENGTH, block_header_previous_LENGTH, block_active_LENGTH, block_signature_data_LENGTH, block_transactions_REP_LENGTH, block_transactions_id_LENGTH, block_transactions_active_LENGTH, block_transactions_signature_data_LENGTH>& block() const { return block_; }
 
-    inline void clear_verify_passive_data() { verify_passive_data_.clear(); }
-    inline void set_verify_passive_data(const EmbeddedProto::boolean& value) { verify_passive_data_ = value; }
-    inline void set_verify_passive_data(const EmbeddedProto::boolean&& value) { verify_passive_data_ = value; }
-    inline EmbeddedProto::boolean& mutable_verify_passive_data() { return verify_passive_data_; }
-    inline const EmbeddedProto::boolean& get_verify_passive_data() const { return verify_passive_data_; }
-    inline EmbeddedProto::boolean::FIELD_TYPE verify_passive_data() const { return verify_passive_data_.get(); }
-
-    inline void clear_verify_block_signature() { verify_block_signature_.clear(); }
-    inline void set_verify_block_signature(const EmbeddedProto::boolean& value) { verify_block_signature_ = value; }
-    inline void set_verify_block_signature(const EmbeddedProto::boolean&& value) { verify_block_signature_ = value; }
-    inline EmbeddedProto::boolean& mutable_verify_block_signature() { return verify_block_signature_; }
-    inline const EmbeddedProto::boolean& get_verify_block_signature() const { return verify_block_signature_; }
-    inline EmbeddedProto::boolean::FIELD_TYPE verify_block_signature() const { return verify_block_signature_.get(); }
-
-    inline void clear_verify_transaction_signature() { verify_transaction_signature_.clear(); }
-    inline void set_verify_transaction_signature(const EmbeddedProto::boolean& value) { verify_transaction_signature_ = value; }
-    inline void set_verify_transaction_signature(const EmbeddedProto::boolean&& value) { verify_transaction_signature_ = value; }
-    inline EmbeddedProto::boolean& mutable_verify_transaction_signature() { return verify_transaction_signature_; }
-    inline const EmbeddedProto::boolean& get_verify_transaction_signature() const { return verify_transaction_signature_; }
-    inline EmbeddedProto::boolean::FIELD_TYPE verify_transaction_signature() const { return verify_transaction_signature_.get(); }
-
 
     ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
     {
@@ -147,21 +111,6 @@ class submit_block_request final: public ::EmbeddedProto::MessageInterface
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
         return_value = block_.serialize_with_id(static_cast<uint32_t>(FieldNumber::BLOCK), buffer, false);
-      }
-
-      if((false != verify_passive_data_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
-      {
-        return_value = verify_passive_data_.serialize_with_id(static_cast<uint32_t>(FieldNumber::VERIFY_PASSIVE_DATA), buffer, false);
-      }
-
-      if((false != verify_block_signature_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
-      {
-        return_value = verify_block_signature_.serialize_with_id(static_cast<uint32_t>(FieldNumber::VERIFY_BLOCK_SIGNATURE), buffer, false);
-      }
-
-      if((false != verify_transaction_signature_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
-      {
-        return_value = verify_transaction_signature_.serialize_with_id(static_cast<uint32_t>(FieldNumber::VERIFY_TRANSACTION_SIGNATURE), buffer, false);
       }
 
       return return_value;
@@ -182,18 +131,6 @@ class submit_block_request final: public ::EmbeddedProto::MessageInterface
         {
           case FieldNumber::BLOCK:
             return_value = block_.deserialize_check_type(buffer, wire_type);
-            break;
-
-          case FieldNumber::VERIFY_PASSIVE_DATA:
-            return_value = verify_passive_data_.deserialize_check_type(buffer, wire_type);
-            break;
-
-          case FieldNumber::VERIFY_BLOCK_SIGNATURE:
-            return_value = verify_block_signature_.deserialize_check_type(buffer, wire_type);
-            break;
-
-          case FieldNumber::VERIFY_TRANSACTION_SIGNATURE:
-            return_value = verify_transaction_signature_.deserialize_check_type(buffer, wire_type);
             break;
 
           default:
@@ -221,9 +158,6 @@ class submit_block_request final: public ::EmbeddedProto::MessageInterface
     void clear() override
     {
       clear_block();
-      clear_verify_passive_data();
-      clear_verify_block_signature();
-      clear_verify_transaction_signature();
 
     }
 
@@ -231,9 +165,6 @@ class submit_block_request final: public ::EmbeddedProto::MessageInterface
 
 
       protocol::block<block_id_LENGTH, block_header_previous_LENGTH, block_active_LENGTH, block_signature_data_LENGTH, block_transactions_REP_LENGTH, block_transactions_id_LENGTH, block_transactions_active_LENGTH, block_transactions_signature_data_LENGTH> block_;
-      EmbeddedProto::boolean verify_passive_data_ = false;
-      EmbeddedProto::boolean verify_block_signature_ = false;
-      EmbeddedProto::boolean verify_transaction_signature_ = false;
 
 };
 
@@ -369,15 +300,11 @@ class submit_transaction_request final: public ::EmbeddedProto::MessageInterface
     submit_transaction_request(const submit_transaction_request& rhs )
     {
       set_transaction(rhs.get_transaction());
-      set_verify_passive_data(rhs.get_verify_passive_data());
-      set_verify_transaction_signature(rhs.get_verify_transaction_signature());
     }
 
     submit_transaction_request(const submit_transaction_request&& rhs ) noexcept
     {
       set_transaction(rhs.get_transaction());
-      set_verify_passive_data(rhs.get_verify_passive_data());
-      set_verify_transaction_signature(rhs.get_verify_transaction_signature());
     }
 
     ~submit_transaction_request() override = default;
@@ -385,24 +312,18 @@ class submit_transaction_request final: public ::EmbeddedProto::MessageInterface
     enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
-      TRANSACTION = 1,
-      VERIFY_PASSIVE_DATA = 2,
-      VERIFY_TRANSACTION_SIGNATURE = 3
+      TRANSACTION = 1
     };
 
     submit_transaction_request& operator=(const submit_transaction_request& rhs)
     {
       set_transaction(rhs.get_transaction());
-      set_verify_passive_data(rhs.get_verify_passive_data());
-      set_verify_transaction_signature(rhs.get_verify_transaction_signature());
       return *this;
     }
 
     submit_transaction_request& operator=(const submit_transaction_request&& rhs) noexcept
     {
       set_transaction(rhs.get_transaction());
-      set_verify_passive_data(rhs.get_verify_passive_data());
-      set_verify_transaction_signature(rhs.get_verify_transaction_signature());
       return *this;
     }
 
@@ -413,20 +334,6 @@ class submit_transaction_request final: public ::EmbeddedProto::MessageInterface
     inline const protocol::transaction<transaction_id_LENGTH, transaction_active_LENGTH, transaction_signature_data_LENGTH>& get_transaction() const { return transaction_; }
     inline const protocol::transaction<transaction_id_LENGTH, transaction_active_LENGTH, transaction_signature_data_LENGTH>& transaction() const { return transaction_; }
 
-    inline void clear_verify_passive_data() { verify_passive_data_.clear(); }
-    inline void set_verify_passive_data(const EmbeddedProto::boolean& value) { verify_passive_data_ = value; }
-    inline void set_verify_passive_data(const EmbeddedProto::boolean&& value) { verify_passive_data_ = value; }
-    inline EmbeddedProto::boolean& mutable_verify_passive_data() { return verify_passive_data_; }
-    inline const EmbeddedProto::boolean& get_verify_passive_data() const { return verify_passive_data_; }
-    inline EmbeddedProto::boolean::FIELD_TYPE verify_passive_data() const { return verify_passive_data_.get(); }
-
-    inline void clear_verify_transaction_signature() { verify_transaction_signature_.clear(); }
-    inline void set_verify_transaction_signature(const EmbeddedProto::boolean& value) { verify_transaction_signature_ = value; }
-    inline void set_verify_transaction_signature(const EmbeddedProto::boolean&& value) { verify_transaction_signature_ = value; }
-    inline EmbeddedProto::boolean& mutable_verify_transaction_signature() { return verify_transaction_signature_; }
-    inline const EmbeddedProto::boolean& get_verify_transaction_signature() const { return verify_transaction_signature_; }
-    inline EmbeddedProto::boolean::FIELD_TYPE verify_transaction_signature() const { return verify_transaction_signature_.get(); }
-
 
     ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
     {
@@ -435,16 +342,6 @@ class submit_transaction_request final: public ::EmbeddedProto::MessageInterface
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
         return_value = transaction_.serialize_with_id(static_cast<uint32_t>(FieldNumber::TRANSACTION), buffer, false);
-      }
-
-      if((false != verify_passive_data_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
-      {
-        return_value = verify_passive_data_.serialize_with_id(static_cast<uint32_t>(FieldNumber::VERIFY_PASSIVE_DATA), buffer, false);
-      }
-
-      if((false != verify_transaction_signature_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
-      {
-        return_value = verify_transaction_signature_.serialize_with_id(static_cast<uint32_t>(FieldNumber::VERIFY_TRANSACTION_SIGNATURE), buffer, false);
       }
 
       return return_value;
@@ -465,14 +362,6 @@ class submit_transaction_request final: public ::EmbeddedProto::MessageInterface
         {
           case FieldNumber::TRANSACTION:
             return_value = transaction_.deserialize_check_type(buffer, wire_type);
-            break;
-
-          case FieldNumber::VERIFY_PASSIVE_DATA:
-            return_value = verify_passive_data_.deserialize_check_type(buffer, wire_type);
-            break;
-
-          case FieldNumber::VERIFY_TRANSACTION_SIGNATURE:
-            return_value = verify_transaction_signature_.deserialize_check_type(buffer, wire_type);
             break;
 
           default:
@@ -500,8 +389,6 @@ class submit_transaction_request final: public ::EmbeddedProto::MessageInterface
     void clear() override
     {
       clear_transaction();
-      clear_verify_passive_data();
-      clear_verify_transaction_signature();
 
     }
 
@@ -509,8 +396,6 @@ class submit_transaction_request final: public ::EmbeddedProto::MessageInterface
 
 
       protocol::transaction<transaction_id_LENGTH, transaction_active_LENGTH, transaction_signature_data_LENGTH> transaction_;
-      EmbeddedProto::boolean verify_passive_data_ = false;
-      EmbeddedProto::boolean verify_transaction_signature_ = false;
 
 };
 
