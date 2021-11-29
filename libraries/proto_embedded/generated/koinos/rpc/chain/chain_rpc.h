@@ -597,7 +597,8 @@ class get_head_info_request final: public ::EmbeddedProto::MessageInterface
 };
 
 template<uint32_t head_topology_id_LENGTH, 
-uint32_t head_topology_previous_LENGTH>
+uint32_t head_topology_previous_LENGTH, 
+uint32_t head_state_merkle_root_LENGTH>
 class get_head_info_response final: public ::EmbeddedProto::MessageInterface
 {
   public:
@@ -606,12 +607,14 @@ class get_head_info_response final: public ::EmbeddedProto::MessageInterface
     {
       set_head_topology(rhs.get_head_topology());
       set_last_irreversible_block(rhs.get_last_irreversible_block());
+      set_head_state_merkle_root(rhs.get_head_state_merkle_root());
     }
 
     get_head_info_response(const get_head_info_response&& rhs ) noexcept
     {
       set_head_topology(rhs.get_head_topology());
       set_last_irreversible_block(rhs.get_last_irreversible_block());
+      set_head_state_merkle_root(rhs.get_head_state_merkle_root());
     }
 
     ~get_head_info_response() override = default;
@@ -620,13 +623,15 @@ class get_head_info_response final: public ::EmbeddedProto::MessageInterface
     {
       NOT_SET = 0,
       HEAD_TOPOLOGY = 1,
-      LAST_IRREVERSIBLE_BLOCK = 2
+      LAST_IRREVERSIBLE_BLOCK = 2,
+      HEAD_STATE_MERKLE_ROOT = 3
     };
 
     get_head_info_response& operator=(const get_head_info_response& rhs)
     {
       set_head_topology(rhs.get_head_topology());
       set_last_irreversible_block(rhs.get_last_irreversible_block());
+      set_head_state_merkle_root(rhs.get_head_state_merkle_root());
       return *this;
     }
 
@@ -634,6 +639,7 @@ class get_head_info_response final: public ::EmbeddedProto::MessageInterface
     {
       set_head_topology(rhs.get_head_topology());
       set_last_irreversible_block(rhs.get_last_irreversible_block());
+      set_head_state_merkle_root(rhs.get_head_state_merkle_root());
       return *this;
     }
 
@@ -651,6 +657,12 @@ class get_head_info_response final: public ::EmbeddedProto::MessageInterface
     inline const EmbeddedProto::uint64& get_last_irreversible_block() const { return last_irreversible_block_; }
     inline EmbeddedProto::uint64::FIELD_TYPE last_irreversible_block() const { return last_irreversible_block_.get(); }
 
+    inline void clear_head_state_merkle_root() { head_state_merkle_root_.clear(); }
+    inline ::EmbeddedProto::FieldBytes<head_state_merkle_root_LENGTH>& mutable_head_state_merkle_root() { return head_state_merkle_root_; }
+    inline void set_head_state_merkle_root(const ::EmbeddedProto::FieldBytes<head_state_merkle_root_LENGTH>& rhs) { head_state_merkle_root_.set(rhs); }
+    inline const ::EmbeddedProto::FieldBytes<head_state_merkle_root_LENGTH>& get_head_state_merkle_root() const { return head_state_merkle_root_; }
+    inline const uint8_t* head_state_merkle_root() const { return head_state_merkle_root_.get_const(); }
+
 
     ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
     {
@@ -664,6 +676,11 @@ class get_head_info_response final: public ::EmbeddedProto::MessageInterface
       if((0U != last_irreversible_block_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
       {
         return_value = last_irreversible_block_.serialize_with_id(static_cast<uint32_t>(FieldNumber::LAST_IRREVERSIBLE_BLOCK), buffer, false);
+      }
+
+      if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+      {
+        return_value = head_state_merkle_root_.serialize_with_id(static_cast<uint32_t>(FieldNumber::HEAD_STATE_MERKLE_ROOT), buffer, false);
       }
 
       return return_value;
@@ -688,6 +705,10 @@ class get_head_info_response final: public ::EmbeddedProto::MessageInterface
 
           case FieldNumber::LAST_IRREVERSIBLE_BLOCK:
             return_value = last_irreversible_block_.deserialize_check_type(buffer, wire_type);
+            break;
+
+          case FieldNumber::HEAD_STATE_MERKLE_ROOT:
+            return_value = head_state_merkle_root_.deserialize_check_type(buffer, wire_type);
             break;
 
           default:
@@ -716,6 +737,7 @@ class get_head_info_response final: public ::EmbeddedProto::MessageInterface
     {
       clear_head_topology();
       clear_last_irreversible_block();
+      clear_head_state_merkle_root();
 
     }
 
@@ -724,6 +746,7 @@ class get_head_info_response final: public ::EmbeddedProto::MessageInterface
 
       block_topology<head_topology_id_LENGTH, head_topology_previous_LENGTH> head_topology_;
       EmbeddedProto::uint64 last_irreversible_block_ = 0U;
+      ::EmbeddedProto::FieldBytes<head_state_merkle_root_LENGTH> head_state_merkle_root_;
 
 };
 
@@ -2996,6 +3019,7 @@ uint32_t submit_transaction_receipt_events_impacted_REP_LENGTH,
 uint32_t submit_transaction_receipt_events_impacted_LENGTH, 
 uint32_t get_head_info_head_topology_id_LENGTH, 
 uint32_t get_head_info_head_topology_previous_LENGTH, 
+uint32_t get_head_info_head_state_merkle_root_LENGTH, 
 uint32_t get_chain_id_chain_id_LENGTH, 
 uint32_t get_fork_heads_last_irreversible_block_id_LENGTH, 
 uint32_t get_fork_heads_last_irreversible_block_previous_LENGTH, 
@@ -3415,10 +3439,10 @@ class chain_response final: public ::EmbeddedProto::MessageInterface
       if(FieldNumber::GET_HEAD_INFO == which_response_)
       {
         which_response_ = FieldNumber::NOT_SET;
-        response_.get_head_info_.~get_head_info_response<get_head_info_head_topology_id_LENGTH, get_head_info_head_topology_previous_LENGTH>();
+        response_.get_head_info_.~get_head_info_response<get_head_info_head_topology_id_LENGTH, get_head_info_head_topology_previous_LENGTH, get_head_info_head_state_merkle_root_LENGTH>();
       }
     }
-    inline void set_get_head_info(const get_head_info_response<get_head_info_head_topology_id_LENGTH, get_head_info_head_topology_previous_LENGTH>& value)
+    inline void set_get_head_info(const get_head_info_response<get_head_info_head_topology_id_LENGTH, get_head_info_head_topology_previous_LENGTH, get_head_info_head_state_merkle_root_LENGTH>& value)
     {
       if(FieldNumber::GET_HEAD_INFO != which_response_)
       {
@@ -3426,7 +3450,7 @@ class chain_response final: public ::EmbeddedProto::MessageInterface
       }
       response_.get_head_info_ = value;
     }
-    inline void set_get_head_info(const get_head_info_response<get_head_info_head_topology_id_LENGTH, get_head_info_head_topology_previous_LENGTH>&& value)
+    inline void set_get_head_info(const get_head_info_response<get_head_info_head_topology_id_LENGTH, get_head_info_head_topology_previous_LENGTH, get_head_info_head_state_merkle_root_LENGTH>&& value)
     {
       if(FieldNumber::GET_HEAD_INFO != which_response_)
       {
@@ -3434,7 +3458,7 @@ class chain_response final: public ::EmbeddedProto::MessageInterface
       }
       response_.get_head_info_ = value;
     }
-    inline get_head_info_response<get_head_info_head_topology_id_LENGTH, get_head_info_head_topology_previous_LENGTH>& mutable_get_head_info()
+    inline get_head_info_response<get_head_info_head_topology_id_LENGTH, get_head_info_head_topology_previous_LENGTH, get_head_info_head_state_merkle_root_LENGTH>& mutable_get_head_info()
     {
       if(FieldNumber::GET_HEAD_INFO != which_response_)
       {
@@ -3442,8 +3466,8 @@ class chain_response final: public ::EmbeddedProto::MessageInterface
       }
       return response_.get_head_info_;
     }
-    inline const get_head_info_response<get_head_info_head_topology_id_LENGTH, get_head_info_head_topology_previous_LENGTH>& get_get_head_info() const { return response_.get_head_info_; }
-    inline const get_head_info_response<get_head_info_head_topology_id_LENGTH, get_head_info_head_topology_previous_LENGTH>& get_head_info() const { return response_.get_head_info_; }
+    inline const get_head_info_response<get_head_info_head_topology_id_LENGTH, get_head_info_head_topology_previous_LENGTH, get_head_info_head_state_merkle_root_LENGTH>& get_get_head_info() const { return response_.get_head_info_; }
+    inline const get_head_info_response<get_head_info_head_topology_id_LENGTH, get_head_info_head_topology_previous_LENGTH, get_head_info_head_state_merkle_root_LENGTH>& get_head_info() const { return response_.get_head_info_; }
 
     inline void clear_get_chain_id()
     {
@@ -3855,7 +3879,7 @@ class chain_response final: public ::EmbeddedProto::MessageInterface
         error_response<error_message_LENGTH, error_data_LENGTH> error_;
         submit_block_response<submit_block_receipt_id_LENGTH, submit_block_receipt_events_REP_LENGTH, submit_block_receipt_events_source_LENGTH, submit_block_receipt_events_name_LENGTH, submit_block_receipt_events_data_LENGTH, submit_block_receipt_events_impacted_REP_LENGTH, submit_block_receipt_events_impacted_LENGTH, submit_block_receipt_transaction_receipts_REP_LENGTH, submit_block_receipt_transaction_receipts_id_LENGTH, submit_block_receipt_transaction_receipts_payer_LENGTH, submit_block_receipt_transaction_receipts_events_REP_LENGTH, submit_block_receipt_transaction_receipts_events_source_LENGTH, submit_block_receipt_transaction_receipts_events_name_LENGTH, submit_block_receipt_transaction_receipts_events_data_LENGTH, submit_block_receipt_transaction_receipts_events_impacted_REP_LENGTH, submit_block_receipt_transaction_receipts_events_impacted_LENGTH> submit_block_;
         submit_transaction_response<submit_transaction_receipt_id_LENGTH, submit_transaction_receipt_payer_LENGTH, submit_transaction_receipt_events_REP_LENGTH, submit_transaction_receipt_events_source_LENGTH, submit_transaction_receipt_events_name_LENGTH, submit_transaction_receipt_events_data_LENGTH, submit_transaction_receipt_events_impacted_REP_LENGTH, submit_transaction_receipt_events_impacted_LENGTH> submit_transaction_;
-        get_head_info_response<get_head_info_head_topology_id_LENGTH, get_head_info_head_topology_previous_LENGTH> get_head_info_;
+        get_head_info_response<get_head_info_head_topology_id_LENGTH, get_head_info_head_topology_previous_LENGTH, get_head_info_head_state_merkle_root_LENGTH> get_head_info_;
         get_chain_id_response<get_chain_id_chain_id_LENGTH> get_chain_id_;
         get_fork_heads_response<get_fork_heads_last_irreversible_block_id_LENGTH, get_fork_heads_last_irreversible_block_previous_LENGTH, get_fork_heads_fork_heads_REP_LENGTH, get_fork_heads_fork_heads_id_LENGTH, get_fork_heads_fork_heads_previous_LENGTH> get_fork_heads_;
         read_contract_response<read_contract_result_LENGTH, read_contract_logs_LENGTH> read_contract_;
@@ -3897,7 +3921,7 @@ class chain_response final: public ::EmbeddedProto::MessageInterface
             break;
 
           case FieldNumber::GET_HEAD_INFO:
-            new(&response_.get_head_info_) get_head_info_response<get_head_info_head_topology_id_LENGTH, get_head_info_head_topology_previous_LENGTH>;
+            new(&response_.get_head_info_) get_head_info_response<get_head_info_head_topology_id_LENGTH, get_head_info_head_topology_previous_LENGTH, get_head_info_head_state_merkle_root_LENGTH>;
             which_response_ = FieldNumber::GET_HEAD_INFO;
             break;
 
@@ -3955,7 +3979,7 @@ class chain_response final: public ::EmbeddedProto::MessageInterface
             response_.submit_transaction_.~submit_transaction_response<submit_transaction_receipt_id_LENGTH, submit_transaction_receipt_payer_LENGTH, submit_transaction_receipt_events_REP_LENGTH, submit_transaction_receipt_events_source_LENGTH, submit_transaction_receipt_events_name_LENGTH, submit_transaction_receipt_events_data_LENGTH, submit_transaction_receipt_events_impacted_REP_LENGTH, submit_transaction_receipt_events_impacted_LENGTH>(); // NOSONAR Unions require this.
             break;
           case FieldNumber::GET_HEAD_INFO:
-            response_.get_head_info_.~get_head_info_response<get_head_info_head_topology_id_LENGTH, get_head_info_head_topology_previous_LENGTH>(); // NOSONAR Unions require this.
+            response_.get_head_info_.~get_head_info_response<get_head_info_head_topology_id_LENGTH, get_head_info_head_topology_previous_LENGTH, get_head_info_head_state_merkle_root_LENGTH>(); // NOSONAR Unions require this.
             break;
           case FieldNumber::GET_CHAIN_ID:
             response_.get_chain_id_.~get_chain_id_response<get_chain_id_chain_id_LENGTH>(); // NOSONAR Unions require this.

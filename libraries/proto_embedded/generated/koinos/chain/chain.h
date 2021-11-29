@@ -340,8 +340,7 @@ class database_key final: public ::EmbeddedProto::MessageInterface
 };
 
 template<uint32_t head_topology_id_LENGTH, 
-uint32_t head_topology_previous_LENGTH, 
-uint32_t head_state_merkle_root_LENGTH>
+uint32_t head_topology_previous_LENGTH>
 class head_info final: public ::EmbeddedProto::MessageInterface
 {
   public:
@@ -351,7 +350,6 @@ class head_info final: public ::EmbeddedProto::MessageInterface
       set_head_topology(rhs.get_head_topology());
       set_head_block_time(rhs.get_head_block_time());
       set_last_irreversible_block(rhs.get_last_irreversible_block());
-      set_head_state_merkle_root(rhs.get_head_state_merkle_root());
     }
 
     head_info(const head_info&& rhs ) noexcept
@@ -359,7 +357,6 @@ class head_info final: public ::EmbeddedProto::MessageInterface
       set_head_topology(rhs.get_head_topology());
       set_head_block_time(rhs.get_head_block_time());
       set_last_irreversible_block(rhs.get_last_irreversible_block());
-      set_head_state_merkle_root(rhs.get_head_state_merkle_root());
     }
 
     ~head_info() override = default;
@@ -369,8 +366,7 @@ class head_info final: public ::EmbeddedProto::MessageInterface
       NOT_SET = 0,
       HEAD_TOPOLOGY = 1,
       HEAD_BLOCK_TIME = 2,
-      LAST_IRREVERSIBLE_BLOCK = 3,
-      HEAD_STATE_MERKLE_ROOT = 4
+      LAST_IRREVERSIBLE_BLOCK = 3
     };
 
     head_info& operator=(const head_info& rhs)
@@ -378,7 +374,6 @@ class head_info final: public ::EmbeddedProto::MessageInterface
       set_head_topology(rhs.get_head_topology());
       set_head_block_time(rhs.get_head_block_time());
       set_last_irreversible_block(rhs.get_last_irreversible_block());
-      set_head_state_merkle_root(rhs.get_head_state_merkle_root());
       return *this;
     }
 
@@ -387,7 +382,6 @@ class head_info final: public ::EmbeddedProto::MessageInterface
       set_head_topology(rhs.get_head_topology());
       set_head_block_time(rhs.get_head_block_time());
       set_last_irreversible_block(rhs.get_last_irreversible_block());
-      set_head_state_merkle_root(rhs.get_head_state_merkle_root());
       return *this;
     }
 
@@ -412,12 +406,6 @@ class head_info final: public ::EmbeddedProto::MessageInterface
     inline const EmbeddedProto::uint64& get_last_irreversible_block() const { return last_irreversible_block_; }
     inline EmbeddedProto::uint64::FIELD_TYPE last_irreversible_block() const { return last_irreversible_block_.get(); }
 
-    inline void clear_head_state_merkle_root() { head_state_merkle_root_.clear(); }
-    inline ::EmbeddedProto::FieldBytes<head_state_merkle_root_LENGTH>& mutable_head_state_merkle_root() { return head_state_merkle_root_; }
-    inline void set_head_state_merkle_root(const ::EmbeddedProto::FieldBytes<head_state_merkle_root_LENGTH>& rhs) { head_state_merkle_root_.set(rhs); }
-    inline const ::EmbeddedProto::FieldBytes<head_state_merkle_root_LENGTH>& get_head_state_merkle_root() const { return head_state_merkle_root_; }
-    inline const uint8_t* head_state_merkle_root() const { return head_state_merkle_root_.get_const(); }
-
 
     ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
     {
@@ -436,11 +424,6 @@ class head_info final: public ::EmbeddedProto::MessageInterface
       if((0U != last_irreversible_block_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
       {
         return_value = last_irreversible_block_.serialize_with_id(static_cast<uint32_t>(FieldNumber::LAST_IRREVERSIBLE_BLOCK), buffer, false);
-      }
-
-      if(::EmbeddedProto::Error::NO_ERRORS == return_value)
-      {
-        return_value = head_state_merkle_root_.serialize_with_id(static_cast<uint32_t>(FieldNumber::HEAD_STATE_MERKLE_ROOT), buffer, false);
       }
 
       return return_value;
@@ -471,10 +454,6 @@ class head_info final: public ::EmbeddedProto::MessageInterface
             return_value = last_irreversible_block_.deserialize_check_type(buffer, wire_type);
             break;
 
-          case FieldNumber::HEAD_STATE_MERKLE_ROOT:
-            return_value = head_state_merkle_root_.deserialize_check_type(buffer, wire_type);
-            break;
-
           default:
             break;
         }
@@ -502,7 +481,6 @@ class head_info final: public ::EmbeddedProto::MessageInterface
       clear_head_topology();
       clear_head_block_time();
       clear_last_irreversible_block();
-      clear_head_state_merkle_root();
 
     }
 
@@ -512,7 +490,6 @@ class head_info final: public ::EmbeddedProto::MessageInterface
       block_topology<head_topology_id_LENGTH, head_topology_previous_LENGTH> head_topology_;
       EmbeddedProto::uint64 head_block_time_ = 0U;
       EmbeddedProto::uint64 last_irreversible_block_ = 0U;
-      ::EmbeddedProto::FieldBytes<head_state_merkle_root_LENGTH> head_state_merkle_root_;
 
 };
 
@@ -5094,8 +5071,7 @@ class get_head_info_arguments final: public ::EmbeddedProto::MessageInterface
 };
 
 template<uint32_t value_head_topology_id_LENGTH, 
-uint32_t value_head_topology_previous_LENGTH, 
-uint32_t value_head_state_merkle_root_LENGTH>
+uint32_t value_head_topology_previous_LENGTH>
 class get_head_info_result final: public ::EmbeddedProto::MessageInterface
 {
   public:
@@ -5131,11 +5107,11 @@ class get_head_info_result final: public ::EmbeddedProto::MessageInterface
     }
 
     inline void clear_value() { value_.clear(); }
-    inline void set_value(const head_info<value_head_topology_id_LENGTH, value_head_topology_previous_LENGTH, value_head_state_merkle_root_LENGTH>& value) { value_ = value; }
-    inline void set_value(const head_info<value_head_topology_id_LENGTH, value_head_topology_previous_LENGTH, value_head_state_merkle_root_LENGTH>&& value) { value_ = value; }
-    inline head_info<value_head_topology_id_LENGTH, value_head_topology_previous_LENGTH, value_head_state_merkle_root_LENGTH>& mutable_value() { return value_; }
-    inline const head_info<value_head_topology_id_LENGTH, value_head_topology_previous_LENGTH, value_head_state_merkle_root_LENGTH>& get_value() const { return value_; }
-    inline const head_info<value_head_topology_id_LENGTH, value_head_topology_previous_LENGTH, value_head_state_merkle_root_LENGTH>& value() const { return value_; }
+    inline void set_value(const head_info<value_head_topology_id_LENGTH, value_head_topology_previous_LENGTH>& value) { value_ = value; }
+    inline void set_value(const head_info<value_head_topology_id_LENGTH, value_head_topology_previous_LENGTH>&& value) { value_ = value; }
+    inline head_info<value_head_topology_id_LENGTH, value_head_topology_previous_LENGTH>& mutable_value() { return value_; }
+    inline const head_info<value_head_topology_id_LENGTH, value_head_topology_previous_LENGTH>& get_value() const { return value_; }
+    inline const head_info<value_head_topology_id_LENGTH, value_head_topology_previous_LENGTH>& value() const { return value_; }
 
 
     ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
@@ -5198,7 +5174,7 @@ class get_head_info_result final: public ::EmbeddedProto::MessageInterface
     private:
 
 
-      head_info<value_head_topology_id_LENGTH, value_head_topology_previous_LENGTH, value_head_state_merkle_root_LENGTH> value_;
+      head_info<value_head_topology_id_LENGTH, value_head_topology_previous_LENGTH> value_;
 
 };
 
