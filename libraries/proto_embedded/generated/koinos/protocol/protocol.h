@@ -2218,8 +2218,7 @@ class transaction_receipt final: public ::EmbeddedProto::MessageInterface
 };
 
 template<uint32_t transaction_merkle_root_LENGTH, 
-uint32_t signer_LENGTH, 
-uint32_t previous_state_merkle_root_LENGTH>
+uint32_t signer_LENGTH>
 class active_block_data final: public ::EmbeddedProto::MessageInterface
 {
   public:
@@ -2228,14 +2227,12 @@ class active_block_data final: public ::EmbeddedProto::MessageInterface
     {
       set_transaction_merkle_root(rhs.get_transaction_merkle_root());
       set_signer(rhs.get_signer());
-      set_previous_state_merkle_root(rhs.get_previous_state_merkle_root());
     }
 
     active_block_data(const active_block_data&& rhs ) noexcept
     {
       set_transaction_merkle_root(rhs.get_transaction_merkle_root());
       set_signer(rhs.get_signer());
-      set_previous_state_merkle_root(rhs.get_previous_state_merkle_root());
     }
 
     ~active_block_data() override = default;
@@ -2244,15 +2241,13 @@ class active_block_data final: public ::EmbeddedProto::MessageInterface
     {
       NOT_SET = 0,
       TRANSACTION_MERKLE_ROOT = 1,
-      SIGNER = 3,
-      PREVIOUS_STATE_MERKLE_ROOT = 4
+      SIGNER = 3
     };
 
     active_block_data& operator=(const active_block_data& rhs)
     {
       set_transaction_merkle_root(rhs.get_transaction_merkle_root());
       set_signer(rhs.get_signer());
-      set_previous_state_merkle_root(rhs.get_previous_state_merkle_root());
       return *this;
     }
 
@@ -2260,7 +2255,6 @@ class active_block_data final: public ::EmbeddedProto::MessageInterface
     {
       set_transaction_merkle_root(rhs.get_transaction_merkle_root());
       set_signer(rhs.get_signer());
-      set_previous_state_merkle_root(rhs.get_previous_state_merkle_root());
       return *this;
     }
 
@@ -2276,12 +2270,6 @@ class active_block_data final: public ::EmbeddedProto::MessageInterface
     inline const ::EmbeddedProto::FieldBytes<signer_LENGTH>& get_signer() const { return signer_; }
     inline const uint8_t* signer() const { return signer_.get_const(); }
 
-    inline void clear_previous_state_merkle_root() { previous_state_merkle_root_.clear(); }
-    inline ::EmbeddedProto::FieldBytes<previous_state_merkle_root_LENGTH>& mutable_previous_state_merkle_root() { return previous_state_merkle_root_; }
-    inline void set_previous_state_merkle_root(const ::EmbeddedProto::FieldBytes<previous_state_merkle_root_LENGTH>& rhs) { previous_state_merkle_root_.set(rhs); }
-    inline const ::EmbeddedProto::FieldBytes<previous_state_merkle_root_LENGTH>& get_previous_state_merkle_root() const { return previous_state_merkle_root_; }
-    inline const uint8_t* previous_state_merkle_root() const { return previous_state_merkle_root_.get_const(); }
-
 
     ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
     {
@@ -2295,11 +2283,6 @@ class active_block_data final: public ::EmbeddedProto::MessageInterface
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
         return_value = signer_.serialize_with_id(static_cast<uint32_t>(FieldNumber::SIGNER), buffer, false);
-      }
-
-      if(::EmbeddedProto::Error::NO_ERRORS == return_value)
-      {
-        return_value = previous_state_merkle_root_.serialize_with_id(static_cast<uint32_t>(FieldNumber::PREVIOUS_STATE_MERKLE_ROOT), buffer, false);
       }
 
       return return_value;
@@ -2324,10 +2307,6 @@ class active_block_data final: public ::EmbeddedProto::MessageInterface
 
           case FieldNumber::SIGNER:
             return_value = signer_.deserialize_check_type(buffer, wire_type);
-            break;
-
-          case FieldNumber::PREVIOUS_STATE_MERKLE_ROOT:
-            return_value = previous_state_merkle_root_.deserialize_check_type(buffer, wire_type);
             break;
 
           default:
@@ -2356,7 +2335,6 @@ class active_block_data final: public ::EmbeddedProto::MessageInterface
     {
       clear_transaction_merkle_root();
       clear_signer();
-      clear_previous_state_merkle_root();
 
     }
 
@@ -2365,11 +2343,11 @@ class active_block_data final: public ::EmbeddedProto::MessageInterface
 
       ::EmbeddedProto::FieldBytes<transaction_merkle_root_LENGTH> transaction_merkle_root_;
       ::EmbeddedProto::FieldBytes<signer_LENGTH> signer_;
-      ::EmbeddedProto::FieldBytes<previous_state_merkle_root_LENGTH> previous_state_merkle_root_;
 
 };
 
-template<uint32_t previous_LENGTH>
+template<uint32_t previous_LENGTH, 
+uint32_t previous_state_merkle_root_LENGTH>
 class block_header final: public ::EmbeddedProto::MessageInterface
 {
   public:
@@ -2379,6 +2357,7 @@ class block_header final: public ::EmbeddedProto::MessageInterface
       set_previous(rhs.get_previous());
       set_height(rhs.get_height());
       set_timestamp(rhs.get_timestamp());
+      set_previous_state_merkle_root(rhs.get_previous_state_merkle_root());
     }
 
     block_header(const block_header&& rhs ) noexcept
@@ -2386,6 +2365,7 @@ class block_header final: public ::EmbeddedProto::MessageInterface
       set_previous(rhs.get_previous());
       set_height(rhs.get_height());
       set_timestamp(rhs.get_timestamp());
+      set_previous_state_merkle_root(rhs.get_previous_state_merkle_root());
     }
 
     ~block_header() override = default;
@@ -2395,7 +2375,8 @@ class block_header final: public ::EmbeddedProto::MessageInterface
       NOT_SET = 0,
       PREVIOUS = 1,
       HEIGHT = 2,
-      TIMESTAMP = 3
+      TIMESTAMP = 3,
+      PREVIOUS_STATE_MERKLE_ROOT = 4
     };
 
     block_header& operator=(const block_header& rhs)
@@ -2403,6 +2384,7 @@ class block_header final: public ::EmbeddedProto::MessageInterface
       set_previous(rhs.get_previous());
       set_height(rhs.get_height());
       set_timestamp(rhs.get_timestamp());
+      set_previous_state_merkle_root(rhs.get_previous_state_merkle_root());
       return *this;
     }
 
@@ -2411,6 +2393,7 @@ class block_header final: public ::EmbeddedProto::MessageInterface
       set_previous(rhs.get_previous());
       set_height(rhs.get_height());
       set_timestamp(rhs.get_timestamp());
+      set_previous_state_merkle_root(rhs.get_previous_state_merkle_root());
       return *this;
     }
 
@@ -2434,6 +2417,12 @@ class block_header final: public ::EmbeddedProto::MessageInterface
     inline const EmbeddedProto::uint64& get_timestamp() const { return timestamp_; }
     inline EmbeddedProto::uint64::FIELD_TYPE timestamp() const { return timestamp_.get(); }
 
+    inline void clear_previous_state_merkle_root() { previous_state_merkle_root_.clear(); }
+    inline ::EmbeddedProto::FieldBytes<previous_state_merkle_root_LENGTH>& mutable_previous_state_merkle_root() { return previous_state_merkle_root_; }
+    inline void set_previous_state_merkle_root(const ::EmbeddedProto::FieldBytes<previous_state_merkle_root_LENGTH>& rhs) { previous_state_merkle_root_.set(rhs); }
+    inline const ::EmbeddedProto::FieldBytes<previous_state_merkle_root_LENGTH>& get_previous_state_merkle_root() const { return previous_state_merkle_root_; }
+    inline const uint8_t* previous_state_merkle_root() const { return previous_state_merkle_root_.get_const(); }
+
 
     ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
     {
@@ -2452,6 +2441,11 @@ class block_header final: public ::EmbeddedProto::MessageInterface
       if((0U != timestamp_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
       {
         return_value = timestamp_.serialize_with_id(static_cast<uint32_t>(FieldNumber::TIMESTAMP), buffer, false);
+      }
+
+      if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+      {
+        return_value = previous_state_merkle_root_.serialize_with_id(static_cast<uint32_t>(FieldNumber::PREVIOUS_STATE_MERKLE_ROOT), buffer, false);
       }
 
       return return_value;
@@ -2482,6 +2476,10 @@ class block_header final: public ::EmbeddedProto::MessageInterface
             return_value = timestamp_.deserialize_check_type(buffer, wire_type);
             break;
 
+          case FieldNumber::PREVIOUS_STATE_MERKLE_ROOT:
+            return_value = previous_state_merkle_root_.deserialize_check_type(buffer, wire_type);
+            break;
+
           default:
             break;
         }
@@ -2509,6 +2507,7 @@ class block_header final: public ::EmbeddedProto::MessageInterface
       clear_previous();
       clear_height();
       clear_timestamp();
+      clear_previous_state_merkle_root();
 
     }
 
@@ -2518,11 +2517,13 @@ class block_header final: public ::EmbeddedProto::MessageInterface
       ::EmbeddedProto::FieldBytes<previous_LENGTH> previous_;
       EmbeddedProto::uint64 height_ = 0U;
       EmbeddedProto::uint64 timestamp_ = 0U;
+      ::EmbeddedProto::FieldBytes<previous_state_merkle_root_LENGTH> previous_state_merkle_root_;
 
 };
 
 template<uint32_t id_LENGTH, 
 uint32_t header_previous_LENGTH, 
+uint32_t header_previous_state_merkle_root_LENGTH, 
 uint32_t active_LENGTH, 
 uint32_t signature_data_LENGTH, 
 uint32_t transactions_REP_LENGTH, 
@@ -2590,11 +2591,11 @@ class block final: public ::EmbeddedProto::MessageInterface
     inline const uint8_t* id() const { return id_.get_const(); }
 
     inline void clear_header() { header_.clear(); }
-    inline void set_header(const block_header<header_previous_LENGTH>& value) { header_ = value; }
-    inline void set_header(const block_header<header_previous_LENGTH>&& value) { header_ = value; }
-    inline block_header<header_previous_LENGTH>& mutable_header() { return header_; }
-    inline const block_header<header_previous_LENGTH>& get_header() const { return header_; }
-    inline const block_header<header_previous_LENGTH>& header() const { return header_; }
+    inline void set_header(const block_header<header_previous_LENGTH, header_previous_state_merkle_root_LENGTH>& value) { header_ = value; }
+    inline void set_header(const block_header<header_previous_LENGTH, header_previous_state_merkle_root_LENGTH>&& value) { header_ = value; }
+    inline block_header<header_previous_LENGTH, header_previous_state_merkle_root_LENGTH>& mutable_header() { return header_; }
+    inline const block_header<header_previous_LENGTH, header_previous_state_merkle_root_LENGTH>& get_header() const { return header_; }
+    inline const block_header<header_previous_LENGTH, header_previous_state_merkle_root_LENGTH>& header() const { return header_; }
 
     inline void clear_active() { active_.clear(); }
     inline ::EmbeddedProto::FieldBytes<active_LENGTH>& mutable_active() { return active_; }
@@ -2721,7 +2722,7 @@ class block final: public ::EmbeddedProto::MessageInterface
 
 
       ::EmbeddedProto::FieldBytes<id_LENGTH> id_;
-      block_header<header_previous_LENGTH> header_;
+      block_header<header_previous_LENGTH, header_previous_state_merkle_root_LENGTH> header_;
       ::EmbeddedProto::FieldBytes<active_LENGTH> active_;
       ::EmbeddedProto::FieldBytes<signature_data_LENGTH> signature_data_;
       ::EmbeddedProto::RepeatedFieldFixedSize<transaction<transactions_id_LENGTH, transactions_active_LENGTH, transactions_signature_data_LENGTH>, transactions_REP_LENGTH> transactions_;

@@ -1788,6 +1788,7 @@ class verify_merkle_root_result final: public ::EmbeddedProto::MessageInterface
 
 template<uint32_t block_id_LENGTH, 
 uint32_t block_header_previous_LENGTH, 
+uint32_t block_header_previous_state_merkle_root_LENGTH, 
 uint32_t block_active_LENGTH, 
 uint32_t block_signature_data_LENGTH, 
 uint32_t block_transactions_REP_LENGTH, 
@@ -1829,11 +1830,11 @@ class apply_block_arguments final: public ::EmbeddedProto::MessageInterface
     }
 
     inline void clear_block() { block_.clear(); }
-    inline void set_block(const protocol::block<block_id_LENGTH, block_header_previous_LENGTH, block_active_LENGTH, block_signature_data_LENGTH, block_transactions_REP_LENGTH, block_transactions_id_LENGTH, block_transactions_active_LENGTH, block_transactions_signature_data_LENGTH>& value) { block_ = value; }
-    inline void set_block(const protocol::block<block_id_LENGTH, block_header_previous_LENGTH, block_active_LENGTH, block_signature_data_LENGTH, block_transactions_REP_LENGTH, block_transactions_id_LENGTH, block_transactions_active_LENGTH, block_transactions_signature_data_LENGTH>&& value) { block_ = value; }
-    inline protocol::block<block_id_LENGTH, block_header_previous_LENGTH, block_active_LENGTH, block_signature_data_LENGTH, block_transactions_REP_LENGTH, block_transactions_id_LENGTH, block_transactions_active_LENGTH, block_transactions_signature_data_LENGTH>& mutable_block() { return block_; }
-    inline const protocol::block<block_id_LENGTH, block_header_previous_LENGTH, block_active_LENGTH, block_signature_data_LENGTH, block_transactions_REP_LENGTH, block_transactions_id_LENGTH, block_transactions_active_LENGTH, block_transactions_signature_data_LENGTH>& get_block() const { return block_; }
-    inline const protocol::block<block_id_LENGTH, block_header_previous_LENGTH, block_active_LENGTH, block_signature_data_LENGTH, block_transactions_REP_LENGTH, block_transactions_id_LENGTH, block_transactions_active_LENGTH, block_transactions_signature_data_LENGTH>& block() const { return block_; }
+    inline void set_block(const protocol::block<block_id_LENGTH, block_header_previous_LENGTH, block_header_previous_state_merkle_root_LENGTH, block_active_LENGTH, block_signature_data_LENGTH, block_transactions_REP_LENGTH, block_transactions_id_LENGTH, block_transactions_active_LENGTH, block_transactions_signature_data_LENGTH>& value) { block_ = value; }
+    inline void set_block(const protocol::block<block_id_LENGTH, block_header_previous_LENGTH, block_header_previous_state_merkle_root_LENGTH, block_active_LENGTH, block_signature_data_LENGTH, block_transactions_REP_LENGTH, block_transactions_id_LENGTH, block_transactions_active_LENGTH, block_transactions_signature_data_LENGTH>&& value) { block_ = value; }
+    inline protocol::block<block_id_LENGTH, block_header_previous_LENGTH, block_header_previous_state_merkle_root_LENGTH, block_active_LENGTH, block_signature_data_LENGTH, block_transactions_REP_LENGTH, block_transactions_id_LENGTH, block_transactions_active_LENGTH, block_transactions_signature_data_LENGTH>& mutable_block() { return block_; }
+    inline const protocol::block<block_id_LENGTH, block_header_previous_LENGTH, block_header_previous_state_merkle_root_LENGTH, block_active_LENGTH, block_signature_data_LENGTH, block_transactions_REP_LENGTH, block_transactions_id_LENGTH, block_transactions_active_LENGTH, block_transactions_signature_data_LENGTH>& get_block() const { return block_; }
+    inline const protocol::block<block_id_LENGTH, block_header_previous_LENGTH, block_header_previous_state_merkle_root_LENGTH, block_active_LENGTH, block_signature_data_LENGTH, block_transactions_REP_LENGTH, block_transactions_id_LENGTH, block_transactions_active_LENGTH, block_transactions_signature_data_LENGTH>& block() const { return block_; }
 
 
     ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
@@ -1896,7 +1897,7 @@ class apply_block_arguments final: public ::EmbeddedProto::MessageInterface
     private:
 
 
-      protocol::block<block_id_LENGTH, block_header_previous_LENGTH, block_active_LENGTH, block_signature_data_LENGTH, block_transactions_REP_LENGTH, block_transactions_id_LENGTH, block_transactions_active_LENGTH, block_transactions_signature_data_LENGTH> block_;
+      protocol::block<block_id_LENGTH, block_header_previous_LENGTH, block_header_previous_state_merkle_root_LENGTH, block_active_LENGTH, block_signature_data_LENGTH, block_transactions_REP_LENGTH, block_transactions_id_LENGTH, block_transactions_active_LENGTH, block_transactions_signature_data_LENGTH> block_;
 
 };
 
