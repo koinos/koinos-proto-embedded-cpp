@@ -2730,6 +2730,7 @@ class block final: public ::EmbeddedProto::MessageInterface
 };
 
 template<uint32_t id_LENGTH, 
+uint32_t state_merkle_root_LENGTH, 
 uint32_t events_REP_LENGTH, 
 uint32_t events_source_LENGTH, 
 uint32_t events_name_LENGTH, 
@@ -2756,6 +2757,7 @@ class block_receipt final: public ::EmbeddedProto::MessageInterface
       set_disk_storage_used(rhs.get_disk_storage_used());
       set_network_bandwidth_used(rhs.get_network_bandwidth_used());
       set_compute_bandwidth_used(rhs.get_compute_bandwidth_used());
+      set_state_merkle_root(rhs.get_state_merkle_root());
       set_events(rhs.get_events());
       set_transaction_receipts(rhs.get_transaction_receipts());
     }
@@ -2767,6 +2769,7 @@ class block_receipt final: public ::EmbeddedProto::MessageInterface
       set_disk_storage_used(rhs.get_disk_storage_used());
       set_network_bandwidth_used(rhs.get_network_bandwidth_used());
       set_compute_bandwidth_used(rhs.get_compute_bandwidth_used());
+      set_state_merkle_root(rhs.get_state_merkle_root());
       set_events(rhs.get_events());
       set_transaction_receipts(rhs.get_transaction_receipts());
     }
@@ -2781,8 +2784,9 @@ class block_receipt final: public ::EmbeddedProto::MessageInterface
       DISK_STORAGE_USED = 3,
       NETWORK_BANDWIDTH_USED = 4,
       COMPUTE_BANDWIDTH_USED = 5,
-      EVENTS = 6,
-      TRANSACTION_RECEIPTS = 7
+      STATE_MERKLE_ROOT = 6,
+      EVENTS = 7,
+      TRANSACTION_RECEIPTS = 8
     };
 
     block_receipt& operator=(const block_receipt& rhs)
@@ -2792,6 +2796,7 @@ class block_receipt final: public ::EmbeddedProto::MessageInterface
       set_disk_storage_used(rhs.get_disk_storage_used());
       set_network_bandwidth_used(rhs.get_network_bandwidth_used());
       set_compute_bandwidth_used(rhs.get_compute_bandwidth_used());
+      set_state_merkle_root(rhs.get_state_merkle_root());
       set_events(rhs.get_events());
       set_transaction_receipts(rhs.get_transaction_receipts());
       return *this;
@@ -2804,6 +2809,7 @@ class block_receipt final: public ::EmbeddedProto::MessageInterface
       set_disk_storage_used(rhs.get_disk_storage_used());
       set_network_bandwidth_used(rhs.get_network_bandwidth_used());
       set_compute_bandwidth_used(rhs.get_compute_bandwidth_used());
+      set_state_merkle_root(rhs.get_state_merkle_root());
       set_events(rhs.get_events());
       set_transaction_receipts(rhs.get_transaction_receipts());
       return *this;
@@ -2842,6 +2848,12 @@ class block_receipt final: public ::EmbeddedProto::MessageInterface
     inline EmbeddedProto::uint64& mutable_compute_bandwidth_used() { return compute_bandwidth_used_; }
     inline const EmbeddedProto::uint64& get_compute_bandwidth_used() const { return compute_bandwidth_used_; }
     inline EmbeddedProto::uint64::FIELD_TYPE compute_bandwidth_used() const { return compute_bandwidth_used_.get(); }
+
+    inline void clear_state_merkle_root() { state_merkle_root_.clear(); }
+    inline ::EmbeddedProto::FieldBytes<state_merkle_root_LENGTH>& mutable_state_merkle_root() { return state_merkle_root_; }
+    inline void set_state_merkle_root(const ::EmbeddedProto::FieldBytes<state_merkle_root_LENGTH>& rhs) { state_merkle_root_.set(rhs); }
+    inline const ::EmbeddedProto::FieldBytes<state_merkle_root_LENGTH>& get_state_merkle_root() const { return state_merkle_root_; }
+    inline const uint8_t* state_merkle_root() const { return state_merkle_root_.get_const(); }
 
     inline const event_data<events_source_LENGTH, events_name_LENGTH, events_data_LENGTH, events_impacted_REP_LENGTH, events_impacted_LENGTH>& events(uint32_t index) const { return events_[index]; }
     inline void clear_events() { events_.clear(); }
@@ -2897,6 +2909,11 @@ class block_receipt final: public ::EmbeddedProto::MessageInterface
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
+        return_value = state_merkle_root_.serialize_with_id(static_cast<uint32_t>(FieldNumber::STATE_MERKLE_ROOT), buffer, false);
+      }
+
+      if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+      {
         return_value = events_.serialize_with_id(static_cast<uint32_t>(FieldNumber::EVENTS), buffer, false);
       }
 
@@ -2941,6 +2958,10 @@ class block_receipt final: public ::EmbeddedProto::MessageInterface
             return_value = compute_bandwidth_used_.deserialize_check_type(buffer, wire_type);
             break;
 
+          case FieldNumber::STATE_MERKLE_ROOT:
+            return_value = state_merkle_root_.deserialize_check_type(buffer, wire_type);
+            break;
+
           case FieldNumber::EVENTS:
             return_value = events_.deserialize_check_type(buffer, wire_type);
             break;
@@ -2978,6 +2999,7 @@ class block_receipt final: public ::EmbeddedProto::MessageInterface
       clear_disk_storage_used();
       clear_network_bandwidth_used();
       clear_compute_bandwidth_used();
+      clear_state_merkle_root();
       clear_events();
       clear_transaction_receipts();
 
@@ -2991,6 +3013,7 @@ class block_receipt final: public ::EmbeddedProto::MessageInterface
       EmbeddedProto::uint64 disk_storage_used_ = 0U;
       EmbeddedProto::uint64 network_bandwidth_used_ = 0U;
       EmbeddedProto::uint64 compute_bandwidth_used_ = 0U;
+      ::EmbeddedProto::FieldBytes<state_merkle_root_LENGTH> state_merkle_root_;
       ::EmbeddedProto::RepeatedFieldFixedSize<event_data<events_source_LENGTH, events_name_LENGTH, events_data_LENGTH, events_impacted_REP_LENGTH, events_impacted_LENGTH>, events_REP_LENGTH> events_;
       ::EmbeddedProto::RepeatedFieldFixedSize<transaction_receipt<transaction_receipts_id_LENGTH, transaction_receipts_payer_LENGTH, transaction_receipts_events_REP_LENGTH, transaction_receipts_events_source_LENGTH, transaction_receipts_events_name_LENGTH, transaction_receipts_events_data_LENGTH, transaction_receipts_events_impacted_REP_LENGTH, transaction_receipts_events_impacted_LENGTH>, transaction_receipts_REP_LENGTH> transaction_receipts_;
 
