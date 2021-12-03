@@ -54,22 +54,22 @@ namespace koinos {
 namespace rpc {
 namespace block_store {
 
-template<uint32_t block_id_REP_LENGTH, 
-uint32_t block_id_LENGTH>
+template<uint32_t block_ids_REP_LENGTH, 
+uint32_t block_ids_LENGTH>
 class get_blocks_by_id_request final: public ::EmbeddedProto::MessageInterface
 {
   public:
     get_blocks_by_id_request() = default;
     get_blocks_by_id_request(const get_blocks_by_id_request& rhs )
     {
-      set_block_id(rhs.get_block_id());
+      set_block_ids(rhs.get_block_ids());
       set_return_block(rhs.get_return_block());
       set_return_receipt(rhs.get_return_receipt());
     }
 
     get_blocks_by_id_request(const get_blocks_by_id_request&& rhs ) noexcept
     {
-      set_block_id(rhs.get_block_id());
+      set_block_ids(rhs.get_block_ids());
       set_return_block(rhs.get_return_block());
       set_return_receipt(rhs.get_return_receipt());
     }
@@ -79,14 +79,14 @@ class get_blocks_by_id_request final: public ::EmbeddedProto::MessageInterface
     enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
-      BLOCK_ID = 1,
+      BLOCK_IDS = 1,
       RETURN_BLOCK = 2,
       RETURN_RECEIPT = 3
     };
 
     get_blocks_by_id_request& operator=(const get_blocks_by_id_request& rhs)
     {
-      set_block_id(rhs.get_block_id());
+      set_block_ids(rhs.get_block_ids());
       set_return_block(rhs.get_return_block());
       set_return_receipt(rhs.get_return_receipt());
       return *this;
@@ -94,22 +94,22 @@ class get_blocks_by_id_request final: public ::EmbeddedProto::MessageInterface
 
     get_blocks_by_id_request& operator=(const get_blocks_by_id_request&& rhs) noexcept
     {
-      set_block_id(rhs.get_block_id());
+      set_block_ids(rhs.get_block_ids());
       set_return_block(rhs.get_return_block());
       set_return_receipt(rhs.get_return_receipt());
       return *this;
     }
 
-    inline const ::EmbeddedProto::FieldBytes<block_id_LENGTH>& block_id(uint32_t index) const { return block_id_[index]; }
-    inline void clear_block_id() { block_id_.clear(); }
-    inline void set_block_id(uint32_t index, const ::EmbeddedProto::FieldBytes<block_id_LENGTH>& value) { block_id_.set(index, value); }
-    inline void set_block_id(uint32_t index, const ::EmbeddedProto::FieldBytes<block_id_LENGTH>&& value) { block_id_.set(index, value); }
-    inline void set_block_id(const ::EmbeddedProto::RepeatedFieldFixedSize<::EmbeddedProto::FieldBytes<block_id_LENGTH>, block_id_REP_LENGTH>& values) { block_id_ = values; }
-    inline void add_block_id(const ::EmbeddedProto::FieldBytes<block_id_LENGTH>& value) { block_id_.add(value); }
-    inline ::EmbeddedProto::RepeatedFieldFixedSize<::EmbeddedProto::FieldBytes<block_id_LENGTH>, block_id_REP_LENGTH>& mutable_block_id() { return block_id_; }
-    inline ::EmbeddedProto::FieldBytes<block_id_LENGTH>& mutable_block_id(uint32_t index) { return block_id_[index]; }
-    inline const ::EmbeddedProto::RepeatedFieldFixedSize<::EmbeddedProto::FieldBytes<block_id_LENGTH>, block_id_REP_LENGTH>& get_block_id() const { return block_id_; }
-    inline const ::EmbeddedProto::RepeatedFieldFixedSize<::EmbeddedProto::FieldBytes<block_id_LENGTH>, block_id_REP_LENGTH>& block_id() const { return block_id_; }
+    inline const ::EmbeddedProto::FieldBytes<block_ids_LENGTH>& block_ids(uint32_t index) const { return block_ids_[index]; }
+    inline void clear_block_ids() { block_ids_.clear(); }
+    inline void set_block_ids(uint32_t index, const ::EmbeddedProto::FieldBytes<block_ids_LENGTH>& value) { block_ids_.set(index, value); }
+    inline void set_block_ids(uint32_t index, const ::EmbeddedProto::FieldBytes<block_ids_LENGTH>&& value) { block_ids_.set(index, value); }
+    inline void set_block_ids(const ::EmbeddedProto::RepeatedFieldFixedSize<::EmbeddedProto::FieldBytes<block_ids_LENGTH>, block_ids_REP_LENGTH>& values) { block_ids_ = values; }
+    inline void add_block_ids(const ::EmbeddedProto::FieldBytes<block_ids_LENGTH>& value) { block_ids_.add(value); }
+    inline ::EmbeddedProto::RepeatedFieldFixedSize<::EmbeddedProto::FieldBytes<block_ids_LENGTH>, block_ids_REP_LENGTH>& mutable_block_ids() { return block_ids_; }
+    inline ::EmbeddedProto::FieldBytes<block_ids_LENGTH>& mutable_block_ids(uint32_t index) { return block_ids_[index]; }
+    inline const ::EmbeddedProto::RepeatedFieldFixedSize<::EmbeddedProto::FieldBytes<block_ids_LENGTH>, block_ids_REP_LENGTH>& get_block_ids() const { return block_ids_; }
+    inline const ::EmbeddedProto::RepeatedFieldFixedSize<::EmbeddedProto::FieldBytes<block_ids_LENGTH>, block_ids_REP_LENGTH>& block_ids() const { return block_ids_; }
 
     inline void clear_return_block() { return_block_.clear(); }
     inline void set_return_block(const EmbeddedProto::boolean& value) { return_block_ = value; }
@@ -132,7 +132,7 @@ class get_blocks_by_id_request final: public ::EmbeddedProto::MessageInterface
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = block_id_.serialize_with_id(static_cast<uint32_t>(FieldNumber::BLOCK_ID), buffer, false);
+        return_value = block_ids_.serialize_with_id(static_cast<uint32_t>(FieldNumber::BLOCK_IDS), buffer, false);
       }
 
       if((false != return_block_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
@@ -161,8 +161,8 @@ class get_blocks_by_id_request final: public ::EmbeddedProto::MessageInterface
         id_tag = static_cast<FieldNumber>(id_number);
         switch(id_tag)
         {
-          case FieldNumber::BLOCK_ID:
-            return_value = block_id_.deserialize_check_type(buffer, wire_type);
+          case FieldNumber::BLOCK_IDS:
+            return_value = block_ids_.deserialize_check_type(buffer, wire_type);
             break;
 
           case FieldNumber::RETURN_BLOCK:
@@ -197,7 +197,7 @@ class get_blocks_by_id_request final: public ::EmbeddedProto::MessageInterface
 
     void clear() override
     {
-      clear_block_id();
+      clear_block_ids();
       clear_return_block();
       clear_return_receipt();
 
@@ -206,7 +206,7 @@ class get_blocks_by_id_request final: public ::EmbeddedProto::MessageInterface
     private:
 
 
-      ::EmbeddedProto::RepeatedFieldFixedSize<::EmbeddedProto::FieldBytes<block_id_LENGTH>, block_id_REP_LENGTH> block_id_;
+      ::EmbeddedProto::RepeatedFieldFixedSize<::EmbeddedProto::FieldBytes<block_ids_LENGTH>, block_ids_REP_LENGTH> block_ids_;
       EmbeddedProto::boolean return_block_ = false;
       EmbeddedProto::boolean return_receipt_ = false;
 
@@ -1073,8 +1073,8 @@ class get_highest_block_response final: public ::EmbeddedProto::MessageInterface
 
 };
 
-template<uint32_t get_blocks_by_id_block_id_REP_LENGTH, 
-uint32_t get_blocks_by_id_block_id_LENGTH, 
+template<uint32_t get_blocks_by_id_block_ids_REP_LENGTH, 
+uint32_t get_blocks_by_id_block_ids_LENGTH, 
 uint32_t get_blocks_by_height_head_block_id_LENGTH, 
 uint32_t add_block_block_to_add_id_LENGTH, 
 uint32_t add_block_block_to_add_header_previous_LENGTH, 
@@ -1289,10 +1289,10 @@ class block_store_request final: public ::EmbeddedProto::MessageInterface
       if(FieldNumber::GET_BLOCKS_BY_ID == which_request_)
       {
         which_request_ = FieldNumber::NOT_SET;
-        request_.get_blocks_by_id_.~get_blocks_by_id_request<get_blocks_by_id_block_id_REP_LENGTH, get_blocks_by_id_block_id_LENGTH>();
+        request_.get_blocks_by_id_.~get_blocks_by_id_request<get_blocks_by_id_block_ids_REP_LENGTH, get_blocks_by_id_block_ids_LENGTH>();
       }
     }
-    inline void set_get_blocks_by_id(const get_blocks_by_id_request<get_blocks_by_id_block_id_REP_LENGTH, get_blocks_by_id_block_id_LENGTH>& value)
+    inline void set_get_blocks_by_id(const get_blocks_by_id_request<get_blocks_by_id_block_ids_REP_LENGTH, get_blocks_by_id_block_ids_LENGTH>& value)
     {
       if(FieldNumber::GET_BLOCKS_BY_ID != which_request_)
       {
@@ -1300,7 +1300,7 @@ class block_store_request final: public ::EmbeddedProto::MessageInterface
       }
       request_.get_blocks_by_id_ = value;
     }
-    inline void set_get_blocks_by_id(const get_blocks_by_id_request<get_blocks_by_id_block_id_REP_LENGTH, get_blocks_by_id_block_id_LENGTH>&& value)
+    inline void set_get_blocks_by_id(const get_blocks_by_id_request<get_blocks_by_id_block_ids_REP_LENGTH, get_blocks_by_id_block_ids_LENGTH>&& value)
     {
       if(FieldNumber::GET_BLOCKS_BY_ID != which_request_)
       {
@@ -1308,7 +1308,7 @@ class block_store_request final: public ::EmbeddedProto::MessageInterface
       }
       request_.get_blocks_by_id_ = value;
     }
-    inline get_blocks_by_id_request<get_blocks_by_id_block_id_REP_LENGTH, get_blocks_by_id_block_id_LENGTH>& mutable_get_blocks_by_id()
+    inline get_blocks_by_id_request<get_blocks_by_id_block_ids_REP_LENGTH, get_blocks_by_id_block_ids_LENGTH>& mutable_get_blocks_by_id()
     {
       if(FieldNumber::GET_BLOCKS_BY_ID != which_request_)
       {
@@ -1316,8 +1316,8 @@ class block_store_request final: public ::EmbeddedProto::MessageInterface
       }
       return request_.get_blocks_by_id_;
     }
-    inline const get_blocks_by_id_request<get_blocks_by_id_block_id_REP_LENGTH, get_blocks_by_id_block_id_LENGTH>& get_get_blocks_by_id() const { return request_.get_blocks_by_id_; }
-    inline const get_blocks_by_id_request<get_blocks_by_id_block_id_REP_LENGTH, get_blocks_by_id_block_id_LENGTH>& get_blocks_by_id() const { return request_.get_blocks_by_id_; }
+    inline const get_blocks_by_id_request<get_blocks_by_id_block_ids_REP_LENGTH, get_blocks_by_id_block_ids_LENGTH>& get_get_blocks_by_id() const { return request_.get_blocks_by_id_; }
+    inline const get_blocks_by_id_request<get_blocks_by_id_block_ids_REP_LENGTH, get_blocks_by_id_block_ids_LENGTH>& get_blocks_by_id() const { return request_.get_blocks_by_id_; }
 
     inline void clear_get_blocks_by_height()
     {
@@ -1549,7 +1549,7 @@ class block_store_request final: public ::EmbeddedProto::MessageInterface
         request() {}
         ~request() {}
         reserved_rpc reserved_;
-        get_blocks_by_id_request<get_blocks_by_id_block_id_REP_LENGTH, get_blocks_by_id_block_id_LENGTH> get_blocks_by_id_;
+        get_blocks_by_id_request<get_blocks_by_id_block_ids_REP_LENGTH, get_blocks_by_id_block_ids_LENGTH> get_blocks_by_id_;
         get_blocks_by_height_request<get_blocks_by_height_head_block_id_LENGTH> get_blocks_by_height_;
         add_block_request<add_block_block_to_add_id_LENGTH, add_block_block_to_add_header_previous_LENGTH, add_block_block_to_add_header_previous_state_merkle_root_LENGTH, add_block_block_to_add_active_LENGTH, add_block_block_to_add_signature_data_LENGTH, add_block_block_to_add_transactions_REP_LENGTH, add_block_block_to_add_transactions_id_LENGTH, add_block_block_to_add_transactions_active_LENGTH, add_block_block_to_add_transactions_signature_data_LENGTH> add_block_;
         get_highest_block_request get_highest_block_;
@@ -1573,7 +1573,7 @@ class block_store_request final: public ::EmbeddedProto::MessageInterface
             break;
 
           case FieldNumber::GET_BLOCKS_BY_ID:
-            new(&request_.get_blocks_by_id_) get_blocks_by_id_request<get_blocks_by_id_block_id_REP_LENGTH, get_blocks_by_id_block_id_LENGTH>;
+            new(&request_.get_blocks_by_id_) get_blocks_by_id_request<get_blocks_by_id_block_ids_REP_LENGTH, get_blocks_by_id_block_ids_LENGTH>;
             which_request_ = FieldNumber::GET_BLOCKS_BY_ID;
             break;
 
@@ -1607,7 +1607,7 @@ class block_store_request final: public ::EmbeddedProto::MessageInterface
             request_.reserved_.~reserved_rpc(); // NOSONAR Unions require this.
             break;
           case FieldNumber::GET_BLOCKS_BY_ID:
-            request_.get_blocks_by_id_.~get_blocks_by_id_request<get_blocks_by_id_block_id_REP_LENGTH, get_blocks_by_id_block_id_LENGTH>(); // NOSONAR Unions require this.
+            request_.get_blocks_by_id_.~get_blocks_by_id_request<get_blocks_by_id_block_ids_REP_LENGTH, get_blocks_by_id_block_ids_LENGTH>(); // NOSONAR Unions require this.
             break;
           case FieldNumber::GET_BLOCKS_BY_HEIGHT:
             request_.get_blocks_by_height_.~get_blocks_by_height_request<get_blocks_by_height_head_block_id_LENGTH>(); // NOSONAR Unions require this.
