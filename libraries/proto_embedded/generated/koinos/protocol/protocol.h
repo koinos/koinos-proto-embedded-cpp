@@ -1162,12 +1162,142 @@ class set_system_call_operation final: public ::EmbeddedProto::MessageInterface
 
 };
 
+template<uint32_t contract_id_LENGTH>
+class set_system_contract_operation final: public ::EmbeddedProto::MessageInterface
+{
+  public:
+    set_system_contract_operation() = default;
+    set_system_contract_operation(const set_system_contract_operation& rhs )
+    {
+      set_contract_id(rhs.get_contract_id());
+      set_system_contract(rhs.get_system_contract());
+    }
+
+    set_system_contract_operation(const set_system_contract_operation&& rhs ) noexcept
+    {
+      set_contract_id(rhs.get_contract_id());
+      set_system_contract(rhs.get_system_contract());
+    }
+
+    ~set_system_contract_operation() override = default;
+
+    enum class FieldNumber : uint32_t
+    {
+      NOT_SET = 0,
+      CONTRACT_ID = 1,
+      SYSTEM_CONTRACT = 2
+    };
+
+    set_system_contract_operation& operator=(const set_system_contract_operation& rhs)
+    {
+      set_contract_id(rhs.get_contract_id());
+      set_system_contract(rhs.get_system_contract());
+      return *this;
+    }
+
+    set_system_contract_operation& operator=(const set_system_contract_operation&& rhs) noexcept
+    {
+      set_contract_id(rhs.get_contract_id());
+      set_system_contract(rhs.get_system_contract());
+      return *this;
+    }
+
+    inline void clear_contract_id() { contract_id_.clear(); }
+    inline ::EmbeddedProto::FieldBytes<contract_id_LENGTH>& mutable_contract_id() { return contract_id_; }
+    inline void set_contract_id(const ::EmbeddedProto::FieldBytes<contract_id_LENGTH>& rhs) { contract_id_.set(rhs); }
+    inline const ::EmbeddedProto::FieldBytes<contract_id_LENGTH>& get_contract_id() const { return contract_id_; }
+    inline const uint8_t* contract_id() const { return contract_id_.get_const(); }
+
+    inline void clear_system_contract() { system_contract_.clear(); }
+    inline void set_system_contract(const EmbeddedProto::boolean& value) { system_contract_ = value; }
+    inline void set_system_contract(const EmbeddedProto::boolean&& value) { system_contract_ = value; }
+    inline EmbeddedProto::boolean& mutable_system_contract() { return system_contract_; }
+    inline const EmbeddedProto::boolean& get_system_contract() const { return system_contract_; }
+    inline EmbeddedProto::boolean::FIELD_TYPE system_contract() const { return system_contract_.get(); }
+
+
+    ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
+    {
+      ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
+
+      if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+      {
+        return_value = contract_id_.serialize_with_id(static_cast<uint32_t>(FieldNumber::CONTRACT_ID), buffer, false);
+      }
+
+      if((false != system_contract_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
+      {
+        return_value = system_contract_.serialize_with_id(static_cast<uint32_t>(FieldNumber::SYSTEM_CONTRACT), buffer, false);
+      }
+
+      return return_value;
+    };
+
+    ::EmbeddedProto::Error deserialize(::EmbeddedProto::ReadBufferInterface& buffer) override
+    {
+      ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
+      ::EmbeddedProto::WireFormatter::WireType wire_type = ::EmbeddedProto::WireFormatter::WireType::VARINT;
+      uint32_t id_number = 0;
+      FieldNumber id_tag = FieldNumber::NOT_SET;
+
+      ::EmbeddedProto::Error tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
+      while((::EmbeddedProto::Error::NO_ERRORS == return_value) && (::EmbeddedProto::Error::NO_ERRORS == tag_value))
+      {
+        id_tag = static_cast<FieldNumber>(id_number);
+        switch(id_tag)
+        {
+          case FieldNumber::CONTRACT_ID:
+            return_value = contract_id_.deserialize_check_type(buffer, wire_type);
+            break;
+
+          case FieldNumber::SYSTEM_CONTRACT:
+            return_value = system_contract_.deserialize_check_type(buffer, wire_type);
+            break;
+
+          default:
+            break;
+        }
+
+        if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+        {
+          // Read the next tag.
+          tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
+        }
+      }
+
+      // When an error was detect while reading the tag but no other errors where found, set it in the return value.
+      if((::EmbeddedProto::Error::NO_ERRORS == return_value)
+         && (::EmbeddedProto::Error::NO_ERRORS != tag_value)
+         && (::EmbeddedProto::Error::END_OF_BUFFER != tag_value)) // The end of the buffer is not an array in this case.
+      {
+        return_value = tag_value;
+      }
+
+      return return_value;
+    };
+
+    void clear() override
+    {
+      clear_contract_id();
+      clear_system_contract();
+
+    }
+
+    private:
+
+
+      ::EmbeddedProto::FieldBytes<contract_id_LENGTH> contract_id_;
+      EmbeddedProto::boolean system_contract_ = false;
+
+};
+
 template<uint32_t upload_contract_contract_id_LENGTH, 
 uint32_t upload_contract_bytecode_LENGTH, 
 uint32_t upload_contract_abi_LENGTH, 
 uint32_t call_contract_contract_id_LENGTH, 
 uint32_t call_contract_args_LENGTH, 
-uint32_t set_system_call_target_system_call_bundle_contract_id_LENGTH>
+uint32_t set_system_call_target_system_call_bundle_contract_id_LENGTH, 
+uint32_t set_system_contract_contract_id_LENGTH>
 class operation final: public ::EmbeddedProto::MessageInterface
 {
   public:
@@ -1192,6 +1322,10 @@ class operation final: public ::EmbeddedProto::MessageInterface
 
         case FieldNumber::SET_SYSTEM_CALL:
           set_set_system_call(rhs.get_set_system_call());
+          break;
+
+        case FieldNumber::SET_SYSTEM_CONTRACT:
+          set_set_system_contract(rhs.get_set_system_contract());
           break;
 
         default:
@@ -1222,6 +1356,10 @@ class operation final: public ::EmbeddedProto::MessageInterface
           set_set_system_call(rhs.get_set_system_call());
           break;
 
+        case FieldNumber::SET_SYSTEM_CONTRACT:
+          set_set_system_contract(rhs.get_set_system_contract());
+          break;
+
         default:
           break;
       }
@@ -1235,7 +1373,8 @@ class operation final: public ::EmbeddedProto::MessageInterface
       NOT_SET = 0,
       UPLOAD_CONTRACT = 1,
       CALL_CONTRACT = 2,
-      SET_SYSTEM_CALL = 3
+      SET_SYSTEM_CALL = 3,
+      SET_SYSTEM_CONTRACT = 4
     };
 
     operation& operator=(const operation& rhs)
@@ -1258,6 +1397,10 @@ class operation final: public ::EmbeddedProto::MessageInterface
 
         case FieldNumber::SET_SYSTEM_CALL:
           set_set_system_call(rhs.get_set_system_call());
+          break;
+
+        case FieldNumber::SET_SYSTEM_CONTRACT:
+          set_set_system_contract(rhs.get_set_system_contract());
           break;
 
         default:
@@ -1287,6 +1430,10 @@ class operation final: public ::EmbeddedProto::MessageInterface
 
         case FieldNumber::SET_SYSTEM_CALL:
           set_set_system_call(rhs.get_set_system_call());
+          break;
+
+        case FieldNumber::SET_SYSTEM_CONTRACT:
+          set_set_system_contract(rhs.get_set_system_contract());
           break;
 
         default:
@@ -1403,6 +1550,41 @@ class operation final: public ::EmbeddedProto::MessageInterface
     inline const set_system_call_operation<set_system_call_target_system_call_bundle_contract_id_LENGTH>& get_set_system_call() const { return op_.set_system_call_; }
     inline const set_system_call_operation<set_system_call_target_system_call_bundle_contract_id_LENGTH>& set_system_call() const { return op_.set_system_call_; }
 
+    inline void clear_set_system_contract()
+    {
+      if(FieldNumber::SET_SYSTEM_CONTRACT == which_op_)
+      {
+        which_op_ = FieldNumber::NOT_SET;
+        op_.set_system_contract_.~set_system_contract_operation<set_system_contract_contract_id_LENGTH>();
+      }
+    }
+    inline void set_set_system_contract(const set_system_contract_operation<set_system_contract_contract_id_LENGTH>& value)
+    {
+      if(FieldNumber::SET_SYSTEM_CONTRACT != which_op_)
+      {
+        init_op(FieldNumber::SET_SYSTEM_CONTRACT);
+      }
+      op_.set_system_contract_ = value;
+    }
+    inline void set_set_system_contract(const set_system_contract_operation<set_system_contract_contract_id_LENGTH>&& value)
+    {
+      if(FieldNumber::SET_SYSTEM_CONTRACT != which_op_)
+      {
+        init_op(FieldNumber::SET_SYSTEM_CONTRACT);
+      }
+      op_.set_system_contract_ = value;
+    }
+    inline set_system_contract_operation<set_system_contract_contract_id_LENGTH>& mutable_set_system_contract()
+    {
+      if(FieldNumber::SET_SYSTEM_CONTRACT != which_op_)
+      {
+        init_op(FieldNumber::SET_SYSTEM_CONTRACT);
+      }
+      return op_.set_system_contract_;
+    }
+    inline const set_system_contract_operation<set_system_contract_contract_id_LENGTH>& get_set_system_contract() const { return op_.set_system_contract_; }
+    inline const set_system_contract_operation<set_system_contract_contract_id_LENGTH>& set_system_contract() const { return op_.set_system_contract_; }
+
 
     ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
     {
@@ -1428,6 +1610,13 @@ class operation final: public ::EmbeddedProto::MessageInterface
           if(::EmbeddedProto::Error::NO_ERRORS == return_value)
           {
             return_value = op_.set_system_call_.serialize_with_id(static_cast<uint32_t>(FieldNumber::SET_SYSTEM_CALL), buffer, false);
+          }
+          break;
+
+        case FieldNumber::SET_SYSTEM_CONTRACT:
+          if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+          {
+            return_value = op_.set_system_contract_.serialize_with_id(static_cast<uint32_t>(FieldNumber::SET_SYSTEM_CONTRACT), buffer, false);
           }
           break;
 
@@ -1463,6 +1652,11 @@ class operation final: public ::EmbeddedProto::MessageInterface
 
           case FieldNumber::SET_SYSTEM_CALL:
             return_value = deserialize_op(FieldNumber::SET_SYSTEM_CALL, op_.set_system_call_, buffer, wire_type);
+
+            break;
+
+          case FieldNumber::SET_SYSTEM_CONTRACT:
+            return_value = deserialize_op(FieldNumber::SET_SYSTEM_CONTRACT, op_.set_system_contract_, buffer, wire_type);
 
             break;
 
@@ -1506,6 +1700,7 @@ class operation final: public ::EmbeddedProto::MessageInterface
         upload_contract_operation<upload_contract_contract_id_LENGTH, upload_contract_bytecode_LENGTH, upload_contract_abi_LENGTH> upload_contract_;
         call_contract_operation<call_contract_contract_id_LENGTH, call_contract_args_LENGTH> call_contract_;
         set_system_call_operation<set_system_call_target_system_call_bundle_contract_id_LENGTH> set_system_call_;
+        set_system_contract_operation<set_system_contract_contract_id_LENGTH> set_system_contract_;
       };
       op op_;
 
@@ -1535,6 +1730,11 @@ class operation final: public ::EmbeddedProto::MessageInterface
             which_op_ = FieldNumber::SET_SYSTEM_CALL;
             break;
 
+          case FieldNumber::SET_SYSTEM_CONTRACT:
+            new(&op_.set_system_contract_) set_system_contract_operation<set_system_contract_contract_id_LENGTH>;
+            which_op_ = FieldNumber::SET_SYSTEM_CONTRACT;
+            break;
+
           default:
             break;
          }
@@ -1554,6 +1754,9 @@ class operation final: public ::EmbeddedProto::MessageInterface
             break;
           case FieldNumber::SET_SYSTEM_CALL:
             op_.set_system_call_.~set_system_call_operation<set_system_call_target_system_call_bundle_contract_id_LENGTH>(); // NOSONAR Unions require this.
+            break;
+          case FieldNumber::SET_SYSTEM_CONTRACT:
+            op_.set_system_contract_.~set_system_contract_operation<set_system_contract_contract_id_LENGTH>(); // NOSONAR Unions require this.
             break;
           default:
             break;
@@ -1585,7 +1788,8 @@ uint32_t operations_upload_contract_bytecode_LENGTH,
 uint32_t operations_upload_contract_abi_LENGTH, 
 uint32_t operations_call_contract_contract_id_LENGTH, 
 uint32_t operations_call_contract_args_LENGTH, 
-uint32_t operations_set_system_call_target_system_call_bundle_contract_id_LENGTH>
+uint32_t operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, 
+uint32_t operations_set_system_contract_contract_id_LENGTH>
 class active_transaction_data final: public ::EmbeddedProto::MessageInterface
 {
   public:
@@ -1644,16 +1848,16 @@ class active_transaction_data final: public ::EmbeddedProto::MessageInterface
     inline const EmbeddedProto::uint64& get_nonce() const { return nonce_; }
     inline EmbeddedProto::uint64::FIELD_TYPE nonce() const { return nonce_.get(); }
 
-    inline const operation<operations_upload_contract_contract_id_LENGTH, operations_upload_contract_bytecode_LENGTH, operations_upload_contract_abi_LENGTH, operations_call_contract_contract_id_LENGTH, operations_call_contract_args_LENGTH, operations_set_system_call_target_system_call_bundle_contract_id_LENGTH>& operations(uint32_t index) const { return operations_[index]; }
+    inline const operation<operations_upload_contract_contract_id_LENGTH, operations_upload_contract_bytecode_LENGTH, operations_upload_contract_abi_LENGTH, operations_call_contract_contract_id_LENGTH, operations_call_contract_args_LENGTH, operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, operations_set_system_contract_contract_id_LENGTH>& operations(uint32_t index) const { return operations_[index]; }
     inline void clear_operations() { operations_.clear(); }
-    inline void set_operations(uint32_t index, const operation<operations_upload_contract_contract_id_LENGTH, operations_upload_contract_bytecode_LENGTH, operations_upload_contract_abi_LENGTH, operations_call_contract_contract_id_LENGTH, operations_call_contract_args_LENGTH, operations_set_system_call_target_system_call_bundle_contract_id_LENGTH>& value) { operations_.set(index, value); }
-    inline void set_operations(uint32_t index, const operation<operations_upload_contract_contract_id_LENGTH, operations_upload_contract_bytecode_LENGTH, operations_upload_contract_abi_LENGTH, operations_call_contract_contract_id_LENGTH, operations_call_contract_args_LENGTH, operations_set_system_call_target_system_call_bundle_contract_id_LENGTH>&& value) { operations_.set(index, value); }
-    inline void set_operations(const ::EmbeddedProto::RepeatedFieldFixedSize<operation<operations_upload_contract_contract_id_LENGTH, operations_upload_contract_bytecode_LENGTH, operations_upload_contract_abi_LENGTH, operations_call_contract_contract_id_LENGTH, operations_call_contract_args_LENGTH, operations_set_system_call_target_system_call_bundle_contract_id_LENGTH>, operations_REP_LENGTH>& values) { operations_ = values; }
-    inline void add_operations(const operation<operations_upload_contract_contract_id_LENGTH, operations_upload_contract_bytecode_LENGTH, operations_upload_contract_abi_LENGTH, operations_call_contract_contract_id_LENGTH, operations_call_contract_args_LENGTH, operations_set_system_call_target_system_call_bundle_contract_id_LENGTH>& value) { operations_.add(value); }
-    inline ::EmbeddedProto::RepeatedFieldFixedSize<operation<operations_upload_contract_contract_id_LENGTH, operations_upload_contract_bytecode_LENGTH, operations_upload_contract_abi_LENGTH, operations_call_contract_contract_id_LENGTH, operations_call_contract_args_LENGTH, operations_set_system_call_target_system_call_bundle_contract_id_LENGTH>, operations_REP_LENGTH>& mutable_operations() { return operations_; }
-    inline operation<operations_upload_contract_contract_id_LENGTH, operations_upload_contract_bytecode_LENGTH, operations_upload_contract_abi_LENGTH, operations_call_contract_contract_id_LENGTH, operations_call_contract_args_LENGTH, operations_set_system_call_target_system_call_bundle_contract_id_LENGTH>& mutable_operations(uint32_t index) { return operations_[index]; }
-    inline const ::EmbeddedProto::RepeatedFieldFixedSize<operation<operations_upload_contract_contract_id_LENGTH, operations_upload_contract_bytecode_LENGTH, operations_upload_contract_abi_LENGTH, operations_call_contract_contract_id_LENGTH, operations_call_contract_args_LENGTH, operations_set_system_call_target_system_call_bundle_contract_id_LENGTH>, operations_REP_LENGTH>& get_operations() const { return operations_; }
-    inline const ::EmbeddedProto::RepeatedFieldFixedSize<operation<operations_upload_contract_contract_id_LENGTH, operations_upload_contract_bytecode_LENGTH, operations_upload_contract_abi_LENGTH, operations_call_contract_contract_id_LENGTH, operations_call_contract_args_LENGTH, operations_set_system_call_target_system_call_bundle_contract_id_LENGTH>, operations_REP_LENGTH>& operations() const { return operations_; }
+    inline void set_operations(uint32_t index, const operation<operations_upload_contract_contract_id_LENGTH, operations_upload_contract_bytecode_LENGTH, operations_upload_contract_abi_LENGTH, operations_call_contract_contract_id_LENGTH, operations_call_contract_args_LENGTH, operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, operations_set_system_contract_contract_id_LENGTH>& value) { operations_.set(index, value); }
+    inline void set_operations(uint32_t index, const operation<operations_upload_contract_contract_id_LENGTH, operations_upload_contract_bytecode_LENGTH, operations_upload_contract_abi_LENGTH, operations_call_contract_contract_id_LENGTH, operations_call_contract_args_LENGTH, operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, operations_set_system_contract_contract_id_LENGTH>&& value) { operations_.set(index, value); }
+    inline void set_operations(const ::EmbeddedProto::RepeatedFieldFixedSize<operation<operations_upload_contract_contract_id_LENGTH, operations_upload_contract_bytecode_LENGTH, operations_upload_contract_abi_LENGTH, operations_call_contract_contract_id_LENGTH, operations_call_contract_args_LENGTH, operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, operations_set_system_contract_contract_id_LENGTH>, operations_REP_LENGTH>& values) { operations_ = values; }
+    inline void add_operations(const operation<operations_upload_contract_contract_id_LENGTH, operations_upload_contract_bytecode_LENGTH, operations_upload_contract_abi_LENGTH, operations_call_contract_contract_id_LENGTH, operations_call_contract_args_LENGTH, operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, operations_set_system_contract_contract_id_LENGTH>& value) { operations_.add(value); }
+    inline ::EmbeddedProto::RepeatedFieldFixedSize<operation<operations_upload_contract_contract_id_LENGTH, operations_upload_contract_bytecode_LENGTH, operations_upload_contract_abi_LENGTH, operations_call_contract_contract_id_LENGTH, operations_call_contract_args_LENGTH, operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, operations_set_system_contract_contract_id_LENGTH>, operations_REP_LENGTH>& mutable_operations() { return operations_; }
+    inline operation<operations_upload_contract_contract_id_LENGTH, operations_upload_contract_bytecode_LENGTH, operations_upload_contract_abi_LENGTH, operations_call_contract_contract_id_LENGTH, operations_call_contract_args_LENGTH, operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, operations_set_system_contract_contract_id_LENGTH>& mutable_operations(uint32_t index) { return operations_[index]; }
+    inline const ::EmbeddedProto::RepeatedFieldFixedSize<operation<operations_upload_contract_contract_id_LENGTH, operations_upload_contract_bytecode_LENGTH, operations_upload_contract_abi_LENGTH, operations_call_contract_contract_id_LENGTH, operations_call_contract_args_LENGTH, operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, operations_set_system_contract_contract_id_LENGTH>, operations_REP_LENGTH>& get_operations() const { return operations_; }
+    inline const ::EmbeddedProto::RepeatedFieldFixedSize<operation<operations_upload_contract_contract_id_LENGTH, operations_upload_contract_bytecode_LENGTH, operations_upload_contract_abi_LENGTH, operations_call_contract_contract_id_LENGTH, operations_call_contract_args_LENGTH, operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, operations_set_system_contract_contract_id_LENGTH>, operations_REP_LENGTH>& operations() const { return operations_; }
 
 
     ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
@@ -1738,7 +1942,7 @@ class active_transaction_data final: public ::EmbeddedProto::MessageInterface
 
       EmbeddedProto::uint64 rc_limit_ = 0U;
       EmbeddedProto::uint64 nonce_ = 0U;
-      ::EmbeddedProto::RepeatedFieldFixedSize<operation<operations_upload_contract_contract_id_LENGTH, operations_upload_contract_bytecode_LENGTH, operations_upload_contract_abi_LENGTH, operations_call_contract_contract_id_LENGTH, operations_call_contract_args_LENGTH, operations_set_system_call_target_system_call_bundle_contract_id_LENGTH>, operations_REP_LENGTH> operations_;
+      ::EmbeddedProto::RepeatedFieldFixedSize<operation<operations_upload_contract_contract_id_LENGTH, operations_upload_contract_bytecode_LENGTH, operations_upload_contract_abi_LENGTH, operations_call_contract_contract_id_LENGTH, operations_call_contract_args_LENGTH, operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, operations_set_system_contract_contract_id_LENGTH>, operations_REP_LENGTH> operations_;
 
 };
 
