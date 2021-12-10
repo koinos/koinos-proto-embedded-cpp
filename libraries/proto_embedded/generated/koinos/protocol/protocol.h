@@ -1782,55 +1782,48 @@ class operation final: public ::EmbeddedProto::MessageInterface
 
 };
 
-template<uint32_t operations_REP_LENGTH, 
-uint32_t operations_upload_contract_contract_id_LENGTH, 
-uint32_t operations_upload_contract_bytecode_LENGTH, 
-uint32_t operations_upload_contract_abi_LENGTH, 
-uint32_t operations_call_contract_contract_id_LENGTH, 
-uint32_t operations_call_contract_args_LENGTH, 
-uint32_t operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, 
-uint32_t operations_set_system_contract_contract_id_LENGTH>
-class active_transaction_data final: public ::EmbeddedProto::MessageInterface
+template<uint32_t operation_merkle_root_LENGTH>
+class transaction_header final: public ::EmbeddedProto::MessageInterface
 {
   public:
-    active_transaction_data() = default;
-    active_transaction_data(const active_transaction_data& rhs )
+    transaction_header() = default;
+    transaction_header(const transaction_header& rhs )
     {
       set_rc_limit(rhs.get_rc_limit());
       set_nonce(rhs.get_nonce());
-      set_operations(rhs.get_operations());
+      set_operation_merkle_root(rhs.get_operation_merkle_root());
     }
 
-    active_transaction_data(const active_transaction_data&& rhs ) noexcept
+    transaction_header(const transaction_header&& rhs ) noexcept
     {
       set_rc_limit(rhs.get_rc_limit());
       set_nonce(rhs.get_nonce());
-      set_operations(rhs.get_operations());
+      set_operation_merkle_root(rhs.get_operation_merkle_root());
     }
 
-    ~active_transaction_data() override = default;
+    ~transaction_header() override = default;
 
     enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
       RC_LIMIT = 1,
       NONCE = 2,
-      OPERATIONS = 3
+      OPERATION_MERKLE_ROOT = 3
     };
 
-    active_transaction_data& operator=(const active_transaction_data& rhs)
+    transaction_header& operator=(const transaction_header& rhs)
     {
       set_rc_limit(rhs.get_rc_limit());
       set_nonce(rhs.get_nonce());
-      set_operations(rhs.get_operations());
+      set_operation_merkle_root(rhs.get_operation_merkle_root());
       return *this;
     }
 
-    active_transaction_data& operator=(const active_transaction_data&& rhs) noexcept
+    transaction_header& operator=(const transaction_header&& rhs) noexcept
     {
       set_rc_limit(rhs.get_rc_limit());
       set_nonce(rhs.get_nonce());
-      set_operations(rhs.get_operations());
+      set_operation_merkle_root(rhs.get_operation_merkle_root());
       return *this;
     }
 
@@ -1848,16 +1841,11 @@ class active_transaction_data final: public ::EmbeddedProto::MessageInterface
     inline const EmbeddedProto::uint64& get_nonce() const { return nonce_; }
     inline EmbeddedProto::uint64::FIELD_TYPE nonce() const { return nonce_.get(); }
 
-    inline const operation<operations_upload_contract_contract_id_LENGTH, operations_upload_contract_bytecode_LENGTH, operations_upload_contract_abi_LENGTH, operations_call_contract_contract_id_LENGTH, operations_call_contract_args_LENGTH, operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, operations_set_system_contract_contract_id_LENGTH>& operations(uint32_t index) const { return operations_[index]; }
-    inline void clear_operations() { operations_.clear(); }
-    inline void set_operations(uint32_t index, const operation<operations_upload_contract_contract_id_LENGTH, operations_upload_contract_bytecode_LENGTH, operations_upload_contract_abi_LENGTH, operations_call_contract_contract_id_LENGTH, operations_call_contract_args_LENGTH, operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, operations_set_system_contract_contract_id_LENGTH>& value) { operations_.set(index, value); }
-    inline void set_operations(uint32_t index, const operation<operations_upload_contract_contract_id_LENGTH, operations_upload_contract_bytecode_LENGTH, operations_upload_contract_abi_LENGTH, operations_call_contract_contract_id_LENGTH, operations_call_contract_args_LENGTH, operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, operations_set_system_contract_contract_id_LENGTH>&& value) { operations_.set(index, value); }
-    inline void set_operations(const ::EmbeddedProto::RepeatedFieldFixedSize<operation<operations_upload_contract_contract_id_LENGTH, operations_upload_contract_bytecode_LENGTH, operations_upload_contract_abi_LENGTH, operations_call_contract_contract_id_LENGTH, operations_call_contract_args_LENGTH, operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, operations_set_system_contract_contract_id_LENGTH>, operations_REP_LENGTH>& values) { operations_ = values; }
-    inline void add_operations(const operation<operations_upload_contract_contract_id_LENGTH, operations_upload_contract_bytecode_LENGTH, operations_upload_contract_abi_LENGTH, operations_call_contract_contract_id_LENGTH, operations_call_contract_args_LENGTH, operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, operations_set_system_contract_contract_id_LENGTH>& value) { operations_.add(value); }
-    inline ::EmbeddedProto::RepeatedFieldFixedSize<operation<operations_upload_contract_contract_id_LENGTH, operations_upload_contract_bytecode_LENGTH, operations_upload_contract_abi_LENGTH, operations_call_contract_contract_id_LENGTH, operations_call_contract_args_LENGTH, operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, operations_set_system_contract_contract_id_LENGTH>, operations_REP_LENGTH>& mutable_operations() { return operations_; }
-    inline operation<operations_upload_contract_contract_id_LENGTH, operations_upload_contract_bytecode_LENGTH, operations_upload_contract_abi_LENGTH, operations_call_contract_contract_id_LENGTH, operations_call_contract_args_LENGTH, operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, operations_set_system_contract_contract_id_LENGTH>& mutable_operations(uint32_t index) { return operations_[index]; }
-    inline const ::EmbeddedProto::RepeatedFieldFixedSize<operation<operations_upload_contract_contract_id_LENGTH, operations_upload_contract_bytecode_LENGTH, operations_upload_contract_abi_LENGTH, operations_call_contract_contract_id_LENGTH, operations_call_contract_args_LENGTH, operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, operations_set_system_contract_contract_id_LENGTH>, operations_REP_LENGTH>& get_operations() const { return operations_; }
-    inline const ::EmbeddedProto::RepeatedFieldFixedSize<operation<operations_upload_contract_contract_id_LENGTH, operations_upload_contract_bytecode_LENGTH, operations_upload_contract_abi_LENGTH, operations_call_contract_contract_id_LENGTH, operations_call_contract_args_LENGTH, operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, operations_set_system_contract_contract_id_LENGTH>, operations_REP_LENGTH>& operations() const { return operations_; }
+    inline void clear_operation_merkle_root() { operation_merkle_root_.clear(); }
+    inline ::EmbeddedProto::FieldBytes<operation_merkle_root_LENGTH>& mutable_operation_merkle_root() { return operation_merkle_root_; }
+    inline void set_operation_merkle_root(const ::EmbeddedProto::FieldBytes<operation_merkle_root_LENGTH>& rhs) { operation_merkle_root_.set(rhs); }
+    inline const ::EmbeddedProto::FieldBytes<operation_merkle_root_LENGTH>& get_operation_merkle_root() const { return operation_merkle_root_; }
+    inline const uint8_t* operation_merkle_root() const { return operation_merkle_root_.get_const(); }
 
 
     ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
@@ -1876,7 +1864,7 @@ class active_transaction_data final: public ::EmbeddedProto::MessageInterface
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = operations_.serialize_with_id(static_cast<uint32_t>(FieldNumber::OPERATIONS), buffer, false);
+        return_value = operation_merkle_root_.serialize_with_id(static_cast<uint32_t>(FieldNumber::OPERATION_MERKLE_ROOT), buffer, false);
       }
 
       return return_value;
@@ -1903,8 +1891,8 @@ class active_transaction_data final: public ::EmbeddedProto::MessageInterface
             return_value = nonce_.deserialize_check_type(buffer, wire_type);
             break;
 
-          case FieldNumber::OPERATIONS:
-            return_value = operations_.deserialize_check_type(buffer, wire_type);
+          case FieldNumber::OPERATION_MERKLE_ROOT:
+            return_value = operation_merkle_root_.deserialize_check_type(buffer, wire_type);
             break;
 
           default:
@@ -1933,7 +1921,7 @@ class active_transaction_data final: public ::EmbeddedProto::MessageInterface
     {
       clear_rc_limit();
       clear_nonce();
-      clear_operations();
+      clear_operation_merkle_root();
 
     }
 
@@ -1942,13 +1930,21 @@ class active_transaction_data final: public ::EmbeddedProto::MessageInterface
 
       EmbeddedProto::uint64 rc_limit_ = 0U;
       EmbeddedProto::uint64 nonce_ = 0U;
-      ::EmbeddedProto::RepeatedFieldFixedSize<operation<operations_upload_contract_contract_id_LENGTH, operations_upload_contract_bytecode_LENGTH, operations_upload_contract_abi_LENGTH, operations_call_contract_contract_id_LENGTH, operations_call_contract_args_LENGTH, operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, operations_set_system_contract_contract_id_LENGTH>, operations_REP_LENGTH> operations_;
+      ::EmbeddedProto::FieldBytes<operation_merkle_root_LENGTH> operation_merkle_root_;
 
 };
 
 template<uint32_t id_LENGTH, 
-uint32_t active_LENGTH, 
-uint32_t signature_data_LENGTH>
+uint32_t header_operation_merkle_root_LENGTH, 
+uint32_t operations_REP_LENGTH, 
+uint32_t operations_upload_contract_contract_id_LENGTH, 
+uint32_t operations_upload_contract_bytecode_LENGTH, 
+uint32_t operations_upload_contract_abi_LENGTH, 
+uint32_t operations_call_contract_contract_id_LENGTH, 
+uint32_t operations_call_contract_args_LENGTH, 
+uint32_t operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, 
+uint32_t operations_set_system_contract_contract_id_LENGTH, 
+uint32_t signature_LENGTH>
 class transaction final: public ::EmbeddedProto::MessageInterface
 {
   public:
@@ -1956,15 +1952,17 @@ class transaction final: public ::EmbeddedProto::MessageInterface
     transaction(const transaction& rhs )
     {
       set_id(rhs.get_id());
-      set_active(rhs.get_active());
-      set_signature_data(rhs.get_signature_data());
+      set_header(rhs.get_header());
+      set_operations(rhs.get_operations());
+      set_signature(rhs.get_signature());
     }
 
     transaction(const transaction&& rhs ) noexcept
     {
       set_id(rhs.get_id());
-      set_active(rhs.get_active());
-      set_signature_data(rhs.get_signature_data());
+      set_header(rhs.get_header());
+      set_operations(rhs.get_operations());
+      set_signature(rhs.get_signature());
     }
 
     ~transaction() override = default;
@@ -1973,23 +1971,26 @@ class transaction final: public ::EmbeddedProto::MessageInterface
     {
       NOT_SET = 0,
       ID = 1,
-      ACTIVE = 2,
-      SIGNATURE_DATA = 4
+      HEADER = 2,
+      OPERATIONS = 3,
+      SIGNATURE = 4
     };
 
     transaction& operator=(const transaction& rhs)
     {
       set_id(rhs.get_id());
-      set_active(rhs.get_active());
-      set_signature_data(rhs.get_signature_data());
+      set_header(rhs.get_header());
+      set_operations(rhs.get_operations());
+      set_signature(rhs.get_signature());
       return *this;
     }
 
     transaction& operator=(const transaction&& rhs) noexcept
     {
       set_id(rhs.get_id());
-      set_active(rhs.get_active());
-      set_signature_data(rhs.get_signature_data());
+      set_header(rhs.get_header());
+      set_operations(rhs.get_operations());
+      set_signature(rhs.get_signature());
       return *this;
     }
 
@@ -1999,17 +2000,29 @@ class transaction final: public ::EmbeddedProto::MessageInterface
     inline const ::EmbeddedProto::FieldBytes<id_LENGTH>& get_id() const { return id_; }
     inline const uint8_t* id() const { return id_.get_const(); }
 
-    inline void clear_active() { active_.clear(); }
-    inline ::EmbeddedProto::FieldBytes<active_LENGTH>& mutable_active() { return active_; }
-    inline void set_active(const ::EmbeddedProto::FieldBytes<active_LENGTH>& rhs) { active_.set(rhs); }
-    inline const ::EmbeddedProto::FieldBytes<active_LENGTH>& get_active() const { return active_; }
-    inline const uint8_t* active() const { return active_.get_const(); }
+    inline void clear_header() { header_.clear(); }
+    inline void set_header(const transaction_header<header_operation_merkle_root_LENGTH>& value) { header_ = value; }
+    inline void set_header(const transaction_header<header_operation_merkle_root_LENGTH>&& value) { header_ = value; }
+    inline transaction_header<header_operation_merkle_root_LENGTH>& mutable_header() { return header_; }
+    inline const transaction_header<header_operation_merkle_root_LENGTH>& get_header() const { return header_; }
+    inline const transaction_header<header_operation_merkle_root_LENGTH>& header() const { return header_; }
 
-    inline void clear_signature_data() { signature_data_.clear(); }
-    inline ::EmbeddedProto::FieldBytes<signature_data_LENGTH>& mutable_signature_data() { return signature_data_; }
-    inline void set_signature_data(const ::EmbeddedProto::FieldBytes<signature_data_LENGTH>& rhs) { signature_data_.set(rhs); }
-    inline const ::EmbeddedProto::FieldBytes<signature_data_LENGTH>& get_signature_data() const { return signature_data_; }
-    inline const uint8_t* signature_data() const { return signature_data_.get_const(); }
+    inline const operation<operations_upload_contract_contract_id_LENGTH, operations_upload_contract_bytecode_LENGTH, operations_upload_contract_abi_LENGTH, operations_call_contract_contract_id_LENGTH, operations_call_contract_args_LENGTH, operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, operations_set_system_contract_contract_id_LENGTH>& operations(uint32_t index) const { return operations_[index]; }
+    inline void clear_operations() { operations_.clear(); }
+    inline void set_operations(uint32_t index, const operation<operations_upload_contract_contract_id_LENGTH, operations_upload_contract_bytecode_LENGTH, operations_upload_contract_abi_LENGTH, operations_call_contract_contract_id_LENGTH, operations_call_contract_args_LENGTH, operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, operations_set_system_contract_contract_id_LENGTH>& value) { operations_.set(index, value); }
+    inline void set_operations(uint32_t index, const operation<operations_upload_contract_contract_id_LENGTH, operations_upload_contract_bytecode_LENGTH, operations_upload_contract_abi_LENGTH, operations_call_contract_contract_id_LENGTH, operations_call_contract_args_LENGTH, operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, operations_set_system_contract_contract_id_LENGTH>&& value) { operations_.set(index, value); }
+    inline void set_operations(const ::EmbeddedProto::RepeatedFieldFixedSize<operation<operations_upload_contract_contract_id_LENGTH, operations_upload_contract_bytecode_LENGTH, operations_upload_contract_abi_LENGTH, operations_call_contract_contract_id_LENGTH, operations_call_contract_args_LENGTH, operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, operations_set_system_contract_contract_id_LENGTH>, operations_REP_LENGTH>& values) { operations_ = values; }
+    inline void add_operations(const operation<operations_upload_contract_contract_id_LENGTH, operations_upload_contract_bytecode_LENGTH, operations_upload_contract_abi_LENGTH, operations_call_contract_contract_id_LENGTH, operations_call_contract_args_LENGTH, operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, operations_set_system_contract_contract_id_LENGTH>& value) { operations_.add(value); }
+    inline ::EmbeddedProto::RepeatedFieldFixedSize<operation<operations_upload_contract_contract_id_LENGTH, operations_upload_contract_bytecode_LENGTH, operations_upload_contract_abi_LENGTH, operations_call_contract_contract_id_LENGTH, operations_call_contract_args_LENGTH, operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, operations_set_system_contract_contract_id_LENGTH>, operations_REP_LENGTH>& mutable_operations() { return operations_; }
+    inline operation<operations_upload_contract_contract_id_LENGTH, operations_upload_contract_bytecode_LENGTH, operations_upload_contract_abi_LENGTH, operations_call_contract_contract_id_LENGTH, operations_call_contract_args_LENGTH, operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, operations_set_system_contract_contract_id_LENGTH>& mutable_operations(uint32_t index) { return operations_[index]; }
+    inline const ::EmbeddedProto::RepeatedFieldFixedSize<operation<operations_upload_contract_contract_id_LENGTH, operations_upload_contract_bytecode_LENGTH, operations_upload_contract_abi_LENGTH, operations_call_contract_contract_id_LENGTH, operations_call_contract_args_LENGTH, operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, operations_set_system_contract_contract_id_LENGTH>, operations_REP_LENGTH>& get_operations() const { return operations_; }
+    inline const ::EmbeddedProto::RepeatedFieldFixedSize<operation<operations_upload_contract_contract_id_LENGTH, operations_upload_contract_bytecode_LENGTH, operations_upload_contract_abi_LENGTH, operations_call_contract_contract_id_LENGTH, operations_call_contract_args_LENGTH, operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, operations_set_system_contract_contract_id_LENGTH>, operations_REP_LENGTH>& operations() const { return operations_; }
+
+    inline void clear_signature() { signature_.clear(); }
+    inline ::EmbeddedProto::FieldBytes<signature_LENGTH>& mutable_signature() { return signature_; }
+    inline void set_signature(const ::EmbeddedProto::FieldBytes<signature_LENGTH>& rhs) { signature_.set(rhs); }
+    inline const ::EmbeddedProto::FieldBytes<signature_LENGTH>& get_signature() const { return signature_; }
+    inline const uint8_t* signature() const { return signature_.get_const(); }
 
 
     ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
@@ -2023,12 +2036,17 @@ class transaction final: public ::EmbeddedProto::MessageInterface
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = active_.serialize_with_id(static_cast<uint32_t>(FieldNumber::ACTIVE), buffer, false);
+        return_value = header_.serialize_with_id(static_cast<uint32_t>(FieldNumber::HEADER), buffer, false);
       }
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = signature_data_.serialize_with_id(static_cast<uint32_t>(FieldNumber::SIGNATURE_DATA), buffer, false);
+        return_value = operations_.serialize_with_id(static_cast<uint32_t>(FieldNumber::OPERATIONS), buffer, false);
+      }
+
+      if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+      {
+        return_value = signature_.serialize_with_id(static_cast<uint32_t>(FieldNumber::SIGNATURE), buffer, false);
       }
 
       return return_value;
@@ -2051,12 +2069,16 @@ class transaction final: public ::EmbeddedProto::MessageInterface
             return_value = id_.deserialize_check_type(buffer, wire_type);
             break;
 
-          case FieldNumber::ACTIVE:
-            return_value = active_.deserialize_check_type(buffer, wire_type);
+          case FieldNumber::HEADER:
+            return_value = header_.deserialize_check_type(buffer, wire_type);
             break;
 
-          case FieldNumber::SIGNATURE_DATA:
-            return_value = signature_data_.deserialize_check_type(buffer, wire_type);
+          case FieldNumber::OPERATIONS:
+            return_value = operations_.deserialize_check_type(buffer, wire_type);
+            break;
+
+          case FieldNumber::SIGNATURE:
+            return_value = signature_.deserialize_check_type(buffer, wire_type);
             break;
 
           default:
@@ -2084,8 +2106,9 @@ class transaction final: public ::EmbeddedProto::MessageInterface
     void clear() override
     {
       clear_id();
-      clear_active();
-      clear_signature_data();
+      clear_header();
+      clear_operations();
+      clear_signature();
 
     }
 
@@ -2093,8 +2116,9 @@ class transaction final: public ::EmbeddedProto::MessageInterface
 
 
       ::EmbeddedProto::FieldBytes<id_LENGTH> id_;
-      ::EmbeddedProto::FieldBytes<active_LENGTH> active_;
-      ::EmbeddedProto::FieldBytes<signature_data_LENGTH> signature_data_;
+      transaction_header<header_operation_merkle_root_LENGTH> header_;
+      ::EmbeddedProto::RepeatedFieldFixedSize<operation<operations_upload_contract_contract_id_LENGTH, operations_upload_contract_bytecode_LENGTH, operations_upload_contract_abi_LENGTH, operations_call_contract_contract_id_LENGTH, operations_call_contract_args_LENGTH, operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, operations_set_system_contract_contract_id_LENGTH>, operations_REP_LENGTH> operations_;
+      ::EmbeddedProto::FieldBytes<signature_LENGTH> signature_;
 
 };
 
@@ -2421,137 +2445,10 @@ class transaction_receipt final: public ::EmbeddedProto::MessageInterface
 
 };
 
-template<uint32_t transaction_merkle_root_LENGTH, 
-uint32_t signer_LENGTH>
-class active_block_data final: public ::EmbeddedProto::MessageInterface
-{
-  public:
-    active_block_data() = default;
-    active_block_data(const active_block_data& rhs )
-    {
-      set_transaction_merkle_root(rhs.get_transaction_merkle_root());
-      set_signer(rhs.get_signer());
-    }
-
-    active_block_data(const active_block_data&& rhs ) noexcept
-    {
-      set_transaction_merkle_root(rhs.get_transaction_merkle_root());
-      set_signer(rhs.get_signer());
-    }
-
-    ~active_block_data() override = default;
-
-    enum class FieldNumber : uint32_t
-    {
-      NOT_SET = 0,
-      TRANSACTION_MERKLE_ROOT = 1,
-      SIGNER = 3
-    };
-
-    active_block_data& operator=(const active_block_data& rhs)
-    {
-      set_transaction_merkle_root(rhs.get_transaction_merkle_root());
-      set_signer(rhs.get_signer());
-      return *this;
-    }
-
-    active_block_data& operator=(const active_block_data&& rhs) noexcept
-    {
-      set_transaction_merkle_root(rhs.get_transaction_merkle_root());
-      set_signer(rhs.get_signer());
-      return *this;
-    }
-
-    inline void clear_transaction_merkle_root() { transaction_merkle_root_.clear(); }
-    inline ::EmbeddedProto::FieldBytes<transaction_merkle_root_LENGTH>& mutable_transaction_merkle_root() { return transaction_merkle_root_; }
-    inline void set_transaction_merkle_root(const ::EmbeddedProto::FieldBytes<transaction_merkle_root_LENGTH>& rhs) { transaction_merkle_root_.set(rhs); }
-    inline const ::EmbeddedProto::FieldBytes<transaction_merkle_root_LENGTH>& get_transaction_merkle_root() const { return transaction_merkle_root_; }
-    inline const uint8_t* transaction_merkle_root() const { return transaction_merkle_root_.get_const(); }
-
-    inline void clear_signer() { signer_.clear(); }
-    inline ::EmbeddedProto::FieldBytes<signer_LENGTH>& mutable_signer() { return signer_; }
-    inline void set_signer(const ::EmbeddedProto::FieldBytes<signer_LENGTH>& rhs) { signer_.set(rhs); }
-    inline const ::EmbeddedProto::FieldBytes<signer_LENGTH>& get_signer() const { return signer_; }
-    inline const uint8_t* signer() const { return signer_.get_const(); }
-
-
-    ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
-    {
-      ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
-
-      if(::EmbeddedProto::Error::NO_ERRORS == return_value)
-      {
-        return_value = transaction_merkle_root_.serialize_with_id(static_cast<uint32_t>(FieldNumber::TRANSACTION_MERKLE_ROOT), buffer, false);
-      }
-
-      if(::EmbeddedProto::Error::NO_ERRORS == return_value)
-      {
-        return_value = signer_.serialize_with_id(static_cast<uint32_t>(FieldNumber::SIGNER), buffer, false);
-      }
-
-      return return_value;
-    };
-
-    ::EmbeddedProto::Error deserialize(::EmbeddedProto::ReadBufferInterface& buffer) override
-    {
-      ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
-      ::EmbeddedProto::WireFormatter::WireType wire_type = ::EmbeddedProto::WireFormatter::WireType::VARINT;
-      uint32_t id_number = 0;
-      FieldNumber id_tag = FieldNumber::NOT_SET;
-
-      ::EmbeddedProto::Error tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
-      while((::EmbeddedProto::Error::NO_ERRORS == return_value) && (::EmbeddedProto::Error::NO_ERRORS == tag_value))
-      {
-        id_tag = static_cast<FieldNumber>(id_number);
-        switch(id_tag)
-        {
-          case FieldNumber::TRANSACTION_MERKLE_ROOT:
-            return_value = transaction_merkle_root_.deserialize_check_type(buffer, wire_type);
-            break;
-
-          case FieldNumber::SIGNER:
-            return_value = signer_.deserialize_check_type(buffer, wire_type);
-            break;
-
-          default:
-            break;
-        }
-
-        if(::EmbeddedProto::Error::NO_ERRORS == return_value)
-        {
-          // Read the next tag.
-          tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
-        }
-      }
-
-      // When an error was detect while reading the tag but no other errors where found, set it in the return value.
-      if((::EmbeddedProto::Error::NO_ERRORS == return_value)
-         && (::EmbeddedProto::Error::NO_ERRORS != tag_value)
-         && (::EmbeddedProto::Error::END_OF_BUFFER != tag_value)) // The end of the buffer is not an array in this case.
-      {
-        return_value = tag_value;
-      }
-
-      return return_value;
-    };
-
-    void clear() override
-    {
-      clear_transaction_merkle_root();
-      clear_signer();
-
-    }
-
-    private:
-
-
-      ::EmbeddedProto::FieldBytes<transaction_merkle_root_LENGTH> transaction_merkle_root_;
-      ::EmbeddedProto::FieldBytes<signer_LENGTH> signer_;
-
-};
-
 template<uint32_t previous_LENGTH, 
-uint32_t previous_state_merkle_root_LENGTH>
+uint32_t previous_state_merkle_root_LENGTH, 
+uint32_t transaction_merkle_root_LENGTH, 
+uint32_t signer_LENGTH>
 class block_header final: public ::EmbeddedProto::MessageInterface
 {
   public:
@@ -2562,6 +2459,8 @@ class block_header final: public ::EmbeddedProto::MessageInterface
       set_height(rhs.get_height());
       set_timestamp(rhs.get_timestamp());
       set_previous_state_merkle_root(rhs.get_previous_state_merkle_root());
+      set_transaction_merkle_root(rhs.get_transaction_merkle_root());
+      set_signer(rhs.get_signer());
     }
 
     block_header(const block_header&& rhs ) noexcept
@@ -2570,6 +2469,8 @@ class block_header final: public ::EmbeddedProto::MessageInterface
       set_height(rhs.get_height());
       set_timestamp(rhs.get_timestamp());
       set_previous_state_merkle_root(rhs.get_previous_state_merkle_root());
+      set_transaction_merkle_root(rhs.get_transaction_merkle_root());
+      set_signer(rhs.get_signer());
     }
 
     ~block_header() override = default;
@@ -2580,7 +2481,9 @@ class block_header final: public ::EmbeddedProto::MessageInterface
       PREVIOUS = 1,
       HEIGHT = 2,
       TIMESTAMP = 3,
-      PREVIOUS_STATE_MERKLE_ROOT = 4
+      PREVIOUS_STATE_MERKLE_ROOT = 4,
+      TRANSACTION_MERKLE_ROOT = 5,
+      SIGNER = 6
     };
 
     block_header& operator=(const block_header& rhs)
@@ -2589,6 +2492,8 @@ class block_header final: public ::EmbeddedProto::MessageInterface
       set_height(rhs.get_height());
       set_timestamp(rhs.get_timestamp());
       set_previous_state_merkle_root(rhs.get_previous_state_merkle_root());
+      set_transaction_merkle_root(rhs.get_transaction_merkle_root());
+      set_signer(rhs.get_signer());
       return *this;
     }
 
@@ -2598,6 +2503,8 @@ class block_header final: public ::EmbeddedProto::MessageInterface
       set_height(rhs.get_height());
       set_timestamp(rhs.get_timestamp());
       set_previous_state_merkle_root(rhs.get_previous_state_merkle_root());
+      set_transaction_merkle_root(rhs.get_transaction_merkle_root());
+      set_signer(rhs.get_signer());
       return *this;
     }
 
@@ -2627,6 +2534,18 @@ class block_header final: public ::EmbeddedProto::MessageInterface
     inline const ::EmbeddedProto::FieldBytes<previous_state_merkle_root_LENGTH>& get_previous_state_merkle_root() const { return previous_state_merkle_root_; }
     inline const uint8_t* previous_state_merkle_root() const { return previous_state_merkle_root_.get_const(); }
 
+    inline void clear_transaction_merkle_root() { transaction_merkle_root_.clear(); }
+    inline ::EmbeddedProto::FieldBytes<transaction_merkle_root_LENGTH>& mutable_transaction_merkle_root() { return transaction_merkle_root_; }
+    inline void set_transaction_merkle_root(const ::EmbeddedProto::FieldBytes<transaction_merkle_root_LENGTH>& rhs) { transaction_merkle_root_.set(rhs); }
+    inline const ::EmbeddedProto::FieldBytes<transaction_merkle_root_LENGTH>& get_transaction_merkle_root() const { return transaction_merkle_root_; }
+    inline const uint8_t* transaction_merkle_root() const { return transaction_merkle_root_.get_const(); }
+
+    inline void clear_signer() { signer_.clear(); }
+    inline ::EmbeddedProto::FieldBytes<signer_LENGTH>& mutable_signer() { return signer_; }
+    inline void set_signer(const ::EmbeddedProto::FieldBytes<signer_LENGTH>& rhs) { signer_.set(rhs); }
+    inline const ::EmbeddedProto::FieldBytes<signer_LENGTH>& get_signer() const { return signer_; }
+    inline const uint8_t* signer() const { return signer_.get_const(); }
+
 
     ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
     {
@@ -2650,6 +2569,16 @@ class block_header final: public ::EmbeddedProto::MessageInterface
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
         return_value = previous_state_merkle_root_.serialize_with_id(static_cast<uint32_t>(FieldNumber::PREVIOUS_STATE_MERKLE_ROOT), buffer, false);
+      }
+
+      if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+      {
+        return_value = transaction_merkle_root_.serialize_with_id(static_cast<uint32_t>(FieldNumber::TRANSACTION_MERKLE_ROOT), buffer, false);
+      }
+
+      if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+      {
+        return_value = signer_.serialize_with_id(static_cast<uint32_t>(FieldNumber::SIGNER), buffer, false);
       }
 
       return return_value;
@@ -2684,6 +2613,14 @@ class block_header final: public ::EmbeddedProto::MessageInterface
             return_value = previous_state_merkle_root_.deserialize_check_type(buffer, wire_type);
             break;
 
+          case FieldNumber::TRANSACTION_MERKLE_ROOT:
+            return_value = transaction_merkle_root_.deserialize_check_type(buffer, wire_type);
+            break;
+
+          case FieldNumber::SIGNER:
+            return_value = signer_.deserialize_check_type(buffer, wire_type);
+            break;
+
           default:
             break;
         }
@@ -2712,6 +2649,8 @@ class block_header final: public ::EmbeddedProto::MessageInterface
       clear_height();
       clear_timestamp();
       clear_previous_state_merkle_root();
+      clear_transaction_merkle_root();
+      clear_signer();
 
     }
 
@@ -2722,18 +2661,29 @@ class block_header final: public ::EmbeddedProto::MessageInterface
       EmbeddedProto::uint64 height_ = 0U;
       EmbeddedProto::uint64 timestamp_ = 0U;
       ::EmbeddedProto::FieldBytes<previous_state_merkle_root_LENGTH> previous_state_merkle_root_;
+      ::EmbeddedProto::FieldBytes<transaction_merkle_root_LENGTH> transaction_merkle_root_;
+      ::EmbeddedProto::FieldBytes<signer_LENGTH> signer_;
 
 };
 
 template<uint32_t id_LENGTH, 
 uint32_t header_previous_LENGTH, 
 uint32_t header_previous_state_merkle_root_LENGTH, 
-uint32_t active_LENGTH, 
-uint32_t signature_data_LENGTH, 
+uint32_t header_transaction_merkle_root_LENGTH, 
+uint32_t header_signer_LENGTH, 
 uint32_t transactions_REP_LENGTH, 
 uint32_t transactions_id_LENGTH, 
-uint32_t transactions_active_LENGTH, 
-uint32_t transactions_signature_data_LENGTH>
+uint32_t transactions_header_operation_merkle_root_LENGTH, 
+uint32_t transactions_operations_REP_LENGTH, 
+uint32_t transactions_operations_upload_contract_contract_id_LENGTH, 
+uint32_t transactions_operations_upload_contract_bytecode_LENGTH, 
+uint32_t transactions_operations_upload_contract_abi_LENGTH, 
+uint32_t transactions_operations_call_contract_contract_id_LENGTH, 
+uint32_t transactions_operations_call_contract_args_LENGTH, 
+uint32_t transactions_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, 
+uint32_t transactions_operations_set_system_contract_contract_id_LENGTH, 
+uint32_t transactions_signature_LENGTH, 
+uint32_t signature_LENGTH>
 class block final: public ::EmbeddedProto::MessageInterface
 {
   public:
@@ -2742,18 +2692,16 @@ class block final: public ::EmbeddedProto::MessageInterface
     {
       set_id(rhs.get_id());
       set_header(rhs.get_header());
-      set_active(rhs.get_active());
-      set_signature_data(rhs.get_signature_data());
       set_transactions(rhs.get_transactions());
+      set_signature(rhs.get_signature());
     }
 
     block(const block&& rhs ) noexcept
     {
       set_id(rhs.get_id());
       set_header(rhs.get_header());
-      set_active(rhs.get_active());
-      set_signature_data(rhs.get_signature_data());
       set_transactions(rhs.get_transactions());
+      set_signature(rhs.get_signature());
     }
 
     ~block() override = default;
@@ -2763,18 +2711,16 @@ class block final: public ::EmbeddedProto::MessageInterface
       NOT_SET = 0,
       ID = 1,
       HEADER = 2,
-      ACTIVE = 3,
-      SIGNATURE_DATA = 5,
-      TRANSACTIONS = 6
+      TRANSACTIONS = 3,
+      SIGNATURE = 4
     };
 
     block& operator=(const block& rhs)
     {
       set_id(rhs.get_id());
       set_header(rhs.get_header());
-      set_active(rhs.get_active());
-      set_signature_data(rhs.get_signature_data());
       set_transactions(rhs.get_transactions());
+      set_signature(rhs.get_signature());
       return *this;
     }
 
@@ -2782,9 +2728,8 @@ class block final: public ::EmbeddedProto::MessageInterface
     {
       set_id(rhs.get_id());
       set_header(rhs.get_header());
-      set_active(rhs.get_active());
-      set_signature_data(rhs.get_signature_data());
       set_transactions(rhs.get_transactions());
+      set_signature(rhs.get_signature());
       return *this;
     }
 
@@ -2795,34 +2740,28 @@ class block final: public ::EmbeddedProto::MessageInterface
     inline const uint8_t* id() const { return id_.get_const(); }
 
     inline void clear_header() { header_.clear(); }
-    inline void set_header(const block_header<header_previous_LENGTH, header_previous_state_merkle_root_LENGTH>& value) { header_ = value; }
-    inline void set_header(const block_header<header_previous_LENGTH, header_previous_state_merkle_root_LENGTH>&& value) { header_ = value; }
-    inline block_header<header_previous_LENGTH, header_previous_state_merkle_root_LENGTH>& mutable_header() { return header_; }
-    inline const block_header<header_previous_LENGTH, header_previous_state_merkle_root_LENGTH>& get_header() const { return header_; }
-    inline const block_header<header_previous_LENGTH, header_previous_state_merkle_root_LENGTH>& header() const { return header_; }
+    inline void set_header(const block_header<header_previous_LENGTH, header_previous_state_merkle_root_LENGTH, header_transaction_merkle_root_LENGTH, header_signer_LENGTH>& value) { header_ = value; }
+    inline void set_header(const block_header<header_previous_LENGTH, header_previous_state_merkle_root_LENGTH, header_transaction_merkle_root_LENGTH, header_signer_LENGTH>&& value) { header_ = value; }
+    inline block_header<header_previous_LENGTH, header_previous_state_merkle_root_LENGTH, header_transaction_merkle_root_LENGTH, header_signer_LENGTH>& mutable_header() { return header_; }
+    inline const block_header<header_previous_LENGTH, header_previous_state_merkle_root_LENGTH, header_transaction_merkle_root_LENGTH, header_signer_LENGTH>& get_header() const { return header_; }
+    inline const block_header<header_previous_LENGTH, header_previous_state_merkle_root_LENGTH, header_transaction_merkle_root_LENGTH, header_signer_LENGTH>& header() const { return header_; }
 
-    inline void clear_active() { active_.clear(); }
-    inline ::EmbeddedProto::FieldBytes<active_LENGTH>& mutable_active() { return active_; }
-    inline void set_active(const ::EmbeddedProto::FieldBytes<active_LENGTH>& rhs) { active_.set(rhs); }
-    inline const ::EmbeddedProto::FieldBytes<active_LENGTH>& get_active() const { return active_; }
-    inline const uint8_t* active() const { return active_.get_const(); }
-
-    inline void clear_signature_data() { signature_data_.clear(); }
-    inline ::EmbeddedProto::FieldBytes<signature_data_LENGTH>& mutable_signature_data() { return signature_data_; }
-    inline void set_signature_data(const ::EmbeddedProto::FieldBytes<signature_data_LENGTH>& rhs) { signature_data_.set(rhs); }
-    inline const ::EmbeddedProto::FieldBytes<signature_data_LENGTH>& get_signature_data() const { return signature_data_; }
-    inline const uint8_t* signature_data() const { return signature_data_.get_const(); }
-
-    inline const transaction<transactions_id_LENGTH, transactions_active_LENGTH, transactions_signature_data_LENGTH>& transactions(uint32_t index) const { return transactions_[index]; }
+    inline const transaction<transactions_id_LENGTH, transactions_header_operation_merkle_root_LENGTH, transactions_operations_REP_LENGTH, transactions_operations_upload_contract_contract_id_LENGTH, transactions_operations_upload_contract_bytecode_LENGTH, transactions_operations_upload_contract_abi_LENGTH, transactions_operations_call_contract_contract_id_LENGTH, transactions_operations_call_contract_args_LENGTH, transactions_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, transactions_operations_set_system_contract_contract_id_LENGTH, transactions_signature_LENGTH>& transactions(uint32_t index) const { return transactions_[index]; }
     inline void clear_transactions() { transactions_.clear(); }
-    inline void set_transactions(uint32_t index, const transaction<transactions_id_LENGTH, transactions_active_LENGTH, transactions_signature_data_LENGTH>& value) { transactions_.set(index, value); }
-    inline void set_transactions(uint32_t index, const transaction<transactions_id_LENGTH, transactions_active_LENGTH, transactions_signature_data_LENGTH>&& value) { transactions_.set(index, value); }
-    inline void set_transactions(const ::EmbeddedProto::RepeatedFieldFixedSize<transaction<transactions_id_LENGTH, transactions_active_LENGTH, transactions_signature_data_LENGTH>, transactions_REP_LENGTH>& values) { transactions_ = values; }
-    inline void add_transactions(const transaction<transactions_id_LENGTH, transactions_active_LENGTH, transactions_signature_data_LENGTH>& value) { transactions_.add(value); }
-    inline ::EmbeddedProto::RepeatedFieldFixedSize<transaction<transactions_id_LENGTH, transactions_active_LENGTH, transactions_signature_data_LENGTH>, transactions_REP_LENGTH>& mutable_transactions() { return transactions_; }
-    inline transaction<transactions_id_LENGTH, transactions_active_LENGTH, transactions_signature_data_LENGTH>& mutable_transactions(uint32_t index) { return transactions_[index]; }
-    inline const ::EmbeddedProto::RepeatedFieldFixedSize<transaction<transactions_id_LENGTH, transactions_active_LENGTH, transactions_signature_data_LENGTH>, transactions_REP_LENGTH>& get_transactions() const { return transactions_; }
-    inline const ::EmbeddedProto::RepeatedFieldFixedSize<transaction<transactions_id_LENGTH, transactions_active_LENGTH, transactions_signature_data_LENGTH>, transactions_REP_LENGTH>& transactions() const { return transactions_; }
+    inline void set_transactions(uint32_t index, const transaction<transactions_id_LENGTH, transactions_header_operation_merkle_root_LENGTH, transactions_operations_REP_LENGTH, transactions_operations_upload_contract_contract_id_LENGTH, transactions_operations_upload_contract_bytecode_LENGTH, transactions_operations_upload_contract_abi_LENGTH, transactions_operations_call_contract_contract_id_LENGTH, transactions_operations_call_contract_args_LENGTH, transactions_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, transactions_operations_set_system_contract_contract_id_LENGTH, transactions_signature_LENGTH>& value) { transactions_.set(index, value); }
+    inline void set_transactions(uint32_t index, const transaction<transactions_id_LENGTH, transactions_header_operation_merkle_root_LENGTH, transactions_operations_REP_LENGTH, transactions_operations_upload_contract_contract_id_LENGTH, transactions_operations_upload_contract_bytecode_LENGTH, transactions_operations_upload_contract_abi_LENGTH, transactions_operations_call_contract_contract_id_LENGTH, transactions_operations_call_contract_args_LENGTH, transactions_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, transactions_operations_set_system_contract_contract_id_LENGTH, transactions_signature_LENGTH>&& value) { transactions_.set(index, value); }
+    inline void set_transactions(const ::EmbeddedProto::RepeatedFieldFixedSize<transaction<transactions_id_LENGTH, transactions_header_operation_merkle_root_LENGTH, transactions_operations_REP_LENGTH, transactions_operations_upload_contract_contract_id_LENGTH, transactions_operations_upload_contract_bytecode_LENGTH, transactions_operations_upload_contract_abi_LENGTH, transactions_operations_call_contract_contract_id_LENGTH, transactions_operations_call_contract_args_LENGTH, transactions_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, transactions_operations_set_system_contract_contract_id_LENGTH, transactions_signature_LENGTH>, transactions_REP_LENGTH>& values) { transactions_ = values; }
+    inline void add_transactions(const transaction<transactions_id_LENGTH, transactions_header_operation_merkle_root_LENGTH, transactions_operations_REP_LENGTH, transactions_operations_upload_contract_contract_id_LENGTH, transactions_operations_upload_contract_bytecode_LENGTH, transactions_operations_upload_contract_abi_LENGTH, transactions_operations_call_contract_contract_id_LENGTH, transactions_operations_call_contract_args_LENGTH, transactions_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, transactions_operations_set_system_contract_contract_id_LENGTH, transactions_signature_LENGTH>& value) { transactions_.add(value); }
+    inline ::EmbeddedProto::RepeatedFieldFixedSize<transaction<transactions_id_LENGTH, transactions_header_operation_merkle_root_LENGTH, transactions_operations_REP_LENGTH, transactions_operations_upload_contract_contract_id_LENGTH, transactions_operations_upload_contract_bytecode_LENGTH, transactions_operations_upload_contract_abi_LENGTH, transactions_operations_call_contract_contract_id_LENGTH, transactions_operations_call_contract_args_LENGTH, transactions_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, transactions_operations_set_system_contract_contract_id_LENGTH, transactions_signature_LENGTH>, transactions_REP_LENGTH>& mutable_transactions() { return transactions_; }
+    inline transaction<transactions_id_LENGTH, transactions_header_operation_merkle_root_LENGTH, transactions_operations_REP_LENGTH, transactions_operations_upload_contract_contract_id_LENGTH, transactions_operations_upload_contract_bytecode_LENGTH, transactions_operations_upload_contract_abi_LENGTH, transactions_operations_call_contract_contract_id_LENGTH, transactions_operations_call_contract_args_LENGTH, transactions_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, transactions_operations_set_system_contract_contract_id_LENGTH, transactions_signature_LENGTH>& mutable_transactions(uint32_t index) { return transactions_[index]; }
+    inline const ::EmbeddedProto::RepeatedFieldFixedSize<transaction<transactions_id_LENGTH, transactions_header_operation_merkle_root_LENGTH, transactions_operations_REP_LENGTH, transactions_operations_upload_contract_contract_id_LENGTH, transactions_operations_upload_contract_bytecode_LENGTH, transactions_operations_upload_contract_abi_LENGTH, transactions_operations_call_contract_contract_id_LENGTH, transactions_operations_call_contract_args_LENGTH, transactions_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, transactions_operations_set_system_contract_contract_id_LENGTH, transactions_signature_LENGTH>, transactions_REP_LENGTH>& get_transactions() const { return transactions_; }
+    inline const ::EmbeddedProto::RepeatedFieldFixedSize<transaction<transactions_id_LENGTH, transactions_header_operation_merkle_root_LENGTH, transactions_operations_REP_LENGTH, transactions_operations_upload_contract_contract_id_LENGTH, transactions_operations_upload_contract_bytecode_LENGTH, transactions_operations_upload_contract_abi_LENGTH, transactions_operations_call_contract_contract_id_LENGTH, transactions_operations_call_contract_args_LENGTH, transactions_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, transactions_operations_set_system_contract_contract_id_LENGTH, transactions_signature_LENGTH>, transactions_REP_LENGTH>& transactions() const { return transactions_; }
+
+    inline void clear_signature() { signature_.clear(); }
+    inline ::EmbeddedProto::FieldBytes<signature_LENGTH>& mutable_signature() { return signature_; }
+    inline void set_signature(const ::EmbeddedProto::FieldBytes<signature_LENGTH>& rhs) { signature_.set(rhs); }
+    inline const ::EmbeddedProto::FieldBytes<signature_LENGTH>& get_signature() const { return signature_; }
+    inline const uint8_t* signature() const { return signature_.get_const(); }
 
 
     ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
@@ -2841,17 +2780,12 @@ class block final: public ::EmbeddedProto::MessageInterface
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = active_.serialize_with_id(static_cast<uint32_t>(FieldNumber::ACTIVE), buffer, false);
-      }
-
-      if(::EmbeddedProto::Error::NO_ERRORS == return_value)
-      {
-        return_value = signature_data_.serialize_with_id(static_cast<uint32_t>(FieldNumber::SIGNATURE_DATA), buffer, false);
-      }
-
-      if(::EmbeddedProto::Error::NO_ERRORS == return_value)
-      {
         return_value = transactions_.serialize_with_id(static_cast<uint32_t>(FieldNumber::TRANSACTIONS), buffer, false);
+      }
+
+      if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+      {
+        return_value = signature_.serialize_with_id(static_cast<uint32_t>(FieldNumber::SIGNATURE), buffer, false);
       }
 
       return return_value;
@@ -2878,16 +2812,12 @@ class block final: public ::EmbeddedProto::MessageInterface
             return_value = header_.deserialize_check_type(buffer, wire_type);
             break;
 
-          case FieldNumber::ACTIVE:
-            return_value = active_.deserialize_check_type(buffer, wire_type);
-            break;
-
-          case FieldNumber::SIGNATURE_DATA:
-            return_value = signature_data_.deserialize_check_type(buffer, wire_type);
-            break;
-
           case FieldNumber::TRANSACTIONS:
             return_value = transactions_.deserialize_check_type(buffer, wire_type);
+            break;
+
+          case FieldNumber::SIGNATURE:
+            return_value = signature_.deserialize_check_type(buffer, wire_type);
             break;
 
           default:
@@ -2916,9 +2846,8 @@ class block final: public ::EmbeddedProto::MessageInterface
     {
       clear_id();
       clear_header();
-      clear_active();
-      clear_signature_data();
       clear_transactions();
+      clear_signature();
 
     }
 
@@ -2926,10 +2855,9 @@ class block final: public ::EmbeddedProto::MessageInterface
 
 
       ::EmbeddedProto::FieldBytes<id_LENGTH> id_;
-      block_header<header_previous_LENGTH, header_previous_state_merkle_root_LENGTH> header_;
-      ::EmbeddedProto::FieldBytes<active_LENGTH> active_;
-      ::EmbeddedProto::FieldBytes<signature_data_LENGTH> signature_data_;
-      ::EmbeddedProto::RepeatedFieldFixedSize<transaction<transactions_id_LENGTH, transactions_active_LENGTH, transactions_signature_data_LENGTH>, transactions_REP_LENGTH> transactions_;
+      block_header<header_previous_LENGTH, header_previous_state_merkle_root_LENGTH, header_transaction_merkle_root_LENGTH, header_signer_LENGTH> header_;
+      ::EmbeddedProto::RepeatedFieldFixedSize<transaction<transactions_id_LENGTH, transactions_header_operation_merkle_root_LENGTH, transactions_operations_REP_LENGTH, transactions_operations_upload_contract_contract_id_LENGTH, transactions_operations_upload_contract_bytecode_LENGTH, transactions_operations_upload_contract_abi_LENGTH, transactions_operations_call_contract_contract_id_LENGTH, transactions_operations_call_contract_args_LENGTH, transactions_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, transactions_operations_set_system_contract_contract_id_LENGTH, transactions_signature_LENGTH>, transactions_REP_LENGTH> transactions_;
+      ::EmbeddedProto::FieldBytes<signature_LENGTH> signature_;
 
 };
 
