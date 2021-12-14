@@ -222,6 +222,123 @@ class transaction_accepted final: public ::EmbeddedProto::MessageInterface
 
 };
 
+template<uint32_t transaction_id_LENGTH, 
+uint32_t transaction_header_operation_merkle_root_LENGTH, 
+uint32_t transaction_operations_REP_LENGTH, 
+uint32_t transaction_operations_upload_contract_contract_id_LENGTH, 
+uint32_t transaction_operations_upload_contract_bytecode_LENGTH, 
+uint32_t transaction_operations_upload_contract_abi_LENGTH, 
+uint32_t transaction_operations_call_contract_contract_id_LENGTH, 
+uint32_t transaction_operations_call_contract_args_LENGTH, 
+uint32_t transaction_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, 
+uint32_t transaction_operations_set_system_contract_contract_id_LENGTH, 
+uint32_t transaction_signature_LENGTH>
+class pending_transaction_failed final: public ::EmbeddedProto::MessageInterface
+{
+  public:
+    pending_transaction_failed() = default;
+    pending_transaction_failed(const pending_transaction_failed& rhs )
+    {
+      set_transaction(rhs.get_transaction());
+    }
+
+    pending_transaction_failed(const pending_transaction_failed&& rhs ) noexcept
+    {
+      set_transaction(rhs.get_transaction());
+    }
+
+    ~pending_transaction_failed() override = default;
+
+    enum class FieldNumber : uint32_t
+    {
+      NOT_SET = 0,
+      TRANSACTION = 1
+    };
+
+    pending_transaction_failed& operator=(const pending_transaction_failed& rhs)
+    {
+      set_transaction(rhs.get_transaction());
+      return *this;
+    }
+
+    pending_transaction_failed& operator=(const pending_transaction_failed&& rhs) noexcept
+    {
+      set_transaction(rhs.get_transaction());
+      return *this;
+    }
+
+    inline void clear_transaction() { transaction_.clear(); }
+    inline void set_transaction(const protocol::transaction<transaction_id_LENGTH, transaction_header_operation_merkle_root_LENGTH, transaction_operations_REP_LENGTH, transaction_operations_upload_contract_contract_id_LENGTH, transaction_operations_upload_contract_bytecode_LENGTH, transaction_operations_upload_contract_abi_LENGTH, transaction_operations_call_contract_contract_id_LENGTH, transaction_operations_call_contract_args_LENGTH, transaction_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, transaction_operations_set_system_contract_contract_id_LENGTH, transaction_signature_LENGTH>& value) { transaction_ = value; }
+    inline void set_transaction(const protocol::transaction<transaction_id_LENGTH, transaction_header_operation_merkle_root_LENGTH, transaction_operations_REP_LENGTH, transaction_operations_upload_contract_contract_id_LENGTH, transaction_operations_upload_contract_bytecode_LENGTH, transaction_operations_upload_contract_abi_LENGTH, transaction_operations_call_contract_contract_id_LENGTH, transaction_operations_call_contract_args_LENGTH, transaction_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, transaction_operations_set_system_contract_contract_id_LENGTH, transaction_signature_LENGTH>&& value) { transaction_ = value; }
+    inline protocol::transaction<transaction_id_LENGTH, transaction_header_operation_merkle_root_LENGTH, transaction_operations_REP_LENGTH, transaction_operations_upload_contract_contract_id_LENGTH, transaction_operations_upload_contract_bytecode_LENGTH, transaction_operations_upload_contract_abi_LENGTH, transaction_operations_call_contract_contract_id_LENGTH, transaction_operations_call_contract_args_LENGTH, transaction_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, transaction_operations_set_system_contract_contract_id_LENGTH, transaction_signature_LENGTH>& mutable_transaction() { return transaction_; }
+    inline const protocol::transaction<transaction_id_LENGTH, transaction_header_operation_merkle_root_LENGTH, transaction_operations_REP_LENGTH, transaction_operations_upload_contract_contract_id_LENGTH, transaction_operations_upload_contract_bytecode_LENGTH, transaction_operations_upload_contract_abi_LENGTH, transaction_operations_call_contract_contract_id_LENGTH, transaction_operations_call_contract_args_LENGTH, transaction_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, transaction_operations_set_system_contract_contract_id_LENGTH, transaction_signature_LENGTH>& get_transaction() const { return transaction_; }
+    inline const protocol::transaction<transaction_id_LENGTH, transaction_header_operation_merkle_root_LENGTH, transaction_operations_REP_LENGTH, transaction_operations_upload_contract_contract_id_LENGTH, transaction_operations_upload_contract_bytecode_LENGTH, transaction_operations_upload_contract_abi_LENGTH, transaction_operations_call_contract_contract_id_LENGTH, transaction_operations_call_contract_args_LENGTH, transaction_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, transaction_operations_set_system_contract_contract_id_LENGTH, transaction_signature_LENGTH>& transaction() const { return transaction_; }
+
+
+    ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
+    {
+      ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
+
+      if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+      {
+        return_value = transaction_.serialize_with_id(static_cast<uint32_t>(FieldNumber::TRANSACTION), buffer, false);
+      }
+
+      return return_value;
+    };
+
+    ::EmbeddedProto::Error deserialize(::EmbeddedProto::ReadBufferInterface& buffer) override
+    {
+      ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
+      ::EmbeddedProto::WireFormatter::WireType wire_type = ::EmbeddedProto::WireFormatter::WireType::VARINT;
+      uint32_t id_number = 0;
+      FieldNumber id_tag = FieldNumber::NOT_SET;
+
+      ::EmbeddedProto::Error tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
+      while((::EmbeddedProto::Error::NO_ERRORS == return_value) && (::EmbeddedProto::Error::NO_ERRORS == tag_value))
+      {
+        id_tag = static_cast<FieldNumber>(id_number);
+        switch(id_tag)
+        {
+          case FieldNumber::TRANSACTION:
+            return_value = transaction_.deserialize_check_type(buffer, wire_type);
+            break;
+
+          default:
+            break;
+        }
+
+        if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+        {
+          // Read the next tag.
+          tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
+        }
+      }
+
+      // When an error was detect while reading the tag but no other errors where found, set it in the return value.
+      if((::EmbeddedProto::Error::NO_ERRORS == return_value)
+         && (::EmbeddedProto::Error::NO_ERRORS != tag_value)
+         && (::EmbeddedProto::Error::END_OF_BUFFER != tag_value)) // The end of the buffer is not an array in this case.
+      {
+        return_value = tag_value;
+      }
+
+      return return_value;
+    };
+
+    void clear() override
+    {
+      clear_transaction();
+
+    }
+
+    private:
+
+
+      protocol::transaction<transaction_id_LENGTH, transaction_header_operation_merkle_root_LENGTH, transaction_operations_REP_LENGTH, transaction_operations_upload_contract_contract_id_LENGTH, transaction_operations_upload_contract_bytecode_LENGTH, transaction_operations_upload_contract_abi_LENGTH, transaction_operations_call_contract_contract_id_LENGTH, transaction_operations_call_contract_args_LENGTH, transaction_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, transaction_operations_set_system_contract_contract_id_LENGTH, transaction_signature_LENGTH> transaction_;
+
+};
+
 template<uint32_t block_id_LENGTH, 
 uint32_t block_header_previous_LENGTH, 
 uint32_t block_header_previous_state_merkle_root_LENGTH, 
