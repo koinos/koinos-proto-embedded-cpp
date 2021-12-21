@@ -222,57 +222,46 @@ class transaction_accepted final: public ::EmbeddedProto::MessageInterface
 
 };
 
-template<uint32_t transaction_id_LENGTH, 
-uint32_t transaction_header_operation_merkle_root_LENGTH, 
-uint32_t transaction_operations_REP_LENGTH, 
-uint32_t transaction_operations_upload_contract_contract_id_LENGTH, 
-uint32_t transaction_operations_upload_contract_bytecode_LENGTH, 
-uint32_t transaction_operations_upload_contract_abi_LENGTH, 
-uint32_t transaction_operations_call_contract_contract_id_LENGTH, 
-uint32_t transaction_operations_call_contract_args_LENGTH, 
-uint32_t transaction_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, 
-uint32_t transaction_operations_set_system_contract_contract_id_LENGTH, 
-uint32_t transaction_signature_LENGTH>
-class pending_transaction_failed final: public ::EmbeddedProto::MessageInterface
+template<uint32_t id_LENGTH>
+class transaction_failed final: public ::EmbeddedProto::MessageInterface
 {
   public:
-    pending_transaction_failed() = default;
-    pending_transaction_failed(const pending_transaction_failed& rhs )
+    transaction_failed() = default;
+    transaction_failed(const transaction_failed& rhs )
     {
-      set_transaction(rhs.get_transaction());
+      set_id(rhs.get_id());
     }
 
-    pending_transaction_failed(const pending_transaction_failed&& rhs ) noexcept
+    transaction_failed(const transaction_failed&& rhs ) noexcept
     {
-      set_transaction(rhs.get_transaction());
+      set_id(rhs.get_id());
     }
 
-    ~pending_transaction_failed() override = default;
+    ~transaction_failed() override = default;
 
     enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
-      TRANSACTION = 1
+      ID = 1
     };
 
-    pending_transaction_failed& operator=(const pending_transaction_failed& rhs)
+    transaction_failed& operator=(const transaction_failed& rhs)
     {
-      set_transaction(rhs.get_transaction());
+      set_id(rhs.get_id());
       return *this;
     }
 
-    pending_transaction_failed& operator=(const pending_transaction_failed&& rhs) noexcept
+    transaction_failed& operator=(const transaction_failed&& rhs) noexcept
     {
-      set_transaction(rhs.get_transaction());
+      set_id(rhs.get_id());
       return *this;
     }
 
-    inline void clear_transaction() { transaction_.clear(); }
-    inline void set_transaction(const protocol::transaction<transaction_id_LENGTH, transaction_header_operation_merkle_root_LENGTH, transaction_operations_REP_LENGTH, transaction_operations_upload_contract_contract_id_LENGTH, transaction_operations_upload_contract_bytecode_LENGTH, transaction_operations_upload_contract_abi_LENGTH, transaction_operations_call_contract_contract_id_LENGTH, transaction_operations_call_contract_args_LENGTH, transaction_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, transaction_operations_set_system_contract_contract_id_LENGTH, transaction_signature_LENGTH>& value) { transaction_ = value; }
-    inline void set_transaction(const protocol::transaction<transaction_id_LENGTH, transaction_header_operation_merkle_root_LENGTH, transaction_operations_REP_LENGTH, transaction_operations_upload_contract_contract_id_LENGTH, transaction_operations_upload_contract_bytecode_LENGTH, transaction_operations_upload_contract_abi_LENGTH, transaction_operations_call_contract_contract_id_LENGTH, transaction_operations_call_contract_args_LENGTH, transaction_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, transaction_operations_set_system_contract_contract_id_LENGTH, transaction_signature_LENGTH>&& value) { transaction_ = value; }
-    inline protocol::transaction<transaction_id_LENGTH, transaction_header_operation_merkle_root_LENGTH, transaction_operations_REP_LENGTH, transaction_operations_upload_contract_contract_id_LENGTH, transaction_operations_upload_contract_bytecode_LENGTH, transaction_operations_upload_contract_abi_LENGTH, transaction_operations_call_contract_contract_id_LENGTH, transaction_operations_call_contract_args_LENGTH, transaction_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, transaction_operations_set_system_contract_contract_id_LENGTH, transaction_signature_LENGTH>& mutable_transaction() { return transaction_; }
-    inline const protocol::transaction<transaction_id_LENGTH, transaction_header_operation_merkle_root_LENGTH, transaction_operations_REP_LENGTH, transaction_operations_upload_contract_contract_id_LENGTH, transaction_operations_upload_contract_bytecode_LENGTH, transaction_operations_upload_contract_abi_LENGTH, transaction_operations_call_contract_contract_id_LENGTH, transaction_operations_call_contract_args_LENGTH, transaction_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, transaction_operations_set_system_contract_contract_id_LENGTH, transaction_signature_LENGTH>& get_transaction() const { return transaction_; }
-    inline const protocol::transaction<transaction_id_LENGTH, transaction_header_operation_merkle_root_LENGTH, transaction_operations_REP_LENGTH, transaction_operations_upload_contract_contract_id_LENGTH, transaction_operations_upload_contract_bytecode_LENGTH, transaction_operations_upload_contract_abi_LENGTH, transaction_operations_call_contract_contract_id_LENGTH, transaction_operations_call_contract_args_LENGTH, transaction_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, transaction_operations_set_system_contract_contract_id_LENGTH, transaction_signature_LENGTH>& transaction() const { return transaction_; }
+    inline void clear_id() { id_.clear(); }
+    inline ::EmbeddedProto::FieldBytes<id_LENGTH>& mutable_id() { return id_; }
+    inline void set_id(const ::EmbeddedProto::FieldBytes<id_LENGTH>& rhs) { id_.set(rhs); }
+    inline const ::EmbeddedProto::FieldBytes<id_LENGTH>& get_id() const { return id_; }
+    inline const uint8_t* id() const { return id_.get_const(); }
 
 
     ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
@@ -281,7 +270,7 @@ class pending_transaction_failed final: public ::EmbeddedProto::MessageInterface
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = transaction_.serialize_with_id(static_cast<uint32_t>(FieldNumber::TRANSACTION), buffer, false);
+        return_value = id_.serialize_with_id(static_cast<uint32_t>(FieldNumber::ID), buffer, false);
       }
 
       return return_value;
@@ -300,8 +289,8 @@ class pending_transaction_failed final: public ::EmbeddedProto::MessageInterface
         id_tag = static_cast<FieldNumber>(id_number);
         switch(id_tag)
         {
-          case FieldNumber::TRANSACTION:
-            return_value = transaction_.deserialize_check_type(buffer, wire_type);
+          case FieldNumber::ID:
+            return_value = id_.deserialize_check_type(buffer, wire_type);
             break;
 
           default:
@@ -328,14 +317,14 @@ class pending_transaction_failed final: public ::EmbeddedProto::MessageInterface
 
     void clear() override
     {
-      clear_transaction();
+      clear_id();
 
     }
 
     private:
 
 
-      protocol::transaction<transaction_id_LENGTH, transaction_header_operation_merkle_root_LENGTH, transaction_operations_REP_LENGTH, transaction_operations_upload_contract_contract_id_LENGTH, transaction_operations_upload_contract_bytecode_LENGTH, transaction_operations_upload_contract_abi_LENGTH, transaction_operations_call_contract_contract_id_LENGTH, transaction_operations_call_contract_args_LENGTH, transaction_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, transaction_operations_set_system_contract_contract_id_LENGTH, transaction_signature_LENGTH> transaction_;
+      ::EmbeddedProto::FieldBytes<id_LENGTH> id_;
 
 };
 
