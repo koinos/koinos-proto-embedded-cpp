@@ -2343,18 +2343,18 @@ class put_object_result final: public ::EmbeddedProto::MessageInterface
     }
 
     inline void clear_value() { value_.clear(); }
-    inline void set_value(const EmbeddedProto::boolean& value) { value_ = value; }
-    inline void set_value(const EmbeddedProto::boolean&& value) { value_ = value; }
-    inline EmbeddedProto::boolean& mutable_value() { return value_; }
-    inline const EmbeddedProto::boolean& get_value() const { return value_; }
-    inline EmbeddedProto::boolean::FIELD_TYPE value() const { return value_.get(); }
+    inline void set_value(const EmbeddedProto::int32& value) { value_ = value; }
+    inline void set_value(const EmbeddedProto::int32&& value) { value_ = value; }
+    inline EmbeddedProto::int32& mutable_value() { return value_; }
+    inline const EmbeddedProto::int32& get_value() const { return value_; }
+    inline EmbeddedProto::int32::FIELD_TYPE value() const { return value_.get(); }
 
 
     ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
     {
       ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
 
-      if((false != value_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
+      if((0 != value_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
       {
         return_value = value_.serialize_with_id(static_cast<uint32_t>(FieldNumber::VALUE), buffer, false);
       }
@@ -2410,7 +2410,7 @@ class put_object_result final: public ::EmbeddedProto::MessageInterface
     private:
 
 
-      EmbeddedProto::boolean value_ = false;
+      EmbeddedProto::int32 value_ = 0;
 
 };
 
