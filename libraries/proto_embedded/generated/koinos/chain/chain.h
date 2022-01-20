@@ -972,12 +972,18 @@ class contract_metadata_object final: public ::EmbeddedProto::MessageInterface
     {
       set_hash(rhs.get_hash());
       set_system(rhs.get_system());
+      set_authorizes_call_contract(rhs.get_authorizes_call_contract());
+      set_authorizes_use_resources(rhs.get_authorizes_use_resources());
+      set_authorizes_upload_contract(rhs.get_authorizes_upload_contract());
     }
 
     contract_metadata_object(const contract_metadata_object&& rhs ) noexcept
     {
       set_hash(rhs.get_hash());
       set_system(rhs.get_system());
+      set_authorizes_call_contract(rhs.get_authorizes_call_contract());
+      set_authorizes_use_resources(rhs.get_authorizes_use_resources());
+      set_authorizes_upload_contract(rhs.get_authorizes_upload_contract());
     }
 
     ~contract_metadata_object() override = default;
@@ -986,13 +992,19 @@ class contract_metadata_object final: public ::EmbeddedProto::MessageInterface
     {
       NOT_SET = 0,
       HASH = 1,
-      SYSTEM = 2
+      SYSTEM = 2,
+      AUTHORIZES_CALL_CONTRACT = 3,
+      AUTHORIZES_USE_RESOURCES = 4,
+      AUTHORIZES_UPLOAD_CONTRACT = 5
     };
 
     contract_metadata_object& operator=(const contract_metadata_object& rhs)
     {
       set_hash(rhs.get_hash());
       set_system(rhs.get_system());
+      set_authorizes_call_contract(rhs.get_authorizes_call_contract());
+      set_authorizes_use_resources(rhs.get_authorizes_use_resources());
+      set_authorizes_upload_contract(rhs.get_authorizes_upload_contract());
       return *this;
     }
 
@@ -1000,6 +1012,9 @@ class contract_metadata_object final: public ::EmbeddedProto::MessageInterface
     {
       set_hash(rhs.get_hash());
       set_system(rhs.get_system());
+      set_authorizes_call_contract(rhs.get_authorizes_call_contract());
+      set_authorizes_use_resources(rhs.get_authorizes_use_resources());
+      set_authorizes_upload_contract(rhs.get_authorizes_upload_contract());
       return *this;
     }
 
@@ -1016,6 +1031,27 @@ class contract_metadata_object final: public ::EmbeddedProto::MessageInterface
     inline const EmbeddedProto::boolean& get_system() const { return system_; }
     inline EmbeddedProto::boolean::FIELD_TYPE system() const { return system_.get(); }
 
+    inline void clear_authorizes_call_contract() { authorizes_call_contract_.clear(); }
+    inline void set_authorizes_call_contract(const EmbeddedProto::boolean& value) { authorizes_call_contract_ = value; }
+    inline void set_authorizes_call_contract(const EmbeddedProto::boolean&& value) { authorizes_call_contract_ = value; }
+    inline EmbeddedProto::boolean& mutable_authorizes_call_contract() { return authorizes_call_contract_; }
+    inline const EmbeddedProto::boolean& get_authorizes_call_contract() const { return authorizes_call_contract_; }
+    inline EmbeddedProto::boolean::FIELD_TYPE authorizes_call_contract() const { return authorizes_call_contract_.get(); }
+
+    inline void clear_authorizes_use_resources() { authorizes_use_resources_.clear(); }
+    inline void set_authorizes_use_resources(const EmbeddedProto::boolean& value) { authorizes_use_resources_ = value; }
+    inline void set_authorizes_use_resources(const EmbeddedProto::boolean&& value) { authorizes_use_resources_ = value; }
+    inline EmbeddedProto::boolean& mutable_authorizes_use_resources() { return authorizes_use_resources_; }
+    inline const EmbeddedProto::boolean& get_authorizes_use_resources() const { return authorizes_use_resources_; }
+    inline EmbeddedProto::boolean::FIELD_TYPE authorizes_use_resources() const { return authorizes_use_resources_.get(); }
+
+    inline void clear_authorizes_upload_contract() { authorizes_upload_contract_.clear(); }
+    inline void set_authorizes_upload_contract(const EmbeddedProto::boolean& value) { authorizes_upload_contract_ = value; }
+    inline void set_authorizes_upload_contract(const EmbeddedProto::boolean&& value) { authorizes_upload_contract_ = value; }
+    inline EmbeddedProto::boolean& mutable_authorizes_upload_contract() { return authorizes_upload_contract_; }
+    inline const EmbeddedProto::boolean& get_authorizes_upload_contract() const { return authorizes_upload_contract_; }
+    inline EmbeddedProto::boolean::FIELD_TYPE authorizes_upload_contract() const { return authorizes_upload_contract_.get(); }
+
 
     ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
     {
@@ -1029,6 +1065,21 @@ class contract_metadata_object final: public ::EmbeddedProto::MessageInterface
       if((false != system_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
       {
         return_value = system_.serialize_with_id(static_cast<uint32_t>(FieldNumber::SYSTEM), buffer, false);
+      }
+
+      if((false != authorizes_call_contract_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
+      {
+        return_value = authorizes_call_contract_.serialize_with_id(static_cast<uint32_t>(FieldNumber::AUTHORIZES_CALL_CONTRACT), buffer, false);
+      }
+
+      if((false != authorizes_use_resources_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
+      {
+        return_value = authorizes_use_resources_.serialize_with_id(static_cast<uint32_t>(FieldNumber::AUTHORIZES_USE_RESOURCES), buffer, false);
+      }
+
+      if((false != authorizes_upload_contract_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
+      {
+        return_value = authorizes_upload_contract_.serialize_with_id(static_cast<uint32_t>(FieldNumber::AUTHORIZES_UPLOAD_CONTRACT), buffer, false);
       }
 
       return return_value;
@@ -1053,6 +1104,18 @@ class contract_metadata_object final: public ::EmbeddedProto::MessageInterface
 
           case FieldNumber::SYSTEM:
             return_value = system_.deserialize_check_type(buffer, wire_type);
+            break;
+
+          case FieldNumber::AUTHORIZES_CALL_CONTRACT:
+            return_value = authorizes_call_contract_.deserialize_check_type(buffer, wire_type);
+            break;
+
+          case FieldNumber::AUTHORIZES_USE_RESOURCES:
+            return_value = authorizes_use_resources_.deserialize_check_type(buffer, wire_type);
+            break;
+
+          case FieldNumber::AUTHORIZES_UPLOAD_CONTRACT:
+            return_value = authorizes_upload_contract_.deserialize_check_type(buffer, wire_type);
             break;
 
           default:
@@ -1081,6 +1144,9 @@ class contract_metadata_object final: public ::EmbeddedProto::MessageInterface
     {
       clear_hash();
       clear_system();
+      clear_authorizes_call_contract();
+      clear_authorizes_use_resources();
+      clear_authorizes_upload_contract();
 
     }
 
@@ -1089,6 +1155,9 @@ class contract_metadata_object final: public ::EmbeddedProto::MessageInterface
 
       ::EmbeddedProto::FieldBytes<hash_LENGTH> hash_;
       EmbeddedProto::boolean system_ = false;
+      EmbeddedProto::boolean authorizes_call_contract_ = false;
+      EmbeddedProto::boolean authorizes_use_resources_ = false;
+      EmbeddedProto::boolean authorizes_upload_contract_ = false;
 
 };
 
