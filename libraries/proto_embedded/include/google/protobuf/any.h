@@ -171,17 +171,22 @@ class Any final: public ::EmbeddedProto::MessageInterface
     }
 
     // Packs the given message into this Any
-    ::EmbeddedProto::Error PackFrom(const ::EmbeddedProto::MessageInterface& message, const ::EmbeddedProto::FieldString<type_url_LENGTH>& type_url)
+    ::EmbeddedProto::Error PackFrom(const ::EmbeddedProto::MessageInterface& message, const ::EmbeddedProto::FieldString<type_url_LENGTH>& type_url = ::EmbeddedProto::FieldString<type_url_LENGTH>())
     {
       koinos::write_buffer buffer(const_cast<uint8_t*>(reinterpret_cast<const uint8_t*>(get_value().get_const())), get_value().get_max_length());
       ::EmbeddedProto::Error return_value = message.serialize(buffer);
 
       if(return_value == ::EmbeddedProto::Error::NO_ERRORS)
       {
-        return_value = set_type_url(type_url);
+        return_value = mutable_value().set(buffer.data(), buffer.get_size());
       }
 
-      return ::EmbeddedProto::Error::NO_ERRORS
+      if(return_value == ::EmbeddedProto::Error::NO_ERRORS)
+      {
+        set_type_url(type_url);
+      }
+
+      return return_value;
     }
 
     // Unpacks this Any to a message

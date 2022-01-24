@@ -9,12 +9,12 @@ namespace koinos {
 
    class read_buffer : public EmbeddedProto::ReadBufferInterface
    {
-      uint8_t* _buffer;
+      const uint8_t* _buffer;
       uint32_t _len;
       uint32_t _pos = 0;
 
       public:
-         read_buffer( uint8_t* buffer, uint32_t len );
+         read_buffer( const uint8_t* buffer, uint32_t len );
 
          //! Return the number of bytes remaining.
          virtual uint32_t get_size() const override final;
@@ -50,7 +50,7 @@ namespace koinos {
          virtual bool pop(uint8_t& byte) override final;
 
          //! Get a pointer to the beginning of the buffer.
-         uint8_t* data();
+         const uint8_t* data() const;
    };
 
    class write_buffer : public EmbeddedProto::WriteBufferInterface
