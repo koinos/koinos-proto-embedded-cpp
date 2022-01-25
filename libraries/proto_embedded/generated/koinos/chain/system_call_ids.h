@@ -29,8 +29,8 @@
  */
 
 // This file is generated. Please do not edit!
-#ifndef KOINOS_CHAIN_OBJECT_SPACES_H
-#define KOINOS_CHAIN_OBJECT_SPACES_H
+#ifndef KOINOS_CHAIN_SYSTEM_CALL_IDS_H
+#define KOINOS_CHAIN_SYSTEM_CALL_IDS_H
 
 #include <cstdint>
 // Include external proto definitions
@@ -38,15 +38,48 @@
 namespace koinos {
 namespace chain {
 
-enum class system_space_id : uint32_t
+enum class system_call_id : uint32_t
 {
-  metadata = 0,
-  system_call_dispatch = 1,
-  contract_bytecode = 2,
-  contract_metadata = 3,
-  transaction_nonce = 4
+  reserved_id = 0,
+  get_head_info = 1,
+  apply_block = 2,
+  apply_transaction = 3,
+  apply_upload_contract_operation = 4,
+  apply_call_contract_operation = 5,
+  apply_set_system_call_operation = 6,
+  apply_set_system_contract_operation = 7,
+  process_block_signature = 101,
+  get_transaction_field = 102,
+  get_block_field = 103,
+  get_last_irreversible_block = 104,
+  get_account_nonce = 105,
+  authorize_system = 106,
+  get_account_rc = 201,
+  consume_account_rc = 202,
+  get_resource_limits = 203,
+  consume_block_resources = 204,
+  put_object = 301,
+  remove_object = 302,
+  get_object = 303,
+  get_next_object = 304,
+  get_prev_object = 305,
+  log = 401,
+  event = 402,
+  hash = 501,
+  recover_public_key = 502,
+  verify_merkle_root = 503,
+  verify_signature = 504,
+  call_contract = 601,
+  get_entry_point = 602,
+  get_contract_arguments_size = 603,
+  get_contract_arguments = 604,
+  set_contract_result = 605,
+  exit_contract = 606,
+  get_contract_id = 607,
+  get_caller = 608,
+  require_authority = 609
 };
 
 } // End of namespace chain
 } // End of namespace koinos
-#endif // KOINOS_CHAIN_OBJECT_SPACES_H
+#endif // KOINOS_CHAIN_SYSTEM_CALL_IDS_H

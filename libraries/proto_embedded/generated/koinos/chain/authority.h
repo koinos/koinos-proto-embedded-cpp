@@ -53,9 +53,9 @@ namespace chain {
 
 enum class authorization_type : uint32_t
 {
-  call_contract = 0,
-  use_rc = 1,
-  upload_contract = 2
+  contract_call = 0,
+  rc_use = 1,
+  contract_upload = 2
 };
 
 template<uint32_t contract_id_LENGTH>

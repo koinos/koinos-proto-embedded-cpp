@@ -49,17 +49,6 @@
 namespace koinos {
 namespace protocol {
 
-enum class dsa : uint32_t
-{
-  ecdsa_secp256k1 = 0
-};
-
-enum class system_authorization_type : uint32_t
-{
-  set_system_contract = 0,
-  set_system_call = 1
-};
-
 template<uint32_t source_LENGTH, 
 uint32_t name_LENGTH, 
 uint32_t data_LENGTH, 

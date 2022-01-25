@@ -47,10 +47,23 @@
 #include <koinos/options.h>
 #include <koinos/common.h>
 #include <koinos/protocol/protocol.h>
+#include <koinos/chain/authority.h>
 #include <koinos/chain/chain.h>
+#include <koinos/chain/value.h>
 
 namespace koinos {
 namespace chain {
+
+enum class dsa : uint32_t
+{
+  ecdsa_secp256k1 = 0
+};
+
+enum class system_authorization_type : uint32_t
+{
+  set_system_contract = 0,
+  set_system_call = 1
+};
 
 class authorize_system_arguments final: public ::EmbeddedProto::MessageInterface
 {
@@ -86,18 +99,18 @@ class authorize_system_arguments final: public ::EmbeddedProto::MessageInterface
       return *this;
     }
 
-    inline void clear_type() { type_ = static_cast<protocol::system_authorization_type>(0); }
-    inline void set_type(const protocol::system_authorization_type& value) { type_ = value; }
-    inline void set_type(const protocol::system_authorization_type&& value) { type_ = value; }
-    inline const protocol::system_authorization_type& get_type() const { return type_; }
-    inline protocol::system_authorization_type type() const { return type_; }
+    inline void clear_type() { type_ = static_cast<system_authorization_type>(0); }
+    inline void set_type(const system_authorization_type& value) { type_ = value; }
+    inline void set_type(const system_authorization_type&& value) { type_ = value; }
+    inline const system_authorization_type& get_type() const { return type_; }
+    inline system_authorization_type type() const { return type_; }
 
 
     ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
     {
       ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
 
-      if((static_cast<protocol::system_authorization_type>(0) != type_) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
+      if((static_cast<system_authorization_type>(0) != type_) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
       {
         EmbeddedProto::uint32 value = 0;
         value.set(static_cast<uint32_t>(type_));
@@ -127,7 +140,7 @@ class authorize_system_arguments final: public ::EmbeddedProto::MessageInterface
               return_value = ::EmbeddedProto::WireFormatter::DeserializeVarint(buffer, value);
               if(::EmbeddedProto::Error::NO_ERRORS == return_value)
               {
-                set_type(static_cast<protocol::system_authorization_type>(value));
+                set_type(static_cast<system_authorization_type>(value));
               }
             }
             else
@@ -168,7 +181,7 @@ class authorize_system_arguments final: public ::EmbeddedProto::MessageInterface
     private:
 
 
-      protocol::system_authorization_type type_ = static_cast<protocol::system_authorization_type>(0);
+      system_authorization_type type_ = static_cast<system_authorization_type>(0);
 
 };
 
@@ -330,11 +343,11 @@ class verify_signature_arguments final: public ::EmbeddedProto::MessageInterface
       return *this;
     }
 
-    inline void clear_type() { type_ = static_cast<protocol::dsa>(0); }
-    inline void set_type(const protocol::dsa& value) { type_ = value; }
-    inline void set_type(const protocol::dsa&& value) { type_ = value; }
-    inline const protocol::dsa& get_type() const { return type_; }
-    inline protocol::dsa type() const { return type_; }
+    inline void clear_type() { type_ = static_cast<dsa>(0); }
+    inline void set_type(const dsa& value) { type_ = value; }
+    inline void set_type(const dsa&& value) { type_ = value; }
+    inline const dsa& get_type() const { return type_; }
+    inline dsa type() const { return type_; }
 
     inline void clear_public_key() { public_key_.clear(); }
     inline ::EmbeddedProto::FieldBytes<public_key_LENGTH>& mutable_public_key() { return public_key_; }
@@ -359,7 +372,7 @@ class verify_signature_arguments final: public ::EmbeddedProto::MessageInterface
     {
       ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
 
-      if((static_cast<protocol::dsa>(0) != type_) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
+      if((static_cast<dsa>(0) != type_) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
       {
         EmbeddedProto::uint32 value = 0;
         value.set(static_cast<uint32_t>(type_));
@@ -404,7 +417,7 @@ class verify_signature_arguments final: public ::EmbeddedProto::MessageInterface
               return_value = ::EmbeddedProto::WireFormatter::DeserializeVarint(buffer, value);
               if(::EmbeddedProto::Error::NO_ERRORS == return_value)
               {
-                set_type(static_cast<protocol::dsa>(value));
+                set_type(static_cast<dsa>(value));
               }
             }
             else
@@ -460,7 +473,7 @@ class verify_signature_arguments final: public ::EmbeddedProto::MessageInterface
     private:
 
 
-      protocol::dsa type_ = static_cast<protocol::dsa>(0);
+      dsa type_ = static_cast<dsa>(0);
       ::EmbeddedProto::FieldBytes<public_key_LENGTH> public_key_;
       ::EmbeddedProto::FieldBytes<signature_LENGTH> signature_;
       ::EmbeddedProto::FieldBytes<digest_LENGTH> digest_;
@@ -619,11 +632,11 @@ class recover_public_key_arguments final: public ::EmbeddedProto::MessageInterfa
       return *this;
     }
 
-    inline void clear_type() { type_ = static_cast<protocol::dsa>(0); }
-    inline void set_type(const protocol::dsa& value) { type_ = value; }
-    inline void set_type(const protocol::dsa&& value) { type_ = value; }
-    inline const protocol::dsa& get_type() const { return type_; }
-    inline protocol::dsa type() const { return type_; }
+    inline void clear_type() { type_ = static_cast<dsa>(0); }
+    inline void set_type(const dsa& value) { type_ = value; }
+    inline void set_type(const dsa&& value) { type_ = value; }
+    inline const dsa& get_type() const { return type_; }
+    inline dsa type() const { return type_; }
 
     inline void clear_signature() { signature_.clear(); }
     inline ::EmbeddedProto::FieldBytes<signature_LENGTH>& mutable_signature() { return signature_; }
@@ -642,7 +655,7 @@ class recover_public_key_arguments final: public ::EmbeddedProto::MessageInterfa
     {
       ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
 
-      if((static_cast<protocol::dsa>(0) != type_) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
+      if((static_cast<dsa>(0) != type_) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
       {
         EmbeddedProto::uint32 value = 0;
         value.set(static_cast<uint32_t>(type_));
@@ -682,7 +695,7 @@ class recover_public_key_arguments final: public ::EmbeddedProto::MessageInterfa
               return_value = ::EmbeddedProto::WireFormatter::DeserializeVarint(buffer, value);
               if(::EmbeddedProto::Error::NO_ERRORS == return_value)
               {
-                set_type(static_cast<protocol::dsa>(value));
+                set_type(static_cast<dsa>(value));
               }
             }
             else
@@ -733,7 +746,7 @@ class recover_public_key_arguments final: public ::EmbeddedProto::MessageInterfa
     private:
 
 
-      protocol::dsa type_ = static_cast<protocol::dsa>(0);
+      dsa type_ = static_cast<dsa>(0);
       ::EmbeddedProto::FieldBytes<signature_LENGTH> signature_;
       ::EmbeddedProto::FieldBytes<digest_LENGTH> digest_;
 
@@ -951,6 +964,8 @@ class get_transaction_field_arguments final: public ::EmbeddedProto::MessageInte
 
 };
 
+template<uint32_t value_string_value_LENGTH, 
+uint32_t value_bytes_value_LENGTH>
 class get_transaction_field_result final: public ::EmbeddedProto::MessageInterface
 {
   public:
@@ -986,11 +1001,11 @@ class get_transaction_field_result final: public ::EmbeddedProto::MessageInterfa
     }
 
     inline void clear_value() { value_.clear(); }
-    inline void set_value(const google::protobuf::Any& value) { value_ = value; }
-    inline void set_value(const google::protobuf::Any&& value) { value_ = value; }
-    inline google::protobuf::Any& mutable_value() { return value_; }
-    inline const google::protobuf::Any& get_value() const { return value_; }
-    inline const google::protobuf::Any& value() const { return value_; }
+    inline void set_value(const value<value_string_value_LENGTH, value_bytes_value_LENGTH>& value) { value_ = value; }
+    inline void set_value(const value<value_string_value_LENGTH, value_bytes_value_LENGTH>&& value) { value_ = value; }
+    inline value<value_string_value_LENGTH, value_bytes_value_LENGTH>& mutable_value() { return value_; }
+    inline const value<value_string_value_LENGTH, value_bytes_value_LENGTH>& get_value() const { return value_; }
+    inline const value<value_string_value_LENGTH, value_bytes_value_LENGTH>& value() const { return value_; }
 
 
     ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
@@ -1053,7 +1068,7 @@ class get_transaction_field_result final: public ::EmbeddedProto::MessageInterfa
     private:
 
 
-      google::protobuf::Any value_;
+      value<value_string_value_LENGTH, value_bytes_value_LENGTH> value_;
 
 };
 
@@ -1163,6 +1178,8 @@ class get_block_field_arguments final: public ::EmbeddedProto::MessageInterface
 
 };
 
+template<uint32_t value_string_value_LENGTH, 
+uint32_t value_bytes_value_LENGTH>
 class get_block_field_result final: public ::EmbeddedProto::MessageInterface
 {
   public:
@@ -1198,11 +1215,11 @@ class get_block_field_result final: public ::EmbeddedProto::MessageInterface
     }
 
     inline void clear_value() { value_.clear(); }
-    inline void set_value(const google::protobuf::Any& value) { value_ = value; }
-    inline void set_value(const google::protobuf::Any&& value) { value_ = value; }
-    inline google::protobuf::Any& mutable_value() { return value_; }
-    inline const google::protobuf::Any& get_value() const { return value_; }
-    inline const google::protobuf::Any& value() const { return value_; }
+    inline void set_value(const value<value_string_value_LENGTH, value_bytes_value_LENGTH>& value) { value_ = value; }
+    inline void set_value(const value<value_string_value_LENGTH, value_bytes_value_LENGTH>&& value) { value_ = value; }
+    inline value<value_string_value_LENGTH, value_bytes_value_LENGTH>& mutable_value() { return value_; }
+    inline const value<value_string_value_LENGTH, value_bytes_value_LENGTH>& get_value() const { return value_; }
+    inline const value<value_string_value_LENGTH, value_bytes_value_LENGTH>& value() const { return value_; }
 
 
     ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
@@ -1265,7 +1282,7 @@ class get_block_field_result final: public ::EmbeddedProto::MessageInterface
     private:
 
 
-      google::protobuf::Any value_;
+      value<value_string_value_LENGTH, value_bytes_value_LENGTH> value_;
 
 };
 
