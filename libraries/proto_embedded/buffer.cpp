@@ -4,7 +4,7 @@
 
 namespace koinos {
 
-read_buffer::read_buffer( uint8_t* buffer, uint32_t len ) :
+read_buffer::read_buffer( const uint8_t* buffer, uint32_t len ) :
    _buffer( buffer ),
    _len( len )
 {}
@@ -49,7 +49,7 @@ bool read_buffer::pop(uint8_t& byte)
    return false;
 }
 
-uint8_t* read_buffer::data()
+const uint8_t* read_buffer::data() const
 {
    return _buffer;
 }

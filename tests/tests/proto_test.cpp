@@ -6,6 +6,8 @@
 #include <koinos/buffer.hpp>
 #include <koinos/common.h>
 
+#include <google/protobuf/any.h>
+
 using namespace std::string_literals;
 
 struct proto_embdedded_fixture{};
@@ -68,6 +70,34 @@ BOOST_AUTO_TEST_CASE( canonical_test )
    }
    catch( std::runtime_error& ) {}
 */
+}
+
+BOOST_AUTO_TEST_CASE( any )
+{
+   koinos::block_topology< 34, 34 > topo;
+   std::string id = "foo";
+   std::string previous = "bar";
+   topo.mutable_id().set( reinterpret_cast< const uint8_t* >( id.c_str() ), id.size() );
+   topo.set_height( 1 );
+   topo.mutable_previous().set( reinterpret_cast< const uint8_t* >( previous.c_str() ), previous.size() );
+
+   google::protobuf::Any< 128, 128 > any;
+
+   any.PackFrom( topo );
+
+   koinos::block_topology< 34, 34 > topo2;
+   any.UnpackTo( topo2 );
+
+   std::array< uint8_t, 128 > buffer1;
+   koinos::write_buffer wb1( buffer1.data(), std::size( buffer1 ) );
+   std::array< uint8_t, 128 > buffer2;
+   koinos::write_buffer wb2( buffer2.data(), std::size( buffer2 ) );
+
+   topo.serialize( wb1 );
+   topo2.serialize( wb2 );
+
+   BOOST_CHECK( std::string( reinterpret_cast< const char* >( wb1.data() ), wb1.get_size() ) == std::string( reinterpret_cast< const char* >( wb2.data() ), wb2.get_size() ) );
+   BOOST_CHECK( std::string( reinterpret_cast< const char* >( wb1.data() ), wb1.get_size() ) == std::string( reinterpret_cast< const char* >( any.get_value().get_const() ), any.get_value().get_length() ) );
 }
 
 BOOST_AUTO_TEST_SUITE_END()
