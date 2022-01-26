@@ -1001,11 +1001,11 @@ class get_transaction_field_result final: public ::EmbeddedProto::MessageInterfa
     }
 
     inline void clear_value() { value_.clear(); }
-    inline void set_value(const value<value_string_value_LENGTH, value_bytes_value_LENGTH>& value) { value_ = value; }
-    inline void set_value(const value<value_string_value_LENGTH, value_bytes_value_LENGTH>&& value) { value_ = value; }
-    inline value<value_string_value_LENGTH, value_bytes_value_LENGTH>& mutable_value() { return value_; }
-    inline const value<value_string_value_LENGTH, value_bytes_value_LENGTH>& get_value() const { return value_; }
-    inline const value<value_string_value_LENGTH, value_bytes_value_LENGTH>& value() const { return value_; }
+    inline void set_value(const value_type<value_string_value_LENGTH, value_bytes_value_LENGTH>& value) { value_ = value; }
+    inline void set_value(const value_type<value_string_value_LENGTH, value_bytes_value_LENGTH>&& value) { value_ = value; }
+    inline value_type<value_string_value_LENGTH, value_bytes_value_LENGTH>& mutable_value() { return value_; }
+    inline const value_type<value_string_value_LENGTH, value_bytes_value_LENGTH>& get_value() const { return value_; }
+    inline const value_type<value_string_value_LENGTH, value_bytes_value_LENGTH>& value() const { return value_; }
 
 
     ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
@@ -1068,7 +1068,7 @@ class get_transaction_field_result final: public ::EmbeddedProto::MessageInterfa
     private:
 
 
-      value<value_string_value_LENGTH, value_bytes_value_LENGTH> value_;
+      value_type<value_string_value_LENGTH, value_bytes_value_LENGTH> value_;
 
 };
 
@@ -1215,11 +1215,11 @@ class get_block_field_result final: public ::EmbeddedProto::MessageInterface
     }
 
     inline void clear_value() { value_.clear(); }
-    inline void set_value(const value<value_string_value_LENGTH, value_bytes_value_LENGTH>& value) { value_ = value; }
-    inline void set_value(const value<value_string_value_LENGTH, value_bytes_value_LENGTH>&& value) { value_ = value; }
-    inline value<value_string_value_LENGTH, value_bytes_value_LENGTH>& mutable_value() { return value_; }
-    inline const value<value_string_value_LENGTH, value_bytes_value_LENGTH>& get_value() const { return value_; }
-    inline const value<value_string_value_LENGTH, value_bytes_value_LENGTH>& value() const { return value_; }
+    inline void set_value(const value_type<value_string_value_LENGTH, value_bytes_value_LENGTH>& value) { value_ = value; }
+    inline void set_value(const value_type<value_string_value_LENGTH, value_bytes_value_LENGTH>&& value) { value_ = value; }
+    inline value_type<value_string_value_LENGTH, value_bytes_value_LENGTH>& mutable_value() { return value_; }
+    inline const value_type<value_string_value_LENGTH, value_bytes_value_LENGTH>& get_value() const { return value_; }
+    inline const value_type<value_string_value_LENGTH, value_bytes_value_LENGTH>& value() const { return value_; }
 
 
     ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
@@ -1282,7 +1282,7 @@ class get_block_field_result final: public ::EmbeddedProto::MessageInterface
     private:
 
 
-      value<value_string_value_LENGTH, value_bytes_value_LENGTH> value_;
+      value_type<value_string_value_LENGTH, value_bytes_value_LENGTH> value_;
 
 };
 
