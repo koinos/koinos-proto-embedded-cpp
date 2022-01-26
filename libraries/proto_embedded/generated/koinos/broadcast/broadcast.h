@@ -752,6 +752,112 @@ class fork_heads final: public ::EmbeddedProto::MessageInterface
 
 };
 
+class gossip_status final: public ::EmbeddedProto::MessageInterface
+{
+  public:
+    gossip_status() = default;
+    gossip_status(const gossip_status& rhs )
+    {
+      set_enabled(rhs.get_enabled());
+    }
+
+    gossip_status(const gossip_status&& rhs ) noexcept
+    {
+      set_enabled(rhs.get_enabled());
+    }
+
+    ~gossip_status() override = default;
+
+    enum class FieldNumber : uint32_t
+    {
+      NOT_SET = 0,
+      ENABLED = 1
+    };
+
+    gossip_status& operator=(const gossip_status& rhs)
+    {
+      set_enabled(rhs.get_enabled());
+      return *this;
+    }
+
+    gossip_status& operator=(const gossip_status&& rhs) noexcept
+    {
+      set_enabled(rhs.get_enabled());
+      return *this;
+    }
+
+    inline void clear_enabled() { enabled_.clear(); }
+    inline void set_enabled(const EmbeddedProto::boolean& value) { enabled_ = value; }
+    inline void set_enabled(const EmbeddedProto::boolean&& value) { enabled_ = value; }
+    inline EmbeddedProto::boolean& mutable_enabled() { return enabled_; }
+    inline const EmbeddedProto::boolean& get_enabled() const { return enabled_; }
+    inline EmbeddedProto::boolean::FIELD_TYPE enabled() const { return enabled_.get(); }
+
+
+    ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
+    {
+      ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
+
+      if((false != enabled_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
+      {
+        return_value = enabled_.serialize_with_id(static_cast<uint32_t>(FieldNumber::ENABLED), buffer, false);
+      }
+
+      return return_value;
+    };
+
+    ::EmbeddedProto::Error deserialize(::EmbeddedProto::ReadBufferInterface& buffer) override
+    {
+      ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
+      ::EmbeddedProto::WireFormatter::WireType wire_type = ::EmbeddedProto::WireFormatter::WireType::VARINT;
+      uint32_t id_number = 0;
+      FieldNumber id_tag = FieldNumber::NOT_SET;
+
+      ::EmbeddedProto::Error tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
+      while((::EmbeddedProto::Error::NO_ERRORS == return_value) && (::EmbeddedProto::Error::NO_ERRORS == tag_value))
+      {
+        id_tag = static_cast<FieldNumber>(id_number);
+        switch(id_tag)
+        {
+          case FieldNumber::ENABLED:
+            return_value = enabled_.deserialize_check_type(buffer, wire_type);
+            break;
+
+          default:
+            break;
+        }
+
+        if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+        {
+          // Read the next tag.
+          tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
+        }
+      }
+
+      // When an error was detect while reading the tag but no other errors where found, set it in the return value.
+      if((::EmbeddedProto::Error::NO_ERRORS == return_value)
+         && (::EmbeddedProto::Error::NO_ERRORS != tag_value)
+         && (::EmbeddedProto::Error::END_OF_BUFFER != tag_value)) // The end of the buffer is not an array in this case.
+      {
+        return_value = tag_value;
+      }
+
+      return return_value;
+    };
+
+    void clear() override
+    {
+      clear_enabled();
+
+    }
+
+    private:
+
+
+      EmbeddedProto::boolean enabled_ = false;
+
+};
+
 } // End of namespace broadcast
 } // End of namespace koinos
 #endif // KOINOS_BROADCAST_BROADCAST_H
