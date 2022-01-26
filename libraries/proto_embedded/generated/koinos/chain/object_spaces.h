@@ -40,12 +40,11 @@ namespace chain {
 
 enum class system_space_id : uint32_t
 {
-  reserved_id = 0,
-  metadata = 1,
-  system_call_dispatch = 3,
-  contract_bytecode = 4,
-  contract_metadata = 5,
-  transaction_nonce = 6
+  metadata = 0,
+  system_call_dispatch = 1,
+  contract_bytecode = 2,
+  contract_metadata = 3,
+  transaction_nonce = 4
 };
 
 } // End of namespace chain

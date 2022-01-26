@@ -2252,7 +2252,9 @@ uint32_t events_source_LENGTH,
 uint32_t events_name_LENGTH, 
 uint32_t events_data_LENGTH, 
 uint32_t events_impacted_REP_LENGTH, 
-uint32_t events_impacted_LENGTH>
+uint32_t events_impacted_LENGTH, 
+uint32_t logs_REP_LENGTH, 
+uint32_t logs_LENGTH>
 class transaction_receipt final: public ::EmbeddedProto::MessageInterface
 {
   public:
@@ -2269,6 +2271,7 @@ class transaction_receipt final: public ::EmbeddedProto::MessageInterface
       set_compute_bandwidth_used(rhs.get_compute_bandwidth_used());
       set_reverted(rhs.get_reverted());
       set_events(rhs.get_events());
+      set_logs(rhs.get_logs());
     }
 
     transaction_receipt(const transaction_receipt&& rhs ) noexcept
@@ -2283,6 +2286,7 @@ class transaction_receipt final: public ::EmbeddedProto::MessageInterface
       set_compute_bandwidth_used(rhs.get_compute_bandwidth_used());
       set_reverted(rhs.get_reverted());
       set_events(rhs.get_events());
+      set_logs(rhs.get_logs());
     }
 
     ~transaction_receipt() override = default;
@@ -2299,7 +2303,8 @@ class transaction_receipt final: public ::EmbeddedProto::MessageInterface
       NETWORK_BANDWIDTH_USED = 7,
       COMPUTE_BANDWIDTH_USED = 8,
       REVERTED = 9,
-      EVENTS = 10
+      EVENTS = 10,
+      LOGS = 11
     };
 
     transaction_receipt& operator=(const transaction_receipt& rhs)
@@ -2314,6 +2319,7 @@ class transaction_receipt final: public ::EmbeddedProto::MessageInterface
       set_compute_bandwidth_used(rhs.get_compute_bandwidth_used());
       set_reverted(rhs.get_reverted());
       set_events(rhs.get_events());
+      set_logs(rhs.get_logs());
       return *this;
     }
 
@@ -2329,6 +2335,7 @@ class transaction_receipt final: public ::EmbeddedProto::MessageInterface
       set_compute_bandwidth_used(rhs.get_compute_bandwidth_used());
       set_reverted(rhs.get_reverted());
       set_events(rhs.get_events());
+      set_logs(rhs.get_logs());
       return *this;
     }
 
@@ -2404,6 +2411,17 @@ class transaction_receipt final: public ::EmbeddedProto::MessageInterface
     inline const ::EmbeddedProto::RepeatedFieldFixedSize<event_data<events_source_LENGTH, events_name_LENGTH, events_data_LENGTH, events_impacted_REP_LENGTH, events_impacted_LENGTH>, events_REP_LENGTH>& get_events() const { return events_; }
     inline const ::EmbeddedProto::RepeatedFieldFixedSize<event_data<events_source_LENGTH, events_name_LENGTH, events_data_LENGTH, events_impacted_REP_LENGTH, events_impacted_LENGTH>, events_REP_LENGTH>& events() const { return events_; }
 
+    inline const ::EmbeddedProto::FieldString<logs_LENGTH>& logs(uint32_t index) const { return logs_[index]; }
+    inline void clear_logs() { logs_.clear(); }
+    inline void set_logs(uint32_t index, const ::EmbeddedProto::FieldString<logs_LENGTH>& value) { logs_.set(index, value); }
+    inline void set_logs(uint32_t index, const ::EmbeddedProto::FieldString<logs_LENGTH>&& value) { logs_.set(index, value); }
+    inline void set_logs(const ::EmbeddedProto::RepeatedFieldFixedSize<::EmbeddedProto::FieldString<logs_LENGTH>, logs_REP_LENGTH>& values) { logs_ = values; }
+    inline void add_logs(const ::EmbeddedProto::FieldString<logs_LENGTH>& value) { logs_.add(value); }
+    inline ::EmbeddedProto::RepeatedFieldFixedSize<::EmbeddedProto::FieldString<logs_LENGTH>, logs_REP_LENGTH>& mutable_logs() { return logs_; }
+    inline ::EmbeddedProto::FieldString<logs_LENGTH>& mutable_logs(uint32_t index) { return logs_[index]; }
+    inline const ::EmbeddedProto::RepeatedFieldFixedSize<::EmbeddedProto::FieldString<logs_LENGTH>, logs_REP_LENGTH>& get_logs() const { return logs_; }
+    inline const ::EmbeddedProto::RepeatedFieldFixedSize<::EmbeddedProto::FieldString<logs_LENGTH>, logs_REP_LENGTH>& logs() const { return logs_; }
+
 
     ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
     {
@@ -2457,6 +2475,11 @@ class transaction_receipt final: public ::EmbeddedProto::MessageInterface
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
         return_value = events_.serialize_with_id(static_cast<uint32_t>(FieldNumber::EVENTS), buffer, false);
+      }
+
+      if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+      {
+        return_value = logs_.serialize_with_id(static_cast<uint32_t>(FieldNumber::LOGS), buffer, false);
       }
 
       return return_value;
@@ -2515,6 +2538,10 @@ class transaction_receipt final: public ::EmbeddedProto::MessageInterface
             return_value = events_.deserialize_check_type(buffer, wire_type);
             break;
 
+          case FieldNumber::LOGS:
+            return_value = logs_.deserialize_check_type(buffer, wire_type);
+            break;
+
           default:
             break;
         }
@@ -2549,6 +2576,7 @@ class transaction_receipt final: public ::EmbeddedProto::MessageInterface
       clear_compute_bandwidth_used();
       clear_reverted();
       clear_events();
+      clear_logs();
 
     }
 
@@ -2565,6 +2593,7 @@ class transaction_receipt final: public ::EmbeddedProto::MessageInterface
       EmbeddedProto::uint64 compute_bandwidth_used_ = 0U;
       EmbeddedProto::boolean reverted_ = false;
       ::EmbeddedProto::RepeatedFieldFixedSize<event_data<events_source_LENGTH, events_name_LENGTH, events_data_LENGTH, events_impacted_REP_LENGTH, events_impacted_LENGTH>, events_REP_LENGTH> events_;
+      ::EmbeddedProto::RepeatedFieldFixedSize<::EmbeddedProto::FieldString<logs_LENGTH>, logs_REP_LENGTH> logs_;
 
 };
 
@@ -3003,7 +3032,11 @@ uint32_t transaction_receipts_events_source_LENGTH,
 uint32_t transaction_receipts_events_name_LENGTH, 
 uint32_t transaction_receipts_events_data_LENGTH, 
 uint32_t transaction_receipts_events_impacted_REP_LENGTH, 
-uint32_t transaction_receipts_events_impacted_LENGTH>
+uint32_t transaction_receipts_events_impacted_LENGTH, 
+uint32_t transaction_receipts_logs_REP_LENGTH, 
+uint32_t transaction_receipts_logs_LENGTH, 
+uint32_t logs_REP_LENGTH, 
+uint32_t logs_LENGTH>
 class block_receipt final: public ::EmbeddedProto::MessageInterface
 {
   public:
@@ -3018,6 +3051,7 @@ class block_receipt final: public ::EmbeddedProto::MessageInterface
       set_state_merkle_root(rhs.get_state_merkle_root());
       set_events(rhs.get_events());
       set_transaction_receipts(rhs.get_transaction_receipts());
+      set_logs(rhs.get_logs());
     }
 
     block_receipt(const block_receipt&& rhs ) noexcept
@@ -3030,6 +3064,7 @@ class block_receipt final: public ::EmbeddedProto::MessageInterface
       set_state_merkle_root(rhs.get_state_merkle_root());
       set_events(rhs.get_events());
       set_transaction_receipts(rhs.get_transaction_receipts());
+      set_logs(rhs.get_logs());
     }
 
     ~block_receipt() override = default;
@@ -3044,7 +3079,8 @@ class block_receipt final: public ::EmbeddedProto::MessageInterface
       COMPUTE_BANDWIDTH_USED = 5,
       STATE_MERKLE_ROOT = 6,
       EVENTS = 7,
-      TRANSACTION_RECEIPTS = 8
+      TRANSACTION_RECEIPTS = 8,
+      LOGS = 9
     };
 
     block_receipt& operator=(const block_receipt& rhs)
@@ -3057,6 +3093,7 @@ class block_receipt final: public ::EmbeddedProto::MessageInterface
       set_state_merkle_root(rhs.get_state_merkle_root());
       set_events(rhs.get_events());
       set_transaction_receipts(rhs.get_transaction_receipts());
+      set_logs(rhs.get_logs());
       return *this;
     }
 
@@ -3070,6 +3107,7 @@ class block_receipt final: public ::EmbeddedProto::MessageInterface
       set_state_merkle_root(rhs.get_state_merkle_root());
       set_events(rhs.get_events());
       set_transaction_receipts(rhs.get_transaction_receipts());
+      set_logs(rhs.get_logs());
       return *this;
     }
 
@@ -3124,16 +3162,27 @@ class block_receipt final: public ::EmbeddedProto::MessageInterface
     inline const ::EmbeddedProto::RepeatedFieldFixedSize<event_data<events_source_LENGTH, events_name_LENGTH, events_data_LENGTH, events_impacted_REP_LENGTH, events_impacted_LENGTH>, events_REP_LENGTH>& get_events() const { return events_; }
     inline const ::EmbeddedProto::RepeatedFieldFixedSize<event_data<events_source_LENGTH, events_name_LENGTH, events_data_LENGTH, events_impacted_REP_LENGTH, events_impacted_LENGTH>, events_REP_LENGTH>& events() const { return events_; }
 
-    inline const transaction_receipt<transaction_receipts_id_LENGTH, transaction_receipts_payer_LENGTH, transaction_receipts_events_REP_LENGTH, transaction_receipts_events_source_LENGTH, transaction_receipts_events_name_LENGTH, transaction_receipts_events_data_LENGTH, transaction_receipts_events_impacted_REP_LENGTH, transaction_receipts_events_impacted_LENGTH>& transaction_receipts(uint32_t index) const { return transaction_receipts_[index]; }
+    inline const transaction_receipt<transaction_receipts_id_LENGTH, transaction_receipts_payer_LENGTH, transaction_receipts_events_REP_LENGTH, transaction_receipts_events_source_LENGTH, transaction_receipts_events_name_LENGTH, transaction_receipts_events_data_LENGTH, transaction_receipts_events_impacted_REP_LENGTH, transaction_receipts_events_impacted_LENGTH, transaction_receipts_logs_REP_LENGTH, transaction_receipts_logs_LENGTH>& transaction_receipts(uint32_t index) const { return transaction_receipts_[index]; }
     inline void clear_transaction_receipts() { transaction_receipts_.clear(); }
-    inline void set_transaction_receipts(uint32_t index, const transaction_receipt<transaction_receipts_id_LENGTH, transaction_receipts_payer_LENGTH, transaction_receipts_events_REP_LENGTH, transaction_receipts_events_source_LENGTH, transaction_receipts_events_name_LENGTH, transaction_receipts_events_data_LENGTH, transaction_receipts_events_impacted_REP_LENGTH, transaction_receipts_events_impacted_LENGTH>& value) { transaction_receipts_.set(index, value); }
-    inline void set_transaction_receipts(uint32_t index, const transaction_receipt<transaction_receipts_id_LENGTH, transaction_receipts_payer_LENGTH, transaction_receipts_events_REP_LENGTH, transaction_receipts_events_source_LENGTH, transaction_receipts_events_name_LENGTH, transaction_receipts_events_data_LENGTH, transaction_receipts_events_impacted_REP_LENGTH, transaction_receipts_events_impacted_LENGTH>&& value) { transaction_receipts_.set(index, value); }
-    inline void set_transaction_receipts(const ::EmbeddedProto::RepeatedFieldFixedSize<transaction_receipt<transaction_receipts_id_LENGTH, transaction_receipts_payer_LENGTH, transaction_receipts_events_REP_LENGTH, transaction_receipts_events_source_LENGTH, transaction_receipts_events_name_LENGTH, transaction_receipts_events_data_LENGTH, transaction_receipts_events_impacted_REP_LENGTH, transaction_receipts_events_impacted_LENGTH>, transaction_receipts_REP_LENGTH>& values) { transaction_receipts_ = values; }
-    inline void add_transaction_receipts(const transaction_receipt<transaction_receipts_id_LENGTH, transaction_receipts_payer_LENGTH, transaction_receipts_events_REP_LENGTH, transaction_receipts_events_source_LENGTH, transaction_receipts_events_name_LENGTH, transaction_receipts_events_data_LENGTH, transaction_receipts_events_impacted_REP_LENGTH, transaction_receipts_events_impacted_LENGTH>& value) { transaction_receipts_.add(value); }
-    inline ::EmbeddedProto::RepeatedFieldFixedSize<transaction_receipt<transaction_receipts_id_LENGTH, transaction_receipts_payer_LENGTH, transaction_receipts_events_REP_LENGTH, transaction_receipts_events_source_LENGTH, transaction_receipts_events_name_LENGTH, transaction_receipts_events_data_LENGTH, transaction_receipts_events_impacted_REP_LENGTH, transaction_receipts_events_impacted_LENGTH>, transaction_receipts_REP_LENGTH>& mutable_transaction_receipts() { return transaction_receipts_; }
-    inline transaction_receipt<transaction_receipts_id_LENGTH, transaction_receipts_payer_LENGTH, transaction_receipts_events_REP_LENGTH, transaction_receipts_events_source_LENGTH, transaction_receipts_events_name_LENGTH, transaction_receipts_events_data_LENGTH, transaction_receipts_events_impacted_REP_LENGTH, transaction_receipts_events_impacted_LENGTH>& mutable_transaction_receipts(uint32_t index) { return transaction_receipts_[index]; }
-    inline const ::EmbeddedProto::RepeatedFieldFixedSize<transaction_receipt<transaction_receipts_id_LENGTH, transaction_receipts_payer_LENGTH, transaction_receipts_events_REP_LENGTH, transaction_receipts_events_source_LENGTH, transaction_receipts_events_name_LENGTH, transaction_receipts_events_data_LENGTH, transaction_receipts_events_impacted_REP_LENGTH, transaction_receipts_events_impacted_LENGTH>, transaction_receipts_REP_LENGTH>& get_transaction_receipts() const { return transaction_receipts_; }
-    inline const ::EmbeddedProto::RepeatedFieldFixedSize<transaction_receipt<transaction_receipts_id_LENGTH, transaction_receipts_payer_LENGTH, transaction_receipts_events_REP_LENGTH, transaction_receipts_events_source_LENGTH, transaction_receipts_events_name_LENGTH, transaction_receipts_events_data_LENGTH, transaction_receipts_events_impacted_REP_LENGTH, transaction_receipts_events_impacted_LENGTH>, transaction_receipts_REP_LENGTH>& transaction_receipts() const { return transaction_receipts_; }
+    inline void set_transaction_receipts(uint32_t index, const transaction_receipt<transaction_receipts_id_LENGTH, transaction_receipts_payer_LENGTH, transaction_receipts_events_REP_LENGTH, transaction_receipts_events_source_LENGTH, transaction_receipts_events_name_LENGTH, transaction_receipts_events_data_LENGTH, transaction_receipts_events_impacted_REP_LENGTH, transaction_receipts_events_impacted_LENGTH, transaction_receipts_logs_REP_LENGTH, transaction_receipts_logs_LENGTH>& value) { transaction_receipts_.set(index, value); }
+    inline void set_transaction_receipts(uint32_t index, const transaction_receipt<transaction_receipts_id_LENGTH, transaction_receipts_payer_LENGTH, transaction_receipts_events_REP_LENGTH, transaction_receipts_events_source_LENGTH, transaction_receipts_events_name_LENGTH, transaction_receipts_events_data_LENGTH, transaction_receipts_events_impacted_REP_LENGTH, transaction_receipts_events_impacted_LENGTH, transaction_receipts_logs_REP_LENGTH, transaction_receipts_logs_LENGTH>&& value) { transaction_receipts_.set(index, value); }
+    inline void set_transaction_receipts(const ::EmbeddedProto::RepeatedFieldFixedSize<transaction_receipt<transaction_receipts_id_LENGTH, transaction_receipts_payer_LENGTH, transaction_receipts_events_REP_LENGTH, transaction_receipts_events_source_LENGTH, transaction_receipts_events_name_LENGTH, transaction_receipts_events_data_LENGTH, transaction_receipts_events_impacted_REP_LENGTH, transaction_receipts_events_impacted_LENGTH, transaction_receipts_logs_REP_LENGTH, transaction_receipts_logs_LENGTH>, transaction_receipts_REP_LENGTH>& values) { transaction_receipts_ = values; }
+    inline void add_transaction_receipts(const transaction_receipt<transaction_receipts_id_LENGTH, transaction_receipts_payer_LENGTH, transaction_receipts_events_REP_LENGTH, transaction_receipts_events_source_LENGTH, transaction_receipts_events_name_LENGTH, transaction_receipts_events_data_LENGTH, transaction_receipts_events_impacted_REP_LENGTH, transaction_receipts_events_impacted_LENGTH, transaction_receipts_logs_REP_LENGTH, transaction_receipts_logs_LENGTH>& value) { transaction_receipts_.add(value); }
+    inline ::EmbeddedProto::RepeatedFieldFixedSize<transaction_receipt<transaction_receipts_id_LENGTH, transaction_receipts_payer_LENGTH, transaction_receipts_events_REP_LENGTH, transaction_receipts_events_source_LENGTH, transaction_receipts_events_name_LENGTH, transaction_receipts_events_data_LENGTH, transaction_receipts_events_impacted_REP_LENGTH, transaction_receipts_events_impacted_LENGTH, transaction_receipts_logs_REP_LENGTH, transaction_receipts_logs_LENGTH>, transaction_receipts_REP_LENGTH>& mutable_transaction_receipts() { return transaction_receipts_; }
+    inline transaction_receipt<transaction_receipts_id_LENGTH, transaction_receipts_payer_LENGTH, transaction_receipts_events_REP_LENGTH, transaction_receipts_events_source_LENGTH, transaction_receipts_events_name_LENGTH, transaction_receipts_events_data_LENGTH, transaction_receipts_events_impacted_REP_LENGTH, transaction_receipts_events_impacted_LENGTH, transaction_receipts_logs_REP_LENGTH, transaction_receipts_logs_LENGTH>& mutable_transaction_receipts(uint32_t index) { return transaction_receipts_[index]; }
+    inline const ::EmbeddedProto::RepeatedFieldFixedSize<transaction_receipt<transaction_receipts_id_LENGTH, transaction_receipts_payer_LENGTH, transaction_receipts_events_REP_LENGTH, transaction_receipts_events_source_LENGTH, transaction_receipts_events_name_LENGTH, transaction_receipts_events_data_LENGTH, transaction_receipts_events_impacted_REP_LENGTH, transaction_receipts_events_impacted_LENGTH, transaction_receipts_logs_REP_LENGTH, transaction_receipts_logs_LENGTH>, transaction_receipts_REP_LENGTH>& get_transaction_receipts() const { return transaction_receipts_; }
+    inline const ::EmbeddedProto::RepeatedFieldFixedSize<transaction_receipt<transaction_receipts_id_LENGTH, transaction_receipts_payer_LENGTH, transaction_receipts_events_REP_LENGTH, transaction_receipts_events_source_LENGTH, transaction_receipts_events_name_LENGTH, transaction_receipts_events_data_LENGTH, transaction_receipts_events_impacted_REP_LENGTH, transaction_receipts_events_impacted_LENGTH, transaction_receipts_logs_REP_LENGTH, transaction_receipts_logs_LENGTH>, transaction_receipts_REP_LENGTH>& transaction_receipts() const { return transaction_receipts_; }
+
+    inline const ::EmbeddedProto::FieldString<logs_LENGTH>& logs(uint32_t index) const { return logs_[index]; }
+    inline void clear_logs() { logs_.clear(); }
+    inline void set_logs(uint32_t index, const ::EmbeddedProto::FieldString<logs_LENGTH>& value) { logs_.set(index, value); }
+    inline void set_logs(uint32_t index, const ::EmbeddedProto::FieldString<logs_LENGTH>&& value) { logs_.set(index, value); }
+    inline void set_logs(const ::EmbeddedProto::RepeatedFieldFixedSize<::EmbeddedProto::FieldString<logs_LENGTH>, logs_REP_LENGTH>& values) { logs_ = values; }
+    inline void add_logs(const ::EmbeddedProto::FieldString<logs_LENGTH>& value) { logs_.add(value); }
+    inline ::EmbeddedProto::RepeatedFieldFixedSize<::EmbeddedProto::FieldString<logs_LENGTH>, logs_REP_LENGTH>& mutable_logs() { return logs_; }
+    inline ::EmbeddedProto::FieldString<logs_LENGTH>& mutable_logs(uint32_t index) { return logs_[index]; }
+    inline const ::EmbeddedProto::RepeatedFieldFixedSize<::EmbeddedProto::FieldString<logs_LENGTH>, logs_REP_LENGTH>& get_logs() const { return logs_; }
+    inline const ::EmbeddedProto::RepeatedFieldFixedSize<::EmbeddedProto::FieldString<logs_LENGTH>, logs_REP_LENGTH>& logs() const { return logs_; }
 
 
     ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
@@ -3178,6 +3227,11 @@ class block_receipt final: public ::EmbeddedProto::MessageInterface
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
         return_value = transaction_receipts_.serialize_with_id(static_cast<uint32_t>(FieldNumber::TRANSACTION_RECEIPTS), buffer, false);
+      }
+
+      if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+      {
+        return_value = logs_.serialize_with_id(static_cast<uint32_t>(FieldNumber::LOGS), buffer, false);
       }
 
       return return_value;
@@ -3228,6 +3282,10 @@ class block_receipt final: public ::EmbeddedProto::MessageInterface
             return_value = transaction_receipts_.deserialize_check_type(buffer, wire_type);
             break;
 
+          case FieldNumber::LOGS:
+            return_value = logs_.deserialize_check_type(buffer, wire_type);
+            break;
+
           default:
             break;
         }
@@ -3260,6 +3318,7 @@ class block_receipt final: public ::EmbeddedProto::MessageInterface
       clear_state_merkle_root();
       clear_events();
       clear_transaction_receipts();
+      clear_logs();
 
     }
 
@@ -3273,7 +3332,8 @@ class block_receipt final: public ::EmbeddedProto::MessageInterface
       EmbeddedProto::uint64 compute_bandwidth_used_ = 0U;
       ::EmbeddedProto::FieldBytes<state_merkle_root_LENGTH> state_merkle_root_;
       ::EmbeddedProto::RepeatedFieldFixedSize<event_data<events_source_LENGTH, events_name_LENGTH, events_data_LENGTH, events_impacted_REP_LENGTH, events_impacted_LENGTH>, events_REP_LENGTH> events_;
-      ::EmbeddedProto::RepeatedFieldFixedSize<transaction_receipt<transaction_receipts_id_LENGTH, transaction_receipts_payer_LENGTH, transaction_receipts_events_REP_LENGTH, transaction_receipts_events_source_LENGTH, transaction_receipts_events_name_LENGTH, transaction_receipts_events_data_LENGTH, transaction_receipts_events_impacted_REP_LENGTH, transaction_receipts_events_impacted_LENGTH>, transaction_receipts_REP_LENGTH> transaction_receipts_;
+      ::EmbeddedProto::RepeatedFieldFixedSize<transaction_receipt<transaction_receipts_id_LENGTH, transaction_receipts_payer_LENGTH, transaction_receipts_events_REP_LENGTH, transaction_receipts_events_source_LENGTH, transaction_receipts_events_name_LENGTH, transaction_receipts_events_data_LENGTH, transaction_receipts_events_impacted_REP_LENGTH, transaction_receipts_events_impacted_LENGTH, transaction_receipts_logs_REP_LENGTH, transaction_receipts_logs_LENGTH>, transaction_receipts_REP_LENGTH> transaction_receipts_;
+      ::EmbeddedProto::RepeatedFieldFixedSize<::EmbeddedProto::FieldString<logs_LENGTH>, logs_REP_LENGTH> logs_;
 
 };
 

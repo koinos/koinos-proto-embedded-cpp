@@ -29,14 +29,14 @@
  */
 
 // This file is generated. Please do not edit!
-#ifndef KOINOS_PROTOCOL_SYSTEM_CALL_IDS_H
-#define KOINOS_PROTOCOL_SYSTEM_CALL_IDS_H
+#ifndef KOINOS_CHAIN_SYSTEM_CALL_IDS_H
+#define KOINOS_CHAIN_SYSTEM_CALL_IDS_H
 
 #include <cstdint>
 // Include external proto definitions
 
 namespace koinos {
-namespace protocol {
+namespace chain {
 
 enum class system_call_id : uint32_t
 {
@@ -80,6 +80,6 @@ enum class system_call_id : uint32_t
   require_authority = 609
 };
 
-} // End of namespace protocol
+} // End of namespace chain
 } // End of namespace koinos
-#endif // KOINOS_PROTOCOL_SYSTEM_CALL_IDS_H
+#endif // KOINOS_CHAIN_SYSTEM_CALL_IDS_H

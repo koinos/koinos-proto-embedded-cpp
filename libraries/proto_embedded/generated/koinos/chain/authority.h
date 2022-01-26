@@ -53,9 +53,9 @@ namespace chain {
 
 enum class authorization_type : uint32_t
 {
-  call_contract = 0,
-  use_rc = 1,
-  upload_contract = 2
+  contract_call = 0,
+  rc_use = 1,
+  contract_upload = 2
 };
 
 template<uint32_t contract_id_LENGTH>
@@ -187,8 +187,7 @@ class call_target final: public ::EmbeddedProto::MessageInterface
 
 };
 
-template<uint32_t calls_REP_LENGTH, 
-uint32_t calls_contract_id_LENGTH>
+template<uint32_t call_contract_id_LENGTH>
 class authorize_arguments final: public ::EmbeddedProto::MessageInterface
 {
   public:
@@ -196,13 +195,13 @@ class authorize_arguments final: public ::EmbeddedProto::MessageInterface
     authorize_arguments(const authorize_arguments& rhs )
     {
       set_type(rhs.get_type());
-      set_calls(rhs.get_calls());
+      set_call(rhs.get_call());
     }
 
     authorize_arguments(const authorize_arguments&& rhs ) noexcept
     {
       set_type(rhs.get_type());
-      set_calls(rhs.get_calls());
+      set_call(rhs.get_call());
     }
 
     ~authorize_arguments() override = default;
@@ -211,20 +210,20 @@ class authorize_arguments final: public ::EmbeddedProto::MessageInterface
     {
       NOT_SET = 0,
       TYPE = 1,
-      CALLS = 2
+      CALL = 2
     };
 
     authorize_arguments& operator=(const authorize_arguments& rhs)
     {
       set_type(rhs.get_type());
-      set_calls(rhs.get_calls());
+      set_call(rhs.get_call());
       return *this;
     }
 
     authorize_arguments& operator=(const authorize_arguments&& rhs) noexcept
     {
       set_type(rhs.get_type());
-      set_calls(rhs.get_calls());
+      set_call(rhs.get_call());
       return *this;
     }
 
@@ -234,16 +233,32 @@ class authorize_arguments final: public ::EmbeddedProto::MessageInterface
     inline const authorization_type& get_type() const { return type_; }
     inline authorization_type type() const { return type_; }
 
-    inline const call_target<calls_contract_id_LENGTH>& calls(uint32_t index) const { return calls_[index]; }
-    inline void clear_calls() { calls_.clear(); }
-    inline void set_calls(uint32_t index, const call_target<calls_contract_id_LENGTH>& value) { calls_.set(index, value); }
-    inline void set_calls(uint32_t index, const call_target<calls_contract_id_LENGTH>&& value) { calls_.set(index, value); }
-    inline void set_calls(const ::EmbeddedProto::RepeatedFieldFixedSize<call_target<calls_contract_id_LENGTH>, calls_REP_LENGTH>& values) { calls_ = values; }
-    inline void add_calls(const call_target<calls_contract_id_LENGTH>& value) { calls_.add(value); }
-    inline ::EmbeddedProto::RepeatedFieldFixedSize<call_target<calls_contract_id_LENGTH>, calls_REP_LENGTH>& mutable_calls() { return calls_; }
-    inline call_target<calls_contract_id_LENGTH>& mutable_calls(uint32_t index) { return calls_[index]; }
-    inline const ::EmbeddedProto::RepeatedFieldFixedSize<call_target<calls_contract_id_LENGTH>, calls_REP_LENGTH>& get_calls() const { return calls_; }
-    inline const ::EmbeddedProto::RepeatedFieldFixedSize<call_target<calls_contract_id_LENGTH>, calls_REP_LENGTH>& calls() const { return calls_; }
+    inline bool has_call() const
+    {
+      return 0 != (presence::mask(presence::fields::CALL) & presence_[presence::index(presence::fields::CALL)]);
+    }
+    inline void clear_call()
+    {
+      presence_[presence::index(presence::fields::CALL)] &= ~(presence::mask(presence::fields::CALL));
+      call_.clear();
+    }
+    inline void set_call(const call_target<call_contract_id_LENGTH>& value)
+    {
+      presence_[presence::index(presence::fields::CALL)] |= presence::mask(presence::fields::CALL);
+      call_ = value;
+    }
+    inline void set_call(const call_target<call_contract_id_LENGTH>&& value)
+    {
+      presence_[presence::index(presence::fields::CALL)] |= presence::mask(presence::fields::CALL);
+      call_ = value;
+    }
+    inline call_target<call_contract_id_LENGTH>& mutable_call()
+    {
+      presence_[presence::index(presence::fields::CALL)] |= presence::mask(presence::fields::CALL);
+      return call_;
+    }
+    inline const call_target<call_contract_id_LENGTH>& get_call() const { return call_; }
+    inline const call_target<call_contract_id_LENGTH>& call() const { return call_; }
 
 
     ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
@@ -257,9 +272,9 @@ class authorize_arguments final: public ::EmbeddedProto::MessageInterface
         return_value = value.serialize_with_id(static_cast<uint32_t>(FieldNumber::TYPE), buffer, false);
       }
 
-      if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+      if(has_call() && (::EmbeddedProto::Error::NO_ERRORS == return_value))
       {
-        return_value = calls_.serialize_with_id(static_cast<uint32_t>(FieldNumber::CALLS), buffer, false);
+        return_value = call_.serialize_with_id(static_cast<uint32_t>(FieldNumber::CALL), buffer, true);
       }
 
       return return_value;
@@ -295,8 +310,9 @@ class authorize_arguments final: public ::EmbeddedProto::MessageInterface
             }
             break;
 
-          case FieldNumber::CALLS:
-            return_value = calls_.deserialize_check_type(buffer, wire_type);
+          case FieldNumber::CALL:
+            presence_[presence::index(presence::fields::CALL)] |= presence::mask(presence::fields::CALL);
+            return_value = call_.deserialize_check_type(buffer, wire_type);
             break;
 
           default:
@@ -324,15 +340,49 @@ class authorize_arguments final: public ::EmbeddedProto::MessageInterface
     void clear() override
     {
       clear_type();
-      clear_calls();
+      clear_call();
 
     }
 
     private:
 
+      // Define constants for tracking the presence of fields.
+      // Use a struct to scope the variables from user fields as namespaces are not allowed within classes.
+      struct presence
+      {
+        // An enumeration with all the fields for which presence has to be tracked.
+        enum class fields : uint32_t
+        {
+          CALL
+        };
+
+        // The number of fields for which presence has to be tracked.
+        static constexpr uint32_t N_FIELDS = 1;
+
+        // Which type are we using to track presence.
+        using TYPE = uint32_t;
+
+        // How many bits are there in the presence type.
+        static constexpr uint32_t N_BITS = std::numeric_limits<TYPE>::digits;
+
+        // How many variables of TYPE do we need to bit mask all presence fields.
+        static constexpr uint32_t SIZE = (N_FIELDS / N_BITS) + ((N_FIELDS % N_BITS) > 0 ? 1 : 0);
+
+        // Obtain the index of a given field in the presence array.
+        static constexpr uint32_t index(const fields& field) { return static_cast<uint32_t>(field) / N_BITS; }
+
+        // Obtain the bit mask for the given field assuming we are at the correct index in the presence array.
+        static constexpr TYPE mask(const fields& field)
+        {
+          return static_cast<uint32_t>(0x01) << (static_cast<uint32_t>(field) % N_BITS);
+        }
+      };
+
+      // Create an array in which the presence flags are stored.
+      typename presence::TYPE presence_[presence::SIZE] = {0};
 
       authorization_type type_ = static_cast<authorization_type>(0);
-      ::EmbeddedProto::RepeatedFieldFixedSize<call_target<calls_contract_id_LENGTH>, calls_REP_LENGTH> calls_;
+      call_target<call_contract_id_LENGTH> call_;
 
 };
 
