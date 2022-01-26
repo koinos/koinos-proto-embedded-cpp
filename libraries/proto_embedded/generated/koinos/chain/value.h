@@ -50,11 +50,11 @@ namespace chain {
 
 template<uint32_t string_value_LENGTH, 
 uint32_t bytes_value_LENGTH>
-class value final: public ::EmbeddedProto::MessageInterface
+class value_type final: public ::EmbeddedProto::MessageInterface
 {
   public:
-    value() = default;
-    value(const value& rhs )
+    value_type() = default;
+    value_type(const value_type& rhs )
     {
       if(rhs.get_which_kind() != which_kind_)
       {
@@ -134,7 +134,7 @@ class value final: public ::EmbeddedProto::MessageInterface
 
     }
 
-    value(const value&& rhs ) noexcept
+    value_type(const value_type&& rhs ) noexcept
     {
       if(rhs.get_which_kind() != which_kind_)
       {
@@ -214,7 +214,7 @@ class value final: public ::EmbeddedProto::MessageInterface
 
     }
 
-    ~value() override = default;
+    ~value_type() override = default;
 
     enum class FieldNumber : uint32_t
     {
@@ -237,7 +237,7 @@ class value final: public ::EmbeddedProto::MessageInterface
       BYTES_VALUE = 16
     };
 
-    value& operator=(const value& rhs)
+    value_type& operator=(const value_type& rhs)
     {
       if(rhs.get_which_kind() != which_kind_)
       {
@@ -318,7 +318,7 @@ class value final: public ::EmbeddedProto::MessageInterface
       return *this;
     }
 
-    value& operator=(const value&& rhs) noexcept
+    value_type& operator=(const value_type&& rhs) noexcept
     {
       if(rhs.get_which_kind() != which_kind_)
       {
@@ -1484,23 +1484,23 @@ class value final: public ::EmbeddedProto::MessageInterface
 };
 
 template<uint32_t name_LENGTH>
-class enum_value final: public ::EmbeddedProto::MessageInterface
+class enum_type final: public ::EmbeddedProto::MessageInterface
 {
   public:
-    enum_value() = default;
-    enum_value(const enum_value& rhs )
+    enum_type() = default;
+    enum_type(const enum_type& rhs )
     {
       set_name(rhs.get_name());
       set_number(rhs.get_number());
     }
 
-    enum_value(const enum_value&& rhs ) noexcept
+    enum_type(const enum_type&& rhs ) noexcept
     {
       set_name(rhs.get_name());
       set_number(rhs.get_number());
     }
 
-    ~enum_value() override = default;
+    ~enum_type() override = default;
 
     enum class FieldNumber : uint32_t
     {
@@ -1509,14 +1509,14 @@ class enum_value final: public ::EmbeddedProto::MessageInterface
       NUMBER = 2
     };
 
-    enum_value& operator=(const enum_value& rhs)
+    enum_type& operator=(const enum_type& rhs)
     {
       set_name(rhs.get_name());
       set_number(rhs.get_number());
       return *this;
     }
 
-    enum_value& operator=(const enum_value&& rhs) noexcept
+    enum_type& operator=(const enum_type&& rhs) noexcept
     {
       set_name(rhs.get_name());
       set_number(rhs.get_number());
@@ -1612,53 +1612,53 @@ class enum_value final: public ::EmbeddedProto::MessageInterface
 
 };
 
-template<uint32_t value_REP_LENGTH, 
-uint32_t value_string_value_LENGTH, 
-uint32_t value_bytes_value_LENGTH>
-class list_value final: public ::EmbeddedProto::MessageInterface
+template<uint32_t values_REP_LENGTH, 
+uint32_t values_string_value_LENGTH, 
+uint32_t values_bytes_value_LENGTH>
+class list_type final: public ::EmbeddedProto::MessageInterface
 {
   public:
-    list_value() = default;
-    list_value(const list_value& rhs )
+    list_type() = default;
+    list_type(const list_type& rhs )
     {
-      set_value(rhs.get_value());
+      set_values(rhs.get_values());
     }
 
-    list_value(const list_value&& rhs ) noexcept
+    list_type(const list_type&& rhs ) noexcept
     {
-      set_value(rhs.get_value());
+      set_values(rhs.get_values());
     }
 
-    ~list_value() override = default;
+    ~list_type() override = default;
 
     enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
-      VALUE = 1
+      VALUES = 1
     };
 
-    list_value& operator=(const list_value& rhs)
+    list_type& operator=(const list_type& rhs)
     {
-      set_value(rhs.get_value());
+      set_values(rhs.get_values());
       return *this;
     }
 
-    list_value& operator=(const list_value&& rhs) noexcept
+    list_type& operator=(const list_type&& rhs) noexcept
     {
-      set_value(rhs.get_value());
+      set_values(rhs.get_values());
       return *this;
     }
 
-    inline const value<value_string_value_LENGTH, value_bytes_value_LENGTH>& value(uint32_t index) const { return value_[index]; }
-    inline void clear_value() { value_.clear(); }
-    inline void set_value(uint32_t index, const value<value_string_value_LENGTH, value_bytes_value_LENGTH>& value) { value_.set(index, value); }
-    inline void set_value(uint32_t index, const value<value_string_value_LENGTH, value_bytes_value_LENGTH>&& value) { value_.set(index, value); }
-    inline void set_value(const ::EmbeddedProto::RepeatedFieldFixedSize<value<value_string_value_LENGTH, value_bytes_value_LENGTH>, value_REP_LENGTH>& values) { value_ = values; }
-    inline void add_value(const value<value_string_value_LENGTH, value_bytes_value_LENGTH>& value) { value_.add(value); }
-    inline ::EmbeddedProto::RepeatedFieldFixedSize<value<value_string_value_LENGTH, value_bytes_value_LENGTH>, value_REP_LENGTH>& mutable_value() { return value_; }
-    inline value<value_string_value_LENGTH, value_bytes_value_LENGTH>& mutable_value(uint32_t index) { return value_[index]; }
-    inline const ::EmbeddedProto::RepeatedFieldFixedSize<value<value_string_value_LENGTH, value_bytes_value_LENGTH>, value_REP_LENGTH>& get_value() const { return value_; }
-    inline const ::EmbeddedProto::RepeatedFieldFixedSize<value<value_string_value_LENGTH, value_bytes_value_LENGTH>, value_REP_LENGTH>& value() const { return value_; }
+    inline const value_type<values_string_value_LENGTH, values_bytes_value_LENGTH>& values(uint32_t index) const { return values_[index]; }
+    inline void clear_values() { values_.clear(); }
+    inline void set_values(uint32_t index, const value_type<values_string_value_LENGTH, values_bytes_value_LENGTH>& value) { values_.set(index, value); }
+    inline void set_values(uint32_t index, const value_type<values_string_value_LENGTH, values_bytes_value_LENGTH>&& value) { values_.set(index, value); }
+    inline void set_values(const ::EmbeddedProto::RepeatedFieldFixedSize<value_type<values_string_value_LENGTH, values_bytes_value_LENGTH>, values_REP_LENGTH>& values) { values_ = values; }
+    inline void add_values(const value_type<values_string_value_LENGTH, values_bytes_value_LENGTH>& value) { values_.add(value); }
+    inline ::EmbeddedProto::RepeatedFieldFixedSize<value_type<values_string_value_LENGTH, values_bytes_value_LENGTH>, values_REP_LENGTH>& mutable_values() { return values_; }
+    inline value_type<values_string_value_LENGTH, values_bytes_value_LENGTH>& mutable_values(uint32_t index) { return values_[index]; }
+    inline const ::EmbeddedProto::RepeatedFieldFixedSize<value_type<values_string_value_LENGTH, values_bytes_value_LENGTH>, values_REP_LENGTH>& get_values() const { return values_; }
+    inline const ::EmbeddedProto::RepeatedFieldFixedSize<value_type<values_string_value_LENGTH, values_bytes_value_LENGTH>, values_REP_LENGTH>& values() const { return values_; }
 
 
     ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
@@ -1667,7 +1667,7 @@ class list_value final: public ::EmbeddedProto::MessageInterface
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = value_.serialize_with_id(static_cast<uint32_t>(FieldNumber::VALUE), buffer, false);
+        return_value = values_.serialize_with_id(static_cast<uint32_t>(FieldNumber::VALUES), buffer, false);
       }
 
       return return_value;
@@ -1686,8 +1686,8 @@ class list_value final: public ::EmbeddedProto::MessageInterface
         id_tag = static_cast<FieldNumber>(id_number);
         switch(id_tag)
         {
-          case FieldNumber::VALUE:
-            return_value = value_.deserialize_check_type(buffer, wire_type);
+          case FieldNumber::VALUES:
+            return_value = values_.deserialize_check_type(buffer, wire_type);
             break;
 
           default:
@@ -1714,14 +1714,14 @@ class list_value final: public ::EmbeddedProto::MessageInterface
 
     void clear() override
     {
-      clear_value();
+      clear_values();
 
     }
 
     private:
 
 
-      ::EmbeddedProto::RepeatedFieldFixedSize<value<value_string_value_LENGTH, value_bytes_value_LENGTH>, value_REP_LENGTH> value_;
+      ::EmbeddedProto::RepeatedFieldFixedSize<value_type<values_string_value_LENGTH, values_bytes_value_LENGTH>, values_REP_LENGTH> values_;
 
 };
 
