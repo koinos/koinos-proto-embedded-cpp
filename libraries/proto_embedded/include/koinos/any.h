@@ -28,8 +28,8 @@
  *    the Netherlands
  */
 
-#ifndef GOOGLE_PROTOBUF_ANY_H
-#define GOOGLE_PROTOBUF_ANY_H
+#ifndef KOINOS_ANY_H
+#define KOINOS_ANY_H
 
 #include <cstdint>
 #include <MessageInterface.h>
@@ -46,8 +46,7 @@
 
 // Include external proto definitions
 
-namespace google {
-namespace protobuf {
+namespace koinos {
 
 template<uint32_t type_url_LENGTH,
 uint32_t value_LENGTH>
@@ -204,6 +203,5 @@ class Any final: public ::EmbeddedProto::MessageInterface
 
 };
 
-} // End of namespace protobuf
-} // End of namespace google
-#endif // GOOGLE_PROTOBUF_ANY_H
+} // End of namespace koinos
+#endif // KOINOS_ANY_H
