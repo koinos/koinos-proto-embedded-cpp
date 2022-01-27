@@ -7667,11 +7667,13 @@ class require_authority_arguments final: public ::EmbeddedProto::MessageInterfac
     require_authority_arguments() = default;
     require_authority_arguments(const require_authority_arguments& rhs )
     {
+      set_type(rhs.get_type());
       set_account(rhs.get_account());
     }
 
     require_authority_arguments(const require_authority_arguments&& rhs ) noexcept
     {
+      set_type(rhs.get_type());
       set_account(rhs.get_account());
     }
 
@@ -7680,20 +7682,29 @@ class require_authority_arguments final: public ::EmbeddedProto::MessageInterfac
     enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
-      ACCOUNT = 1
+      TYPE = 1,
+      ACCOUNT = 2
     };
 
     require_authority_arguments& operator=(const require_authority_arguments& rhs)
     {
+      set_type(rhs.get_type());
       set_account(rhs.get_account());
       return *this;
     }
 
     require_authority_arguments& operator=(const require_authority_arguments&& rhs) noexcept
     {
+      set_type(rhs.get_type());
       set_account(rhs.get_account());
       return *this;
     }
+
+    inline void clear_type() { type_ = static_cast<authorization_type>(0); }
+    inline void set_type(const authorization_type& value) { type_ = value; }
+    inline void set_type(const authorization_type&& value) { type_ = value; }
+    inline const authorization_type& get_type() const { return type_; }
+    inline authorization_type type() const { return type_; }
 
     inline void clear_account() { account_.clear(); }
     inline ::EmbeddedProto::FieldBytes<account_LENGTH>& mutable_account() { return account_; }
@@ -7705,6 +7716,13 @@ class require_authority_arguments final: public ::EmbeddedProto::MessageInterfac
     ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
     {
       ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
+
+      if((static_cast<authorization_type>(0) != type_) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
+      {
+        EmbeddedProto::uint32 value = 0;
+        value.set(static_cast<uint32_t>(type_));
+        return_value = value.serialize_with_id(static_cast<uint32_t>(FieldNumber::TYPE), buffer, false);
+      }
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
@@ -7727,6 +7745,23 @@ class require_authority_arguments final: public ::EmbeddedProto::MessageInterfac
         id_tag = static_cast<FieldNumber>(id_number);
         switch(id_tag)
         {
+          case FieldNumber::TYPE:
+            if(::EmbeddedProto::WireFormatter::WireType::VARINT == wire_type)
+            {
+              uint32_t value = 0;
+              return_value = ::EmbeddedProto::WireFormatter::DeserializeVarint(buffer, value);
+              if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+              {
+                set_type(static_cast<authorization_type>(value));
+              }
+            }
+            else
+            {
+              // Wire type does not match field.
+              return_value = ::EmbeddedProto::Error::INVALID_WIRETYPE;
+            }
+            break;
+
           case FieldNumber::ACCOUNT:
             return_value = account_.deserialize_check_type(buffer, wire_type);
             break;
@@ -7755,6 +7790,7 @@ class require_authority_arguments final: public ::EmbeddedProto::MessageInterfac
 
     void clear() override
     {
+      clear_type();
       clear_account();
 
     }
@@ -7762,6 +7798,7 @@ class require_authority_arguments final: public ::EmbeddedProto::MessageInterfac
     private:
 
 
+      authorization_type type_ = static_cast<authorization_type>(0);
       ::EmbeddedProto::FieldBytes<account_LENGTH> account_;
 
 };
