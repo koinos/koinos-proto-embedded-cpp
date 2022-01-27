@@ -48,7 +48,7 @@
 namespace koinos {
 namespace chain {
 
-template<uint32_t string_value_LENGTH, 
+template<uint32_t string_value_LENGTH,
 uint32_t bytes_value_LENGTH>
 class value_type final: public ::EmbeddedProto::MessageInterface
 {
@@ -1484,23 +1484,23 @@ class value_type final: public ::EmbeddedProto::MessageInterface
 };
 
 template<uint32_t name_LENGTH>
-class enum_value final: public ::EmbeddedProto::MessageInterface
+class enum_type final: public ::EmbeddedProto::MessageInterface
 {
   public:
-    enum_value() = default;
-    enum_value(const enum_value& rhs )
+    enum_type() = default;
+    enum_type(const enum_type& rhs )
     {
       set_name(rhs.get_name());
       set_number(rhs.get_number());
     }
 
-    enum_value(const enum_value&& rhs ) noexcept
+    enum_type(const enum_type&& rhs ) noexcept
     {
       set_name(rhs.get_name());
       set_number(rhs.get_number());
     }
 
-    ~enum_value() override = default;
+    ~enum_type() override = default;
 
     enum class FieldNumber : uint32_t
     {
@@ -1509,14 +1509,14 @@ class enum_value final: public ::EmbeddedProto::MessageInterface
       NUMBER = 2
     };
 
-    enum_value& operator=(const enum_value& rhs)
+    enum_type& operator=(const enum_type& rhs)
     {
       set_name(rhs.get_name());
       set_number(rhs.get_number());
       return *this;
     }
 
-    enum_value& operator=(const enum_value&& rhs) noexcept
+    enum_type& operator=(const enum_type&& rhs) noexcept
     {
       set_name(rhs.get_name());
       set_number(rhs.get_number());
@@ -1612,24 +1612,24 @@ class enum_value final: public ::EmbeddedProto::MessageInterface
 
 };
 
-template<uint32_t values_REP_LENGTH, 
-uint32_t values_string_value_LENGTH, 
+template<uint32_t values_REP_LENGTH,
+uint32_t values_string_value_LENGTH,
 uint32_t values_bytes_value_LENGTH>
-class list_value final: public ::EmbeddedProto::MessageInterface
+class list_type final: public ::EmbeddedProto::MessageInterface
 {
   public:
-    list_value() = default;
-    list_value(const list_value& rhs )
+    list_type() = default;
+    list_type(const list_type& rhs )
     {
       set_values(rhs.get_values());
     }
 
-    list_value(const list_value&& rhs ) noexcept
+    list_type(const list_type&& rhs ) noexcept
     {
       set_values(rhs.get_values());
     }
 
-    ~list_value() override = default;
+    ~list_type() override = default;
 
     enum class FieldNumber : uint32_t
     {
@@ -1637,13 +1637,13 @@ class list_value final: public ::EmbeddedProto::MessageInterface
       VALUES = 1
     };
 
-    list_value& operator=(const list_value& rhs)
+    list_type& operator=(const list_type& rhs)
     {
       set_values(rhs.get_values());
       return *this;
     }
 
-    list_value& operator=(const list_value&& rhs) noexcept
+    list_type& operator=(const list_type&& rhs) noexcept
     {
       set_values(rhs.get_values());
       return *this;
