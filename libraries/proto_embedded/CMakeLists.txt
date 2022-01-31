@@ -2,7 +2,7 @@ file(GLOB_RECURSE GEN_HEADERS "generated/*.h")
 file(GLOB EAMS_HEADERS "src/*.h")
 file(GLOB EAMS_SOURCE  "src/*.cpp")
 file(GLOB HEADERS "include/koinos/*.hpp")
-file(GLOB HEADERS "include/google/protobuf/*.hpp")
+file(GLOB HEADERS "include/google/protobuf/*.h")
 add_library(koinos_proto_embedded
             buffer.cpp
             ${EAMS_SOURCE}
@@ -22,6 +22,11 @@ install(
    DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/include/"
    DESTINATION "include/"
    FILES_MATCHING PATTERN "*.hpp" )
+
+install(
+   DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/include/"
+   DESTINATION "include/"
+   FILES_MATCHING PATTERN "*.h" )
 
 install(
    DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/src/"

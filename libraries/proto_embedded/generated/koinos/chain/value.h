@@ -48,7 +48,7 @@
 namespace koinos {
 namespace chain {
 
-template<uint32_t string_value_LENGTH, 
+template<uint32_t string_value_LENGTH,
 uint32_t bytes_value_LENGTH>
 class value_type final: public ::EmbeddedProto::MessageInterface
 {
@@ -1612,8 +1612,8 @@ class enum_type final: public ::EmbeddedProto::MessageInterface
 
 };
 
-template<uint32_t values_REP_LENGTH, 
-uint32_t values_string_value_LENGTH, 
+template<uint32_t values_REP_LENGTH,
+uint32_t values_string_value_LENGTH,
 uint32_t values_bytes_value_LENGTH>
 class list_type final: public ::EmbeddedProto::MessageInterface
 {
