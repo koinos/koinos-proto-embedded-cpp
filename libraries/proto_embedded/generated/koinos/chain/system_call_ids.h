@@ -49,11 +49,13 @@ enum class system_call_id : uint32_t
   apply_set_system_call_operation = 6,
   apply_set_system_contract_operation = 7,
   process_block_signature = 101,
-  get_transaction_field = 102,
-  get_block_field = 103,
-  get_last_irreversible_block = 104,
-  get_account_nonce = 105,
-  authorize_system = 106,
+  get_transaction = 102,
+  get_transaction_field = 103,
+  get_block = 104,
+  get_block_field = 105,
+  get_last_irreversible_block = 106,
+  get_account_nonce = 107,
+  authorize_system = 108,
   get_account_rc = 201,
   consume_account_rc = 202,
   get_resource_limits = 203,
@@ -71,13 +73,12 @@ enum class system_call_id : uint32_t
   verify_signature = 504,
   call_contract = 601,
   get_entry_point = 602,
-  get_contract_arguments_size = 603,
-  get_contract_arguments = 604,
-  set_contract_result = 605,
-  exit_contract = 606,
-  get_contract_id = 607,
-  get_caller = 608,
-  require_authority = 609
+  get_contract_arguments = 603,
+  set_contract_result = 604,
+  exit_contract = 605,
+  get_contract_id = 606,
+  get_caller = 607,
+  require_authority = 608
 };
 
 } // End of namespace chain
