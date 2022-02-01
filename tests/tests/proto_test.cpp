@@ -6,7 +6,7 @@
 #include <koinos/buffer.hpp>
 #include <koinos/common.h>
 
-#include <google/protobuf/any.h>
+#include <koinos/any.hpp>
 
 using namespace std::string_literals;
 
@@ -81,7 +81,7 @@ BOOST_AUTO_TEST_CASE( any )
    topo.set_height( 1 );
    topo.mutable_previous().set( reinterpret_cast< const uint8_t* >( previous.c_str() ), previous.size() );
 
-   google::protobuf::Any< 128, 128 > any;
+   koinos::Any< 128, 128 > any;
 
    any.PackFrom( topo );
 
