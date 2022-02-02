@@ -55,7 +55,8 @@ enum class authorization_type : uint32_t
 {
   contract_call = 0,
   rc_use = 1,
-  contract_upload = 2
+  contract_upload = 2,
+  signature_exists = 3
 };
 
 template<uint32_t contract_id_LENGTH>
