@@ -1161,6 +1161,247 @@ class contract_metadata_object final: public ::EmbeddedProto::MessageInterface
 
 };
 
+template<uint32_t name_LENGTH>
+class compute_bandwidth_entry final: public ::EmbeddedProto::MessageInterface
+{
+  public:
+    compute_bandwidth_entry() = default;
+    compute_bandwidth_entry(const compute_bandwidth_entry& rhs )
+    {
+      set_name(rhs.get_name());
+      set_compute(rhs.get_compute());
+    }
+
+    compute_bandwidth_entry(const compute_bandwidth_entry&& rhs ) noexcept
+    {
+      set_name(rhs.get_name());
+      set_compute(rhs.get_compute());
+    }
+
+    ~compute_bandwidth_entry() override = default;
+
+    enum class FieldNumber : uint32_t
+    {
+      NOT_SET = 0,
+      NAME = 1,
+      COMPUTE = 2
+    };
+
+    compute_bandwidth_entry& operator=(const compute_bandwidth_entry& rhs)
+    {
+      set_name(rhs.get_name());
+      set_compute(rhs.get_compute());
+      return *this;
+    }
+
+    compute_bandwidth_entry& operator=(const compute_bandwidth_entry&& rhs) noexcept
+    {
+      set_name(rhs.get_name());
+      set_compute(rhs.get_compute());
+      return *this;
+    }
+
+    inline void clear_name() { name_.clear(); }
+    inline ::EmbeddedProto::FieldString<name_LENGTH>& mutable_name() { return name_; }
+    inline void set_name(const ::EmbeddedProto::FieldString<name_LENGTH>& rhs) { name_.set(rhs); }
+    inline const ::EmbeddedProto::FieldString<name_LENGTH>& get_name() const { return name_; }
+    inline const char* name() const { return name_.get_const(); }
+
+    inline void clear_compute() { compute_.clear(); }
+    inline void set_compute(const EmbeddedProto::uint64& value) { compute_ = value; }
+    inline void set_compute(const EmbeddedProto::uint64&& value) { compute_ = value; }
+    inline EmbeddedProto::uint64& mutable_compute() { return compute_; }
+    inline const EmbeddedProto::uint64& get_compute() const { return compute_; }
+    inline EmbeddedProto::uint64::FIELD_TYPE compute() const { return compute_.get(); }
+
+
+    ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
+    {
+      ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
+
+      if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+      {
+        return_value = name_.serialize_with_id(static_cast<uint32_t>(FieldNumber::NAME), buffer, false);
+      }
+
+      if((0U != compute_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
+      {
+        return_value = compute_.serialize_with_id(static_cast<uint32_t>(FieldNumber::COMPUTE), buffer, false);
+      }
+
+      return return_value;
+    };
+
+    ::EmbeddedProto::Error deserialize(::EmbeddedProto::ReadBufferInterface& buffer) override
+    {
+      ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
+      ::EmbeddedProto::WireFormatter::WireType wire_type = ::EmbeddedProto::WireFormatter::WireType::VARINT;
+      uint32_t id_number = 0;
+      FieldNumber id_tag = FieldNumber::NOT_SET;
+
+      ::EmbeddedProto::Error tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
+      while((::EmbeddedProto::Error::NO_ERRORS == return_value) && (::EmbeddedProto::Error::NO_ERRORS == tag_value))
+      {
+        id_tag = static_cast<FieldNumber>(id_number);
+        switch(id_tag)
+        {
+          case FieldNumber::NAME:
+            return_value = name_.deserialize_check_type(buffer, wire_type);
+            break;
+
+          case FieldNumber::COMPUTE:
+            return_value = compute_.deserialize_check_type(buffer, wire_type);
+            break;
+
+          default:
+            break;
+        }
+
+        if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+        {
+          // Read the next tag.
+          tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
+        }
+      }
+
+      // When an error was detect while reading the tag but no other errors where found, set it in the return value.
+      if((::EmbeddedProto::Error::NO_ERRORS == return_value)
+         && (::EmbeddedProto::Error::NO_ERRORS != tag_value)
+         && (::EmbeddedProto::Error::END_OF_BUFFER != tag_value)) // The end of the buffer is not an array in this case.
+      {
+        return_value = tag_value;
+      }
+
+      return return_value;
+    };
+
+    void clear() override
+    {
+      clear_name();
+      clear_compute();
+
+    }
+
+    private:
+
+
+      ::EmbeddedProto::FieldString<name_LENGTH> name_;
+      EmbeddedProto::uint64 compute_ = 0U;
+
+};
+
+template<uint32_t entries_REP_LENGTH, 
+uint32_t entries_name_LENGTH>
+class compute_bandwidth_registry final: public ::EmbeddedProto::MessageInterface
+{
+  public:
+    compute_bandwidth_registry() = default;
+    compute_bandwidth_registry(const compute_bandwidth_registry& rhs )
+    {
+      set_entries(rhs.get_entries());
+    }
+
+    compute_bandwidth_registry(const compute_bandwidth_registry&& rhs ) noexcept
+    {
+      set_entries(rhs.get_entries());
+    }
+
+    ~compute_bandwidth_registry() override = default;
+
+    enum class FieldNumber : uint32_t
+    {
+      NOT_SET = 0,
+      ENTRIES = 1
+    };
+
+    compute_bandwidth_registry& operator=(const compute_bandwidth_registry& rhs)
+    {
+      set_entries(rhs.get_entries());
+      return *this;
+    }
+
+    compute_bandwidth_registry& operator=(const compute_bandwidth_registry&& rhs) noexcept
+    {
+      set_entries(rhs.get_entries());
+      return *this;
+    }
+
+    inline const compute_bandwidth_entry<entries_name_LENGTH>& entries(uint32_t index) const { return entries_[index]; }
+    inline void clear_entries() { entries_.clear(); }
+    inline void set_entries(uint32_t index, const compute_bandwidth_entry<entries_name_LENGTH>& value) { entries_.set(index, value); }
+    inline void set_entries(uint32_t index, const compute_bandwidth_entry<entries_name_LENGTH>&& value) { entries_.set(index, value); }
+    inline void set_entries(const ::EmbeddedProto::RepeatedFieldFixedSize<compute_bandwidth_entry<entries_name_LENGTH>, entries_REP_LENGTH>& values) { entries_ = values; }
+    inline void add_entries(const compute_bandwidth_entry<entries_name_LENGTH>& value) { entries_.add(value); }
+    inline ::EmbeddedProto::RepeatedFieldFixedSize<compute_bandwidth_entry<entries_name_LENGTH>, entries_REP_LENGTH>& mutable_entries() { return entries_; }
+    inline compute_bandwidth_entry<entries_name_LENGTH>& mutable_entries(uint32_t index) { return entries_[index]; }
+    inline const ::EmbeddedProto::RepeatedFieldFixedSize<compute_bandwidth_entry<entries_name_LENGTH>, entries_REP_LENGTH>& get_entries() const { return entries_; }
+    inline const ::EmbeddedProto::RepeatedFieldFixedSize<compute_bandwidth_entry<entries_name_LENGTH>, entries_REP_LENGTH>& entries() const { return entries_; }
+
+
+    ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
+    {
+      ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
+
+      if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+      {
+        return_value = entries_.serialize_with_id(static_cast<uint32_t>(FieldNumber::ENTRIES), buffer, false);
+      }
+
+      return return_value;
+    };
+
+    ::EmbeddedProto::Error deserialize(::EmbeddedProto::ReadBufferInterface& buffer) override
+    {
+      ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
+      ::EmbeddedProto::WireFormatter::WireType wire_type = ::EmbeddedProto::WireFormatter::WireType::VARINT;
+      uint32_t id_number = 0;
+      FieldNumber id_tag = FieldNumber::NOT_SET;
+
+      ::EmbeddedProto::Error tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
+      while((::EmbeddedProto::Error::NO_ERRORS == return_value) && (::EmbeddedProto::Error::NO_ERRORS == tag_value))
+      {
+        id_tag = static_cast<FieldNumber>(id_number);
+        switch(id_tag)
+        {
+          case FieldNumber::ENTRIES:
+            return_value = entries_.deserialize_check_type(buffer, wire_type);
+            break;
+
+          default:
+            break;
+        }
+
+        if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+        {
+          // Read the next tag.
+          tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
+        }
+      }
+
+      // When an error was detect while reading the tag but no other errors where found, set it in the return value.
+      if((::EmbeddedProto::Error::NO_ERRORS == return_value)
+         && (::EmbeddedProto::Error::NO_ERRORS != tag_value)
+         && (::EmbeddedProto::Error::END_OF_BUFFER != tag_value)) // The end of the buffer is not an array in this case.
+      {
+        return_value = tag_value;
+      }
+
+      return return_value;
+    };
+
+    void clear() override
+    {
+      clear_entries();
+
+    }
+
+    private:
+
+
+      ::EmbeddedProto::RepeatedFieldFixedSize<compute_bandwidth_entry<entries_name_LENGTH>, entries_REP_LENGTH> entries_;
+
+};
+
 template<uint32_t space_zone_LENGTH, 
 uint32_t key_LENGTH, 
 uint32_t value_LENGTH>
