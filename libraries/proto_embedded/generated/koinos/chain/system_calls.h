@@ -3502,6 +3502,7 @@ class get_account_nonce_arguments final: public ::EmbeddedProto::MessageInterfac
 
 };
 
+template<uint32_t value_LENGTH>
 class get_account_nonce_result final: public ::EmbeddedProto::MessageInterface
 {
   public:
@@ -3537,18 +3538,17 @@ class get_account_nonce_result final: public ::EmbeddedProto::MessageInterface
     }
 
     inline void clear_value() { value_.clear(); }
-    inline void set_value(const EmbeddedProto::uint64& value) { value_ = value; }
-    inline void set_value(const EmbeddedProto::uint64&& value) { value_ = value; }
-    inline EmbeddedProto::uint64& mutable_value() { return value_; }
-    inline const EmbeddedProto::uint64& get_value() const { return value_; }
-    inline EmbeddedProto::uint64::FIELD_TYPE value() const { return value_.get(); }
+    inline ::EmbeddedProto::FieldBytes<value_LENGTH>& mutable_value() { return value_; }
+    inline void set_value(const ::EmbeddedProto::FieldBytes<value_LENGTH>& rhs) { value_.set(rhs); }
+    inline const ::EmbeddedProto::FieldBytes<value_LENGTH>& get_value() const { return value_; }
+    inline const uint8_t* value() const { return value_.get_const(); }
 
 
     ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
     {
       ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
 
-      if((0U != value_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
+      if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
         return_value = value_.serialize_with_id(static_cast<uint32_t>(FieldNumber::VALUE), buffer, false);
       }
@@ -3604,7 +3604,7 @@ class get_account_nonce_result final: public ::EmbeddedProto::MessageInterface
     private:
 
 
-      EmbeddedProto::uint64 value_ = 0U;
+      ::EmbeddedProto::FieldBytes<value_LENGTH> value_;
 
 };
 
