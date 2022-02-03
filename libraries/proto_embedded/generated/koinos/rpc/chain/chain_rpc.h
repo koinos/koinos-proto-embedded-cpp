@@ -1588,6 +1588,7 @@ class get_account_nonce_request final: public ::EmbeddedProto::MessageInterface
 
 };
 
+template<uint32_t nonce_LENGTH>
 class get_account_nonce_response final: public ::EmbeddedProto::MessageInterface
 {
   public:
@@ -1623,18 +1624,17 @@ class get_account_nonce_response final: public ::EmbeddedProto::MessageInterface
     }
 
     inline void clear_nonce() { nonce_.clear(); }
-    inline void set_nonce(const EmbeddedProto::uint64& value) { nonce_ = value; }
-    inline void set_nonce(const EmbeddedProto::uint64&& value) { nonce_ = value; }
-    inline EmbeddedProto::uint64& mutable_nonce() { return nonce_; }
-    inline const EmbeddedProto::uint64& get_nonce() const { return nonce_; }
-    inline EmbeddedProto::uint64::FIELD_TYPE nonce() const { return nonce_.get(); }
+    inline ::EmbeddedProto::FieldBytes<nonce_LENGTH>& mutable_nonce() { return nonce_; }
+    inline void set_nonce(const ::EmbeddedProto::FieldBytes<nonce_LENGTH>& rhs) { nonce_.set(rhs); }
+    inline const ::EmbeddedProto::FieldBytes<nonce_LENGTH>& get_nonce() const { return nonce_; }
+    inline const uint8_t* nonce() const { return nonce_.get_const(); }
 
 
     ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
     {
       ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
 
-      if((0U != nonce_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
+      if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
         return_value = nonce_.serialize_with_id(static_cast<uint32_t>(FieldNumber::NONCE), buffer, false);
       }
@@ -1690,7 +1690,7 @@ class get_account_nonce_response final: public ::EmbeddedProto::MessageInterface
     private:
 
 
-      EmbeddedProto::uint64 nonce_ = 0U;
+      ::EmbeddedProto::FieldBytes<nonce_LENGTH> nonce_;
 
 };
 
@@ -3104,7 +3104,8 @@ uint32_t get_fork_heads_fork_heads_id_LENGTH,
 uint32_t get_fork_heads_fork_heads_previous_LENGTH, 
 uint32_t read_contract_result_LENGTH, 
 uint32_t read_contract_logs_REP_LENGTH, 
-uint32_t read_contract_logs_LENGTH>
+uint32_t read_contract_logs_LENGTH, 
+uint32_t get_account_nonce_nonce_LENGTH>
 class chain_response final: public ::EmbeddedProto::MessageInterface
 {
   public:
@@ -3656,10 +3657,10 @@ class chain_response final: public ::EmbeddedProto::MessageInterface
       if(FieldNumber::GET_ACCOUNT_NONCE == which_response_)
       {
         which_response_ = FieldNumber::NOT_SET;
-        response_.get_account_nonce_.~get_account_nonce_response();
+        response_.get_account_nonce_.~get_account_nonce_response<get_account_nonce_nonce_LENGTH>();
       }
     }
-    inline void set_get_account_nonce(const get_account_nonce_response& value)
+    inline void set_get_account_nonce(const get_account_nonce_response<get_account_nonce_nonce_LENGTH>& value)
     {
       if(FieldNumber::GET_ACCOUNT_NONCE != which_response_)
       {
@@ -3667,7 +3668,7 @@ class chain_response final: public ::EmbeddedProto::MessageInterface
       }
       response_.get_account_nonce_ = value;
     }
-    inline void set_get_account_nonce(const get_account_nonce_response&& value)
+    inline void set_get_account_nonce(const get_account_nonce_response<get_account_nonce_nonce_LENGTH>&& value)
     {
       if(FieldNumber::GET_ACCOUNT_NONCE != which_response_)
       {
@@ -3675,7 +3676,7 @@ class chain_response final: public ::EmbeddedProto::MessageInterface
       }
       response_.get_account_nonce_ = value;
     }
-    inline get_account_nonce_response& mutable_get_account_nonce()
+    inline get_account_nonce_response<get_account_nonce_nonce_LENGTH>& mutable_get_account_nonce()
     {
       if(FieldNumber::GET_ACCOUNT_NONCE != which_response_)
       {
@@ -3683,8 +3684,8 @@ class chain_response final: public ::EmbeddedProto::MessageInterface
       }
       return response_.get_account_nonce_;
     }
-    inline const get_account_nonce_response& get_get_account_nonce() const { return response_.get_account_nonce_; }
-    inline const get_account_nonce_response& get_account_nonce() const { return response_.get_account_nonce_; }
+    inline const get_account_nonce_response<get_account_nonce_nonce_LENGTH>& get_get_account_nonce() const { return response_.get_account_nonce_; }
+    inline const get_account_nonce_response<get_account_nonce_nonce_LENGTH>& get_account_nonce() const { return response_.get_account_nonce_; }
 
     inline void clear_get_account_rc()
     {
@@ -3960,7 +3961,7 @@ class chain_response final: public ::EmbeddedProto::MessageInterface
         get_chain_id_response<get_chain_id_chain_id_LENGTH> get_chain_id_;
         get_fork_heads_response<get_fork_heads_last_irreversible_block_id_LENGTH, get_fork_heads_last_irreversible_block_previous_LENGTH, get_fork_heads_fork_heads_REP_LENGTH, get_fork_heads_fork_heads_id_LENGTH, get_fork_heads_fork_heads_previous_LENGTH> get_fork_heads_;
         read_contract_response<read_contract_result_LENGTH, read_contract_logs_REP_LENGTH, read_contract_logs_LENGTH> read_contract_;
-        get_account_nonce_response get_account_nonce_;
+        get_account_nonce_response<get_account_nonce_nonce_LENGTH> get_account_nonce_;
         get_account_rc_response get_account_rc_;
         get_resource_limits_response get_resource_limits_;
       };
@@ -4018,7 +4019,7 @@ class chain_response final: public ::EmbeddedProto::MessageInterface
             break;
 
           case FieldNumber::GET_ACCOUNT_NONCE:
-            new(&response_.get_account_nonce_) get_account_nonce_response;
+            new(&response_.get_account_nonce_) get_account_nonce_response<get_account_nonce_nonce_LENGTH>;
             which_response_ = FieldNumber::GET_ACCOUNT_NONCE;
             break;
 
@@ -4068,7 +4069,7 @@ class chain_response final: public ::EmbeddedProto::MessageInterface
             response_.read_contract_.~read_contract_response<read_contract_result_LENGTH, read_contract_logs_REP_LENGTH, read_contract_logs_LENGTH>(); // NOSONAR Unions require this.
             break;
           case FieldNumber::GET_ACCOUNT_NONCE:
-            response_.get_account_nonce_.~get_account_nonce_response(); // NOSONAR Unions require this.
+            response_.get_account_nonce_.~get_account_nonce_response<get_account_nonce_nonce_LENGTH>(); // NOSONAR Unions require this.
             break;
           case FieldNumber::GET_ACCOUNT_RC:
             response_.get_account_rc_.~get_account_rc_response(); // NOSONAR Unions require this.
