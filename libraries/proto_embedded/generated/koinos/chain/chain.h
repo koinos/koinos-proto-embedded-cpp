@@ -973,7 +973,7 @@ class contract_metadata_object final: public ::EmbeddedProto::MessageInterface
       set_hash(rhs.get_hash());
       set_system(rhs.get_system());
       set_authorizes_call_contract(rhs.get_authorizes_call_contract());
-      set_authorizes_use_rc(rhs.get_authorizes_use_rc());
+      set_authorizes_transacion_application(rhs.get_authorizes_transacion_application());
       set_authorizes_upload_contract(rhs.get_authorizes_upload_contract());
     }
 
@@ -982,7 +982,7 @@ class contract_metadata_object final: public ::EmbeddedProto::MessageInterface
       set_hash(rhs.get_hash());
       set_system(rhs.get_system());
       set_authorizes_call_contract(rhs.get_authorizes_call_contract());
-      set_authorizes_use_rc(rhs.get_authorizes_use_rc());
+      set_authorizes_transacion_application(rhs.get_authorizes_transacion_application());
       set_authorizes_upload_contract(rhs.get_authorizes_upload_contract());
     }
 
@@ -994,7 +994,7 @@ class contract_metadata_object final: public ::EmbeddedProto::MessageInterface
       HASH = 1,
       SYSTEM = 2,
       AUTHORIZES_CALL_CONTRACT = 3,
-      AUTHORIZES_USE_RC = 4,
+      AUTHORIZES_TRANSACION_APPLICATION = 4,
       AUTHORIZES_UPLOAD_CONTRACT = 5
     };
 
@@ -1003,7 +1003,7 @@ class contract_metadata_object final: public ::EmbeddedProto::MessageInterface
       set_hash(rhs.get_hash());
       set_system(rhs.get_system());
       set_authorizes_call_contract(rhs.get_authorizes_call_contract());
-      set_authorizes_use_rc(rhs.get_authorizes_use_rc());
+      set_authorizes_transacion_application(rhs.get_authorizes_transacion_application());
       set_authorizes_upload_contract(rhs.get_authorizes_upload_contract());
       return *this;
     }
@@ -1013,7 +1013,7 @@ class contract_metadata_object final: public ::EmbeddedProto::MessageInterface
       set_hash(rhs.get_hash());
       set_system(rhs.get_system());
       set_authorizes_call_contract(rhs.get_authorizes_call_contract());
-      set_authorizes_use_rc(rhs.get_authorizes_use_rc());
+      set_authorizes_transacion_application(rhs.get_authorizes_transacion_application());
       set_authorizes_upload_contract(rhs.get_authorizes_upload_contract());
       return *this;
     }
@@ -1038,12 +1038,12 @@ class contract_metadata_object final: public ::EmbeddedProto::MessageInterface
     inline const EmbeddedProto::boolean& get_authorizes_call_contract() const { return authorizes_call_contract_; }
     inline EmbeddedProto::boolean::FIELD_TYPE authorizes_call_contract() const { return authorizes_call_contract_.get(); }
 
-    inline void clear_authorizes_use_rc() { authorizes_use_rc_.clear(); }
-    inline void set_authorizes_use_rc(const EmbeddedProto::boolean& value) { authorizes_use_rc_ = value; }
-    inline void set_authorizes_use_rc(const EmbeddedProto::boolean&& value) { authorizes_use_rc_ = value; }
-    inline EmbeddedProto::boolean& mutable_authorizes_use_rc() { return authorizes_use_rc_; }
-    inline const EmbeddedProto::boolean& get_authorizes_use_rc() const { return authorizes_use_rc_; }
-    inline EmbeddedProto::boolean::FIELD_TYPE authorizes_use_rc() const { return authorizes_use_rc_.get(); }
+    inline void clear_authorizes_transacion_application() { authorizes_transacion_application_.clear(); }
+    inline void set_authorizes_transacion_application(const EmbeddedProto::boolean& value) { authorizes_transacion_application_ = value; }
+    inline void set_authorizes_transacion_application(const EmbeddedProto::boolean&& value) { authorizes_transacion_application_ = value; }
+    inline EmbeddedProto::boolean& mutable_authorizes_transacion_application() { return authorizes_transacion_application_; }
+    inline const EmbeddedProto::boolean& get_authorizes_transacion_application() const { return authorizes_transacion_application_; }
+    inline EmbeddedProto::boolean::FIELD_TYPE authorizes_transacion_application() const { return authorizes_transacion_application_.get(); }
 
     inline void clear_authorizes_upload_contract() { authorizes_upload_contract_.clear(); }
     inline void set_authorizes_upload_contract(const EmbeddedProto::boolean& value) { authorizes_upload_contract_ = value; }
@@ -1072,9 +1072,9 @@ class contract_metadata_object final: public ::EmbeddedProto::MessageInterface
         return_value = authorizes_call_contract_.serialize_with_id(static_cast<uint32_t>(FieldNumber::AUTHORIZES_CALL_CONTRACT), buffer, false);
       }
 
-      if((false != authorizes_use_rc_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
+      if((false != authorizes_transacion_application_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
       {
-        return_value = authorizes_use_rc_.serialize_with_id(static_cast<uint32_t>(FieldNumber::AUTHORIZES_USE_RC), buffer, false);
+        return_value = authorizes_transacion_application_.serialize_with_id(static_cast<uint32_t>(FieldNumber::AUTHORIZES_TRANSACION_APPLICATION), buffer, false);
       }
 
       if((false != authorizes_upload_contract_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
@@ -1110,8 +1110,8 @@ class contract_metadata_object final: public ::EmbeddedProto::MessageInterface
             return_value = authorizes_call_contract_.deserialize_check_type(buffer, wire_type);
             break;
 
-          case FieldNumber::AUTHORIZES_USE_RC:
-            return_value = authorizes_use_rc_.deserialize_check_type(buffer, wire_type);
+          case FieldNumber::AUTHORIZES_TRANSACION_APPLICATION:
+            return_value = authorizes_transacion_application_.deserialize_check_type(buffer, wire_type);
             break;
 
           case FieldNumber::AUTHORIZES_UPLOAD_CONTRACT:
@@ -1145,7 +1145,7 @@ class contract_metadata_object final: public ::EmbeddedProto::MessageInterface
       clear_hash();
       clear_system();
       clear_authorizes_call_contract();
-      clear_authorizes_use_rc();
+      clear_authorizes_transacion_application();
       clear_authorizes_upload_contract();
 
     }
@@ -1156,7 +1156,7 @@ class contract_metadata_object final: public ::EmbeddedProto::MessageInterface
       ::EmbeddedProto::FieldBytes<hash_LENGTH> hash_;
       EmbeddedProto::boolean system_ = false;
       EmbeddedProto::boolean authorizes_call_contract_ = false;
-      EmbeddedProto::boolean authorizes_use_rc_ = false;
+      EmbeddedProto::boolean authorizes_transacion_application_ = false;
       EmbeddedProto::boolean authorizes_upload_contract_ = false;
 
 };

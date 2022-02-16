@@ -741,7 +741,7 @@ class upload_contract_operation final: public ::EmbeddedProto::MessageInterface
       set_bytecode(rhs.get_bytecode());
       set_abi(rhs.get_abi());
       set_authorizes_call_contract(rhs.get_authorizes_call_contract());
-      set_authorizes_use_rc(rhs.get_authorizes_use_rc());
+      set_authorizes_transaction_application(rhs.get_authorizes_transaction_application());
       set_authorizes_upload_contract(rhs.get_authorizes_upload_contract());
     }
 
@@ -751,7 +751,7 @@ class upload_contract_operation final: public ::EmbeddedProto::MessageInterface
       set_bytecode(rhs.get_bytecode());
       set_abi(rhs.get_abi());
       set_authorizes_call_contract(rhs.get_authorizes_call_contract());
-      set_authorizes_use_rc(rhs.get_authorizes_use_rc());
+      set_authorizes_transaction_application(rhs.get_authorizes_transaction_application());
       set_authorizes_upload_contract(rhs.get_authorizes_upload_contract());
     }
 
@@ -764,7 +764,7 @@ class upload_contract_operation final: public ::EmbeddedProto::MessageInterface
       BYTECODE = 2,
       ABI = 3,
       AUTHORIZES_CALL_CONTRACT = 4,
-      AUTHORIZES_USE_RC = 5,
+      AUTHORIZES_TRANSACTION_APPLICATION = 5,
       AUTHORIZES_UPLOAD_CONTRACT = 6
     };
 
@@ -774,7 +774,7 @@ class upload_contract_operation final: public ::EmbeddedProto::MessageInterface
       set_bytecode(rhs.get_bytecode());
       set_abi(rhs.get_abi());
       set_authorizes_call_contract(rhs.get_authorizes_call_contract());
-      set_authorizes_use_rc(rhs.get_authorizes_use_rc());
+      set_authorizes_transaction_application(rhs.get_authorizes_transaction_application());
       set_authorizes_upload_contract(rhs.get_authorizes_upload_contract());
       return *this;
     }
@@ -785,7 +785,7 @@ class upload_contract_operation final: public ::EmbeddedProto::MessageInterface
       set_bytecode(rhs.get_bytecode());
       set_abi(rhs.get_abi());
       set_authorizes_call_contract(rhs.get_authorizes_call_contract());
-      set_authorizes_use_rc(rhs.get_authorizes_use_rc());
+      set_authorizes_transaction_application(rhs.get_authorizes_transaction_application());
       set_authorizes_upload_contract(rhs.get_authorizes_upload_contract());
       return *this;
     }
@@ -815,12 +815,12 @@ class upload_contract_operation final: public ::EmbeddedProto::MessageInterface
     inline const EmbeddedProto::boolean& get_authorizes_call_contract() const { return authorizes_call_contract_; }
     inline EmbeddedProto::boolean::FIELD_TYPE authorizes_call_contract() const { return authorizes_call_contract_.get(); }
 
-    inline void clear_authorizes_use_rc() { authorizes_use_rc_.clear(); }
-    inline void set_authorizes_use_rc(const EmbeddedProto::boolean& value) { authorizes_use_rc_ = value; }
-    inline void set_authorizes_use_rc(const EmbeddedProto::boolean&& value) { authorizes_use_rc_ = value; }
-    inline EmbeddedProto::boolean& mutable_authorizes_use_rc() { return authorizes_use_rc_; }
-    inline const EmbeddedProto::boolean& get_authorizes_use_rc() const { return authorizes_use_rc_; }
-    inline EmbeddedProto::boolean::FIELD_TYPE authorizes_use_rc() const { return authorizes_use_rc_.get(); }
+    inline void clear_authorizes_transaction_application() { authorizes_transaction_application_.clear(); }
+    inline void set_authorizes_transaction_application(const EmbeddedProto::boolean& value) { authorizes_transaction_application_ = value; }
+    inline void set_authorizes_transaction_application(const EmbeddedProto::boolean&& value) { authorizes_transaction_application_ = value; }
+    inline EmbeddedProto::boolean& mutable_authorizes_transaction_application() { return authorizes_transaction_application_; }
+    inline const EmbeddedProto::boolean& get_authorizes_transaction_application() const { return authorizes_transaction_application_; }
+    inline EmbeddedProto::boolean::FIELD_TYPE authorizes_transaction_application() const { return authorizes_transaction_application_.get(); }
 
     inline void clear_authorizes_upload_contract() { authorizes_upload_contract_.clear(); }
     inline void set_authorizes_upload_contract(const EmbeddedProto::boolean& value) { authorizes_upload_contract_ = value; }
@@ -854,9 +854,9 @@ class upload_contract_operation final: public ::EmbeddedProto::MessageInterface
         return_value = authorizes_call_contract_.serialize_with_id(static_cast<uint32_t>(FieldNumber::AUTHORIZES_CALL_CONTRACT), buffer, false);
       }
 
-      if((false != authorizes_use_rc_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
+      if((false != authorizes_transaction_application_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
       {
-        return_value = authorizes_use_rc_.serialize_with_id(static_cast<uint32_t>(FieldNumber::AUTHORIZES_USE_RC), buffer, false);
+        return_value = authorizes_transaction_application_.serialize_with_id(static_cast<uint32_t>(FieldNumber::AUTHORIZES_TRANSACTION_APPLICATION), buffer, false);
       }
 
       if((false != authorizes_upload_contract_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
@@ -896,8 +896,8 @@ class upload_contract_operation final: public ::EmbeddedProto::MessageInterface
             return_value = authorizes_call_contract_.deserialize_check_type(buffer, wire_type);
             break;
 
-          case FieldNumber::AUTHORIZES_USE_RC:
-            return_value = authorizes_use_rc_.deserialize_check_type(buffer, wire_type);
+          case FieldNumber::AUTHORIZES_TRANSACTION_APPLICATION:
+            return_value = authorizes_transaction_application_.deserialize_check_type(buffer, wire_type);
             break;
 
           case FieldNumber::AUTHORIZES_UPLOAD_CONTRACT:
@@ -932,7 +932,7 @@ class upload_contract_operation final: public ::EmbeddedProto::MessageInterface
       clear_bytecode();
       clear_abi();
       clear_authorizes_call_contract();
-      clear_authorizes_use_rc();
+      clear_authorizes_transaction_application();
       clear_authorizes_upload_contract();
 
     }
@@ -944,7 +944,7 @@ class upload_contract_operation final: public ::EmbeddedProto::MessageInterface
       ::EmbeddedProto::FieldBytes<bytecode_LENGTH> bytecode_;
       ::EmbeddedProto::FieldString<abi_LENGTH> abi_;
       EmbeddedProto::boolean authorizes_call_contract_ = false;
-      EmbeddedProto::boolean authorizes_use_rc_ = false;
+      EmbeddedProto::boolean authorizes_transaction_application_ = false;
       EmbeddedProto::boolean authorizes_upload_contract_ = false;
 
 };
