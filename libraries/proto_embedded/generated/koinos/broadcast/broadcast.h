@@ -860,6 +860,237 @@ class gossip_status final: public ::EmbeddedProto::MessageInterface
 
 };
 
+template<uint32_t block_id_LENGTH, 
+uint32_t transaction_id_LENGTH, 
+uint32_t event_source_LENGTH, 
+uint32_t event_name_LENGTH, 
+uint32_t event_data_LENGTH, 
+uint32_t event_impacted_REP_LENGTH, 
+uint32_t event_impacted_LENGTH>
+class event_parcel final: public ::EmbeddedProto::MessageInterface
+{
+  public:
+    event_parcel() = default;
+    event_parcel(const event_parcel& rhs )
+    {
+      set_block_id(rhs.get_block_id());
+      set_height(rhs.get_height());
+      set_transaction_id(rhs.get_transaction_id());
+      set_event(rhs.get_event());
+    }
+
+    event_parcel(const event_parcel&& rhs ) noexcept
+    {
+      set_block_id(rhs.get_block_id());
+      set_height(rhs.get_height());
+      set_transaction_id(rhs.get_transaction_id());
+      set_event(rhs.get_event());
+    }
+
+    ~event_parcel() override = default;
+
+    enum class FieldNumber : uint32_t
+    {
+      NOT_SET = 0,
+      BLOCK_ID = 1,
+      HEIGHT = 2,
+      TRANSACTION_ID = 3,
+      EVENT = 4
+    };
+
+    event_parcel& operator=(const event_parcel& rhs)
+    {
+      set_block_id(rhs.get_block_id());
+      set_height(rhs.get_height());
+      set_transaction_id(rhs.get_transaction_id());
+      set_event(rhs.get_event());
+      return *this;
+    }
+
+    event_parcel& operator=(const event_parcel&& rhs) noexcept
+    {
+      set_block_id(rhs.get_block_id());
+      set_height(rhs.get_height());
+      set_transaction_id(rhs.get_transaction_id());
+      set_event(rhs.get_event());
+      return *this;
+    }
+
+    inline void clear_block_id() { block_id_.clear(); }
+    inline ::EmbeddedProto::FieldBytes<block_id_LENGTH>& mutable_block_id() { return block_id_; }
+    inline void set_block_id(const ::EmbeddedProto::FieldBytes<block_id_LENGTH>& rhs) { block_id_.set(rhs); }
+    inline const ::EmbeddedProto::FieldBytes<block_id_LENGTH>& get_block_id() const { return block_id_; }
+    inline const uint8_t* block_id() const { return block_id_.get_const(); }
+
+    inline void clear_height() { height_.clear(); }
+    inline void set_height(const EmbeddedProto::uint64& value) { height_ = value; }
+    inline void set_height(const EmbeddedProto::uint64&& value) { height_ = value; }
+    inline EmbeddedProto::uint64& mutable_height() { return height_; }
+    inline const EmbeddedProto::uint64& get_height() const { return height_; }
+    inline EmbeddedProto::uint64::FIELD_TYPE height() const { return height_.get(); }
+
+    inline bool has_transaction_id() const
+    {
+      return 0 != (presence::mask(presence::fields::TRANSACTION_ID) & presence_[presence::index(presence::fields::TRANSACTION_ID)]);
+    }
+    inline void clear_transaction_id()
+    {
+      presence_[presence::index(presence::fields::TRANSACTION_ID)] &= ~(presence::mask(presence::fields::TRANSACTION_ID));
+      transaction_id_.clear();
+    }
+    inline ::EmbeddedProto::FieldBytes<transaction_id_LENGTH>& mutable_transaction_id()
+    {
+      presence_[presence::index(presence::fields::TRANSACTION_ID)] |= presence::mask(presence::fields::TRANSACTION_ID);
+      return transaction_id_;
+    }
+    inline void set_transaction_id(const ::EmbeddedProto::FieldBytes<transaction_id_LENGTH>& rhs)
+    {
+      presence_[presence::index(presence::fields::TRANSACTION_ID)] |= presence::mask(presence::fields::TRANSACTION_ID);
+      transaction_id_.set(rhs);
+    }
+    inline const ::EmbeddedProto::FieldBytes<transaction_id_LENGTH>& get_transaction_id() const { return transaction_id_; }
+    inline const uint8_t* transaction_id() const { return transaction_id_.get_const(); }
+
+    inline void clear_event() { event_.clear(); }
+    inline void set_event(const protocol::event_data<event_source_LENGTH, event_name_LENGTH, event_data_LENGTH, event_impacted_REP_LENGTH, event_impacted_LENGTH>& value) { event_ = value; }
+    inline void set_event(const protocol::event_data<event_source_LENGTH, event_name_LENGTH, event_data_LENGTH, event_impacted_REP_LENGTH, event_impacted_LENGTH>&& value) { event_ = value; }
+    inline protocol::event_data<event_source_LENGTH, event_name_LENGTH, event_data_LENGTH, event_impacted_REP_LENGTH, event_impacted_LENGTH>& mutable_event() { return event_; }
+    inline const protocol::event_data<event_source_LENGTH, event_name_LENGTH, event_data_LENGTH, event_impacted_REP_LENGTH, event_impacted_LENGTH>& get_event() const { return event_; }
+    inline const protocol::event_data<event_source_LENGTH, event_name_LENGTH, event_data_LENGTH, event_impacted_REP_LENGTH, event_impacted_LENGTH>& event() const { return event_; }
+
+
+    ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
+    {
+      ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
+
+      if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+      {
+        return_value = block_id_.serialize_with_id(static_cast<uint32_t>(FieldNumber::BLOCK_ID), buffer, false);
+      }
+
+      if((0U != height_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
+      {
+        return_value = height_.serialize_with_id(static_cast<uint32_t>(FieldNumber::HEIGHT), buffer, false);
+      }
+
+      if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+      {
+        return_value = transaction_id_.serialize_with_id(static_cast<uint32_t>(FieldNumber::TRANSACTION_ID), buffer, true);
+      }
+
+      if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+      {
+        return_value = event_.serialize_with_id(static_cast<uint32_t>(FieldNumber::EVENT), buffer, false);
+      }
+
+      return return_value;
+    };
+
+    ::EmbeddedProto::Error deserialize(::EmbeddedProto::ReadBufferInterface& buffer) override
+    {
+      ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
+      ::EmbeddedProto::WireFormatter::WireType wire_type = ::EmbeddedProto::WireFormatter::WireType::VARINT;
+      uint32_t id_number = 0;
+      FieldNumber id_tag = FieldNumber::NOT_SET;
+
+      ::EmbeddedProto::Error tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
+      while((::EmbeddedProto::Error::NO_ERRORS == return_value) && (::EmbeddedProto::Error::NO_ERRORS == tag_value))
+      {
+        id_tag = static_cast<FieldNumber>(id_number);
+        switch(id_tag)
+        {
+          case FieldNumber::BLOCK_ID:
+            return_value = block_id_.deserialize_check_type(buffer, wire_type);
+            break;
+
+          case FieldNumber::HEIGHT:
+            return_value = height_.deserialize_check_type(buffer, wire_type);
+            break;
+
+          case FieldNumber::TRANSACTION_ID:
+            presence_[presence::index(presence::fields::TRANSACTION_ID)] |= presence::mask(presence::fields::TRANSACTION_ID);
+            return_value = transaction_id_.deserialize_check_type(buffer, wire_type);
+            break;
+
+          case FieldNumber::EVENT:
+            return_value = event_.deserialize_check_type(buffer, wire_type);
+            break;
+
+          default:
+            break;
+        }
+
+        if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+        {
+          // Read the next tag.
+          tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
+        }
+      }
+
+      // When an error was detect while reading the tag but no other errors where found, set it in the return value.
+      if((::EmbeddedProto::Error::NO_ERRORS == return_value)
+         && (::EmbeddedProto::Error::NO_ERRORS != tag_value)
+         && (::EmbeddedProto::Error::END_OF_BUFFER != tag_value)) // The end of the buffer is not an array in this case.
+      {
+        return_value = tag_value;
+      }
+
+      return return_value;
+    };
+
+    void clear() override
+    {
+      clear_block_id();
+      clear_height();
+      clear_transaction_id();
+      clear_event();
+
+    }
+
+    private:
+
+      // Define constants for tracking the presence of fields.
+      // Use a struct to scope the variables from user fields as namespaces are not allowed within classes.
+      struct presence
+      {
+        // An enumeration with all the fields for which presence has to be tracked.
+        enum class fields : uint32_t
+        {
+          TRANSACTION_ID
+        };
+
+        // The number of fields for which presence has to be tracked.
+        static constexpr uint32_t N_FIELDS = 1;
+
+        // Which type are we using to track presence.
+        using TYPE = uint32_t;
+
+        // How many bits are there in the presence type.
+        static constexpr uint32_t N_BITS = std::numeric_limits<TYPE>::digits;
+
+        // How many variables of TYPE do we need to bit mask all presence fields.
+        static constexpr uint32_t SIZE = (N_FIELDS / N_BITS) + ((N_FIELDS % N_BITS) > 0 ? 1 : 0);
+
+        // Obtain the index of a given field in the presence array.
+        static constexpr uint32_t index(const fields& field) { return static_cast<uint32_t>(field) / N_BITS; }
+
+        // Obtain the bit mask for the given field assuming we are at the correct index in the presence array.
+        static constexpr TYPE mask(const fields& field)
+        {
+          return static_cast<uint32_t>(0x01) << (static_cast<uint32_t>(field) % N_BITS);
+        }
+      };
+
+      // Create an array in which the presence flags are stored.
+      typename presence::TYPE presence_[presence::SIZE] = {0};
+
+      ::EmbeddedProto::FieldBytes<block_id_LENGTH> block_id_;
+      EmbeddedProto::uint64 height_ = 0U;
+      ::EmbeddedProto::FieldBytes<transaction_id_LENGTH> transaction_id_;
+      protocol::event_data<event_source_LENGTH, event_name_LENGTH, event_data_LENGTH, event_impacted_REP_LENGTH, event_impacted_LENGTH> event_;
+
+};
+
 } // End of namespace broadcast
 } // End of namespace koinos
 #endif // KOINOS_BROADCAST_BROADCAST_H
