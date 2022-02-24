@@ -1792,7 +1792,7 @@ class mint_event final: public ::EmbeddedProto::MessageInterface
     {
       NOT_SET = 0,
       TO = 1,
-      VALUE = 3
+      VALUE = 2
     };
 
     mint_event& operator=(const mint_event& rhs)
