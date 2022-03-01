@@ -387,12 +387,14 @@ class block_accepted final: public ::EmbeddedProto::MessageInterface
     {
       set_block(rhs.get_block());
       set_receipt(rhs.get_receipt());
+      set_live(rhs.get_live());
     }
 
     block_accepted(const block_accepted&& rhs ) noexcept
     {
       set_block(rhs.get_block());
       set_receipt(rhs.get_receipt());
+      set_live(rhs.get_live());
     }
 
     ~block_accepted() override = default;
@@ -401,13 +403,15 @@ class block_accepted final: public ::EmbeddedProto::MessageInterface
     {
       NOT_SET = 0,
       BLOCK = 1,
-      RECEIPT = 2
+      RECEIPT = 2,
+      LIVE = 3
     };
 
     block_accepted& operator=(const block_accepted& rhs)
     {
       set_block(rhs.get_block());
       set_receipt(rhs.get_receipt());
+      set_live(rhs.get_live());
       return *this;
     }
 
@@ -415,6 +419,7 @@ class block_accepted final: public ::EmbeddedProto::MessageInterface
     {
       set_block(rhs.get_block());
       set_receipt(rhs.get_receipt());
+      set_live(rhs.get_live());
       return *this;
     }
 
@@ -432,6 +437,13 @@ class block_accepted final: public ::EmbeddedProto::MessageInterface
     inline const protocol::block_receipt<receipt_id_LENGTH, receipt_state_merkle_root_LENGTH, receipt_events_REP_LENGTH, receipt_events_source_LENGTH, receipt_events_name_LENGTH, receipt_events_data_LENGTH, receipt_events_impacted_REP_LENGTH, receipt_events_impacted_LENGTH, receipt_transaction_receipts_REP_LENGTH, receipt_transaction_receipts_id_LENGTH, receipt_transaction_receipts_payer_LENGTH, receipt_transaction_receipts_events_REP_LENGTH, receipt_transaction_receipts_events_source_LENGTH, receipt_transaction_receipts_events_name_LENGTH, receipt_transaction_receipts_events_data_LENGTH, receipt_transaction_receipts_events_impacted_REP_LENGTH, receipt_transaction_receipts_events_impacted_LENGTH, receipt_transaction_receipts_logs_REP_LENGTH, receipt_transaction_receipts_logs_LENGTH, receipt_logs_REP_LENGTH, receipt_logs_LENGTH>& get_receipt() const { return receipt_; }
     inline const protocol::block_receipt<receipt_id_LENGTH, receipt_state_merkle_root_LENGTH, receipt_events_REP_LENGTH, receipt_events_source_LENGTH, receipt_events_name_LENGTH, receipt_events_data_LENGTH, receipt_events_impacted_REP_LENGTH, receipt_events_impacted_LENGTH, receipt_transaction_receipts_REP_LENGTH, receipt_transaction_receipts_id_LENGTH, receipt_transaction_receipts_payer_LENGTH, receipt_transaction_receipts_events_REP_LENGTH, receipt_transaction_receipts_events_source_LENGTH, receipt_transaction_receipts_events_name_LENGTH, receipt_transaction_receipts_events_data_LENGTH, receipt_transaction_receipts_events_impacted_REP_LENGTH, receipt_transaction_receipts_events_impacted_LENGTH, receipt_transaction_receipts_logs_REP_LENGTH, receipt_transaction_receipts_logs_LENGTH, receipt_logs_REP_LENGTH, receipt_logs_LENGTH>& receipt() const { return receipt_; }
 
+    inline void clear_live() { live_.clear(); }
+    inline void set_live(const EmbeddedProto::boolean& value) { live_ = value; }
+    inline void set_live(const EmbeddedProto::boolean&& value) { live_ = value; }
+    inline EmbeddedProto::boolean& mutable_live() { return live_; }
+    inline const EmbeddedProto::boolean& get_live() const { return live_; }
+    inline EmbeddedProto::boolean::FIELD_TYPE live() const { return live_.get(); }
+
 
     ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
     {
@@ -445,6 +457,11 @@ class block_accepted final: public ::EmbeddedProto::MessageInterface
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
         return_value = receipt_.serialize_with_id(static_cast<uint32_t>(FieldNumber::RECEIPT), buffer, false);
+      }
+
+      if((false != live_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
+      {
+        return_value = live_.serialize_with_id(static_cast<uint32_t>(FieldNumber::LIVE), buffer, false);
       }
 
       return return_value;
@@ -469,6 +486,10 @@ class block_accepted final: public ::EmbeddedProto::MessageInterface
 
           case FieldNumber::RECEIPT:
             return_value = receipt_.deserialize_check_type(buffer, wire_type);
+            break;
+
+          case FieldNumber::LIVE:
+            return_value = live_.deserialize_check_type(buffer, wire_type);
             break;
 
           default:
@@ -497,6 +518,7 @@ class block_accepted final: public ::EmbeddedProto::MessageInterface
     {
       clear_block();
       clear_receipt();
+      clear_live();
 
     }
 
@@ -505,6 +527,7 @@ class block_accepted final: public ::EmbeddedProto::MessageInterface
 
       protocol::block<block_id_LENGTH, block_header_previous_LENGTH, block_header_previous_state_merkle_root_LENGTH, block_header_transaction_merkle_root_LENGTH, block_header_signer_LENGTH, block_transactions_REP_LENGTH, block_transactions_id_LENGTH, block_transactions_header_chain_id_LENGTH, block_transactions_header_nonce_LENGTH, block_transactions_header_operation_merkle_root_LENGTH, block_transactions_header_payer_LENGTH, block_transactions_header_payee_LENGTH, block_transactions_operations_REP_LENGTH, block_transactions_operations_upload_contract_contract_id_LENGTH, block_transactions_operations_upload_contract_bytecode_LENGTH, block_transactions_operations_upload_contract_abi_LENGTH, block_transactions_operations_call_contract_contract_id_LENGTH, block_transactions_operations_call_contract_args_LENGTH, block_transactions_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, block_transactions_operations_set_system_contract_contract_id_LENGTH, block_transactions_signatures_REP_LENGTH, block_transactions_signatures_LENGTH, block_signature_LENGTH> block_;
       protocol::block_receipt<receipt_id_LENGTH, receipt_state_merkle_root_LENGTH, receipt_events_REP_LENGTH, receipt_events_source_LENGTH, receipt_events_name_LENGTH, receipt_events_data_LENGTH, receipt_events_impacted_REP_LENGTH, receipt_events_impacted_LENGTH, receipt_transaction_receipts_REP_LENGTH, receipt_transaction_receipts_id_LENGTH, receipt_transaction_receipts_payer_LENGTH, receipt_transaction_receipts_events_REP_LENGTH, receipt_transaction_receipts_events_source_LENGTH, receipt_transaction_receipts_events_name_LENGTH, receipt_transaction_receipts_events_data_LENGTH, receipt_transaction_receipts_events_impacted_REP_LENGTH, receipt_transaction_receipts_events_impacted_LENGTH, receipt_transaction_receipts_logs_REP_LENGTH, receipt_transaction_receipts_logs_LENGTH, receipt_logs_REP_LENGTH, receipt_logs_LENGTH> receipt_;
+      EmbeddedProto::boolean live_ = false;
 
 };
 
