@@ -335,6 +335,230 @@ class transaction_failed final: public ::EmbeddedProto::MessageInterface
 
 };
 
+template<uint32_t transaction_id_LENGTH, 
+uint32_t transaction_header_chain_id_LENGTH, 
+uint32_t transaction_header_nonce_LENGTH, 
+uint32_t transaction_header_operation_merkle_root_LENGTH, 
+uint32_t transaction_header_payer_LENGTH, 
+uint32_t transaction_header_payee_LENGTH, 
+uint32_t transaction_operations_REP_LENGTH, 
+uint32_t transaction_operations_upload_contract_contract_id_LENGTH, 
+uint32_t transaction_operations_upload_contract_bytecode_LENGTH, 
+uint32_t transaction_operations_upload_contract_abi_LENGTH, 
+uint32_t transaction_operations_call_contract_contract_id_LENGTH, 
+uint32_t transaction_operations_call_contract_args_LENGTH, 
+uint32_t transaction_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, 
+uint32_t transaction_operations_set_system_contract_contract_id_LENGTH, 
+uint32_t transaction_signatures_REP_LENGTH, 
+uint32_t transaction_signatures_LENGTH, 
+uint32_t receipt_id_LENGTH, 
+uint32_t receipt_payer_LENGTH, 
+uint32_t receipt_events_REP_LENGTH, 
+uint32_t receipt_events_source_LENGTH, 
+uint32_t receipt_events_name_LENGTH, 
+uint32_t receipt_events_data_LENGTH, 
+uint32_t receipt_events_impacted_REP_LENGTH, 
+uint32_t receipt_events_impacted_LENGTH, 
+uint32_t receipt_logs_REP_LENGTH, 
+uint32_t receipt_logs_LENGTH>
+class mempool_accepted final: public ::EmbeddedProto::MessageInterface
+{
+  public:
+    mempool_accepted() = default;
+    mempool_accepted(const mempool_accepted& rhs )
+    {
+      set_transaction(rhs.get_transaction());
+      set_receipt(rhs.get_receipt());
+      set_height(rhs.get_height());
+      set_pending_rc_used(rhs.get_pending_rc_used());
+      set_rc_limit(rhs.get_rc_limit());
+    }
+
+    mempool_accepted(const mempool_accepted&& rhs ) noexcept
+    {
+      set_transaction(rhs.get_transaction());
+      set_receipt(rhs.get_receipt());
+      set_height(rhs.get_height());
+      set_pending_rc_used(rhs.get_pending_rc_used());
+      set_rc_limit(rhs.get_rc_limit());
+    }
+
+    ~mempool_accepted() override = default;
+
+    enum class FieldNumber : uint32_t
+    {
+      NOT_SET = 0,
+      TRANSACTION = 1,
+      RECEIPT = 2,
+      HEIGHT = 3,
+      PENDING_RC_USED = 4,
+      RC_LIMIT = 5
+    };
+
+    mempool_accepted& operator=(const mempool_accepted& rhs)
+    {
+      set_transaction(rhs.get_transaction());
+      set_receipt(rhs.get_receipt());
+      set_height(rhs.get_height());
+      set_pending_rc_used(rhs.get_pending_rc_used());
+      set_rc_limit(rhs.get_rc_limit());
+      return *this;
+    }
+
+    mempool_accepted& operator=(const mempool_accepted&& rhs) noexcept
+    {
+      set_transaction(rhs.get_transaction());
+      set_receipt(rhs.get_receipt());
+      set_height(rhs.get_height());
+      set_pending_rc_used(rhs.get_pending_rc_used());
+      set_rc_limit(rhs.get_rc_limit());
+      return *this;
+    }
+
+    inline void clear_transaction() { transaction_.clear(); }
+    inline void set_transaction(const protocol::transaction<transaction_id_LENGTH, transaction_header_chain_id_LENGTH, transaction_header_nonce_LENGTH, transaction_header_operation_merkle_root_LENGTH, transaction_header_payer_LENGTH, transaction_header_payee_LENGTH, transaction_operations_REP_LENGTH, transaction_operations_upload_contract_contract_id_LENGTH, transaction_operations_upload_contract_bytecode_LENGTH, transaction_operations_upload_contract_abi_LENGTH, transaction_operations_call_contract_contract_id_LENGTH, transaction_operations_call_contract_args_LENGTH, transaction_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, transaction_operations_set_system_contract_contract_id_LENGTH, transaction_signatures_REP_LENGTH, transaction_signatures_LENGTH>& value) { transaction_ = value; }
+    inline void set_transaction(const protocol::transaction<transaction_id_LENGTH, transaction_header_chain_id_LENGTH, transaction_header_nonce_LENGTH, transaction_header_operation_merkle_root_LENGTH, transaction_header_payer_LENGTH, transaction_header_payee_LENGTH, transaction_operations_REP_LENGTH, transaction_operations_upload_contract_contract_id_LENGTH, transaction_operations_upload_contract_bytecode_LENGTH, transaction_operations_upload_contract_abi_LENGTH, transaction_operations_call_contract_contract_id_LENGTH, transaction_operations_call_contract_args_LENGTH, transaction_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, transaction_operations_set_system_contract_contract_id_LENGTH, transaction_signatures_REP_LENGTH, transaction_signatures_LENGTH>&& value) { transaction_ = value; }
+    inline protocol::transaction<transaction_id_LENGTH, transaction_header_chain_id_LENGTH, transaction_header_nonce_LENGTH, transaction_header_operation_merkle_root_LENGTH, transaction_header_payer_LENGTH, transaction_header_payee_LENGTH, transaction_operations_REP_LENGTH, transaction_operations_upload_contract_contract_id_LENGTH, transaction_operations_upload_contract_bytecode_LENGTH, transaction_operations_upload_contract_abi_LENGTH, transaction_operations_call_contract_contract_id_LENGTH, transaction_operations_call_contract_args_LENGTH, transaction_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, transaction_operations_set_system_contract_contract_id_LENGTH, transaction_signatures_REP_LENGTH, transaction_signatures_LENGTH>& mutable_transaction() { return transaction_; }
+    inline const protocol::transaction<transaction_id_LENGTH, transaction_header_chain_id_LENGTH, transaction_header_nonce_LENGTH, transaction_header_operation_merkle_root_LENGTH, transaction_header_payer_LENGTH, transaction_header_payee_LENGTH, transaction_operations_REP_LENGTH, transaction_operations_upload_contract_contract_id_LENGTH, transaction_operations_upload_contract_bytecode_LENGTH, transaction_operations_upload_contract_abi_LENGTH, transaction_operations_call_contract_contract_id_LENGTH, transaction_operations_call_contract_args_LENGTH, transaction_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, transaction_operations_set_system_contract_contract_id_LENGTH, transaction_signatures_REP_LENGTH, transaction_signatures_LENGTH>& get_transaction() const { return transaction_; }
+    inline const protocol::transaction<transaction_id_LENGTH, transaction_header_chain_id_LENGTH, transaction_header_nonce_LENGTH, transaction_header_operation_merkle_root_LENGTH, transaction_header_payer_LENGTH, transaction_header_payee_LENGTH, transaction_operations_REP_LENGTH, transaction_operations_upload_contract_contract_id_LENGTH, transaction_operations_upload_contract_bytecode_LENGTH, transaction_operations_upload_contract_abi_LENGTH, transaction_operations_call_contract_contract_id_LENGTH, transaction_operations_call_contract_args_LENGTH, transaction_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, transaction_operations_set_system_contract_contract_id_LENGTH, transaction_signatures_REP_LENGTH, transaction_signatures_LENGTH>& transaction() const { return transaction_; }
+
+    inline void clear_receipt() { receipt_.clear(); }
+    inline void set_receipt(const protocol::transaction_receipt<receipt_id_LENGTH, receipt_payer_LENGTH, receipt_events_REP_LENGTH, receipt_events_source_LENGTH, receipt_events_name_LENGTH, receipt_events_data_LENGTH, receipt_events_impacted_REP_LENGTH, receipt_events_impacted_LENGTH, receipt_logs_REP_LENGTH, receipt_logs_LENGTH>& value) { receipt_ = value; }
+    inline void set_receipt(const protocol::transaction_receipt<receipt_id_LENGTH, receipt_payer_LENGTH, receipt_events_REP_LENGTH, receipt_events_source_LENGTH, receipt_events_name_LENGTH, receipt_events_data_LENGTH, receipt_events_impacted_REP_LENGTH, receipt_events_impacted_LENGTH, receipt_logs_REP_LENGTH, receipt_logs_LENGTH>&& value) { receipt_ = value; }
+    inline protocol::transaction_receipt<receipt_id_LENGTH, receipt_payer_LENGTH, receipt_events_REP_LENGTH, receipt_events_source_LENGTH, receipt_events_name_LENGTH, receipt_events_data_LENGTH, receipt_events_impacted_REP_LENGTH, receipt_events_impacted_LENGTH, receipt_logs_REP_LENGTH, receipt_logs_LENGTH>& mutable_receipt() { return receipt_; }
+    inline const protocol::transaction_receipt<receipt_id_LENGTH, receipt_payer_LENGTH, receipt_events_REP_LENGTH, receipt_events_source_LENGTH, receipt_events_name_LENGTH, receipt_events_data_LENGTH, receipt_events_impacted_REP_LENGTH, receipt_events_impacted_LENGTH, receipt_logs_REP_LENGTH, receipt_logs_LENGTH>& get_receipt() const { return receipt_; }
+    inline const protocol::transaction_receipt<receipt_id_LENGTH, receipt_payer_LENGTH, receipt_events_REP_LENGTH, receipt_events_source_LENGTH, receipt_events_name_LENGTH, receipt_events_data_LENGTH, receipt_events_impacted_REP_LENGTH, receipt_events_impacted_LENGTH, receipt_logs_REP_LENGTH, receipt_logs_LENGTH>& receipt() const { return receipt_; }
+
+    inline void clear_height() { height_.clear(); }
+    inline void set_height(const EmbeddedProto::uint64& value) { height_ = value; }
+    inline void set_height(const EmbeddedProto::uint64&& value) { height_ = value; }
+    inline EmbeddedProto::uint64& mutable_height() { return height_; }
+    inline const EmbeddedProto::uint64& get_height() const { return height_; }
+    inline EmbeddedProto::uint64::FIELD_TYPE height() const { return height_.get(); }
+
+    inline void clear_pending_rc_used() { pending_rc_used_.clear(); }
+    inline void set_pending_rc_used(const EmbeddedProto::uint64& value) { pending_rc_used_ = value; }
+    inline void set_pending_rc_used(const EmbeddedProto::uint64&& value) { pending_rc_used_ = value; }
+    inline EmbeddedProto::uint64& mutable_pending_rc_used() { return pending_rc_used_; }
+    inline const EmbeddedProto::uint64& get_pending_rc_used() const { return pending_rc_used_; }
+    inline EmbeddedProto::uint64::FIELD_TYPE pending_rc_used() const { return pending_rc_used_.get(); }
+
+    inline void clear_rc_limit() { rc_limit_.clear(); }
+    inline void set_rc_limit(const EmbeddedProto::uint64& value) { rc_limit_ = value; }
+    inline void set_rc_limit(const EmbeddedProto::uint64&& value) { rc_limit_ = value; }
+    inline EmbeddedProto::uint64& mutable_rc_limit() { return rc_limit_; }
+    inline const EmbeddedProto::uint64& get_rc_limit() const { return rc_limit_; }
+    inline EmbeddedProto::uint64::FIELD_TYPE rc_limit() const { return rc_limit_.get(); }
+
+
+    ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
+    {
+      ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
+
+      if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+      {
+        return_value = transaction_.serialize_with_id(static_cast<uint32_t>(FieldNumber::TRANSACTION), buffer, false);
+      }
+
+      if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+      {
+        return_value = receipt_.serialize_with_id(static_cast<uint32_t>(FieldNumber::RECEIPT), buffer, false);
+      }
+
+      if((0U != height_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
+      {
+        return_value = height_.serialize_with_id(static_cast<uint32_t>(FieldNumber::HEIGHT), buffer, false);
+      }
+
+      if((0U != pending_rc_used_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
+      {
+        return_value = pending_rc_used_.serialize_with_id(static_cast<uint32_t>(FieldNumber::PENDING_RC_USED), buffer, false);
+      }
+
+      if((0U != rc_limit_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
+      {
+        return_value = rc_limit_.serialize_with_id(static_cast<uint32_t>(FieldNumber::RC_LIMIT), buffer, false);
+      }
+
+      return return_value;
+    };
+
+    ::EmbeddedProto::Error deserialize(::EmbeddedProto::ReadBufferInterface& buffer) override
+    {
+      ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
+      ::EmbeddedProto::WireFormatter::WireType wire_type = ::EmbeddedProto::WireFormatter::WireType::VARINT;
+      uint32_t id_number = 0;
+      FieldNumber id_tag = FieldNumber::NOT_SET;
+
+      ::EmbeddedProto::Error tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
+      while((::EmbeddedProto::Error::NO_ERRORS == return_value) && (::EmbeddedProto::Error::NO_ERRORS == tag_value))
+      {
+        id_tag = static_cast<FieldNumber>(id_number);
+        switch(id_tag)
+        {
+          case FieldNumber::TRANSACTION:
+            return_value = transaction_.deserialize_check_type(buffer, wire_type);
+            break;
+
+          case FieldNumber::RECEIPT:
+            return_value = receipt_.deserialize_check_type(buffer, wire_type);
+            break;
+
+          case FieldNumber::HEIGHT:
+            return_value = height_.deserialize_check_type(buffer, wire_type);
+            break;
+
+          case FieldNumber::PENDING_RC_USED:
+            return_value = pending_rc_used_.deserialize_check_type(buffer, wire_type);
+            break;
+
+          case FieldNumber::RC_LIMIT:
+            return_value = rc_limit_.deserialize_check_type(buffer, wire_type);
+            break;
+
+          default:
+            break;
+        }
+
+        if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+        {
+          // Read the next tag.
+          tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
+        }
+      }
+
+      // When an error was detect while reading the tag but no other errors where found, set it in the return value.
+      if((::EmbeddedProto::Error::NO_ERRORS == return_value)
+         && (::EmbeddedProto::Error::NO_ERRORS != tag_value)
+         && (::EmbeddedProto::Error::END_OF_BUFFER != tag_value)) // The end of the buffer is not an array in this case.
+      {
+        return_value = tag_value;
+      }
+
+      return return_value;
+    };
+
+    void clear() override
+    {
+      clear_transaction();
+      clear_receipt();
+      clear_height();
+      clear_pending_rc_used();
+      clear_rc_limit();
+
+    }
+
+    private:
+
+
+      protocol::transaction<transaction_id_LENGTH, transaction_header_chain_id_LENGTH, transaction_header_nonce_LENGTH, transaction_header_operation_merkle_root_LENGTH, transaction_header_payer_LENGTH, transaction_header_payee_LENGTH, transaction_operations_REP_LENGTH, transaction_operations_upload_contract_contract_id_LENGTH, transaction_operations_upload_contract_bytecode_LENGTH, transaction_operations_upload_contract_abi_LENGTH, transaction_operations_call_contract_contract_id_LENGTH, transaction_operations_call_contract_args_LENGTH, transaction_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, transaction_operations_set_system_contract_contract_id_LENGTH, transaction_signatures_REP_LENGTH, transaction_signatures_LENGTH> transaction_;
+      protocol::transaction_receipt<receipt_id_LENGTH, receipt_payer_LENGTH, receipt_events_REP_LENGTH, receipt_events_source_LENGTH, receipt_events_name_LENGTH, receipt_events_data_LENGTH, receipt_events_impacted_REP_LENGTH, receipt_events_impacted_LENGTH, receipt_logs_REP_LENGTH, receipt_logs_LENGTH> receipt_;
+      EmbeddedProto::uint64 height_ = 0U;
+      EmbeddedProto::uint64 pending_rc_used_ = 0U;
+      EmbeddedProto::uint64 rc_limit_ = 0U;
+
+};
+
 template<uint32_t block_id_LENGTH, 
 uint32_t block_header_previous_LENGTH, 
 uint32_t block_header_previous_state_merkle_root_LENGTH, 
