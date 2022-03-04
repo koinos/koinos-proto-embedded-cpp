@@ -371,7 +371,6 @@ class mempool_accepted final: public ::EmbeddedProto::MessageInterface
       set_receipt(rhs.get_receipt());
       set_height(rhs.get_height());
       set_pending_rc_used(rhs.get_pending_rc_used());
-      set_rc_limit(rhs.get_rc_limit());
     }
 
     mempool_accepted(const mempool_accepted&& rhs ) noexcept
@@ -380,7 +379,6 @@ class mempool_accepted final: public ::EmbeddedProto::MessageInterface
       set_receipt(rhs.get_receipt());
       set_height(rhs.get_height());
       set_pending_rc_used(rhs.get_pending_rc_used());
-      set_rc_limit(rhs.get_rc_limit());
     }
 
     ~mempool_accepted() override = default;
@@ -391,8 +389,7 @@ class mempool_accepted final: public ::EmbeddedProto::MessageInterface
       TRANSACTION = 1,
       RECEIPT = 2,
       HEIGHT = 3,
-      PENDING_RC_USED = 4,
-      RC_LIMIT = 5
+      PENDING_RC_USED = 4
     };
 
     mempool_accepted& operator=(const mempool_accepted& rhs)
@@ -401,7 +398,6 @@ class mempool_accepted final: public ::EmbeddedProto::MessageInterface
       set_receipt(rhs.get_receipt());
       set_height(rhs.get_height());
       set_pending_rc_used(rhs.get_pending_rc_used());
-      set_rc_limit(rhs.get_rc_limit());
       return *this;
     }
 
@@ -411,7 +407,6 @@ class mempool_accepted final: public ::EmbeddedProto::MessageInterface
       set_receipt(rhs.get_receipt());
       set_height(rhs.get_height());
       set_pending_rc_used(rhs.get_pending_rc_used());
-      set_rc_limit(rhs.get_rc_limit());
       return *this;
     }
 
@@ -443,13 +438,6 @@ class mempool_accepted final: public ::EmbeddedProto::MessageInterface
     inline const EmbeddedProto::uint64& get_pending_rc_used() const { return pending_rc_used_; }
     inline EmbeddedProto::uint64::FIELD_TYPE pending_rc_used() const { return pending_rc_used_.get(); }
 
-    inline void clear_rc_limit() { rc_limit_.clear(); }
-    inline void set_rc_limit(const EmbeddedProto::uint64& value) { rc_limit_ = value; }
-    inline void set_rc_limit(const EmbeddedProto::uint64&& value) { rc_limit_ = value; }
-    inline EmbeddedProto::uint64& mutable_rc_limit() { return rc_limit_; }
-    inline const EmbeddedProto::uint64& get_rc_limit() const { return rc_limit_; }
-    inline EmbeddedProto::uint64::FIELD_TYPE rc_limit() const { return rc_limit_.get(); }
-
 
     ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
     {
@@ -473,11 +461,6 @@ class mempool_accepted final: public ::EmbeddedProto::MessageInterface
       if((0U != pending_rc_used_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
       {
         return_value = pending_rc_used_.serialize_with_id(static_cast<uint32_t>(FieldNumber::PENDING_RC_USED), buffer, false);
-      }
-
-      if((0U != rc_limit_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
-      {
-        return_value = rc_limit_.serialize_with_id(static_cast<uint32_t>(FieldNumber::RC_LIMIT), buffer, false);
       }
 
       return return_value;
@@ -512,10 +495,6 @@ class mempool_accepted final: public ::EmbeddedProto::MessageInterface
             return_value = pending_rc_used_.deserialize_check_type(buffer, wire_type);
             break;
 
-          case FieldNumber::RC_LIMIT:
-            return_value = rc_limit_.deserialize_check_type(buffer, wire_type);
-            break;
-
           default:
             break;
         }
@@ -544,7 +523,6 @@ class mempool_accepted final: public ::EmbeddedProto::MessageInterface
       clear_receipt();
       clear_height();
       clear_pending_rc_used();
-      clear_rc_limit();
 
     }
 
@@ -555,7 +533,6 @@ class mempool_accepted final: public ::EmbeddedProto::MessageInterface
       protocol::transaction_receipt<receipt_id_LENGTH, receipt_payer_LENGTH, receipt_events_REP_LENGTH, receipt_events_source_LENGTH, receipt_events_name_LENGTH, receipt_events_data_LENGTH, receipt_events_impacted_REP_LENGTH, receipt_events_impacted_LENGTH, receipt_logs_REP_LENGTH, receipt_logs_LENGTH> receipt_;
       EmbeddedProto::uint64 height_ = 0U;
       EmbeddedProto::uint64 pending_rc_used_ = 0U;
-      EmbeddedProto::uint64 rc_limit_ = 0U;
 
 };
 
