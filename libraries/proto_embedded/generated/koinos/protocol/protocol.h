@@ -2625,7 +2625,9 @@ class transaction_receipt final: public ::EmbeddedProto::MessageInterface
 template<uint32_t previous_LENGTH, 
 uint32_t previous_state_merkle_root_LENGTH, 
 uint32_t transaction_merkle_root_LENGTH, 
-uint32_t signer_LENGTH>
+uint32_t signer_LENGTH, 
+uint32_t approved_proposals_REP_LENGTH, 
+uint32_t approved_proposals_LENGTH>
 class block_header final: public ::EmbeddedProto::MessageInterface
 {
   public:
@@ -2638,6 +2640,7 @@ class block_header final: public ::EmbeddedProto::MessageInterface
       set_previous_state_merkle_root(rhs.get_previous_state_merkle_root());
       set_transaction_merkle_root(rhs.get_transaction_merkle_root());
       set_signer(rhs.get_signer());
+      set_approved_proposals(rhs.get_approved_proposals());
     }
 
     block_header(const block_header&& rhs ) noexcept
@@ -2648,6 +2651,7 @@ class block_header final: public ::EmbeddedProto::MessageInterface
       set_previous_state_merkle_root(rhs.get_previous_state_merkle_root());
       set_transaction_merkle_root(rhs.get_transaction_merkle_root());
       set_signer(rhs.get_signer());
+      set_approved_proposals(rhs.get_approved_proposals());
     }
 
     ~block_header() override = default;
@@ -2660,7 +2664,8 @@ class block_header final: public ::EmbeddedProto::MessageInterface
       TIMESTAMP = 3,
       PREVIOUS_STATE_MERKLE_ROOT = 4,
       TRANSACTION_MERKLE_ROOT = 5,
-      SIGNER = 6
+      SIGNER = 6,
+      APPROVED_PROPOSALS = 7
     };
 
     block_header& operator=(const block_header& rhs)
@@ -2671,6 +2676,7 @@ class block_header final: public ::EmbeddedProto::MessageInterface
       set_previous_state_merkle_root(rhs.get_previous_state_merkle_root());
       set_transaction_merkle_root(rhs.get_transaction_merkle_root());
       set_signer(rhs.get_signer());
+      set_approved_proposals(rhs.get_approved_proposals());
       return *this;
     }
 
@@ -2682,6 +2688,7 @@ class block_header final: public ::EmbeddedProto::MessageInterface
       set_previous_state_merkle_root(rhs.get_previous_state_merkle_root());
       set_transaction_merkle_root(rhs.get_transaction_merkle_root());
       set_signer(rhs.get_signer());
+      set_approved_proposals(rhs.get_approved_proposals());
       return *this;
     }
 
@@ -2723,6 +2730,17 @@ class block_header final: public ::EmbeddedProto::MessageInterface
     inline const ::EmbeddedProto::FieldBytes<signer_LENGTH>& get_signer() const { return signer_; }
     inline const uint8_t* signer() const { return signer_.get_const(); }
 
+    inline const ::EmbeddedProto::FieldBytes<approved_proposals_LENGTH>& approved_proposals(uint32_t index) const { return approved_proposals_[index]; }
+    inline void clear_approved_proposals() { approved_proposals_.clear(); }
+    inline void set_approved_proposals(uint32_t index, const ::EmbeddedProto::FieldBytes<approved_proposals_LENGTH>& value) { approved_proposals_.set(index, value); }
+    inline void set_approved_proposals(uint32_t index, const ::EmbeddedProto::FieldBytes<approved_proposals_LENGTH>&& value) { approved_proposals_.set(index, value); }
+    inline void set_approved_proposals(const ::EmbeddedProto::RepeatedFieldFixedSize<::EmbeddedProto::FieldBytes<approved_proposals_LENGTH>, approved_proposals_REP_LENGTH>& values) { approved_proposals_ = values; }
+    inline void add_approved_proposals(const ::EmbeddedProto::FieldBytes<approved_proposals_LENGTH>& value) { approved_proposals_.add(value); }
+    inline ::EmbeddedProto::RepeatedFieldFixedSize<::EmbeddedProto::FieldBytes<approved_proposals_LENGTH>, approved_proposals_REP_LENGTH>& mutable_approved_proposals() { return approved_proposals_; }
+    inline ::EmbeddedProto::FieldBytes<approved_proposals_LENGTH>& mutable_approved_proposals(uint32_t index) { return approved_proposals_[index]; }
+    inline const ::EmbeddedProto::RepeatedFieldFixedSize<::EmbeddedProto::FieldBytes<approved_proposals_LENGTH>, approved_proposals_REP_LENGTH>& get_approved_proposals() const { return approved_proposals_; }
+    inline const ::EmbeddedProto::RepeatedFieldFixedSize<::EmbeddedProto::FieldBytes<approved_proposals_LENGTH>, approved_proposals_REP_LENGTH>& approved_proposals() const { return approved_proposals_; }
+
 
     ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
     {
@@ -2756,6 +2774,11 @@ class block_header final: public ::EmbeddedProto::MessageInterface
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
         return_value = signer_.serialize_with_id(static_cast<uint32_t>(FieldNumber::SIGNER), buffer, false);
+      }
+
+      if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+      {
+        return_value = approved_proposals_.serialize_with_id(static_cast<uint32_t>(FieldNumber::APPROVED_PROPOSALS), buffer, false);
       }
 
       return return_value;
@@ -2798,6 +2821,10 @@ class block_header final: public ::EmbeddedProto::MessageInterface
             return_value = signer_.deserialize_check_type(buffer, wire_type);
             break;
 
+          case FieldNumber::APPROVED_PROPOSALS:
+            return_value = approved_proposals_.deserialize_check_type(buffer, wire_type);
+            break;
+
           default:
             break;
         }
@@ -2828,6 +2855,7 @@ class block_header final: public ::EmbeddedProto::MessageInterface
       clear_previous_state_merkle_root();
       clear_transaction_merkle_root();
       clear_signer();
+      clear_approved_proposals();
 
     }
 
@@ -2840,6 +2868,7 @@ class block_header final: public ::EmbeddedProto::MessageInterface
       ::EmbeddedProto::FieldBytes<previous_state_merkle_root_LENGTH> previous_state_merkle_root_;
       ::EmbeddedProto::FieldBytes<transaction_merkle_root_LENGTH> transaction_merkle_root_;
       ::EmbeddedProto::FieldBytes<signer_LENGTH> signer_;
+      ::EmbeddedProto::RepeatedFieldFixedSize<::EmbeddedProto::FieldBytes<approved_proposals_LENGTH>, approved_proposals_REP_LENGTH> approved_proposals_;
 
 };
 
@@ -2848,6 +2877,8 @@ uint32_t header_previous_LENGTH,
 uint32_t header_previous_state_merkle_root_LENGTH, 
 uint32_t header_transaction_merkle_root_LENGTH, 
 uint32_t header_signer_LENGTH, 
+uint32_t header_approved_proposals_REP_LENGTH, 
+uint32_t header_approved_proposals_LENGTH, 
 uint32_t transactions_REP_LENGTH, 
 uint32_t transactions_id_LENGTH, 
 uint32_t transactions_header_chain_id_LENGTH, 
@@ -2922,11 +2953,11 @@ class block final: public ::EmbeddedProto::MessageInterface
     inline const uint8_t* id() const { return id_.get_const(); }
 
     inline void clear_header() { header_.clear(); }
-    inline void set_header(const block_header<header_previous_LENGTH, header_previous_state_merkle_root_LENGTH, header_transaction_merkle_root_LENGTH, header_signer_LENGTH>& value) { header_ = value; }
-    inline void set_header(const block_header<header_previous_LENGTH, header_previous_state_merkle_root_LENGTH, header_transaction_merkle_root_LENGTH, header_signer_LENGTH>&& value) { header_ = value; }
-    inline block_header<header_previous_LENGTH, header_previous_state_merkle_root_LENGTH, header_transaction_merkle_root_LENGTH, header_signer_LENGTH>& mutable_header() { return header_; }
-    inline const block_header<header_previous_LENGTH, header_previous_state_merkle_root_LENGTH, header_transaction_merkle_root_LENGTH, header_signer_LENGTH>& get_header() const { return header_; }
-    inline const block_header<header_previous_LENGTH, header_previous_state_merkle_root_LENGTH, header_transaction_merkle_root_LENGTH, header_signer_LENGTH>& header() const { return header_; }
+    inline void set_header(const block_header<header_previous_LENGTH, header_previous_state_merkle_root_LENGTH, header_transaction_merkle_root_LENGTH, header_signer_LENGTH, header_approved_proposals_REP_LENGTH, header_approved_proposals_LENGTH>& value) { header_ = value; }
+    inline void set_header(const block_header<header_previous_LENGTH, header_previous_state_merkle_root_LENGTH, header_transaction_merkle_root_LENGTH, header_signer_LENGTH, header_approved_proposals_REP_LENGTH, header_approved_proposals_LENGTH>&& value) { header_ = value; }
+    inline block_header<header_previous_LENGTH, header_previous_state_merkle_root_LENGTH, header_transaction_merkle_root_LENGTH, header_signer_LENGTH, header_approved_proposals_REP_LENGTH, header_approved_proposals_LENGTH>& mutable_header() { return header_; }
+    inline const block_header<header_previous_LENGTH, header_previous_state_merkle_root_LENGTH, header_transaction_merkle_root_LENGTH, header_signer_LENGTH, header_approved_proposals_REP_LENGTH, header_approved_proposals_LENGTH>& get_header() const { return header_; }
+    inline const block_header<header_previous_LENGTH, header_previous_state_merkle_root_LENGTH, header_transaction_merkle_root_LENGTH, header_signer_LENGTH, header_approved_proposals_REP_LENGTH, header_approved_proposals_LENGTH>& header() const { return header_; }
 
     inline const transaction<transactions_id_LENGTH, transactions_header_chain_id_LENGTH, transactions_header_nonce_LENGTH, transactions_header_operation_merkle_root_LENGTH, transactions_header_payer_LENGTH, transactions_header_payee_LENGTH, transactions_operations_REP_LENGTH, transactions_operations_upload_contract_contract_id_LENGTH, transactions_operations_upload_contract_bytecode_LENGTH, transactions_operations_upload_contract_abi_LENGTH, transactions_operations_call_contract_contract_id_LENGTH, transactions_operations_call_contract_args_LENGTH, transactions_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, transactions_operations_set_system_contract_contract_id_LENGTH, transactions_signatures_REP_LENGTH, transactions_signatures_LENGTH>& transactions(uint32_t index) const { return transactions_[index]; }
     inline void clear_transactions() { transactions_.clear(); }
@@ -3037,7 +3068,7 @@ class block final: public ::EmbeddedProto::MessageInterface
 
 
       ::EmbeddedProto::FieldBytes<id_LENGTH> id_;
-      block_header<header_previous_LENGTH, header_previous_state_merkle_root_LENGTH, header_transaction_merkle_root_LENGTH, header_signer_LENGTH> header_;
+      block_header<header_previous_LENGTH, header_previous_state_merkle_root_LENGTH, header_transaction_merkle_root_LENGTH, header_signer_LENGTH, header_approved_proposals_REP_LENGTH, header_approved_proposals_LENGTH> header_;
       ::EmbeddedProto::RepeatedFieldFixedSize<transaction<transactions_id_LENGTH, transactions_header_chain_id_LENGTH, transactions_header_nonce_LENGTH, transactions_header_operation_merkle_root_LENGTH, transactions_header_payer_LENGTH, transactions_header_payee_LENGTH, transactions_operations_REP_LENGTH, transactions_operations_upload_contract_contract_id_LENGTH, transactions_operations_upload_contract_bytecode_LENGTH, transactions_operations_upload_contract_abi_LENGTH, transactions_operations_call_contract_contract_id_LENGTH, transactions_operations_call_contract_args_LENGTH, transactions_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, transactions_operations_set_system_contract_contract_id_LENGTH, transactions_signatures_REP_LENGTH, transactions_signatures_LENGTH>, transactions_REP_LENGTH> transactions_;
       ::EmbeddedProto::FieldBytes<signature_LENGTH> signature_;
 
