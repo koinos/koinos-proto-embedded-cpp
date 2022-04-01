@@ -57,6 +57,11 @@ enum class privilege : uint32_t
   user_mode = 1
 };
 
+enum class dsa : uint32_t
+{
+  ecdsa_secp256k1 = 0
+};
+
 template<uint32_t zone_LENGTH>
 class object_space final: public ::EmbeddedProto::MessageInterface
 {

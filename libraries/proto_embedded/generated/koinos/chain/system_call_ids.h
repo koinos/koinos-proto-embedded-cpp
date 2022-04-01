@@ -77,6 +77,7 @@ enum class system_call_id : uint32_t
   recover_public_key = 502,
   verify_merkle_root = 503,
   verify_signature = 504,
+  verify_vrf_proof = 505,
   call_contract = 601,
   get_entry_point = 602,
   get_contract_arguments = 603,

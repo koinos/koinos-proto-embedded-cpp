@@ -54,11 +54,6 @@
 namespace koinos {
 namespace chain {
 
-enum class dsa : uint32_t
-{
-  ecdsa_secp256k1 = 0
-};
-
 enum class system_authorization_type : uint32_t
 {
   set_system_contract = 0,
@@ -7915,6 +7910,324 @@ class verify_signature_result final: public ::EmbeddedProto::MessageInterface
     }
 
     verify_signature_result& operator=(const verify_signature_result&& rhs) noexcept
+    {
+      set_value(rhs.get_value());
+      return *this;
+    }
+
+    inline void clear_value() { value_.clear(); }
+    inline void set_value(const EmbeddedProto::boolean& value) { value_ = value; }
+    inline void set_value(const EmbeddedProto::boolean&& value) { value_ = value; }
+    inline EmbeddedProto::boolean& mutable_value() { return value_; }
+    inline const EmbeddedProto::boolean& get_value() const { return value_; }
+    inline EmbeddedProto::boolean::FIELD_TYPE value() const { return value_.get(); }
+
+
+    ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
+    {
+      ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
+
+      if((false != value_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
+      {
+        return_value = value_.serialize_with_id(static_cast<uint32_t>(FieldNumber::VALUE), buffer, false);
+      }
+
+      return return_value;
+    };
+
+    ::EmbeddedProto::Error deserialize(::EmbeddedProto::ReadBufferInterface& buffer) override
+    {
+      ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
+      ::EmbeddedProto::WireFormatter::WireType wire_type = ::EmbeddedProto::WireFormatter::WireType::VARINT;
+      uint32_t id_number = 0;
+      FieldNumber id_tag = FieldNumber::NOT_SET;
+
+      ::EmbeddedProto::Error tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
+      while((::EmbeddedProto::Error::NO_ERRORS == return_value) && (::EmbeddedProto::Error::NO_ERRORS == tag_value))
+      {
+        id_tag = static_cast<FieldNumber>(id_number);
+        switch(id_tag)
+        {
+          case FieldNumber::VALUE:
+            return_value = value_.deserialize_check_type(buffer, wire_type);
+            break;
+
+          default:
+            break;
+        }
+
+        if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+        {
+          // Read the next tag.
+          tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
+        }
+      }
+
+      // When an error was detect while reading the tag but no other errors where found, set it in the return value.
+      if((::EmbeddedProto::Error::NO_ERRORS == return_value)
+         && (::EmbeddedProto::Error::NO_ERRORS != tag_value)
+         && (::EmbeddedProto::Error::END_OF_BUFFER != tag_value)) // The end of the buffer is not an array in this case.
+      {
+        return_value = tag_value;
+      }
+
+      return return_value;
+    };
+
+    void clear() override
+    {
+      clear_value();
+
+    }
+
+    private:
+
+
+      EmbeddedProto::boolean value_ = false;
+
+};
+
+template<uint32_t public_key_LENGTH, 
+uint32_t proof_LENGTH, 
+uint32_t hash_LENGTH, 
+uint32_t message_LENGTH>
+class verify_vrf_proof_arguments final: public ::EmbeddedProto::MessageInterface
+{
+  public:
+    verify_vrf_proof_arguments() = default;
+    verify_vrf_proof_arguments(const verify_vrf_proof_arguments& rhs )
+    {
+      set_type(rhs.get_type());
+      set_public_key(rhs.get_public_key());
+      set_proof(rhs.get_proof());
+      set_hash(rhs.get_hash());
+      set_message(rhs.get_message());
+    }
+
+    verify_vrf_proof_arguments(const verify_vrf_proof_arguments&& rhs ) noexcept
+    {
+      set_type(rhs.get_type());
+      set_public_key(rhs.get_public_key());
+      set_proof(rhs.get_proof());
+      set_hash(rhs.get_hash());
+      set_message(rhs.get_message());
+    }
+
+    ~verify_vrf_proof_arguments() override = default;
+
+    enum class FieldNumber : uint32_t
+    {
+      NOT_SET = 0,
+      TYPE = 1,
+      PUBLIC_KEY = 2,
+      PROOF = 3,
+      HASH = 4,
+      MESSAGE = 5
+    };
+
+    verify_vrf_proof_arguments& operator=(const verify_vrf_proof_arguments& rhs)
+    {
+      set_type(rhs.get_type());
+      set_public_key(rhs.get_public_key());
+      set_proof(rhs.get_proof());
+      set_hash(rhs.get_hash());
+      set_message(rhs.get_message());
+      return *this;
+    }
+
+    verify_vrf_proof_arguments& operator=(const verify_vrf_proof_arguments&& rhs) noexcept
+    {
+      set_type(rhs.get_type());
+      set_public_key(rhs.get_public_key());
+      set_proof(rhs.get_proof());
+      set_hash(rhs.get_hash());
+      set_message(rhs.get_message());
+      return *this;
+    }
+
+    inline void clear_type() { type_ = static_cast<dsa>(0); }
+    inline void set_type(const dsa& value) { type_ = value; }
+    inline void set_type(const dsa&& value) { type_ = value; }
+    inline const dsa& get_type() const { return type_; }
+    inline dsa type() const { return type_; }
+
+    inline void clear_public_key() { public_key_.clear(); }
+    inline ::EmbeddedProto::FieldBytes<public_key_LENGTH>& mutable_public_key() { return public_key_; }
+    inline void set_public_key(const ::EmbeddedProto::FieldBytes<public_key_LENGTH>& rhs) { public_key_.set(rhs); }
+    inline const ::EmbeddedProto::FieldBytes<public_key_LENGTH>& get_public_key() const { return public_key_; }
+    inline const uint8_t* public_key() const { return public_key_.get_const(); }
+
+    inline void clear_proof() { proof_.clear(); }
+    inline ::EmbeddedProto::FieldBytes<proof_LENGTH>& mutable_proof() { return proof_; }
+    inline void set_proof(const ::EmbeddedProto::FieldBytes<proof_LENGTH>& rhs) { proof_.set(rhs); }
+    inline const ::EmbeddedProto::FieldBytes<proof_LENGTH>& get_proof() const { return proof_; }
+    inline const uint8_t* proof() const { return proof_.get_const(); }
+
+    inline void clear_hash() { hash_.clear(); }
+    inline ::EmbeddedProto::FieldBytes<hash_LENGTH>& mutable_hash() { return hash_; }
+    inline void set_hash(const ::EmbeddedProto::FieldBytes<hash_LENGTH>& rhs) { hash_.set(rhs); }
+    inline const ::EmbeddedProto::FieldBytes<hash_LENGTH>& get_hash() const { return hash_; }
+    inline const uint8_t* hash() const { return hash_.get_const(); }
+
+    inline void clear_message() { message_.clear(); }
+    inline ::EmbeddedProto::FieldBytes<message_LENGTH>& mutable_message() { return message_; }
+    inline void set_message(const ::EmbeddedProto::FieldBytes<message_LENGTH>& rhs) { message_.set(rhs); }
+    inline const ::EmbeddedProto::FieldBytes<message_LENGTH>& get_message() const { return message_; }
+    inline const uint8_t* message() const { return message_.get_const(); }
+
+
+    ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
+    {
+      ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
+
+      if((static_cast<dsa>(0) != type_) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
+      {
+        EmbeddedProto::uint32 value = 0;
+        value.set(static_cast<uint32_t>(type_));
+        return_value = value.serialize_with_id(static_cast<uint32_t>(FieldNumber::TYPE), buffer, false);
+      }
+
+      if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+      {
+        return_value = public_key_.serialize_with_id(static_cast<uint32_t>(FieldNumber::PUBLIC_KEY), buffer, false);
+      }
+
+      if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+      {
+        return_value = proof_.serialize_with_id(static_cast<uint32_t>(FieldNumber::PROOF), buffer, false);
+      }
+
+      if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+      {
+        return_value = hash_.serialize_with_id(static_cast<uint32_t>(FieldNumber::HASH), buffer, false);
+      }
+
+      if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+      {
+        return_value = message_.serialize_with_id(static_cast<uint32_t>(FieldNumber::MESSAGE), buffer, false);
+      }
+
+      return return_value;
+    };
+
+    ::EmbeddedProto::Error deserialize(::EmbeddedProto::ReadBufferInterface& buffer) override
+    {
+      ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
+      ::EmbeddedProto::WireFormatter::WireType wire_type = ::EmbeddedProto::WireFormatter::WireType::VARINT;
+      uint32_t id_number = 0;
+      FieldNumber id_tag = FieldNumber::NOT_SET;
+
+      ::EmbeddedProto::Error tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
+      while((::EmbeddedProto::Error::NO_ERRORS == return_value) && (::EmbeddedProto::Error::NO_ERRORS == tag_value))
+      {
+        id_tag = static_cast<FieldNumber>(id_number);
+        switch(id_tag)
+        {
+          case FieldNumber::TYPE:
+            if(::EmbeddedProto::WireFormatter::WireType::VARINT == wire_type)
+            {
+              uint32_t value = 0;
+              return_value = ::EmbeddedProto::WireFormatter::DeserializeVarint(buffer, value);
+              if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+              {
+                set_type(static_cast<dsa>(value));
+              }
+            }
+            else
+            {
+              // Wire type does not match field.
+              return_value = ::EmbeddedProto::Error::INVALID_WIRETYPE;
+            }
+            break;
+
+          case FieldNumber::PUBLIC_KEY:
+            return_value = public_key_.deserialize_check_type(buffer, wire_type);
+            break;
+
+          case FieldNumber::PROOF:
+            return_value = proof_.deserialize_check_type(buffer, wire_type);
+            break;
+
+          case FieldNumber::HASH:
+            return_value = hash_.deserialize_check_type(buffer, wire_type);
+            break;
+
+          case FieldNumber::MESSAGE:
+            return_value = message_.deserialize_check_type(buffer, wire_type);
+            break;
+
+          default:
+            break;
+        }
+
+        if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+        {
+          // Read the next tag.
+          tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
+        }
+      }
+
+      // When an error was detect while reading the tag but no other errors where found, set it in the return value.
+      if((::EmbeddedProto::Error::NO_ERRORS == return_value)
+         && (::EmbeddedProto::Error::NO_ERRORS != tag_value)
+         && (::EmbeddedProto::Error::END_OF_BUFFER != tag_value)) // The end of the buffer is not an array in this case.
+      {
+        return_value = tag_value;
+      }
+
+      return return_value;
+    };
+
+    void clear() override
+    {
+      clear_type();
+      clear_public_key();
+      clear_proof();
+      clear_hash();
+      clear_message();
+
+    }
+
+    private:
+
+
+      dsa type_ = static_cast<dsa>(0);
+      ::EmbeddedProto::FieldBytes<public_key_LENGTH> public_key_;
+      ::EmbeddedProto::FieldBytes<proof_LENGTH> proof_;
+      ::EmbeddedProto::FieldBytes<hash_LENGTH> hash_;
+      ::EmbeddedProto::FieldBytes<message_LENGTH> message_;
+
+};
+
+class verify_vrf_proof_result final: public ::EmbeddedProto::MessageInterface
+{
+  public:
+    verify_vrf_proof_result() = default;
+    verify_vrf_proof_result(const verify_vrf_proof_result& rhs )
+    {
+      set_value(rhs.get_value());
+    }
+
+    verify_vrf_proof_result(const verify_vrf_proof_result&& rhs ) noexcept
+    {
+      set_value(rhs.get_value());
+    }
+
+    ~verify_vrf_proof_result() override = default;
+
+    enum class FieldNumber : uint32_t
+    {
+      NOT_SET = 0,
+      VALUE = 1
+    };
+
+    verify_vrf_proof_result& operator=(const verify_vrf_proof_result& rhs)
+    {
+      set_value(rhs.get_value());
+      return *this;
+    }
+
+    verify_vrf_proof_result& operator=(const verify_vrf_proof_result&& rhs) noexcept
     {
       set_value(rhs.get_value());
       return *this;
