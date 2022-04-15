@@ -45,7 +45,6 @@
 
 // Include external proto definitions
 #include <koinos/options.h>
-#include <koinos/common.h>
 #include <koinos/protocol/protocol.h>
 #include <koinos/chain/authority.h>
 #include <koinos/chain/chain.h>

@@ -46,7 +46,6 @@
 // Include external proto definitions
 #include <koinos/options.h>
 #include <koinos/common.h>
-#include <koinos/protocol/protocol.h>
 
 namespace koinos {
 namespace chain {
