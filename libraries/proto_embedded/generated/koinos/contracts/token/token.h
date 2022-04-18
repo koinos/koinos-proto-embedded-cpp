@@ -1511,6 +1511,241 @@ class mint_result final: public ::EmbeddedProto::MessageInterface
 
 };
 
+template<uint32_t from_LENGTH>
+class burn_arguments final: public ::EmbeddedProto::MessageInterface
+{
+  public:
+    burn_arguments() = default;
+    burn_arguments(const burn_arguments& rhs )
+    {
+      set_from(rhs.get_from());
+      set_value(rhs.get_value());
+    }
+
+    burn_arguments(const burn_arguments&& rhs ) noexcept
+    {
+      set_from(rhs.get_from());
+      set_value(rhs.get_value());
+    }
+
+    ~burn_arguments() override = default;
+
+    enum class FieldNumber : uint32_t
+    {
+      NOT_SET = 0,
+      FROM = 1,
+      VALUE = 2
+    };
+
+    burn_arguments& operator=(const burn_arguments& rhs)
+    {
+      set_from(rhs.get_from());
+      set_value(rhs.get_value());
+      return *this;
+    }
+
+    burn_arguments& operator=(const burn_arguments&& rhs) noexcept
+    {
+      set_from(rhs.get_from());
+      set_value(rhs.get_value());
+      return *this;
+    }
+
+    inline void clear_from() { from_.clear(); }
+    inline ::EmbeddedProto::FieldBytes<from_LENGTH>& mutable_from() { return from_; }
+    inline void set_from(const ::EmbeddedProto::FieldBytes<from_LENGTH>& rhs) { from_.set(rhs); }
+    inline const ::EmbeddedProto::FieldBytes<from_LENGTH>& get_from() const { return from_; }
+    inline const uint8_t* from() const { return from_.get_const(); }
+
+    inline void clear_value() { value_.clear(); }
+    inline void set_value(const EmbeddedProto::uint64& value) { value_ = value; }
+    inline void set_value(const EmbeddedProto::uint64&& value) { value_ = value; }
+    inline EmbeddedProto::uint64& mutable_value() { return value_; }
+    inline const EmbeddedProto::uint64& get_value() const { return value_; }
+    inline EmbeddedProto::uint64::FIELD_TYPE value() const { return value_.get(); }
+
+
+    ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
+    {
+      ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
+
+      if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+      {
+        return_value = from_.serialize_with_id(static_cast<uint32_t>(FieldNumber::FROM), buffer, false);
+      }
+
+      if((0U != value_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
+      {
+        return_value = value_.serialize_with_id(static_cast<uint32_t>(FieldNumber::VALUE), buffer, false);
+      }
+
+      return return_value;
+    };
+
+    ::EmbeddedProto::Error deserialize(::EmbeddedProto::ReadBufferInterface& buffer) override
+    {
+      ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
+      ::EmbeddedProto::WireFormatter::WireType wire_type = ::EmbeddedProto::WireFormatter::WireType::VARINT;
+      uint32_t id_number = 0;
+      FieldNumber id_tag = FieldNumber::NOT_SET;
+
+      ::EmbeddedProto::Error tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
+      while((::EmbeddedProto::Error::NO_ERRORS == return_value) && (::EmbeddedProto::Error::NO_ERRORS == tag_value))
+      {
+        id_tag = static_cast<FieldNumber>(id_number);
+        switch(id_tag)
+        {
+          case FieldNumber::FROM:
+            return_value = from_.deserialize_check_type(buffer, wire_type);
+            break;
+
+          case FieldNumber::VALUE:
+            return_value = value_.deserialize_check_type(buffer, wire_type);
+            break;
+
+          default:
+            break;
+        }
+
+        if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+        {
+          // Read the next tag.
+          tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
+        }
+      }
+
+      // When an error was detect while reading the tag but no other errors where found, set it in the return value.
+      if((::EmbeddedProto::Error::NO_ERRORS == return_value)
+         && (::EmbeddedProto::Error::NO_ERRORS != tag_value)
+         && (::EmbeddedProto::Error::END_OF_BUFFER != tag_value)) // The end of the buffer is not an array in this case.
+      {
+        return_value = tag_value;
+      }
+
+      return return_value;
+    };
+
+    void clear() override
+    {
+      clear_from();
+      clear_value();
+
+    }
+
+    private:
+
+
+      ::EmbeddedProto::FieldBytes<from_LENGTH> from_;
+      EmbeddedProto::uint64 value_ = 0U;
+
+};
+
+class burn_result final: public ::EmbeddedProto::MessageInterface
+{
+  public:
+    burn_result() = default;
+    burn_result(const burn_result& rhs )
+    {
+      set_value(rhs.get_value());
+    }
+
+    burn_result(const burn_result&& rhs ) noexcept
+    {
+      set_value(rhs.get_value());
+    }
+
+    ~burn_result() override = default;
+
+    enum class FieldNumber : uint32_t
+    {
+      NOT_SET = 0,
+      VALUE = 1
+    };
+
+    burn_result& operator=(const burn_result& rhs)
+    {
+      set_value(rhs.get_value());
+      return *this;
+    }
+
+    burn_result& operator=(const burn_result&& rhs) noexcept
+    {
+      set_value(rhs.get_value());
+      return *this;
+    }
+
+    inline void clear_value() { value_.clear(); }
+    inline void set_value(const EmbeddedProto::boolean& value) { value_ = value; }
+    inline void set_value(const EmbeddedProto::boolean&& value) { value_ = value; }
+    inline EmbeddedProto::boolean& mutable_value() { return value_; }
+    inline const EmbeddedProto::boolean& get_value() const { return value_; }
+    inline EmbeddedProto::boolean::FIELD_TYPE value() const { return value_.get(); }
+
+
+    ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
+    {
+      ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
+
+      if((false != value_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
+      {
+        return_value = value_.serialize_with_id(static_cast<uint32_t>(FieldNumber::VALUE), buffer, false);
+      }
+
+      return return_value;
+    };
+
+    ::EmbeddedProto::Error deserialize(::EmbeddedProto::ReadBufferInterface& buffer) override
+    {
+      ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
+      ::EmbeddedProto::WireFormatter::WireType wire_type = ::EmbeddedProto::WireFormatter::WireType::VARINT;
+      uint32_t id_number = 0;
+      FieldNumber id_tag = FieldNumber::NOT_SET;
+
+      ::EmbeddedProto::Error tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
+      while((::EmbeddedProto::Error::NO_ERRORS == return_value) && (::EmbeddedProto::Error::NO_ERRORS == tag_value))
+      {
+        id_tag = static_cast<FieldNumber>(id_number);
+        switch(id_tag)
+        {
+          case FieldNumber::VALUE:
+            return_value = value_.deserialize_check_type(buffer, wire_type);
+            break;
+
+          default:
+            break;
+        }
+
+        if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+        {
+          // Read the next tag.
+          tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
+        }
+      }
+
+      // When an error was detect while reading the tag but no other errors where found, set it in the return value.
+      if((::EmbeddedProto::Error::NO_ERRORS == return_value)
+         && (::EmbeddedProto::Error::NO_ERRORS != tag_value)
+         && (::EmbeddedProto::Error::END_OF_BUFFER != tag_value)) // The end of the buffer is not an array in this case.
+      {
+        return_value = tag_value;
+      }
+
+      return return_value;
+    };
+
+    void clear() override
+    {
+      clear_value();
+
+    }
+
+    private:
+
+
+      EmbeddedProto::boolean value_ = false;
+
+};
+
 class balance_object final: public ::EmbeddedProto::MessageInterface
 {
   public:
@@ -1766,6 +2001,135 @@ class mana_balance_object final: public ::EmbeddedProto::MessageInterface
       EmbeddedProto::uint64 balance_ = 0U;
       EmbeddedProto::uint64 mana_ = 0U;
       EmbeddedProto::uint64 last_mana_update_ = 0U;
+
+};
+
+template<uint32_t from_LENGTH>
+class burn_event final: public ::EmbeddedProto::MessageInterface
+{
+  public:
+    burn_event() = default;
+    burn_event(const burn_event& rhs )
+    {
+      set_from(rhs.get_from());
+      set_value(rhs.get_value());
+    }
+
+    burn_event(const burn_event&& rhs ) noexcept
+    {
+      set_from(rhs.get_from());
+      set_value(rhs.get_value());
+    }
+
+    ~burn_event() override = default;
+
+    enum class FieldNumber : uint32_t
+    {
+      NOT_SET = 0,
+      FROM = 1,
+      VALUE = 2
+    };
+
+    burn_event& operator=(const burn_event& rhs)
+    {
+      set_from(rhs.get_from());
+      set_value(rhs.get_value());
+      return *this;
+    }
+
+    burn_event& operator=(const burn_event&& rhs) noexcept
+    {
+      set_from(rhs.get_from());
+      set_value(rhs.get_value());
+      return *this;
+    }
+
+    inline void clear_from() { from_.clear(); }
+    inline ::EmbeddedProto::FieldBytes<from_LENGTH>& mutable_from() { return from_; }
+    inline void set_from(const ::EmbeddedProto::FieldBytes<from_LENGTH>& rhs) { from_.set(rhs); }
+    inline const ::EmbeddedProto::FieldBytes<from_LENGTH>& get_from() const { return from_; }
+    inline const uint8_t* from() const { return from_.get_const(); }
+
+    inline void clear_value() { value_.clear(); }
+    inline void set_value(const EmbeddedProto::uint64& value) { value_ = value; }
+    inline void set_value(const EmbeddedProto::uint64&& value) { value_ = value; }
+    inline EmbeddedProto::uint64& mutable_value() { return value_; }
+    inline const EmbeddedProto::uint64& get_value() const { return value_; }
+    inline EmbeddedProto::uint64::FIELD_TYPE value() const { return value_.get(); }
+
+
+    ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
+    {
+      ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
+
+      if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+      {
+        return_value = from_.serialize_with_id(static_cast<uint32_t>(FieldNumber::FROM), buffer, false);
+      }
+
+      if((0U != value_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
+      {
+        return_value = value_.serialize_with_id(static_cast<uint32_t>(FieldNumber::VALUE), buffer, false);
+      }
+
+      return return_value;
+    };
+
+    ::EmbeddedProto::Error deserialize(::EmbeddedProto::ReadBufferInterface& buffer) override
+    {
+      ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
+      ::EmbeddedProto::WireFormatter::WireType wire_type = ::EmbeddedProto::WireFormatter::WireType::VARINT;
+      uint32_t id_number = 0;
+      FieldNumber id_tag = FieldNumber::NOT_SET;
+
+      ::EmbeddedProto::Error tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
+      while((::EmbeddedProto::Error::NO_ERRORS == return_value) && (::EmbeddedProto::Error::NO_ERRORS == tag_value))
+      {
+        id_tag = static_cast<FieldNumber>(id_number);
+        switch(id_tag)
+        {
+          case FieldNumber::FROM:
+            return_value = from_.deserialize_check_type(buffer, wire_type);
+            break;
+
+          case FieldNumber::VALUE:
+            return_value = value_.deserialize_check_type(buffer, wire_type);
+            break;
+
+          default:
+            break;
+        }
+
+        if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+        {
+          // Read the next tag.
+          tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
+        }
+      }
+
+      // When an error was detect while reading the tag but no other errors where found, set it in the return value.
+      if((::EmbeddedProto::Error::NO_ERRORS == return_value)
+         && (::EmbeddedProto::Error::NO_ERRORS != tag_value)
+         && (::EmbeddedProto::Error::END_OF_BUFFER != tag_value)) // The end of the buffer is not an array in this case.
+      {
+        return_value = tag_value;
+      }
+
+      return return_value;
+    };
+
+    void clear() override
+    {
+      clear_from();
+      clear_value();
+
+    }
+
+    private:
+
+
+      ::EmbeddedProto::FieldBytes<from_LENGTH> from_;
+      EmbeddedProto::uint64 value_ = 0U;
 
 };
 
