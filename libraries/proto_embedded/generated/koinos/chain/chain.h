@@ -61,6 +61,135 @@ enum class dsa : uint32_t
   ecdsa_secp256k1 = 0
 };
 
+template<uint32_t value_LENGTH>
+class result final: public ::EmbeddedProto::MessageInterface
+{
+  public:
+    result() = default;
+    result(const result& rhs )
+    {
+      set_code(rhs.get_code());
+      set_value(rhs.get_value());
+    }
+
+    result(const result&& rhs ) noexcept
+    {
+      set_code(rhs.get_code());
+      set_value(rhs.get_value());
+    }
+
+    ~result() override = default;
+
+    enum class FieldNumber : uint32_t
+    {
+      NOT_SET = 0,
+      CODE = 1,
+      VALUE = 2
+    };
+
+    result& operator=(const result& rhs)
+    {
+      set_code(rhs.get_code());
+      set_value(rhs.get_value());
+      return *this;
+    }
+
+    result& operator=(const result&& rhs) noexcept
+    {
+      set_code(rhs.get_code());
+      set_value(rhs.get_value());
+      return *this;
+    }
+
+    inline void clear_code() { code_.clear(); }
+    inline void set_code(const EmbeddedProto::int32& value) { code_ = value; }
+    inline void set_code(const EmbeddedProto::int32&& value) { code_ = value; }
+    inline EmbeddedProto::int32& mutable_code() { return code_; }
+    inline const EmbeddedProto::int32& get_code() const { return code_; }
+    inline EmbeddedProto::int32::FIELD_TYPE code() const { return code_.get(); }
+
+    inline void clear_value() { value_.clear(); }
+    inline ::EmbeddedProto::FieldBytes<value_LENGTH>& mutable_value() { return value_; }
+    inline void set_value(const ::EmbeddedProto::FieldBytes<value_LENGTH>& rhs) { value_.set(rhs); }
+    inline const ::EmbeddedProto::FieldBytes<value_LENGTH>& get_value() const { return value_; }
+    inline const uint8_t* value() const { return value_.get_const(); }
+
+
+    ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
+    {
+      ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
+
+      if((0 != code_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
+      {
+        return_value = code_.serialize_with_id(static_cast<uint32_t>(FieldNumber::CODE), buffer, false);
+      }
+
+      if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+      {
+        return_value = value_.serialize_with_id(static_cast<uint32_t>(FieldNumber::VALUE), buffer, false);
+      }
+
+      return return_value;
+    };
+
+    ::EmbeddedProto::Error deserialize(::EmbeddedProto::ReadBufferInterface& buffer) override
+    {
+      ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
+      ::EmbeddedProto::WireFormatter::WireType wire_type = ::EmbeddedProto::WireFormatter::WireType::VARINT;
+      uint32_t id_number = 0;
+      FieldNumber id_tag = FieldNumber::NOT_SET;
+
+      ::EmbeddedProto::Error tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
+      while((::EmbeddedProto::Error::NO_ERRORS == return_value) && (::EmbeddedProto::Error::NO_ERRORS == tag_value))
+      {
+        id_tag = static_cast<FieldNumber>(id_number);
+        switch(id_tag)
+        {
+          case FieldNumber::CODE:
+            return_value = code_.deserialize_check_type(buffer, wire_type);
+            break;
+
+          case FieldNumber::VALUE:
+            return_value = value_.deserialize_check_type(buffer, wire_type);
+            break;
+
+          default:
+            break;
+        }
+
+        if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+        {
+          // Read the next tag.
+          tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
+        }
+      }
+
+      // When an error was detect while reading the tag but no other errors where found, set it in the return value.
+      if((::EmbeddedProto::Error::NO_ERRORS == return_value)
+         && (::EmbeddedProto::Error::NO_ERRORS != tag_value)
+         && (::EmbeddedProto::Error::END_OF_BUFFER != tag_value)) // The end of the buffer is not an array in this case.
+      {
+        return_value = tag_value;
+      }
+
+      return return_value;
+    };
+
+    void clear() override
+    {
+      clear_code();
+      clear_value();
+
+    }
+
+    private:
+
+
+      EmbeddedProto::int32 code_ = 0;
+      ::EmbeddedProto::FieldBytes<value_LENGTH> value_;
+
+};
+
 template<uint32_t zone_LENGTH>
 class object_space final: public ::EmbeddedProto::MessageInterface
 {

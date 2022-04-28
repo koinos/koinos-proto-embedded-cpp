@@ -381,16 +381,19 @@ class apply_block_arguments final: public ::EmbeddedProto::MessageInterface
 
 };
 
+template<uint32_t value_value_LENGTH>
 class apply_block_result final: public ::EmbeddedProto::MessageInterface
 {
   public:
     apply_block_result() = default;
     apply_block_result(const apply_block_result& rhs )
     {
+      set_value(rhs.get_value());
     }
 
     apply_block_result(const apply_block_result&& rhs ) noexcept
     {
+      set_value(rhs.get_value());
     }
 
     ~apply_block_result() override = default;
@@ -398,22 +401,37 @@ class apply_block_result final: public ::EmbeddedProto::MessageInterface
     enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
+      VALUE = 1
     };
 
     apply_block_result& operator=(const apply_block_result& rhs)
     {
+      set_value(rhs.get_value());
       return *this;
     }
 
     apply_block_result& operator=(const apply_block_result&& rhs) noexcept
     {
+      set_value(rhs.get_value());
       return *this;
     }
+
+    inline void clear_value() { value_.clear(); }
+    inline void set_value(const result<value_value_LENGTH>& value) { value_ = value; }
+    inline void set_value(const result<value_value_LENGTH>&& value) { value_ = value; }
+    inline result<value_value_LENGTH>& mutable_value() { return value_; }
+    inline const result<value_value_LENGTH>& get_value() const { return value_; }
+    inline const result<value_value_LENGTH>& value() const { return value_; }
 
 
     ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
     {
       ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
+
+      if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+      {
+        return_value = value_.serialize_with_id(static_cast<uint32_t>(FieldNumber::VALUE), buffer, false);
+      }
 
       return return_value;
     };
@@ -431,6 +449,10 @@ class apply_block_result final: public ::EmbeddedProto::MessageInterface
         id_tag = static_cast<FieldNumber>(id_number);
         switch(id_tag)
         {
+          case FieldNumber::VALUE:
+            return_value = value_.deserialize_check_type(buffer, wire_type);
+            break;
+
           default:
             break;
         }
@@ -455,12 +477,14 @@ class apply_block_result final: public ::EmbeddedProto::MessageInterface
 
     void clear() override
     {
+      clear_value();
 
     }
 
     private:
 
 
+      result<value_value_LENGTH> value_;
 
 };
 
@@ -586,16 +610,19 @@ class apply_transaction_arguments final: public ::EmbeddedProto::MessageInterfac
 
 };
 
+template<uint32_t value_value_LENGTH>
 class apply_transaction_result final: public ::EmbeddedProto::MessageInterface
 {
   public:
     apply_transaction_result() = default;
     apply_transaction_result(const apply_transaction_result& rhs )
     {
+      set_value(rhs.get_value());
     }
 
     apply_transaction_result(const apply_transaction_result&& rhs ) noexcept
     {
+      set_value(rhs.get_value());
     }
 
     ~apply_transaction_result() override = default;
@@ -603,22 +630,37 @@ class apply_transaction_result final: public ::EmbeddedProto::MessageInterface
     enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
+      VALUE = 1
     };
 
     apply_transaction_result& operator=(const apply_transaction_result& rhs)
     {
+      set_value(rhs.get_value());
       return *this;
     }
 
     apply_transaction_result& operator=(const apply_transaction_result&& rhs) noexcept
     {
+      set_value(rhs.get_value());
       return *this;
     }
+
+    inline void clear_value() { value_.clear(); }
+    inline void set_value(const result<value_value_LENGTH>& value) { value_ = value; }
+    inline void set_value(const result<value_value_LENGTH>&& value) { value_ = value; }
+    inline result<value_value_LENGTH>& mutable_value() { return value_; }
+    inline const result<value_value_LENGTH>& get_value() const { return value_; }
+    inline const result<value_value_LENGTH>& value() const { return value_; }
 
 
     ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
     {
       ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
+
+      if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+      {
+        return_value = value_.serialize_with_id(static_cast<uint32_t>(FieldNumber::VALUE), buffer, false);
+      }
 
       return return_value;
     };
@@ -636,6 +678,10 @@ class apply_transaction_result final: public ::EmbeddedProto::MessageInterface
         id_tag = static_cast<FieldNumber>(id_number);
         switch(id_tag)
         {
+          case FieldNumber::VALUE:
+            return_value = value_.deserialize_check_type(buffer, wire_type);
+            break;
+
           default:
             break;
         }
@@ -660,12 +706,14 @@ class apply_transaction_result final: public ::EmbeddedProto::MessageInterface
 
     void clear() override
     {
+      clear_value();
 
     }
 
     private:
 
 
+      result<value_value_LENGTH> value_;
 
 };
 
@@ -778,16 +826,19 @@ class apply_upload_contract_operation_arguments final: public ::EmbeddedProto::M
 
 };
 
+template<uint32_t value_value_LENGTH>
 class apply_upload_contract_operation_result final: public ::EmbeddedProto::MessageInterface
 {
   public:
     apply_upload_contract_operation_result() = default;
     apply_upload_contract_operation_result(const apply_upload_contract_operation_result& rhs )
     {
+      set_value(rhs.get_value());
     }
 
     apply_upload_contract_operation_result(const apply_upload_contract_operation_result&& rhs ) noexcept
     {
+      set_value(rhs.get_value());
     }
 
     ~apply_upload_contract_operation_result() override = default;
@@ -795,22 +846,37 @@ class apply_upload_contract_operation_result final: public ::EmbeddedProto::Mess
     enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
+      VALUE = 1
     };
 
     apply_upload_contract_operation_result& operator=(const apply_upload_contract_operation_result& rhs)
     {
+      set_value(rhs.get_value());
       return *this;
     }
 
     apply_upload_contract_operation_result& operator=(const apply_upload_contract_operation_result&& rhs) noexcept
     {
+      set_value(rhs.get_value());
       return *this;
     }
+
+    inline void clear_value() { value_.clear(); }
+    inline void set_value(const result<value_value_LENGTH>& value) { value_ = value; }
+    inline void set_value(const result<value_value_LENGTH>&& value) { value_ = value; }
+    inline result<value_value_LENGTH>& mutable_value() { return value_; }
+    inline const result<value_value_LENGTH>& get_value() const { return value_; }
+    inline const result<value_value_LENGTH>& value() const { return value_; }
 
 
     ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
     {
       ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
+
+      if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+      {
+        return_value = value_.serialize_with_id(static_cast<uint32_t>(FieldNumber::VALUE), buffer, false);
+      }
 
       return return_value;
     };
@@ -828,6 +894,10 @@ class apply_upload_contract_operation_result final: public ::EmbeddedProto::Mess
         id_tag = static_cast<FieldNumber>(id_number);
         switch(id_tag)
         {
+          case FieldNumber::VALUE:
+            return_value = value_.deserialize_check_type(buffer, wire_type);
+            break;
+
           default:
             break;
         }
@@ -852,12 +922,14 @@ class apply_upload_contract_operation_result final: public ::EmbeddedProto::Mess
 
     void clear() override
     {
+      clear_value();
 
     }
 
     private:
 
 
+      result<value_value_LENGTH> value_;
 
 };
 
@@ -969,16 +1041,19 @@ class apply_call_contract_operation_arguments final: public ::EmbeddedProto::Mes
 
 };
 
+template<uint32_t value_value_LENGTH>
 class apply_call_contract_operation_result final: public ::EmbeddedProto::MessageInterface
 {
   public:
     apply_call_contract_operation_result() = default;
     apply_call_contract_operation_result(const apply_call_contract_operation_result& rhs )
     {
+      set_value(rhs.get_value());
     }
 
     apply_call_contract_operation_result(const apply_call_contract_operation_result&& rhs ) noexcept
     {
+      set_value(rhs.get_value());
     }
 
     ~apply_call_contract_operation_result() override = default;
@@ -986,22 +1061,37 @@ class apply_call_contract_operation_result final: public ::EmbeddedProto::Messag
     enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
+      VALUE = 1
     };
 
     apply_call_contract_operation_result& operator=(const apply_call_contract_operation_result& rhs)
     {
+      set_value(rhs.get_value());
       return *this;
     }
 
     apply_call_contract_operation_result& operator=(const apply_call_contract_operation_result&& rhs) noexcept
     {
+      set_value(rhs.get_value());
       return *this;
     }
+
+    inline void clear_value() { value_.clear(); }
+    inline void set_value(const result<value_value_LENGTH>& value) { value_ = value; }
+    inline void set_value(const result<value_value_LENGTH>&& value) { value_ = value; }
+    inline result<value_value_LENGTH>& mutable_value() { return value_; }
+    inline const result<value_value_LENGTH>& get_value() const { return value_; }
+    inline const result<value_value_LENGTH>& value() const { return value_; }
 
 
     ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
     {
       ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
+
+      if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+      {
+        return_value = value_.serialize_with_id(static_cast<uint32_t>(FieldNumber::VALUE), buffer, false);
+      }
 
       return return_value;
     };
@@ -1019,6 +1109,10 @@ class apply_call_contract_operation_result final: public ::EmbeddedProto::Messag
         id_tag = static_cast<FieldNumber>(id_number);
         switch(id_tag)
         {
+          case FieldNumber::VALUE:
+            return_value = value_.deserialize_check_type(buffer, wire_type);
+            break;
+
           default:
             break;
         }
@@ -1043,12 +1137,14 @@ class apply_call_contract_operation_result final: public ::EmbeddedProto::Messag
 
     void clear() override
     {
+      clear_value();
 
     }
 
     private:
 
 
+      result<value_value_LENGTH> value_;
 
 };
 
@@ -1159,16 +1255,19 @@ class apply_set_system_call_operation_arguments final: public ::EmbeddedProto::M
 
 };
 
+template<uint32_t value_value_LENGTH>
 class apply_set_system_call_operation_result final: public ::EmbeddedProto::MessageInterface
 {
   public:
     apply_set_system_call_operation_result() = default;
     apply_set_system_call_operation_result(const apply_set_system_call_operation_result& rhs )
     {
+      set_value(rhs.get_value());
     }
 
     apply_set_system_call_operation_result(const apply_set_system_call_operation_result&& rhs ) noexcept
     {
+      set_value(rhs.get_value());
     }
 
     ~apply_set_system_call_operation_result() override = default;
@@ -1176,22 +1275,37 @@ class apply_set_system_call_operation_result final: public ::EmbeddedProto::Mess
     enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
+      VALUE = 1
     };
 
     apply_set_system_call_operation_result& operator=(const apply_set_system_call_operation_result& rhs)
     {
+      set_value(rhs.get_value());
       return *this;
     }
 
     apply_set_system_call_operation_result& operator=(const apply_set_system_call_operation_result&& rhs) noexcept
     {
+      set_value(rhs.get_value());
       return *this;
     }
+
+    inline void clear_value() { value_.clear(); }
+    inline void set_value(const result<value_value_LENGTH>& value) { value_ = value; }
+    inline void set_value(const result<value_value_LENGTH>&& value) { value_ = value; }
+    inline result<value_value_LENGTH>& mutable_value() { return value_; }
+    inline const result<value_value_LENGTH>& get_value() const { return value_; }
+    inline const result<value_value_LENGTH>& value() const { return value_; }
 
 
     ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
     {
       ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
+
+      if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+      {
+        return_value = value_.serialize_with_id(static_cast<uint32_t>(FieldNumber::VALUE), buffer, false);
+      }
 
       return return_value;
     };
@@ -1209,6 +1323,10 @@ class apply_set_system_call_operation_result final: public ::EmbeddedProto::Mess
         id_tag = static_cast<FieldNumber>(id_number);
         switch(id_tag)
         {
+          case FieldNumber::VALUE:
+            return_value = value_.deserialize_check_type(buffer, wire_type);
+            break;
+
           default:
             break;
         }
@@ -1233,12 +1351,14 @@ class apply_set_system_call_operation_result final: public ::EmbeddedProto::Mess
 
     void clear() override
     {
+      clear_value();
 
     }
 
     private:
 
 
+      result<value_value_LENGTH> value_;
 
 };
 
@@ -1349,16 +1469,19 @@ class apply_set_system_contract_operation_arguments final: public ::EmbeddedProt
 
 };
 
+template<uint32_t value_value_LENGTH>
 class apply_set_system_contract_operation_result final: public ::EmbeddedProto::MessageInterface
 {
   public:
     apply_set_system_contract_operation_result() = default;
     apply_set_system_contract_operation_result(const apply_set_system_contract_operation_result& rhs )
     {
+      set_value(rhs.get_value());
     }
 
     apply_set_system_contract_operation_result(const apply_set_system_contract_operation_result&& rhs ) noexcept
     {
+      set_value(rhs.get_value());
     }
 
     ~apply_set_system_contract_operation_result() override = default;
@@ -1366,22 +1489,37 @@ class apply_set_system_contract_operation_result final: public ::EmbeddedProto::
     enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
+      VALUE = 1
     };
 
     apply_set_system_contract_operation_result& operator=(const apply_set_system_contract_operation_result& rhs)
     {
+      set_value(rhs.get_value());
       return *this;
     }
 
     apply_set_system_contract_operation_result& operator=(const apply_set_system_contract_operation_result&& rhs) noexcept
     {
+      set_value(rhs.get_value());
       return *this;
     }
+
+    inline void clear_value() { value_.clear(); }
+    inline void set_value(const result<value_value_LENGTH>& value) { value_ = value; }
+    inline void set_value(const result<value_value_LENGTH>&& value) { value_ = value; }
+    inline result<value_value_LENGTH>& mutable_value() { return value_; }
+    inline const result<value_value_LENGTH>& get_value() const { return value_; }
+    inline const result<value_value_LENGTH>& value() const { return value_; }
 
 
     ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
     {
       ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
+
+      if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+      {
+        return_value = value_.serialize_with_id(static_cast<uint32_t>(FieldNumber::VALUE), buffer, false);
+      }
 
       return return_value;
     };
@@ -1399,6 +1537,10 @@ class apply_set_system_contract_operation_result final: public ::EmbeddedProto::
         id_tag = static_cast<FieldNumber>(id_number);
         switch(id_tag)
         {
+          case FieldNumber::VALUE:
+            return_value = value_.deserialize_check_type(buffer, wire_type);
+            break;
+
           default:
             break;
         }
@@ -1423,12 +1565,14 @@ class apply_set_system_contract_operation_result final: public ::EmbeddedProto::
 
     void clear() override
     {
+      clear_value();
 
     }
 
     private:
 
 
+      result<value_value_LENGTH> value_;
 
 };
 
@@ -1515,16 +1659,19 @@ class pre_block_callback_arguments final: public ::EmbeddedProto::MessageInterfa
 
 };
 
+template<uint32_t value_value_LENGTH>
 class pre_block_callback_result final: public ::EmbeddedProto::MessageInterface
 {
   public:
     pre_block_callback_result() = default;
     pre_block_callback_result(const pre_block_callback_result& rhs )
     {
+      set_value(rhs.get_value());
     }
 
     pre_block_callback_result(const pre_block_callback_result&& rhs ) noexcept
     {
+      set_value(rhs.get_value());
     }
 
     ~pre_block_callback_result() override = default;
@@ -1532,22 +1679,37 @@ class pre_block_callback_result final: public ::EmbeddedProto::MessageInterface
     enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
+      VALUE = 1
     };
 
     pre_block_callback_result& operator=(const pre_block_callback_result& rhs)
     {
+      set_value(rhs.get_value());
       return *this;
     }
 
     pre_block_callback_result& operator=(const pre_block_callback_result&& rhs) noexcept
     {
+      set_value(rhs.get_value());
       return *this;
     }
+
+    inline void clear_value() { value_.clear(); }
+    inline void set_value(const result<value_value_LENGTH>& value) { value_ = value; }
+    inline void set_value(const result<value_value_LENGTH>&& value) { value_ = value; }
+    inline result<value_value_LENGTH>& mutable_value() { return value_; }
+    inline const result<value_value_LENGTH>& get_value() const { return value_; }
+    inline const result<value_value_LENGTH>& value() const { return value_; }
 
 
     ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
     {
       ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
+
+      if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+      {
+        return_value = value_.serialize_with_id(static_cast<uint32_t>(FieldNumber::VALUE), buffer, false);
+      }
 
       return return_value;
     };
@@ -1565,6 +1727,10 @@ class pre_block_callback_result final: public ::EmbeddedProto::MessageInterface
         id_tag = static_cast<FieldNumber>(id_number);
         switch(id_tag)
         {
+          case FieldNumber::VALUE:
+            return_value = value_.deserialize_check_type(buffer, wire_type);
+            break;
+
           default:
             break;
         }
@@ -1589,12 +1755,14 @@ class pre_block_callback_result final: public ::EmbeddedProto::MessageInterface
 
     void clear() override
     {
+      clear_value();
 
     }
 
     private:
 
 
+      result<value_value_LENGTH> value_;
 
 };
 
@@ -1681,16 +1849,19 @@ class post_block_callback_arguments final: public ::EmbeddedProto::MessageInterf
 
 };
 
+template<uint32_t value_value_LENGTH>
 class post_block_callback_result final: public ::EmbeddedProto::MessageInterface
 {
   public:
     post_block_callback_result() = default;
     post_block_callback_result(const post_block_callback_result& rhs )
     {
+      set_value(rhs.get_value());
     }
 
     post_block_callback_result(const post_block_callback_result&& rhs ) noexcept
     {
+      set_value(rhs.get_value());
     }
 
     ~post_block_callback_result() override = default;
@@ -1698,22 +1869,37 @@ class post_block_callback_result final: public ::EmbeddedProto::MessageInterface
     enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
+      VALUE = 1
     };
 
     post_block_callback_result& operator=(const post_block_callback_result& rhs)
     {
+      set_value(rhs.get_value());
       return *this;
     }
 
     post_block_callback_result& operator=(const post_block_callback_result&& rhs) noexcept
     {
+      set_value(rhs.get_value());
       return *this;
     }
+
+    inline void clear_value() { value_.clear(); }
+    inline void set_value(const result<value_value_LENGTH>& value) { value_ = value; }
+    inline void set_value(const result<value_value_LENGTH>&& value) { value_ = value; }
+    inline result<value_value_LENGTH>& mutable_value() { return value_; }
+    inline const result<value_value_LENGTH>& get_value() const { return value_; }
+    inline const result<value_value_LENGTH>& value() const { return value_; }
 
 
     ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
     {
       ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
+
+      if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+      {
+        return_value = value_.serialize_with_id(static_cast<uint32_t>(FieldNumber::VALUE), buffer, false);
+      }
 
       return return_value;
     };
@@ -1731,6 +1917,10 @@ class post_block_callback_result final: public ::EmbeddedProto::MessageInterface
         id_tag = static_cast<FieldNumber>(id_number);
         switch(id_tag)
         {
+          case FieldNumber::VALUE:
+            return_value = value_.deserialize_check_type(buffer, wire_type);
+            break;
+
           default:
             break;
         }
@@ -1755,12 +1945,14 @@ class post_block_callback_result final: public ::EmbeddedProto::MessageInterface
 
     void clear() override
     {
+      clear_value();
 
     }
 
     private:
 
 
+      result<value_value_LENGTH> value_;
 
 };
 
@@ -1847,16 +2039,19 @@ class pre_transaction_callback_arguments final: public ::EmbeddedProto::MessageI
 
 };
 
+template<uint32_t value_value_LENGTH>
 class pre_transaction_callback_result final: public ::EmbeddedProto::MessageInterface
 {
   public:
     pre_transaction_callback_result() = default;
     pre_transaction_callback_result(const pre_transaction_callback_result& rhs )
     {
+      set_value(rhs.get_value());
     }
 
     pre_transaction_callback_result(const pre_transaction_callback_result&& rhs ) noexcept
     {
+      set_value(rhs.get_value());
     }
 
     ~pre_transaction_callback_result() override = default;
@@ -1864,22 +2059,37 @@ class pre_transaction_callback_result final: public ::EmbeddedProto::MessageInte
     enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
+      VALUE = 1
     };
 
     pre_transaction_callback_result& operator=(const pre_transaction_callback_result& rhs)
     {
+      set_value(rhs.get_value());
       return *this;
     }
 
     pre_transaction_callback_result& operator=(const pre_transaction_callback_result&& rhs) noexcept
     {
+      set_value(rhs.get_value());
       return *this;
     }
+
+    inline void clear_value() { value_.clear(); }
+    inline void set_value(const result<value_value_LENGTH>& value) { value_ = value; }
+    inline void set_value(const result<value_value_LENGTH>&& value) { value_ = value; }
+    inline result<value_value_LENGTH>& mutable_value() { return value_; }
+    inline const result<value_value_LENGTH>& get_value() const { return value_; }
+    inline const result<value_value_LENGTH>& value() const { return value_; }
 
 
     ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
     {
       ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
+
+      if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+      {
+        return_value = value_.serialize_with_id(static_cast<uint32_t>(FieldNumber::VALUE), buffer, false);
+      }
 
       return return_value;
     };
@@ -1897,6 +2107,10 @@ class pre_transaction_callback_result final: public ::EmbeddedProto::MessageInte
         id_tag = static_cast<FieldNumber>(id_number);
         switch(id_tag)
         {
+          case FieldNumber::VALUE:
+            return_value = value_.deserialize_check_type(buffer, wire_type);
+            break;
+
           default:
             break;
         }
@@ -1921,12 +2135,14 @@ class pre_transaction_callback_result final: public ::EmbeddedProto::MessageInte
 
     void clear() override
     {
+      clear_value();
 
     }
 
     private:
 
 
+      result<value_value_LENGTH> value_;
 
 };
 
@@ -2013,16 +2229,19 @@ class post_transaction_callback_arguments final: public ::EmbeddedProto::Message
 
 };
 
+template<uint32_t value_value_LENGTH>
 class post_transaction_callback_result final: public ::EmbeddedProto::MessageInterface
 {
   public:
     post_transaction_callback_result() = default;
     post_transaction_callback_result(const post_transaction_callback_result& rhs )
     {
+      set_value(rhs.get_value());
     }
 
     post_transaction_callback_result(const post_transaction_callback_result&& rhs ) noexcept
     {
+      set_value(rhs.get_value());
     }
 
     ~post_transaction_callback_result() override = default;
@@ -2030,22 +2249,37 @@ class post_transaction_callback_result final: public ::EmbeddedProto::MessageInt
     enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
+      VALUE = 1
     };
 
     post_transaction_callback_result& operator=(const post_transaction_callback_result& rhs)
     {
+      set_value(rhs.get_value());
       return *this;
     }
 
     post_transaction_callback_result& operator=(const post_transaction_callback_result&& rhs) noexcept
     {
+      set_value(rhs.get_value());
       return *this;
     }
+
+    inline void clear_value() { value_.clear(); }
+    inline void set_value(const result<value_value_LENGTH>& value) { value_ = value; }
+    inline void set_value(const result<value_value_LENGTH>&& value) { value_ = value; }
+    inline result<value_value_LENGTH>& mutable_value() { return value_; }
+    inline const result<value_value_LENGTH>& get_value() const { return value_; }
+    inline const result<value_value_LENGTH>& value() const { return value_; }
 
 
     ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
     {
       ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
+
+      if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+      {
+        return_value = value_.serialize_with_id(static_cast<uint32_t>(FieldNumber::VALUE), buffer, false);
+      }
 
       return return_value;
     };
@@ -2063,6 +2297,10 @@ class post_transaction_callback_result final: public ::EmbeddedProto::MessageInt
         id_tag = static_cast<FieldNumber>(id_number);
         switch(id_tag)
         {
+          case FieldNumber::VALUE:
+            return_value = value_.deserialize_check_type(buffer, wire_type);
+            break;
+
           default:
             break;
         }
@@ -2087,12 +2325,14 @@ class post_transaction_callback_result final: public ::EmbeddedProto::MessageInt
 
     void clear() override
     {
+      clear_value();
 
     }
 
     private:
 
 
+      result<value_value_LENGTH> value_;
 
 };
 
@@ -4055,21 +4295,21 @@ class set_account_nonce_result final: public ::EmbeddedProto::MessageInterface
 
 };
 
-class require_system_authority_arguments final: public ::EmbeddedProto::MessageInterface
+class check_system_authority_arguments final: public ::EmbeddedProto::MessageInterface
 {
   public:
-    require_system_authority_arguments() = default;
-    require_system_authority_arguments(const require_system_authority_arguments& rhs )
+    check_system_authority_arguments() = default;
+    check_system_authority_arguments(const check_system_authority_arguments& rhs )
     {
       set_type(rhs.get_type());
     }
 
-    require_system_authority_arguments(const require_system_authority_arguments&& rhs ) noexcept
+    check_system_authority_arguments(const check_system_authority_arguments&& rhs ) noexcept
     {
       set_type(rhs.get_type());
     }
 
-    ~require_system_authority_arguments() override = default;
+    ~check_system_authority_arguments() override = default;
 
     enum class FieldNumber : uint32_t
     {
@@ -4077,13 +4317,13 @@ class require_system_authority_arguments final: public ::EmbeddedProto::MessageI
       TYPE = 1
     };
 
-    require_system_authority_arguments& operator=(const require_system_authority_arguments& rhs)
+    check_system_authority_arguments& operator=(const check_system_authority_arguments& rhs)
     {
       set_type(rhs.get_type());
       return *this;
     }
 
-    require_system_authority_arguments& operator=(const require_system_authority_arguments&& rhs) noexcept
+    check_system_authority_arguments& operator=(const check_system_authority_arguments&& rhs) noexcept
     {
       set_type(rhs.get_type());
       return *this;
@@ -4175,39 +4415,56 @@ class require_system_authority_arguments final: public ::EmbeddedProto::MessageI
 
 };
 
-class require_system_authority_result final: public ::EmbeddedProto::MessageInterface
+class check_system_authority_result final: public ::EmbeddedProto::MessageInterface
 {
   public:
-    require_system_authority_result() = default;
-    require_system_authority_result(const require_system_authority_result& rhs )
+    check_system_authority_result() = default;
+    check_system_authority_result(const check_system_authority_result& rhs )
     {
+      set_value(rhs.get_value());
     }
 
-    require_system_authority_result(const require_system_authority_result&& rhs ) noexcept
+    check_system_authority_result(const check_system_authority_result&& rhs ) noexcept
     {
+      set_value(rhs.get_value());
     }
 
-    ~require_system_authority_result() override = default;
+    ~check_system_authority_result() override = default;
 
     enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
+      VALUE = 1
     };
 
-    require_system_authority_result& operator=(const require_system_authority_result& rhs)
+    check_system_authority_result& operator=(const check_system_authority_result& rhs)
     {
+      set_value(rhs.get_value());
       return *this;
     }
 
-    require_system_authority_result& operator=(const require_system_authority_result&& rhs) noexcept
+    check_system_authority_result& operator=(const check_system_authority_result&& rhs) noexcept
     {
+      set_value(rhs.get_value());
       return *this;
     }
+
+    inline void clear_value() { value_.clear(); }
+    inline void set_value(const EmbeddedProto::boolean& value) { value_ = value; }
+    inline void set_value(const EmbeddedProto::boolean&& value) { value_ = value; }
+    inline EmbeddedProto::boolean& mutable_value() { return value_; }
+    inline const EmbeddedProto::boolean& get_value() const { return value_; }
+    inline EmbeddedProto::boolean::FIELD_TYPE value() const { return value_.get(); }
 
 
     ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
     {
       ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
+
+      if((false != value_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
+      {
+        return_value = value_.serialize_with_id(static_cast<uint32_t>(FieldNumber::VALUE), buffer, false);
+      }
 
       return return_value;
     };
@@ -4225,6 +4482,10 @@ class require_system_authority_result final: public ::EmbeddedProto::MessageInte
         id_tag = static_cast<FieldNumber>(id_number);
         switch(id_tag)
         {
+          case FieldNumber::VALUE:
+            return_value = value_.deserialize_check_type(buffer, wire_type);
+            break;
+
           default:
             break;
         }
@@ -4249,12 +4510,14 @@ class require_system_authority_result final: public ::EmbeddedProto::MessageInte
 
     void clear() override
     {
+      clear_value();
 
     }
 
     private:
 
 
+      EmbeddedProto::boolean value_ = false;
 
 };
 
@@ -5311,12 +5574,10 @@ class put_object_result final: public ::EmbeddedProto::MessageInterface
     put_object_result() = default;
     put_object_result(const put_object_result& rhs )
     {
-      set_value(rhs.get_value());
     }
 
     put_object_result(const put_object_result&& rhs ) noexcept
     {
-      set_value(rhs.get_value());
     }
 
     ~put_object_result() override = default;
@@ -5324,37 +5585,22 @@ class put_object_result final: public ::EmbeddedProto::MessageInterface
     enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
-      VALUE = 1
     };
 
     put_object_result& operator=(const put_object_result& rhs)
     {
-      set_value(rhs.get_value());
       return *this;
     }
 
     put_object_result& operator=(const put_object_result&& rhs) noexcept
     {
-      set_value(rhs.get_value());
       return *this;
     }
-
-    inline void clear_value() { value_.clear(); }
-    inline void set_value(const EmbeddedProto::int32& value) { value_ = value; }
-    inline void set_value(const EmbeddedProto::int32&& value) { value_ = value; }
-    inline EmbeddedProto::int32& mutable_value() { return value_; }
-    inline const EmbeddedProto::int32& get_value() const { return value_; }
-    inline EmbeddedProto::int32::FIELD_TYPE value() const { return value_.get(); }
 
 
     ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
     {
       ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
-
-      if((0 != value_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
-      {
-        return_value = value_.serialize_with_id(static_cast<uint32_t>(FieldNumber::VALUE), buffer, false);
-      }
 
       return return_value;
     };
@@ -5372,10 +5618,6 @@ class put_object_result final: public ::EmbeddedProto::MessageInterface
         id_tag = static_cast<FieldNumber>(id_number);
         switch(id_tag)
         {
-          case FieldNumber::VALUE:
-            return_value = value_.deserialize_check_type(buffer, wire_type);
-            break;
-
           default:
             break;
         }
@@ -5400,14 +5642,12 @@ class put_object_result final: public ::EmbeddedProto::MessageInterface
 
     void clear() override
     {
-      clear_value();
 
     }
 
     private:
 
 
-      EmbeddedProto::int32 value_ = 0;
 
 };
 
@@ -8306,25 +8546,25 @@ class verify_vrf_proof_result final: public ::EmbeddedProto::MessageInterface
 
 template<uint32_t contract_id_LENGTH, 
 uint32_t args_LENGTH>
-class call_contract_arguments final: public ::EmbeddedProto::MessageInterface
+class call_arguments final: public ::EmbeddedProto::MessageInterface
 {
   public:
-    call_contract_arguments() = default;
-    call_contract_arguments(const call_contract_arguments& rhs )
+    call_arguments() = default;
+    call_arguments(const call_arguments& rhs )
     {
       set_contract_id(rhs.get_contract_id());
       set_entry_point(rhs.get_entry_point());
       set_args(rhs.get_args());
     }
 
-    call_contract_arguments(const call_contract_arguments&& rhs ) noexcept
+    call_arguments(const call_arguments&& rhs ) noexcept
     {
       set_contract_id(rhs.get_contract_id());
       set_entry_point(rhs.get_entry_point());
       set_args(rhs.get_args());
     }
 
-    ~call_contract_arguments() override = default;
+    ~call_arguments() override = default;
 
     enum class FieldNumber : uint32_t
     {
@@ -8334,7 +8574,7 @@ class call_contract_arguments final: public ::EmbeddedProto::MessageInterface
       ARGS = 3
     };
 
-    call_contract_arguments& operator=(const call_contract_arguments& rhs)
+    call_arguments& operator=(const call_arguments& rhs)
     {
       set_contract_id(rhs.get_contract_id());
       set_entry_point(rhs.get_entry_point());
@@ -8342,7 +8582,7 @@ class call_contract_arguments final: public ::EmbeddedProto::MessageInterface
       return *this;
     }
 
-    call_contract_arguments& operator=(const call_contract_arguments&& rhs) noexcept
+    call_arguments& operator=(const call_arguments&& rhs) noexcept
     {
       set_contract_id(rhs.get_contract_id());
       set_entry_point(rhs.get_entry_point());
@@ -8456,22 +8696,22 @@ class call_contract_arguments final: public ::EmbeddedProto::MessageInterface
 
 };
 
-template<uint32_t value_LENGTH>
-class call_contract_result final: public ::EmbeddedProto::MessageInterface
+template<uint32_t value_value_LENGTH>
+class call_result final: public ::EmbeddedProto::MessageInterface
 {
   public:
-    call_contract_result() = default;
-    call_contract_result(const call_contract_result& rhs )
+    call_result() = default;
+    call_result(const call_result& rhs )
     {
       set_value(rhs.get_value());
     }
 
-    call_contract_result(const call_contract_result&& rhs ) noexcept
+    call_result(const call_result&& rhs ) noexcept
     {
       set_value(rhs.get_value());
     }
 
-    ~call_contract_result() override = default;
+    ~call_result() override = default;
 
     enum class FieldNumber : uint32_t
     {
@@ -8479,23 +8719,24 @@ class call_contract_result final: public ::EmbeddedProto::MessageInterface
       VALUE = 1
     };
 
-    call_contract_result& operator=(const call_contract_result& rhs)
+    call_result& operator=(const call_result& rhs)
     {
       set_value(rhs.get_value());
       return *this;
     }
 
-    call_contract_result& operator=(const call_contract_result&& rhs) noexcept
+    call_result& operator=(const call_result&& rhs) noexcept
     {
       set_value(rhs.get_value());
       return *this;
     }
 
     inline void clear_value() { value_.clear(); }
-    inline ::EmbeddedProto::FieldBytes<value_LENGTH>& mutable_value() { return value_; }
-    inline void set_value(const ::EmbeddedProto::FieldBytes<value_LENGTH>& rhs) { value_.set(rhs); }
-    inline const ::EmbeddedProto::FieldBytes<value_LENGTH>& get_value() const { return value_; }
-    inline const uint8_t* value() const { return value_.get_const(); }
+    inline void set_value(const result<value_value_LENGTH>& value) { value_ = value; }
+    inline void set_value(const result<value_value_LENGTH>&& value) { value_ = value; }
+    inline result<value_value_LENGTH>& mutable_value() { return value_; }
+    inline const result<value_value_LENGTH>& get_value() const { return value_; }
+    inline const result<value_value_LENGTH>& value() const { return value_; }
 
 
     ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
@@ -8558,7 +8799,7 @@ class call_contract_result final: public ::EmbeddedProto::MessageInterface
     private:
 
 
-      ::EmbeddedProto::FieldBytes<value_LENGTH> value_;
+      result<value_value_LENGTH> value_;
 
 };
 
@@ -8751,31 +8992,31 @@ class get_entry_point_result final: public ::EmbeddedProto::MessageInterface
 
 };
 
-class get_contract_arguments_arguments final: public ::EmbeddedProto::MessageInterface
+class get_arguments_arguments final: public ::EmbeddedProto::MessageInterface
 {
   public:
-    get_contract_arguments_arguments() = default;
-    get_contract_arguments_arguments(const get_contract_arguments_arguments& rhs )
+    get_arguments_arguments() = default;
+    get_arguments_arguments(const get_arguments_arguments& rhs )
     {
     }
 
-    get_contract_arguments_arguments(const get_contract_arguments_arguments&& rhs ) noexcept
+    get_arguments_arguments(const get_arguments_arguments&& rhs ) noexcept
     {
     }
 
-    ~get_contract_arguments_arguments() override = default;
+    ~get_arguments_arguments() override = default;
 
     enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
     };
 
-    get_contract_arguments_arguments& operator=(const get_contract_arguments_arguments& rhs)
+    get_arguments_arguments& operator=(const get_arguments_arguments& rhs)
     {
       return *this;
     }
 
-    get_contract_arguments_arguments& operator=(const get_contract_arguments_arguments&& rhs) noexcept
+    get_arguments_arguments& operator=(const get_arguments_arguments&& rhs) noexcept
     {
       return *this;
     }
@@ -8835,21 +9076,21 @@ class get_contract_arguments_arguments final: public ::EmbeddedProto::MessageInt
 };
 
 template<uint32_t value_LENGTH>
-class get_contract_arguments_result final: public ::EmbeddedProto::MessageInterface
+class get_arguments_result final: public ::EmbeddedProto::MessageInterface
 {
   public:
-    get_contract_arguments_result() = default;
-    get_contract_arguments_result(const get_contract_arguments_result& rhs )
+    get_arguments_result() = default;
+    get_arguments_result(const get_arguments_result& rhs )
     {
       set_value(rhs.get_value());
     }
 
-    get_contract_arguments_result(const get_contract_arguments_result&& rhs ) noexcept
+    get_arguments_result(const get_arguments_result&& rhs ) noexcept
     {
       set_value(rhs.get_value());
     }
 
-    ~get_contract_arguments_result() override = default;
+    ~get_arguments_result() override = default;
 
     enum class FieldNumber : uint32_t
     {
@@ -8857,13 +9098,13 @@ class get_contract_arguments_result final: public ::EmbeddedProto::MessageInterf
       VALUE = 1
     };
 
-    get_contract_arguments_result& operator=(const get_contract_arguments_result& rhs)
+    get_arguments_result& operator=(const get_arguments_result& rhs)
     {
       set_value(rhs.get_value());
       return *this;
     }
 
-    get_contract_arguments_result& operator=(const get_contract_arguments_result&& rhs) noexcept
+    get_arguments_result& operator=(const get_arguments_result&& rhs) noexcept
     {
       set_value(rhs.get_value());
       return *this;
@@ -8940,46 +9181,47 @@ class get_contract_arguments_result final: public ::EmbeddedProto::MessageInterf
 
 };
 
-template<uint32_t value_LENGTH>
-class set_contract_result_arguments final: public ::EmbeddedProto::MessageInterface
+template<uint32_t retval_value_LENGTH>
+class exit_arguments final: public ::EmbeddedProto::MessageInterface
 {
   public:
-    set_contract_result_arguments() = default;
-    set_contract_result_arguments(const set_contract_result_arguments& rhs )
+    exit_arguments() = default;
+    exit_arguments(const exit_arguments& rhs )
     {
-      set_value(rhs.get_value());
+      set_retval(rhs.get_retval());
     }
 
-    set_contract_result_arguments(const set_contract_result_arguments&& rhs ) noexcept
+    exit_arguments(const exit_arguments&& rhs ) noexcept
     {
-      set_value(rhs.get_value());
+      set_retval(rhs.get_retval());
     }
 
-    ~set_contract_result_arguments() override = default;
+    ~exit_arguments() override = default;
 
     enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
-      VALUE = 1
+      RETVAL = 1
     };
 
-    set_contract_result_arguments& operator=(const set_contract_result_arguments& rhs)
+    exit_arguments& operator=(const exit_arguments& rhs)
     {
-      set_value(rhs.get_value());
+      set_retval(rhs.get_retval());
       return *this;
     }
 
-    set_contract_result_arguments& operator=(const set_contract_result_arguments&& rhs) noexcept
+    exit_arguments& operator=(const exit_arguments&& rhs) noexcept
     {
-      set_value(rhs.get_value());
+      set_retval(rhs.get_retval());
       return *this;
     }
 
-    inline void clear_value() { value_.clear(); }
-    inline ::EmbeddedProto::FieldBytes<value_LENGTH>& mutable_value() { return value_; }
-    inline void set_value(const ::EmbeddedProto::FieldBytes<value_LENGTH>& rhs) { value_.set(rhs); }
-    inline const ::EmbeddedProto::FieldBytes<value_LENGTH>& get_value() const { return value_; }
-    inline const uint8_t* value() const { return value_.get_const(); }
+    inline void clear_retval() { retval_.clear(); }
+    inline void set_retval(const result<retval_value_LENGTH>& value) { retval_ = value; }
+    inline void set_retval(const result<retval_value_LENGTH>&& value) { retval_ = value; }
+    inline result<retval_value_LENGTH>& mutable_retval() { return retval_; }
+    inline const result<retval_value_LENGTH>& get_retval() const { return retval_; }
+    inline const result<retval_value_LENGTH>& retval() const { return retval_; }
 
 
     ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
@@ -8988,7 +9230,7 @@ class set_contract_result_arguments final: public ::EmbeddedProto::MessageInterf
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = value_.serialize_with_id(static_cast<uint32_t>(FieldNumber::VALUE), buffer, false);
+        return_value = retval_.serialize_with_id(static_cast<uint32_t>(FieldNumber::RETVAL), buffer, false);
       }
 
       return return_value;
@@ -9007,8 +9249,8 @@ class set_contract_result_arguments final: public ::EmbeddedProto::MessageInterf
         id_tag = static_cast<FieldNumber>(id_number);
         switch(id_tag)
         {
-          case FieldNumber::VALUE:
-            return_value = value_.deserialize_check_type(buffer, wire_type);
+          case FieldNumber::RETVAL:
+            return_value = retval_.deserialize_check_type(buffer, wire_type);
             break;
 
           default:
@@ -9035,231 +9277,42 @@ class set_contract_result_arguments final: public ::EmbeddedProto::MessageInterf
 
     void clear() override
     {
-      clear_value();
+      clear_retval();
 
     }
 
     private:
 
 
-      ::EmbeddedProto::FieldBytes<value_LENGTH> value_;
+      result<retval_value_LENGTH> retval_;
 
 };
 
-class set_contract_result_result final: public ::EmbeddedProto::MessageInterface
+class exit_result final: public ::EmbeddedProto::MessageInterface
 {
   public:
-    set_contract_result_result() = default;
-    set_contract_result_result(const set_contract_result_result& rhs )
+    exit_result() = default;
+    exit_result(const exit_result& rhs )
     {
     }
 
-    set_contract_result_result(const set_contract_result_result&& rhs ) noexcept
+    exit_result(const exit_result&& rhs ) noexcept
     {
     }
 
-    ~set_contract_result_result() override = default;
+    ~exit_result() override = default;
 
     enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
     };
 
-    set_contract_result_result& operator=(const set_contract_result_result& rhs)
+    exit_result& operator=(const exit_result& rhs)
     {
       return *this;
     }
 
-    set_contract_result_result& operator=(const set_contract_result_result&& rhs) noexcept
-    {
-      return *this;
-    }
-
-
-    ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
-    {
-      ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
-
-      return return_value;
-    };
-
-    ::EmbeddedProto::Error deserialize(::EmbeddedProto::ReadBufferInterface& buffer) override
-    {
-      ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
-      ::EmbeddedProto::WireFormatter::WireType wire_type = ::EmbeddedProto::WireFormatter::WireType::VARINT;
-      uint32_t id_number = 0;
-      FieldNumber id_tag = FieldNumber::NOT_SET;
-
-      ::EmbeddedProto::Error tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
-      while((::EmbeddedProto::Error::NO_ERRORS == return_value) && (::EmbeddedProto::Error::NO_ERRORS == tag_value))
-      {
-        id_tag = static_cast<FieldNumber>(id_number);
-        switch(id_tag)
-        {
-          default:
-            break;
-        }
-
-        if(::EmbeddedProto::Error::NO_ERRORS == return_value)
-        {
-          // Read the next tag.
-          tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
-        }
-      }
-
-      // When an error was detect while reading the tag but no other errors where found, set it in the return value.
-      if((::EmbeddedProto::Error::NO_ERRORS == return_value)
-         && (::EmbeddedProto::Error::NO_ERRORS != tag_value)
-         && (::EmbeddedProto::Error::END_OF_BUFFER != tag_value)) // The end of the buffer is not an array in this case.
-      {
-        return_value = tag_value;
-      }
-
-      return return_value;
-    };
-
-    void clear() override
-    {
-
-    }
-
-    private:
-
-
-
-};
-
-class exit_contract_arguments final: public ::EmbeddedProto::MessageInterface
-{
-  public:
-    exit_contract_arguments() = default;
-    exit_contract_arguments(const exit_contract_arguments& rhs )
-    {
-      set_exit_code(rhs.get_exit_code());
-    }
-
-    exit_contract_arguments(const exit_contract_arguments&& rhs ) noexcept
-    {
-      set_exit_code(rhs.get_exit_code());
-    }
-
-    ~exit_contract_arguments() override = default;
-
-    enum class FieldNumber : uint32_t
-    {
-      NOT_SET = 0,
-      EXIT_CODE = 1
-    };
-
-    exit_contract_arguments& operator=(const exit_contract_arguments& rhs)
-    {
-      set_exit_code(rhs.get_exit_code());
-      return *this;
-    }
-
-    exit_contract_arguments& operator=(const exit_contract_arguments&& rhs) noexcept
-    {
-      set_exit_code(rhs.get_exit_code());
-      return *this;
-    }
-
-    inline void clear_exit_code() { exit_code_.clear(); }
-    inline void set_exit_code(const EmbeddedProto::uint32& value) { exit_code_ = value; }
-    inline void set_exit_code(const EmbeddedProto::uint32&& value) { exit_code_ = value; }
-    inline EmbeddedProto::uint32& mutable_exit_code() { return exit_code_; }
-    inline const EmbeddedProto::uint32& get_exit_code() const { return exit_code_; }
-    inline EmbeddedProto::uint32::FIELD_TYPE exit_code() const { return exit_code_.get(); }
-
-
-    ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
-    {
-      ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
-
-      if((0U != exit_code_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
-      {
-        return_value = exit_code_.serialize_with_id(static_cast<uint32_t>(FieldNumber::EXIT_CODE), buffer, false);
-      }
-
-      return return_value;
-    };
-
-    ::EmbeddedProto::Error deserialize(::EmbeddedProto::ReadBufferInterface& buffer) override
-    {
-      ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
-      ::EmbeddedProto::WireFormatter::WireType wire_type = ::EmbeddedProto::WireFormatter::WireType::VARINT;
-      uint32_t id_number = 0;
-      FieldNumber id_tag = FieldNumber::NOT_SET;
-
-      ::EmbeddedProto::Error tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
-      while((::EmbeddedProto::Error::NO_ERRORS == return_value) && (::EmbeddedProto::Error::NO_ERRORS == tag_value))
-      {
-        id_tag = static_cast<FieldNumber>(id_number);
-        switch(id_tag)
-        {
-          case FieldNumber::EXIT_CODE:
-            return_value = exit_code_.deserialize_check_type(buffer, wire_type);
-            break;
-
-          default:
-            break;
-        }
-
-        if(::EmbeddedProto::Error::NO_ERRORS == return_value)
-        {
-          // Read the next tag.
-          tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
-        }
-      }
-
-      // When an error was detect while reading the tag but no other errors where found, set it in the return value.
-      if((::EmbeddedProto::Error::NO_ERRORS == return_value)
-         && (::EmbeddedProto::Error::NO_ERRORS != tag_value)
-         && (::EmbeddedProto::Error::END_OF_BUFFER != tag_value)) // The end of the buffer is not an array in this case.
-      {
-        return_value = tag_value;
-      }
-
-      return return_value;
-    };
-
-    void clear() override
-    {
-      clear_exit_code();
-
-    }
-
-    private:
-
-
-      EmbeddedProto::uint32 exit_code_ = 0U;
-
-};
-
-class exit_contract_result final: public ::EmbeddedProto::MessageInterface
-{
-  public:
-    exit_contract_result() = default;
-    exit_contract_result(const exit_contract_result& rhs )
-    {
-    }
-
-    exit_contract_result(const exit_contract_result&& rhs ) noexcept
-    {
-    }
-
-    ~exit_contract_result() override = default;
-
-    enum class FieldNumber : uint32_t
-    {
-      NOT_SET = 0,
-    };
-
-    exit_contract_result& operator=(const exit_contract_result& rhs)
-    {
-      return *this;
-    }
-
-    exit_contract_result& operator=(const exit_contract_result&& rhs) noexcept
+    exit_result& operator=(const exit_result&& rhs) noexcept
     {
       return *this;
     }
@@ -9698,23 +9751,23 @@ class get_caller_result final: public ::EmbeddedProto::MessageInterface
 };
 
 template<uint32_t account_LENGTH>
-class require_authority_arguments final: public ::EmbeddedProto::MessageInterface
+class check_authority_arguments final: public ::EmbeddedProto::MessageInterface
 {
   public:
-    require_authority_arguments() = default;
-    require_authority_arguments(const require_authority_arguments& rhs )
+    check_authority_arguments() = default;
+    check_authority_arguments(const check_authority_arguments& rhs )
     {
       set_type(rhs.get_type());
       set_account(rhs.get_account());
     }
 
-    require_authority_arguments(const require_authority_arguments&& rhs ) noexcept
+    check_authority_arguments(const check_authority_arguments&& rhs ) noexcept
     {
       set_type(rhs.get_type());
       set_account(rhs.get_account());
     }
 
-    ~require_authority_arguments() override = default;
+    ~check_authority_arguments() override = default;
 
     enum class FieldNumber : uint32_t
     {
@@ -9723,14 +9776,14 @@ class require_authority_arguments final: public ::EmbeddedProto::MessageInterfac
       ACCOUNT = 2
     };
 
-    require_authority_arguments& operator=(const require_authority_arguments& rhs)
+    check_authority_arguments& operator=(const check_authority_arguments& rhs)
     {
       set_type(rhs.get_type());
       set_account(rhs.get_account());
       return *this;
     }
 
-    require_authority_arguments& operator=(const require_authority_arguments&& rhs) noexcept
+    check_authority_arguments& operator=(const check_authority_arguments&& rhs) noexcept
     {
       set_type(rhs.get_type());
       set_account(rhs.get_account());
@@ -9840,39 +9893,56 @@ class require_authority_arguments final: public ::EmbeddedProto::MessageInterfac
 
 };
 
-class require_authority_result final: public ::EmbeddedProto::MessageInterface
+class check_authority_result final: public ::EmbeddedProto::MessageInterface
 {
   public:
-    require_authority_result() = default;
-    require_authority_result(const require_authority_result& rhs )
+    check_authority_result() = default;
+    check_authority_result(const check_authority_result& rhs )
     {
+      set_value(rhs.get_value());
     }
 
-    require_authority_result(const require_authority_result&& rhs ) noexcept
+    check_authority_result(const check_authority_result&& rhs ) noexcept
     {
+      set_value(rhs.get_value());
     }
 
-    ~require_authority_result() override = default;
+    ~check_authority_result() override = default;
 
     enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
+      VALUE = 1
     };
 
-    require_authority_result& operator=(const require_authority_result& rhs)
+    check_authority_result& operator=(const check_authority_result& rhs)
     {
+      set_value(rhs.get_value());
       return *this;
     }
 
-    require_authority_result& operator=(const require_authority_result&& rhs) noexcept
+    check_authority_result& operator=(const check_authority_result&& rhs) noexcept
     {
+      set_value(rhs.get_value());
       return *this;
     }
+
+    inline void clear_value() { value_.clear(); }
+    inline void set_value(const EmbeddedProto::boolean& value) { value_ = value; }
+    inline void set_value(const EmbeddedProto::boolean&& value) { value_ = value; }
+    inline EmbeddedProto::boolean& mutable_value() { return value_; }
+    inline const EmbeddedProto::boolean& get_value() const { return value_; }
+    inline EmbeddedProto::boolean::FIELD_TYPE value() const { return value_.get(); }
 
 
     ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
     {
       ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
+
+      if((false != value_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
+      {
+        return_value = value_.serialize_with_id(static_cast<uint32_t>(FieldNumber::VALUE), buffer, false);
+      }
 
       return return_value;
     };
@@ -9890,6 +9960,10 @@ class require_authority_result final: public ::EmbeddedProto::MessageInterface
         id_tag = static_cast<FieldNumber>(id_number);
         switch(id_tag)
         {
+          case FieldNumber::VALUE:
+            return_value = value_.deserialize_check_type(buffer, wire_type);
+            break;
+
           default:
             break;
         }
@@ -9914,12 +9988,14 @@ class require_authority_result final: public ::EmbeddedProto::MessageInterface
 
     void clear() override
     {
+      clear_value();
 
     }
 
     private:
 
 
+      EmbeddedProto::boolean value_ = false;
 
 };
 
