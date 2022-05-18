@@ -52,6 +52,7 @@ enum class system_call_id : uint32_t
   post_block_callback = 9,
   pre_transaction_callback = 10,
   post_transaction_callback = 11,
+  get_chain_id = 12,
   process_block_signature = 101,
   get_transaction = 102,
   get_transaction_field = 103,
@@ -61,7 +62,7 @@ enum class system_call_id : uint32_t
   get_account_nonce = 107,
   verify_account_nonce = 108,
   set_account_nonce = 109,
-  require_system_authority = 110,
+  check_system_authority = 110,
   get_account_rc = 201,
   consume_account_rc = 202,
   get_resource_limits = 203,
@@ -78,14 +79,12 @@ enum class system_call_id : uint32_t
   verify_merkle_root = 503,
   verify_signature = 504,
   verify_vrf_proof = 505,
-  call_contract = 601,
-  get_entry_point = 602,
-  get_contract_arguments = 603,
-  set_contract_result = 604,
-  exit_contract = 605,
-  get_contract_id = 606,
-  get_caller = 607,
-  require_authority = 608
+  call = 601,
+  exit = 602,
+  get_arguments = 603,
+  get_contract_id = 604,
+  get_caller = 605,
+  check_authority = 606
 };
 
 } // End of namespace chain
