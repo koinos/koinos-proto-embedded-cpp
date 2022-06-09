@@ -57,49 +57,48 @@ enum class proposal_status : uint32_t
   active = 1,
   approved = 2,
   expired = 3,
-  applied = 4
+  applied = 4,
+  failed = 5,
+  reverted = 6
 };
 
-template<uint32_t proposal_id_LENGTH, 
-uint32_t proposal_header_chain_id_LENGTH, 
-uint32_t proposal_header_nonce_LENGTH, 
-uint32_t proposal_header_operation_merkle_root_LENGTH, 
-uint32_t proposal_header_payer_LENGTH, 
-uint32_t proposal_header_payee_LENGTH, 
-uint32_t proposal_operations_REP_LENGTH, 
-uint32_t proposal_operations_upload_contract_contract_id_LENGTH, 
-uint32_t proposal_operations_upload_contract_bytecode_LENGTH, 
-uint32_t proposal_operations_upload_contract_abi_LENGTH, 
-uint32_t proposal_operations_call_contract_contract_id_LENGTH, 
-uint32_t proposal_operations_call_contract_args_LENGTH, 
-uint32_t proposal_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, 
-uint32_t proposal_operations_set_system_contract_contract_id_LENGTH, 
-uint32_t proposal_signatures_REP_LENGTH, 
-uint32_t proposal_signatures_LENGTH>
+template<uint32_t operations_REP_LENGTH, 
+uint32_t operations_upload_contract_contract_id_LENGTH, 
+uint32_t operations_upload_contract_bytecode_LENGTH, 
+uint32_t operations_upload_contract_abi_LENGTH, 
+uint32_t operations_call_contract_contract_id_LENGTH, 
+uint32_t operations_call_contract_args_LENGTH, 
+uint32_t operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, 
+uint32_t operations_set_system_contract_contract_id_LENGTH, 
+uint32_t operation_merkle_root_LENGTH>
 class proposal_record final: public ::EmbeddedProto::MessageInterface
 {
   public:
     proposal_record() = default;
     proposal_record(const proposal_record& rhs )
     {
-      set_proposal(rhs.get_proposal());
+      set_operations(rhs.get_operations());
+      set_operation_merkle_root(rhs.get_operation_merkle_root());
       set_vote_start_height(rhs.get_vote_start_height());
       set_vote_tally(rhs.get_vote_tally());
       set_vote_threshold(rhs.get_vote_threshold());
       set_shall_authorize(rhs.get_shall_authorize());
       set_updates_governance(rhs.get_updates_governance());
       set_status(rhs.get_status());
+      set_fee(rhs.get_fee());
     }
 
     proposal_record(const proposal_record&& rhs ) noexcept
     {
-      set_proposal(rhs.get_proposal());
+      set_operations(rhs.get_operations());
+      set_operation_merkle_root(rhs.get_operation_merkle_root());
       set_vote_start_height(rhs.get_vote_start_height());
       set_vote_tally(rhs.get_vote_tally());
       set_vote_threshold(rhs.get_vote_threshold());
       set_shall_authorize(rhs.get_shall_authorize());
       set_updates_governance(rhs.get_updates_governance());
       set_status(rhs.get_status());
+      set_fee(rhs.get_fee());
     }
 
     ~proposal_record() override = default;
@@ -107,45 +106,61 @@ class proposal_record final: public ::EmbeddedProto::MessageInterface
     enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
-      PROPOSAL = 1,
-      VOTE_START_HEIGHT = 2,
-      VOTE_TALLY = 3,
-      VOTE_THRESHOLD = 4,
-      SHALL_AUTHORIZE = 5,
-      UPDATES_GOVERNANCE = 6,
-      STATUS = 7
+      OPERATIONS = 1,
+      OPERATION_MERKLE_ROOT = 2,
+      VOTE_START_HEIGHT = 3,
+      VOTE_TALLY = 4,
+      VOTE_THRESHOLD = 5,
+      SHALL_AUTHORIZE = 6,
+      UPDATES_GOVERNANCE = 7,
+      STATUS = 8,
+      FEE = 9
     };
 
     proposal_record& operator=(const proposal_record& rhs)
     {
-      set_proposal(rhs.get_proposal());
+      set_operations(rhs.get_operations());
+      set_operation_merkle_root(rhs.get_operation_merkle_root());
       set_vote_start_height(rhs.get_vote_start_height());
       set_vote_tally(rhs.get_vote_tally());
       set_vote_threshold(rhs.get_vote_threshold());
       set_shall_authorize(rhs.get_shall_authorize());
       set_updates_governance(rhs.get_updates_governance());
       set_status(rhs.get_status());
+      set_fee(rhs.get_fee());
       return *this;
     }
 
     proposal_record& operator=(const proposal_record&& rhs) noexcept
     {
-      set_proposal(rhs.get_proposal());
+      set_operations(rhs.get_operations());
+      set_operation_merkle_root(rhs.get_operation_merkle_root());
       set_vote_start_height(rhs.get_vote_start_height());
       set_vote_tally(rhs.get_vote_tally());
       set_vote_threshold(rhs.get_vote_threshold());
       set_shall_authorize(rhs.get_shall_authorize());
       set_updates_governance(rhs.get_updates_governance());
       set_status(rhs.get_status());
+      set_fee(rhs.get_fee());
       return *this;
     }
 
-    inline void clear_proposal() { proposal_.clear(); }
-    inline void set_proposal(const protocol::transaction<proposal_id_LENGTH, proposal_header_chain_id_LENGTH, proposal_header_nonce_LENGTH, proposal_header_operation_merkle_root_LENGTH, proposal_header_payer_LENGTH, proposal_header_payee_LENGTH, proposal_operations_REP_LENGTH, proposal_operations_upload_contract_contract_id_LENGTH, proposal_operations_upload_contract_bytecode_LENGTH, proposal_operations_upload_contract_abi_LENGTH, proposal_operations_call_contract_contract_id_LENGTH, proposal_operations_call_contract_args_LENGTH, proposal_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, proposal_operations_set_system_contract_contract_id_LENGTH, proposal_signatures_REP_LENGTH, proposal_signatures_LENGTH>& value) { proposal_ = value; }
-    inline void set_proposal(const protocol::transaction<proposal_id_LENGTH, proposal_header_chain_id_LENGTH, proposal_header_nonce_LENGTH, proposal_header_operation_merkle_root_LENGTH, proposal_header_payer_LENGTH, proposal_header_payee_LENGTH, proposal_operations_REP_LENGTH, proposal_operations_upload_contract_contract_id_LENGTH, proposal_operations_upload_contract_bytecode_LENGTH, proposal_operations_upload_contract_abi_LENGTH, proposal_operations_call_contract_contract_id_LENGTH, proposal_operations_call_contract_args_LENGTH, proposal_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, proposal_operations_set_system_contract_contract_id_LENGTH, proposal_signatures_REP_LENGTH, proposal_signatures_LENGTH>&& value) { proposal_ = value; }
-    inline protocol::transaction<proposal_id_LENGTH, proposal_header_chain_id_LENGTH, proposal_header_nonce_LENGTH, proposal_header_operation_merkle_root_LENGTH, proposal_header_payer_LENGTH, proposal_header_payee_LENGTH, proposal_operations_REP_LENGTH, proposal_operations_upload_contract_contract_id_LENGTH, proposal_operations_upload_contract_bytecode_LENGTH, proposal_operations_upload_contract_abi_LENGTH, proposal_operations_call_contract_contract_id_LENGTH, proposal_operations_call_contract_args_LENGTH, proposal_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, proposal_operations_set_system_contract_contract_id_LENGTH, proposal_signatures_REP_LENGTH, proposal_signatures_LENGTH>& mutable_proposal() { return proposal_; }
-    inline const protocol::transaction<proposal_id_LENGTH, proposal_header_chain_id_LENGTH, proposal_header_nonce_LENGTH, proposal_header_operation_merkle_root_LENGTH, proposal_header_payer_LENGTH, proposal_header_payee_LENGTH, proposal_operations_REP_LENGTH, proposal_operations_upload_contract_contract_id_LENGTH, proposal_operations_upload_contract_bytecode_LENGTH, proposal_operations_upload_contract_abi_LENGTH, proposal_operations_call_contract_contract_id_LENGTH, proposal_operations_call_contract_args_LENGTH, proposal_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, proposal_operations_set_system_contract_contract_id_LENGTH, proposal_signatures_REP_LENGTH, proposal_signatures_LENGTH>& get_proposal() const { return proposal_; }
-    inline const protocol::transaction<proposal_id_LENGTH, proposal_header_chain_id_LENGTH, proposal_header_nonce_LENGTH, proposal_header_operation_merkle_root_LENGTH, proposal_header_payer_LENGTH, proposal_header_payee_LENGTH, proposal_operations_REP_LENGTH, proposal_operations_upload_contract_contract_id_LENGTH, proposal_operations_upload_contract_bytecode_LENGTH, proposal_operations_upload_contract_abi_LENGTH, proposal_operations_call_contract_contract_id_LENGTH, proposal_operations_call_contract_args_LENGTH, proposal_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, proposal_operations_set_system_contract_contract_id_LENGTH, proposal_signatures_REP_LENGTH, proposal_signatures_LENGTH>& proposal() const { return proposal_; }
+    inline const protocol::operation<operations_upload_contract_contract_id_LENGTH, operations_upload_contract_bytecode_LENGTH, operations_upload_contract_abi_LENGTH, operations_call_contract_contract_id_LENGTH, operations_call_contract_args_LENGTH, operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, operations_set_system_contract_contract_id_LENGTH>& operations(uint32_t index) const { return operations_[index]; }
+    inline void clear_operations() { operations_.clear(); }
+    inline void set_operations(uint32_t index, const protocol::operation<operations_upload_contract_contract_id_LENGTH, operations_upload_contract_bytecode_LENGTH, operations_upload_contract_abi_LENGTH, operations_call_contract_contract_id_LENGTH, operations_call_contract_args_LENGTH, operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, operations_set_system_contract_contract_id_LENGTH>& value) { operations_.set(index, value); }
+    inline void set_operations(uint32_t index, const protocol::operation<operations_upload_contract_contract_id_LENGTH, operations_upload_contract_bytecode_LENGTH, operations_upload_contract_abi_LENGTH, operations_call_contract_contract_id_LENGTH, operations_call_contract_args_LENGTH, operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, operations_set_system_contract_contract_id_LENGTH>&& value) { operations_.set(index, value); }
+    inline void set_operations(const ::EmbeddedProto::RepeatedFieldFixedSize<protocol::operation<operations_upload_contract_contract_id_LENGTH, operations_upload_contract_bytecode_LENGTH, operations_upload_contract_abi_LENGTH, operations_call_contract_contract_id_LENGTH, operations_call_contract_args_LENGTH, operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, operations_set_system_contract_contract_id_LENGTH>, operations_REP_LENGTH>& values) { operations_ = values; }
+    inline void add_operations(const protocol::operation<operations_upload_contract_contract_id_LENGTH, operations_upload_contract_bytecode_LENGTH, operations_upload_contract_abi_LENGTH, operations_call_contract_contract_id_LENGTH, operations_call_contract_args_LENGTH, operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, operations_set_system_contract_contract_id_LENGTH>& value) { operations_.add(value); }
+    inline ::EmbeddedProto::RepeatedFieldFixedSize<protocol::operation<operations_upload_contract_contract_id_LENGTH, operations_upload_contract_bytecode_LENGTH, operations_upload_contract_abi_LENGTH, operations_call_contract_contract_id_LENGTH, operations_call_contract_args_LENGTH, operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, operations_set_system_contract_contract_id_LENGTH>, operations_REP_LENGTH>& mutable_operations() { return operations_; }
+    inline protocol::operation<operations_upload_contract_contract_id_LENGTH, operations_upload_contract_bytecode_LENGTH, operations_upload_contract_abi_LENGTH, operations_call_contract_contract_id_LENGTH, operations_call_contract_args_LENGTH, operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, operations_set_system_contract_contract_id_LENGTH>& mutable_operations(uint32_t index) { return operations_[index]; }
+    inline const ::EmbeddedProto::RepeatedFieldFixedSize<protocol::operation<operations_upload_contract_contract_id_LENGTH, operations_upload_contract_bytecode_LENGTH, operations_upload_contract_abi_LENGTH, operations_call_contract_contract_id_LENGTH, operations_call_contract_args_LENGTH, operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, operations_set_system_contract_contract_id_LENGTH>, operations_REP_LENGTH>& get_operations() const { return operations_; }
+    inline const ::EmbeddedProto::RepeatedFieldFixedSize<protocol::operation<operations_upload_contract_contract_id_LENGTH, operations_upload_contract_bytecode_LENGTH, operations_upload_contract_abi_LENGTH, operations_call_contract_contract_id_LENGTH, operations_call_contract_args_LENGTH, operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, operations_set_system_contract_contract_id_LENGTH>, operations_REP_LENGTH>& operations() const { return operations_; }
+
+    inline void clear_operation_merkle_root() { operation_merkle_root_.clear(); }
+    inline ::EmbeddedProto::FieldBytes<operation_merkle_root_LENGTH>& mutable_operation_merkle_root() { return operation_merkle_root_; }
+    inline void set_operation_merkle_root(const ::EmbeddedProto::FieldBytes<operation_merkle_root_LENGTH>& rhs) { operation_merkle_root_.set(rhs); }
+    inline const ::EmbeddedProto::FieldBytes<operation_merkle_root_LENGTH>& get_operation_merkle_root() const { return operation_merkle_root_; }
+    inline const uint8_t* operation_merkle_root() const { return operation_merkle_root_.get_const(); }
 
     inline void clear_vote_start_height() { vote_start_height_.clear(); }
     inline void set_vote_start_height(const EmbeddedProto::uint64& value) { vote_start_height_ = value; }
@@ -188,6 +203,13 @@ class proposal_record final: public ::EmbeddedProto::MessageInterface
     inline const proposal_status& get_status() const { return status_; }
     inline proposal_status status() const { return status_; }
 
+    inline void clear_fee() { fee_.clear(); }
+    inline void set_fee(const EmbeddedProto::uint64& value) { fee_ = value; }
+    inline void set_fee(const EmbeddedProto::uint64&& value) { fee_ = value; }
+    inline EmbeddedProto::uint64& mutable_fee() { return fee_; }
+    inline const EmbeddedProto::uint64& get_fee() const { return fee_; }
+    inline EmbeddedProto::uint64::FIELD_TYPE fee() const { return fee_.get(); }
+
 
     ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
     {
@@ -195,7 +217,12 @@ class proposal_record final: public ::EmbeddedProto::MessageInterface
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = proposal_.serialize_with_id(static_cast<uint32_t>(FieldNumber::PROPOSAL), buffer, false);
+        return_value = operations_.serialize_with_id(static_cast<uint32_t>(FieldNumber::OPERATIONS), buffer, false);
+      }
+
+      if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+      {
+        return_value = operation_merkle_root_.serialize_with_id(static_cast<uint32_t>(FieldNumber::OPERATION_MERKLE_ROOT), buffer, false);
       }
 
       if((0U != vote_start_height_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
@@ -230,6 +257,11 @@ class proposal_record final: public ::EmbeddedProto::MessageInterface
         return_value = value.serialize_with_id(static_cast<uint32_t>(FieldNumber::STATUS), buffer, false);
       }
 
+      if((0U != fee_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
+      {
+        return_value = fee_.serialize_with_id(static_cast<uint32_t>(FieldNumber::FEE), buffer, false);
+      }
+
       return return_value;
     };
 
@@ -246,8 +278,12 @@ class proposal_record final: public ::EmbeddedProto::MessageInterface
         id_tag = static_cast<FieldNumber>(id_number);
         switch(id_tag)
         {
-          case FieldNumber::PROPOSAL:
-            return_value = proposal_.deserialize_check_type(buffer, wire_type);
+          case FieldNumber::OPERATIONS:
+            return_value = operations_.deserialize_check_type(buffer, wire_type);
+            break;
+
+          case FieldNumber::OPERATION_MERKLE_ROOT:
+            return_value = operation_merkle_root_.deserialize_check_type(buffer, wire_type);
             break;
 
           case FieldNumber::VOTE_START_HEIGHT:
@@ -287,6 +323,10 @@ class proposal_record final: public ::EmbeddedProto::MessageInterface
             }
             break;
 
+          case FieldNumber::FEE:
+            return_value = fee_.deserialize_check_type(buffer, wire_type);
+            break;
+
           default:
             break;
         }
@@ -311,58 +351,57 @@ class proposal_record final: public ::EmbeddedProto::MessageInterface
 
     void clear() override
     {
-      clear_proposal();
+      clear_operations();
+      clear_operation_merkle_root();
       clear_vote_start_height();
       clear_vote_tally();
       clear_vote_threshold();
       clear_shall_authorize();
       clear_updates_governance();
       clear_status();
+      clear_fee();
 
     }
 
     private:
 
 
-      protocol::transaction<proposal_id_LENGTH, proposal_header_chain_id_LENGTH, proposal_header_nonce_LENGTH, proposal_header_operation_merkle_root_LENGTH, proposal_header_payer_LENGTH, proposal_header_payee_LENGTH, proposal_operations_REP_LENGTH, proposal_operations_upload_contract_contract_id_LENGTH, proposal_operations_upload_contract_bytecode_LENGTH, proposal_operations_upload_contract_abi_LENGTH, proposal_operations_call_contract_contract_id_LENGTH, proposal_operations_call_contract_args_LENGTH, proposal_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, proposal_operations_set_system_contract_contract_id_LENGTH, proposal_signatures_REP_LENGTH, proposal_signatures_LENGTH> proposal_;
+      ::EmbeddedProto::RepeatedFieldFixedSize<protocol::operation<operations_upload_contract_contract_id_LENGTH, operations_upload_contract_bytecode_LENGTH, operations_upload_contract_abi_LENGTH, operations_call_contract_contract_id_LENGTH, operations_call_contract_args_LENGTH, operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, operations_set_system_contract_contract_id_LENGTH>, operations_REP_LENGTH> operations_;
+      ::EmbeddedProto::FieldBytes<operation_merkle_root_LENGTH> operation_merkle_root_;
       EmbeddedProto::uint64 vote_start_height_ = 0U;
       EmbeddedProto::uint64 vote_tally_ = 0U;
       EmbeddedProto::uint64 vote_threshold_ = 0U;
       EmbeddedProto::boolean shall_authorize_ = false;
       EmbeddedProto::boolean updates_governance_ = false;
       proposal_status status_ = static_cast<proposal_status>(0);
+      EmbeddedProto::uint64 fee_ = 0U;
 
 };
 
-template<uint32_t proposal_id_LENGTH, 
-uint32_t proposal_header_chain_id_LENGTH, 
-uint32_t proposal_header_nonce_LENGTH, 
-uint32_t proposal_header_operation_merkle_root_LENGTH, 
-uint32_t proposal_header_payer_LENGTH, 
-uint32_t proposal_header_payee_LENGTH, 
-uint32_t proposal_operations_REP_LENGTH, 
-uint32_t proposal_operations_upload_contract_contract_id_LENGTH, 
-uint32_t proposal_operations_upload_contract_bytecode_LENGTH, 
-uint32_t proposal_operations_upload_contract_abi_LENGTH, 
-uint32_t proposal_operations_call_contract_contract_id_LENGTH, 
-uint32_t proposal_operations_call_contract_args_LENGTH, 
-uint32_t proposal_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, 
-uint32_t proposal_operations_set_system_contract_contract_id_LENGTH, 
-uint32_t proposal_signatures_REP_LENGTH, 
-uint32_t proposal_signatures_LENGTH>
+template<uint32_t operations_REP_LENGTH, 
+uint32_t operations_upload_contract_contract_id_LENGTH, 
+uint32_t operations_upload_contract_bytecode_LENGTH, 
+uint32_t operations_upload_contract_abi_LENGTH, 
+uint32_t operations_call_contract_contract_id_LENGTH, 
+uint32_t operations_call_contract_args_LENGTH, 
+uint32_t operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, 
+uint32_t operations_set_system_contract_contract_id_LENGTH, 
+uint32_t operation_merkle_root_LENGTH>
 class submit_proposal_arguments final: public ::EmbeddedProto::MessageInterface
 {
   public:
     submit_proposal_arguments() = default;
     submit_proposal_arguments(const submit_proposal_arguments& rhs )
     {
-      set_proposal(rhs.get_proposal());
+      set_operations(rhs.get_operations());
+      set_operation_merkle_root(rhs.get_operation_merkle_root());
       set_fee(rhs.get_fee());
     }
 
     submit_proposal_arguments(const submit_proposal_arguments&& rhs ) noexcept
     {
-      set_proposal(rhs.get_proposal());
+      set_operations(rhs.get_operations());
+      set_operation_merkle_root(rhs.get_operation_merkle_root());
       set_fee(rhs.get_fee());
     }
 
@@ -371,30 +410,43 @@ class submit_proposal_arguments final: public ::EmbeddedProto::MessageInterface
     enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
-      PROPOSAL = 1,
-      FEE = 2
+      OPERATIONS = 1,
+      OPERATION_MERKLE_ROOT = 2,
+      FEE = 3
     };
 
     submit_proposal_arguments& operator=(const submit_proposal_arguments& rhs)
     {
-      set_proposal(rhs.get_proposal());
+      set_operations(rhs.get_operations());
+      set_operation_merkle_root(rhs.get_operation_merkle_root());
       set_fee(rhs.get_fee());
       return *this;
     }
 
     submit_proposal_arguments& operator=(const submit_proposal_arguments&& rhs) noexcept
     {
-      set_proposal(rhs.get_proposal());
+      set_operations(rhs.get_operations());
+      set_operation_merkle_root(rhs.get_operation_merkle_root());
       set_fee(rhs.get_fee());
       return *this;
     }
 
-    inline void clear_proposal() { proposal_.clear(); }
-    inline void set_proposal(const protocol::transaction<proposal_id_LENGTH, proposal_header_chain_id_LENGTH, proposal_header_nonce_LENGTH, proposal_header_operation_merkle_root_LENGTH, proposal_header_payer_LENGTH, proposal_header_payee_LENGTH, proposal_operations_REP_LENGTH, proposal_operations_upload_contract_contract_id_LENGTH, proposal_operations_upload_contract_bytecode_LENGTH, proposal_operations_upload_contract_abi_LENGTH, proposal_operations_call_contract_contract_id_LENGTH, proposal_operations_call_contract_args_LENGTH, proposal_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, proposal_operations_set_system_contract_contract_id_LENGTH, proposal_signatures_REP_LENGTH, proposal_signatures_LENGTH>& value) { proposal_ = value; }
-    inline void set_proposal(const protocol::transaction<proposal_id_LENGTH, proposal_header_chain_id_LENGTH, proposal_header_nonce_LENGTH, proposal_header_operation_merkle_root_LENGTH, proposal_header_payer_LENGTH, proposal_header_payee_LENGTH, proposal_operations_REP_LENGTH, proposal_operations_upload_contract_contract_id_LENGTH, proposal_operations_upload_contract_bytecode_LENGTH, proposal_operations_upload_contract_abi_LENGTH, proposal_operations_call_contract_contract_id_LENGTH, proposal_operations_call_contract_args_LENGTH, proposal_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, proposal_operations_set_system_contract_contract_id_LENGTH, proposal_signatures_REP_LENGTH, proposal_signatures_LENGTH>&& value) { proposal_ = value; }
-    inline protocol::transaction<proposal_id_LENGTH, proposal_header_chain_id_LENGTH, proposal_header_nonce_LENGTH, proposal_header_operation_merkle_root_LENGTH, proposal_header_payer_LENGTH, proposal_header_payee_LENGTH, proposal_operations_REP_LENGTH, proposal_operations_upload_contract_contract_id_LENGTH, proposal_operations_upload_contract_bytecode_LENGTH, proposal_operations_upload_contract_abi_LENGTH, proposal_operations_call_contract_contract_id_LENGTH, proposal_operations_call_contract_args_LENGTH, proposal_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, proposal_operations_set_system_contract_contract_id_LENGTH, proposal_signatures_REP_LENGTH, proposal_signatures_LENGTH>& mutable_proposal() { return proposal_; }
-    inline const protocol::transaction<proposal_id_LENGTH, proposal_header_chain_id_LENGTH, proposal_header_nonce_LENGTH, proposal_header_operation_merkle_root_LENGTH, proposal_header_payer_LENGTH, proposal_header_payee_LENGTH, proposal_operations_REP_LENGTH, proposal_operations_upload_contract_contract_id_LENGTH, proposal_operations_upload_contract_bytecode_LENGTH, proposal_operations_upload_contract_abi_LENGTH, proposal_operations_call_contract_contract_id_LENGTH, proposal_operations_call_contract_args_LENGTH, proposal_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, proposal_operations_set_system_contract_contract_id_LENGTH, proposal_signatures_REP_LENGTH, proposal_signatures_LENGTH>& get_proposal() const { return proposal_; }
-    inline const protocol::transaction<proposal_id_LENGTH, proposal_header_chain_id_LENGTH, proposal_header_nonce_LENGTH, proposal_header_operation_merkle_root_LENGTH, proposal_header_payer_LENGTH, proposal_header_payee_LENGTH, proposal_operations_REP_LENGTH, proposal_operations_upload_contract_contract_id_LENGTH, proposal_operations_upload_contract_bytecode_LENGTH, proposal_operations_upload_contract_abi_LENGTH, proposal_operations_call_contract_contract_id_LENGTH, proposal_operations_call_contract_args_LENGTH, proposal_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, proposal_operations_set_system_contract_contract_id_LENGTH, proposal_signatures_REP_LENGTH, proposal_signatures_LENGTH>& proposal() const { return proposal_; }
+    inline const protocol::operation<operations_upload_contract_contract_id_LENGTH, operations_upload_contract_bytecode_LENGTH, operations_upload_contract_abi_LENGTH, operations_call_contract_contract_id_LENGTH, operations_call_contract_args_LENGTH, operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, operations_set_system_contract_contract_id_LENGTH>& operations(uint32_t index) const { return operations_[index]; }
+    inline void clear_operations() { operations_.clear(); }
+    inline void set_operations(uint32_t index, const protocol::operation<operations_upload_contract_contract_id_LENGTH, operations_upload_contract_bytecode_LENGTH, operations_upload_contract_abi_LENGTH, operations_call_contract_contract_id_LENGTH, operations_call_contract_args_LENGTH, operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, operations_set_system_contract_contract_id_LENGTH>& value) { operations_.set(index, value); }
+    inline void set_operations(uint32_t index, const protocol::operation<operations_upload_contract_contract_id_LENGTH, operations_upload_contract_bytecode_LENGTH, operations_upload_contract_abi_LENGTH, operations_call_contract_contract_id_LENGTH, operations_call_contract_args_LENGTH, operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, operations_set_system_contract_contract_id_LENGTH>&& value) { operations_.set(index, value); }
+    inline void set_operations(const ::EmbeddedProto::RepeatedFieldFixedSize<protocol::operation<operations_upload_contract_contract_id_LENGTH, operations_upload_contract_bytecode_LENGTH, operations_upload_contract_abi_LENGTH, operations_call_contract_contract_id_LENGTH, operations_call_contract_args_LENGTH, operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, operations_set_system_contract_contract_id_LENGTH>, operations_REP_LENGTH>& values) { operations_ = values; }
+    inline void add_operations(const protocol::operation<operations_upload_contract_contract_id_LENGTH, operations_upload_contract_bytecode_LENGTH, operations_upload_contract_abi_LENGTH, operations_call_contract_contract_id_LENGTH, operations_call_contract_args_LENGTH, operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, operations_set_system_contract_contract_id_LENGTH>& value) { operations_.add(value); }
+    inline ::EmbeddedProto::RepeatedFieldFixedSize<protocol::operation<operations_upload_contract_contract_id_LENGTH, operations_upload_contract_bytecode_LENGTH, operations_upload_contract_abi_LENGTH, operations_call_contract_contract_id_LENGTH, operations_call_contract_args_LENGTH, operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, operations_set_system_contract_contract_id_LENGTH>, operations_REP_LENGTH>& mutable_operations() { return operations_; }
+    inline protocol::operation<operations_upload_contract_contract_id_LENGTH, operations_upload_contract_bytecode_LENGTH, operations_upload_contract_abi_LENGTH, operations_call_contract_contract_id_LENGTH, operations_call_contract_args_LENGTH, operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, operations_set_system_contract_contract_id_LENGTH>& mutable_operations(uint32_t index) { return operations_[index]; }
+    inline const ::EmbeddedProto::RepeatedFieldFixedSize<protocol::operation<operations_upload_contract_contract_id_LENGTH, operations_upload_contract_bytecode_LENGTH, operations_upload_contract_abi_LENGTH, operations_call_contract_contract_id_LENGTH, operations_call_contract_args_LENGTH, operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, operations_set_system_contract_contract_id_LENGTH>, operations_REP_LENGTH>& get_operations() const { return operations_; }
+    inline const ::EmbeddedProto::RepeatedFieldFixedSize<protocol::operation<operations_upload_contract_contract_id_LENGTH, operations_upload_contract_bytecode_LENGTH, operations_upload_contract_abi_LENGTH, operations_call_contract_contract_id_LENGTH, operations_call_contract_args_LENGTH, operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, operations_set_system_contract_contract_id_LENGTH>, operations_REP_LENGTH>& operations() const { return operations_; }
+
+    inline void clear_operation_merkle_root() { operation_merkle_root_.clear(); }
+    inline ::EmbeddedProto::FieldBytes<operation_merkle_root_LENGTH>& mutable_operation_merkle_root() { return operation_merkle_root_; }
+    inline void set_operation_merkle_root(const ::EmbeddedProto::FieldBytes<operation_merkle_root_LENGTH>& rhs) { operation_merkle_root_.set(rhs); }
+    inline const ::EmbeddedProto::FieldBytes<operation_merkle_root_LENGTH>& get_operation_merkle_root() const { return operation_merkle_root_; }
+    inline const uint8_t* operation_merkle_root() const { return operation_merkle_root_.get_const(); }
 
     inline void clear_fee() { fee_.clear(); }
     inline void set_fee(const EmbeddedProto::uint64& value) { fee_ = value; }
@@ -410,7 +462,12 @@ class submit_proposal_arguments final: public ::EmbeddedProto::MessageInterface
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = proposal_.serialize_with_id(static_cast<uint32_t>(FieldNumber::PROPOSAL), buffer, false);
+        return_value = operations_.serialize_with_id(static_cast<uint32_t>(FieldNumber::OPERATIONS), buffer, false);
+      }
+
+      if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+      {
+        return_value = operation_merkle_root_.serialize_with_id(static_cast<uint32_t>(FieldNumber::OPERATION_MERKLE_ROOT), buffer, false);
       }
 
       if((0U != fee_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
@@ -434,8 +491,12 @@ class submit_proposal_arguments final: public ::EmbeddedProto::MessageInterface
         id_tag = static_cast<FieldNumber>(id_number);
         switch(id_tag)
         {
-          case FieldNumber::PROPOSAL:
-            return_value = proposal_.deserialize_check_type(buffer, wire_type);
+          case FieldNumber::OPERATIONS:
+            return_value = operations_.deserialize_check_type(buffer, wire_type);
+            break;
+
+          case FieldNumber::OPERATION_MERKLE_ROOT:
+            return_value = operation_merkle_root_.deserialize_check_type(buffer, wire_type);
             break;
 
           case FieldNumber::FEE:
@@ -466,7 +527,8 @@ class submit_proposal_arguments final: public ::EmbeddedProto::MessageInterface
 
     void clear() override
     {
-      clear_proposal();
+      clear_operations();
+      clear_operation_merkle_root();
       clear_fee();
 
     }
@@ -474,7 +536,8 @@ class submit_proposal_arguments final: public ::EmbeddedProto::MessageInterface
     private:
 
 
-      protocol::transaction<proposal_id_LENGTH, proposal_header_chain_id_LENGTH, proposal_header_nonce_LENGTH, proposal_header_operation_merkle_root_LENGTH, proposal_header_payer_LENGTH, proposal_header_payee_LENGTH, proposal_operations_REP_LENGTH, proposal_operations_upload_contract_contract_id_LENGTH, proposal_operations_upload_contract_bytecode_LENGTH, proposal_operations_upload_contract_abi_LENGTH, proposal_operations_call_contract_contract_id_LENGTH, proposal_operations_call_contract_args_LENGTH, proposal_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, proposal_operations_set_system_contract_contract_id_LENGTH, proposal_signatures_REP_LENGTH, proposal_signatures_LENGTH> proposal_;
+      ::EmbeddedProto::RepeatedFieldFixedSize<protocol::operation<operations_upload_contract_contract_id_LENGTH, operations_upload_contract_bytecode_LENGTH, operations_upload_contract_abi_LENGTH, operations_call_contract_contract_id_LENGTH, operations_call_contract_args_LENGTH, operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, operations_set_system_contract_contract_id_LENGTH>, operations_REP_LENGTH> operations_;
+      ::EmbeddedProto::FieldBytes<operation_merkle_root_LENGTH> operation_merkle_root_;
       EmbeddedProto::uint64 fee_ = 0U;
 
 };
@@ -485,12 +548,10 @@ class submit_proposal_result final: public ::EmbeddedProto::MessageInterface
     submit_proposal_result() = default;
     submit_proposal_result(const submit_proposal_result& rhs )
     {
-      set_value(rhs.get_value());
     }
 
     submit_proposal_result(const submit_proposal_result&& rhs ) noexcept
     {
-      set_value(rhs.get_value());
     }
 
     ~submit_proposal_result() override = default;
@@ -498,37 +559,22 @@ class submit_proposal_result final: public ::EmbeddedProto::MessageInterface
     enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
-      VALUE = 1
     };
 
     submit_proposal_result& operator=(const submit_proposal_result& rhs)
     {
-      set_value(rhs.get_value());
       return *this;
     }
 
     submit_proposal_result& operator=(const submit_proposal_result&& rhs) noexcept
     {
-      set_value(rhs.get_value());
       return *this;
     }
-
-    inline void clear_value() { value_.clear(); }
-    inline void set_value(const EmbeddedProto::boolean& value) { value_ = value; }
-    inline void set_value(const EmbeddedProto::boolean&& value) { value_ = value; }
-    inline EmbeddedProto::boolean& mutable_value() { return value_; }
-    inline const EmbeddedProto::boolean& get_value() const { return value_; }
-    inline EmbeddedProto::boolean::FIELD_TYPE value() const { return value_.get(); }
 
 
     ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
     {
       ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
-
-      if((false != value_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
-      {
-        return_value = value_.serialize_with_id(static_cast<uint32_t>(FieldNumber::VALUE), buffer, false);
-      }
 
       return return_value;
     };
@@ -546,10 +592,6 @@ class submit_proposal_result final: public ::EmbeddedProto::MessageInterface
         id_tag = static_cast<FieldNumber>(id_number);
         switch(id_tag)
         {
-          case FieldNumber::VALUE:
-            return_value = value_.deserialize_check_type(buffer, wire_type);
-            break;
-
           default:
             break;
         }
@@ -574,14 +616,12 @@ class submit_proposal_result final: public ::EmbeddedProto::MessageInterface
 
     void clear() override
     {
-      clear_value();
 
     }
 
     private:
 
 
-      EmbeddedProto::boolean value_ = false;
 
 };
 
@@ -691,22 +731,15 @@ class get_proposal_by_id_arguments final: public ::EmbeddedProto::MessageInterfa
 
 };
 
-template<uint32_t value_proposal_id_LENGTH, 
-uint32_t value_proposal_header_chain_id_LENGTH, 
-uint32_t value_proposal_header_nonce_LENGTH, 
-uint32_t value_proposal_header_operation_merkle_root_LENGTH, 
-uint32_t value_proposal_header_payer_LENGTH, 
-uint32_t value_proposal_header_payee_LENGTH, 
-uint32_t value_proposal_operations_REP_LENGTH, 
-uint32_t value_proposal_operations_upload_contract_contract_id_LENGTH, 
-uint32_t value_proposal_operations_upload_contract_bytecode_LENGTH, 
-uint32_t value_proposal_operations_upload_contract_abi_LENGTH, 
-uint32_t value_proposal_operations_call_contract_contract_id_LENGTH, 
-uint32_t value_proposal_operations_call_contract_args_LENGTH, 
-uint32_t value_proposal_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, 
-uint32_t value_proposal_operations_set_system_contract_contract_id_LENGTH, 
-uint32_t value_proposal_signatures_REP_LENGTH, 
-uint32_t value_proposal_signatures_LENGTH>
+template<uint32_t value_operations_REP_LENGTH, 
+uint32_t value_operations_upload_contract_contract_id_LENGTH, 
+uint32_t value_operations_upload_contract_bytecode_LENGTH, 
+uint32_t value_operations_upload_contract_abi_LENGTH, 
+uint32_t value_operations_call_contract_contract_id_LENGTH, 
+uint32_t value_operations_call_contract_args_LENGTH, 
+uint32_t value_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, 
+uint32_t value_operations_set_system_contract_contract_id_LENGTH, 
+uint32_t value_operation_merkle_root_LENGTH>
 class get_proposal_by_id_result final: public ::EmbeddedProto::MessageInterface
 {
   public:
@@ -742,11 +775,11 @@ class get_proposal_by_id_result final: public ::EmbeddedProto::MessageInterface
     }
 
     inline void clear_value() { value_.clear(); }
-    inline void set_value(const proposal_record<value_proposal_id_LENGTH, value_proposal_header_chain_id_LENGTH, value_proposal_header_nonce_LENGTH, value_proposal_header_operation_merkle_root_LENGTH, value_proposal_header_payer_LENGTH, value_proposal_header_payee_LENGTH, value_proposal_operations_REP_LENGTH, value_proposal_operations_upload_contract_contract_id_LENGTH, value_proposal_operations_upload_contract_bytecode_LENGTH, value_proposal_operations_upload_contract_abi_LENGTH, value_proposal_operations_call_contract_contract_id_LENGTH, value_proposal_operations_call_contract_args_LENGTH, value_proposal_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, value_proposal_operations_set_system_contract_contract_id_LENGTH, value_proposal_signatures_REP_LENGTH, value_proposal_signatures_LENGTH>& value) { value_ = value; }
-    inline void set_value(const proposal_record<value_proposal_id_LENGTH, value_proposal_header_chain_id_LENGTH, value_proposal_header_nonce_LENGTH, value_proposal_header_operation_merkle_root_LENGTH, value_proposal_header_payer_LENGTH, value_proposal_header_payee_LENGTH, value_proposal_operations_REP_LENGTH, value_proposal_operations_upload_contract_contract_id_LENGTH, value_proposal_operations_upload_contract_bytecode_LENGTH, value_proposal_operations_upload_contract_abi_LENGTH, value_proposal_operations_call_contract_contract_id_LENGTH, value_proposal_operations_call_contract_args_LENGTH, value_proposal_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, value_proposal_operations_set_system_contract_contract_id_LENGTH, value_proposal_signatures_REP_LENGTH, value_proposal_signatures_LENGTH>&& value) { value_ = value; }
-    inline proposal_record<value_proposal_id_LENGTH, value_proposal_header_chain_id_LENGTH, value_proposal_header_nonce_LENGTH, value_proposal_header_operation_merkle_root_LENGTH, value_proposal_header_payer_LENGTH, value_proposal_header_payee_LENGTH, value_proposal_operations_REP_LENGTH, value_proposal_operations_upload_contract_contract_id_LENGTH, value_proposal_operations_upload_contract_bytecode_LENGTH, value_proposal_operations_upload_contract_abi_LENGTH, value_proposal_operations_call_contract_contract_id_LENGTH, value_proposal_operations_call_contract_args_LENGTH, value_proposal_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, value_proposal_operations_set_system_contract_contract_id_LENGTH, value_proposal_signatures_REP_LENGTH, value_proposal_signatures_LENGTH>& mutable_value() { return value_; }
-    inline const proposal_record<value_proposal_id_LENGTH, value_proposal_header_chain_id_LENGTH, value_proposal_header_nonce_LENGTH, value_proposal_header_operation_merkle_root_LENGTH, value_proposal_header_payer_LENGTH, value_proposal_header_payee_LENGTH, value_proposal_operations_REP_LENGTH, value_proposal_operations_upload_contract_contract_id_LENGTH, value_proposal_operations_upload_contract_bytecode_LENGTH, value_proposal_operations_upload_contract_abi_LENGTH, value_proposal_operations_call_contract_contract_id_LENGTH, value_proposal_operations_call_contract_args_LENGTH, value_proposal_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, value_proposal_operations_set_system_contract_contract_id_LENGTH, value_proposal_signatures_REP_LENGTH, value_proposal_signatures_LENGTH>& get_value() const { return value_; }
-    inline const proposal_record<value_proposal_id_LENGTH, value_proposal_header_chain_id_LENGTH, value_proposal_header_nonce_LENGTH, value_proposal_header_operation_merkle_root_LENGTH, value_proposal_header_payer_LENGTH, value_proposal_header_payee_LENGTH, value_proposal_operations_REP_LENGTH, value_proposal_operations_upload_contract_contract_id_LENGTH, value_proposal_operations_upload_contract_bytecode_LENGTH, value_proposal_operations_upload_contract_abi_LENGTH, value_proposal_operations_call_contract_contract_id_LENGTH, value_proposal_operations_call_contract_args_LENGTH, value_proposal_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, value_proposal_operations_set_system_contract_contract_id_LENGTH, value_proposal_signatures_REP_LENGTH, value_proposal_signatures_LENGTH>& value() const { return value_; }
+    inline void set_value(const proposal_record<value_operations_REP_LENGTH, value_operations_upload_contract_contract_id_LENGTH, value_operations_upload_contract_bytecode_LENGTH, value_operations_upload_contract_abi_LENGTH, value_operations_call_contract_contract_id_LENGTH, value_operations_call_contract_args_LENGTH, value_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, value_operations_set_system_contract_contract_id_LENGTH, value_operation_merkle_root_LENGTH>& value) { value_ = value; }
+    inline void set_value(const proposal_record<value_operations_REP_LENGTH, value_operations_upload_contract_contract_id_LENGTH, value_operations_upload_contract_bytecode_LENGTH, value_operations_upload_contract_abi_LENGTH, value_operations_call_contract_contract_id_LENGTH, value_operations_call_contract_args_LENGTH, value_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, value_operations_set_system_contract_contract_id_LENGTH, value_operation_merkle_root_LENGTH>&& value) { value_ = value; }
+    inline proposal_record<value_operations_REP_LENGTH, value_operations_upload_contract_contract_id_LENGTH, value_operations_upload_contract_bytecode_LENGTH, value_operations_upload_contract_abi_LENGTH, value_operations_call_contract_contract_id_LENGTH, value_operations_call_contract_args_LENGTH, value_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, value_operations_set_system_contract_contract_id_LENGTH, value_operation_merkle_root_LENGTH>& mutable_value() { return value_; }
+    inline const proposal_record<value_operations_REP_LENGTH, value_operations_upload_contract_contract_id_LENGTH, value_operations_upload_contract_bytecode_LENGTH, value_operations_upload_contract_abi_LENGTH, value_operations_call_contract_contract_id_LENGTH, value_operations_call_contract_args_LENGTH, value_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, value_operations_set_system_contract_contract_id_LENGTH, value_operation_merkle_root_LENGTH>& get_value() const { return value_; }
+    inline const proposal_record<value_operations_REP_LENGTH, value_operations_upload_contract_contract_id_LENGTH, value_operations_upload_contract_bytecode_LENGTH, value_operations_upload_contract_abi_LENGTH, value_operations_call_contract_contract_id_LENGTH, value_operations_call_contract_args_LENGTH, value_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, value_operations_set_system_contract_contract_id_LENGTH, value_operation_merkle_root_LENGTH>& value() const { return value_; }
 
 
     ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
@@ -809,7 +842,7 @@ class get_proposal_by_id_result final: public ::EmbeddedProto::MessageInterface
     private:
 
 
-      proposal_record<value_proposal_id_LENGTH, value_proposal_header_chain_id_LENGTH, value_proposal_header_nonce_LENGTH, value_proposal_header_operation_merkle_root_LENGTH, value_proposal_header_payer_LENGTH, value_proposal_header_payee_LENGTH, value_proposal_operations_REP_LENGTH, value_proposal_operations_upload_contract_contract_id_LENGTH, value_proposal_operations_upload_contract_bytecode_LENGTH, value_proposal_operations_upload_contract_abi_LENGTH, value_proposal_operations_call_contract_contract_id_LENGTH, value_proposal_operations_call_contract_args_LENGTH, value_proposal_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, value_proposal_operations_set_system_contract_contract_id_LENGTH, value_proposal_signatures_REP_LENGTH, value_proposal_signatures_LENGTH> value_;
+      proposal_record<value_operations_REP_LENGTH, value_operations_upload_contract_contract_id_LENGTH, value_operations_upload_contract_bytecode_LENGTH, value_operations_upload_contract_abi_LENGTH, value_operations_call_contract_contract_id_LENGTH, value_operations_call_contract_args_LENGTH, value_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, value_operations_set_system_contract_contract_id_LENGTH, value_operation_merkle_root_LENGTH> value_;
 
 };
 
@@ -980,22 +1013,15 @@ class get_proposals_by_status_arguments final: public ::EmbeddedProto::MessageIn
 };
 
 template<uint32_t value_REP_LENGTH, 
-uint32_t value_proposal_id_LENGTH, 
-uint32_t value_proposal_header_chain_id_LENGTH, 
-uint32_t value_proposal_header_nonce_LENGTH, 
-uint32_t value_proposal_header_operation_merkle_root_LENGTH, 
-uint32_t value_proposal_header_payer_LENGTH, 
-uint32_t value_proposal_header_payee_LENGTH, 
-uint32_t value_proposal_operations_REP_LENGTH, 
-uint32_t value_proposal_operations_upload_contract_contract_id_LENGTH, 
-uint32_t value_proposal_operations_upload_contract_bytecode_LENGTH, 
-uint32_t value_proposal_operations_upload_contract_abi_LENGTH, 
-uint32_t value_proposal_operations_call_contract_contract_id_LENGTH, 
-uint32_t value_proposal_operations_call_contract_args_LENGTH, 
-uint32_t value_proposal_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, 
-uint32_t value_proposal_operations_set_system_contract_contract_id_LENGTH, 
-uint32_t value_proposal_signatures_REP_LENGTH, 
-uint32_t value_proposal_signatures_LENGTH>
+uint32_t value_operations_REP_LENGTH, 
+uint32_t value_operations_upload_contract_contract_id_LENGTH, 
+uint32_t value_operations_upload_contract_bytecode_LENGTH, 
+uint32_t value_operations_upload_contract_abi_LENGTH, 
+uint32_t value_operations_call_contract_contract_id_LENGTH, 
+uint32_t value_operations_call_contract_args_LENGTH, 
+uint32_t value_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, 
+uint32_t value_operations_set_system_contract_contract_id_LENGTH, 
+uint32_t value_operation_merkle_root_LENGTH>
 class get_proposals_by_status_result final: public ::EmbeddedProto::MessageInterface
 {
   public:
@@ -1030,16 +1056,16 @@ class get_proposals_by_status_result final: public ::EmbeddedProto::MessageInter
       return *this;
     }
 
-    inline const proposal_record<value_proposal_id_LENGTH, value_proposal_header_chain_id_LENGTH, value_proposal_header_nonce_LENGTH, value_proposal_header_operation_merkle_root_LENGTH, value_proposal_header_payer_LENGTH, value_proposal_header_payee_LENGTH, value_proposal_operations_REP_LENGTH, value_proposal_operations_upload_contract_contract_id_LENGTH, value_proposal_operations_upload_contract_bytecode_LENGTH, value_proposal_operations_upload_contract_abi_LENGTH, value_proposal_operations_call_contract_contract_id_LENGTH, value_proposal_operations_call_contract_args_LENGTH, value_proposal_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, value_proposal_operations_set_system_contract_contract_id_LENGTH, value_proposal_signatures_REP_LENGTH, value_proposal_signatures_LENGTH>& value(uint32_t index) const { return value_[index]; }
+    inline const proposal_record<value_operations_REP_LENGTH, value_operations_upload_contract_contract_id_LENGTH, value_operations_upload_contract_bytecode_LENGTH, value_operations_upload_contract_abi_LENGTH, value_operations_call_contract_contract_id_LENGTH, value_operations_call_contract_args_LENGTH, value_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, value_operations_set_system_contract_contract_id_LENGTH, value_operation_merkle_root_LENGTH>& value(uint32_t index) const { return value_[index]; }
     inline void clear_value() { value_.clear(); }
-    inline void set_value(uint32_t index, const proposal_record<value_proposal_id_LENGTH, value_proposal_header_chain_id_LENGTH, value_proposal_header_nonce_LENGTH, value_proposal_header_operation_merkle_root_LENGTH, value_proposal_header_payer_LENGTH, value_proposal_header_payee_LENGTH, value_proposal_operations_REP_LENGTH, value_proposal_operations_upload_contract_contract_id_LENGTH, value_proposal_operations_upload_contract_bytecode_LENGTH, value_proposal_operations_upload_contract_abi_LENGTH, value_proposal_operations_call_contract_contract_id_LENGTH, value_proposal_operations_call_contract_args_LENGTH, value_proposal_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, value_proposal_operations_set_system_contract_contract_id_LENGTH, value_proposal_signatures_REP_LENGTH, value_proposal_signatures_LENGTH>& value) { value_.set(index, value); }
-    inline void set_value(uint32_t index, const proposal_record<value_proposal_id_LENGTH, value_proposal_header_chain_id_LENGTH, value_proposal_header_nonce_LENGTH, value_proposal_header_operation_merkle_root_LENGTH, value_proposal_header_payer_LENGTH, value_proposal_header_payee_LENGTH, value_proposal_operations_REP_LENGTH, value_proposal_operations_upload_contract_contract_id_LENGTH, value_proposal_operations_upload_contract_bytecode_LENGTH, value_proposal_operations_upload_contract_abi_LENGTH, value_proposal_operations_call_contract_contract_id_LENGTH, value_proposal_operations_call_contract_args_LENGTH, value_proposal_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, value_proposal_operations_set_system_contract_contract_id_LENGTH, value_proposal_signatures_REP_LENGTH, value_proposal_signatures_LENGTH>&& value) { value_.set(index, value); }
-    inline void set_value(const ::EmbeddedProto::RepeatedFieldFixedSize<proposal_record<value_proposal_id_LENGTH, value_proposal_header_chain_id_LENGTH, value_proposal_header_nonce_LENGTH, value_proposal_header_operation_merkle_root_LENGTH, value_proposal_header_payer_LENGTH, value_proposal_header_payee_LENGTH, value_proposal_operations_REP_LENGTH, value_proposal_operations_upload_contract_contract_id_LENGTH, value_proposal_operations_upload_contract_bytecode_LENGTH, value_proposal_operations_upload_contract_abi_LENGTH, value_proposal_operations_call_contract_contract_id_LENGTH, value_proposal_operations_call_contract_args_LENGTH, value_proposal_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, value_proposal_operations_set_system_contract_contract_id_LENGTH, value_proposal_signatures_REP_LENGTH, value_proposal_signatures_LENGTH>, value_REP_LENGTH>& values) { value_ = values; }
-    inline void add_value(const proposal_record<value_proposal_id_LENGTH, value_proposal_header_chain_id_LENGTH, value_proposal_header_nonce_LENGTH, value_proposal_header_operation_merkle_root_LENGTH, value_proposal_header_payer_LENGTH, value_proposal_header_payee_LENGTH, value_proposal_operations_REP_LENGTH, value_proposal_operations_upload_contract_contract_id_LENGTH, value_proposal_operations_upload_contract_bytecode_LENGTH, value_proposal_operations_upload_contract_abi_LENGTH, value_proposal_operations_call_contract_contract_id_LENGTH, value_proposal_operations_call_contract_args_LENGTH, value_proposal_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, value_proposal_operations_set_system_contract_contract_id_LENGTH, value_proposal_signatures_REP_LENGTH, value_proposal_signatures_LENGTH>& value) { value_.add(value); }
-    inline ::EmbeddedProto::RepeatedFieldFixedSize<proposal_record<value_proposal_id_LENGTH, value_proposal_header_chain_id_LENGTH, value_proposal_header_nonce_LENGTH, value_proposal_header_operation_merkle_root_LENGTH, value_proposal_header_payer_LENGTH, value_proposal_header_payee_LENGTH, value_proposal_operations_REP_LENGTH, value_proposal_operations_upload_contract_contract_id_LENGTH, value_proposal_operations_upload_contract_bytecode_LENGTH, value_proposal_operations_upload_contract_abi_LENGTH, value_proposal_operations_call_contract_contract_id_LENGTH, value_proposal_operations_call_contract_args_LENGTH, value_proposal_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, value_proposal_operations_set_system_contract_contract_id_LENGTH, value_proposal_signatures_REP_LENGTH, value_proposal_signatures_LENGTH>, value_REP_LENGTH>& mutable_value() { return value_; }
-    inline proposal_record<value_proposal_id_LENGTH, value_proposal_header_chain_id_LENGTH, value_proposal_header_nonce_LENGTH, value_proposal_header_operation_merkle_root_LENGTH, value_proposal_header_payer_LENGTH, value_proposal_header_payee_LENGTH, value_proposal_operations_REP_LENGTH, value_proposal_operations_upload_contract_contract_id_LENGTH, value_proposal_operations_upload_contract_bytecode_LENGTH, value_proposal_operations_upload_contract_abi_LENGTH, value_proposal_operations_call_contract_contract_id_LENGTH, value_proposal_operations_call_contract_args_LENGTH, value_proposal_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, value_proposal_operations_set_system_contract_contract_id_LENGTH, value_proposal_signatures_REP_LENGTH, value_proposal_signatures_LENGTH>& mutable_value(uint32_t index) { return value_[index]; }
-    inline const ::EmbeddedProto::RepeatedFieldFixedSize<proposal_record<value_proposal_id_LENGTH, value_proposal_header_chain_id_LENGTH, value_proposal_header_nonce_LENGTH, value_proposal_header_operation_merkle_root_LENGTH, value_proposal_header_payer_LENGTH, value_proposal_header_payee_LENGTH, value_proposal_operations_REP_LENGTH, value_proposal_operations_upload_contract_contract_id_LENGTH, value_proposal_operations_upload_contract_bytecode_LENGTH, value_proposal_operations_upload_contract_abi_LENGTH, value_proposal_operations_call_contract_contract_id_LENGTH, value_proposal_operations_call_contract_args_LENGTH, value_proposal_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, value_proposal_operations_set_system_contract_contract_id_LENGTH, value_proposal_signatures_REP_LENGTH, value_proposal_signatures_LENGTH>, value_REP_LENGTH>& get_value() const { return value_; }
-    inline const ::EmbeddedProto::RepeatedFieldFixedSize<proposal_record<value_proposal_id_LENGTH, value_proposal_header_chain_id_LENGTH, value_proposal_header_nonce_LENGTH, value_proposal_header_operation_merkle_root_LENGTH, value_proposal_header_payer_LENGTH, value_proposal_header_payee_LENGTH, value_proposal_operations_REP_LENGTH, value_proposal_operations_upload_contract_contract_id_LENGTH, value_proposal_operations_upload_contract_bytecode_LENGTH, value_proposal_operations_upload_contract_abi_LENGTH, value_proposal_operations_call_contract_contract_id_LENGTH, value_proposal_operations_call_contract_args_LENGTH, value_proposal_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, value_proposal_operations_set_system_contract_contract_id_LENGTH, value_proposal_signatures_REP_LENGTH, value_proposal_signatures_LENGTH>, value_REP_LENGTH>& value() const { return value_; }
+    inline void set_value(uint32_t index, const proposal_record<value_operations_REP_LENGTH, value_operations_upload_contract_contract_id_LENGTH, value_operations_upload_contract_bytecode_LENGTH, value_operations_upload_contract_abi_LENGTH, value_operations_call_contract_contract_id_LENGTH, value_operations_call_contract_args_LENGTH, value_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, value_operations_set_system_contract_contract_id_LENGTH, value_operation_merkle_root_LENGTH>& value) { value_.set(index, value); }
+    inline void set_value(uint32_t index, const proposal_record<value_operations_REP_LENGTH, value_operations_upload_contract_contract_id_LENGTH, value_operations_upload_contract_bytecode_LENGTH, value_operations_upload_contract_abi_LENGTH, value_operations_call_contract_contract_id_LENGTH, value_operations_call_contract_args_LENGTH, value_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, value_operations_set_system_contract_contract_id_LENGTH, value_operation_merkle_root_LENGTH>&& value) { value_.set(index, value); }
+    inline void set_value(const ::EmbeddedProto::RepeatedFieldFixedSize<proposal_record<value_operations_REP_LENGTH, value_operations_upload_contract_contract_id_LENGTH, value_operations_upload_contract_bytecode_LENGTH, value_operations_upload_contract_abi_LENGTH, value_operations_call_contract_contract_id_LENGTH, value_operations_call_contract_args_LENGTH, value_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, value_operations_set_system_contract_contract_id_LENGTH, value_operation_merkle_root_LENGTH>, value_REP_LENGTH>& values) { value_ = values; }
+    inline void add_value(const proposal_record<value_operations_REP_LENGTH, value_operations_upload_contract_contract_id_LENGTH, value_operations_upload_contract_bytecode_LENGTH, value_operations_upload_contract_abi_LENGTH, value_operations_call_contract_contract_id_LENGTH, value_operations_call_contract_args_LENGTH, value_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, value_operations_set_system_contract_contract_id_LENGTH, value_operation_merkle_root_LENGTH>& value) { value_.add(value); }
+    inline ::EmbeddedProto::RepeatedFieldFixedSize<proposal_record<value_operations_REP_LENGTH, value_operations_upload_contract_contract_id_LENGTH, value_operations_upload_contract_bytecode_LENGTH, value_operations_upload_contract_abi_LENGTH, value_operations_call_contract_contract_id_LENGTH, value_operations_call_contract_args_LENGTH, value_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, value_operations_set_system_contract_contract_id_LENGTH, value_operation_merkle_root_LENGTH>, value_REP_LENGTH>& mutable_value() { return value_; }
+    inline proposal_record<value_operations_REP_LENGTH, value_operations_upload_contract_contract_id_LENGTH, value_operations_upload_contract_bytecode_LENGTH, value_operations_upload_contract_abi_LENGTH, value_operations_call_contract_contract_id_LENGTH, value_operations_call_contract_args_LENGTH, value_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, value_operations_set_system_contract_contract_id_LENGTH, value_operation_merkle_root_LENGTH>& mutable_value(uint32_t index) { return value_[index]; }
+    inline const ::EmbeddedProto::RepeatedFieldFixedSize<proposal_record<value_operations_REP_LENGTH, value_operations_upload_contract_contract_id_LENGTH, value_operations_upload_contract_bytecode_LENGTH, value_operations_upload_contract_abi_LENGTH, value_operations_call_contract_contract_id_LENGTH, value_operations_call_contract_args_LENGTH, value_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, value_operations_set_system_contract_contract_id_LENGTH, value_operation_merkle_root_LENGTH>, value_REP_LENGTH>& get_value() const { return value_; }
+    inline const ::EmbeddedProto::RepeatedFieldFixedSize<proposal_record<value_operations_REP_LENGTH, value_operations_upload_contract_contract_id_LENGTH, value_operations_upload_contract_bytecode_LENGTH, value_operations_upload_contract_abi_LENGTH, value_operations_call_contract_contract_id_LENGTH, value_operations_call_contract_args_LENGTH, value_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, value_operations_set_system_contract_contract_id_LENGTH, value_operation_merkle_root_LENGTH>, value_REP_LENGTH>& value() const { return value_; }
 
 
     ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
@@ -1102,7 +1128,7 @@ class get_proposals_by_status_result final: public ::EmbeddedProto::MessageInter
     private:
 
 
-      ::EmbeddedProto::RepeatedFieldFixedSize<proposal_record<value_proposal_id_LENGTH, value_proposal_header_chain_id_LENGTH, value_proposal_header_nonce_LENGTH, value_proposal_header_operation_merkle_root_LENGTH, value_proposal_header_payer_LENGTH, value_proposal_header_payee_LENGTH, value_proposal_operations_REP_LENGTH, value_proposal_operations_upload_contract_contract_id_LENGTH, value_proposal_operations_upload_contract_bytecode_LENGTH, value_proposal_operations_upload_contract_abi_LENGTH, value_proposal_operations_call_contract_contract_id_LENGTH, value_proposal_operations_call_contract_args_LENGTH, value_proposal_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, value_proposal_operations_set_system_contract_contract_id_LENGTH, value_proposal_signatures_REP_LENGTH, value_proposal_signatures_LENGTH>, value_REP_LENGTH> value_;
+      ::EmbeddedProto::RepeatedFieldFixedSize<proposal_record<value_operations_REP_LENGTH, value_operations_upload_contract_contract_id_LENGTH, value_operations_upload_contract_bytecode_LENGTH, value_operations_upload_contract_abi_LENGTH, value_operations_call_contract_contract_id_LENGTH, value_operations_call_contract_args_LENGTH, value_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, value_operations_set_system_contract_contract_id_LENGTH, value_operation_merkle_root_LENGTH>, value_REP_LENGTH> value_;
 
 };
 
@@ -1236,22 +1262,15 @@ class get_proposals_arguments final: public ::EmbeddedProto::MessageInterface
 };
 
 template<uint32_t value_REP_LENGTH, 
-uint32_t value_proposal_id_LENGTH, 
-uint32_t value_proposal_header_chain_id_LENGTH, 
-uint32_t value_proposal_header_nonce_LENGTH, 
-uint32_t value_proposal_header_operation_merkle_root_LENGTH, 
-uint32_t value_proposal_header_payer_LENGTH, 
-uint32_t value_proposal_header_payee_LENGTH, 
-uint32_t value_proposal_operations_REP_LENGTH, 
-uint32_t value_proposal_operations_upload_contract_contract_id_LENGTH, 
-uint32_t value_proposal_operations_upload_contract_bytecode_LENGTH, 
-uint32_t value_proposal_operations_upload_contract_abi_LENGTH, 
-uint32_t value_proposal_operations_call_contract_contract_id_LENGTH, 
-uint32_t value_proposal_operations_call_contract_args_LENGTH, 
-uint32_t value_proposal_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, 
-uint32_t value_proposal_operations_set_system_contract_contract_id_LENGTH, 
-uint32_t value_proposal_signatures_REP_LENGTH, 
-uint32_t value_proposal_signatures_LENGTH>
+uint32_t value_operations_REP_LENGTH, 
+uint32_t value_operations_upload_contract_contract_id_LENGTH, 
+uint32_t value_operations_upload_contract_bytecode_LENGTH, 
+uint32_t value_operations_upload_contract_abi_LENGTH, 
+uint32_t value_operations_call_contract_contract_id_LENGTH, 
+uint32_t value_operations_call_contract_args_LENGTH, 
+uint32_t value_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, 
+uint32_t value_operations_set_system_contract_contract_id_LENGTH, 
+uint32_t value_operation_merkle_root_LENGTH>
 class get_proposals_result final: public ::EmbeddedProto::MessageInterface
 {
   public:
@@ -1286,16 +1305,16 @@ class get_proposals_result final: public ::EmbeddedProto::MessageInterface
       return *this;
     }
 
-    inline const proposal_record<value_proposal_id_LENGTH, value_proposal_header_chain_id_LENGTH, value_proposal_header_nonce_LENGTH, value_proposal_header_operation_merkle_root_LENGTH, value_proposal_header_payer_LENGTH, value_proposal_header_payee_LENGTH, value_proposal_operations_REP_LENGTH, value_proposal_operations_upload_contract_contract_id_LENGTH, value_proposal_operations_upload_contract_bytecode_LENGTH, value_proposal_operations_upload_contract_abi_LENGTH, value_proposal_operations_call_contract_contract_id_LENGTH, value_proposal_operations_call_contract_args_LENGTH, value_proposal_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, value_proposal_operations_set_system_contract_contract_id_LENGTH, value_proposal_signatures_REP_LENGTH, value_proposal_signatures_LENGTH>& value(uint32_t index) const { return value_[index]; }
+    inline const proposal_record<value_operations_REP_LENGTH, value_operations_upload_contract_contract_id_LENGTH, value_operations_upload_contract_bytecode_LENGTH, value_operations_upload_contract_abi_LENGTH, value_operations_call_contract_contract_id_LENGTH, value_operations_call_contract_args_LENGTH, value_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, value_operations_set_system_contract_contract_id_LENGTH, value_operation_merkle_root_LENGTH>& value(uint32_t index) const { return value_[index]; }
     inline void clear_value() { value_.clear(); }
-    inline void set_value(uint32_t index, const proposal_record<value_proposal_id_LENGTH, value_proposal_header_chain_id_LENGTH, value_proposal_header_nonce_LENGTH, value_proposal_header_operation_merkle_root_LENGTH, value_proposal_header_payer_LENGTH, value_proposal_header_payee_LENGTH, value_proposal_operations_REP_LENGTH, value_proposal_operations_upload_contract_contract_id_LENGTH, value_proposal_operations_upload_contract_bytecode_LENGTH, value_proposal_operations_upload_contract_abi_LENGTH, value_proposal_operations_call_contract_contract_id_LENGTH, value_proposal_operations_call_contract_args_LENGTH, value_proposal_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, value_proposal_operations_set_system_contract_contract_id_LENGTH, value_proposal_signatures_REP_LENGTH, value_proposal_signatures_LENGTH>& value) { value_.set(index, value); }
-    inline void set_value(uint32_t index, const proposal_record<value_proposal_id_LENGTH, value_proposal_header_chain_id_LENGTH, value_proposal_header_nonce_LENGTH, value_proposal_header_operation_merkle_root_LENGTH, value_proposal_header_payer_LENGTH, value_proposal_header_payee_LENGTH, value_proposal_operations_REP_LENGTH, value_proposal_operations_upload_contract_contract_id_LENGTH, value_proposal_operations_upload_contract_bytecode_LENGTH, value_proposal_operations_upload_contract_abi_LENGTH, value_proposal_operations_call_contract_contract_id_LENGTH, value_proposal_operations_call_contract_args_LENGTH, value_proposal_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, value_proposal_operations_set_system_contract_contract_id_LENGTH, value_proposal_signatures_REP_LENGTH, value_proposal_signatures_LENGTH>&& value) { value_.set(index, value); }
-    inline void set_value(const ::EmbeddedProto::RepeatedFieldFixedSize<proposal_record<value_proposal_id_LENGTH, value_proposal_header_chain_id_LENGTH, value_proposal_header_nonce_LENGTH, value_proposal_header_operation_merkle_root_LENGTH, value_proposal_header_payer_LENGTH, value_proposal_header_payee_LENGTH, value_proposal_operations_REP_LENGTH, value_proposal_operations_upload_contract_contract_id_LENGTH, value_proposal_operations_upload_contract_bytecode_LENGTH, value_proposal_operations_upload_contract_abi_LENGTH, value_proposal_operations_call_contract_contract_id_LENGTH, value_proposal_operations_call_contract_args_LENGTH, value_proposal_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, value_proposal_operations_set_system_contract_contract_id_LENGTH, value_proposal_signatures_REP_LENGTH, value_proposal_signatures_LENGTH>, value_REP_LENGTH>& values) { value_ = values; }
-    inline void add_value(const proposal_record<value_proposal_id_LENGTH, value_proposal_header_chain_id_LENGTH, value_proposal_header_nonce_LENGTH, value_proposal_header_operation_merkle_root_LENGTH, value_proposal_header_payer_LENGTH, value_proposal_header_payee_LENGTH, value_proposal_operations_REP_LENGTH, value_proposal_operations_upload_contract_contract_id_LENGTH, value_proposal_operations_upload_contract_bytecode_LENGTH, value_proposal_operations_upload_contract_abi_LENGTH, value_proposal_operations_call_contract_contract_id_LENGTH, value_proposal_operations_call_contract_args_LENGTH, value_proposal_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, value_proposal_operations_set_system_contract_contract_id_LENGTH, value_proposal_signatures_REP_LENGTH, value_proposal_signatures_LENGTH>& value) { value_.add(value); }
-    inline ::EmbeddedProto::RepeatedFieldFixedSize<proposal_record<value_proposal_id_LENGTH, value_proposal_header_chain_id_LENGTH, value_proposal_header_nonce_LENGTH, value_proposal_header_operation_merkle_root_LENGTH, value_proposal_header_payer_LENGTH, value_proposal_header_payee_LENGTH, value_proposal_operations_REP_LENGTH, value_proposal_operations_upload_contract_contract_id_LENGTH, value_proposal_operations_upload_contract_bytecode_LENGTH, value_proposal_operations_upload_contract_abi_LENGTH, value_proposal_operations_call_contract_contract_id_LENGTH, value_proposal_operations_call_contract_args_LENGTH, value_proposal_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, value_proposal_operations_set_system_contract_contract_id_LENGTH, value_proposal_signatures_REP_LENGTH, value_proposal_signatures_LENGTH>, value_REP_LENGTH>& mutable_value() { return value_; }
-    inline proposal_record<value_proposal_id_LENGTH, value_proposal_header_chain_id_LENGTH, value_proposal_header_nonce_LENGTH, value_proposal_header_operation_merkle_root_LENGTH, value_proposal_header_payer_LENGTH, value_proposal_header_payee_LENGTH, value_proposal_operations_REP_LENGTH, value_proposal_operations_upload_contract_contract_id_LENGTH, value_proposal_operations_upload_contract_bytecode_LENGTH, value_proposal_operations_upload_contract_abi_LENGTH, value_proposal_operations_call_contract_contract_id_LENGTH, value_proposal_operations_call_contract_args_LENGTH, value_proposal_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, value_proposal_operations_set_system_contract_contract_id_LENGTH, value_proposal_signatures_REP_LENGTH, value_proposal_signatures_LENGTH>& mutable_value(uint32_t index) { return value_[index]; }
-    inline const ::EmbeddedProto::RepeatedFieldFixedSize<proposal_record<value_proposal_id_LENGTH, value_proposal_header_chain_id_LENGTH, value_proposal_header_nonce_LENGTH, value_proposal_header_operation_merkle_root_LENGTH, value_proposal_header_payer_LENGTH, value_proposal_header_payee_LENGTH, value_proposal_operations_REP_LENGTH, value_proposal_operations_upload_contract_contract_id_LENGTH, value_proposal_operations_upload_contract_bytecode_LENGTH, value_proposal_operations_upload_contract_abi_LENGTH, value_proposal_operations_call_contract_contract_id_LENGTH, value_proposal_operations_call_contract_args_LENGTH, value_proposal_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, value_proposal_operations_set_system_contract_contract_id_LENGTH, value_proposal_signatures_REP_LENGTH, value_proposal_signatures_LENGTH>, value_REP_LENGTH>& get_value() const { return value_; }
-    inline const ::EmbeddedProto::RepeatedFieldFixedSize<proposal_record<value_proposal_id_LENGTH, value_proposal_header_chain_id_LENGTH, value_proposal_header_nonce_LENGTH, value_proposal_header_operation_merkle_root_LENGTH, value_proposal_header_payer_LENGTH, value_proposal_header_payee_LENGTH, value_proposal_operations_REP_LENGTH, value_proposal_operations_upload_contract_contract_id_LENGTH, value_proposal_operations_upload_contract_bytecode_LENGTH, value_proposal_operations_upload_contract_abi_LENGTH, value_proposal_operations_call_contract_contract_id_LENGTH, value_proposal_operations_call_contract_args_LENGTH, value_proposal_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, value_proposal_operations_set_system_contract_contract_id_LENGTH, value_proposal_signatures_REP_LENGTH, value_proposal_signatures_LENGTH>, value_REP_LENGTH>& value() const { return value_; }
+    inline void set_value(uint32_t index, const proposal_record<value_operations_REP_LENGTH, value_operations_upload_contract_contract_id_LENGTH, value_operations_upload_contract_bytecode_LENGTH, value_operations_upload_contract_abi_LENGTH, value_operations_call_contract_contract_id_LENGTH, value_operations_call_contract_args_LENGTH, value_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, value_operations_set_system_contract_contract_id_LENGTH, value_operation_merkle_root_LENGTH>& value) { value_.set(index, value); }
+    inline void set_value(uint32_t index, const proposal_record<value_operations_REP_LENGTH, value_operations_upload_contract_contract_id_LENGTH, value_operations_upload_contract_bytecode_LENGTH, value_operations_upload_contract_abi_LENGTH, value_operations_call_contract_contract_id_LENGTH, value_operations_call_contract_args_LENGTH, value_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, value_operations_set_system_contract_contract_id_LENGTH, value_operation_merkle_root_LENGTH>&& value) { value_.set(index, value); }
+    inline void set_value(const ::EmbeddedProto::RepeatedFieldFixedSize<proposal_record<value_operations_REP_LENGTH, value_operations_upload_contract_contract_id_LENGTH, value_operations_upload_contract_bytecode_LENGTH, value_operations_upload_contract_abi_LENGTH, value_operations_call_contract_contract_id_LENGTH, value_operations_call_contract_args_LENGTH, value_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, value_operations_set_system_contract_contract_id_LENGTH, value_operation_merkle_root_LENGTH>, value_REP_LENGTH>& values) { value_ = values; }
+    inline void add_value(const proposal_record<value_operations_REP_LENGTH, value_operations_upload_contract_contract_id_LENGTH, value_operations_upload_contract_bytecode_LENGTH, value_operations_upload_contract_abi_LENGTH, value_operations_call_contract_contract_id_LENGTH, value_operations_call_contract_args_LENGTH, value_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, value_operations_set_system_contract_contract_id_LENGTH, value_operation_merkle_root_LENGTH>& value) { value_.add(value); }
+    inline ::EmbeddedProto::RepeatedFieldFixedSize<proposal_record<value_operations_REP_LENGTH, value_operations_upload_contract_contract_id_LENGTH, value_operations_upload_contract_bytecode_LENGTH, value_operations_upload_contract_abi_LENGTH, value_operations_call_contract_contract_id_LENGTH, value_operations_call_contract_args_LENGTH, value_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, value_operations_set_system_contract_contract_id_LENGTH, value_operation_merkle_root_LENGTH>, value_REP_LENGTH>& mutable_value() { return value_; }
+    inline proposal_record<value_operations_REP_LENGTH, value_operations_upload_contract_contract_id_LENGTH, value_operations_upload_contract_bytecode_LENGTH, value_operations_upload_contract_abi_LENGTH, value_operations_call_contract_contract_id_LENGTH, value_operations_call_contract_args_LENGTH, value_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, value_operations_set_system_contract_contract_id_LENGTH, value_operation_merkle_root_LENGTH>& mutable_value(uint32_t index) { return value_[index]; }
+    inline const ::EmbeddedProto::RepeatedFieldFixedSize<proposal_record<value_operations_REP_LENGTH, value_operations_upload_contract_contract_id_LENGTH, value_operations_upload_contract_bytecode_LENGTH, value_operations_upload_contract_abi_LENGTH, value_operations_call_contract_contract_id_LENGTH, value_operations_call_contract_args_LENGTH, value_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, value_operations_set_system_contract_contract_id_LENGTH, value_operation_merkle_root_LENGTH>, value_REP_LENGTH>& get_value() const { return value_; }
+    inline const ::EmbeddedProto::RepeatedFieldFixedSize<proposal_record<value_operations_REP_LENGTH, value_operations_upload_contract_contract_id_LENGTH, value_operations_upload_contract_bytecode_LENGTH, value_operations_upload_contract_abi_LENGTH, value_operations_call_contract_contract_id_LENGTH, value_operations_call_contract_args_LENGTH, value_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, value_operations_set_system_contract_contract_id_LENGTH, value_operation_merkle_root_LENGTH>, value_REP_LENGTH>& value() const { return value_; }
 
 
     ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
@@ -1358,26 +1377,19 @@ class get_proposals_result final: public ::EmbeddedProto::MessageInterface
     private:
 
 
-      ::EmbeddedProto::RepeatedFieldFixedSize<proposal_record<value_proposal_id_LENGTH, value_proposal_header_chain_id_LENGTH, value_proposal_header_nonce_LENGTH, value_proposal_header_operation_merkle_root_LENGTH, value_proposal_header_payer_LENGTH, value_proposal_header_payee_LENGTH, value_proposal_operations_REP_LENGTH, value_proposal_operations_upload_contract_contract_id_LENGTH, value_proposal_operations_upload_contract_bytecode_LENGTH, value_proposal_operations_upload_contract_abi_LENGTH, value_proposal_operations_call_contract_contract_id_LENGTH, value_proposal_operations_call_contract_args_LENGTH, value_proposal_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, value_proposal_operations_set_system_contract_contract_id_LENGTH, value_proposal_signatures_REP_LENGTH, value_proposal_signatures_LENGTH>, value_REP_LENGTH> value_;
+      ::EmbeddedProto::RepeatedFieldFixedSize<proposal_record<value_operations_REP_LENGTH, value_operations_upload_contract_contract_id_LENGTH, value_operations_upload_contract_bytecode_LENGTH, value_operations_upload_contract_abi_LENGTH, value_operations_call_contract_contract_id_LENGTH, value_operations_call_contract_args_LENGTH, value_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, value_operations_set_system_contract_contract_id_LENGTH, value_operation_merkle_root_LENGTH>, value_REP_LENGTH> value_;
 
 };
 
-template<uint32_t proposal_proposal_id_LENGTH, 
-uint32_t proposal_proposal_header_chain_id_LENGTH, 
-uint32_t proposal_proposal_header_nonce_LENGTH, 
-uint32_t proposal_proposal_header_operation_merkle_root_LENGTH, 
-uint32_t proposal_proposal_header_payer_LENGTH, 
-uint32_t proposal_proposal_header_payee_LENGTH, 
-uint32_t proposal_proposal_operations_REP_LENGTH, 
-uint32_t proposal_proposal_operations_upload_contract_contract_id_LENGTH, 
-uint32_t proposal_proposal_operations_upload_contract_bytecode_LENGTH, 
-uint32_t proposal_proposal_operations_upload_contract_abi_LENGTH, 
-uint32_t proposal_proposal_operations_call_contract_contract_id_LENGTH, 
-uint32_t proposal_proposal_operations_call_contract_args_LENGTH, 
-uint32_t proposal_proposal_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, 
-uint32_t proposal_proposal_operations_set_system_contract_contract_id_LENGTH, 
-uint32_t proposal_proposal_signatures_REP_LENGTH, 
-uint32_t proposal_proposal_signatures_LENGTH>
+template<uint32_t proposal_operations_REP_LENGTH, 
+uint32_t proposal_operations_upload_contract_contract_id_LENGTH, 
+uint32_t proposal_operations_upload_contract_bytecode_LENGTH, 
+uint32_t proposal_operations_upload_contract_abi_LENGTH, 
+uint32_t proposal_operations_call_contract_contract_id_LENGTH, 
+uint32_t proposal_operations_call_contract_args_LENGTH, 
+uint32_t proposal_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, 
+uint32_t proposal_operations_set_system_contract_contract_id_LENGTH, 
+uint32_t proposal_operation_merkle_root_LENGTH>
 class proposal_submission_event final: public ::EmbeddedProto::MessageInterface
 {
   public:
@@ -1413,11 +1425,11 @@ class proposal_submission_event final: public ::EmbeddedProto::MessageInterface
     }
 
     inline void clear_proposal() { proposal_.clear(); }
-    inline void set_proposal(const proposal_record<proposal_proposal_id_LENGTH, proposal_proposal_header_chain_id_LENGTH, proposal_proposal_header_nonce_LENGTH, proposal_proposal_header_operation_merkle_root_LENGTH, proposal_proposal_header_payer_LENGTH, proposal_proposal_header_payee_LENGTH, proposal_proposal_operations_REP_LENGTH, proposal_proposal_operations_upload_contract_contract_id_LENGTH, proposal_proposal_operations_upload_contract_bytecode_LENGTH, proposal_proposal_operations_upload_contract_abi_LENGTH, proposal_proposal_operations_call_contract_contract_id_LENGTH, proposal_proposal_operations_call_contract_args_LENGTH, proposal_proposal_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, proposal_proposal_operations_set_system_contract_contract_id_LENGTH, proposal_proposal_signatures_REP_LENGTH, proposal_proposal_signatures_LENGTH>& value) { proposal_ = value; }
-    inline void set_proposal(const proposal_record<proposal_proposal_id_LENGTH, proposal_proposal_header_chain_id_LENGTH, proposal_proposal_header_nonce_LENGTH, proposal_proposal_header_operation_merkle_root_LENGTH, proposal_proposal_header_payer_LENGTH, proposal_proposal_header_payee_LENGTH, proposal_proposal_operations_REP_LENGTH, proposal_proposal_operations_upload_contract_contract_id_LENGTH, proposal_proposal_operations_upload_contract_bytecode_LENGTH, proposal_proposal_operations_upload_contract_abi_LENGTH, proposal_proposal_operations_call_contract_contract_id_LENGTH, proposal_proposal_operations_call_contract_args_LENGTH, proposal_proposal_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, proposal_proposal_operations_set_system_contract_contract_id_LENGTH, proposal_proposal_signatures_REP_LENGTH, proposal_proposal_signatures_LENGTH>&& value) { proposal_ = value; }
-    inline proposal_record<proposal_proposal_id_LENGTH, proposal_proposal_header_chain_id_LENGTH, proposal_proposal_header_nonce_LENGTH, proposal_proposal_header_operation_merkle_root_LENGTH, proposal_proposal_header_payer_LENGTH, proposal_proposal_header_payee_LENGTH, proposal_proposal_operations_REP_LENGTH, proposal_proposal_operations_upload_contract_contract_id_LENGTH, proposal_proposal_operations_upload_contract_bytecode_LENGTH, proposal_proposal_operations_upload_contract_abi_LENGTH, proposal_proposal_operations_call_contract_contract_id_LENGTH, proposal_proposal_operations_call_contract_args_LENGTH, proposal_proposal_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, proposal_proposal_operations_set_system_contract_contract_id_LENGTH, proposal_proposal_signatures_REP_LENGTH, proposal_proposal_signatures_LENGTH>& mutable_proposal() { return proposal_; }
-    inline const proposal_record<proposal_proposal_id_LENGTH, proposal_proposal_header_chain_id_LENGTH, proposal_proposal_header_nonce_LENGTH, proposal_proposal_header_operation_merkle_root_LENGTH, proposal_proposal_header_payer_LENGTH, proposal_proposal_header_payee_LENGTH, proposal_proposal_operations_REP_LENGTH, proposal_proposal_operations_upload_contract_contract_id_LENGTH, proposal_proposal_operations_upload_contract_bytecode_LENGTH, proposal_proposal_operations_upload_contract_abi_LENGTH, proposal_proposal_operations_call_contract_contract_id_LENGTH, proposal_proposal_operations_call_contract_args_LENGTH, proposal_proposal_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, proposal_proposal_operations_set_system_contract_contract_id_LENGTH, proposal_proposal_signatures_REP_LENGTH, proposal_proposal_signatures_LENGTH>& get_proposal() const { return proposal_; }
-    inline const proposal_record<proposal_proposal_id_LENGTH, proposal_proposal_header_chain_id_LENGTH, proposal_proposal_header_nonce_LENGTH, proposal_proposal_header_operation_merkle_root_LENGTH, proposal_proposal_header_payer_LENGTH, proposal_proposal_header_payee_LENGTH, proposal_proposal_operations_REP_LENGTH, proposal_proposal_operations_upload_contract_contract_id_LENGTH, proposal_proposal_operations_upload_contract_bytecode_LENGTH, proposal_proposal_operations_upload_contract_abi_LENGTH, proposal_proposal_operations_call_contract_contract_id_LENGTH, proposal_proposal_operations_call_contract_args_LENGTH, proposal_proposal_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, proposal_proposal_operations_set_system_contract_contract_id_LENGTH, proposal_proposal_signatures_REP_LENGTH, proposal_proposal_signatures_LENGTH>& proposal() const { return proposal_; }
+    inline void set_proposal(const proposal_record<proposal_operations_REP_LENGTH, proposal_operations_upload_contract_contract_id_LENGTH, proposal_operations_upload_contract_bytecode_LENGTH, proposal_operations_upload_contract_abi_LENGTH, proposal_operations_call_contract_contract_id_LENGTH, proposal_operations_call_contract_args_LENGTH, proposal_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, proposal_operations_set_system_contract_contract_id_LENGTH, proposal_operation_merkle_root_LENGTH>& value) { proposal_ = value; }
+    inline void set_proposal(const proposal_record<proposal_operations_REP_LENGTH, proposal_operations_upload_contract_contract_id_LENGTH, proposal_operations_upload_contract_bytecode_LENGTH, proposal_operations_upload_contract_abi_LENGTH, proposal_operations_call_contract_contract_id_LENGTH, proposal_operations_call_contract_args_LENGTH, proposal_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, proposal_operations_set_system_contract_contract_id_LENGTH, proposal_operation_merkle_root_LENGTH>&& value) { proposal_ = value; }
+    inline proposal_record<proposal_operations_REP_LENGTH, proposal_operations_upload_contract_contract_id_LENGTH, proposal_operations_upload_contract_bytecode_LENGTH, proposal_operations_upload_contract_abi_LENGTH, proposal_operations_call_contract_contract_id_LENGTH, proposal_operations_call_contract_args_LENGTH, proposal_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, proposal_operations_set_system_contract_contract_id_LENGTH, proposal_operation_merkle_root_LENGTH>& mutable_proposal() { return proposal_; }
+    inline const proposal_record<proposal_operations_REP_LENGTH, proposal_operations_upload_contract_contract_id_LENGTH, proposal_operations_upload_contract_bytecode_LENGTH, proposal_operations_upload_contract_abi_LENGTH, proposal_operations_call_contract_contract_id_LENGTH, proposal_operations_call_contract_args_LENGTH, proposal_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, proposal_operations_set_system_contract_contract_id_LENGTH, proposal_operation_merkle_root_LENGTH>& get_proposal() const { return proposal_; }
+    inline const proposal_record<proposal_operations_REP_LENGTH, proposal_operations_upload_contract_contract_id_LENGTH, proposal_operations_upload_contract_bytecode_LENGTH, proposal_operations_upload_contract_abi_LENGTH, proposal_operations_call_contract_contract_id_LENGTH, proposal_operations_call_contract_args_LENGTH, proposal_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, proposal_operations_set_system_contract_contract_id_LENGTH, proposal_operation_merkle_root_LENGTH>& proposal() const { return proposal_; }
 
 
     ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
@@ -1480,7 +1492,7 @@ class proposal_submission_event final: public ::EmbeddedProto::MessageInterface
     private:
 
 
-      proposal_record<proposal_proposal_id_LENGTH, proposal_proposal_header_chain_id_LENGTH, proposal_proposal_header_nonce_LENGTH, proposal_proposal_header_operation_merkle_root_LENGTH, proposal_proposal_header_payer_LENGTH, proposal_proposal_header_payee_LENGTH, proposal_proposal_operations_REP_LENGTH, proposal_proposal_operations_upload_contract_contract_id_LENGTH, proposal_proposal_operations_upload_contract_bytecode_LENGTH, proposal_proposal_operations_upload_contract_abi_LENGTH, proposal_proposal_operations_call_contract_contract_id_LENGTH, proposal_proposal_operations_call_contract_args_LENGTH, proposal_proposal_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, proposal_proposal_operations_set_system_contract_contract_id_LENGTH, proposal_proposal_signatures_REP_LENGTH, proposal_proposal_signatures_LENGTH> proposal_;
+      proposal_record<proposal_operations_REP_LENGTH, proposal_operations_upload_contract_contract_id_LENGTH, proposal_operations_upload_contract_bytecode_LENGTH, proposal_operations_upload_contract_abi_LENGTH, proposal_operations_call_contract_contract_id_LENGTH, proposal_operations_call_contract_args_LENGTH, proposal_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, proposal_operations_set_system_contract_contract_id_LENGTH, proposal_operation_merkle_root_LENGTH> proposal_;
 
 };
 
@@ -1776,172 +1788,6 @@ class proposal_vote_event final: public ::EmbeddedProto::MessageInterface
       ::EmbeddedProto::FieldBytes<id_LENGTH> id_;
       EmbeddedProto::uint64 vote_tally_ = 0U;
       EmbeddedProto::uint64 vote_threshold_ = 0U;
-
-};
-
-class block_callback_arguments final: public ::EmbeddedProto::MessageInterface
-{
-  public:
-    block_callback_arguments() = default;
-    block_callback_arguments(const block_callback_arguments& rhs )
-    {
-    }
-
-    block_callback_arguments(const block_callback_arguments&& rhs ) noexcept
-    {
-    }
-
-    ~block_callback_arguments() override = default;
-
-    enum class FieldNumber : uint32_t
-    {
-      NOT_SET = 0,
-    };
-
-    block_callback_arguments& operator=(const block_callback_arguments& rhs)
-    {
-      return *this;
-    }
-
-    block_callback_arguments& operator=(const block_callback_arguments&& rhs) noexcept
-    {
-      return *this;
-    }
-
-
-    ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
-    {
-      ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
-
-      return return_value;
-    };
-
-    ::EmbeddedProto::Error deserialize(::EmbeddedProto::ReadBufferInterface& buffer) override
-    {
-      ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
-      ::EmbeddedProto::WireFormatter::WireType wire_type = ::EmbeddedProto::WireFormatter::WireType::VARINT;
-      uint32_t id_number = 0;
-      FieldNumber id_tag = FieldNumber::NOT_SET;
-
-      ::EmbeddedProto::Error tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
-      while((::EmbeddedProto::Error::NO_ERRORS == return_value) && (::EmbeddedProto::Error::NO_ERRORS == tag_value))
-      {
-        id_tag = static_cast<FieldNumber>(id_number);
-        switch(id_tag)
-        {
-          default:
-            break;
-        }
-
-        if(::EmbeddedProto::Error::NO_ERRORS == return_value)
-        {
-          // Read the next tag.
-          tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
-        }
-      }
-
-      // When an error was detect while reading the tag but no other errors where found, set it in the return value.
-      if((::EmbeddedProto::Error::NO_ERRORS == return_value)
-         && (::EmbeddedProto::Error::NO_ERRORS != tag_value)
-         && (::EmbeddedProto::Error::END_OF_BUFFER != tag_value)) // The end of the buffer is not an array in this case.
-      {
-        return_value = tag_value;
-      }
-
-      return return_value;
-    };
-
-    void clear() override
-    {
-
-    }
-
-    private:
-
-
-
-};
-
-class block_callback_result final: public ::EmbeddedProto::MessageInterface
-{
-  public:
-    block_callback_result() = default;
-    block_callback_result(const block_callback_result& rhs )
-    {
-    }
-
-    block_callback_result(const block_callback_result&& rhs ) noexcept
-    {
-    }
-
-    ~block_callback_result() override = default;
-
-    enum class FieldNumber : uint32_t
-    {
-      NOT_SET = 0,
-    };
-
-    block_callback_result& operator=(const block_callback_result& rhs)
-    {
-      return *this;
-    }
-
-    block_callback_result& operator=(const block_callback_result&& rhs) noexcept
-    {
-      return *this;
-    }
-
-
-    ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
-    {
-      ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
-
-      return return_value;
-    };
-
-    ::EmbeddedProto::Error deserialize(::EmbeddedProto::ReadBufferInterface& buffer) override
-    {
-      ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
-      ::EmbeddedProto::WireFormatter::WireType wire_type = ::EmbeddedProto::WireFormatter::WireType::VARINT;
-      uint32_t id_number = 0;
-      FieldNumber id_tag = FieldNumber::NOT_SET;
-
-      ::EmbeddedProto::Error tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
-      while((::EmbeddedProto::Error::NO_ERRORS == return_value) && (::EmbeddedProto::Error::NO_ERRORS == tag_value))
-      {
-        id_tag = static_cast<FieldNumber>(id_number);
-        switch(id_tag)
-        {
-          default:
-            break;
-        }
-
-        if(::EmbeddedProto::Error::NO_ERRORS == return_value)
-        {
-          // Read the next tag.
-          tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
-        }
-      }
-
-      // When an error was detect while reading the tag but no other errors where found, set it in the return value.
-      if((::EmbeddedProto::Error::NO_ERRORS == return_value)
-         && (::EmbeddedProto::Error::NO_ERRORS != tag_value)
-         && (::EmbeddedProto::Error::END_OF_BUFFER != tag_value)) // The end of the buffer is not an array in this case.
-      {
-        return_value = tag_value;
-      }
-
-      return return_value;
-    };
-
-    void clear() override
-    {
-
-    }
-
-    private:
-
-
 
 };
 
