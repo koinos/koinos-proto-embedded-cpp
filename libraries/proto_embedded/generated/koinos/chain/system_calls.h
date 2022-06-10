@@ -2013,19 +2013,16 @@ class post_transaction_callback_arguments final: public ::EmbeddedProto::Message
 
 };
 
-template<uint32_t value_value_LENGTH>
 class post_transaction_callback_result final: public ::EmbeddedProto::MessageInterface
 {
   public:
     post_transaction_callback_result() = default;
     post_transaction_callback_result(const post_transaction_callback_result& rhs )
     {
-      set_value(rhs.get_value());
     }
 
     post_transaction_callback_result(const post_transaction_callback_result&& rhs ) noexcept
     {
-      set_value(rhs.get_value());
     }
 
     ~post_transaction_callback_result() override = default;
@@ -2033,37 +2030,22 @@ class post_transaction_callback_result final: public ::EmbeddedProto::MessageInt
     enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
-      VALUE = 1
     };
 
     post_transaction_callback_result& operator=(const post_transaction_callback_result& rhs)
     {
-      set_value(rhs.get_value());
       return *this;
     }
 
     post_transaction_callback_result& operator=(const post_transaction_callback_result&& rhs) noexcept
     {
-      set_value(rhs.get_value());
       return *this;
     }
-
-    inline void clear_value() { value_.clear(); }
-    inline void set_value(const result<value_value_LENGTH>& value) { value_ = value; }
-    inline void set_value(const result<value_value_LENGTH>&& value) { value_ = value; }
-    inline result<value_value_LENGTH>& mutable_value() { return value_; }
-    inline const result<value_value_LENGTH>& get_value() const { return value_; }
-    inline const result<value_value_LENGTH>& value() const { return value_; }
 
 
     ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
     {
       ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
-
-      if(::EmbeddedProto::Error::NO_ERRORS == return_value)
-      {
-        return_value = value_.serialize_with_id(static_cast<uint32_t>(FieldNumber::VALUE), buffer, false);
-      }
 
       return return_value;
     };
@@ -2081,10 +2063,6 @@ class post_transaction_callback_result final: public ::EmbeddedProto::MessageInt
         id_tag = static_cast<FieldNumber>(id_number);
         switch(id_tag)
         {
-          case FieldNumber::VALUE:
-            return_value = value_.deserialize_check_type(buffer, wire_type);
-            break;
-
           default:
             break;
         }
@@ -2109,14 +2087,12 @@ class post_transaction_callback_result final: public ::EmbeddedProto::MessageInt
 
     void clear() override
     {
-      clear_value();
 
     }
 
     private:
 
 
-      result<value_value_LENGTH> value_;
 
 };
 
@@ -8669,7 +8645,8 @@ class call_arguments final: public ::EmbeddedProto::MessageInterface
 
 };
 
-template<uint32_t value_LENGTH>
+template<uint32_t value_object_LENGTH, 
+uint32_t value_error_message_LENGTH>
 class call_result final: public ::EmbeddedProto::MessageInterface
 {
   public:
@@ -8705,10 +8682,11 @@ class call_result final: public ::EmbeddedProto::MessageInterface
     }
 
     inline void clear_value() { value_.clear(); }
-    inline ::EmbeddedProto::FieldBytes<value_LENGTH>& mutable_value() { return value_; }
-    inline void set_value(const ::EmbeddedProto::FieldBytes<value_LENGTH>& rhs) { value_.set(rhs); }
-    inline const ::EmbeddedProto::FieldBytes<value_LENGTH>& get_value() const { return value_; }
-    inline const uint8_t* value() const { return value_.get_const(); }
+    inline void set_value(const result<value_object_LENGTH, value_error_message_LENGTH>& value) { value_ = value; }
+    inline void set_value(const result<value_object_LENGTH, value_error_message_LENGTH>&& value) { value_ = value; }
+    inline result<value_object_LENGTH, value_error_message_LENGTH>& mutable_value() { return value_; }
+    inline const result<value_object_LENGTH, value_error_message_LENGTH>& get_value() const { return value_; }
+    inline const result<value_object_LENGTH, value_error_message_LENGTH>& value() const { return value_; }
 
 
     ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
@@ -8771,7 +8749,7 @@ class call_result final: public ::EmbeddedProto::MessageInterface
     private:
 
 
-      ::EmbeddedProto::FieldBytes<value_LENGTH> value_;
+      result<value_object_LENGTH, value_error_message_LENGTH> value_;
 
 };
 
@@ -8965,19 +8943,22 @@ class get_arguments_result final: public ::EmbeddedProto::MessageInterface
 
 };
 
-template<uint32_t retval_value_LENGTH>
+template<uint32_t res_object_LENGTH, 
+uint32_t res_error_message_LENGTH>
 class exit_arguments final: public ::EmbeddedProto::MessageInterface
 {
   public:
     exit_arguments() = default;
     exit_arguments(const exit_arguments& rhs )
     {
-      set_retval(rhs.get_retval());
+      set_code(rhs.get_code());
+      set_res(rhs.get_res());
     }
 
     exit_arguments(const exit_arguments&& rhs ) noexcept
     {
-      set_retval(rhs.get_retval());
+      set_code(rhs.get_code());
+      set_res(rhs.get_res());
     }
 
     ~exit_arguments() override = default;
@@ -8985,36 +8966,51 @@ class exit_arguments final: public ::EmbeddedProto::MessageInterface
     enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
-      RETVAL = 1
+      CODE = 1,
+      RES = 2
     };
 
     exit_arguments& operator=(const exit_arguments& rhs)
     {
-      set_retval(rhs.get_retval());
+      set_code(rhs.get_code());
+      set_res(rhs.get_res());
       return *this;
     }
 
     exit_arguments& operator=(const exit_arguments&& rhs) noexcept
     {
-      set_retval(rhs.get_retval());
+      set_code(rhs.get_code());
+      set_res(rhs.get_res());
       return *this;
     }
 
-    inline void clear_retval() { retval_.clear(); }
-    inline void set_retval(const result<retval_value_LENGTH>& value) { retval_ = value; }
-    inline void set_retval(const result<retval_value_LENGTH>&& value) { retval_ = value; }
-    inline result<retval_value_LENGTH>& mutable_retval() { return retval_; }
-    inline const result<retval_value_LENGTH>& get_retval() const { return retval_; }
-    inline const result<retval_value_LENGTH>& retval() const { return retval_; }
+    inline void clear_code() { code_.clear(); }
+    inline void set_code(const EmbeddedProto::int32& value) { code_ = value; }
+    inline void set_code(const EmbeddedProto::int32&& value) { code_ = value; }
+    inline EmbeddedProto::int32& mutable_code() { return code_; }
+    inline const EmbeddedProto::int32& get_code() const { return code_; }
+    inline EmbeddedProto::int32::FIELD_TYPE code() const { return code_.get(); }
+
+    inline void clear_res() { res_.clear(); }
+    inline void set_res(const result<res_object_LENGTH, res_error_message_LENGTH>& value) { res_ = value; }
+    inline void set_res(const result<res_object_LENGTH, res_error_message_LENGTH>&& value) { res_ = value; }
+    inline result<res_object_LENGTH, res_error_message_LENGTH>& mutable_res() { return res_; }
+    inline const result<res_object_LENGTH, res_error_message_LENGTH>& get_res() const { return res_; }
+    inline const result<res_object_LENGTH, res_error_message_LENGTH>& res() const { return res_; }
 
 
     ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
     {
       ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
 
+      if((0 != code_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
+      {
+        return_value = code_.serialize_with_id(static_cast<uint32_t>(FieldNumber::CODE), buffer, false);
+      }
+
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = retval_.serialize_with_id(static_cast<uint32_t>(FieldNumber::RETVAL), buffer, false);
+        return_value = res_.serialize_with_id(static_cast<uint32_t>(FieldNumber::RES), buffer, false);
       }
 
       return return_value;
@@ -9033,8 +9029,12 @@ class exit_arguments final: public ::EmbeddedProto::MessageInterface
         id_tag = static_cast<FieldNumber>(id_number);
         switch(id_tag)
         {
-          case FieldNumber::RETVAL:
-            return_value = retval_.deserialize_check_type(buffer, wire_type);
+          case FieldNumber::CODE:
+            return_value = code_.deserialize_check_type(buffer, wire_type);
+            break;
+
+          case FieldNumber::RES:
+            return_value = res_.deserialize_check_type(buffer, wire_type);
             break;
 
           default:
@@ -9061,14 +9061,16 @@ class exit_arguments final: public ::EmbeddedProto::MessageInterface
 
     void clear() override
     {
-      clear_retval();
+      clear_code();
+      clear_res();
 
     }
 
     private:
 
 
-      result<retval_value_LENGTH> retval_;
+      EmbeddedProto::int32 code_ = 0;
+      result<res_object_LENGTH, res_error_message_LENGTH> res_;
 
 };
 
