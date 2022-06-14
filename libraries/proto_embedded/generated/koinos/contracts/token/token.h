@@ -1176,12 +1176,10 @@ class transfer_result final: public ::EmbeddedProto::MessageInterface
     transfer_result() = default;
     transfer_result(const transfer_result& rhs )
     {
-      set_value(rhs.get_value());
     }
 
     transfer_result(const transfer_result&& rhs ) noexcept
     {
-      set_value(rhs.get_value());
     }
 
     ~transfer_result() override = default;
@@ -1189,37 +1187,22 @@ class transfer_result final: public ::EmbeddedProto::MessageInterface
     enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
-      VALUE = 1
     };
 
     transfer_result& operator=(const transfer_result& rhs)
     {
-      set_value(rhs.get_value());
       return *this;
     }
 
     transfer_result& operator=(const transfer_result&& rhs) noexcept
     {
-      set_value(rhs.get_value());
       return *this;
     }
-
-    inline void clear_value() { value_.clear(); }
-    inline void set_value(const EmbeddedProto::boolean& value) { value_ = value; }
-    inline void set_value(const EmbeddedProto::boolean&& value) { value_ = value; }
-    inline EmbeddedProto::boolean& mutable_value() { return value_; }
-    inline const EmbeddedProto::boolean& get_value() const { return value_; }
-    inline EmbeddedProto::boolean::FIELD_TYPE value() const { return value_.get(); }
 
 
     ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
     {
       ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
-
-      if((false != value_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
-      {
-        return_value = value_.serialize_with_id(static_cast<uint32_t>(FieldNumber::VALUE), buffer, false);
-      }
 
       return return_value;
     };
@@ -1237,10 +1220,6 @@ class transfer_result final: public ::EmbeddedProto::MessageInterface
         id_tag = static_cast<FieldNumber>(id_number);
         switch(id_tag)
         {
-          case FieldNumber::VALUE:
-            return_value = value_.deserialize_check_type(buffer, wire_type);
-            break;
-
           default:
             break;
         }
@@ -1265,14 +1244,12 @@ class transfer_result final: public ::EmbeddedProto::MessageInterface
 
     void clear() override
     {
-      clear_value();
 
     }
 
     private:
 
 
-      EmbeddedProto::boolean value_ = false;
 
 };
 
@@ -1411,12 +1388,10 @@ class mint_result final: public ::EmbeddedProto::MessageInterface
     mint_result() = default;
     mint_result(const mint_result& rhs )
     {
-      set_value(rhs.get_value());
     }
 
     mint_result(const mint_result&& rhs ) noexcept
     {
-      set_value(rhs.get_value());
     }
 
     ~mint_result() override = default;
@@ -1424,37 +1399,22 @@ class mint_result final: public ::EmbeddedProto::MessageInterface
     enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
-      VALUE = 1
     };
 
     mint_result& operator=(const mint_result& rhs)
     {
-      set_value(rhs.get_value());
       return *this;
     }
 
     mint_result& operator=(const mint_result&& rhs) noexcept
     {
-      set_value(rhs.get_value());
       return *this;
     }
-
-    inline void clear_value() { value_.clear(); }
-    inline void set_value(const EmbeddedProto::boolean& value) { value_ = value; }
-    inline void set_value(const EmbeddedProto::boolean&& value) { value_ = value; }
-    inline EmbeddedProto::boolean& mutable_value() { return value_; }
-    inline const EmbeddedProto::boolean& get_value() const { return value_; }
-    inline EmbeddedProto::boolean::FIELD_TYPE value() const { return value_.get(); }
 
 
     ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
     {
       ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
-
-      if((false != value_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
-      {
-        return_value = value_.serialize_with_id(static_cast<uint32_t>(FieldNumber::VALUE), buffer, false);
-      }
 
       return return_value;
     };
@@ -1472,10 +1432,6 @@ class mint_result final: public ::EmbeddedProto::MessageInterface
         id_tag = static_cast<FieldNumber>(id_number);
         switch(id_tag)
         {
-          case FieldNumber::VALUE:
-            return_value = value_.deserialize_check_type(buffer, wire_type);
-            break;
-
           default:
             break;
         }
@@ -1500,14 +1456,12 @@ class mint_result final: public ::EmbeddedProto::MessageInterface
 
     void clear() override
     {
-      clear_value();
 
     }
 
     private:
 
 
-      EmbeddedProto::boolean value_ = false;
 
 };
 
@@ -1646,12 +1600,10 @@ class burn_result final: public ::EmbeddedProto::MessageInterface
     burn_result() = default;
     burn_result(const burn_result& rhs )
     {
-      set_value(rhs.get_value());
     }
 
     burn_result(const burn_result&& rhs ) noexcept
     {
-      set_value(rhs.get_value());
     }
 
     ~burn_result() override = default;
@@ -1659,37 +1611,22 @@ class burn_result final: public ::EmbeddedProto::MessageInterface
     enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
-      VALUE = 1
     };
 
     burn_result& operator=(const burn_result& rhs)
     {
-      set_value(rhs.get_value());
       return *this;
     }
 
     burn_result& operator=(const burn_result&& rhs) noexcept
     {
-      set_value(rhs.get_value());
       return *this;
     }
-
-    inline void clear_value() { value_.clear(); }
-    inline void set_value(const EmbeddedProto::boolean& value) { value_ = value; }
-    inline void set_value(const EmbeddedProto::boolean&& value) { value_ = value; }
-    inline EmbeddedProto::boolean& mutable_value() { return value_; }
-    inline const EmbeddedProto::boolean& get_value() const { return value_; }
-    inline EmbeddedProto::boolean::FIELD_TYPE value() const { return value_.get(); }
 
 
     ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
     {
       ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
-
-      if((false != value_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
-      {
-        return_value = value_.serialize_with_id(static_cast<uint32_t>(FieldNumber::VALUE), buffer, false);
-      }
 
       return return_value;
     };
@@ -1707,10 +1644,6 @@ class burn_result final: public ::EmbeddedProto::MessageInterface
         id_tag = static_cast<FieldNumber>(id_number);
         switch(id_tag)
         {
-          case FieldNumber::VALUE:
-            return_value = value_.deserialize_check_type(buffer, wire_type);
-            break;
-
           default:
             break;
         }
@@ -1735,14 +1668,12 @@ class burn_result final: public ::EmbeddedProto::MessageInterface
 
     void clear() override
     {
-      clear_value();
 
     }
 
     private:
 
 
-      EmbeddedProto::boolean value_ = false;
 
 };
 
