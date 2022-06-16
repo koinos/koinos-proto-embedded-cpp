@@ -8841,8 +8841,7 @@ class call_arguments final: public ::EmbeddedProto::MessageInterface
 
 };
 
-template<uint32_t value_object_LENGTH, 
-uint32_t value_error_message_LENGTH>
+template<uint32_t value_LENGTH>
 class call_result final: public ::EmbeddedProto::MessageInterface
 {
   public:
@@ -8878,11 +8877,10 @@ class call_result final: public ::EmbeddedProto::MessageInterface
     }
 
     inline void clear_value() { value_.clear(); }
-    inline void set_value(const result<value_object_LENGTH, value_error_message_LENGTH>& value) { value_ = value; }
-    inline void set_value(const result<value_object_LENGTH, value_error_message_LENGTH>&& value) { value_ = value; }
-    inline result<value_object_LENGTH, value_error_message_LENGTH>& mutable_value() { return value_; }
-    inline const result<value_object_LENGTH, value_error_message_LENGTH>& get_value() const { return value_; }
-    inline const result<value_object_LENGTH, value_error_message_LENGTH>& value() const { return value_; }
+    inline ::EmbeddedProto::FieldBytes<value_LENGTH>& mutable_value() { return value_; }
+    inline void set_value(const ::EmbeddedProto::FieldBytes<value_LENGTH>& rhs) { value_.set(rhs); }
+    inline const ::EmbeddedProto::FieldBytes<value_LENGTH>& get_value() const { return value_; }
+    inline const uint8_t* value() const { return value_.get_const(); }
 
 
     ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
@@ -8945,7 +8943,7 @@ class call_result final: public ::EmbeddedProto::MessageInterface
     private:
 
 
-      result<value_object_LENGTH, value_error_message_LENGTH> value_;
+      ::EmbeddedProto::FieldBytes<value_LENGTH> value_;
 
 };
 
