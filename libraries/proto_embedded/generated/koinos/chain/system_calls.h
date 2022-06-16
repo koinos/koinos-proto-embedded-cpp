@@ -4470,6 +4470,202 @@ class check_system_authority_result final: public ::EmbeddedProto::MessageInterf
 
 };
 
+class get_operation_arguments final: public ::EmbeddedProto::MessageInterface
+{
+  public:
+    get_operation_arguments() = default;
+    get_operation_arguments(const get_operation_arguments& rhs )
+    {
+    }
+
+    get_operation_arguments(const get_operation_arguments&& rhs ) noexcept
+    {
+    }
+
+    ~get_operation_arguments() override = default;
+
+    enum class FieldNumber : uint32_t
+    {
+      NOT_SET = 0,
+    };
+
+    get_operation_arguments& operator=(const get_operation_arguments& rhs)
+    {
+      return *this;
+    }
+
+    get_operation_arguments& operator=(const get_operation_arguments&& rhs) noexcept
+    {
+      return *this;
+    }
+
+
+    ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
+    {
+      ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
+
+      return return_value;
+    };
+
+    ::EmbeddedProto::Error deserialize(::EmbeddedProto::ReadBufferInterface& buffer) override
+    {
+      ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
+      ::EmbeddedProto::WireFormatter::WireType wire_type = ::EmbeddedProto::WireFormatter::WireType::VARINT;
+      uint32_t id_number = 0;
+      FieldNumber id_tag = FieldNumber::NOT_SET;
+
+      ::EmbeddedProto::Error tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
+      while((::EmbeddedProto::Error::NO_ERRORS == return_value) && (::EmbeddedProto::Error::NO_ERRORS == tag_value))
+      {
+        id_tag = static_cast<FieldNumber>(id_number);
+        switch(id_tag)
+        {
+          default:
+            break;
+        }
+
+        if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+        {
+          // Read the next tag.
+          tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
+        }
+      }
+
+      // When an error was detect while reading the tag but no other errors where found, set it in the return value.
+      if((::EmbeddedProto::Error::NO_ERRORS == return_value)
+         && (::EmbeddedProto::Error::NO_ERRORS != tag_value)
+         && (::EmbeddedProto::Error::END_OF_BUFFER != tag_value)) // The end of the buffer is not an array in this case.
+      {
+        return_value = tag_value;
+      }
+
+      return return_value;
+    };
+
+    void clear() override
+    {
+
+    }
+
+    private:
+
+
+
+};
+
+template<uint32_t value_upload_contract_contract_id_LENGTH, 
+uint32_t value_upload_contract_bytecode_LENGTH, 
+uint32_t value_upload_contract_abi_LENGTH, 
+uint32_t value_call_contract_contract_id_LENGTH, 
+uint32_t value_call_contract_args_LENGTH, 
+uint32_t value_set_system_call_target_system_call_bundle_contract_id_LENGTH, 
+uint32_t value_set_system_contract_contract_id_LENGTH>
+class get_operation_result final: public ::EmbeddedProto::MessageInterface
+{
+  public:
+    get_operation_result() = default;
+    get_operation_result(const get_operation_result& rhs )
+    {
+      set_value(rhs.get_value());
+    }
+
+    get_operation_result(const get_operation_result&& rhs ) noexcept
+    {
+      set_value(rhs.get_value());
+    }
+
+    ~get_operation_result() override = default;
+
+    enum class FieldNumber : uint32_t
+    {
+      NOT_SET = 0,
+      VALUE = 1
+    };
+
+    get_operation_result& operator=(const get_operation_result& rhs)
+    {
+      set_value(rhs.get_value());
+      return *this;
+    }
+
+    get_operation_result& operator=(const get_operation_result&& rhs) noexcept
+    {
+      set_value(rhs.get_value());
+      return *this;
+    }
+
+    inline void clear_value() { value_.clear(); }
+    inline void set_value(const protocol::operation<value_upload_contract_contract_id_LENGTH, value_upload_contract_bytecode_LENGTH, value_upload_contract_abi_LENGTH, value_call_contract_contract_id_LENGTH, value_call_contract_args_LENGTH, value_set_system_call_target_system_call_bundle_contract_id_LENGTH, value_set_system_contract_contract_id_LENGTH>& value) { value_ = value; }
+    inline void set_value(const protocol::operation<value_upload_contract_contract_id_LENGTH, value_upload_contract_bytecode_LENGTH, value_upload_contract_abi_LENGTH, value_call_contract_contract_id_LENGTH, value_call_contract_args_LENGTH, value_set_system_call_target_system_call_bundle_contract_id_LENGTH, value_set_system_contract_contract_id_LENGTH>&& value) { value_ = value; }
+    inline protocol::operation<value_upload_contract_contract_id_LENGTH, value_upload_contract_bytecode_LENGTH, value_upload_contract_abi_LENGTH, value_call_contract_contract_id_LENGTH, value_call_contract_args_LENGTH, value_set_system_call_target_system_call_bundle_contract_id_LENGTH, value_set_system_contract_contract_id_LENGTH>& mutable_value() { return value_; }
+    inline const protocol::operation<value_upload_contract_contract_id_LENGTH, value_upload_contract_bytecode_LENGTH, value_upload_contract_abi_LENGTH, value_call_contract_contract_id_LENGTH, value_call_contract_args_LENGTH, value_set_system_call_target_system_call_bundle_contract_id_LENGTH, value_set_system_contract_contract_id_LENGTH>& get_value() const { return value_; }
+    inline const protocol::operation<value_upload_contract_contract_id_LENGTH, value_upload_contract_bytecode_LENGTH, value_upload_contract_abi_LENGTH, value_call_contract_contract_id_LENGTH, value_call_contract_args_LENGTH, value_set_system_call_target_system_call_bundle_contract_id_LENGTH, value_set_system_contract_contract_id_LENGTH>& value() const { return value_; }
+
+
+    ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
+    {
+      ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
+
+      if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+      {
+        return_value = value_.serialize_with_id(static_cast<uint32_t>(FieldNumber::VALUE), buffer, false);
+      }
+
+      return return_value;
+    };
+
+    ::EmbeddedProto::Error deserialize(::EmbeddedProto::ReadBufferInterface& buffer) override
+    {
+      ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
+      ::EmbeddedProto::WireFormatter::WireType wire_type = ::EmbeddedProto::WireFormatter::WireType::VARINT;
+      uint32_t id_number = 0;
+      FieldNumber id_tag = FieldNumber::NOT_SET;
+
+      ::EmbeddedProto::Error tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
+      while((::EmbeddedProto::Error::NO_ERRORS == return_value) && (::EmbeddedProto::Error::NO_ERRORS == tag_value))
+      {
+        id_tag = static_cast<FieldNumber>(id_number);
+        switch(id_tag)
+        {
+          case FieldNumber::VALUE:
+            return_value = value_.deserialize_check_type(buffer, wire_type);
+            break;
+
+          default:
+            break;
+        }
+
+        if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+        {
+          // Read the next tag.
+          tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
+        }
+      }
+
+      // When an error was detect while reading the tag but no other errors where found, set it in the return value.
+      if((::EmbeddedProto::Error::NO_ERRORS == return_value)
+         && (::EmbeddedProto::Error::NO_ERRORS != tag_value)
+         && (::EmbeddedProto::Error::END_OF_BUFFER != tag_value)) // The end of the buffer is not an array in this case.
+      {
+        return_value = tag_value;
+      }
+
+      return return_value;
+    };
+
+    void clear() override
+    {
+      clear_value();
+
+    }
+
+    private:
+
+
+      protocol::operation<value_upload_contract_contract_id_LENGTH, value_upload_contract_bytecode_LENGTH, value_upload_contract_abi_LENGTH, value_call_contract_contract_id_LENGTH, value_call_contract_args_LENGTH, value_set_system_call_target_system_call_bundle_contract_id_LENGTH, value_set_system_contract_contract_id_LENGTH> value_;
+
+};
+
 template<uint32_t account_LENGTH>
 class get_account_rc_arguments final: public ::EmbeddedProto::MessageInterface
 {
