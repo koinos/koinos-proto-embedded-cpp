@@ -49,7 +49,7 @@
 namespace koinos {
 namespace chain {
 
-enum class authorization_type : uint32_t
+enum class authorization_type : int32_t
 {
   contract_call = 0,
   transaction_application = 1,

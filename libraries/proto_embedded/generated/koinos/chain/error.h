@@ -38,7 +38,7 @@
 namespace koinos {
 namespace chain {
 
-enum class error_code : uint32_t
+enum class error_code : int32_t
 {
   success = 0,
   reversion = 1,

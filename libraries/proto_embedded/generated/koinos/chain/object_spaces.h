@@ -38,7 +38,7 @@
 namespace koinos {
 namespace chain {
 
-enum class system_space_id : uint32_t
+enum class system_space_id : int32_t
 {
   metadata = 0,
   system_call_dispatch = 1,

@@ -37,7 +37,7 @@
 
 namespace koinos {
 
-enum class bytes_type : uint32_t
+enum class bytes_type : int32_t
 {
   BASE64 = 0,
   BASE58 = 1,

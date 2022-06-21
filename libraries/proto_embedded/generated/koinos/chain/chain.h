@@ -50,13 +50,13 @@
 namespace koinos {
 namespace chain {
 
-enum class privilege : uint32_t
+enum class privilege : int32_t
 {
   kernel_mode = 0,
   user_mode = 1
 };
 
-enum class dsa : uint32_t
+enum class dsa : int32_t
 {
   ecdsa_secp256k1 = 0
 };

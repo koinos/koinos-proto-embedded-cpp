@@ -51,7 +51,7 @@ namespace koinos {
 namespace contracts {
 namespace governance {
 
-enum class proposal_status : uint32_t
+enum class proposal_status : int32_t
 {
   pending = 0,
   active = 1,

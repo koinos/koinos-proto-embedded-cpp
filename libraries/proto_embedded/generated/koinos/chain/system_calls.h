@@ -53,7 +53,7 @@
 namespace koinos {
 namespace chain {
 
-enum class system_authorization_type : uint32_t
+enum class system_authorization_type : int32_t
 {
   set_system_contract = 0,
   set_system_call = 1

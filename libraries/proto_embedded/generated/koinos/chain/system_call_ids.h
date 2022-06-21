@@ -38,7 +38,7 @@
 namespace koinos {
 namespace chain {
 
-enum class system_call_id : uint32_t
+enum class system_call_id : int32_t
 {
   reserved_id = 0,
   get_head_info = 1,
