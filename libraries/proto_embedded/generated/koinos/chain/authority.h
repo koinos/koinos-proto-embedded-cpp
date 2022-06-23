@@ -56,43 +56,55 @@ enum class authorization_type : int32_t
   contract_upload = 2
 };
 
-template<uint32_t contract_id_LENGTH>
-class call_target final: public ::EmbeddedProto::MessageInterface
+template<uint32_t contract_id_LENGTH, 
+uint32_t caller_LENGTH, 
+uint32_t data_LENGTH>
+class call_data final: public ::EmbeddedProto::MessageInterface
 {
   public:
-    call_target() = default;
-    call_target(const call_target& rhs )
+    call_data() = default;
+    call_data(const call_data& rhs )
     {
       set_contract_id(rhs.get_contract_id());
       set_entry_point(rhs.get_entry_point());
+      set_caller(rhs.get_caller());
+      set_data(rhs.get_data());
     }
 
-    call_target(const call_target&& rhs ) noexcept
+    call_data(const call_data&& rhs ) noexcept
     {
       set_contract_id(rhs.get_contract_id());
       set_entry_point(rhs.get_entry_point());
+      set_caller(rhs.get_caller());
+      set_data(rhs.get_data());
     }
 
-    ~call_target() override = default;
+    ~call_data() override = default;
 
     enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
       CONTRACT_ID = 1,
-      ENTRY_POINT = 2
+      ENTRY_POINT = 2,
+      CALLER = 3,
+      DATA = 4
     };
 
-    call_target& operator=(const call_target& rhs)
+    call_data& operator=(const call_data& rhs)
     {
       set_contract_id(rhs.get_contract_id());
       set_entry_point(rhs.get_entry_point());
+      set_caller(rhs.get_caller());
+      set_data(rhs.get_data());
       return *this;
     }
 
-    call_target& operator=(const call_target&& rhs) noexcept
+    call_data& operator=(const call_data&& rhs) noexcept
     {
       set_contract_id(rhs.get_contract_id());
       set_entry_point(rhs.get_entry_point());
+      set_caller(rhs.get_caller());
+      set_data(rhs.get_data());
       return *this;
     }
 
@@ -109,6 +121,18 @@ class call_target final: public ::EmbeddedProto::MessageInterface
     inline const EmbeddedProto::uint32& get_entry_point() const { return entry_point_; }
     inline EmbeddedProto::uint32::FIELD_TYPE entry_point() const { return entry_point_.get(); }
 
+    inline void clear_caller() { caller_.clear(); }
+    inline ::EmbeddedProto::FieldBytes<caller_LENGTH>& mutable_caller() { return caller_; }
+    inline void set_caller(const ::EmbeddedProto::FieldBytes<caller_LENGTH>& rhs) { caller_.set(rhs); }
+    inline const ::EmbeddedProto::FieldBytes<caller_LENGTH>& get_caller() const { return caller_; }
+    inline const uint8_t* caller() const { return caller_.get_const(); }
+
+    inline void clear_data() { data_.clear(); }
+    inline ::EmbeddedProto::FieldBytes<data_LENGTH>& mutable_data() { return data_; }
+    inline void set_data(const ::EmbeddedProto::FieldBytes<data_LENGTH>& rhs) { data_.set(rhs); }
+    inline const ::EmbeddedProto::FieldBytes<data_LENGTH>& get_data() const { return data_; }
+    inline const uint8_t* data() const { return data_.get_const(); }
+
 
     ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
     {
@@ -122,6 +146,16 @@ class call_target final: public ::EmbeddedProto::MessageInterface
       if((0U != entry_point_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
       {
         return_value = entry_point_.serialize_with_id(static_cast<uint32_t>(FieldNumber::ENTRY_POINT), buffer, false);
+      }
+
+      if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+      {
+        return_value = caller_.serialize_with_id(static_cast<uint32_t>(FieldNumber::CALLER), buffer, false);
+      }
+
+      if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+      {
+        return_value = data_.serialize_with_id(static_cast<uint32_t>(FieldNumber::DATA), buffer, false);
       }
 
       return return_value;
@@ -146,6 +180,14 @@ class call_target final: public ::EmbeddedProto::MessageInterface
 
           case FieldNumber::ENTRY_POINT:
             return_value = entry_point_.deserialize_check_type(buffer, wire_type);
+            break;
+
+          case FieldNumber::CALLER:
+            return_value = caller_.deserialize_check_type(buffer, wire_type);
+            break;
+
+          case FieldNumber::DATA:
+            return_value = data_.deserialize_check_type(buffer, wire_type);
             break;
 
           default:
@@ -174,6 +216,8 @@ class call_target final: public ::EmbeddedProto::MessageInterface
     {
       clear_contract_id();
       clear_entry_point();
+      clear_caller();
+      clear_data();
 
     }
 
@@ -182,10 +226,14 @@ class call_target final: public ::EmbeddedProto::MessageInterface
 
       ::EmbeddedProto::FieldBytes<contract_id_LENGTH> contract_id_;
       EmbeddedProto::uint32 entry_point_ = 0U;
+      ::EmbeddedProto::FieldBytes<caller_LENGTH> caller_;
+      ::EmbeddedProto::FieldBytes<data_LENGTH> data_;
 
 };
 
-template<uint32_t call_contract_id_LENGTH>
+template<uint32_t call_contract_id_LENGTH, 
+uint32_t call_caller_LENGTH, 
+uint32_t call_data_LENGTH>
 class authorize_arguments final: public ::EmbeddedProto::MessageInterface
 {
   public:
@@ -240,23 +288,23 @@ class authorize_arguments final: public ::EmbeddedProto::MessageInterface
       presence_[presence::index(presence::fields::CALL)] &= ~(presence::mask(presence::fields::CALL));
       call_.clear();
     }
-    inline void set_call(const call_target<call_contract_id_LENGTH>& value)
+    inline void set_call(const call_data<call_contract_id_LENGTH, call_caller_LENGTH, call_data_LENGTH>& value)
     {
       presence_[presence::index(presence::fields::CALL)] |= presence::mask(presence::fields::CALL);
       call_ = value;
     }
-    inline void set_call(const call_target<call_contract_id_LENGTH>&& value)
+    inline void set_call(const call_data<call_contract_id_LENGTH, call_caller_LENGTH, call_data_LENGTH>&& value)
     {
       presence_[presence::index(presence::fields::CALL)] |= presence::mask(presence::fields::CALL);
       call_ = value;
     }
-    inline call_target<call_contract_id_LENGTH>& mutable_call()
+    inline call_data<call_contract_id_LENGTH, call_caller_LENGTH, call_data_LENGTH>& mutable_call()
     {
       presence_[presence::index(presence::fields::CALL)] |= presence::mask(presence::fields::CALL);
       return call_;
     }
-    inline const call_target<call_contract_id_LENGTH>& get_call() const { return call_; }
-    inline const call_target<call_contract_id_LENGTH>& call() const { return call_; }
+    inline const call_data<call_contract_id_LENGTH, call_caller_LENGTH, call_data_LENGTH>& get_call() const { return call_; }
+    inline const call_data<call_contract_id_LENGTH, call_caller_LENGTH, call_data_LENGTH>& call() const { return call_; }
 
 
     ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
@@ -380,7 +428,7 @@ class authorize_arguments final: public ::EmbeddedProto::MessageInterface
       typename presence::TYPE presence_[presence::SIZE] = {0};
 
       authorization_type type_ = static_cast<authorization_type>(0);
-      call_target<call_contract_id_LENGTH> call_;
+      call_data<call_contract_id_LENGTH, call_caller_LENGTH, call_data_LENGTH> call_;
 
 };
 

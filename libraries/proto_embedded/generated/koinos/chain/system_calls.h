@@ -9730,7 +9730,8 @@ class get_caller_result final: public ::EmbeddedProto::MessageInterface
 
 };
 
-template<uint32_t account_LENGTH>
+template<uint32_t account_LENGTH, 
+uint32_t data_LENGTH>
 class check_authority_arguments final: public ::EmbeddedProto::MessageInterface
 {
   public:
@@ -9739,12 +9740,14 @@ class check_authority_arguments final: public ::EmbeddedProto::MessageInterface
     {
       set_type(rhs.get_type());
       set_account(rhs.get_account());
+      set_data(rhs.get_data());
     }
 
     check_authority_arguments(const check_authority_arguments&& rhs ) noexcept
     {
       set_type(rhs.get_type());
       set_account(rhs.get_account());
+      set_data(rhs.get_data());
     }
 
     ~check_authority_arguments() override = default;
@@ -9753,13 +9756,15 @@ class check_authority_arguments final: public ::EmbeddedProto::MessageInterface
     {
       NOT_SET = 0,
       TYPE = 1,
-      ACCOUNT = 2
+      ACCOUNT = 2,
+      DATA = 3
     };
 
     check_authority_arguments& operator=(const check_authority_arguments& rhs)
     {
       set_type(rhs.get_type());
       set_account(rhs.get_account());
+      set_data(rhs.get_data());
       return *this;
     }
 
@@ -9767,6 +9772,7 @@ class check_authority_arguments final: public ::EmbeddedProto::MessageInterface
     {
       set_type(rhs.get_type());
       set_account(rhs.get_account());
+      set_data(rhs.get_data());
       return *this;
     }
 
@@ -9781,6 +9787,12 @@ class check_authority_arguments final: public ::EmbeddedProto::MessageInterface
     inline void set_account(const ::EmbeddedProto::FieldBytes<account_LENGTH>& rhs) { account_.set(rhs); }
     inline const ::EmbeddedProto::FieldBytes<account_LENGTH>& get_account() const { return account_; }
     inline const uint8_t* account() const { return account_.get_const(); }
+
+    inline void clear_data() { data_.clear(); }
+    inline ::EmbeddedProto::FieldBytes<data_LENGTH>& mutable_data() { return data_; }
+    inline void set_data(const ::EmbeddedProto::FieldBytes<data_LENGTH>& rhs) { data_.set(rhs); }
+    inline const ::EmbeddedProto::FieldBytes<data_LENGTH>& get_data() const { return data_; }
+    inline const uint8_t* data() const { return data_.get_const(); }
 
 
     ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
@@ -9797,6 +9809,11 @@ class check_authority_arguments final: public ::EmbeddedProto::MessageInterface
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
         return_value = account_.serialize_with_id(static_cast<uint32_t>(FieldNumber::ACCOUNT), buffer, false);
+      }
+
+      if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+      {
+        return_value = data_.serialize_with_id(static_cast<uint32_t>(FieldNumber::DATA), buffer, false);
       }
 
       return return_value;
@@ -9836,6 +9853,10 @@ class check_authority_arguments final: public ::EmbeddedProto::MessageInterface
             return_value = account_.deserialize_check_type(buffer, wire_type);
             break;
 
+          case FieldNumber::DATA:
+            return_value = data_.deserialize_check_type(buffer, wire_type);
+            break;
+
           default:
             break;
         }
@@ -9862,6 +9883,7 @@ class check_authority_arguments final: public ::EmbeddedProto::MessageInterface
     {
       clear_type();
       clear_account();
+      clear_data();
 
     }
 
@@ -9870,6 +9892,7 @@ class check_authority_arguments final: public ::EmbeddedProto::MessageInterface
 
       authorization_type type_ = static_cast<authorization_type>(0);
       ::EmbeddedProto::FieldBytes<account_LENGTH> account_;
+      ::EmbeddedProto::FieldBytes<data_LENGTH> data_;
 
 };
 
