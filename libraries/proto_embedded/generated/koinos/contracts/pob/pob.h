@@ -1119,20 +1119,20 @@ class get_metadata_arguments final: public ::EmbeddedProto::MessageInterface
 
 };
 
-template<uint32_t metadata_seed_LENGTH, 
-uint32_t metadata_difficulty_LENGTH>
+template<uint32_t value_seed_LENGTH, 
+uint32_t value_difficulty_LENGTH>
 class get_metadata_result final: public ::EmbeddedProto::MessageInterface
 {
   public:
     get_metadata_result() = default;
     get_metadata_result(const get_metadata_result& rhs )
     {
-      set_metadata(rhs.get_metadata());
+      set_value(rhs.get_value());
     }
 
     get_metadata_result(const get_metadata_result&& rhs ) noexcept
     {
-      set_metadata(rhs.get_metadata());
+      set_value(rhs.get_value());
     }
 
     ~get_metadata_result() override = default;
@@ -1140,27 +1140,27 @@ class get_metadata_result final: public ::EmbeddedProto::MessageInterface
     enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
-      METADATA = 1
+      VALUE = 1
     };
 
     get_metadata_result& operator=(const get_metadata_result& rhs)
     {
-      set_metadata(rhs.get_metadata());
+      set_value(rhs.get_value());
       return *this;
     }
 
     get_metadata_result& operator=(const get_metadata_result&& rhs) noexcept
     {
-      set_metadata(rhs.get_metadata());
+      set_value(rhs.get_value());
       return *this;
     }
 
-    inline void clear_metadata() { metadata_.clear(); }
-    inline void set_metadata(const metadata<metadata_seed_LENGTH, metadata_difficulty_LENGTH>& value) { metadata_ = value; }
-    inline void set_metadata(const metadata<metadata_seed_LENGTH, metadata_difficulty_LENGTH>&& value) { metadata_ = value; }
-    inline metadata<metadata_seed_LENGTH, metadata_difficulty_LENGTH>& mutable_metadata() { return metadata_; }
-    inline const metadata<metadata_seed_LENGTH, metadata_difficulty_LENGTH>& get_metadata() const { return metadata_; }
-    inline const metadata<metadata_seed_LENGTH, metadata_difficulty_LENGTH>& metadata() const { return metadata_; }
+    inline void clear_value() { value_.clear(); }
+    inline void set_value(const metadata<value_seed_LENGTH, value_difficulty_LENGTH>& value) { value_ = value; }
+    inline void set_value(const metadata<value_seed_LENGTH, value_difficulty_LENGTH>&& value) { value_ = value; }
+    inline metadata<value_seed_LENGTH, value_difficulty_LENGTH>& mutable_value() { return value_; }
+    inline const metadata<value_seed_LENGTH, value_difficulty_LENGTH>& get_value() const { return value_; }
+    inline const metadata<value_seed_LENGTH, value_difficulty_LENGTH>& value() const { return value_; }
 
 
     ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
@@ -1169,7 +1169,7 @@ class get_metadata_result final: public ::EmbeddedProto::MessageInterface
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = metadata_.serialize_with_id(static_cast<uint32_t>(FieldNumber::METADATA), buffer, false);
+        return_value = value_.serialize_with_id(static_cast<uint32_t>(FieldNumber::VALUE), buffer, false);
       }
 
       return return_value;
@@ -1188,8 +1188,8 @@ class get_metadata_result final: public ::EmbeddedProto::MessageInterface
         id_tag = static_cast<FieldNumber>(id_number);
         switch(id_tag)
         {
-          case FieldNumber::METADATA:
-            return_value = metadata_.deserialize_check_type(buffer, wire_type);
+          case FieldNumber::VALUE:
+            return_value = value_.deserialize_check_type(buffer, wire_type);
             break;
 
           default:
@@ -1216,14 +1216,14 @@ class get_metadata_result final: public ::EmbeddedProto::MessageInterface
 
     void clear() override
     {
-      clear_metadata();
+      clear_value();
 
     }
 
     private:
 
 
-      metadata<metadata_seed_LENGTH, metadata_difficulty_LENGTH> metadata_;
+      metadata<value_seed_LENGTH, value_difficulty_LENGTH> value_;
 
 };
 
