@@ -40,7 +40,7 @@ namespace chain {
 
 enum class system_call_id : int32_t
 {
-  reserved_id = 0,
+  nop = 0,
   get_head_info = 1,
   apply_block = 2,
   apply_transaction = 3,
