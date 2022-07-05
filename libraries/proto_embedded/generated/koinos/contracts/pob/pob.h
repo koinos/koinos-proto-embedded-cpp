@@ -50,6 +50,158 @@ namespace koinos {
 namespace contracts {
 namespace pob {
 
+class consensus_parameters final: public ::EmbeddedProto::MessageInterface
+{
+  public:
+    consensus_parameters() = default;
+    consensus_parameters(const consensus_parameters& rhs )
+    {
+      set_target_annual_inflation_rate(rhs.get_target_annual_inflation_rate());
+      set_target_burn_percent(rhs.get_target_burn_percent());
+      set_target_block_interval(rhs.get_target_block_interval());
+    }
+
+    consensus_parameters(const consensus_parameters&& rhs ) noexcept
+    {
+      set_target_annual_inflation_rate(rhs.get_target_annual_inflation_rate());
+      set_target_burn_percent(rhs.get_target_burn_percent());
+      set_target_block_interval(rhs.get_target_block_interval());
+    }
+
+    ~consensus_parameters() override = default;
+
+    enum class FieldNumber : uint32_t
+    {
+      NOT_SET = 0,
+      TARGET_ANNUAL_INFLATION_RATE = 1,
+      TARGET_BURN_PERCENT = 2,
+      TARGET_BLOCK_INTERVAL = 3
+    };
+
+    consensus_parameters& operator=(const consensus_parameters& rhs)
+    {
+      set_target_annual_inflation_rate(rhs.get_target_annual_inflation_rate());
+      set_target_burn_percent(rhs.get_target_burn_percent());
+      set_target_block_interval(rhs.get_target_block_interval());
+      return *this;
+    }
+
+    consensus_parameters& operator=(const consensus_parameters&& rhs) noexcept
+    {
+      set_target_annual_inflation_rate(rhs.get_target_annual_inflation_rate());
+      set_target_burn_percent(rhs.get_target_burn_percent());
+      set_target_block_interval(rhs.get_target_block_interval());
+      return *this;
+    }
+
+    inline void clear_target_annual_inflation_rate() { target_annual_inflation_rate_.clear(); }
+    inline void set_target_annual_inflation_rate(const EmbeddedProto::uint64& value) { target_annual_inflation_rate_ = value; }
+    inline void set_target_annual_inflation_rate(const EmbeddedProto::uint64&& value) { target_annual_inflation_rate_ = value; }
+    inline EmbeddedProto::uint64& mutable_target_annual_inflation_rate() { return target_annual_inflation_rate_; }
+    inline const EmbeddedProto::uint64& get_target_annual_inflation_rate() const { return target_annual_inflation_rate_; }
+    inline EmbeddedProto::uint64::FIELD_TYPE target_annual_inflation_rate() const { return target_annual_inflation_rate_.get(); }
+
+    inline void clear_target_burn_percent() { target_burn_percent_.clear(); }
+    inline void set_target_burn_percent(const EmbeddedProto::uint64& value) { target_burn_percent_ = value; }
+    inline void set_target_burn_percent(const EmbeddedProto::uint64&& value) { target_burn_percent_ = value; }
+    inline EmbeddedProto::uint64& mutable_target_burn_percent() { return target_burn_percent_; }
+    inline const EmbeddedProto::uint64& get_target_burn_percent() const { return target_burn_percent_; }
+    inline EmbeddedProto::uint64::FIELD_TYPE target_burn_percent() const { return target_burn_percent_.get(); }
+
+    inline void clear_target_block_interval() { target_block_interval_.clear(); }
+    inline void set_target_block_interval(const EmbeddedProto::uint64& value) { target_block_interval_ = value; }
+    inline void set_target_block_interval(const EmbeddedProto::uint64&& value) { target_block_interval_ = value; }
+    inline EmbeddedProto::uint64& mutable_target_block_interval() { return target_block_interval_; }
+    inline const EmbeddedProto::uint64& get_target_block_interval() const { return target_block_interval_; }
+    inline EmbeddedProto::uint64::FIELD_TYPE target_block_interval() const { return target_block_interval_.get(); }
+
+
+    ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
+    {
+      ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
+
+      if((0U != target_annual_inflation_rate_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
+      {
+        return_value = target_annual_inflation_rate_.serialize_with_id(static_cast<uint32_t>(FieldNumber::TARGET_ANNUAL_INFLATION_RATE), buffer, false);
+      }
+
+      if((0U != target_burn_percent_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
+      {
+        return_value = target_burn_percent_.serialize_with_id(static_cast<uint32_t>(FieldNumber::TARGET_BURN_PERCENT), buffer, false);
+      }
+
+      if((0U != target_block_interval_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
+      {
+        return_value = target_block_interval_.serialize_with_id(static_cast<uint32_t>(FieldNumber::TARGET_BLOCK_INTERVAL), buffer, false);
+      }
+
+      return return_value;
+    };
+
+    ::EmbeddedProto::Error deserialize(::EmbeddedProto::ReadBufferInterface& buffer) override
+    {
+      ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
+      ::EmbeddedProto::WireFormatter::WireType wire_type = ::EmbeddedProto::WireFormatter::WireType::VARINT;
+      uint32_t id_number = 0;
+      FieldNumber id_tag = FieldNumber::NOT_SET;
+
+      ::EmbeddedProto::Error tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
+      while((::EmbeddedProto::Error::NO_ERRORS == return_value) && (::EmbeddedProto::Error::NO_ERRORS == tag_value))
+      {
+        id_tag = static_cast<FieldNumber>(id_number);
+        switch(id_tag)
+        {
+          case FieldNumber::TARGET_ANNUAL_INFLATION_RATE:
+            return_value = target_annual_inflation_rate_.deserialize_check_type(buffer, wire_type);
+            break;
+
+          case FieldNumber::TARGET_BURN_PERCENT:
+            return_value = target_burn_percent_.deserialize_check_type(buffer, wire_type);
+            break;
+
+          case FieldNumber::TARGET_BLOCK_INTERVAL:
+            return_value = target_block_interval_.deserialize_check_type(buffer, wire_type);
+            break;
+
+          default:
+            break;
+        }
+
+        if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+        {
+          // Read the next tag.
+          tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
+        }
+      }
+
+      // When an error was detect while reading the tag but no other errors where found, set it in the return value.
+      if((::EmbeddedProto::Error::NO_ERRORS == return_value)
+         && (::EmbeddedProto::Error::NO_ERRORS != tag_value)
+         && (::EmbeddedProto::Error::END_OF_BUFFER != tag_value)) // The end of the buffer is not an array in this case.
+      {
+        return_value = tag_value;
+      }
+
+      return return_value;
+    };
+
+    void clear() override
+    {
+      clear_target_annual_inflation_rate();
+      clear_target_burn_percent();
+      clear_target_block_interval();
+
+    }
+
+    private:
+
+
+      EmbeddedProto::uint64 target_annual_inflation_rate_ = 0U;
+      EmbeddedProto::uint64 target_burn_percent_ = 0U;
+      EmbeddedProto::uint64 target_block_interval_ = 0U;
+
+};
+
 template<uint32_t public_key_LENGTH>
 class public_key_record final: public ::EmbeddedProto::MessageInterface
 {
@@ -167,7 +319,6 @@ class metadata final: public ::EmbeddedProto::MessageInterface
       set_seed(rhs.get_seed());
       set_difficulty(rhs.get_difficulty());
       set_last_block_time(rhs.get_last_block_time());
-      set_target_block_interval(rhs.get_target_block_interval());
     }
 
     metadata(const metadata&& rhs ) noexcept
@@ -175,7 +326,6 @@ class metadata final: public ::EmbeddedProto::MessageInterface
       set_seed(rhs.get_seed());
       set_difficulty(rhs.get_difficulty());
       set_last_block_time(rhs.get_last_block_time());
-      set_target_block_interval(rhs.get_target_block_interval());
     }
 
     ~metadata() override = default;
@@ -185,8 +335,7 @@ class metadata final: public ::EmbeddedProto::MessageInterface
       NOT_SET = 0,
       SEED = 1,
       DIFFICULTY = 2,
-      LAST_BLOCK_TIME = 3,
-      TARGET_BLOCK_INTERVAL = 4
+      LAST_BLOCK_TIME = 3
     };
 
     metadata& operator=(const metadata& rhs)
@@ -194,7 +343,6 @@ class metadata final: public ::EmbeddedProto::MessageInterface
       set_seed(rhs.get_seed());
       set_difficulty(rhs.get_difficulty());
       set_last_block_time(rhs.get_last_block_time());
-      set_target_block_interval(rhs.get_target_block_interval());
       return *this;
     }
 
@@ -203,7 +351,6 @@ class metadata final: public ::EmbeddedProto::MessageInterface
       set_seed(rhs.get_seed());
       set_difficulty(rhs.get_difficulty());
       set_last_block_time(rhs.get_last_block_time());
-      set_target_block_interval(rhs.get_target_block_interval());
       return *this;
     }
 
@@ -226,13 +373,6 @@ class metadata final: public ::EmbeddedProto::MessageInterface
     inline const EmbeddedProto::uint64& get_last_block_time() const { return last_block_time_; }
     inline EmbeddedProto::uint64::FIELD_TYPE last_block_time() const { return last_block_time_.get(); }
 
-    inline void clear_target_block_interval() { target_block_interval_.clear(); }
-    inline void set_target_block_interval(const EmbeddedProto::uint64& value) { target_block_interval_ = value; }
-    inline void set_target_block_interval(const EmbeddedProto::uint64&& value) { target_block_interval_ = value; }
-    inline EmbeddedProto::uint64& mutable_target_block_interval() { return target_block_interval_; }
-    inline const EmbeddedProto::uint64& get_target_block_interval() const { return target_block_interval_; }
-    inline EmbeddedProto::uint64::FIELD_TYPE target_block_interval() const { return target_block_interval_.get(); }
-
 
     ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
     {
@@ -251,11 +391,6 @@ class metadata final: public ::EmbeddedProto::MessageInterface
       if((0U != last_block_time_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
       {
         return_value = last_block_time_.serialize_with_id(static_cast<uint32_t>(FieldNumber::LAST_BLOCK_TIME), buffer, false);
-      }
-
-      if((0U != target_block_interval_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
-      {
-        return_value = target_block_interval_.serialize_with_id(static_cast<uint32_t>(FieldNumber::TARGET_BLOCK_INTERVAL), buffer, false);
       }
 
       return return_value;
@@ -286,10 +421,6 @@ class metadata final: public ::EmbeddedProto::MessageInterface
             return_value = last_block_time_.deserialize_check_type(buffer, wire_type);
             break;
 
-          case FieldNumber::TARGET_BLOCK_INTERVAL:
-            return_value = target_block_interval_.deserialize_check_type(buffer, wire_type);
-            break;
-
           default:
             break;
         }
@@ -317,7 +448,6 @@ class metadata final: public ::EmbeddedProto::MessageInterface
       clear_seed();
       clear_difficulty();
       clear_last_block_time();
-      clear_target_block_interval();
 
     }
 
@@ -327,7 +457,6 @@ class metadata final: public ::EmbeddedProto::MessageInterface
       ::EmbeddedProto::FieldBytes<seed_LENGTH> seed_;
       ::EmbeddedProto::FieldBytes<difficulty_LENGTH> difficulty_;
       EmbeddedProto::uint64 last_block_time_ = 0U;
-      EmbeddedProto::uint64 target_block_interval_ = 0U;
 
 };
 
@@ -1033,6 +1162,195 @@ class burn_result final: public ::EmbeddedProto::MessageInterface
     private:
 
 
+
+};
+
+class get_consensus_parameters_arguments final: public ::EmbeddedProto::MessageInterface
+{
+  public:
+    get_consensus_parameters_arguments() = default;
+    get_consensus_parameters_arguments(const get_consensus_parameters_arguments& rhs )
+    {
+    }
+
+    get_consensus_parameters_arguments(const get_consensus_parameters_arguments&& rhs ) noexcept
+    {
+    }
+
+    ~get_consensus_parameters_arguments() override = default;
+
+    enum class FieldNumber : uint32_t
+    {
+      NOT_SET = 0,
+    };
+
+    get_consensus_parameters_arguments& operator=(const get_consensus_parameters_arguments& rhs)
+    {
+      return *this;
+    }
+
+    get_consensus_parameters_arguments& operator=(const get_consensus_parameters_arguments&& rhs) noexcept
+    {
+      return *this;
+    }
+
+
+    ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
+    {
+      ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
+
+      return return_value;
+    };
+
+    ::EmbeddedProto::Error deserialize(::EmbeddedProto::ReadBufferInterface& buffer) override
+    {
+      ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
+      ::EmbeddedProto::WireFormatter::WireType wire_type = ::EmbeddedProto::WireFormatter::WireType::VARINT;
+      uint32_t id_number = 0;
+      FieldNumber id_tag = FieldNumber::NOT_SET;
+
+      ::EmbeddedProto::Error tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
+      while((::EmbeddedProto::Error::NO_ERRORS == return_value) && (::EmbeddedProto::Error::NO_ERRORS == tag_value))
+      {
+        id_tag = static_cast<FieldNumber>(id_number);
+        switch(id_tag)
+        {
+          default:
+            break;
+        }
+
+        if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+        {
+          // Read the next tag.
+          tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
+        }
+      }
+
+      // When an error was detect while reading the tag but no other errors where found, set it in the return value.
+      if((::EmbeddedProto::Error::NO_ERRORS == return_value)
+         && (::EmbeddedProto::Error::NO_ERRORS != tag_value)
+         && (::EmbeddedProto::Error::END_OF_BUFFER != tag_value)) // The end of the buffer is not an array in this case.
+      {
+        return_value = tag_value;
+      }
+
+      return return_value;
+    };
+
+    void clear() override
+    {
+
+    }
+
+    private:
+
+
+
+};
+
+class get_consensus_parameters_result final: public ::EmbeddedProto::MessageInterface
+{
+  public:
+    get_consensus_parameters_result() = default;
+    get_consensus_parameters_result(const get_consensus_parameters_result& rhs )
+    {
+      set_value(rhs.get_value());
+    }
+
+    get_consensus_parameters_result(const get_consensus_parameters_result&& rhs ) noexcept
+    {
+      set_value(rhs.get_value());
+    }
+
+    ~get_consensus_parameters_result() override = default;
+
+    enum class FieldNumber : uint32_t
+    {
+      NOT_SET = 0,
+      VALUE = 1
+    };
+
+    get_consensus_parameters_result& operator=(const get_consensus_parameters_result& rhs)
+    {
+      set_value(rhs.get_value());
+      return *this;
+    }
+
+    get_consensus_parameters_result& operator=(const get_consensus_parameters_result&& rhs) noexcept
+    {
+      set_value(rhs.get_value());
+      return *this;
+    }
+
+    inline void clear_value() { value_.clear(); }
+    inline void set_value(const consensus_parameters& value) { value_ = value; }
+    inline void set_value(const consensus_parameters&& value) { value_ = value; }
+    inline consensus_parameters& mutable_value() { return value_; }
+    inline const consensus_parameters& get_value() const { return value_; }
+    inline const consensus_parameters& value() const { return value_; }
+
+
+    ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
+    {
+      ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
+
+      if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+      {
+        return_value = value_.serialize_with_id(static_cast<uint32_t>(FieldNumber::VALUE), buffer, false);
+      }
+
+      return return_value;
+    };
+
+    ::EmbeddedProto::Error deserialize(::EmbeddedProto::ReadBufferInterface& buffer) override
+    {
+      ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
+      ::EmbeddedProto::WireFormatter::WireType wire_type = ::EmbeddedProto::WireFormatter::WireType::VARINT;
+      uint32_t id_number = 0;
+      FieldNumber id_tag = FieldNumber::NOT_SET;
+
+      ::EmbeddedProto::Error tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
+      while((::EmbeddedProto::Error::NO_ERRORS == return_value) && (::EmbeddedProto::Error::NO_ERRORS == tag_value))
+      {
+        id_tag = static_cast<FieldNumber>(id_number);
+        switch(id_tag)
+        {
+          case FieldNumber::VALUE:
+            return_value = value_.deserialize_check_type(buffer, wire_type);
+            break;
+
+          default:
+            break;
+        }
+
+        if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+        {
+          // Read the next tag.
+          tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
+        }
+      }
+
+      // When an error was detect while reading the tag but no other errors where found, set it in the return value.
+      if((::EmbeddedProto::Error::NO_ERRORS == return_value)
+         && (::EmbeddedProto::Error::NO_ERRORS != tag_value)
+         && (::EmbeddedProto::Error::END_OF_BUFFER != tag_value)) // The end of the buffer is not an array in this case.
+      {
+        return_value = tag_value;
+      }
+
+      return return_value;
+    };
+
+    void clear() override
+    {
+      clear_value();
+
+    }
+
+    private:
+
+
+      consensus_parameters value_;
 
 };
 
