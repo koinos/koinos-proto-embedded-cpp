@@ -591,6 +591,7 @@ class block_accepted final: public ::EmbeddedProto::MessageInterface
       set_block(rhs.get_block());
       set_receipt(rhs.get_receipt());
       set_live(rhs.get_live());
+      set_head(rhs.get_head());
     }
 
     block_accepted(const block_accepted&& rhs ) noexcept
@@ -598,6 +599,7 @@ class block_accepted final: public ::EmbeddedProto::MessageInterface
       set_block(rhs.get_block());
       set_receipt(rhs.get_receipt());
       set_live(rhs.get_live());
+      set_head(rhs.get_head());
     }
 
     ~block_accepted() override = default;
@@ -607,7 +609,8 @@ class block_accepted final: public ::EmbeddedProto::MessageInterface
       NOT_SET = 0,
       BLOCK = 1,
       RECEIPT = 2,
-      LIVE = 3
+      LIVE = 3,
+      HEAD = 4
     };
 
     block_accepted& operator=(const block_accepted& rhs)
@@ -615,6 +618,7 @@ class block_accepted final: public ::EmbeddedProto::MessageInterface
       set_block(rhs.get_block());
       set_receipt(rhs.get_receipt());
       set_live(rhs.get_live());
+      set_head(rhs.get_head());
       return *this;
     }
 
@@ -623,6 +627,7 @@ class block_accepted final: public ::EmbeddedProto::MessageInterface
       set_block(rhs.get_block());
       set_receipt(rhs.get_receipt());
       set_live(rhs.get_live());
+      set_head(rhs.get_head());
       return *this;
     }
 
@@ -647,6 +652,13 @@ class block_accepted final: public ::EmbeddedProto::MessageInterface
     inline const EmbeddedProto::boolean& get_live() const { return live_; }
     inline EmbeddedProto::boolean::FIELD_TYPE live() const { return live_.get(); }
 
+    inline void clear_head() { head_.clear(); }
+    inline void set_head(const EmbeddedProto::boolean& value) { head_ = value; }
+    inline void set_head(const EmbeddedProto::boolean&& value) { head_ = value; }
+    inline EmbeddedProto::boolean& mutable_head() { return head_; }
+    inline const EmbeddedProto::boolean& get_head() const { return head_; }
+    inline EmbeddedProto::boolean::FIELD_TYPE head() const { return head_.get(); }
+
 
     ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
     {
@@ -665,6 +677,11 @@ class block_accepted final: public ::EmbeddedProto::MessageInterface
       if((false != live_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
       {
         return_value = live_.serialize_with_id(static_cast<uint32_t>(FieldNumber::LIVE), buffer, false);
+      }
+
+      if((false != head_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
+      {
+        return_value = head_.serialize_with_id(static_cast<uint32_t>(FieldNumber::HEAD), buffer, false);
       }
 
       return return_value;
@@ -695,6 +712,10 @@ class block_accepted final: public ::EmbeddedProto::MessageInterface
             return_value = live_.deserialize_check_type(buffer, wire_type);
             break;
 
+          case FieldNumber::HEAD:
+            return_value = head_.deserialize_check_type(buffer, wire_type);
+            break;
+
           default:
             break;
         }
@@ -722,6 +743,7 @@ class block_accepted final: public ::EmbeddedProto::MessageInterface
       clear_block();
       clear_receipt();
       clear_live();
+      clear_head();
 
     }
 
@@ -731,6 +753,7 @@ class block_accepted final: public ::EmbeddedProto::MessageInterface
       protocol::block<block_id_LENGTH, block_header_previous_LENGTH, block_header_previous_state_merkle_root_LENGTH, block_header_transaction_merkle_root_LENGTH, block_header_signer_LENGTH, block_header_approved_proposals_REP_LENGTH, block_header_approved_proposals_LENGTH, block_transactions_REP_LENGTH, block_transactions_id_LENGTH, block_transactions_header_chain_id_LENGTH, block_transactions_header_nonce_LENGTH, block_transactions_header_operation_merkle_root_LENGTH, block_transactions_header_payer_LENGTH, block_transactions_header_payee_LENGTH, block_transactions_operations_REP_LENGTH, block_transactions_operations_upload_contract_contract_id_LENGTH, block_transactions_operations_upload_contract_bytecode_LENGTH, block_transactions_operations_upload_contract_abi_LENGTH, block_transactions_operations_call_contract_contract_id_LENGTH, block_transactions_operations_call_contract_args_LENGTH, block_transactions_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, block_transactions_operations_set_system_contract_contract_id_LENGTH, block_transactions_signatures_REP_LENGTH, block_transactions_signatures_LENGTH, block_signature_LENGTH> block_;
       protocol::block_receipt<receipt_id_LENGTH, receipt_state_merkle_root_LENGTH, receipt_events_REP_LENGTH, receipt_events_source_LENGTH, receipt_events_name_LENGTH, receipt_events_data_LENGTH, receipt_events_impacted_REP_LENGTH, receipt_events_impacted_LENGTH, receipt_transaction_receipts_REP_LENGTH, receipt_transaction_receipts_id_LENGTH, receipt_transaction_receipts_payer_LENGTH, receipt_transaction_receipts_events_REP_LENGTH, receipt_transaction_receipts_events_source_LENGTH, receipt_transaction_receipts_events_name_LENGTH, receipt_transaction_receipts_events_data_LENGTH, receipt_transaction_receipts_events_impacted_REP_LENGTH, receipt_transaction_receipts_events_impacted_LENGTH, receipt_transaction_receipts_logs_REP_LENGTH, receipt_transaction_receipts_logs_LENGTH, receipt_logs_REP_LENGTH, receipt_logs_LENGTH> receipt_;
       EmbeddedProto::boolean live_ = false;
+      EmbeddedProto::boolean head_ = false;
 
 };
 
