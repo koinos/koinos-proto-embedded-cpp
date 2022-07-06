@@ -645,6 +645,7 @@ class get_head_info_response final: public ::EmbeddedProto::MessageInterface
       set_head_topology(rhs.get_head_topology());
       set_last_irreversible_block(rhs.get_last_irreversible_block());
       set_head_state_merkle_root(rhs.get_head_state_merkle_root());
+      set_head_block_time(rhs.get_head_block_time());
     }
 
     get_head_info_response(const get_head_info_response&& rhs ) noexcept
@@ -652,6 +653,7 @@ class get_head_info_response final: public ::EmbeddedProto::MessageInterface
       set_head_topology(rhs.get_head_topology());
       set_last_irreversible_block(rhs.get_last_irreversible_block());
       set_head_state_merkle_root(rhs.get_head_state_merkle_root());
+      set_head_block_time(rhs.get_head_block_time());
     }
 
     ~get_head_info_response() override = default;
@@ -661,7 +663,8 @@ class get_head_info_response final: public ::EmbeddedProto::MessageInterface
       NOT_SET = 0,
       HEAD_TOPOLOGY = 1,
       LAST_IRREVERSIBLE_BLOCK = 2,
-      HEAD_STATE_MERKLE_ROOT = 3
+      HEAD_STATE_MERKLE_ROOT = 3,
+      HEAD_BLOCK_TIME = 4
     };
 
     get_head_info_response& operator=(const get_head_info_response& rhs)
@@ -669,6 +672,7 @@ class get_head_info_response final: public ::EmbeddedProto::MessageInterface
       set_head_topology(rhs.get_head_topology());
       set_last_irreversible_block(rhs.get_last_irreversible_block());
       set_head_state_merkle_root(rhs.get_head_state_merkle_root());
+      set_head_block_time(rhs.get_head_block_time());
       return *this;
     }
 
@@ -677,6 +681,7 @@ class get_head_info_response final: public ::EmbeddedProto::MessageInterface
       set_head_topology(rhs.get_head_topology());
       set_last_irreversible_block(rhs.get_last_irreversible_block());
       set_head_state_merkle_root(rhs.get_head_state_merkle_root());
+      set_head_block_time(rhs.get_head_block_time());
       return *this;
     }
 
@@ -700,6 +705,13 @@ class get_head_info_response final: public ::EmbeddedProto::MessageInterface
     inline const ::EmbeddedProto::FieldBytes<head_state_merkle_root_LENGTH>& get_head_state_merkle_root() const { return head_state_merkle_root_; }
     inline const uint8_t* head_state_merkle_root() const { return head_state_merkle_root_.get_const(); }
 
+    inline void clear_head_block_time() { head_block_time_.clear(); }
+    inline void set_head_block_time(const EmbeddedProto::uint64& value) { head_block_time_ = value; }
+    inline void set_head_block_time(const EmbeddedProto::uint64&& value) { head_block_time_ = value; }
+    inline EmbeddedProto::uint64& mutable_head_block_time() { return head_block_time_; }
+    inline const EmbeddedProto::uint64& get_head_block_time() const { return head_block_time_; }
+    inline EmbeddedProto::uint64::FIELD_TYPE head_block_time() const { return head_block_time_.get(); }
+
 
     ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
     {
@@ -718,6 +730,11 @@ class get_head_info_response final: public ::EmbeddedProto::MessageInterface
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
         return_value = head_state_merkle_root_.serialize_with_id(static_cast<uint32_t>(FieldNumber::HEAD_STATE_MERKLE_ROOT), buffer, false);
+      }
+
+      if((0U != head_block_time_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
+      {
+        return_value = head_block_time_.serialize_with_id(static_cast<uint32_t>(FieldNumber::HEAD_BLOCK_TIME), buffer, false);
       }
 
       return return_value;
@@ -748,6 +765,10 @@ class get_head_info_response final: public ::EmbeddedProto::MessageInterface
             return_value = head_state_merkle_root_.deserialize_check_type(buffer, wire_type);
             break;
 
+          case FieldNumber::HEAD_BLOCK_TIME:
+            return_value = head_block_time_.deserialize_check_type(buffer, wire_type);
+            break;
+
           default:
             break;
         }
@@ -775,6 +796,7 @@ class get_head_info_response final: public ::EmbeddedProto::MessageInterface
       clear_head_topology();
       clear_last_irreversible_block();
       clear_head_state_merkle_root();
+      clear_head_block_time();
 
     }
 
@@ -784,6 +806,7 @@ class get_head_info_response final: public ::EmbeddedProto::MessageInterface
       block_topology<head_topology_id_LENGTH, head_topology_previous_LENGTH> head_topology_;
       EmbeddedProto::uint64 last_irreversible_block_ = 0U;
       ::EmbeddedProto::FieldBytes<head_state_merkle_root_LENGTH> head_state_merkle_root_;
+      EmbeddedProto::uint64 head_block_time_ = 0U;
 
 };
 
