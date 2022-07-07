@@ -764,18 +764,21 @@ class vrf_payload final: public ::EmbeddedProto::MessageInterface
 
 };
 
-template<uint32_t public_key_LENGTH>
+template<uint32_t producer_LENGTH, 
+uint32_t public_key_LENGTH>
 class register_public_key_arguments final: public ::EmbeddedProto::MessageInterface
 {
   public:
     register_public_key_arguments() = default;
     register_public_key_arguments(const register_public_key_arguments& rhs )
     {
+      set_producer(rhs.get_producer());
       set_public_key(rhs.get_public_key());
     }
 
     register_public_key_arguments(const register_public_key_arguments&& rhs ) noexcept
     {
+      set_producer(rhs.get_producer());
       set_public_key(rhs.get_public_key());
     }
 
@@ -784,20 +787,29 @@ class register_public_key_arguments final: public ::EmbeddedProto::MessageInterf
     enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
-      PUBLIC_KEY = 1
+      PRODUCER = 1,
+      PUBLIC_KEY = 2
     };
 
     register_public_key_arguments& operator=(const register_public_key_arguments& rhs)
     {
+      set_producer(rhs.get_producer());
       set_public_key(rhs.get_public_key());
       return *this;
     }
 
     register_public_key_arguments& operator=(const register_public_key_arguments&& rhs) noexcept
     {
+      set_producer(rhs.get_producer());
       set_public_key(rhs.get_public_key());
       return *this;
     }
+
+    inline void clear_producer() { producer_.clear(); }
+    inline ::EmbeddedProto::FieldBytes<producer_LENGTH>& mutable_producer() { return producer_; }
+    inline void set_producer(const ::EmbeddedProto::FieldBytes<producer_LENGTH>& rhs) { producer_.set(rhs); }
+    inline const ::EmbeddedProto::FieldBytes<producer_LENGTH>& get_producer() const { return producer_; }
+    inline const uint8_t* producer() const { return producer_.get_const(); }
 
     inline void clear_public_key() { public_key_.clear(); }
     inline ::EmbeddedProto::FieldBytes<public_key_LENGTH>& mutable_public_key() { return public_key_; }
@@ -809,6 +821,11 @@ class register_public_key_arguments final: public ::EmbeddedProto::MessageInterf
     ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
     {
       ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
+
+      if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+      {
+        return_value = producer_.serialize_with_id(static_cast<uint32_t>(FieldNumber::PRODUCER), buffer, false);
+      }
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
@@ -831,6 +848,10 @@ class register_public_key_arguments final: public ::EmbeddedProto::MessageInterf
         id_tag = static_cast<FieldNumber>(id_number);
         switch(id_tag)
         {
+          case FieldNumber::PRODUCER:
+            return_value = producer_.deserialize_check_type(buffer, wire_type);
+            break;
+
           case FieldNumber::PUBLIC_KEY:
             return_value = public_key_.deserialize_check_type(buffer, wire_type);
             break;
@@ -859,6 +880,7 @@ class register_public_key_arguments final: public ::EmbeddedProto::MessageInterf
 
     void clear() override
     {
+      clear_producer();
       clear_public_key();
 
     }
@@ -866,6 +888,7 @@ class register_public_key_arguments final: public ::EmbeddedProto::MessageInterf
     private:
 
 
+      ::EmbeddedProto::FieldBytes<producer_LENGTH> producer_;
       ::EmbeddedProto::FieldBytes<public_key_LENGTH> public_key_;
 
 };
