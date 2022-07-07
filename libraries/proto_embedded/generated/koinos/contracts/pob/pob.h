@@ -59,6 +59,7 @@ class consensus_parameters final: public ::EmbeddedProto::MessageInterface
       set_target_annual_inflation_rate(rhs.get_target_annual_inflation_rate());
       set_target_burn_percent(rhs.get_target_burn_percent());
       set_target_block_interval(rhs.get_target_block_interval());
+      set_quantum_length(rhs.get_quantum_length());
     }
 
     consensus_parameters(const consensus_parameters&& rhs ) noexcept
@@ -66,6 +67,7 @@ class consensus_parameters final: public ::EmbeddedProto::MessageInterface
       set_target_annual_inflation_rate(rhs.get_target_annual_inflation_rate());
       set_target_burn_percent(rhs.get_target_burn_percent());
       set_target_block_interval(rhs.get_target_block_interval());
+      set_quantum_length(rhs.get_quantum_length());
     }
 
     ~consensus_parameters() override = default;
@@ -75,7 +77,8 @@ class consensus_parameters final: public ::EmbeddedProto::MessageInterface
       NOT_SET = 0,
       TARGET_ANNUAL_INFLATION_RATE = 1,
       TARGET_BURN_PERCENT = 2,
-      TARGET_BLOCK_INTERVAL = 3
+      TARGET_BLOCK_INTERVAL = 3,
+      QUANTUM_LENGTH = 4
     };
 
     consensus_parameters& operator=(const consensus_parameters& rhs)
@@ -83,6 +86,7 @@ class consensus_parameters final: public ::EmbeddedProto::MessageInterface
       set_target_annual_inflation_rate(rhs.get_target_annual_inflation_rate());
       set_target_burn_percent(rhs.get_target_burn_percent());
       set_target_block_interval(rhs.get_target_block_interval());
+      set_quantum_length(rhs.get_quantum_length());
       return *this;
     }
 
@@ -91,29 +95,37 @@ class consensus_parameters final: public ::EmbeddedProto::MessageInterface
       set_target_annual_inflation_rate(rhs.get_target_annual_inflation_rate());
       set_target_burn_percent(rhs.get_target_burn_percent());
       set_target_block_interval(rhs.get_target_block_interval());
+      set_quantum_length(rhs.get_quantum_length());
       return *this;
     }
 
     inline void clear_target_annual_inflation_rate() { target_annual_inflation_rate_.clear(); }
-    inline void set_target_annual_inflation_rate(const EmbeddedProto::uint64& value) { target_annual_inflation_rate_ = value; }
-    inline void set_target_annual_inflation_rate(const EmbeddedProto::uint64&& value) { target_annual_inflation_rate_ = value; }
-    inline EmbeddedProto::uint64& mutable_target_annual_inflation_rate() { return target_annual_inflation_rate_; }
-    inline const EmbeddedProto::uint64& get_target_annual_inflation_rate() const { return target_annual_inflation_rate_; }
-    inline EmbeddedProto::uint64::FIELD_TYPE target_annual_inflation_rate() const { return target_annual_inflation_rate_.get(); }
+    inline void set_target_annual_inflation_rate(const EmbeddedProto::uint32& value) { target_annual_inflation_rate_ = value; }
+    inline void set_target_annual_inflation_rate(const EmbeddedProto::uint32&& value) { target_annual_inflation_rate_ = value; }
+    inline EmbeddedProto::uint32& mutable_target_annual_inflation_rate() { return target_annual_inflation_rate_; }
+    inline const EmbeddedProto::uint32& get_target_annual_inflation_rate() const { return target_annual_inflation_rate_; }
+    inline EmbeddedProto::uint32::FIELD_TYPE target_annual_inflation_rate() const { return target_annual_inflation_rate_.get(); }
 
     inline void clear_target_burn_percent() { target_burn_percent_.clear(); }
-    inline void set_target_burn_percent(const EmbeddedProto::uint64& value) { target_burn_percent_ = value; }
-    inline void set_target_burn_percent(const EmbeddedProto::uint64&& value) { target_burn_percent_ = value; }
-    inline EmbeddedProto::uint64& mutable_target_burn_percent() { return target_burn_percent_; }
-    inline const EmbeddedProto::uint64& get_target_burn_percent() const { return target_burn_percent_; }
-    inline EmbeddedProto::uint64::FIELD_TYPE target_burn_percent() const { return target_burn_percent_.get(); }
+    inline void set_target_burn_percent(const EmbeddedProto::uint32& value) { target_burn_percent_ = value; }
+    inline void set_target_burn_percent(const EmbeddedProto::uint32&& value) { target_burn_percent_ = value; }
+    inline EmbeddedProto::uint32& mutable_target_burn_percent() { return target_burn_percent_; }
+    inline const EmbeddedProto::uint32& get_target_burn_percent() const { return target_burn_percent_; }
+    inline EmbeddedProto::uint32::FIELD_TYPE target_burn_percent() const { return target_burn_percent_.get(); }
 
     inline void clear_target_block_interval() { target_block_interval_.clear(); }
-    inline void set_target_block_interval(const EmbeddedProto::uint64& value) { target_block_interval_ = value; }
-    inline void set_target_block_interval(const EmbeddedProto::uint64&& value) { target_block_interval_ = value; }
-    inline EmbeddedProto::uint64& mutable_target_block_interval() { return target_block_interval_; }
-    inline const EmbeddedProto::uint64& get_target_block_interval() const { return target_block_interval_; }
-    inline EmbeddedProto::uint64::FIELD_TYPE target_block_interval() const { return target_block_interval_.get(); }
+    inline void set_target_block_interval(const EmbeddedProto::uint32& value) { target_block_interval_ = value; }
+    inline void set_target_block_interval(const EmbeddedProto::uint32&& value) { target_block_interval_ = value; }
+    inline EmbeddedProto::uint32& mutable_target_block_interval() { return target_block_interval_; }
+    inline const EmbeddedProto::uint32& get_target_block_interval() const { return target_block_interval_; }
+    inline EmbeddedProto::uint32::FIELD_TYPE target_block_interval() const { return target_block_interval_.get(); }
+
+    inline void clear_quantum_length() { quantum_length_.clear(); }
+    inline void set_quantum_length(const EmbeddedProto::uint32& value) { quantum_length_ = value; }
+    inline void set_quantum_length(const EmbeddedProto::uint32&& value) { quantum_length_ = value; }
+    inline EmbeddedProto::uint32& mutable_quantum_length() { return quantum_length_; }
+    inline const EmbeddedProto::uint32& get_quantum_length() const { return quantum_length_; }
+    inline EmbeddedProto::uint32::FIELD_TYPE quantum_length() const { return quantum_length_.get(); }
 
 
     ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
@@ -133,6 +145,11 @@ class consensus_parameters final: public ::EmbeddedProto::MessageInterface
       if((0U != target_block_interval_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
       {
         return_value = target_block_interval_.serialize_with_id(static_cast<uint32_t>(FieldNumber::TARGET_BLOCK_INTERVAL), buffer, false);
+      }
+
+      if((0U != quantum_length_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
+      {
+        return_value = quantum_length_.serialize_with_id(static_cast<uint32_t>(FieldNumber::QUANTUM_LENGTH), buffer, false);
       }
 
       return return_value;
@@ -163,6 +180,10 @@ class consensus_parameters final: public ::EmbeddedProto::MessageInterface
             return_value = target_block_interval_.deserialize_check_type(buffer, wire_type);
             break;
 
+          case FieldNumber::QUANTUM_LENGTH:
+            return_value = quantum_length_.deserialize_check_type(buffer, wire_type);
+            break;
+
           default:
             break;
         }
@@ -190,15 +211,17 @@ class consensus_parameters final: public ::EmbeddedProto::MessageInterface
       clear_target_annual_inflation_rate();
       clear_target_burn_percent();
       clear_target_block_interval();
+      clear_quantum_length();
 
     }
 
     private:
 
 
-      EmbeddedProto::uint64 target_annual_inflation_rate_ = 0U;
-      EmbeddedProto::uint64 target_burn_percent_ = 0U;
-      EmbeddedProto::uint64 target_block_interval_ = 0U;
+      EmbeddedProto::uint32 target_annual_inflation_rate_ = 0U;
+      EmbeddedProto::uint32 target_burn_percent_ = 0U;
+      EmbeddedProto::uint32 target_block_interval_ = 0U;
+      EmbeddedProto::uint32 quantum_length_ = 0U;
 
 };
 
