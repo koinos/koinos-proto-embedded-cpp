@@ -335,11 +335,13 @@ class submit_transaction_request final: public ::EmbeddedProto::MessageInterface
     submit_transaction_request(const submit_transaction_request& rhs )
     {
       set_transaction(rhs.get_transaction());
+      set_broadcast(rhs.get_broadcast());
     }
 
     submit_transaction_request(const submit_transaction_request&& rhs ) noexcept
     {
       set_transaction(rhs.get_transaction());
+      set_broadcast(rhs.get_broadcast());
     }
 
     ~submit_transaction_request() override = default;
@@ -347,18 +349,21 @@ class submit_transaction_request final: public ::EmbeddedProto::MessageInterface
     enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
-      TRANSACTION = 1
+      TRANSACTION = 1,
+      BROADCAST = 2
     };
 
     submit_transaction_request& operator=(const submit_transaction_request& rhs)
     {
       set_transaction(rhs.get_transaction());
+      set_broadcast(rhs.get_broadcast());
       return *this;
     }
 
     submit_transaction_request& operator=(const submit_transaction_request&& rhs) noexcept
     {
       set_transaction(rhs.get_transaction());
+      set_broadcast(rhs.get_broadcast());
       return *this;
     }
 
@@ -369,6 +374,13 @@ class submit_transaction_request final: public ::EmbeddedProto::MessageInterface
     inline const protocol::transaction<transaction_id_LENGTH, transaction_header_chain_id_LENGTH, transaction_header_nonce_LENGTH, transaction_header_operation_merkle_root_LENGTH, transaction_header_payer_LENGTH, transaction_header_payee_LENGTH, transaction_operations_REP_LENGTH, transaction_operations_upload_contract_contract_id_LENGTH, transaction_operations_upload_contract_bytecode_LENGTH, transaction_operations_upload_contract_abi_LENGTH, transaction_operations_call_contract_contract_id_LENGTH, transaction_operations_call_contract_args_LENGTH, transaction_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, transaction_operations_set_system_contract_contract_id_LENGTH, transaction_signatures_REP_LENGTH, transaction_signatures_LENGTH>& get_transaction() const { return transaction_; }
     inline const protocol::transaction<transaction_id_LENGTH, transaction_header_chain_id_LENGTH, transaction_header_nonce_LENGTH, transaction_header_operation_merkle_root_LENGTH, transaction_header_payer_LENGTH, transaction_header_payee_LENGTH, transaction_operations_REP_LENGTH, transaction_operations_upload_contract_contract_id_LENGTH, transaction_operations_upload_contract_bytecode_LENGTH, transaction_operations_upload_contract_abi_LENGTH, transaction_operations_call_contract_contract_id_LENGTH, transaction_operations_call_contract_args_LENGTH, transaction_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, transaction_operations_set_system_contract_contract_id_LENGTH, transaction_signatures_REP_LENGTH, transaction_signatures_LENGTH>& transaction() const { return transaction_; }
 
+    inline void clear_broadcast() { broadcast_.clear(); }
+    inline void set_broadcast(const EmbeddedProto::boolean& value) { broadcast_ = value; }
+    inline void set_broadcast(const EmbeddedProto::boolean&& value) { broadcast_ = value; }
+    inline EmbeddedProto::boolean& mutable_broadcast() { return broadcast_; }
+    inline const EmbeddedProto::boolean& get_broadcast() const { return broadcast_; }
+    inline EmbeddedProto::boolean::FIELD_TYPE broadcast() const { return broadcast_.get(); }
+
 
     ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
     {
@@ -377,6 +389,11 @@ class submit_transaction_request final: public ::EmbeddedProto::MessageInterface
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
         return_value = transaction_.serialize_with_id(static_cast<uint32_t>(FieldNumber::TRANSACTION), buffer, false);
+      }
+
+      if((false != broadcast_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
+      {
+        return_value = broadcast_.serialize_with_id(static_cast<uint32_t>(FieldNumber::BROADCAST), buffer, false);
       }
 
       return return_value;
@@ -397,6 +414,10 @@ class submit_transaction_request final: public ::EmbeddedProto::MessageInterface
         {
           case FieldNumber::TRANSACTION:
             return_value = transaction_.deserialize_check_type(buffer, wire_type);
+            break;
+
+          case FieldNumber::BROADCAST:
+            return_value = broadcast_.deserialize_check_type(buffer, wire_type);
             break;
 
           default:
@@ -424,6 +445,7 @@ class submit_transaction_request final: public ::EmbeddedProto::MessageInterface
     void clear() override
     {
       clear_transaction();
+      clear_broadcast();
 
     }
 
@@ -431,6 +453,7 @@ class submit_transaction_request final: public ::EmbeddedProto::MessageInterface
 
 
       protocol::transaction<transaction_id_LENGTH, transaction_header_chain_id_LENGTH, transaction_header_nonce_LENGTH, transaction_header_operation_merkle_root_LENGTH, transaction_header_payer_LENGTH, transaction_header_payee_LENGTH, transaction_operations_REP_LENGTH, transaction_operations_upload_contract_contract_id_LENGTH, transaction_operations_upload_contract_bytecode_LENGTH, transaction_operations_upload_contract_abi_LENGTH, transaction_operations_call_contract_contract_id_LENGTH, transaction_operations_call_contract_args_LENGTH, transaction_operations_set_system_call_target_system_call_bundle_contract_id_LENGTH, transaction_operations_set_system_contract_contract_id_LENGTH, transaction_signatures_REP_LENGTH, transaction_signatures_LENGTH> transaction_;
+      EmbeddedProto::boolean broadcast_ = false;
 
 };
 
