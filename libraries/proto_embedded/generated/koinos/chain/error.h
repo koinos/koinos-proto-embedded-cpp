@@ -63,7 +63,7 @@ enum class error_code : int32_t
   malformed_block = -203,
   malformed_transaction = -204,
   block_resource_failure = -205,
-  unknown_backend_exception = -1000,
+  unknown_backend = -1000,
   unexpected_state = -1001,
   missing_required_arguments = -1002,
   unknown_previous_block = -1003,
@@ -72,7 +72,12 @@ enum class error_code : int32_t
   state_merkle_mismatch = -1006,
   unexpected_receipt = -1007,
   rpc_failure = -1008,
-  pending_state_error = -1009
+  pending_state_error = -1009,
+  timestamp_out_of_bounds = -1010,
+  indexer_failure = -1011,
+  network_bandwidth_limit_exceeded = -1012,
+  compute_bandwidth_limit_exceeded = -1013,
+  disk_storage_limit_exceeded = -1014
 };
 
 } // End of namespace chain
