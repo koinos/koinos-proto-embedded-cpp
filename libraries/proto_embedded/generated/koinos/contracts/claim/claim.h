@@ -179,7 +179,8 @@ class claim_status final: public ::EmbeddedProto::MessageInterface
 
 };
 
-template<uint32_t eth_address_LENGTH>
+template<uint32_t eth_address_LENGTH, 
+uint32_t koin_address_LENGTH>
 class claim_arguments final: public ::EmbeddedProto::MessageInterface
 {
   public:
@@ -187,11 +188,13 @@ class claim_arguments final: public ::EmbeddedProto::MessageInterface
     claim_arguments(const claim_arguments& rhs )
     {
       set_eth_address(rhs.get_eth_address());
+      set_koin_address(rhs.get_koin_address());
     }
 
     claim_arguments(const claim_arguments&& rhs ) noexcept
     {
       set_eth_address(rhs.get_eth_address());
+      set_koin_address(rhs.get_koin_address());
     }
 
     ~claim_arguments() override = default;
@@ -199,18 +202,21 @@ class claim_arguments final: public ::EmbeddedProto::MessageInterface
     enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
-      ETH_ADDRESS = 1
+      ETH_ADDRESS = 1,
+      KOIN_ADDRESS = 2
     };
 
     claim_arguments& operator=(const claim_arguments& rhs)
     {
       set_eth_address(rhs.get_eth_address());
+      set_koin_address(rhs.get_koin_address());
       return *this;
     }
 
     claim_arguments& operator=(const claim_arguments&& rhs) noexcept
     {
       set_eth_address(rhs.get_eth_address());
+      set_koin_address(rhs.get_koin_address());
       return *this;
     }
 
@@ -220,6 +226,12 @@ class claim_arguments final: public ::EmbeddedProto::MessageInterface
     inline const ::EmbeddedProto::FieldBytes<eth_address_LENGTH>& get_eth_address() const { return eth_address_; }
     inline const uint8_t* eth_address() const { return eth_address_.get_const(); }
 
+    inline void clear_koin_address() { koin_address_.clear(); }
+    inline ::EmbeddedProto::FieldBytes<koin_address_LENGTH>& mutable_koin_address() { return koin_address_; }
+    inline void set_koin_address(const ::EmbeddedProto::FieldBytes<koin_address_LENGTH>& rhs) { koin_address_.set(rhs); }
+    inline const ::EmbeddedProto::FieldBytes<koin_address_LENGTH>& get_koin_address() const { return koin_address_; }
+    inline const uint8_t* koin_address() const { return koin_address_.get_const(); }
+
 
     ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
     {
@@ -228,6 +240,11 @@ class claim_arguments final: public ::EmbeddedProto::MessageInterface
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
         return_value = eth_address_.serialize_with_id(static_cast<uint32_t>(FieldNumber::ETH_ADDRESS), buffer, false);
+      }
+
+      if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+      {
+        return_value = koin_address_.serialize_with_id(static_cast<uint32_t>(FieldNumber::KOIN_ADDRESS), buffer, false);
       }
 
       return return_value;
@@ -248,6 +265,10 @@ class claim_arguments final: public ::EmbeddedProto::MessageInterface
         {
           case FieldNumber::ETH_ADDRESS:
             return_value = eth_address_.deserialize_check_type(buffer, wire_type);
+            break;
+
+          case FieldNumber::KOIN_ADDRESS:
+            return_value = koin_address_.deserialize_check_type(buffer, wire_type);
             break;
 
           default:
@@ -275,6 +296,7 @@ class claim_arguments final: public ::EmbeddedProto::MessageInterface
     void clear() override
     {
       clear_eth_address();
+      clear_koin_address();
 
     }
 
@@ -282,6 +304,7 @@ class claim_arguments final: public ::EmbeddedProto::MessageInterface
 
 
       ::EmbeddedProto::FieldBytes<eth_address_LENGTH> eth_address_;
+      ::EmbeddedProto::FieldBytes<koin_address_LENGTH> koin_address_;
 
 };
 
