@@ -50,6 +50,181 @@ namespace koinos {
 namespace contracts {
 namespace claim {
 
+class claim_info final: public ::EmbeddedProto::MessageInterface
+{
+  public:
+    claim_info() = default;
+    claim_info(const claim_info& rhs )
+    {
+      set_total_eth_accounts(rhs.get_total_eth_accounts());
+      set_eth_accounts_claimed(rhs.get_eth_accounts_claimed());
+      set_total_koin(rhs.get_total_koin());
+      set_koin_claimed(rhs.get_koin_claimed());
+    }
+
+    claim_info(const claim_info&& rhs ) noexcept
+    {
+      set_total_eth_accounts(rhs.get_total_eth_accounts());
+      set_eth_accounts_claimed(rhs.get_eth_accounts_claimed());
+      set_total_koin(rhs.get_total_koin());
+      set_koin_claimed(rhs.get_koin_claimed());
+    }
+
+    ~claim_info() override = default;
+
+    enum class FieldNumber : uint32_t
+    {
+      NOT_SET = 0,
+      TOTAL_ETH_ACCOUNTS = 1,
+      ETH_ACCOUNTS_CLAIMED = 2,
+      TOTAL_KOIN = 3,
+      KOIN_CLAIMED = 4
+    };
+
+    claim_info& operator=(const claim_info& rhs)
+    {
+      set_total_eth_accounts(rhs.get_total_eth_accounts());
+      set_eth_accounts_claimed(rhs.get_eth_accounts_claimed());
+      set_total_koin(rhs.get_total_koin());
+      set_koin_claimed(rhs.get_koin_claimed());
+      return *this;
+    }
+
+    claim_info& operator=(const claim_info&& rhs) noexcept
+    {
+      set_total_eth_accounts(rhs.get_total_eth_accounts());
+      set_eth_accounts_claimed(rhs.get_eth_accounts_claimed());
+      set_total_koin(rhs.get_total_koin());
+      set_koin_claimed(rhs.get_koin_claimed());
+      return *this;
+    }
+
+    inline void clear_total_eth_accounts() { total_eth_accounts_.clear(); }
+    inline void set_total_eth_accounts(const EmbeddedProto::uint32& value) { total_eth_accounts_ = value; }
+    inline void set_total_eth_accounts(const EmbeddedProto::uint32&& value) { total_eth_accounts_ = value; }
+    inline EmbeddedProto::uint32& mutable_total_eth_accounts() { return total_eth_accounts_; }
+    inline const EmbeddedProto::uint32& get_total_eth_accounts() const { return total_eth_accounts_; }
+    inline EmbeddedProto::uint32::FIELD_TYPE total_eth_accounts() const { return total_eth_accounts_.get(); }
+
+    inline void clear_eth_accounts_claimed() { eth_accounts_claimed_.clear(); }
+    inline void set_eth_accounts_claimed(const EmbeddedProto::uint32& value) { eth_accounts_claimed_ = value; }
+    inline void set_eth_accounts_claimed(const EmbeddedProto::uint32&& value) { eth_accounts_claimed_ = value; }
+    inline EmbeddedProto::uint32& mutable_eth_accounts_claimed() { return eth_accounts_claimed_; }
+    inline const EmbeddedProto::uint32& get_eth_accounts_claimed() const { return eth_accounts_claimed_; }
+    inline EmbeddedProto::uint32::FIELD_TYPE eth_accounts_claimed() const { return eth_accounts_claimed_.get(); }
+
+    inline void clear_total_koin() { total_koin_.clear(); }
+    inline void set_total_koin(const EmbeddedProto::uint64& value) { total_koin_ = value; }
+    inline void set_total_koin(const EmbeddedProto::uint64&& value) { total_koin_ = value; }
+    inline EmbeddedProto::uint64& mutable_total_koin() { return total_koin_; }
+    inline const EmbeddedProto::uint64& get_total_koin() const { return total_koin_; }
+    inline EmbeddedProto::uint64::FIELD_TYPE total_koin() const { return total_koin_.get(); }
+
+    inline void clear_koin_claimed() { koin_claimed_.clear(); }
+    inline void set_koin_claimed(const EmbeddedProto::uint64& value) { koin_claimed_ = value; }
+    inline void set_koin_claimed(const EmbeddedProto::uint64&& value) { koin_claimed_ = value; }
+    inline EmbeddedProto::uint64& mutable_koin_claimed() { return koin_claimed_; }
+    inline const EmbeddedProto::uint64& get_koin_claimed() const { return koin_claimed_; }
+    inline EmbeddedProto::uint64::FIELD_TYPE koin_claimed() const { return koin_claimed_.get(); }
+
+
+    ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
+    {
+      ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
+
+      if((0U != total_eth_accounts_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
+      {
+        return_value = total_eth_accounts_.serialize_with_id(static_cast<uint32_t>(FieldNumber::TOTAL_ETH_ACCOUNTS), buffer, false);
+      }
+
+      if((0U != eth_accounts_claimed_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
+      {
+        return_value = eth_accounts_claimed_.serialize_with_id(static_cast<uint32_t>(FieldNumber::ETH_ACCOUNTS_CLAIMED), buffer, false);
+      }
+
+      if((0U != total_koin_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
+      {
+        return_value = total_koin_.serialize_with_id(static_cast<uint32_t>(FieldNumber::TOTAL_KOIN), buffer, false);
+      }
+
+      if((0U != koin_claimed_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
+      {
+        return_value = koin_claimed_.serialize_with_id(static_cast<uint32_t>(FieldNumber::KOIN_CLAIMED), buffer, false);
+      }
+
+      return return_value;
+    };
+
+    ::EmbeddedProto::Error deserialize(::EmbeddedProto::ReadBufferInterface& buffer) override
+    {
+      ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
+      ::EmbeddedProto::WireFormatter::WireType wire_type = ::EmbeddedProto::WireFormatter::WireType::VARINT;
+      uint32_t id_number = 0;
+      FieldNumber id_tag = FieldNumber::NOT_SET;
+
+      ::EmbeddedProto::Error tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
+      while((::EmbeddedProto::Error::NO_ERRORS == return_value) && (::EmbeddedProto::Error::NO_ERRORS == tag_value))
+      {
+        id_tag = static_cast<FieldNumber>(id_number);
+        switch(id_tag)
+        {
+          case FieldNumber::TOTAL_ETH_ACCOUNTS:
+            return_value = total_eth_accounts_.deserialize_check_type(buffer, wire_type);
+            break;
+
+          case FieldNumber::ETH_ACCOUNTS_CLAIMED:
+            return_value = eth_accounts_claimed_.deserialize_check_type(buffer, wire_type);
+            break;
+
+          case FieldNumber::TOTAL_KOIN:
+            return_value = total_koin_.deserialize_check_type(buffer, wire_type);
+            break;
+
+          case FieldNumber::KOIN_CLAIMED:
+            return_value = koin_claimed_.deserialize_check_type(buffer, wire_type);
+            break;
+
+          default:
+            break;
+        }
+
+        if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+        {
+          // Read the next tag.
+          tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
+        }
+      }
+
+      // When an error was detect while reading the tag but no other errors where found, set it in the return value.
+      if((::EmbeddedProto::Error::NO_ERRORS == return_value)
+         && (::EmbeddedProto::Error::NO_ERRORS != tag_value)
+         && (::EmbeddedProto::Error::END_OF_BUFFER != tag_value)) // The end of the buffer is not an array in this case.
+      {
+        return_value = tag_value;
+      }
+
+      return return_value;
+    };
+
+    void clear() override
+    {
+      clear_total_eth_accounts();
+      clear_eth_accounts_claimed();
+      clear_total_koin();
+      clear_koin_claimed();
+
+    }
+
+    private:
+
+
+      EmbeddedProto::uint32 total_eth_accounts_ = 0U;
+      EmbeddedProto::uint32 eth_accounts_claimed_ = 0U;
+      EmbeddedProto::uint64 total_koin_ = 0U;
+      EmbeddedProto::uint64 koin_claimed_ = 0U;
+
+};
+
 class claim_status final: public ::EmbeddedProto::MessageInterface
 {
   public:
@@ -388,6 +563,195 @@ class claim_result final: public ::EmbeddedProto::MessageInterface
     private:
 
 
+
+};
+
+class get_info_arguments final: public ::EmbeddedProto::MessageInterface
+{
+  public:
+    get_info_arguments() = default;
+    get_info_arguments(const get_info_arguments& rhs )
+    {
+    }
+
+    get_info_arguments(const get_info_arguments&& rhs ) noexcept
+    {
+    }
+
+    ~get_info_arguments() override = default;
+
+    enum class FieldNumber : uint32_t
+    {
+      NOT_SET = 0,
+    };
+
+    get_info_arguments& operator=(const get_info_arguments& rhs)
+    {
+      return *this;
+    }
+
+    get_info_arguments& operator=(const get_info_arguments&& rhs) noexcept
+    {
+      return *this;
+    }
+
+
+    ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
+    {
+      ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
+
+      return return_value;
+    };
+
+    ::EmbeddedProto::Error deserialize(::EmbeddedProto::ReadBufferInterface& buffer) override
+    {
+      ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
+      ::EmbeddedProto::WireFormatter::WireType wire_type = ::EmbeddedProto::WireFormatter::WireType::VARINT;
+      uint32_t id_number = 0;
+      FieldNumber id_tag = FieldNumber::NOT_SET;
+
+      ::EmbeddedProto::Error tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
+      while((::EmbeddedProto::Error::NO_ERRORS == return_value) && (::EmbeddedProto::Error::NO_ERRORS == tag_value))
+      {
+        id_tag = static_cast<FieldNumber>(id_number);
+        switch(id_tag)
+        {
+          default:
+            break;
+        }
+
+        if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+        {
+          // Read the next tag.
+          tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
+        }
+      }
+
+      // When an error was detect while reading the tag but no other errors where found, set it in the return value.
+      if((::EmbeddedProto::Error::NO_ERRORS == return_value)
+         && (::EmbeddedProto::Error::NO_ERRORS != tag_value)
+         && (::EmbeddedProto::Error::END_OF_BUFFER != tag_value)) // The end of the buffer is not an array in this case.
+      {
+        return_value = tag_value;
+      }
+
+      return return_value;
+    };
+
+    void clear() override
+    {
+
+    }
+
+    private:
+
+
+
+};
+
+class get_info_result final: public ::EmbeddedProto::MessageInterface
+{
+  public:
+    get_info_result() = default;
+    get_info_result(const get_info_result& rhs )
+    {
+      set_value(rhs.get_value());
+    }
+
+    get_info_result(const get_info_result&& rhs ) noexcept
+    {
+      set_value(rhs.get_value());
+    }
+
+    ~get_info_result() override = default;
+
+    enum class FieldNumber : uint32_t
+    {
+      NOT_SET = 0,
+      VALUE = 1
+    };
+
+    get_info_result& operator=(const get_info_result& rhs)
+    {
+      set_value(rhs.get_value());
+      return *this;
+    }
+
+    get_info_result& operator=(const get_info_result&& rhs) noexcept
+    {
+      set_value(rhs.get_value());
+      return *this;
+    }
+
+    inline void clear_value() { value_.clear(); }
+    inline void set_value(const claim_info& value) { value_ = value; }
+    inline void set_value(const claim_info&& value) { value_ = value; }
+    inline claim_info& mutable_value() { return value_; }
+    inline const claim_info& get_value() const { return value_; }
+    inline const claim_info& value() const { return value_; }
+
+
+    ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
+    {
+      ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
+
+      if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+      {
+        return_value = value_.serialize_with_id(static_cast<uint32_t>(FieldNumber::VALUE), buffer, false);
+      }
+
+      return return_value;
+    };
+
+    ::EmbeddedProto::Error deserialize(::EmbeddedProto::ReadBufferInterface& buffer) override
+    {
+      ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
+      ::EmbeddedProto::WireFormatter::WireType wire_type = ::EmbeddedProto::WireFormatter::WireType::VARINT;
+      uint32_t id_number = 0;
+      FieldNumber id_tag = FieldNumber::NOT_SET;
+
+      ::EmbeddedProto::Error tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
+      while((::EmbeddedProto::Error::NO_ERRORS == return_value) && (::EmbeddedProto::Error::NO_ERRORS == tag_value))
+      {
+        id_tag = static_cast<FieldNumber>(id_number);
+        switch(id_tag)
+        {
+          case FieldNumber::VALUE:
+            return_value = value_.deserialize_check_type(buffer, wire_type);
+            break;
+
+          default:
+            break;
+        }
+
+        if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+        {
+          // Read the next tag.
+          tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
+        }
+      }
+
+      // When an error was detect while reading the tag but no other errors where found, set it in the return value.
+      if((::EmbeddedProto::Error::NO_ERRORS == return_value)
+         && (::EmbeddedProto::Error::NO_ERRORS != tag_value)
+         && (::EmbeddedProto::Error::END_OF_BUFFER != tag_value)) // The end of the buffer is not an array in this case.
+      {
+        return_value = tag_value;
+      }
+
+      return return_value;
+    };
+
+    void clear() override
+    {
+      clear_value();
+
+    }
+
+    private:
+
+
+      claim_info value_;
 
 };
 
