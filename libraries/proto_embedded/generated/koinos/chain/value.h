@@ -68,14 +68,6 @@ class value_type final: public ::EmbeddedProto::MessageInterface
           set_message_value(rhs.get_message_value());
           break;
 
-        case FieldNumber::DOUBLE_VALUE:
-          set_double_value(rhs.get_double_value());
-          break;
-
-        case FieldNumber::FLOAT_VALUE:
-          set_float_value(rhs.get_float_value());
-          break;
-
         case FieldNumber::INT32_VALUE:
           set_int32_value(rhs.get_int32_value());
           break;
@@ -148,14 +140,6 @@ class value_type final: public ::EmbeddedProto::MessageInterface
           set_message_value(rhs.get_message_value());
           break;
 
-        case FieldNumber::DOUBLE_VALUE:
-          set_double_value(rhs.get_double_value());
-          break;
-
-        case FieldNumber::FLOAT_VALUE:
-          set_float_value(rhs.get_float_value());
-          break;
-
         case FieldNumber::INT32_VALUE:
           set_int32_value(rhs.get_int32_value());
           break;
@@ -220,21 +204,19 @@ class value_type final: public ::EmbeddedProto::MessageInterface
     {
       NOT_SET = 0,
       MESSAGE_VALUE = 1,
-      DOUBLE_VALUE = 2,
-      FLOAT_VALUE = 3,
-      INT32_VALUE = 4,
-      INT64_VALUE = 5,
-      UINT32_VALUE = 6,
-      UINT64_VALUE = 7,
-      SINT32_VALUE = 8,
-      SINT64_VALUE = 9,
-      FIXED32_VALUE = 10,
-      FIXED64_VALUE = 11,
-      SFIXED32_VALUE = 12,
-      SFIXED64_VALUE = 13,
-      BOOL_VALUE = 14,
-      STRING_VALUE = 15,
-      BYTES_VALUE = 16
+      INT32_VALUE = 2,
+      INT64_VALUE = 3,
+      UINT32_VALUE = 4,
+      UINT64_VALUE = 5,
+      SINT32_VALUE = 6,
+      SINT64_VALUE = 7,
+      FIXED32_VALUE = 8,
+      FIXED64_VALUE = 9,
+      SFIXED32_VALUE = 10,
+      SFIXED64_VALUE = 11,
+      BOOL_VALUE = 12,
+      STRING_VALUE = 13,
+      BYTES_VALUE = 14
     };
 
     value_type& operator=(const value_type& rhs)
@@ -249,14 +231,6 @@ class value_type final: public ::EmbeddedProto::MessageInterface
       {
         case FieldNumber::MESSAGE_VALUE:
           set_message_value(rhs.get_message_value());
-          break;
-
-        case FieldNumber::DOUBLE_VALUE:
-          set_double_value(rhs.get_double_value());
-          break;
-
-        case FieldNumber::FLOAT_VALUE:
-          set_float_value(rhs.get_float_value());
           break;
 
         case FieldNumber::INT32_VALUE:
@@ -330,14 +304,6 @@ class value_type final: public ::EmbeddedProto::MessageInterface
       {
         case FieldNumber::MESSAGE_VALUE:
           set_message_value(rhs.get_message_value());
-          break;
-
-        case FieldNumber::DOUBLE_VALUE:
-          set_double_value(rhs.get_double_value());
-          break;
-
-        case FieldNumber::FLOAT_VALUE:
-          set_float_value(rhs.get_float_value());
           break;
 
         case FieldNumber::INT32_VALUE:
@@ -435,92 +401,6 @@ class value_type final: public ::EmbeddedProto::MessageInterface
     }
     inline const google::protobuf::Any& get_message_value() const { return kind_.message_value_; }
     inline const google::protobuf::Any& message_value() const { return kind_.message_value_; }
-
-    inline void clear_double_value()
-    {
-      if(FieldNumber::DOUBLE_VALUE == which_kind_)
-      {
-        which_kind_ = FieldNumber::NOT_SET;
-        kind_.double_value_.~doublefixed(); // NOSONAR Unions require this.
-      }
-    }
-    inline void set_double_value(const EmbeddedProto::doublefixed::FIELD_TYPE& value)
-    {
-      if(FieldNumber::DOUBLE_VALUE != which_kind_)
-      {
-        init_kind(FieldNumber::DOUBLE_VALUE);
-      }
-      kind_.double_value_.set(value);
-    }
-    inline void set_double_value(const EmbeddedProto::doublefixed::FIELD_TYPE&& value)
-    {
-      if(FieldNumber::DOUBLE_VALUE != which_kind_)
-      {
-        init_kind(FieldNumber::DOUBLE_VALUE);
-      }
-      kind_.double_value_.set(value);
-    }
-    inline void set_double_value(const EmbeddedProto::doublefixed& value)
-    {
-      if(FieldNumber::DOUBLE_VALUE != which_kind_)
-      {
-        init_kind(FieldNumber::DOUBLE_VALUE);
-      }
-      kind_.double_value_ = value;
-    }
-    inline void set_double_value(const EmbeddedProto::doublefixed&& value)
-    {
-      if(FieldNumber::DOUBLE_VALUE != which_kind_)
-      {
-        init_kind(FieldNumber::DOUBLE_VALUE);
-      }
-      kind_.double_value_ = value;
-    }
-    inline const EmbeddedProto::doublefixed& get_double_value() const { return kind_.double_value_; }
-    inline EmbeddedProto::doublefixed::FIELD_TYPE double_value() const { return kind_.double_value_.get(); }
-
-    inline void clear_float_value()
-    {
-      if(FieldNumber::FLOAT_VALUE == which_kind_)
-      {
-        which_kind_ = FieldNumber::NOT_SET;
-        kind_.float_value_.~floatfixed(); // NOSONAR Unions require this.
-      }
-    }
-    inline void set_float_value(const EmbeddedProto::floatfixed::FIELD_TYPE& value)
-    {
-      if(FieldNumber::FLOAT_VALUE != which_kind_)
-      {
-        init_kind(FieldNumber::FLOAT_VALUE);
-      }
-      kind_.float_value_.set(value);
-    }
-    inline void set_float_value(const EmbeddedProto::floatfixed::FIELD_TYPE&& value)
-    {
-      if(FieldNumber::FLOAT_VALUE != which_kind_)
-      {
-        init_kind(FieldNumber::FLOAT_VALUE);
-      }
-      kind_.float_value_.set(value);
-    }
-    inline void set_float_value(const EmbeddedProto::floatfixed& value)
-    {
-      if(FieldNumber::FLOAT_VALUE != which_kind_)
-      {
-        init_kind(FieldNumber::FLOAT_VALUE);
-      }
-      kind_.float_value_ = value;
-    }
-    inline void set_float_value(const EmbeddedProto::floatfixed&& value)
-    {
-      if(FieldNumber::FLOAT_VALUE != which_kind_)
-      {
-        init_kind(FieldNumber::FLOAT_VALUE);
-      }
-      kind_.float_value_ = value;
-    }
-    inline const EmbeddedProto::floatfixed& get_float_value() const { return kind_.float_value_; }
-    inline EmbeddedProto::floatfixed::FIELD_TYPE float_value() const { return kind_.float_value_.get(); }
 
     inline void clear_int32_value()
     {
@@ -1063,20 +943,6 @@ class value_type final: public ::EmbeddedProto::MessageInterface
           }
           break;
 
-        case FieldNumber::DOUBLE_VALUE:
-          if((0.0 != kind_.double_value_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
-          {
-            return_value = kind_.double_value_.serialize_with_id(static_cast<uint32_t>(FieldNumber::DOUBLE_VALUE), buffer, false);
-          }
-          break;
-
-        case FieldNumber::FLOAT_VALUE:
-          if((0.0 != kind_.float_value_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
-          {
-            return_value = kind_.float_value_.serialize_with_id(static_cast<uint32_t>(FieldNumber::FLOAT_VALUE), buffer, false);
-          }
-          break;
-
         case FieldNumber::INT32_VALUE:
           if((0 != kind_.int32_value_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
           {
@@ -1193,14 +1059,6 @@ class value_type final: public ::EmbeddedProto::MessageInterface
 
             break;
 
-          case FieldNumber::DOUBLE_VALUE:
-            return_value = deserialize_kind(FieldNumber::DOUBLE_VALUE, kind_.double_value_, buffer, wire_type);
-            break;
-
-          case FieldNumber::FLOAT_VALUE:
-            return_value = deserialize_kind(FieldNumber::FLOAT_VALUE, kind_.float_value_, buffer, wire_type);
-            break;
-
           case FieldNumber::INT32_VALUE:
             return_value = deserialize_kind(FieldNumber::INT32_VALUE, kind_.int32_value_, buffer, wire_type);
             break;
@@ -1291,8 +1149,6 @@ class value_type final: public ::EmbeddedProto::MessageInterface
         kind() {}
         ~kind() {}
         google::protobuf::Any message_value_;
-        EmbeddedProto::doublefixed double_value_;
-        EmbeddedProto::floatfixed float_value_;
         EmbeddedProto::int32 int32_value_;
         EmbeddedProto::int64 int64_value_;
         EmbeddedProto::uint32 uint32_value_;
@@ -1323,16 +1179,6 @@ class value_type final: public ::EmbeddedProto::MessageInterface
           case FieldNumber::MESSAGE_VALUE:
             new(&kind_.message_value_) google::protobuf::Any;
             which_kind_ = FieldNumber::MESSAGE_VALUE;
-            break;
-
-          case FieldNumber::DOUBLE_VALUE:
-            new(&kind_.double_value_) EmbeddedProto::doublefixed;
-            which_kind_ = FieldNumber::DOUBLE_VALUE;
-            break;
-
-          case FieldNumber::FLOAT_VALUE:
-            new(&kind_.float_value_) EmbeddedProto::floatfixed;
-            which_kind_ = FieldNumber::FLOAT_VALUE;
             break;
 
           case FieldNumber::INT32_VALUE:
@@ -1413,12 +1259,6 @@ class value_type final: public ::EmbeddedProto::MessageInterface
         {
           case FieldNumber::MESSAGE_VALUE:
             kind_.message_value_.~Any(); // NOSONAR Unions require this.
-            break;
-          case FieldNumber::DOUBLE_VALUE:
-            kind_.double_value_.~doublefixed(); // NOSONAR Unions require this.
-            break;
-          case FieldNumber::FLOAT_VALUE:
-            kind_.float_value_.~floatfixed(); // NOSONAR Unions require this.
             break;
           case FieldNumber::INT32_VALUE:
             kind_.int32_value_.~int32(); // NOSONAR Unions require this.
