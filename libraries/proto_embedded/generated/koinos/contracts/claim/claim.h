@@ -355,7 +355,8 @@ class claim_status final: public ::EmbeddedProto::MessageInterface
 };
 
 template<uint32_t eth_address_LENGTH, 
-uint32_t koin_address_LENGTH>
+uint32_t koin_address_LENGTH, 
+uint32_t signature_LENGTH>
 class claim_arguments final: public ::EmbeddedProto::MessageInterface
 {
   public:
@@ -364,12 +365,14 @@ class claim_arguments final: public ::EmbeddedProto::MessageInterface
     {
       set_eth_address(rhs.get_eth_address());
       set_koin_address(rhs.get_koin_address());
+      set_signature(rhs.get_signature());
     }
 
     claim_arguments(const claim_arguments&& rhs ) noexcept
     {
       set_eth_address(rhs.get_eth_address());
       set_koin_address(rhs.get_koin_address());
+      set_signature(rhs.get_signature());
     }
 
     ~claim_arguments() override = default;
@@ -378,13 +381,15 @@ class claim_arguments final: public ::EmbeddedProto::MessageInterface
     {
       NOT_SET = 0,
       ETH_ADDRESS = 1,
-      KOIN_ADDRESS = 2
+      KOIN_ADDRESS = 2,
+      SIGNATURE = 3
     };
 
     claim_arguments& operator=(const claim_arguments& rhs)
     {
       set_eth_address(rhs.get_eth_address());
       set_koin_address(rhs.get_koin_address());
+      set_signature(rhs.get_signature());
       return *this;
     }
 
@@ -392,6 +397,7 @@ class claim_arguments final: public ::EmbeddedProto::MessageInterface
     {
       set_eth_address(rhs.get_eth_address());
       set_koin_address(rhs.get_koin_address());
+      set_signature(rhs.get_signature());
       return *this;
     }
 
@@ -407,6 +413,12 @@ class claim_arguments final: public ::EmbeddedProto::MessageInterface
     inline const ::EmbeddedProto::FieldBytes<koin_address_LENGTH>& get_koin_address() const { return koin_address_; }
     inline const uint8_t* koin_address() const { return koin_address_.get_const(); }
 
+    inline void clear_signature() { signature_.clear(); }
+    inline ::EmbeddedProto::FieldBytes<signature_LENGTH>& mutable_signature() { return signature_; }
+    inline void set_signature(const ::EmbeddedProto::FieldBytes<signature_LENGTH>& rhs) { signature_.set(rhs); }
+    inline const ::EmbeddedProto::FieldBytes<signature_LENGTH>& get_signature() const { return signature_; }
+    inline const uint8_t* signature() const { return signature_.get_const(); }
+
 
     ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
     {
@@ -420,6 +432,11 @@ class claim_arguments final: public ::EmbeddedProto::MessageInterface
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
         return_value = koin_address_.serialize_with_id(static_cast<uint32_t>(FieldNumber::KOIN_ADDRESS), buffer, false);
+      }
+
+      if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+      {
+        return_value = signature_.serialize_with_id(static_cast<uint32_t>(FieldNumber::SIGNATURE), buffer, false);
       }
 
       return return_value;
@@ -444,6 +461,10 @@ class claim_arguments final: public ::EmbeddedProto::MessageInterface
 
           case FieldNumber::KOIN_ADDRESS:
             return_value = koin_address_.deserialize_check_type(buffer, wire_type);
+            break;
+
+          case FieldNumber::SIGNATURE:
+            return_value = signature_.deserialize_check_type(buffer, wire_type);
             break;
 
           default:
@@ -472,6 +493,7 @@ class claim_arguments final: public ::EmbeddedProto::MessageInterface
     {
       clear_eth_address();
       clear_koin_address();
+      clear_signature();
 
     }
 
@@ -480,6 +502,7 @@ class claim_arguments final: public ::EmbeddedProto::MessageInterface
 
       ::EmbeddedProto::FieldBytes<eth_address_LENGTH> eth_address_;
       ::EmbeddedProto::FieldBytes<koin_address_LENGTH> koin_address_;
+      ::EmbeddedProto::FieldBytes<signature_LENGTH> signature_;
 
 };
 
