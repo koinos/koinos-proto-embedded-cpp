@@ -7740,6 +7740,7 @@ class recover_public_key_arguments final: public ::EmbeddedProto::MessageInterfa
       set_type(rhs.get_type());
       set_signature(rhs.get_signature());
       set_digest(rhs.get_digest());
+      set_compressed(rhs.get_compressed());
     }
 
     recover_public_key_arguments(const recover_public_key_arguments&& rhs ) noexcept
@@ -7747,6 +7748,7 @@ class recover_public_key_arguments final: public ::EmbeddedProto::MessageInterfa
       set_type(rhs.get_type());
       set_signature(rhs.get_signature());
       set_digest(rhs.get_digest());
+      set_compressed(rhs.get_compressed());
     }
 
     ~recover_public_key_arguments() override = default;
@@ -7756,7 +7758,8 @@ class recover_public_key_arguments final: public ::EmbeddedProto::MessageInterfa
       NOT_SET = 0,
       TYPE = 1,
       SIGNATURE = 2,
-      DIGEST = 3
+      DIGEST = 3,
+      COMPRESSED = 4
     };
 
     recover_public_key_arguments& operator=(const recover_public_key_arguments& rhs)
@@ -7764,6 +7767,7 @@ class recover_public_key_arguments final: public ::EmbeddedProto::MessageInterfa
       set_type(rhs.get_type());
       set_signature(rhs.get_signature());
       set_digest(rhs.get_digest());
+      set_compressed(rhs.get_compressed());
       return *this;
     }
 
@@ -7772,6 +7776,7 @@ class recover_public_key_arguments final: public ::EmbeddedProto::MessageInterfa
       set_type(rhs.get_type());
       set_signature(rhs.get_signature());
       set_digest(rhs.get_digest());
+      set_compressed(rhs.get_compressed());
       return *this;
     }
 
@@ -7793,6 +7798,13 @@ class recover_public_key_arguments final: public ::EmbeddedProto::MessageInterfa
     inline const ::EmbeddedProto::FieldBytes<digest_LENGTH>& get_digest() const { return digest_; }
     inline const uint8_t* digest() const { return digest_.get_const(); }
 
+    inline void clear_compressed() { compressed_.clear(); }
+    inline void set_compressed(const EmbeddedProto::boolean& value) { compressed_ = value; }
+    inline void set_compressed(const EmbeddedProto::boolean&& value) { compressed_ = value; }
+    inline EmbeddedProto::boolean& mutable_compressed() { return compressed_; }
+    inline const EmbeddedProto::boolean& get_compressed() const { return compressed_; }
+    inline EmbeddedProto::boolean::FIELD_TYPE compressed() const { return compressed_.get(); }
+
 
     ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
     {
@@ -7813,6 +7825,11 @@ class recover_public_key_arguments final: public ::EmbeddedProto::MessageInterfa
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
         return_value = digest_.serialize_with_id(static_cast<uint32_t>(FieldNumber::DIGEST), buffer, false);
+      }
+
+      if((false != compressed_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
+      {
+        return_value = compressed_.serialize_with_id(static_cast<uint32_t>(FieldNumber::COMPRESSED), buffer, false);
       }
 
       return return_value;
@@ -7856,6 +7873,10 @@ class recover_public_key_arguments final: public ::EmbeddedProto::MessageInterfa
             return_value = digest_.deserialize_check_type(buffer, wire_type);
             break;
 
+          case FieldNumber::COMPRESSED:
+            return_value = compressed_.deserialize_check_type(buffer, wire_type);
+            break;
+
           default:
             break;
         }
@@ -7883,6 +7904,7 @@ class recover_public_key_arguments final: public ::EmbeddedProto::MessageInterfa
       clear_type();
       clear_signature();
       clear_digest();
+      clear_compressed();
 
     }
 
@@ -7892,6 +7914,7 @@ class recover_public_key_arguments final: public ::EmbeddedProto::MessageInterfa
       dsa type_ = static_cast<dsa>(0);
       ::EmbeddedProto::FieldBytes<signature_LENGTH> signature_;
       ::EmbeddedProto::FieldBytes<digest_LENGTH> digest_;
+      EmbeddedProto::boolean compressed_ = false;
 
 };
 
@@ -8255,6 +8278,7 @@ class verify_signature_arguments final: public ::EmbeddedProto::MessageInterface
       set_public_key(rhs.get_public_key());
       set_signature(rhs.get_signature());
       set_digest(rhs.get_digest());
+      set_compressed(rhs.get_compressed());
     }
 
     verify_signature_arguments(const verify_signature_arguments&& rhs ) noexcept
@@ -8263,6 +8287,7 @@ class verify_signature_arguments final: public ::EmbeddedProto::MessageInterface
       set_public_key(rhs.get_public_key());
       set_signature(rhs.get_signature());
       set_digest(rhs.get_digest());
+      set_compressed(rhs.get_compressed());
     }
 
     ~verify_signature_arguments() override = default;
@@ -8273,7 +8298,8 @@ class verify_signature_arguments final: public ::EmbeddedProto::MessageInterface
       TYPE = 1,
       PUBLIC_KEY = 2,
       SIGNATURE = 3,
-      DIGEST = 4
+      DIGEST = 4,
+      COMPRESSED = 5
     };
 
     verify_signature_arguments& operator=(const verify_signature_arguments& rhs)
@@ -8282,6 +8308,7 @@ class verify_signature_arguments final: public ::EmbeddedProto::MessageInterface
       set_public_key(rhs.get_public_key());
       set_signature(rhs.get_signature());
       set_digest(rhs.get_digest());
+      set_compressed(rhs.get_compressed());
       return *this;
     }
 
@@ -8291,6 +8318,7 @@ class verify_signature_arguments final: public ::EmbeddedProto::MessageInterface
       set_public_key(rhs.get_public_key());
       set_signature(rhs.get_signature());
       set_digest(rhs.get_digest());
+      set_compressed(rhs.get_compressed());
       return *this;
     }
 
@@ -8318,6 +8346,13 @@ class verify_signature_arguments final: public ::EmbeddedProto::MessageInterface
     inline const ::EmbeddedProto::FieldBytes<digest_LENGTH>& get_digest() const { return digest_; }
     inline const uint8_t* digest() const { return digest_.get_const(); }
 
+    inline void clear_compressed() { compressed_.clear(); }
+    inline void set_compressed(const EmbeddedProto::boolean& value) { compressed_ = value; }
+    inline void set_compressed(const EmbeddedProto::boolean&& value) { compressed_ = value; }
+    inline EmbeddedProto::boolean& mutable_compressed() { return compressed_; }
+    inline const EmbeddedProto::boolean& get_compressed() const { return compressed_; }
+    inline EmbeddedProto::boolean::FIELD_TYPE compressed() const { return compressed_.get(); }
+
 
     ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
     {
@@ -8343,6 +8378,11 @@ class verify_signature_arguments final: public ::EmbeddedProto::MessageInterface
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
         return_value = digest_.serialize_with_id(static_cast<uint32_t>(FieldNumber::DIGEST), buffer, false);
+      }
+
+      if((false != compressed_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
+      {
+        return_value = compressed_.serialize_with_id(static_cast<uint32_t>(FieldNumber::COMPRESSED), buffer, false);
       }
 
       return return_value;
@@ -8390,6 +8430,10 @@ class verify_signature_arguments final: public ::EmbeddedProto::MessageInterface
             return_value = digest_.deserialize_check_type(buffer, wire_type);
             break;
 
+          case FieldNumber::COMPRESSED:
+            return_value = compressed_.deserialize_check_type(buffer, wire_type);
+            break;
+
           default:
             break;
         }
@@ -8418,6 +8462,7 @@ class verify_signature_arguments final: public ::EmbeddedProto::MessageInterface
       clear_public_key();
       clear_signature();
       clear_digest();
+      clear_compressed();
 
     }
 
@@ -8428,6 +8473,7 @@ class verify_signature_arguments final: public ::EmbeddedProto::MessageInterface
       ::EmbeddedProto::FieldBytes<public_key_LENGTH> public_key_;
       ::EmbeddedProto::FieldBytes<signature_LENGTH> signature_;
       ::EmbeddedProto::FieldBytes<digest_LENGTH> digest_;
+      EmbeddedProto::boolean compressed_ = false;
 
 };
 
