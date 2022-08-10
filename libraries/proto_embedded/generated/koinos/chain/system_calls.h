@@ -53,12 +53,6 @@
 namespace koinos {
 namespace chain {
 
-enum class system_authorization_type : int32_t
-{
-  set_system_contract = 0,
-  set_system_call = 1
-};
-
 class nop_arguments final: public ::EmbeddedProto::MessageInterface
 {
   public:
@@ -4416,12 +4410,10 @@ class check_system_authority_arguments final: public ::EmbeddedProto::MessageInt
     check_system_authority_arguments() = default;
     check_system_authority_arguments(const check_system_authority_arguments& rhs )
     {
-      set_type(rhs.get_type());
     }
 
     check_system_authority_arguments(const check_system_authority_arguments&& rhs ) noexcept
     {
-      set_type(rhs.get_type());
     }
 
     ~check_system_authority_arguments() override = default;
@@ -4429,38 +4421,22 @@ class check_system_authority_arguments final: public ::EmbeddedProto::MessageInt
     enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
-      TYPE = 1
     };
 
     check_system_authority_arguments& operator=(const check_system_authority_arguments& rhs)
     {
-      set_type(rhs.get_type());
       return *this;
     }
 
     check_system_authority_arguments& operator=(const check_system_authority_arguments&& rhs) noexcept
     {
-      set_type(rhs.get_type());
       return *this;
     }
-
-    inline void clear_type() { type_ = static_cast<system_authorization_type>(0); }
-    inline void set_type(const system_authorization_type& value) { type_ = value; }
-    inline void set_type(const system_authorization_type&& value) { type_ = value; }
-    inline const system_authorization_type& get_type() const { return type_; }
-    inline system_authorization_type type() const { return type_; }
 
 
     ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
     {
       ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
-
-      if((static_cast<system_authorization_type>(0) != type_) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
-      {
-        EmbeddedProto::uint32 value = 0;
-        value.set(static_cast<uint32_t>(type_));
-        return_value = value.serialize_with_id(static_cast<uint32_t>(FieldNumber::TYPE), buffer, false);
-      }
 
       return return_value;
     };
@@ -4478,23 +4454,6 @@ class check_system_authority_arguments final: public ::EmbeddedProto::MessageInt
         id_tag = static_cast<FieldNumber>(id_number);
         switch(id_tag)
         {
-          case FieldNumber::TYPE:
-            if(::EmbeddedProto::WireFormatter::WireType::VARINT == wire_type)
-            {
-              uint32_t value = 0;
-              return_value = ::EmbeddedProto::WireFormatter::DeserializeVarint(buffer, value);
-              if(::EmbeddedProto::Error::NO_ERRORS == return_value)
-              {
-                set_type(static_cast<system_authorization_type>(value));
-              }
-            }
-            else
-            {
-              // Wire type does not match field.
-              return_value = ::EmbeddedProto::Error::INVALID_WIRETYPE;
-            }
-            break;
-
           default:
             break;
         }
@@ -4519,14 +4478,12 @@ class check_system_authority_arguments final: public ::EmbeddedProto::MessageInt
 
     void clear() override
     {
-      clear_type();
 
     }
 
     private:
 
 
-      system_authorization_type type_ = static_cast<system_authorization_type>(0);
 
 };
 
