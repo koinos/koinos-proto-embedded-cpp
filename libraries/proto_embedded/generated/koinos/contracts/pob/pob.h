@@ -60,6 +60,7 @@ class consensus_parameters final: public ::EmbeddedProto::MessageInterface
       set_target_burn_percent(rhs.get_target_burn_percent());
       set_target_block_interval(rhs.get_target_block_interval());
       set_quantum_length(rhs.get_quantum_length());
+      set_minimum_block_time(rhs.get_minimum_block_time());
     }
 
     consensus_parameters(const consensus_parameters&& rhs ) noexcept
@@ -68,6 +69,7 @@ class consensus_parameters final: public ::EmbeddedProto::MessageInterface
       set_target_burn_percent(rhs.get_target_burn_percent());
       set_target_block_interval(rhs.get_target_block_interval());
       set_quantum_length(rhs.get_quantum_length());
+      set_minimum_block_time(rhs.get_minimum_block_time());
     }
 
     ~consensus_parameters() override = default;
@@ -78,7 +80,8 @@ class consensus_parameters final: public ::EmbeddedProto::MessageInterface
       TARGET_ANNUAL_INFLATION_RATE = 1,
       TARGET_BURN_PERCENT = 2,
       TARGET_BLOCK_INTERVAL = 3,
-      QUANTUM_LENGTH = 4
+      QUANTUM_LENGTH = 4,
+      MINIMUM_BLOCK_TIME = 5
     };
 
     consensus_parameters& operator=(const consensus_parameters& rhs)
@@ -87,6 +90,7 @@ class consensus_parameters final: public ::EmbeddedProto::MessageInterface
       set_target_burn_percent(rhs.get_target_burn_percent());
       set_target_block_interval(rhs.get_target_block_interval());
       set_quantum_length(rhs.get_quantum_length());
+      set_minimum_block_time(rhs.get_minimum_block_time());
       return *this;
     }
 
@@ -96,6 +100,7 @@ class consensus_parameters final: public ::EmbeddedProto::MessageInterface
       set_target_burn_percent(rhs.get_target_burn_percent());
       set_target_block_interval(rhs.get_target_block_interval());
       set_quantum_length(rhs.get_quantum_length());
+      set_minimum_block_time(rhs.get_minimum_block_time());
       return *this;
     }
 
@@ -127,6 +132,13 @@ class consensus_parameters final: public ::EmbeddedProto::MessageInterface
     inline const EmbeddedProto::uint32& get_quantum_length() const { return quantum_length_; }
     inline EmbeddedProto::uint32::FIELD_TYPE quantum_length() const { return quantum_length_.get(); }
 
+    inline void clear_minimum_block_time() { minimum_block_time_.clear(); }
+    inline void set_minimum_block_time(const EmbeddedProto::uint64& value) { minimum_block_time_ = value; }
+    inline void set_minimum_block_time(const EmbeddedProto::uint64&& value) { minimum_block_time_ = value; }
+    inline EmbeddedProto::uint64& mutable_minimum_block_time() { return minimum_block_time_; }
+    inline const EmbeddedProto::uint64& get_minimum_block_time() const { return minimum_block_time_; }
+    inline EmbeddedProto::uint64::FIELD_TYPE minimum_block_time() const { return minimum_block_time_.get(); }
+
 
     ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
     {
@@ -150,6 +162,11 @@ class consensus_parameters final: public ::EmbeddedProto::MessageInterface
       if((0U != quantum_length_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
       {
         return_value = quantum_length_.serialize_with_id(static_cast<uint32_t>(FieldNumber::QUANTUM_LENGTH), buffer, false);
+      }
+
+      if((0U != minimum_block_time_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
+      {
+        return_value = minimum_block_time_.serialize_with_id(static_cast<uint32_t>(FieldNumber::MINIMUM_BLOCK_TIME), buffer, false);
       }
 
       return return_value;
@@ -184,6 +201,10 @@ class consensus_parameters final: public ::EmbeddedProto::MessageInterface
             return_value = quantum_length_.deserialize_check_type(buffer, wire_type);
             break;
 
+          case FieldNumber::MINIMUM_BLOCK_TIME:
+            return_value = minimum_block_time_.deserialize_check_type(buffer, wire_type);
+            break;
+
           default:
             break;
         }
@@ -212,6 +233,7 @@ class consensus_parameters final: public ::EmbeddedProto::MessageInterface
       clear_target_burn_percent();
       clear_target_block_interval();
       clear_quantum_length();
+      clear_minimum_block_time();
 
     }
 
@@ -222,6 +244,7 @@ class consensus_parameters final: public ::EmbeddedProto::MessageInterface
       EmbeddedProto::uint32 target_burn_percent_ = 0U;
       EmbeddedProto::uint32 target_block_interval_ = 0U;
       EmbeddedProto::uint32 quantum_length_ = 0U;
+      EmbeddedProto::uint64 minimum_block_time_ = 0U;
 
 };
 
