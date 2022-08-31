@@ -1018,6 +1018,218 @@ class balance_of_result final: public ::EmbeddedProto::MessageInterface
 
 };
 
+template<uint32_t owner_LENGTH>
+class effective_balance_of_arguments final: public ::EmbeddedProto::MessageInterface
+{
+  public:
+    effective_balance_of_arguments() = default;
+    effective_balance_of_arguments(const effective_balance_of_arguments& rhs )
+    {
+      set_owner(rhs.get_owner());
+    }
+
+    effective_balance_of_arguments(const effective_balance_of_arguments&& rhs ) noexcept
+    {
+      set_owner(rhs.get_owner());
+    }
+
+    ~effective_balance_of_arguments() override = default;
+
+    enum class FieldNumber : uint32_t
+    {
+      NOT_SET = 0,
+      OWNER = 1
+    };
+
+    effective_balance_of_arguments& operator=(const effective_balance_of_arguments& rhs)
+    {
+      set_owner(rhs.get_owner());
+      return *this;
+    }
+
+    effective_balance_of_arguments& operator=(const effective_balance_of_arguments&& rhs) noexcept
+    {
+      set_owner(rhs.get_owner());
+      return *this;
+    }
+
+    inline void clear_owner() { owner_.clear(); }
+    inline ::EmbeddedProto::FieldBytes<owner_LENGTH>& mutable_owner() { return owner_; }
+    inline void set_owner(const ::EmbeddedProto::FieldBytes<owner_LENGTH>& rhs) { owner_.set(rhs); }
+    inline const ::EmbeddedProto::FieldBytes<owner_LENGTH>& get_owner() const { return owner_; }
+    inline const uint8_t* owner() const { return owner_.get_const(); }
+
+
+    ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
+    {
+      ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
+
+      if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+      {
+        return_value = owner_.serialize_with_id(static_cast<uint32_t>(FieldNumber::OWNER), buffer, false);
+      }
+
+      return return_value;
+    };
+
+    ::EmbeddedProto::Error deserialize(::EmbeddedProto::ReadBufferInterface& buffer) override
+    {
+      ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
+      ::EmbeddedProto::WireFormatter::WireType wire_type = ::EmbeddedProto::WireFormatter::WireType::VARINT;
+      uint32_t id_number = 0;
+      FieldNumber id_tag = FieldNumber::NOT_SET;
+
+      ::EmbeddedProto::Error tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
+      while((::EmbeddedProto::Error::NO_ERRORS == return_value) && (::EmbeddedProto::Error::NO_ERRORS == tag_value))
+      {
+        id_tag = static_cast<FieldNumber>(id_number);
+        switch(id_tag)
+        {
+          case FieldNumber::OWNER:
+            return_value = owner_.deserialize_check_type(buffer, wire_type);
+            break;
+
+          default:
+            break;
+        }
+
+        if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+        {
+          // Read the next tag.
+          tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
+        }
+      }
+
+      // When an error was detect while reading the tag but no other errors where found, set it in the return value.
+      if((::EmbeddedProto::Error::NO_ERRORS == return_value)
+         && (::EmbeddedProto::Error::NO_ERRORS != tag_value)
+         && (::EmbeddedProto::Error::END_OF_BUFFER != tag_value)) // The end of the buffer is not an array in this case.
+      {
+        return_value = tag_value;
+      }
+
+      return return_value;
+    };
+
+    void clear() override
+    {
+      clear_owner();
+
+    }
+
+    private:
+
+
+      ::EmbeddedProto::FieldBytes<owner_LENGTH> owner_;
+
+};
+
+class effective_balance_of_result final: public ::EmbeddedProto::MessageInterface
+{
+  public:
+    effective_balance_of_result() = default;
+    effective_balance_of_result(const effective_balance_of_result& rhs )
+    {
+      set_value(rhs.get_value());
+    }
+
+    effective_balance_of_result(const effective_balance_of_result&& rhs ) noexcept
+    {
+      set_value(rhs.get_value());
+    }
+
+    ~effective_balance_of_result() override = default;
+
+    enum class FieldNumber : uint32_t
+    {
+      NOT_SET = 0,
+      VALUE = 1
+    };
+
+    effective_balance_of_result& operator=(const effective_balance_of_result& rhs)
+    {
+      set_value(rhs.get_value());
+      return *this;
+    }
+
+    effective_balance_of_result& operator=(const effective_balance_of_result&& rhs) noexcept
+    {
+      set_value(rhs.get_value());
+      return *this;
+    }
+
+    inline void clear_value() { value_.clear(); }
+    inline void set_value(const EmbeddedProto::uint64& value) { value_ = value; }
+    inline void set_value(const EmbeddedProto::uint64&& value) { value_ = value; }
+    inline EmbeddedProto::uint64& mutable_value() { return value_; }
+    inline const EmbeddedProto::uint64& get_value() const { return value_; }
+    inline EmbeddedProto::uint64::FIELD_TYPE value() const { return value_.get(); }
+
+
+    ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
+    {
+      ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
+
+      if((0U != value_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
+      {
+        return_value = value_.serialize_with_id(static_cast<uint32_t>(FieldNumber::VALUE), buffer, false);
+      }
+
+      return return_value;
+    };
+
+    ::EmbeddedProto::Error deserialize(::EmbeddedProto::ReadBufferInterface& buffer) override
+    {
+      ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
+      ::EmbeddedProto::WireFormatter::WireType wire_type = ::EmbeddedProto::WireFormatter::WireType::VARINT;
+      uint32_t id_number = 0;
+      FieldNumber id_tag = FieldNumber::NOT_SET;
+
+      ::EmbeddedProto::Error tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
+      while((::EmbeddedProto::Error::NO_ERRORS == return_value) && (::EmbeddedProto::Error::NO_ERRORS == tag_value))
+      {
+        id_tag = static_cast<FieldNumber>(id_number);
+        switch(id_tag)
+        {
+          case FieldNumber::VALUE:
+            return_value = value_.deserialize_check_type(buffer, wire_type);
+            break;
+
+          default:
+            break;
+        }
+
+        if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+        {
+          // Read the next tag.
+          tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
+        }
+      }
+
+      // When an error was detect while reading the tag but no other errors where found, set it in the return value.
+      if((::EmbeddedProto::Error::NO_ERRORS == return_value)
+         && (::EmbeddedProto::Error::NO_ERRORS != tag_value)
+         && (::EmbeddedProto::Error::END_OF_BUFFER != tag_value)) // The end of the buffer is not an array in this case.
+      {
+        return_value = tag_value;
+      }
+
+      return return_value;
+    };
+
+    void clear() override
+    {
+      clear_value();
+
+    }
+
+    private:
+
+
+      EmbeddedProto::uint64 value_ = 0U;
+
+};
+
 template<uint32_t from_LENGTH, 
 uint32_t to_LENGTH>
 class transfer_arguments final: public ::EmbeddedProto::MessageInterface
@@ -1932,6 +2144,269 @@ class mana_balance_object final: public ::EmbeddedProto::MessageInterface
       EmbeddedProto::uint64 balance_ = 0U;
       EmbeddedProto::uint64 mana_ = 0U;
       EmbeddedProto::uint64 last_mana_update_ = 0U;
+
+};
+
+template<uint32_t past_balances_REP_LENGTH>
+class effective_balance_object final: public ::EmbeddedProto::MessageInterface
+{
+  public:
+    effective_balance_object() = default;
+    effective_balance_object(const effective_balance_object& rhs )
+    {
+      set_current_balance(rhs.get_current_balance());
+      set_past_balances(rhs.get_past_balances());
+    }
+
+    effective_balance_object(const effective_balance_object&& rhs ) noexcept
+    {
+      set_current_balance(rhs.get_current_balance());
+      set_past_balances(rhs.get_past_balances());
+    }
+
+    ~effective_balance_object() override = default;
+
+    class PastBalancesEntry final: public ::EmbeddedProto::MessageInterface
+    {
+      public:
+        PastBalancesEntry() = default;
+        PastBalancesEntry(const PastBalancesEntry& rhs )
+        {
+          set_key(rhs.get_key());
+          set_value(rhs.get_value());
+        }
+
+        PastBalancesEntry(const PastBalancesEntry&& rhs ) noexcept
+        {
+          set_key(rhs.get_key());
+          set_value(rhs.get_value());
+        }
+
+        ~PastBalancesEntry() override = default;
+
+        enum class FieldNumber : uint32_t
+        {
+          NOT_SET = 0,
+          KEY = 1,
+          VALUE = 2
+        };
+
+        PastBalancesEntry& operator=(const PastBalancesEntry& rhs)
+        {
+          set_key(rhs.get_key());
+          set_value(rhs.get_value());
+          return *this;
+        }
+
+        PastBalancesEntry& operator=(const PastBalancesEntry&& rhs) noexcept
+        {
+          set_key(rhs.get_key());
+          set_value(rhs.get_value());
+          return *this;
+        }
+
+        inline void clear_key() { key_.clear(); }
+        inline void set_key(const EmbeddedProto::uint64& value) { key_ = value; }
+        inline void set_key(const EmbeddedProto::uint64&& value) { key_ = value; }
+        inline EmbeddedProto::uint64& mutable_key() { return key_; }
+        inline const EmbeddedProto::uint64& get_key() const { return key_; }
+        inline EmbeddedProto::uint64::FIELD_TYPE key() const { return key_.get(); }
+
+        inline void clear_value() { value_.clear(); }
+        inline void set_value(const EmbeddedProto::uint64& value) { value_ = value; }
+        inline void set_value(const EmbeddedProto::uint64&& value) { value_ = value; }
+        inline EmbeddedProto::uint64& mutable_value() { return value_; }
+        inline const EmbeddedProto::uint64& get_value() const { return value_; }
+        inline EmbeddedProto::uint64::FIELD_TYPE value() const { return value_.get(); }
+
+
+        ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
+        {
+          ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
+
+          if((0U != key_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
+          {
+            return_value = key_.serialize_with_id(static_cast<uint32_t>(FieldNumber::KEY), buffer, false);
+          }
+
+          if((0U != value_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
+          {
+            return_value = value_.serialize_with_id(static_cast<uint32_t>(FieldNumber::VALUE), buffer, false);
+          }
+
+          return return_value;
+        };
+
+        ::EmbeddedProto::Error deserialize(::EmbeddedProto::ReadBufferInterface& buffer) override
+        {
+          ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
+          ::EmbeddedProto::WireFormatter::WireType wire_type = ::EmbeddedProto::WireFormatter::WireType::VARINT;
+          uint32_t id_number = 0;
+          FieldNumber id_tag = FieldNumber::NOT_SET;
+
+          ::EmbeddedProto::Error tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
+          while((::EmbeddedProto::Error::NO_ERRORS == return_value) && (::EmbeddedProto::Error::NO_ERRORS == tag_value))
+          {
+            id_tag = static_cast<FieldNumber>(id_number);
+            switch(id_tag)
+            {
+              case FieldNumber::KEY:
+                return_value = key_.deserialize_check_type(buffer, wire_type);
+                break;
+
+              case FieldNumber::VALUE:
+                return_value = value_.deserialize_check_type(buffer, wire_type);
+                break;
+
+              default:
+                break;
+            }
+
+            if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+            {
+              // Read the next tag.
+              tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
+            }
+          }
+
+          // When an error was detect while reading the tag but no other errors where found, set it in the return value.
+          if((::EmbeddedProto::Error::NO_ERRORS == return_value)
+             && (::EmbeddedProto::Error::NO_ERRORS != tag_value)
+             && (::EmbeddedProto::Error::END_OF_BUFFER != tag_value)) // The end of the buffer is not an array in this case.
+          {
+            return_value = tag_value;
+          }
+
+          return return_value;
+        };
+
+        void clear() override
+        {
+          clear_key();
+          clear_value();
+
+        }
+
+        private:
+
+
+          EmbeddedProto::uint64 key_ = 0U;
+          EmbeddedProto::uint64 value_ = 0U;
+
+    };
+
+    enum class FieldNumber : uint32_t
+    {
+      NOT_SET = 0,
+      CURRENT_BALANCE = 1,
+      PAST_BALANCES = 2
+    };
+
+    effective_balance_object& operator=(const effective_balance_object& rhs)
+    {
+      set_current_balance(rhs.get_current_balance());
+      set_past_balances(rhs.get_past_balances());
+      return *this;
+    }
+
+    effective_balance_object& operator=(const effective_balance_object&& rhs) noexcept
+    {
+      set_current_balance(rhs.get_current_balance());
+      set_past_balances(rhs.get_past_balances());
+      return *this;
+    }
+
+    inline void clear_current_balance() { current_balance_.clear(); }
+    inline void set_current_balance(const EmbeddedProto::uint64& value) { current_balance_ = value; }
+    inline void set_current_balance(const EmbeddedProto::uint64&& value) { current_balance_ = value; }
+    inline EmbeddedProto::uint64& mutable_current_balance() { return current_balance_; }
+    inline const EmbeddedProto::uint64& get_current_balance() const { return current_balance_; }
+    inline EmbeddedProto::uint64::FIELD_TYPE current_balance() const { return current_balance_.get(); }
+
+    inline const PastBalancesEntry& past_balances(uint32_t index) const { return past_balances_[index]; }
+    inline void clear_past_balances() { past_balances_.clear(); }
+    inline void set_past_balances(uint32_t index, const PastBalancesEntry& value) { past_balances_.set(index, value); }
+    inline void set_past_balances(uint32_t index, const PastBalancesEntry&& value) { past_balances_.set(index, value); }
+    inline void set_past_balances(const ::EmbeddedProto::RepeatedFieldFixedSize<PastBalancesEntry, past_balances_REP_LENGTH>& values) { past_balances_ = values; }
+    inline void add_past_balances(const PastBalancesEntry& value) { past_balances_.add(value); }
+    inline ::EmbeddedProto::RepeatedFieldFixedSize<PastBalancesEntry, past_balances_REP_LENGTH>& mutable_past_balances() { return past_balances_; }
+    inline PastBalancesEntry& mutable_past_balances(uint32_t index) { return past_balances_[index]; }
+    inline const ::EmbeddedProto::RepeatedFieldFixedSize<PastBalancesEntry, past_balances_REP_LENGTH>& get_past_balances() const { return past_balances_; }
+    inline const ::EmbeddedProto::RepeatedFieldFixedSize<PastBalancesEntry, past_balances_REP_LENGTH>& past_balances() const { return past_balances_; }
+
+
+    ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
+    {
+      ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
+
+      if((0U != current_balance_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
+      {
+        return_value = current_balance_.serialize_with_id(static_cast<uint32_t>(FieldNumber::CURRENT_BALANCE), buffer, false);
+      }
+
+      if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+      {
+        return_value = past_balances_.serialize_with_id(static_cast<uint32_t>(FieldNumber::PAST_BALANCES), buffer, false);
+      }
+
+      return return_value;
+    };
+
+    ::EmbeddedProto::Error deserialize(::EmbeddedProto::ReadBufferInterface& buffer) override
+    {
+      ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
+      ::EmbeddedProto::WireFormatter::WireType wire_type = ::EmbeddedProto::WireFormatter::WireType::VARINT;
+      uint32_t id_number = 0;
+      FieldNumber id_tag = FieldNumber::NOT_SET;
+
+      ::EmbeddedProto::Error tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
+      while((::EmbeddedProto::Error::NO_ERRORS == return_value) && (::EmbeddedProto::Error::NO_ERRORS == tag_value))
+      {
+        id_tag = static_cast<FieldNumber>(id_number);
+        switch(id_tag)
+        {
+          case FieldNumber::CURRENT_BALANCE:
+            return_value = current_balance_.deserialize_check_type(buffer, wire_type);
+            break;
+
+          case FieldNumber::PAST_BALANCES:
+            return_value = past_balances_.deserialize_check_type(buffer, wire_type);
+            break;
+
+          default:
+            break;
+        }
+
+        if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+        {
+          // Read the next tag.
+          tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
+        }
+      }
+
+      // When an error was detect while reading the tag but no other errors where found, set it in the return value.
+      if((::EmbeddedProto::Error::NO_ERRORS == return_value)
+         && (::EmbeddedProto::Error::NO_ERRORS != tag_value)
+         && (::EmbeddedProto::Error::END_OF_BUFFER != tag_value)) // The end of the buffer is not an array in this case.
+      {
+        return_value = tag_value;
+      }
+
+      return return_value;
+    };
+
+    void clear() override
+    {
+      clear_current_balance();
+      clear_past_balances();
+
+    }
+
+    private:
+
+
+      EmbeddedProto::uint64 current_balance_ = 0U;
+      ::EmbeddedProto::RepeatedFieldFixedSize<PastBalancesEntry, past_balances_REP_LENGTH> past_balances_;
 
 };
 

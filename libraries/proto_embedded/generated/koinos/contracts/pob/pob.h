@@ -233,11 +233,13 @@ class public_key_record final: public ::EmbeddedProto::MessageInterface
     public_key_record(const public_key_record& rhs )
     {
       set_public_key(rhs.get_public_key());
+      set_set_block_height(rhs.get_set_block_height());
     }
 
     public_key_record(const public_key_record&& rhs ) noexcept
     {
       set_public_key(rhs.get_public_key());
+      set_set_block_height(rhs.get_set_block_height());
     }
 
     ~public_key_record() override = default;
@@ -245,18 +247,21 @@ class public_key_record final: public ::EmbeddedProto::MessageInterface
     enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
-      PUBLIC_KEY = 1
+      PUBLIC_KEY = 1,
+      SET_BLOCK_HEIGHT = 2
     };
 
     public_key_record& operator=(const public_key_record& rhs)
     {
       set_public_key(rhs.get_public_key());
+      set_set_block_height(rhs.get_set_block_height());
       return *this;
     }
 
     public_key_record& operator=(const public_key_record&& rhs) noexcept
     {
       set_public_key(rhs.get_public_key());
+      set_set_block_height(rhs.get_set_block_height());
       return *this;
     }
 
@@ -266,6 +271,13 @@ class public_key_record final: public ::EmbeddedProto::MessageInterface
     inline const ::EmbeddedProto::FieldBytes<public_key_LENGTH>& get_public_key() const { return public_key_; }
     inline const uint8_t* public_key() const { return public_key_.get_const(); }
 
+    inline void clear_set_block_height() { set_block_height_.clear(); }
+    inline void set_set_block_height(const EmbeddedProto::uint64& value) { set_block_height_ = value; }
+    inline void set_set_block_height(const EmbeddedProto::uint64&& value) { set_block_height_ = value; }
+    inline EmbeddedProto::uint64& mutable_set_block_height() { return set_block_height_; }
+    inline const EmbeddedProto::uint64& get_set_block_height() const { return set_block_height_; }
+    inline EmbeddedProto::uint64::FIELD_TYPE set_block_height() const { return set_block_height_.get(); }
+
 
     ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
     {
@@ -274,6 +286,11 @@ class public_key_record final: public ::EmbeddedProto::MessageInterface
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
         return_value = public_key_.serialize_with_id(static_cast<uint32_t>(FieldNumber::PUBLIC_KEY), buffer, false);
+      }
+
+      if((0U != set_block_height_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
+      {
+        return_value = set_block_height_.serialize_with_id(static_cast<uint32_t>(FieldNumber::SET_BLOCK_HEIGHT), buffer, false);
       }
 
       return return_value;
@@ -294,6 +311,10 @@ class public_key_record final: public ::EmbeddedProto::MessageInterface
         {
           case FieldNumber::PUBLIC_KEY:
             return_value = public_key_.deserialize_check_type(buffer, wire_type);
+            break;
+
+          case FieldNumber::SET_BLOCK_HEIGHT:
+            return_value = set_block_height_.deserialize_check_type(buffer, wire_type);
             break;
 
           default:
@@ -321,6 +342,7 @@ class public_key_record final: public ::EmbeddedProto::MessageInterface
     void clear() override
     {
       clear_public_key();
+      clear_set_block_height();
 
     }
 
@@ -328,6 +350,7 @@ class public_key_record final: public ::EmbeddedProto::MessageInterface
 
 
       ::EmbeddedProto::FieldBytes<public_key_LENGTH> public_key_;
+      EmbeddedProto::uint64 set_block_height_ = 0U;
 
 };
 
