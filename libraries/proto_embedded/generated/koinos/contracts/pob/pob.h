@@ -1978,6 +1978,195 @@ class get_public_key_result final: public ::EmbeddedProto::MessageInterface
 
 };
 
+class update_consensus_parameters_arguments final: public ::EmbeddedProto::MessageInterface
+{
+  public:
+    update_consensus_parameters_arguments() = default;
+    update_consensus_parameters_arguments(const update_consensus_parameters_arguments& rhs )
+    {
+      set_value(rhs.get_value());
+    }
+
+    update_consensus_parameters_arguments(const update_consensus_parameters_arguments&& rhs ) noexcept
+    {
+      set_value(rhs.get_value());
+    }
+
+    ~update_consensus_parameters_arguments() override = default;
+
+    enum class FieldNumber : uint32_t
+    {
+      NOT_SET = 0,
+      VALUE = 1
+    };
+
+    update_consensus_parameters_arguments& operator=(const update_consensus_parameters_arguments& rhs)
+    {
+      set_value(rhs.get_value());
+      return *this;
+    }
+
+    update_consensus_parameters_arguments& operator=(const update_consensus_parameters_arguments&& rhs) noexcept
+    {
+      set_value(rhs.get_value());
+      return *this;
+    }
+
+    inline void clear_value() { value_.clear(); }
+    inline void set_value(const consensus_parameters& value) { value_ = value; }
+    inline void set_value(const consensus_parameters&& value) { value_ = value; }
+    inline consensus_parameters& mutable_value() { return value_; }
+    inline const consensus_parameters& get_value() const { return value_; }
+    inline const consensus_parameters& value() const { return value_; }
+
+
+    ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
+    {
+      ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
+
+      if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+      {
+        return_value = value_.serialize_with_id(static_cast<uint32_t>(FieldNumber::VALUE), buffer, false);
+      }
+
+      return return_value;
+    };
+
+    ::EmbeddedProto::Error deserialize(::EmbeddedProto::ReadBufferInterface& buffer) override
+    {
+      ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
+      ::EmbeddedProto::WireFormatter::WireType wire_type = ::EmbeddedProto::WireFormatter::WireType::VARINT;
+      uint32_t id_number = 0;
+      FieldNumber id_tag = FieldNumber::NOT_SET;
+
+      ::EmbeddedProto::Error tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
+      while((::EmbeddedProto::Error::NO_ERRORS == return_value) && (::EmbeddedProto::Error::NO_ERRORS == tag_value))
+      {
+        id_tag = static_cast<FieldNumber>(id_number);
+        switch(id_tag)
+        {
+          case FieldNumber::VALUE:
+            return_value = value_.deserialize_check_type(buffer, wire_type);
+            break;
+
+          default:
+            break;
+        }
+
+        if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+        {
+          // Read the next tag.
+          tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
+        }
+      }
+
+      // When an error was detect while reading the tag but no other errors where found, set it in the return value.
+      if((::EmbeddedProto::Error::NO_ERRORS == return_value)
+         && (::EmbeddedProto::Error::NO_ERRORS != tag_value)
+         && (::EmbeddedProto::Error::END_OF_BUFFER != tag_value)) // The end of the buffer is not an array in this case.
+      {
+        return_value = tag_value;
+      }
+
+      return return_value;
+    };
+
+    void clear() override
+    {
+      clear_value();
+
+    }
+
+    private:
+
+
+      consensus_parameters value_;
+
+};
+
+class update_consensus_parameters_result final: public ::EmbeddedProto::MessageInterface
+{
+  public:
+    update_consensus_parameters_result() = default;
+    update_consensus_parameters_result(const update_consensus_parameters_result& rhs )
+    {
+    }
+
+    update_consensus_parameters_result(const update_consensus_parameters_result&& rhs ) noexcept
+    {
+    }
+
+    ~update_consensus_parameters_result() override = default;
+
+    enum class FieldNumber : uint32_t
+    {
+      NOT_SET = 0,
+    };
+
+    update_consensus_parameters_result& operator=(const update_consensus_parameters_result& rhs)
+    {
+      return *this;
+    }
+
+    update_consensus_parameters_result& operator=(const update_consensus_parameters_result&& rhs) noexcept
+    {
+      return *this;
+    }
+
+
+    ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
+    {
+      ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
+
+      return return_value;
+    };
+
+    ::EmbeddedProto::Error deserialize(::EmbeddedProto::ReadBufferInterface& buffer) override
+    {
+      ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
+      ::EmbeddedProto::WireFormatter::WireType wire_type = ::EmbeddedProto::WireFormatter::WireType::VARINT;
+      uint32_t id_number = 0;
+      FieldNumber id_tag = FieldNumber::NOT_SET;
+
+      ::EmbeddedProto::Error tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
+      while((::EmbeddedProto::Error::NO_ERRORS == return_value) && (::EmbeddedProto::Error::NO_ERRORS == tag_value))
+      {
+        id_tag = static_cast<FieldNumber>(id_number);
+        switch(id_tag)
+        {
+          default:
+            break;
+        }
+
+        if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+        {
+          // Read the next tag.
+          tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
+        }
+      }
+
+      // When an error was detect while reading the tag but no other errors where found, set it in the return value.
+      if((::EmbeddedProto::Error::NO_ERRORS == return_value)
+         && (::EmbeddedProto::Error::NO_ERRORS != tag_value)
+         && (::EmbeddedProto::Error::END_OF_BUFFER != tag_value)) // The end of the buffer is not an array in this case.
+      {
+        return_value = tag_value;
+      }
+
+      return return_value;
+    };
+
+    void clear() override
+    {
+
+    }
+
+    private:
+
+
+
+};
+
 } // End of namespace pob
 } // End of namespace contracts
 } // End of namespace koinos
