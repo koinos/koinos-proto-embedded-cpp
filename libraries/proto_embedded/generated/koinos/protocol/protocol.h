@@ -3110,6 +3110,9 @@ class block_receipt final: public ::EmbeddedProto::MessageInterface
       set_events(rhs.get_events());
       set_transaction_receipts(rhs.get_transaction_receipts());
       set_logs(rhs.get_logs());
+      set_disk_storage_charged(rhs.get_disk_storage_charged());
+      set_network_bandwidth_charged(rhs.get_network_bandwidth_charged());
+      set_compute_bandwidth_charged(rhs.get_compute_bandwidth_charged());
     }
 
     block_receipt(const block_receipt&& rhs ) noexcept
@@ -3123,6 +3126,9 @@ class block_receipt final: public ::EmbeddedProto::MessageInterface
       set_events(rhs.get_events());
       set_transaction_receipts(rhs.get_transaction_receipts());
       set_logs(rhs.get_logs());
+      set_disk_storage_charged(rhs.get_disk_storage_charged());
+      set_network_bandwidth_charged(rhs.get_network_bandwidth_charged());
+      set_compute_bandwidth_charged(rhs.get_compute_bandwidth_charged());
     }
 
     ~block_receipt() override = default;
@@ -3138,7 +3144,10 @@ class block_receipt final: public ::EmbeddedProto::MessageInterface
       STATE_MERKLE_ROOT = 6,
       EVENTS = 7,
       TRANSACTION_RECEIPTS = 8,
-      LOGS = 9
+      LOGS = 9,
+      DISK_STORAGE_CHARGED = 10,
+      NETWORK_BANDWIDTH_CHARGED = 11,
+      COMPUTE_BANDWIDTH_CHARGED = 12
     };
 
     block_receipt& operator=(const block_receipt& rhs)
@@ -3152,6 +3161,9 @@ class block_receipt final: public ::EmbeddedProto::MessageInterface
       set_events(rhs.get_events());
       set_transaction_receipts(rhs.get_transaction_receipts());
       set_logs(rhs.get_logs());
+      set_disk_storage_charged(rhs.get_disk_storage_charged());
+      set_network_bandwidth_charged(rhs.get_network_bandwidth_charged());
+      set_compute_bandwidth_charged(rhs.get_compute_bandwidth_charged());
       return *this;
     }
 
@@ -3166,6 +3178,9 @@ class block_receipt final: public ::EmbeddedProto::MessageInterface
       set_events(rhs.get_events());
       set_transaction_receipts(rhs.get_transaction_receipts());
       set_logs(rhs.get_logs());
+      set_disk_storage_charged(rhs.get_disk_storage_charged());
+      set_network_bandwidth_charged(rhs.get_network_bandwidth_charged());
+      set_compute_bandwidth_charged(rhs.get_compute_bandwidth_charged());
       return *this;
     }
 
@@ -3242,6 +3257,27 @@ class block_receipt final: public ::EmbeddedProto::MessageInterface
     inline const ::EmbeddedProto::RepeatedFieldFixedSize<::EmbeddedProto::FieldString<logs_LENGTH>, logs_REP_LENGTH>& get_logs() const { return logs_; }
     inline const ::EmbeddedProto::RepeatedFieldFixedSize<::EmbeddedProto::FieldString<logs_LENGTH>, logs_REP_LENGTH>& logs() const { return logs_; }
 
+    inline void clear_disk_storage_charged() { disk_storage_charged_.clear(); }
+    inline void set_disk_storage_charged(const EmbeddedProto::uint64& value) { disk_storage_charged_ = value; }
+    inline void set_disk_storage_charged(const EmbeddedProto::uint64&& value) { disk_storage_charged_ = value; }
+    inline EmbeddedProto::uint64& mutable_disk_storage_charged() { return disk_storage_charged_; }
+    inline const EmbeddedProto::uint64& get_disk_storage_charged() const { return disk_storage_charged_; }
+    inline EmbeddedProto::uint64::FIELD_TYPE disk_storage_charged() const { return disk_storage_charged_.get(); }
+
+    inline void clear_network_bandwidth_charged() { network_bandwidth_charged_.clear(); }
+    inline void set_network_bandwidth_charged(const EmbeddedProto::uint64& value) { network_bandwidth_charged_ = value; }
+    inline void set_network_bandwidth_charged(const EmbeddedProto::uint64&& value) { network_bandwidth_charged_ = value; }
+    inline EmbeddedProto::uint64& mutable_network_bandwidth_charged() { return network_bandwidth_charged_; }
+    inline const EmbeddedProto::uint64& get_network_bandwidth_charged() const { return network_bandwidth_charged_; }
+    inline EmbeddedProto::uint64::FIELD_TYPE network_bandwidth_charged() const { return network_bandwidth_charged_.get(); }
+
+    inline void clear_compute_bandwidth_charged() { compute_bandwidth_charged_.clear(); }
+    inline void set_compute_bandwidth_charged(const EmbeddedProto::uint64& value) { compute_bandwidth_charged_ = value; }
+    inline void set_compute_bandwidth_charged(const EmbeddedProto::uint64&& value) { compute_bandwidth_charged_ = value; }
+    inline EmbeddedProto::uint64& mutable_compute_bandwidth_charged() { return compute_bandwidth_charged_; }
+    inline const EmbeddedProto::uint64& get_compute_bandwidth_charged() const { return compute_bandwidth_charged_; }
+    inline EmbeddedProto::uint64::FIELD_TYPE compute_bandwidth_charged() const { return compute_bandwidth_charged_.get(); }
+
 
     ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
     {
@@ -3290,6 +3326,21 @@ class block_receipt final: public ::EmbeddedProto::MessageInterface
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
         return_value = logs_.serialize_with_id(static_cast<uint32_t>(FieldNumber::LOGS), buffer, false);
+      }
+
+      if((0U != disk_storage_charged_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
+      {
+        return_value = disk_storage_charged_.serialize_with_id(static_cast<uint32_t>(FieldNumber::DISK_STORAGE_CHARGED), buffer, false);
+      }
+
+      if((0U != network_bandwidth_charged_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
+      {
+        return_value = network_bandwidth_charged_.serialize_with_id(static_cast<uint32_t>(FieldNumber::NETWORK_BANDWIDTH_CHARGED), buffer, false);
+      }
+
+      if((0U != compute_bandwidth_charged_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
+      {
+        return_value = compute_bandwidth_charged_.serialize_with_id(static_cast<uint32_t>(FieldNumber::COMPUTE_BANDWIDTH_CHARGED), buffer, false);
       }
 
       return return_value;
@@ -3344,6 +3395,18 @@ class block_receipt final: public ::EmbeddedProto::MessageInterface
             return_value = logs_.deserialize_check_type(buffer, wire_type);
             break;
 
+          case FieldNumber::DISK_STORAGE_CHARGED:
+            return_value = disk_storage_charged_.deserialize_check_type(buffer, wire_type);
+            break;
+
+          case FieldNumber::NETWORK_BANDWIDTH_CHARGED:
+            return_value = network_bandwidth_charged_.deserialize_check_type(buffer, wire_type);
+            break;
+
+          case FieldNumber::COMPUTE_BANDWIDTH_CHARGED:
+            return_value = compute_bandwidth_charged_.deserialize_check_type(buffer, wire_type);
+            break;
+
           default:
             break;
         }
@@ -3377,6 +3440,9 @@ class block_receipt final: public ::EmbeddedProto::MessageInterface
       clear_events();
       clear_transaction_receipts();
       clear_logs();
+      clear_disk_storage_charged();
+      clear_network_bandwidth_charged();
+      clear_compute_bandwidth_charged();
 
     }
 
@@ -3392,6 +3458,9 @@ class block_receipt final: public ::EmbeddedProto::MessageInterface
       ::EmbeddedProto::RepeatedFieldFixedSize<event_data<events_source_LENGTH, events_name_LENGTH, events_data_LENGTH, events_impacted_REP_LENGTH, events_impacted_LENGTH>, events_REP_LENGTH> events_;
       ::EmbeddedProto::RepeatedFieldFixedSize<transaction_receipt<transaction_receipts_id_LENGTH, transaction_receipts_payer_LENGTH, transaction_receipts_events_REP_LENGTH, transaction_receipts_events_source_LENGTH, transaction_receipts_events_name_LENGTH, transaction_receipts_events_data_LENGTH, transaction_receipts_events_impacted_REP_LENGTH, transaction_receipts_events_impacted_LENGTH, transaction_receipts_logs_REP_LENGTH, transaction_receipts_logs_LENGTH>, transaction_receipts_REP_LENGTH> transaction_receipts_;
       ::EmbeddedProto::RepeatedFieldFixedSize<::EmbeddedProto::FieldString<logs_LENGTH>, logs_REP_LENGTH> logs_;
+      EmbeddedProto::uint64 disk_storage_charged_ = 0U;
+      EmbeddedProto::uint64 network_bandwidth_charged_ = 0U;
+      EmbeddedProto::uint64 compute_bandwidth_charged_ = 0U;
 
 };
 
