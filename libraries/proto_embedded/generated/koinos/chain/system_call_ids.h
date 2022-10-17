@@ -85,7 +85,9 @@ enum class system_call_id : int32_t
   get_arguments = 603,
   get_contract_id = 604,
   get_caller = 605,
-  check_authority = 606
+  check_authority = 606,
+  get_contract_name = 10000,
+  get_contract_address = 10001
 };
 
 } // End of namespace chain
