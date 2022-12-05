@@ -1614,22 +1614,22 @@ class get_metadata_result final: public ::EmbeddedProto::MessageInterface
 
 };
 
-template<uint32_t public_key_LENGTH, 
-uint32_t address_LENGTH>
+template<uint32_t address_LENGTH, 
+uint32_t public_key_LENGTH>
 class register_public_key_event final: public ::EmbeddedProto::MessageInterface
 {
   public:
     register_public_key_event() = default;
     register_public_key_event(const register_public_key_event& rhs )
     {
-      set_public_key(rhs.get_public_key());
       set_address(rhs.get_address());
+      set_public_key(rhs.get_public_key());
     }
 
     register_public_key_event(const register_public_key_event&& rhs ) noexcept
     {
-      set_public_key(rhs.get_public_key());
       set_address(rhs.get_address());
+      set_public_key(rhs.get_public_key());
     }
 
     ~register_public_key_event() override = default;
@@ -1637,35 +1637,35 @@ class register_public_key_event final: public ::EmbeddedProto::MessageInterface
     enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
-      PUBLIC_KEY = 1,
-      ADDRESS = 2
+      ADDRESS = 1,
+      PUBLIC_KEY = 2
     };
 
     register_public_key_event& operator=(const register_public_key_event& rhs)
     {
-      set_public_key(rhs.get_public_key());
       set_address(rhs.get_address());
+      set_public_key(rhs.get_public_key());
       return *this;
     }
 
     register_public_key_event& operator=(const register_public_key_event&& rhs) noexcept
     {
-      set_public_key(rhs.get_public_key());
       set_address(rhs.get_address());
+      set_public_key(rhs.get_public_key());
       return *this;
     }
-
-    inline void clear_public_key() { public_key_.clear(); }
-    inline ::EmbeddedProto::FieldBytes<public_key_LENGTH>& mutable_public_key() { return public_key_; }
-    inline void set_public_key(const ::EmbeddedProto::FieldBytes<public_key_LENGTH>& rhs) { public_key_.set(rhs); }
-    inline const ::EmbeddedProto::FieldBytes<public_key_LENGTH>& get_public_key() const { return public_key_; }
-    inline const uint8_t* public_key() const { return public_key_.get_const(); }
 
     inline void clear_address() { address_.clear(); }
     inline ::EmbeddedProto::FieldBytes<address_LENGTH>& mutable_address() { return address_; }
     inline void set_address(const ::EmbeddedProto::FieldBytes<address_LENGTH>& rhs) { address_.set(rhs); }
     inline const ::EmbeddedProto::FieldBytes<address_LENGTH>& get_address() const { return address_; }
     inline const uint8_t* address() const { return address_.get_const(); }
+
+    inline void clear_public_key() { public_key_.clear(); }
+    inline ::EmbeddedProto::FieldBytes<public_key_LENGTH>& mutable_public_key() { return public_key_; }
+    inline void set_public_key(const ::EmbeddedProto::FieldBytes<public_key_LENGTH>& rhs) { public_key_.set(rhs); }
+    inline const ::EmbeddedProto::FieldBytes<public_key_LENGTH>& get_public_key() const { return public_key_; }
+    inline const uint8_t* public_key() const { return public_key_.get_const(); }
 
 
     ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
@@ -1674,12 +1674,12 @@ class register_public_key_event final: public ::EmbeddedProto::MessageInterface
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = public_key_.serialize_with_id(static_cast<uint32_t>(FieldNumber::PUBLIC_KEY), buffer, false);
+        return_value = address_.serialize_with_id(static_cast<uint32_t>(FieldNumber::ADDRESS), buffer, false);
       }
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = address_.serialize_with_id(static_cast<uint32_t>(FieldNumber::ADDRESS), buffer, false);
+        return_value = public_key_.serialize_with_id(static_cast<uint32_t>(FieldNumber::PUBLIC_KEY), buffer, false);
       }
 
       return return_value;
@@ -1698,12 +1698,12 @@ class register_public_key_event final: public ::EmbeddedProto::MessageInterface
         id_tag = static_cast<FieldNumber>(id_number);
         switch(id_tag)
         {
-          case FieldNumber::PUBLIC_KEY:
-            return_value = public_key_.deserialize_check_type(buffer, wire_type);
-            break;
-
           case FieldNumber::ADDRESS:
             return_value = address_.deserialize_check_type(buffer, wire_type);
+            break;
+
+          case FieldNumber::PUBLIC_KEY:
+            return_value = public_key_.deserialize_check_type(buffer, wire_type);
             break;
 
           default:
@@ -1730,16 +1730,16 @@ class register_public_key_event final: public ::EmbeddedProto::MessageInterface
 
     void clear() override
     {
-      clear_public_key();
       clear_address();
+      clear_public_key();
 
     }
 
     private:
 
 
-      ::EmbeddedProto::FieldBytes<public_key_LENGTH> public_key_;
       ::EmbeddedProto::FieldBytes<address_LENGTH> address_;
+      ::EmbeddedProto::FieldBytes<public_key_LENGTH> public_key_;
 
 };
 
