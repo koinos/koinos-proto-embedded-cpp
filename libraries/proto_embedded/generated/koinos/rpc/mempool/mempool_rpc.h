@@ -501,6 +501,7 @@ class check_pending_account_resources_response final: public ::EmbeddedProto::Me
 
 };
 
+template<uint32_t block_id_LENGTH>
 class get_pending_transactions_request final: public ::EmbeddedProto::MessageInterface
 {
   public:
@@ -508,11 +509,13 @@ class get_pending_transactions_request final: public ::EmbeddedProto::MessageInt
     get_pending_transactions_request(const get_pending_transactions_request& rhs )
     {
       set_limit(rhs.get_limit());
+      set_block_id(rhs.get_block_id());
     }
 
     get_pending_transactions_request(const get_pending_transactions_request&& rhs ) noexcept
     {
       set_limit(rhs.get_limit());
+      set_block_id(rhs.get_block_id());
     }
 
     ~get_pending_transactions_request() override = default;
@@ -520,18 +523,21 @@ class get_pending_transactions_request final: public ::EmbeddedProto::MessageInt
     enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
-      LIMIT = 1
+      LIMIT = 1,
+      BLOCK_ID = 2
     };
 
     get_pending_transactions_request& operator=(const get_pending_transactions_request& rhs)
     {
       set_limit(rhs.get_limit());
+      set_block_id(rhs.get_block_id());
       return *this;
     }
 
     get_pending_transactions_request& operator=(const get_pending_transactions_request&& rhs) noexcept
     {
       set_limit(rhs.get_limit());
+      set_block_id(rhs.get_block_id());
       return *this;
     }
 
@@ -542,6 +548,28 @@ class get_pending_transactions_request final: public ::EmbeddedProto::MessageInt
     inline const EmbeddedProto::uint64& get_limit() const { return limit_; }
     inline EmbeddedProto::uint64::FIELD_TYPE limit() const { return limit_.get(); }
 
+    inline bool has_block_id() const
+    {
+      return 0 != (presence::mask(presence::fields::BLOCK_ID) & presence_[presence::index(presence::fields::BLOCK_ID)]);
+    }
+    inline void clear_block_id()
+    {
+      presence_[presence::index(presence::fields::BLOCK_ID)] &= ~(presence::mask(presence::fields::BLOCK_ID));
+      block_id_.clear();
+    }
+    inline ::EmbeddedProto::FieldBytes<block_id_LENGTH>& mutable_block_id()
+    {
+      presence_[presence::index(presence::fields::BLOCK_ID)] |= presence::mask(presence::fields::BLOCK_ID);
+      return block_id_;
+    }
+    inline void set_block_id(const ::EmbeddedProto::FieldBytes<block_id_LENGTH>& rhs)
+    {
+      presence_[presence::index(presence::fields::BLOCK_ID)] |= presence::mask(presence::fields::BLOCK_ID);
+      block_id_.set(rhs);
+    }
+    inline const ::EmbeddedProto::FieldBytes<block_id_LENGTH>& get_block_id() const { return block_id_; }
+    inline const uint8_t* block_id() const { return block_id_.get_const(); }
+
 
     ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
     {
@@ -550,6 +578,11 @@ class get_pending_transactions_request final: public ::EmbeddedProto::MessageInt
       if((0U != limit_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
       {
         return_value = limit_.serialize_with_id(static_cast<uint32_t>(FieldNumber::LIMIT), buffer, false);
+      }
+
+      if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+      {
+        return_value = block_id_.serialize_with_id(static_cast<uint32_t>(FieldNumber::BLOCK_ID), buffer, true);
       }
 
       return return_value;
@@ -570,6 +603,11 @@ class get_pending_transactions_request final: public ::EmbeddedProto::MessageInt
         {
           case FieldNumber::LIMIT:
             return_value = limit_.deserialize_check_type(buffer, wire_type);
+            break;
+
+          case FieldNumber::BLOCK_ID:
+            presence_[presence::index(presence::fields::BLOCK_ID)] |= presence::mask(presence::fields::BLOCK_ID);
+            return_value = block_id_.deserialize_check_type(buffer, wire_type);
             break;
 
           default:
@@ -597,13 +635,49 @@ class get_pending_transactions_request final: public ::EmbeddedProto::MessageInt
     void clear() override
     {
       clear_limit();
+      clear_block_id();
 
     }
 
     private:
 
+      // Define constants for tracking the presence of fields.
+      // Use a struct to scope the variables from user fields as namespaces are not allowed within classes.
+      struct presence
+      {
+        // An enumeration with all the fields for which presence has to be tracked.
+        enum class fields : uint32_t
+        {
+          BLOCK_ID
+        };
+
+        // The number of fields for which presence has to be tracked.
+        static constexpr uint32_t N_FIELDS = 1;
+
+        // Which type are we using to track presence.
+        using TYPE = uint32_t;
+
+        // How many bits are there in the presence type.
+        static constexpr uint32_t N_BITS = std::numeric_limits<TYPE>::digits;
+
+        // How many variables of TYPE do we need to bit mask all presence fields.
+        static constexpr uint32_t SIZE = (N_FIELDS / N_BITS) + ((N_FIELDS % N_BITS) > 0 ? 1 : 0);
+
+        // Obtain the index of a given field in the presence array.
+        static constexpr uint32_t index(const fields& field) { return static_cast<uint32_t>(field) / N_BITS; }
+
+        // Obtain the bit mask for the given field assuming we are at the correct index in the presence array.
+        static constexpr TYPE mask(const fields& field)
+        {
+          return static_cast<uint32_t>(0x01) << (static_cast<uint32_t>(field) % N_BITS);
+        }
+      };
+
+      // Create an array in which the presence flags are stored.
+      typename presence::TYPE presence_[presence::SIZE] = {0};
 
       EmbeddedProto::uint64 limit_ = 0U;
+      ::EmbeddedProto::FieldBytes<block_id_LENGTH> block_id_;
 
 };
 
@@ -734,7 +808,8 @@ class get_pending_transactions_response final: public ::EmbeddedProto::MessageIn
 
 };
 
-template<uint32_t check_pending_account_resources_payer_LENGTH>
+template<uint32_t check_pending_account_resources_payer_LENGTH, 
+uint32_t get_pending_transactions_block_id_LENGTH>
 class mempool_request final: public ::EmbeddedProto::MessageInterface
 {
   public:
@@ -940,10 +1015,10 @@ class mempool_request final: public ::EmbeddedProto::MessageInterface
       if(FieldNumber::GET_PENDING_TRANSACTIONS == which_request_)
       {
         which_request_ = FieldNumber::NOT_SET;
-        request_.get_pending_transactions_.~get_pending_transactions_request();
+        request_.get_pending_transactions_.~get_pending_transactions_request<get_pending_transactions_block_id_LENGTH>();
       }
     }
-    inline void set_get_pending_transactions(const get_pending_transactions_request& value)
+    inline void set_get_pending_transactions(const get_pending_transactions_request<get_pending_transactions_block_id_LENGTH>& value)
     {
       if(FieldNumber::GET_PENDING_TRANSACTIONS != which_request_)
       {
@@ -951,7 +1026,7 @@ class mempool_request final: public ::EmbeddedProto::MessageInterface
       }
       request_.get_pending_transactions_ = value;
     }
-    inline void set_get_pending_transactions(const get_pending_transactions_request&& value)
+    inline void set_get_pending_transactions(const get_pending_transactions_request<get_pending_transactions_block_id_LENGTH>&& value)
     {
       if(FieldNumber::GET_PENDING_TRANSACTIONS != which_request_)
       {
@@ -959,7 +1034,7 @@ class mempool_request final: public ::EmbeddedProto::MessageInterface
       }
       request_.get_pending_transactions_ = value;
     }
-    inline get_pending_transactions_request& mutable_get_pending_transactions()
+    inline get_pending_transactions_request<get_pending_transactions_block_id_LENGTH>& mutable_get_pending_transactions()
     {
       if(FieldNumber::GET_PENDING_TRANSACTIONS != which_request_)
       {
@@ -967,8 +1042,8 @@ class mempool_request final: public ::EmbeddedProto::MessageInterface
       }
       return request_.get_pending_transactions_;
     }
-    inline const get_pending_transactions_request& get_get_pending_transactions() const { return request_.get_pending_transactions_; }
-    inline const get_pending_transactions_request& get_pending_transactions() const { return request_.get_pending_transactions_; }
+    inline const get_pending_transactions_request<get_pending_transactions_block_id_LENGTH>& get_get_pending_transactions() const { return request_.get_pending_transactions_; }
+    inline const get_pending_transactions_request<get_pending_transactions_block_id_LENGTH>& get_pending_transactions() const { return request_.get_pending_transactions_; }
 
 
     ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
@@ -1072,7 +1147,7 @@ class mempool_request final: public ::EmbeddedProto::MessageInterface
         ~request() {}
         reserved_rpc reserved_;
         check_pending_account_resources_request<check_pending_account_resources_payer_LENGTH> check_pending_account_resources_;
-        get_pending_transactions_request get_pending_transactions_;
+        get_pending_transactions_request<get_pending_transactions_block_id_LENGTH> get_pending_transactions_;
       };
       request request_;
 
@@ -1098,7 +1173,7 @@ class mempool_request final: public ::EmbeddedProto::MessageInterface
             break;
 
           case FieldNumber::GET_PENDING_TRANSACTIONS:
-            new(&request_.get_pending_transactions_) get_pending_transactions_request;
+            new(&request_.get_pending_transactions_) get_pending_transactions_request<get_pending_transactions_block_id_LENGTH>;
             which_request_ = FieldNumber::GET_PENDING_TRANSACTIONS;
             break;
 
@@ -1120,7 +1195,7 @@ class mempool_request final: public ::EmbeddedProto::MessageInterface
             request_.check_pending_account_resources_.~check_pending_account_resources_request<check_pending_account_resources_payer_LENGTH>(); // NOSONAR Unions require this.
             break;
           case FieldNumber::GET_PENDING_TRANSACTIONS:
-            request_.get_pending_transactions_.~get_pending_transactions_request(); // NOSONAR Unions require this.
+            request_.get_pending_transactions_.~get_pending_transactions_request<get_pending_transactions_block_id_LENGTH>(); // NOSONAR Unions require this.
             break;
           default:
             break;
