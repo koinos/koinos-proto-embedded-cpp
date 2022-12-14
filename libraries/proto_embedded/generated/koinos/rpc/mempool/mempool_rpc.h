@@ -243,7 +243,8 @@ class pending_transaction final: public ::EmbeddedProto::MessageInterface
 
 };
 
-template<uint32_t payer_LENGTH>
+template<uint32_t payer_LENGTH, 
+uint32_t block_id_LENGTH>
 class check_pending_account_resources_request final: public ::EmbeddedProto::MessageInterface
 {
   public:
@@ -253,6 +254,7 @@ class check_pending_account_resources_request final: public ::EmbeddedProto::Mes
       set_payer(rhs.get_payer());
       set_max_payer_rc(rhs.get_max_payer_rc());
       set_rc_limit(rhs.get_rc_limit());
+      set_block_id(rhs.get_block_id());
     }
 
     check_pending_account_resources_request(const check_pending_account_resources_request&& rhs ) noexcept
@@ -260,6 +262,7 @@ class check_pending_account_resources_request final: public ::EmbeddedProto::Mes
       set_payer(rhs.get_payer());
       set_max_payer_rc(rhs.get_max_payer_rc());
       set_rc_limit(rhs.get_rc_limit());
+      set_block_id(rhs.get_block_id());
     }
 
     ~check_pending_account_resources_request() override = default;
@@ -269,7 +272,8 @@ class check_pending_account_resources_request final: public ::EmbeddedProto::Mes
       NOT_SET = 0,
       PAYER = 1,
       MAX_PAYER_RC = 2,
-      RC_LIMIT = 3
+      RC_LIMIT = 3,
+      BLOCK_ID = 4
     };
 
     check_pending_account_resources_request& operator=(const check_pending_account_resources_request& rhs)
@@ -277,6 +281,7 @@ class check_pending_account_resources_request final: public ::EmbeddedProto::Mes
       set_payer(rhs.get_payer());
       set_max_payer_rc(rhs.get_max_payer_rc());
       set_rc_limit(rhs.get_rc_limit());
+      set_block_id(rhs.get_block_id());
       return *this;
     }
 
@@ -285,6 +290,7 @@ class check_pending_account_resources_request final: public ::EmbeddedProto::Mes
       set_payer(rhs.get_payer());
       set_max_payer_rc(rhs.get_max_payer_rc());
       set_rc_limit(rhs.get_rc_limit());
+      set_block_id(rhs.get_block_id());
       return *this;
     }
 
@@ -308,6 +314,28 @@ class check_pending_account_resources_request final: public ::EmbeddedProto::Mes
     inline const EmbeddedProto::uint64& get_rc_limit() const { return rc_limit_; }
     inline EmbeddedProto::uint64::FIELD_TYPE rc_limit() const { return rc_limit_.get(); }
 
+    inline bool has_block_id() const
+    {
+      return 0 != (presence::mask(presence::fields::BLOCK_ID) & presence_[presence::index(presence::fields::BLOCK_ID)]);
+    }
+    inline void clear_block_id()
+    {
+      presence_[presence::index(presence::fields::BLOCK_ID)] &= ~(presence::mask(presence::fields::BLOCK_ID));
+      block_id_.clear();
+    }
+    inline ::EmbeddedProto::FieldBytes<block_id_LENGTH>& mutable_block_id()
+    {
+      presence_[presence::index(presence::fields::BLOCK_ID)] |= presence::mask(presence::fields::BLOCK_ID);
+      return block_id_;
+    }
+    inline void set_block_id(const ::EmbeddedProto::FieldBytes<block_id_LENGTH>& rhs)
+    {
+      presence_[presence::index(presence::fields::BLOCK_ID)] |= presence::mask(presence::fields::BLOCK_ID);
+      block_id_.set(rhs);
+    }
+    inline const ::EmbeddedProto::FieldBytes<block_id_LENGTH>& get_block_id() const { return block_id_; }
+    inline const uint8_t* block_id() const { return block_id_.get_const(); }
+
 
     ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
     {
@@ -326,6 +354,11 @@ class check_pending_account_resources_request final: public ::EmbeddedProto::Mes
       if((0U != rc_limit_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
       {
         return_value = rc_limit_.serialize_with_id(static_cast<uint32_t>(FieldNumber::RC_LIMIT), buffer, false);
+      }
+
+      if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+      {
+        return_value = block_id_.serialize_with_id(static_cast<uint32_t>(FieldNumber::BLOCK_ID), buffer, true);
       }
 
       return return_value;
@@ -356,6 +389,11 @@ class check_pending_account_resources_request final: public ::EmbeddedProto::Mes
             return_value = rc_limit_.deserialize_check_type(buffer, wire_type);
             break;
 
+          case FieldNumber::BLOCK_ID:
+            presence_[presence::index(presence::fields::BLOCK_ID)] |= presence::mask(presence::fields::BLOCK_ID);
+            return_value = block_id_.deserialize_check_type(buffer, wire_type);
+            break;
+
           default:
             break;
         }
@@ -383,15 +421,51 @@ class check_pending_account_resources_request final: public ::EmbeddedProto::Mes
       clear_payer();
       clear_max_payer_rc();
       clear_rc_limit();
+      clear_block_id();
 
     }
 
     private:
 
+      // Define constants for tracking the presence of fields.
+      // Use a struct to scope the variables from user fields as namespaces are not allowed within classes.
+      struct presence
+      {
+        // An enumeration with all the fields for which presence has to be tracked.
+        enum class fields : uint32_t
+        {
+          BLOCK_ID
+        };
+
+        // The number of fields for which presence has to be tracked.
+        static constexpr uint32_t N_FIELDS = 1;
+
+        // Which type are we using to track presence.
+        using TYPE = uint32_t;
+
+        // How many bits are there in the presence type.
+        static constexpr uint32_t N_BITS = std::numeric_limits<TYPE>::digits;
+
+        // How many variables of TYPE do we need to bit mask all presence fields.
+        static constexpr uint32_t SIZE = (N_FIELDS / N_BITS) + ((N_FIELDS % N_BITS) > 0 ? 1 : 0);
+
+        // Obtain the index of a given field in the presence array.
+        static constexpr uint32_t index(const fields& field) { return static_cast<uint32_t>(field) / N_BITS; }
+
+        // Obtain the bit mask for the given field assuming we are at the correct index in the presence array.
+        static constexpr TYPE mask(const fields& field)
+        {
+          return static_cast<uint32_t>(0x01) << (static_cast<uint32_t>(field) % N_BITS);
+        }
+      };
+
+      // Create an array in which the presence flags are stored.
+      typename presence::TYPE presence_[presence::SIZE] = {0};
 
       ::EmbeddedProto::FieldBytes<payer_LENGTH> payer_;
       EmbeddedProto::uint64 max_payer_rc_ = 0U;
       EmbeddedProto::uint64 rc_limit_ = 0U;
+      ::EmbeddedProto::FieldBytes<block_id_LENGTH> block_id_;
 
 };
 
@@ -809,6 +883,7 @@ class get_pending_transactions_response final: public ::EmbeddedProto::MessageIn
 };
 
 template<uint32_t check_pending_account_resources_payer_LENGTH, 
+uint32_t check_pending_account_resources_block_id_LENGTH, 
 uint32_t get_pending_transactions_block_id_LENGTH>
 class mempool_request final: public ::EmbeddedProto::MessageInterface
 {
@@ -980,10 +1055,10 @@ class mempool_request final: public ::EmbeddedProto::MessageInterface
       if(FieldNumber::CHECK_PENDING_ACCOUNT_RESOURCES == which_request_)
       {
         which_request_ = FieldNumber::NOT_SET;
-        request_.check_pending_account_resources_.~check_pending_account_resources_request<check_pending_account_resources_payer_LENGTH>();
+        request_.check_pending_account_resources_.~check_pending_account_resources_request<check_pending_account_resources_payer_LENGTH, check_pending_account_resources_block_id_LENGTH>();
       }
     }
-    inline void set_check_pending_account_resources(const check_pending_account_resources_request<check_pending_account_resources_payer_LENGTH>& value)
+    inline void set_check_pending_account_resources(const check_pending_account_resources_request<check_pending_account_resources_payer_LENGTH, check_pending_account_resources_block_id_LENGTH>& value)
     {
       if(FieldNumber::CHECK_PENDING_ACCOUNT_RESOURCES != which_request_)
       {
@@ -991,7 +1066,7 @@ class mempool_request final: public ::EmbeddedProto::MessageInterface
       }
       request_.check_pending_account_resources_ = value;
     }
-    inline void set_check_pending_account_resources(const check_pending_account_resources_request<check_pending_account_resources_payer_LENGTH>&& value)
+    inline void set_check_pending_account_resources(const check_pending_account_resources_request<check_pending_account_resources_payer_LENGTH, check_pending_account_resources_block_id_LENGTH>&& value)
     {
       if(FieldNumber::CHECK_PENDING_ACCOUNT_RESOURCES != which_request_)
       {
@@ -999,7 +1074,7 @@ class mempool_request final: public ::EmbeddedProto::MessageInterface
       }
       request_.check_pending_account_resources_ = value;
     }
-    inline check_pending_account_resources_request<check_pending_account_resources_payer_LENGTH>& mutable_check_pending_account_resources()
+    inline check_pending_account_resources_request<check_pending_account_resources_payer_LENGTH, check_pending_account_resources_block_id_LENGTH>& mutable_check_pending_account_resources()
     {
       if(FieldNumber::CHECK_PENDING_ACCOUNT_RESOURCES != which_request_)
       {
@@ -1007,8 +1082,8 @@ class mempool_request final: public ::EmbeddedProto::MessageInterface
       }
       return request_.check_pending_account_resources_;
     }
-    inline const check_pending_account_resources_request<check_pending_account_resources_payer_LENGTH>& get_check_pending_account_resources() const { return request_.check_pending_account_resources_; }
-    inline const check_pending_account_resources_request<check_pending_account_resources_payer_LENGTH>& check_pending_account_resources() const { return request_.check_pending_account_resources_; }
+    inline const check_pending_account_resources_request<check_pending_account_resources_payer_LENGTH, check_pending_account_resources_block_id_LENGTH>& get_check_pending_account_resources() const { return request_.check_pending_account_resources_; }
+    inline const check_pending_account_resources_request<check_pending_account_resources_payer_LENGTH, check_pending_account_resources_block_id_LENGTH>& check_pending_account_resources() const { return request_.check_pending_account_resources_; }
 
     inline void clear_get_pending_transactions()
     {
@@ -1146,7 +1221,7 @@ class mempool_request final: public ::EmbeddedProto::MessageInterface
         request() {}
         ~request() {}
         reserved_rpc reserved_;
-        check_pending_account_resources_request<check_pending_account_resources_payer_LENGTH> check_pending_account_resources_;
+        check_pending_account_resources_request<check_pending_account_resources_payer_LENGTH, check_pending_account_resources_block_id_LENGTH> check_pending_account_resources_;
         get_pending_transactions_request<get_pending_transactions_block_id_LENGTH> get_pending_transactions_;
       };
       request request_;
@@ -1168,7 +1243,7 @@ class mempool_request final: public ::EmbeddedProto::MessageInterface
             break;
 
           case FieldNumber::CHECK_PENDING_ACCOUNT_RESOURCES:
-            new(&request_.check_pending_account_resources_) check_pending_account_resources_request<check_pending_account_resources_payer_LENGTH>;
+            new(&request_.check_pending_account_resources_) check_pending_account_resources_request<check_pending_account_resources_payer_LENGTH, check_pending_account_resources_block_id_LENGTH>;
             which_request_ = FieldNumber::CHECK_PENDING_ACCOUNT_RESOURCES;
             break;
 
@@ -1192,7 +1267,7 @@ class mempool_request final: public ::EmbeddedProto::MessageInterface
             request_.reserved_.~reserved_rpc(); // NOSONAR Unions require this.
             break;
           case FieldNumber::CHECK_PENDING_ACCOUNT_RESOURCES:
-            request_.check_pending_account_resources_.~check_pending_account_resources_request<check_pending_account_resources_payer_LENGTH>(); // NOSONAR Unions require this.
+            request_.check_pending_account_resources_.~check_pending_account_resources_request<check_pending_account_resources_payer_LENGTH, check_pending_account_resources_block_id_LENGTH>(); // NOSONAR Unions require this.
             break;
           case FieldNumber::GET_PENDING_TRANSACTIONS:
             request_.get_pending_transactions_.~get_pending_transactions_request<get_pending_transactions_block_id_LENGTH>(); // NOSONAR Unions require this.
