@@ -49,6 +49,158 @@
 namespace koinos {
 namespace protocol {
 
+template<uint32_t zone_LENGTH>
+class object_space final: public ::EmbeddedProto::MessageInterface
+{
+  public:
+    object_space() = default;
+    object_space(const object_space& rhs )
+    {
+      set_system(rhs.get_system());
+      set_zone(rhs.get_zone());
+      set_id(rhs.get_id());
+    }
+
+    object_space(const object_space&& rhs ) noexcept
+    {
+      set_system(rhs.get_system());
+      set_zone(rhs.get_zone());
+      set_id(rhs.get_id());
+    }
+
+    ~object_space() override = default;
+
+    enum class FieldNumber : uint32_t
+    {
+      NOT_SET = 0,
+      SYSTEM = 1,
+      ZONE = 2,
+      ID = 3
+    };
+
+    object_space& operator=(const object_space& rhs)
+    {
+      set_system(rhs.get_system());
+      set_zone(rhs.get_zone());
+      set_id(rhs.get_id());
+      return *this;
+    }
+
+    object_space& operator=(const object_space&& rhs) noexcept
+    {
+      set_system(rhs.get_system());
+      set_zone(rhs.get_zone());
+      set_id(rhs.get_id());
+      return *this;
+    }
+
+    inline void clear_system() { system_.clear(); }
+    inline void set_system(const EmbeddedProto::boolean& value) { system_ = value; }
+    inline void set_system(const EmbeddedProto::boolean&& value) { system_ = value; }
+    inline EmbeddedProto::boolean& mutable_system() { return system_; }
+    inline const EmbeddedProto::boolean& get_system() const { return system_; }
+    inline EmbeddedProto::boolean::FIELD_TYPE system() const { return system_.get(); }
+
+    inline void clear_zone() { zone_.clear(); }
+    inline ::EmbeddedProto::FieldBytes<zone_LENGTH>& mutable_zone() { return zone_; }
+    inline void set_zone(const ::EmbeddedProto::FieldBytes<zone_LENGTH>& rhs) { zone_.set(rhs); }
+    inline const ::EmbeddedProto::FieldBytes<zone_LENGTH>& get_zone() const { return zone_; }
+    inline const uint8_t* zone() const { return zone_.get_const(); }
+
+    inline void clear_id() { id_.clear(); }
+    inline void set_id(const EmbeddedProto::uint32& value) { id_ = value; }
+    inline void set_id(const EmbeddedProto::uint32&& value) { id_ = value; }
+    inline EmbeddedProto::uint32& mutable_id() { return id_; }
+    inline const EmbeddedProto::uint32& get_id() const { return id_; }
+    inline EmbeddedProto::uint32::FIELD_TYPE id() const { return id_.get(); }
+
+
+    ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
+    {
+      ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
+
+      if((false != system_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
+      {
+        return_value = system_.serialize_with_id(static_cast<uint32_t>(FieldNumber::SYSTEM), buffer, false);
+      }
+
+      if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+      {
+        return_value = zone_.serialize_with_id(static_cast<uint32_t>(FieldNumber::ZONE), buffer, false);
+      }
+
+      if((0U != id_.get()) && (::EmbeddedProto::Error::NO_ERRORS == return_value))
+      {
+        return_value = id_.serialize_with_id(static_cast<uint32_t>(FieldNumber::ID), buffer, false);
+      }
+
+      return return_value;
+    };
+
+    ::EmbeddedProto::Error deserialize(::EmbeddedProto::ReadBufferInterface& buffer) override
+    {
+      ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
+      ::EmbeddedProto::WireFormatter::WireType wire_type = ::EmbeddedProto::WireFormatter::WireType::VARINT;
+      uint32_t id_number = 0;
+      FieldNumber id_tag = FieldNumber::NOT_SET;
+
+      ::EmbeddedProto::Error tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
+      while((::EmbeddedProto::Error::NO_ERRORS == return_value) && (::EmbeddedProto::Error::NO_ERRORS == tag_value))
+      {
+        id_tag = static_cast<FieldNumber>(id_number);
+        switch(id_tag)
+        {
+          case FieldNumber::SYSTEM:
+            return_value = system_.deserialize_check_type(buffer, wire_type);
+            break;
+
+          case FieldNumber::ZONE:
+            return_value = zone_.deserialize_check_type(buffer, wire_type);
+            break;
+
+          case FieldNumber::ID:
+            return_value = id_.deserialize_check_type(buffer, wire_type);
+            break;
+
+          default:
+            break;
+        }
+
+        if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+        {
+          // Read the next tag.
+          tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
+        }
+      }
+
+      // When an error was detect while reading the tag but no other errors where found, set it in the return value.
+      if((::EmbeddedProto::Error::NO_ERRORS == return_value)
+         && (::EmbeddedProto::Error::NO_ERRORS != tag_value)
+         && (::EmbeddedProto::Error::END_OF_BUFFER != tag_value)) // The end of the buffer is not an array in this case.
+      {
+        return_value = tag_value;
+      }
+
+      return return_value;
+    };
+
+    void clear() override
+    {
+      clear_system();
+      clear_zone();
+      clear_id();
+
+    }
+
+    private:
+
+
+      EmbeddedProto::boolean system_ = false;
+      ::EmbeddedProto::FieldBytes<zone_LENGTH> zone_;
+      EmbeddedProto::uint32 id_ = 0U;
+
+};
+
 template<uint32_t source_LENGTH, 
 uint32_t name_LENGTH, 
 uint32_t data_LENGTH, 
@@ -2279,7 +2431,11 @@ uint32_t events_data_LENGTH,
 uint32_t events_impacted_REP_LENGTH, 
 uint32_t events_impacted_LENGTH, 
 uint32_t logs_REP_LENGTH, 
-uint32_t logs_LENGTH>
+uint32_t logs_LENGTH, 
+uint32_t state_delta_entries_REP_LENGTH, 
+uint32_t state_delta_entries_object_space_zone_LENGTH, 
+uint32_t state_delta_entries_key_LENGTH, 
+uint32_t state_delta_entries_value_LENGTH>
 class transaction_receipt final: public ::EmbeddedProto::MessageInterface
 {
   public:
@@ -2297,6 +2453,7 @@ class transaction_receipt final: public ::EmbeddedProto::MessageInterface
       set_reverted(rhs.get_reverted());
       set_events(rhs.get_events());
       set_logs(rhs.get_logs());
+      set_state_delta_entries(rhs.get_state_delta_entries());
     }
 
     transaction_receipt(const transaction_receipt&& rhs ) noexcept
@@ -2312,6 +2469,7 @@ class transaction_receipt final: public ::EmbeddedProto::MessageInterface
       set_reverted(rhs.get_reverted());
       set_events(rhs.get_events());
       set_logs(rhs.get_logs());
+      set_state_delta_entries(rhs.get_state_delta_entries());
     }
 
     ~transaction_receipt() override = default;
@@ -2329,7 +2487,8 @@ class transaction_receipt final: public ::EmbeddedProto::MessageInterface
       COMPUTE_BANDWIDTH_USED = 8,
       REVERTED = 9,
       EVENTS = 10,
-      LOGS = 11
+      LOGS = 11,
+      STATE_DELTA_ENTRIES = 12
     };
 
     transaction_receipt& operator=(const transaction_receipt& rhs)
@@ -2345,6 +2504,7 @@ class transaction_receipt final: public ::EmbeddedProto::MessageInterface
       set_reverted(rhs.get_reverted());
       set_events(rhs.get_events());
       set_logs(rhs.get_logs());
+      set_state_delta_entries(rhs.get_state_delta_entries());
       return *this;
     }
 
@@ -2361,6 +2521,7 @@ class transaction_receipt final: public ::EmbeddedProto::MessageInterface
       set_reverted(rhs.get_reverted());
       set_events(rhs.get_events());
       set_logs(rhs.get_logs());
+      set_state_delta_entries(rhs.get_state_delta_entries());
       return *this;
     }
 
@@ -2447,6 +2608,17 @@ class transaction_receipt final: public ::EmbeddedProto::MessageInterface
     inline const ::EmbeddedProto::RepeatedFieldFixedSize<::EmbeddedProto::FieldString<logs_LENGTH>, logs_REP_LENGTH>& get_logs() const { return logs_; }
     inline const ::EmbeddedProto::RepeatedFieldFixedSize<::EmbeddedProto::FieldString<logs_LENGTH>, logs_REP_LENGTH>& logs() const { return logs_; }
 
+    inline const state_delta_entry<state_delta_entries_object_space_zone_LENGTH, state_delta_entries_key_LENGTH, state_delta_entries_value_LENGTH>& state_delta_entries(uint32_t index) const { return state_delta_entries_[index]; }
+    inline void clear_state_delta_entries() { state_delta_entries_.clear(); }
+    inline void set_state_delta_entries(uint32_t index, const state_delta_entry<state_delta_entries_object_space_zone_LENGTH, state_delta_entries_key_LENGTH, state_delta_entries_value_LENGTH>& value) { state_delta_entries_.set(index, value); }
+    inline void set_state_delta_entries(uint32_t index, const state_delta_entry<state_delta_entries_object_space_zone_LENGTH, state_delta_entries_key_LENGTH, state_delta_entries_value_LENGTH>&& value) { state_delta_entries_.set(index, value); }
+    inline void set_state_delta_entries(const ::EmbeddedProto::RepeatedFieldFixedSize<state_delta_entry<state_delta_entries_object_space_zone_LENGTH, state_delta_entries_key_LENGTH, state_delta_entries_value_LENGTH>, state_delta_entries_REP_LENGTH>& values) { state_delta_entries_ = values; }
+    inline void add_state_delta_entries(const state_delta_entry<state_delta_entries_object_space_zone_LENGTH, state_delta_entries_key_LENGTH, state_delta_entries_value_LENGTH>& value) { state_delta_entries_.add(value); }
+    inline ::EmbeddedProto::RepeatedFieldFixedSize<state_delta_entry<state_delta_entries_object_space_zone_LENGTH, state_delta_entries_key_LENGTH, state_delta_entries_value_LENGTH>, state_delta_entries_REP_LENGTH>& mutable_state_delta_entries() { return state_delta_entries_; }
+    inline state_delta_entry<state_delta_entries_object_space_zone_LENGTH, state_delta_entries_key_LENGTH, state_delta_entries_value_LENGTH>& mutable_state_delta_entries(uint32_t index) { return state_delta_entries_[index]; }
+    inline const ::EmbeddedProto::RepeatedFieldFixedSize<state_delta_entry<state_delta_entries_object_space_zone_LENGTH, state_delta_entries_key_LENGTH, state_delta_entries_value_LENGTH>, state_delta_entries_REP_LENGTH>& get_state_delta_entries() const { return state_delta_entries_; }
+    inline const ::EmbeddedProto::RepeatedFieldFixedSize<state_delta_entry<state_delta_entries_object_space_zone_LENGTH, state_delta_entries_key_LENGTH, state_delta_entries_value_LENGTH>, state_delta_entries_REP_LENGTH>& state_delta_entries() const { return state_delta_entries_; }
+
 
     ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
     {
@@ -2505,6 +2677,11 @@ class transaction_receipt final: public ::EmbeddedProto::MessageInterface
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
         return_value = logs_.serialize_with_id(static_cast<uint32_t>(FieldNumber::LOGS), buffer, false);
+      }
+
+      if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+      {
+        return_value = state_delta_entries_.serialize_with_id(static_cast<uint32_t>(FieldNumber::STATE_DELTA_ENTRIES), buffer, false);
       }
 
       return return_value;
@@ -2567,6 +2744,10 @@ class transaction_receipt final: public ::EmbeddedProto::MessageInterface
             return_value = logs_.deserialize_check_type(buffer, wire_type);
             break;
 
+          case FieldNumber::STATE_DELTA_ENTRIES:
+            return_value = state_delta_entries_.deserialize_check_type(buffer, wire_type);
+            break;
+
           default:
             break;
         }
@@ -2602,6 +2783,7 @@ class transaction_receipt final: public ::EmbeddedProto::MessageInterface
       clear_reverted();
       clear_events();
       clear_logs();
+      clear_state_delta_entries();
 
     }
 
@@ -2619,6 +2801,7 @@ class transaction_receipt final: public ::EmbeddedProto::MessageInterface
       EmbeddedProto::boolean reverted_ = false;
       ::EmbeddedProto::RepeatedFieldFixedSize<event_data<events_source_LENGTH, events_name_LENGTH, events_data_LENGTH, events_impacted_REP_LENGTH, events_impacted_LENGTH>, events_REP_LENGTH> events_;
       ::EmbeddedProto::RepeatedFieldFixedSize<::EmbeddedProto::FieldString<logs_LENGTH>, logs_REP_LENGTH> logs_;
+      ::EmbeddedProto::RepeatedFieldFixedSize<state_delta_entry<state_delta_entries_object_space_zone_LENGTH, state_delta_entries_key_LENGTH, state_delta_entries_value_LENGTH>, state_delta_entries_REP_LENGTH> state_delta_entries_;
 
 };
 
@@ -3093,8 +3276,16 @@ uint32_t transaction_receipts_events_impacted_REP_LENGTH,
 uint32_t transaction_receipts_events_impacted_LENGTH, 
 uint32_t transaction_receipts_logs_REP_LENGTH, 
 uint32_t transaction_receipts_logs_LENGTH, 
+uint32_t transaction_receipts_state_delta_entries_REP_LENGTH, 
+uint32_t transaction_receipts_state_delta_entries_object_space_zone_LENGTH, 
+uint32_t transaction_receipts_state_delta_entries_key_LENGTH, 
+uint32_t transaction_receipts_state_delta_entries_value_LENGTH, 
 uint32_t logs_REP_LENGTH, 
-uint32_t logs_LENGTH>
+uint32_t logs_LENGTH, 
+uint32_t state_delta_entries_REP_LENGTH, 
+uint32_t state_delta_entries_object_space_zone_LENGTH, 
+uint32_t state_delta_entries_key_LENGTH, 
+uint32_t state_delta_entries_value_LENGTH>
 class block_receipt final: public ::EmbeddedProto::MessageInterface
 {
   public:
@@ -3113,6 +3304,7 @@ class block_receipt final: public ::EmbeddedProto::MessageInterface
       set_disk_storage_charged(rhs.get_disk_storage_charged());
       set_network_bandwidth_charged(rhs.get_network_bandwidth_charged());
       set_compute_bandwidth_charged(rhs.get_compute_bandwidth_charged());
+      set_state_delta_entries(rhs.get_state_delta_entries());
     }
 
     block_receipt(const block_receipt&& rhs ) noexcept
@@ -3129,6 +3321,7 @@ class block_receipt final: public ::EmbeddedProto::MessageInterface
       set_disk_storage_charged(rhs.get_disk_storage_charged());
       set_network_bandwidth_charged(rhs.get_network_bandwidth_charged());
       set_compute_bandwidth_charged(rhs.get_compute_bandwidth_charged());
+      set_state_delta_entries(rhs.get_state_delta_entries());
     }
 
     ~block_receipt() override = default;
@@ -3147,7 +3340,8 @@ class block_receipt final: public ::EmbeddedProto::MessageInterface
       LOGS = 9,
       DISK_STORAGE_CHARGED = 10,
       NETWORK_BANDWIDTH_CHARGED = 11,
-      COMPUTE_BANDWIDTH_CHARGED = 12
+      COMPUTE_BANDWIDTH_CHARGED = 12,
+      STATE_DELTA_ENTRIES = 13
     };
 
     block_receipt& operator=(const block_receipt& rhs)
@@ -3164,6 +3358,7 @@ class block_receipt final: public ::EmbeddedProto::MessageInterface
       set_disk_storage_charged(rhs.get_disk_storage_charged());
       set_network_bandwidth_charged(rhs.get_network_bandwidth_charged());
       set_compute_bandwidth_charged(rhs.get_compute_bandwidth_charged());
+      set_state_delta_entries(rhs.get_state_delta_entries());
       return *this;
     }
 
@@ -3181,6 +3376,7 @@ class block_receipt final: public ::EmbeddedProto::MessageInterface
       set_disk_storage_charged(rhs.get_disk_storage_charged());
       set_network_bandwidth_charged(rhs.get_network_bandwidth_charged());
       set_compute_bandwidth_charged(rhs.get_compute_bandwidth_charged());
+      set_state_delta_entries(rhs.get_state_delta_entries());
       return *this;
     }
 
@@ -3235,16 +3431,16 @@ class block_receipt final: public ::EmbeddedProto::MessageInterface
     inline const ::EmbeddedProto::RepeatedFieldFixedSize<event_data<events_source_LENGTH, events_name_LENGTH, events_data_LENGTH, events_impacted_REP_LENGTH, events_impacted_LENGTH>, events_REP_LENGTH>& get_events() const { return events_; }
     inline const ::EmbeddedProto::RepeatedFieldFixedSize<event_data<events_source_LENGTH, events_name_LENGTH, events_data_LENGTH, events_impacted_REP_LENGTH, events_impacted_LENGTH>, events_REP_LENGTH>& events() const { return events_; }
 
-    inline const transaction_receipt<transaction_receipts_id_LENGTH, transaction_receipts_payer_LENGTH, transaction_receipts_events_REP_LENGTH, transaction_receipts_events_source_LENGTH, transaction_receipts_events_name_LENGTH, transaction_receipts_events_data_LENGTH, transaction_receipts_events_impacted_REP_LENGTH, transaction_receipts_events_impacted_LENGTH, transaction_receipts_logs_REP_LENGTH, transaction_receipts_logs_LENGTH>& transaction_receipts(uint32_t index) const { return transaction_receipts_[index]; }
+    inline const transaction_receipt<transaction_receipts_id_LENGTH, transaction_receipts_payer_LENGTH, transaction_receipts_events_REP_LENGTH, transaction_receipts_events_source_LENGTH, transaction_receipts_events_name_LENGTH, transaction_receipts_events_data_LENGTH, transaction_receipts_events_impacted_REP_LENGTH, transaction_receipts_events_impacted_LENGTH, transaction_receipts_logs_REP_LENGTH, transaction_receipts_logs_LENGTH, transaction_receipts_state_delta_entries_REP_LENGTH, transaction_receipts_state_delta_entries_object_space_zone_LENGTH, transaction_receipts_state_delta_entries_key_LENGTH, transaction_receipts_state_delta_entries_value_LENGTH>& transaction_receipts(uint32_t index) const { return transaction_receipts_[index]; }
     inline void clear_transaction_receipts() { transaction_receipts_.clear(); }
-    inline void set_transaction_receipts(uint32_t index, const transaction_receipt<transaction_receipts_id_LENGTH, transaction_receipts_payer_LENGTH, transaction_receipts_events_REP_LENGTH, transaction_receipts_events_source_LENGTH, transaction_receipts_events_name_LENGTH, transaction_receipts_events_data_LENGTH, transaction_receipts_events_impacted_REP_LENGTH, transaction_receipts_events_impacted_LENGTH, transaction_receipts_logs_REP_LENGTH, transaction_receipts_logs_LENGTH>& value) { transaction_receipts_.set(index, value); }
-    inline void set_transaction_receipts(uint32_t index, const transaction_receipt<transaction_receipts_id_LENGTH, transaction_receipts_payer_LENGTH, transaction_receipts_events_REP_LENGTH, transaction_receipts_events_source_LENGTH, transaction_receipts_events_name_LENGTH, transaction_receipts_events_data_LENGTH, transaction_receipts_events_impacted_REP_LENGTH, transaction_receipts_events_impacted_LENGTH, transaction_receipts_logs_REP_LENGTH, transaction_receipts_logs_LENGTH>&& value) { transaction_receipts_.set(index, value); }
-    inline void set_transaction_receipts(const ::EmbeddedProto::RepeatedFieldFixedSize<transaction_receipt<transaction_receipts_id_LENGTH, transaction_receipts_payer_LENGTH, transaction_receipts_events_REP_LENGTH, transaction_receipts_events_source_LENGTH, transaction_receipts_events_name_LENGTH, transaction_receipts_events_data_LENGTH, transaction_receipts_events_impacted_REP_LENGTH, transaction_receipts_events_impacted_LENGTH, transaction_receipts_logs_REP_LENGTH, transaction_receipts_logs_LENGTH>, transaction_receipts_REP_LENGTH>& values) { transaction_receipts_ = values; }
-    inline void add_transaction_receipts(const transaction_receipt<transaction_receipts_id_LENGTH, transaction_receipts_payer_LENGTH, transaction_receipts_events_REP_LENGTH, transaction_receipts_events_source_LENGTH, transaction_receipts_events_name_LENGTH, transaction_receipts_events_data_LENGTH, transaction_receipts_events_impacted_REP_LENGTH, transaction_receipts_events_impacted_LENGTH, transaction_receipts_logs_REP_LENGTH, transaction_receipts_logs_LENGTH>& value) { transaction_receipts_.add(value); }
-    inline ::EmbeddedProto::RepeatedFieldFixedSize<transaction_receipt<transaction_receipts_id_LENGTH, transaction_receipts_payer_LENGTH, transaction_receipts_events_REP_LENGTH, transaction_receipts_events_source_LENGTH, transaction_receipts_events_name_LENGTH, transaction_receipts_events_data_LENGTH, transaction_receipts_events_impacted_REP_LENGTH, transaction_receipts_events_impacted_LENGTH, transaction_receipts_logs_REP_LENGTH, transaction_receipts_logs_LENGTH>, transaction_receipts_REP_LENGTH>& mutable_transaction_receipts() { return transaction_receipts_; }
-    inline transaction_receipt<transaction_receipts_id_LENGTH, transaction_receipts_payer_LENGTH, transaction_receipts_events_REP_LENGTH, transaction_receipts_events_source_LENGTH, transaction_receipts_events_name_LENGTH, transaction_receipts_events_data_LENGTH, transaction_receipts_events_impacted_REP_LENGTH, transaction_receipts_events_impacted_LENGTH, transaction_receipts_logs_REP_LENGTH, transaction_receipts_logs_LENGTH>& mutable_transaction_receipts(uint32_t index) { return transaction_receipts_[index]; }
-    inline const ::EmbeddedProto::RepeatedFieldFixedSize<transaction_receipt<transaction_receipts_id_LENGTH, transaction_receipts_payer_LENGTH, transaction_receipts_events_REP_LENGTH, transaction_receipts_events_source_LENGTH, transaction_receipts_events_name_LENGTH, transaction_receipts_events_data_LENGTH, transaction_receipts_events_impacted_REP_LENGTH, transaction_receipts_events_impacted_LENGTH, transaction_receipts_logs_REP_LENGTH, transaction_receipts_logs_LENGTH>, transaction_receipts_REP_LENGTH>& get_transaction_receipts() const { return transaction_receipts_; }
-    inline const ::EmbeddedProto::RepeatedFieldFixedSize<transaction_receipt<transaction_receipts_id_LENGTH, transaction_receipts_payer_LENGTH, transaction_receipts_events_REP_LENGTH, transaction_receipts_events_source_LENGTH, transaction_receipts_events_name_LENGTH, transaction_receipts_events_data_LENGTH, transaction_receipts_events_impacted_REP_LENGTH, transaction_receipts_events_impacted_LENGTH, transaction_receipts_logs_REP_LENGTH, transaction_receipts_logs_LENGTH>, transaction_receipts_REP_LENGTH>& transaction_receipts() const { return transaction_receipts_; }
+    inline void set_transaction_receipts(uint32_t index, const transaction_receipt<transaction_receipts_id_LENGTH, transaction_receipts_payer_LENGTH, transaction_receipts_events_REP_LENGTH, transaction_receipts_events_source_LENGTH, transaction_receipts_events_name_LENGTH, transaction_receipts_events_data_LENGTH, transaction_receipts_events_impacted_REP_LENGTH, transaction_receipts_events_impacted_LENGTH, transaction_receipts_logs_REP_LENGTH, transaction_receipts_logs_LENGTH, transaction_receipts_state_delta_entries_REP_LENGTH, transaction_receipts_state_delta_entries_object_space_zone_LENGTH, transaction_receipts_state_delta_entries_key_LENGTH, transaction_receipts_state_delta_entries_value_LENGTH>& value) { transaction_receipts_.set(index, value); }
+    inline void set_transaction_receipts(uint32_t index, const transaction_receipt<transaction_receipts_id_LENGTH, transaction_receipts_payer_LENGTH, transaction_receipts_events_REP_LENGTH, transaction_receipts_events_source_LENGTH, transaction_receipts_events_name_LENGTH, transaction_receipts_events_data_LENGTH, transaction_receipts_events_impacted_REP_LENGTH, transaction_receipts_events_impacted_LENGTH, transaction_receipts_logs_REP_LENGTH, transaction_receipts_logs_LENGTH, transaction_receipts_state_delta_entries_REP_LENGTH, transaction_receipts_state_delta_entries_object_space_zone_LENGTH, transaction_receipts_state_delta_entries_key_LENGTH, transaction_receipts_state_delta_entries_value_LENGTH>&& value) { transaction_receipts_.set(index, value); }
+    inline void set_transaction_receipts(const ::EmbeddedProto::RepeatedFieldFixedSize<transaction_receipt<transaction_receipts_id_LENGTH, transaction_receipts_payer_LENGTH, transaction_receipts_events_REP_LENGTH, transaction_receipts_events_source_LENGTH, transaction_receipts_events_name_LENGTH, transaction_receipts_events_data_LENGTH, transaction_receipts_events_impacted_REP_LENGTH, transaction_receipts_events_impacted_LENGTH, transaction_receipts_logs_REP_LENGTH, transaction_receipts_logs_LENGTH, transaction_receipts_state_delta_entries_REP_LENGTH, transaction_receipts_state_delta_entries_object_space_zone_LENGTH, transaction_receipts_state_delta_entries_key_LENGTH, transaction_receipts_state_delta_entries_value_LENGTH>, transaction_receipts_REP_LENGTH>& values) { transaction_receipts_ = values; }
+    inline void add_transaction_receipts(const transaction_receipt<transaction_receipts_id_LENGTH, transaction_receipts_payer_LENGTH, transaction_receipts_events_REP_LENGTH, transaction_receipts_events_source_LENGTH, transaction_receipts_events_name_LENGTH, transaction_receipts_events_data_LENGTH, transaction_receipts_events_impacted_REP_LENGTH, transaction_receipts_events_impacted_LENGTH, transaction_receipts_logs_REP_LENGTH, transaction_receipts_logs_LENGTH, transaction_receipts_state_delta_entries_REP_LENGTH, transaction_receipts_state_delta_entries_object_space_zone_LENGTH, transaction_receipts_state_delta_entries_key_LENGTH, transaction_receipts_state_delta_entries_value_LENGTH>& value) { transaction_receipts_.add(value); }
+    inline ::EmbeddedProto::RepeatedFieldFixedSize<transaction_receipt<transaction_receipts_id_LENGTH, transaction_receipts_payer_LENGTH, transaction_receipts_events_REP_LENGTH, transaction_receipts_events_source_LENGTH, transaction_receipts_events_name_LENGTH, transaction_receipts_events_data_LENGTH, transaction_receipts_events_impacted_REP_LENGTH, transaction_receipts_events_impacted_LENGTH, transaction_receipts_logs_REP_LENGTH, transaction_receipts_logs_LENGTH, transaction_receipts_state_delta_entries_REP_LENGTH, transaction_receipts_state_delta_entries_object_space_zone_LENGTH, transaction_receipts_state_delta_entries_key_LENGTH, transaction_receipts_state_delta_entries_value_LENGTH>, transaction_receipts_REP_LENGTH>& mutable_transaction_receipts() { return transaction_receipts_; }
+    inline transaction_receipt<transaction_receipts_id_LENGTH, transaction_receipts_payer_LENGTH, transaction_receipts_events_REP_LENGTH, transaction_receipts_events_source_LENGTH, transaction_receipts_events_name_LENGTH, transaction_receipts_events_data_LENGTH, transaction_receipts_events_impacted_REP_LENGTH, transaction_receipts_events_impacted_LENGTH, transaction_receipts_logs_REP_LENGTH, transaction_receipts_logs_LENGTH, transaction_receipts_state_delta_entries_REP_LENGTH, transaction_receipts_state_delta_entries_object_space_zone_LENGTH, transaction_receipts_state_delta_entries_key_LENGTH, transaction_receipts_state_delta_entries_value_LENGTH>& mutable_transaction_receipts(uint32_t index) { return transaction_receipts_[index]; }
+    inline const ::EmbeddedProto::RepeatedFieldFixedSize<transaction_receipt<transaction_receipts_id_LENGTH, transaction_receipts_payer_LENGTH, transaction_receipts_events_REP_LENGTH, transaction_receipts_events_source_LENGTH, transaction_receipts_events_name_LENGTH, transaction_receipts_events_data_LENGTH, transaction_receipts_events_impacted_REP_LENGTH, transaction_receipts_events_impacted_LENGTH, transaction_receipts_logs_REP_LENGTH, transaction_receipts_logs_LENGTH, transaction_receipts_state_delta_entries_REP_LENGTH, transaction_receipts_state_delta_entries_object_space_zone_LENGTH, transaction_receipts_state_delta_entries_key_LENGTH, transaction_receipts_state_delta_entries_value_LENGTH>, transaction_receipts_REP_LENGTH>& get_transaction_receipts() const { return transaction_receipts_; }
+    inline const ::EmbeddedProto::RepeatedFieldFixedSize<transaction_receipt<transaction_receipts_id_LENGTH, transaction_receipts_payer_LENGTH, transaction_receipts_events_REP_LENGTH, transaction_receipts_events_source_LENGTH, transaction_receipts_events_name_LENGTH, transaction_receipts_events_data_LENGTH, transaction_receipts_events_impacted_REP_LENGTH, transaction_receipts_events_impacted_LENGTH, transaction_receipts_logs_REP_LENGTH, transaction_receipts_logs_LENGTH, transaction_receipts_state_delta_entries_REP_LENGTH, transaction_receipts_state_delta_entries_object_space_zone_LENGTH, transaction_receipts_state_delta_entries_key_LENGTH, transaction_receipts_state_delta_entries_value_LENGTH>, transaction_receipts_REP_LENGTH>& transaction_receipts() const { return transaction_receipts_; }
 
     inline const ::EmbeddedProto::FieldString<logs_LENGTH>& logs(uint32_t index) const { return logs_[index]; }
     inline void clear_logs() { logs_.clear(); }
@@ -3277,6 +3473,17 @@ class block_receipt final: public ::EmbeddedProto::MessageInterface
     inline EmbeddedProto::uint64& mutable_compute_bandwidth_charged() { return compute_bandwidth_charged_; }
     inline const EmbeddedProto::uint64& get_compute_bandwidth_charged() const { return compute_bandwidth_charged_; }
     inline EmbeddedProto::uint64::FIELD_TYPE compute_bandwidth_charged() const { return compute_bandwidth_charged_.get(); }
+
+    inline const state_delta_entry<state_delta_entries_object_space_zone_LENGTH, state_delta_entries_key_LENGTH, state_delta_entries_value_LENGTH>& state_delta_entries(uint32_t index) const { return state_delta_entries_[index]; }
+    inline void clear_state_delta_entries() { state_delta_entries_.clear(); }
+    inline void set_state_delta_entries(uint32_t index, const state_delta_entry<state_delta_entries_object_space_zone_LENGTH, state_delta_entries_key_LENGTH, state_delta_entries_value_LENGTH>& value) { state_delta_entries_.set(index, value); }
+    inline void set_state_delta_entries(uint32_t index, const state_delta_entry<state_delta_entries_object_space_zone_LENGTH, state_delta_entries_key_LENGTH, state_delta_entries_value_LENGTH>&& value) { state_delta_entries_.set(index, value); }
+    inline void set_state_delta_entries(const ::EmbeddedProto::RepeatedFieldFixedSize<state_delta_entry<state_delta_entries_object_space_zone_LENGTH, state_delta_entries_key_LENGTH, state_delta_entries_value_LENGTH>, state_delta_entries_REP_LENGTH>& values) { state_delta_entries_ = values; }
+    inline void add_state_delta_entries(const state_delta_entry<state_delta_entries_object_space_zone_LENGTH, state_delta_entries_key_LENGTH, state_delta_entries_value_LENGTH>& value) { state_delta_entries_.add(value); }
+    inline ::EmbeddedProto::RepeatedFieldFixedSize<state_delta_entry<state_delta_entries_object_space_zone_LENGTH, state_delta_entries_key_LENGTH, state_delta_entries_value_LENGTH>, state_delta_entries_REP_LENGTH>& mutable_state_delta_entries() { return state_delta_entries_; }
+    inline state_delta_entry<state_delta_entries_object_space_zone_LENGTH, state_delta_entries_key_LENGTH, state_delta_entries_value_LENGTH>& mutable_state_delta_entries(uint32_t index) { return state_delta_entries_[index]; }
+    inline const ::EmbeddedProto::RepeatedFieldFixedSize<state_delta_entry<state_delta_entries_object_space_zone_LENGTH, state_delta_entries_key_LENGTH, state_delta_entries_value_LENGTH>, state_delta_entries_REP_LENGTH>& get_state_delta_entries() const { return state_delta_entries_; }
+    inline const ::EmbeddedProto::RepeatedFieldFixedSize<state_delta_entry<state_delta_entries_object_space_zone_LENGTH, state_delta_entries_key_LENGTH, state_delta_entries_value_LENGTH>, state_delta_entries_REP_LENGTH>& state_delta_entries() const { return state_delta_entries_; }
 
 
     ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
@@ -3343,6 +3550,11 @@ class block_receipt final: public ::EmbeddedProto::MessageInterface
         return_value = compute_bandwidth_charged_.serialize_with_id(static_cast<uint32_t>(FieldNumber::COMPUTE_BANDWIDTH_CHARGED), buffer, false);
       }
 
+      if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+      {
+        return_value = state_delta_entries_.serialize_with_id(static_cast<uint32_t>(FieldNumber::STATE_DELTA_ENTRIES), buffer, false);
+      }
+
       return return_value;
     };
 
@@ -3407,6 +3619,10 @@ class block_receipt final: public ::EmbeddedProto::MessageInterface
             return_value = compute_bandwidth_charged_.deserialize_check_type(buffer, wire_type);
             break;
 
+          case FieldNumber::STATE_DELTA_ENTRIES:
+            return_value = state_delta_entries_.deserialize_check_type(buffer, wire_type);
+            break;
+
           default:
             break;
         }
@@ -3443,6 +3659,7 @@ class block_receipt final: public ::EmbeddedProto::MessageInterface
       clear_disk_storage_charged();
       clear_network_bandwidth_charged();
       clear_compute_bandwidth_charged();
+      clear_state_delta_entries();
 
     }
 
@@ -3456,11 +3673,216 @@ class block_receipt final: public ::EmbeddedProto::MessageInterface
       EmbeddedProto::uint64 compute_bandwidth_used_ = 0U;
       ::EmbeddedProto::FieldBytes<state_merkle_root_LENGTH> state_merkle_root_;
       ::EmbeddedProto::RepeatedFieldFixedSize<event_data<events_source_LENGTH, events_name_LENGTH, events_data_LENGTH, events_impacted_REP_LENGTH, events_impacted_LENGTH>, events_REP_LENGTH> events_;
-      ::EmbeddedProto::RepeatedFieldFixedSize<transaction_receipt<transaction_receipts_id_LENGTH, transaction_receipts_payer_LENGTH, transaction_receipts_events_REP_LENGTH, transaction_receipts_events_source_LENGTH, transaction_receipts_events_name_LENGTH, transaction_receipts_events_data_LENGTH, transaction_receipts_events_impacted_REP_LENGTH, transaction_receipts_events_impacted_LENGTH, transaction_receipts_logs_REP_LENGTH, transaction_receipts_logs_LENGTH>, transaction_receipts_REP_LENGTH> transaction_receipts_;
+      ::EmbeddedProto::RepeatedFieldFixedSize<transaction_receipt<transaction_receipts_id_LENGTH, transaction_receipts_payer_LENGTH, transaction_receipts_events_REP_LENGTH, transaction_receipts_events_source_LENGTH, transaction_receipts_events_name_LENGTH, transaction_receipts_events_data_LENGTH, transaction_receipts_events_impacted_REP_LENGTH, transaction_receipts_events_impacted_LENGTH, transaction_receipts_logs_REP_LENGTH, transaction_receipts_logs_LENGTH, transaction_receipts_state_delta_entries_REP_LENGTH, transaction_receipts_state_delta_entries_object_space_zone_LENGTH, transaction_receipts_state_delta_entries_key_LENGTH, transaction_receipts_state_delta_entries_value_LENGTH>, transaction_receipts_REP_LENGTH> transaction_receipts_;
       ::EmbeddedProto::RepeatedFieldFixedSize<::EmbeddedProto::FieldString<logs_LENGTH>, logs_REP_LENGTH> logs_;
       EmbeddedProto::uint64 disk_storage_charged_ = 0U;
       EmbeddedProto::uint64 network_bandwidth_charged_ = 0U;
       EmbeddedProto::uint64 compute_bandwidth_charged_ = 0U;
+      ::EmbeddedProto::RepeatedFieldFixedSize<state_delta_entry<state_delta_entries_object_space_zone_LENGTH, state_delta_entries_key_LENGTH, state_delta_entries_value_LENGTH>, state_delta_entries_REP_LENGTH> state_delta_entries_;
+
+};
+
+template<uint32_t object_space_zone_LENGTH, 
+uint32_t key_LENGTH, 
+uint32_t value_LENGTH>
+class state_delta_entry final: public ::EmbeddedProto::MessageInterface
+{
+  public:
+    state_delta_entry() = default;
+    state_delta_entry(const state_delta_entry& rhs )
+    {
+      set_object_space(rhs.get_object_space());
+      set_key(rhs.get_key());
+      set_value(rhs.get_value());
+    }
+
+    state_delta_entry(const state_delta_entry&& rhs ) noexcept
+    {
+      set_object_space(rhs.get_object_space());
+      set_key(rhs.get_key());
+      set_value(rhs.get_value());
+    }
+
+    ~state_delta_entry() override = default;
+
+    enum class FieldNumber : uint32_t
+    {
+      NOT_SET = 0,
+      OBJECT_SPACE = 1,
+      KEY = 2,
+      VALUE = 3
+    };
+
+    state_delta_entry& operator=(const state_delta_entry& rhs)
+    {
+      set_object_space(rhs.get_object_space());
+      set_key(rhs.get_key());
+      set_value(rhs.get_value());
+      return *this;
+    }
+
+    state_delta_entry& operator=(const state_delta_entry&& rhs) noexcept
+    {
+      set_object_space(rhs.get_object_space());
+      set_key(rhs.get_key());
+      set_value(rhs.get_value());
+      return *this;
+    }
+
+    inline void clear_object_space() { object_space_.clear(); }
+    inline void set_object_space(const object_space<object_space_zone_LENGTH>& value) { object_space_ = value; }
+    inline void set_object_space(const object_space<object_space_zone_LENGTH>&& value) { object_space_ = value; }
+    inline object_space<object_space_zone_LENGTH>& mutable_object_space() { return object_space_; }
+    inline const object_space<object_space_zone_LENGTH>& get_object_space() const { return object_space_; }
+    inline const object_space<object_space_zone_LENGTH>& object_space() const { return object_space_; }
+
+    inline void clear_key() { key_.clear(); }
+    inline ::EmbeddedProto::FieldBytes<key_LENGTH>& mutable_key() { return key_; }
+    inline void set_key(const ::EmbeddedProto::FieldBytes<key_LENGTH>& rhs) { key_.set(rhs); }
+    inline const ::EmbeddedProto::FieldBytes<key_LENGTH>& get_key() const { return key_; }
+    inline const uint8_t* key() const { return key_.get_const(); }
+
+    inline bool has_value() const
+    {
+      return 0 != (presence::mask(presence::fields::VALUE) & presence_[presence::index(presence::fields::VALUE)]);
+    }
+    inline void clear_value()
+    {
+      presence_[presence::index(presence::fields::VALUE)] &= ~(presence::mask(presence::fields::VALUE));
+      value_.clear();
+    }
+    inline ::EmbeddedProto::FieldBytes<value_LENGTH>& mutable_value()
+    {
+      presence_[presence::index(presence::fields::VALUE)] |= presence::mask(presence::fields::VALUE);
+      return value_;
+    }
+    inline void set_value(const ::EmbeddedProto::FieldBytes<value_LENGTH>& rhs)
+    {
+      presence_[presence::index(presence::fields::VALUE)] |= presence::mask(presence::fields::VALUE);
+      value_.set(rhs);
+    }
+    inline const ::EmbeddedProto::FieldBytes<value_LENGTH>& get_value() const { return value_; }
+    inline const uint8_t* value() const { return value_.get_const(); }
+
+
+    ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
+    {
+      ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
+
+      if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+      {
+        return_value = object_space_.serialize_with_id(static_cast<uint32_t>(FieldNumber::OBJECT_SPACE), buffer, false);
+      }
+
+      if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+      {
+        return_value = key_.serialize_with_id(static_cast<uint32_t>(FieldNumber::KEY), buffer, false);
+      }
+
+      if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+      {
+        return_value = value_.serialize_with_id(static_cast<uint32_t>(FieldNumber::VALUE), buffer, true);
+      }
+
+      return return_value;
+    };
+
+    ::EmbeddedProto::Error deserialize(::EmbeddedProto::ReadBufferInterface& buffer) override
+    {
+      ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
+      ::EmbeddedProto::WireFormatter::WireType wire_type = ::EmbeddedProto::WireFormatter::WireType::VARINT;
+      uint32_t id_number = 0;
+      FieldNumber id_tag = FieldNumber::NOT_SET;
+
+      ::EmbeddedProto::Error tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
+      while((::EmbeddedProto::Error::NO_ERRORS == return_value) && (::EmbeddedProto::Error::NO_ERRORS == tag_value))
+      {
+        id_tag = static_cast<FieldNumber>(id_number);
+        switch(id_tag)
+        {
+          case FieldNumber::OBJECT_SPACE:
+            return_value = object_space_.deserialize_check_type(buffer, wire_type);
+            break;
+
+          case FieldNumber::KEY:
+            return_value = key_.deserialize_check_type(buffer, wire_type);
+            break;
+
+          case FieldNumber::VALUE:
+            presence_[presence::index(presence::fields::VALUE)] |= presence::mask(presence::fields::VALUE);
+            return_value = value_.deserialize_check_type(buffer, wire_type);
+            break;
+
+          default:
+            break;
+        }
+
+        if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+        {
+          // Read the next tag.
+          tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
+        }
+      }
+
+      // When an error was detect while reading the tag but no other errors where found, set it in the return value.
+      if((::EmbeddedProto::Error::NO_ERRORS == return_value)
+         && (::EmbeddedProto::Error::NO_ERRORS != tag_value)
+         && (::EmbeddedProto::Error::END_OF_BUFFER != tag_value)) // The end of the buffer is not an array in this case.
+      {
+        return_value = tag_value;
+      }
+
+      return return_value;
+    };
+
+    void clear() override
+    {
+      clear_object_space();
+      clear_key();
+      clear_value();
+
+    }
+
+    private:
+
+      // Define constants for tracking the presence of fields.
+      // Use a struct to scope the variables from user fields as namespaces are not allowed within classes.
+      struct presence
+      {
+        // An enumeration with all the fields for which presence has to be tracked.
+        enum class fields : uint32_t
+        {
+          VALUE
+        };
+
+        // The number of fields for which presence has to be tracked.
+        static constexpr uint32_t N_FIELDS = 1;
+
+        // Which type are we using to track presence.
+        using TYPE = uint32_t;
+
+        // How many bits are there in the presence type.
+        static constexpr uint32_t N_BITS = std::numeric_limits<TYPE>::digits;
+
+        // How many variables of TYPE do we need to bit mask all presence fields.
+        static constexpr uint32_t SIZE = (N_FIELDS / N_BITS) + ((N_FIELDS % N_BITS) > 0 ? 1 : 0);
+
+        // Obtain the index of a given field in the presence array.
+        static constexpr uint32_t index(const fields& field) { return static_cast<uint32_t>(field) / N_BITS; }
+
+        // Obtain the bit mask for the given field assuming we are at the correct index in the presence array.
+        static constexpr TYPE mask(const fields& field)
+        {
+          return static_cast<uint32_t>(0x01) << (static_cast<uint32_t>(field) % N_BITS);
+        }
+      };
+
+      // Create an array in which the presence flags are stored.
+      typename presence::TYPE presence_[presence::SIZE] = {0};
+
+      object_space<object_space_zone_LENGTH> object_space_;
+      ::EmbeddedProto::FieldBytes<key_LENGTH> key_;
+      ::EmbeddedProto::FieldBytes<value_LENGTH> value_;
 
 };
 
