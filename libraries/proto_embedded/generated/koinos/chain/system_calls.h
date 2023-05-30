@@ -4789,6 +4789,219 @@ class get_operation_result final: public ::EmbeddedProto::MessageInterface
 
 };
 
+template<uint32_t contract_id_LENGTH>
+class get_contract_metadata_arguments final: public ::EmbeddedProto::MessageInterface
+{
+  public:
+    get_contract_metadata_arguments() = default;
+    get_contract_metadata_arguments(const get_contract_metadata_arguments& rhs )
+    {
+      set_contract_id(rhs.get_contract_id());
+    }
+
+    get_contract_metadata_arguments(const get_contract_metadata_arguments&& rhs ) noexcept
+    {
+      set_contract_id(rhs.get_contract_id());
+    }
+
+    ~get_contract_metadata_arguments() override = default;
+
+    enum class FieldNumber : uint32_t
+    {
+      NOT_SET = 0,
+      CONTRACT_ID = 1
+    };
+
+    get_contract_metadata_arguments& operator=(const get_contract_metadata_arguments& rhs)
+    {
+      set_contract_id(rhs.get_contract_id());
+      return *this;
+    }
+
+    get_contract_metadata_arguments& operator=(const get_contract_metadata_arguments&& rhs) noexcept
+    {
+      set_contract_id(rhs.get_contract_id());
+      return *this;
+    }
+
+    inline void clear_contract_id() { contract_id_.clear(); }
+    inline ::EmbeddedProto::FieldBytes<contract_id_LENGTH>& mutable_contract_id() { return contract_id_; }
+    inline void set_contract_id(const ::EmbeddedProto::FieldBytes<contract_id_LENGTH>& rhs) { contract_id_.set(rhs); }
+    inline const ::EmbeddedProto::FieldBytes<contract_id_LENGTH>& get_contract_id() const { return contract_id_; }
+    inline const uint8_t* contract_id() const { return contract_id_.get_const(); }
+
+
+    ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
+    {
+      ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
+
+      if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+      {
+        return_value = contract_id_.serialize_with_id(static_cast<uint32_t>(FieldNumber::CONTRACT_ID), buffer, false);
+      }
+
+      return return_value;
+    };
+
+    ::EmbeddedProto::Error deserialize(::EmbeddedProto::ReadBufferInterface& buffer) override
+    {
+      ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
+      ::EmbeddedProto::WireFormatter::WireType wire_type = ::EmbeddedProto::WireFormatter::WireType::VARINT;
+      uint32_t id_number = 0;
+      FieldNumber id_tag = FieldNumber::NOT_SET;
+
+      ::EmbeddedProto::Error tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
+      while((::EmbeddedProto::Error::NO_ERRORS == return_value) && (::EmbeddedProto::Error::NO_ERRORS == tag_value))
+      {
+        id_tag = static_cast<FieldNumber>(id_number);
+        switch(id_tag)
+        {
+          case FieldNumber::CONTRACT_ID:
+            return_value = contract_id_.deserialize_check_type(buffer, wire_type);
+            break;
+
+          default:
+            break;
+        }
+
+        if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+        {
+          // Read the next tag.
+          tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
+        }
+      }
+
+      // When an error was detect while reading the tag but no other errors where found, set it in the return value.
+      if((::EmbeddedProto::Error::NO_ERRORS == return_value)
+         && (::EmbeddedProto::Error::NO_ERRORS != tag_value)
+         && (::EmbeddedProto::Error::END_OF_BUFFER != tag_value)) // The end of the buffer is not an array in this case.
+      {
+        return_value = tag_value;
+      }
+
+      return return_value;
+    };
+
+    void clear() override
+    {
+      clear_contract_id();
+
+    }
+
+    private:
+
+
+      ::EmbeddedProto::FieldBytes<contract_id_LENGTH> contract_id_;
+
+};
+
+template<uint32_t contract_metadata_hash_LENGTH>
+class get_contract_metadata_result final: public ::EmbeddedProto::MessageInterface
+{
+  public:
+    get_contract_metadata_result() = default;
+    get_contract_metadata_result(const get_contract_metadata_result& rhs )
+    {
+      set_contract_metadata(rhs.get_contract_metadata());
+    }
+
+    get_contract_metadata_result(const get_contract_metadata_result&& rhs ) noexcept
+    {
+      set_contract_metadata(rhs.get_contract_metadata());
+    }
+
+    ~get_contract_metadata_result() override = default;
+
+    enum class FieldNumber : uint32_t
+    {
+      NOT_SET = 0,
+      CONTRACT_METADATA = 1
+    };
+
+    get_contract_metadata_result& operator=(const get_contract_metadata_result& rhs)
+    {
+      set_contract_metadata(rhs.get_contract_metadata());
+      return *this;
+    }
+
+    get_contract_metadata_result& operator=(const get_contract_metadata_result&& rhs) noexcept
+    {
+      set_contract_metadata(rhs.get_contract_metadata());
+      return *this;
+    }
+
+    inline void clear_contract_metadata() { contract_metadata_.clear(); }
+    inline void set_contract_metadata(const contract_metadata_object<contract_metadata_hash_LENGTH>& value) { contract_metadata_ = value; }
+    inline void set_contract_metadata(const contract_metadata_object<contract_metadata_hash_LENGTH>&& value) { contract_metadata_ = value; }
+    inline contract_metadata_object<contract_metadata_hash_LENGTH>& mutable_contract_metadata() { return contract_metadata_; }
+    inline const contract_metadata_object<contract_metadata_hash_LENGTH>& get_contract_metadata() const { return contract_metadata_; }
+    inline const contract_metadata_object<contract_metadata_hash_LENGTH>& contract_metadata() const { return contract_metadata_; }
+
+
+    ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
+    {
+      ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
+
+      if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+      {
+        return_value = contract_metadata_.serialize_with_id(static_cast<uint32_t>(FieldNumber::CONTRACT_METADATA), buffer, false);
+      }
+
+      return return_value;
+    };
+
+    ::EmbeddedProto::Error deserialize(::EmbeddedProto::ReadBufferInterface& buffer) override
+    {
+      ::EmbeddedProto::Error return_value = ::EmbeddedProto::Error::NO_ERRORS;
+      ::EmbeddedProto::WireFormatter::WireType wire_type = ::EmbeddedProto::WireFormatter::WireType::VARINT;
+      uint32_t id_number = 0;
+      FieldNumber id_tag = FieldNumber::NOT_SET;
+
+      ::EmbeddedProto::Error tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
+      while((::EmbeddedProto::Error::NO_ERRORS == return_value) && (::EmbeddedProto::Error::NO_ERRORS == tag_value))
+      {
+        id_tag = static_cast<FieldNumber>(id_number);
+        switch(id_tag)
+        {
+          case FieldNumber::CONTRACT_METADATA:
+            return_value = contract_metadata_.deserialize_check_type(buffer, wire_type);
+            break;
+
+          default:
+            break;
+        }
+
+        if(::EmbeddedProto::Error::NO_ERRORS == return_value)
+        {
+          // Read the next tag.
+          tag_value = ::EmbeddedProto::WireFormatter::DeserializeTag(buffer, wire_type, id_number);
+        }
+      }
+
+      // When an error was detect while reading the tag but no other errors where found, set it in the return value.
+      if((::EmbeddedProto::Error::NO_ERRORS == return_value)
+         && (::EmbeddedProto::Error::NO_ERRORS != tag_value)
+         && (::EmbeddedProto::Error::END_OF_BUFFER != tag_value)) // The end of the buffer is not an array in this case.
+      {
+        return_value = tag_value;
+      }
+
+      return return_value;
+    };
+
+    void clear() override
+    {
+      clear_contract_metadata();
+
+    }
+
+    private:
+
+
+      contract_metadata_object<contract_metadata_hash_LENGTH> contract_metadata_;
+
+};
+
 template<uint32_t account_LENGTH>
 class get_account_rc_arguments final: public ::EmbeddedProto::MessageInterface
 {
