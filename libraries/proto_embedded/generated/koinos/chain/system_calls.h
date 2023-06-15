@@ -4895,19 +4895,19 @@ class get_contract_metadata_arguments final: public ::EmbeddedProto::MessageInte
 
 };
 
-template<uint32_t contract_metadata_hash_LENGTH>
+template<uint32_t value_hash_LENGTH>
 class get_contract_metadata_result final: public ::EmbeddedProto::MessageInterface
 {
   public:
     get_contract_metadata_result() = default;
     get_contract_metadata_result(const get_contract_metadata_result& rhs )
     {
-      set_contract_metadata(rhs.get_contract_metadata());
+      set_value(rhs.get_value());
     }
 
     get_contract_metadata_result(const get_contract_metadata_result&& rhs ) noexcept
     {
-      set_contract_metadata(rhs.get_contract_metadata());
+      set_value(rhs.get_value());
     }
 
     ~get_contract_metadata_result() override = default;
@@ -4915,27 +4915,27 @@ class get_contract_metadata_result final: public ::EmbeddedProto::MessageInterfa
     enum class FieldNumber : uint32_t
     {
       NOT_SET = 0,
-      CONTRACT_METADATA = 1
+      VALUE = 1
     };
 
     get_contract_metadata_result& operator=(const get_contract_metadata_result& rhs)
     {
-      set_contract_metadata(rhs.get_contract_metadata());
+      set_value(rhs.get_value());
       return *this;
     }
 
     get_contract_metadata_result& operator=(const get_contract_metadata_result&& rhs) noexcept
     {
-      set_contract_metadata(rhs.get_contract_metadata());
+      set_value(rhs.get_value());
       return *this;
     }
 
-    inline void clear_contract_metadata() { contract_metadata_.clear(); }
-    inline void set_contract_metadata(const contract_metadata_object<contract_metadata_hash_LENGTH>& value) { contract_metadata_ = value; }
-    inline void set_contract_metadata(const contract_metadata_object<contract_metadata_hash_LENGTH>&& value) { contract_metadata_ = value; }
-    inline contract_metadata_object<contract_metadata_hash_LENGTH>& mutable_contract_metadata() { return contract_metadata_; }
-    inline const contract_metadata_object<contract_metadata_hash_LENGTH>& get_contract_metadata() const { return contract_metadata_; }
-    inline const contract_metadata_object<contract_metadata_hash_LENGTH>& contract_metadata() const { return contract_metadata_; }
+    inline void clear_value() { value_.clear(); }
+    inline void set_value(const contract_metadata_object<value_hash_LENGTH>& value) { value_ = value; }
+    inline void set_value(const contract_metadata_object<value_hash_LENGTH>&& value) { value_ = value; }
+    inline contract_metadata_object<value_hash_LENGTH>& mutable_value() { return value_; }
+    inline const contract_metadata_object<value_hash_LENGTH>& get_value() const { return value_; }
+    inline const contract_metadata_object<value_hash_LENGTH>& value() const { return value_; }
 
 
     ::EmbeddedProto::Error serialize(::EmbeddedProto::WriteBufferInterface& buffer) const override
@@ -4944,7 +4944,7 @@ class get_contract_metadata_result final: public ::EmbeddedProto::MessageInterfa
 
       if(::EmbeddedProto::Error::NO_ERRORS == return_value)
       {
-        return_value = contract_metadata_.serialize_with_id(static_cast<uint32_t>(FieldNumber::CONTRACT_METADATA), buffer, false);
+        return_value = value_.serialize_with_id(static_cast<uint32_t>(FieldNumber::VALUE), buffer, false);
       }
 
       return return_value;
@@ -4963,8 +4963,8 @@ class get_contract_metadata_result final: public ::EmbeddedProto::MessageInterfa
         id_tag = static_cast<FieldNumber>(id_number);
         switch(id_tag)
         {
-          case FieldNumber::CONTRACT_METADATA:
-            return_value = contract_metadata_.deserialize_check_type(buffer, wire_type);
+          case FieldNumber::VALUE:
+            return_value = value_.deserialize_check_type(buffer, wire_type);
             break;
 
           default:
@@ -4991,14 +4991,14 @@ class get_contract_metadata_result final: public ::EmbeddedProto::MessageInterfa
 
     void clear() override
     {
-      clear_contract_metadata();
+      clear_value();
 
     }
 
     private:
 
 
-      contract_metadata_object<contract_metadata_hash_LENGTH> contract_metadata_;
+      contract_metadata_object<value_hash_LENGTH> value_;
 
 };
 
